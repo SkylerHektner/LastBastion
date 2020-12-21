@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent( typeof( Animator ) )]
 public class Enemy : MonoBehaviour
 {
+    public UnityEvent OnDeath = new UnityEvent();
+
     [SerializeField] float MoveSpeed = 1.0f;
     [SerializeField] GameObject DeathEffect;
     [SerializeField] GameObject SpawnEffect;
@@ -27,8 +30,8 @@ public class Enemy : MonoBehaviour
         if( transform.position.y - Rail.LeftRail.Bottom < Time.deltaTime * MoveSpeed )
         {
             Moving = false;
-            Destroy( gameObject );
             // TODO: Deal damage to base or attack or something
+            Kill();
         }
         else
             transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime;
@@ -61,5 +64,6 @@ public class Enemy : MonoBehaviour
         if( DeathEffect != null )
             Instantiate( DeathEffect ).transform.position = transform.position;
         Destroy( gameObject );
+        OnDeath.Invoke();
     }
 }

@@ -12,14 +12,14 @@ public class SpawnCadenceProfile : ScriptableObject
     [Serializable]
     public class Wave
     {
-        public List<SpawnGroup.EnemyEnum> PassiveEnemies;
+        public List<EnemyEnum> PassiveEnemies;
         public List<float> PassiveEnemySpawnCadence;
         public List<SpawnGroup> SpawnGroups;
         public List<float> SpawnGroupSpawnTimes;
 
         public Wave()
         {
-            PassiveEnemies = new List<SpawnGroup.EnemyEnum>();
+            PassiveEnemies = new List<EnemyEnum>();
             PassiveEnemySpawnCadence = new List<float>();
             SpawnGroups = new List<SpawnGroup>();
             SpawnGroupSpawnTimes = new List<float>();
@@ -27,7 +27,7 @@ public class SpawnCadenceProfile : ScriptableObject
 
         public Wave( Wave other )
         {
-            PassiveEnemies = new List<SpawnGroup.EnemyEnum>();
+            PassiveEnemies = new List<EnemyEnum>();
             PassiveEnemySpawnCadence = new List<float>();
             SpawnGroups = new List<SpawnGroup>();
             SpawnGroupSpawnTimes = new List<float>();
@@ -74,7 +74,7 @@ public class SpawnCadenceProfileEditor : Editor
             GUILayout.Label( "Passive Enemy Spawn Rates" );
             if( GUILayout.Button( "+" ) )
             {
-                wave.PassiveEnemies.Add( SpawnGroup.EnemyEnum.Skeleton );
+                wave.PassiveEnemies.Add( EnemyEnum.Skeleton );
                 wave.PassiveEnemySpawnCadence.Add( 0.0f );
                 EditorUtility.SetDirty( target );
             }
@@ -85,7 +85,7 @@ public class SpawnCadenceProfileEditor : Editor
             {
 
                 EditorGUILayout.BeginHorizontal();
-                SpawnGroup.EnemyEnum enemy = (SpawnGroup.EnemyEnum)EditorGUILayout.EnumPopup( wave.PassiveEnemies[x] );
+                EnemyEnum enemy = (EnemyEnum)EditorGUILayout.EnumPopup( wave.PassiveEnemies[x] );
                 if( enemy != wave.PassiveEnemies[x] )
                 {
                     wave.PassiveEnemies[x] = enemy;

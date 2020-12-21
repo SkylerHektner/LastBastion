@@ -10,16 +10,7 @@ public class SpawnGroup : ScriptableObject
 {
     [SerializeField] public SpawnDictionary SpawnMap;
     [SerializeField] public Layout layout;
-
-    [System.Serializable]
-    public enum EnemyEnum
-    {
-        Skeleton,
-        ShieldBearer,
-        ArcMage,
-        Shrike,
-        Shaman,
-    }
+    [SerializeField] public float cluster_density = 2.0f; // per meter squared
 
     [System.Serializable]
     public enum Layout
@@ -39,22 +30,22 @@ public class SpawnGroupEdtior : Editor
         if( spawn_group.SpawnMap == null  || spawn_group.SpawnMap.Count == 0)
         {
             spawn_group.SpawnMap = new SpawnDictionary();
-            foreach( var e in Enum.GetValues( typeof( SpawnGroup.EnemyEnum ) ) )
-                spawn_group.SpawnMap[(SpawnGroup.EnemyEnum)e] = 0;
+            foreach( var e in Enum.GetValues( typeof( EnemyEnum ) ) )
+                spawn_group.SpawnMap[(EnemyEnum)e] = 0;
         }
 
-        foreach (var e in Enum.GetValues(typeof(SpawnGroup.EnemyEnum)))
+        foreach (var e in Enum.GetValues(typeof(EnemyEnum)))
         {
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField( e.ToString() + ": " + spawn_group.SpawnMap[(SpawnGroup.EnemyEnum)e].ToString() );
+            EditorGUILayout.LabelField( e.ToString() + ": " + spawn_group.SpawnMap[(EnemyEnum)e].ToString() );
             if( GUILayout.Button( "+", GUILayout.Width( 25 ) ) )
             {
-                spawn_group.SpawnMap[(SpawnGroup.EnemyEnum)e]++;
+                spawn_group.SpawnMap[(EnemyEnum)e]++;
                 EditorUtility.SetDirty( target );
             }
-            else if( GUILayout.Button( "-", GUILayout.Width( 25 ) ) && spawn_group.SpawnMap[(SpawnGroup.EnemyEnum)e] >= 1 )
+            else if( GUILayout.Button( "-", GUILayout.Width( 25 ) ) && spawn_group.SpawnMap[(EnemyEnum)e] >= 1 )
             {
-                spawn_group.SpawnMap[(SpawnGroup.EnemyEnum)e]--;
+                spawn_group.SpawnMap[(EnemyEnum)e]--;
                 EditorUtility.SetDirty( target );
             }
             EditorGUILayout.EndHorizontal();
@@ -66,10 +57,24 @@ public class SpawnGroupEdtior : Editor
             spawn_group.layout = layout;
             EditorUtility.SetDirty( target );
         }
+
+        if(layout == SpawnGroup.Layout.Cluster)
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField( "Monster Per Meter^2" );
+            float cluster_density = EditorGUILayout.FloatField( spawn_group.cluster_density );
+            if( cluster_density != spawn_group.cluster_density )
+            {
+                if( cluster_density <= 0.0f ) cluster_density = 0.1f;
+                spawn_group.cluster_density = cluster_density;
+                EditorUtility.SetDirty( target );
+            }
+            EditorGUILayout.EndHorizontal();
+        }
     }
 }
 
-[Serializable] public class SpawnDictionary : SerializableDictionary<SpawnGroup.EnemyEnum, int> { }
+[Serializable] public class SpawnDictionary : SerializableDictionary<EnemyEnum, int> { }
 
 [Serializable]
 public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
