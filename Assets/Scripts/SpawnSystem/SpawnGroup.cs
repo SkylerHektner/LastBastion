@@ -61,7 +61,7 @@ public class SpawnGroupEdtior : Editor
         }
 
         SpawnGroup.Layout layout = (SpawnGroup.Layout)EditorGUILayout.EnumPopup( "Layout: ", spawn_group.layout );
-        if( layout != spawn_group.layout)
+        if( layout != spawn_group.layout )
         {
             spawn_group.layout = layout;
             EditorUtility.SetDirty( target );
