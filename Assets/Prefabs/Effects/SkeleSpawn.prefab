@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1824666046701122353}
   - component: {fileID: 1824666046701122352}
   - component: {fileID: 1824666046701122355}
+  - component: {fileID: 805624168539284615}
   m_Layer: 0
   m_Name: SkeleSpawn
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1824666046701122354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.82, y: 5.728, z: 0}
-  m_LocalScale: {x: 2.0943117, y: 2.0943117, z: 2.0943117}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1824666047409929174}
   - {fileID: 1824666047569432133}
@@ -105,6 +106,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &805624168539284615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824666046701122354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28115c6d4874a254181e338bfbbce637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1.29
+  DeleteDurationReached:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1824666047409929161
 GameObject:
   m_ObjectHideFlags: 0
