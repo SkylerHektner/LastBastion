@@ -5,8 +5,6 @@ using UnityEngine;
 public class Saw : MonoBehaviour
 {
     [SerializeField] float MoveSpeed = 1.0f;
-    [SerializeField] Rail RightRail;
-    [SerializeField] Rail LeftRail;
 
     private bool onLeftSide = true;
     private Vector3 target_position;
@@ -31,20 +29,26 @@ public class Saw : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D( Collider2D col )
+    {
+        // TODO: Death animation
+        Destroy( col.gameObject );
+    }
+
     public void GoToSide()
     {
         Vector3 touch_postition = Vector3.zero;
-#if PC
+#if PC || UNITY_EDITOR
         touch_postition = Input.mousePosition;
 #endif
-#if MOBILE
+#if MOBILE && !UNITY_EDITOR
         touch_postition = Input.GetTouch( 0 ).position;
 #endif
 
         Vector3 world_pos = Camera.main.ScreenToWorldPoint( touch_postition );
         world_pos.z = 0;
 
-        Rail new_rail = onLeftSide ? RightRail : LeftRail;
+        Rail new_rail = onLeftSide ? Rail.RightRail : Rail.LeftRail;
         if( world_pos.y < new_rail.Bottom )
             world_pos.y = new_rail.Bottom;
         else if( world_pos.y > new_rail.Top )

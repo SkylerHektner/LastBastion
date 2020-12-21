@@ -5,6 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class Rail : MonoBehaviour
 {
+    public static Rail LeftRail;
+    public static Rail RightRail;
+
+    [SerializeField] bool IsLeftRail = false;
     [SerializeField] [Range(0.01f, 0.5f)] float vfxUpdateInterval = 0.1f;
     [SerializeField] [Range( 0.01f, 1.0f )] float vfxLightningDensity = 0.1f;
     [SerializeField] [Range( 0.01f, 1.0f )] float vfxLightningRange = 0.1f;
@@ -20,6 +24,8 @@ public class Rail : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         StartCoroutine( updateLine() );
+        if( IsLeftRail ) LeftRail = this;
+        else RightRail = this;
     }
 
     IEnumerator updateLine()
