@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent( typeof( Animator ) )]
 public class Enemy : MonoBehaviour
 {
-    public float MoveSpeed = 1.0f;
-
-
+    [SerializeField] float MoveSpeed = 1.0f;
+    [SerializeField] GameObject DeathEffect;
     public bool Moving { get; private set; }
 
     private Animator anim;
@@ -34,5 +33,12 @@ public class Enemy : MonoBehaviour
     {
         Moving = true;
         anim.SetBool( "Attacking", Moving );
+    }
+
+    public void Kill()
+    {
+        if( DeathEffect != null )
+            Instantiate( DeathEffect ).transform.position = transform.position;
+        Destroy( gameObject );
     }
 }

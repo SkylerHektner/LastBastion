@@ -31,8 +31,7 @@ public class Saw : MonoBehaviour
 
     void OnTriggerEnter2D( Collider2D col )
     {
-        // TODO: Death animation
-        Destroy( col.gameObject );
+        col.gameObject.GetComponent<Enemy>().Kill();
     }
 
     public void GoToSide()
