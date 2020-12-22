@@ -7,6 +7,8 @@ using System.Linq;
 
 public class SpawnManager : MonoBehaviour
 {
+    public static SpawnManager Instance;
+
     [SerializeField] SpawnCadenceProfile spawnCadenceProfile;
     [SerializeField] GameObject SkeletonPrefab;
     [SerializeField] GameObject ShieldSkeletonPrefab;
@@ -20,6 +22,8 @@ public class SpawnManager : MonoBehaviour
     [Tooltip( "When spawn groups are spawned using the cluster spawn setting this determines how tightly packed they will be. The cluster is a circle. The radius of the circle is the number of spawns * this number" )]
     public Vector3 SpawnableAreaTopRight;
     public Vector3 SpawnableAreaBottomLeft;
+    public Vector3 PlayableAreaTopRight;
+    public Vector3 PlayableAreaBottomLeft;
 
     private float spawn_timer = -1.0f;
     private int current_wave = 0;
@@ -42,6 +46,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
         StartWaves();
     }
 
@@ -253,14 +258,29 @@ public class SpawnManagerEditor : Editor
     {
         SpawnManager spawn_manager = (SpawnManager)target;
 
-        Vector3 top_right = spawn_manager.SpawnableAreaTopRight;
-        Vector3 bottom_left = spawn_manager.SpawnableAreaBottomLeft;
-        Vector3 top_left = new Vector3( bottom_left.x, top_right.y, ( bottom_left.z + top_right.z ) / 2.0f );
-        Vector3 bottom_right = new Vector3( top_right.x, bottom_left.y, ( bottom_left.z + top_right.z ) / 2.0f );
-        Handles.color = Color.cyan;
-        Handles.DrawLine( top_left, top_right );
-        Handles.DrawLine( top_right, bottom_right );
-        Handles.DrawLine( bottom_right, bottom_left );
-        Handles.DrawLine( bottom_left, top_left );
+        {
+            Vector3 top_right = spawn_manager.SpawnableAreaTopRight;
+            Vector3 bottom_left = spawn_manager.SpawnableAreaBottomLeft;
+            Vector3 top_left = new Vector3( bottom_left.x, top_right.y, ( bottom_left.z + top_right.z ) / 2.0f );
+            Vector3 bottom_right = new Vector3( top_right.x, bottom_left.y, ( bottom_left.z + top_right.z ) / 2.0f );
+            Handles.color = Color.cyan;
+            Handles.DrawLine( top_left, top_right );
+            Handles.DrawLine( top_right, bottom_right );
+            Handles.DrawLine( bottom_right, bottom_left );
+            Handles.DrawLine( bottom_left, top_left );
+        }
+
+        {
+            Vector3 top_right = spawn_manager.PlayableAreaTopRight;
+            Vector3 bottom_left = spawn_manager.PlayableAreaBottomLeft;
+            Vector3 top_left = new Vector3( bottom_left.x, top_right.y, ( bottom_left.z + top_right.z ) / 2.0f );
+            Vector3 bottom_right = new Vector3( top_right.x, bottom_left.y, ( bottom_left.z + top_right.z ) / 2.0f );
+            Handles.color = Color.green;
+            Handles.DrawLine( top_left, top_right );
+            Handles.DrawLine( top_right, bottom_right );
+            Handles.DrawLine( bottom_right, bottom_left );
+            Handles.DrawLine( bottom_left, top_left );
+        }
+
     }
 }

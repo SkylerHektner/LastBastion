@@ -11,6 +11,8 @@ public class Shrike : Enemy
     private float current_teleport_cooldown = 0.0f;
     private bool teleporting = false;
 
+    private Vector3 last_saw_hit_direction;
+
     protected override void Update()
     {
         base.Update();
@@ -19,18 +21,19 @@ public class Shrike : Enemy
             current_teleport_cooldown -= Time.deltaTime;
     }
 
-    public override void Hit()
+    public override void Hit( Vector3 hit_direction )
     {
         if( teleporting )
             return;
         if( Moving && current_teleport_cooldown <= 0.0f )
         {
+            last_saw_hit_direction = hit_direction;
             StopMoving();
             Teleport();
         }
         else
         {
-            base.Hit();
+            base.Hit( hit_direction );
         }
     }
 
@@ -38,7 +41,7 @@ public class Shrike : Enemy
     {
         anim.SetTrigger( "Teleport" );
         Invoke( "TeleportFinished", TeleportDuration );
-        Invoke( "ChangePosition", TeleportDuration * 0.5f);
+        Invoke( "ChangePosition", TeleportDuration * 0.5f );
     }
 
     private void ChangePosition()

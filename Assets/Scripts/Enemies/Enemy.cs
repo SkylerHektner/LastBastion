@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] string DeathAnimation;
     [SerializeField] GameObject SpawnEffect;
     [SerializeField] string SpawnAnimation;
+    [SerializeField] GameObject DamagedEffect;
+    [SerializeField] string DamagedAnimation;
     public bool Moving { get; private set; }
     public bool Spawning { get; private set; }
     public bool Dying { get; private set; }
@@ -36,7 +38,7 @@ public class Enemy : MonoBehaviour
     {
         if( Moving )
         {
-            if( transform.position.y - Rail.LeftRail.Bottom < Time.deltaTime * MoveSpeed )
+            if( transform.position.y - SpawnManager.Instance.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed )
             {
                 Moving = false;
                 // TODO: Deal damage to base or attack or something
@@ -98,7 +100,7 @@ public class Enemy : MonoBehaviour
         anim.SetBool( "Attacking", Moving );
     }
 
-    public virtual void Hit()
+    public virtual void Hit( Vector3 hit_direction )
     {
         if( Spawning || Dying ) return; // ignore being hit if we are spawning
 
@@ -107,9 +109,10 @@ public class Enemy : MonoBehaviour
             Kill();
         else
         {
-            // TODO: replace with hit effect
-            if( DeathEffect != null )
-                Instantiate( DeathEffect ).transform.position = transform.position;
+            if( DamagedEffect != null )
+                Instantiate( DamagedEffect ).transform.position = transform.position;
+            if(DamagedAnimation != null && DamagedAnimation.Length > 0)
+                anim.SetTrigger( DamagedAnimation );
         }
     }
 

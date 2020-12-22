@@ -19,7 +19,7 @@ public class Saw : MonoBehaviour
     {
         if( moving )
         {
-            if((transform.position - target_position).magnitude < MoveSpeed * Time.deltaTime)
+            if( ( transform.position - target_position ).magnitude < MoveSpeed * Time.deltaTime )
             {
                 transform.position = target_position;
                 moving = false;
@@ -31,7 +31,7 @@ public class Saw : MonoBehaviour
 
     void OnTriggerEnter2D( Collider2D col )
     {
-        col.gameObject.GetComponent<Enemy>().Hit();
+        col.gameObject.GetComponent<Enemy>().Hit( ( target_position - transform.position ).normalized );
     }
 
     public void GoToSide()
