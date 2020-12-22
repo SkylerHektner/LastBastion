@@ -17,6 +17,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject ArcMagePrefab;
     [SerializeField] GameObject ShrikePrefab;
     [SerializeField] GameObject ShamanPrefab;
+    [SerializeField] GameObject CarrierLPrefab;
+    [SerializeField] GameObject CarrierMPrefab;
+    [SerializeField] GameObject CarrierSPrefab;
     [SerializeField] float SpawnStaggerMinTime = 0.02f;
     [SerializeField] float SpawnStaggerMaxTime = 0.07f;
     [Tooltip( "When spawn groups are spawned using the cluster spawn setting this determines how tightly packed they will be. The cluster is a circle. The radius of the circle is the number of spawns * this number" )]
@@ -269,6 +272,15 @@ public class SpawnManager : MonoBehaviour
                 break;
             case EnemyEnum.Shaman:
                 ret = Instantiate( ShamanPrefab );
+                break;
+            case EnemyEnum.CarrierL:
+                ret = Instantiate( CarrierLPrefab );
+                break;
+            case EnemyEnum.CarrierM:
+                ret = Instantiate( CarrierMPrefab );
+                break;
+            case EnemyEnum.CarrierS:
+                ret = Instantiate( CarrierSPrefab );
                 break;
         }
         if( ret )
