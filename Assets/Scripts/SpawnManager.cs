@@ -282,13 +282,16 @@ public class SpawnManager : MonoBehaviour
 [System.Serializable]
 public enum EnemyEnum
 {
-    Skeleton,
-    ShieldSkeleton,
-    PumpkinWarrior,
-    ShieldBearer,
-    ArcMage,
-    Shrike,
-    Shaman,
+    Skeleton = 1,
+    ShieldSkeleton = 2,
+    PumpkinWarrior = 3,
+    ShieldBearer = 4,
+    ArcMage = 5,
+    Shrike = 6,
+    Shaman = 7,
+    CarrierL = 8,
+    CarrierM = 9,
+    CarrierS = 10,
 }
 
 // EDITOR
