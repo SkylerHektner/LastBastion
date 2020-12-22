@@ -101,7 +101,7 @@ public class SpawnManager : MonoBehaviour
 
             if( cur_spawn_group_index == spawnCadenceProfile.Waves[current_wave].SpawnGroups.Count
                 && pending_spawns.Count == 0
-                && num_living_spawned_monsters == 0)
+                && num_living_spawned_monsters == 0 )
             {
                 WaveComplete();
             }
@@ -153,8 +153,8 @@ public class SpawnManager : MonoBehaviour
                     for( int x = 0; x < e.Value; ++x )
                     {
                         float random_radius = UnityEngine.Random.Range( 0.0f, radius );
-                        float random_theta = UnityEngine.Random.Range( 0.0f, Mathf.PI * 2);
-                        Vector3 final_point = new Vector3( Mathf.Cos( random_theta ) * radius + circle_center.x, Mathf.Sin( random_theta ) * radius + circle_center.y );
+                        float random_theta = UnityEngine.Random.Range( 0.0f, Mathf.PI * 2 );
+                        Vector3 final_point = new Vector3( Mathf.Cos( random_theta ) * random_radius + circle_center.x, Mathf.Sin( random_theta ) * random_radius + circle_center.y );
                         SpawnMonster( e.Key, final_point, stagger );
                         stagger += UnityEngine.Random.Range( SpawnStaggerMinTime, SpawnStaggerMaxTime );
                     }
@@ -167,7 +167,48 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    private void SpawnGroupRandomPlacement(SpawnGroup sg)
+    public List<Vector3> SpawnSpawnGroup( SpawnGroup sg, Vector3 circle_center, bool should_stagger )
+    {
+        List<Vector3> ret = new List<Vector3>();
+        float num_spawns = sg.SpawnMap.Aggregate( 0, ( current, next ) => next.Value + current );
+        float desired_area = num_spawns / sg.cluster_density;
+        float radius = Mathf.Sqrt( desired_area / Mathf.PI );
+
+        float stagger = 0.0f;
+        foreach( var e in sg.SpawnMap )
+        {
+            for( int x = 0; x < e.Value; ++x )
+            {
+                Vector3 final_point;
+                int loop_depth = 0;
+                do
+                {
+                    float random_radius = UnityEngine.Random.Range( 0.0f, radius );
+                    float random_theta = UnityEngine.Random.Range( 0.0f, Mathf.PI * 2 );
+                    final_point = new Vector3( Mathf.Cos( random_theta ) * random_radius + circle_center.x, Mathf.Sin( random_theta ) * random_radius + circle_center.y );
+                    ++loop_depth;
+                } while( !PointInsidePlayableArea( final_point ) && loop_depth < 100 );
+                if( loop_depth >= 100 )
+                    Debug.LogError( "ERROR: Could not find spawn point inside playable area. Spawn Aborted" );
+                else
+                {
+                    SpawnMonster( e.Key, final_point, stagger );
+                    stagger += ( should_stagger ? UnityEngine.Random.Range( SpawnStaggerMinTime, SpawnStaggerMaxTime ) : 0.0f );
+                    ret.Add( final_point );
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    public bool PointInsidePlayableArea( Vector3 point )
+    {
+        return ( point.x > PlayableAreaBottomLeft.x && point.x < PlayableAreaTopRight.x
+            && point.y < PlayableAreaTopRight.y && point.y > PlayableAreaBottomLeft.y );
+    }
+
+    private void SpawnGroupRandomPlacement( SpawnGroup sg )
     {
         float stagger = 0.0f;
         foreach( var e in sg.SpawnMap )

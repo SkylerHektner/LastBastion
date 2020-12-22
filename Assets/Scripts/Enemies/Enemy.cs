@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
         StartMoving();
     }
 
-    public void StartMoving()
+    public virtual void StartMoving()
     {
         Moving = true;
         anim.SetBool( "Attacking", Moving );
