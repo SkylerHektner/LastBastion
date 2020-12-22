@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
 
 [CreateAssetMenu( fileName = "SpawnGroup", menuName = "ScriptableObjects/SpawnGroup", order = 1 )]
 [System.Serializable]
@@ -26,13 +27,32 @@ public class SpawnGroupEdtior : Editor
     public override void OnInspectorGUI()
     {
         SpawnGroup spawn_group = (SpawnGroup)target;
+        var enemy_enum_values = Enum.GetValues( typeof( EnemyEnum ) ).Cast<EnemyEnum>();
 
-        if( spawn_group.SpawnMap == null || spawn_group.SpawnMap.Count < Enum.GetValues( typeof( EnemyEnum ) ).Length )
+        // no spawnmap exists
+        if( spawn_group.SpawnMap == null )
         {
             spawn_group.SpawnMap = new SpawnDictionary();
-            foreach( var e in Enum.GetValues( typeof( EnemyEnum ) ) )
-                if( !spawn_group.SpawnMap.ContainsKey( (EnemyEnum)e ) )
-                    spawn_group.SpawnMap[(EnemyEnum)e] = 0;
+            EditorUtility.SetDirty( target );
+        }
+        // new enemy types have been added
+        else if( spawn_group.SpawnMap.Count < enemy_enum_values.Count() )
+        {
+            foreach( var e in enemy_enum_values )
+                if( !spawn_group.SpawnMap.ContainsKey( e ) )
+                    spawn_group.SpawnMap[e] = 0;
+            EditorUtility.SetDirty( target );
+        }
+        // enemy types have been removed
+        else if( spawn_group.SpawnMap.Count > enemy_enum_values.Count() )
+        {
+            var old_spawn_map = spawn_group.SpawnMap;
+            spawn_group.SpawnMap = new SpawnDictionary();
+            foreach(var e in enemy_enum_values )
+            {
+                spawn_group.SpawnMap[e] = old_spawn_map[e];
+            }
+            EditorUtility.SetDirty( target );
         }
 
         foreach( var e in Enum.GetValues( typeof( EnemyEnum ) ) )
