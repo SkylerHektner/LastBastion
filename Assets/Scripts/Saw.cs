@@ -36,6 +36,7 @@ public class Saw : MonoBehaviour
 
     public void GoToSide()
     {
+        if( moving ) return;
         Vector3 touch_postition = Vector3.zero;
 #if PC || UNITY_EDITOR
         touch_postition = Input.mousePosition;
