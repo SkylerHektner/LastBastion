@@ -833,6 +833,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton(Shield)
       objectReference: {fileID: 0}
+    - target: {fileID: 3993805466842966640, guid: b031cf1a28fe9cc49a6f7c648955ab25, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3993805466842966647, guid: b031cf1a28fe9cc49a6f7c648955ab25, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1117,7 +1121,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475016962
 GameObject:
@@ -1877,6 +1881,10 @@ PrefabInstance:
     - target: {fileID: 6013094092943625660, guid: e6c5b4b4ce1296d459c6a7752fbf597a, type: 3}
       propertyPath: m_Name
       value: Pumpkin (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013094092943625660, guid: e6c5b4b4ce1296d459c6a7752fbf597a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c5b4b4ce1296d459c6a7752fbf597a, type: 3}
@@ -4700,6 +4708,10 @@ PrefabInstance:
     - target: {fileID: 6013094092943625660, guid: e6c5b4b4ce1296d459c6a7752fbf597a, type: 3}
       propertyPath: m_Name
       value: Pumpkin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013094092943625660, guid: e6c5b4b4ce1296d459c6a7752fbf597a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6c5b4b4ce1296d459c6a7752fbf597a, type: 3}
@@ -11821,7 +11833,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1521077212
 GameObject:
@@ -12160,7 +12172,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5791246195442022341, guid: 82cd008a9b59c5d4882184de35a62a61, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5791246195442022341, guid: 82cd008a9b59c5d4882184de35a62a61, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12769,13 +12781,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnCadenceProfile: {fileID: 11400000, guid: ff8124aff5e90e04b8b32bc498228443, type: 2}
   SkeletonPrefab: {fileID: 9130753680679645999, guid: 6190d6c3c3a252a43801b80676198653, type: 3}
+  ShieldSkeletonPrefab: {fileID: 3993805466842966640, guid: b031cf1a28fe9cc49a6f7c648955ab25, type: 3}
+  PumpkinWarriorPrefab: {fileID: 6013094092943625660, guid: e6c5b4b4ce1296d459c6a7752fbf597a, type: 3}
   ShieldBearerPrefab: {fileID: 3993805466842966640, guid: b031cf1a28fe9cc49a6f7c648955ab25, type: 3}
   ArcMagePrefab: {fileID: 0}
-  ShrikePrefab: {fileID: 0}
-  ShamanPrefab: {fileID: 0}
+  ShrikePrefab: {fileID: 161093999407771307, guid: e1edfff97f6903e4fac0fdd92cdcaf20, type: 3}
+  ShamanPrefab: {fileID: 2898304853937610190, guid: 0c13988d28d1293499319665a84ef1cc, type: 3}
   SpawnStaggerMinTime: 0.02
   SpawnStaggerMaxTime: 0.07
-  ClusterRadiusPerSpawn: 1
   SpawnableAreaTopRight: {x: 4.33, y: 12.16, z: 0}
   SpawnableAreaBottomLeft: {x: -4.33, y: 2.27, z: 0}
 --- !u!4 &1845556993
@@ -31599,7 +31612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_LocalPosition.x

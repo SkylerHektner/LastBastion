@@ -20,21 +20,22 @@ public class SpawnGroup : ScriptableObject
     }
 }
 
-[CustomEditor(typeof(SpawnGroup))]
+[CustomEditor( typeof( SpawnGroup ) )]
 public class SpawnGroupEdtior : Editor
 {
     public override void OnInspectorGUI()
     {
         SpawnGroup spawn_group = (SpawnGroup)target;
 
-        if( spawn_group.SpawnMap == null  || spawn_group.SpawnMap.Count == 0)
+        if( spawn_group.SpawnMap == null || spawn_group.SpawnMap.Count < Enum.GetValues( typeof( EnemyEnum ) ).Length )
         {
             spawn_group.SpawnMap = new SpawnDictionary();
             foreach( var e in Enum.GetValues( typeof( EnemyEnum ) ) )
-                spawn_group.SpawnMap[(EnemyEnum)e] = 0;
+                if( !spawn_group.SpawnMap.ContainsKey( (EnemyEnum)e ) )
+                    spawn_group.SpawnMap[(EnemyEnum)e] = 0;
         }
 
-        foreach (var e in Enum.GetValues(typeof(EnemyEnum)))
+        foreach( var e in Enum.GetValues( typeof( EnemyEnum ) ) )
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField( e.ToString() + ": " + spawn_group.SpawnMap[(EnemyEnum)e].ToString() );
@@ -58,7 +59,7 @@ public class SpawnGroupEdtior : Editor
             EditorUtility.SetDirty( target );
         }
 
-        if(layout == SpawnGroup.Layout.Cluster)
+        if( layout == SpawnGroup.Layout.Cluster )
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField( "Monster Per Meter^2" );

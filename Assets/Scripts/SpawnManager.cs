@@ -9,6 +9,8 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] SpawnCadenceProfile spawnCadenceProfile;
     [SerializeField] GameObject SkeletonPrefab;
+    [SerializeField] GameObject ShieldSkeletonPrefab;
+    [SerializeField] GameObject PumpkinWarriorPrefab;
     [SerializeField] GameObject ShieldBearerPrefab;
     [SerializeField] GameObject ArcMagePrefab;
     [SerializeField] GameObject ShrikePrefab;
@@ -204,6 +206,12 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.Skeleton:
                 ret = Instantiate( SkeletonPrefab );
                 break;
+            case EnemyEnum.ShieldSkeleton:
+                ret = Instantiate( ShieldSkeletonPrefab );
+                break;
+            case EnemyEnum.PumpkinWarrior:
+                ret = Instantiate( PumpkinWarriorPrefab );
+                break;
             case EnemyEnum.ShieldBearer:
                 ret = Instantiate( ShieldBearerPrefab );
                 break;
@@ -229,6 +237,8 @@ public class SpawnManager : MonoBehaviour
 public enum EnemyEnum
 {
     Skeleton,
+    ShieldSkeleton,
+    PumpkinWarrior,
     ShieldBearer,
     ArcMage,
     Shrike,

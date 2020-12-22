@@ -31,7 +31,7 @@ public class Saw : MonoBehaviour
 
     void OnTriggerEnter2D( Collider2D col )
     {
-        col.gameObject.GetComponent<Enemy>().Kill();
+        col.gameObject.GetComponent<Enemy>().Hit();
     }
 
     public void GoToSide()

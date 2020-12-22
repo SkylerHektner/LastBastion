@@ -9,46 +9,79 @@ public class Enemy : MonoBehaviour
     public UnityEvent OnDeath = new UnityEvent();
 
     [SerializeField] float MoveSpeed = 1.0f;
+    [SerializeField] int MaxHealth = 1;
     [SerializeField] GameObject DeathEffect;
+    [SerializeField] string DeathAnimation;
     [SerializeField] GameObject SpawnEffect;
+    [SerializeField] string SpawnAnimation;
     public bool Moving { get; private set; }
     public bool Spawning { get; private set; }
+    public bool Dying { get; private set; }
+    public int CurrentHealth { get; private set; }
 
-    private Animator anim;
+    protected Animator anim;
 
-    private void Start()
+    protected virtual void Start()
     {
+        CurrentHealth = MaxHealth;
+
         anim = GetComponent<Animator>();
-        if( SpawnEffect )
+        if( SpawnEffect || ( SpawnAnimation != null && SpawnAnimation.Length > 0 ) )
             Spawn();
         else
             StartMoving();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        if( transform.position.y - Rail.LeftRail.Bottom < Time.deltaTime * MoveSpeed )
+        if( Moving )
         {
-            Moving = false;
-            // TODO: Deal damage to base or attack or something
-            Kill();
+            if( transform.position.y - Rail.LeftRail.Bottom < Time.deltaTime * MoveSpeed )
+            {
+                Moving = false;
+                // TODO: Deal damage to base or attack or something
+                Kill();
+            }
+            else
+                transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime;
         }
-        else
-            transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime;
     }
 
     public void Spawn()
     {
-        var spawn_effect = Instantiate( SpawnEffect );
-        spawn_effect.transform.position = transform.position;
-        spawn_effect.GetComponent<DeleteAfterDuration>()?.DeleteDurationReached.AddListener( SpawnAnimationDone );
-        gameObject.SetActive( false );
+        if( SpawnEffect )
+        {
+            var spawn_effect = Instantiate( SpawnEffect );
+            spawn_effect.transform.position = transform.position;
+            spawn_effect.GetComponent<DeleteAfterDuration>()?.DeleteDurationReached.AddListener( SpawnEffectDone );
+            gameObject.SetActive( false );
+        }
+        else
+        {
+            anim.SetTrigger( "Spawn" );
+            Invoke( "SpawnAnimationDone", anim.GetCurrentAnimatorStateInfo( 0 ).length );
+        }
+
         Spawning = true;
+    }
+
+    public void SpawnEffectDone()
+    {
+        gameObject.SetActive( true );
+        if( SpawnAnimation == null || SpawnAnimation.Length == 0 )
+        {
+            Spawning = false;
+            StartMoving();
+        }
+        else
+        {
+            anim.SetTrigger( "Spawn" );
+            Invoke( "SpawnAnimationDone", 1.0f );
+        }
     }
 
     public void SpawnAnimationDone()
     {
-        gameObject.SetActive( true );
         Spawning = false;
         StartMoving();
     }
@@ -59,10 +92,44 @@ public class Enemy : MonoBehaviour
         anim.SetBool( "Attacking", Moving );
     }
 
+    public void StopMoving()
+    {
+        Moving = false;
+        anim.SetBool( "Attacking", Moving );
+    }
+
+    public virtual void Hit()
+    {
+        if( Spawning || Dying ) return; // ignore being hit if we are spawning
+
+        CurrentHealth--;
+        if( CurrentHealth <= 0 )
+            Kill();
+        else
+        {
+            // TODO: replace with hit effect
+            if( DeathEffect != null )
+                Instantiate( DeathEffect ).transform.position = transform.position;
+        }
+    }
+
     public void Kill()
     {
+        StopMoving();
+        Dying = true;
         if( DeathEffect != null )
             Instantiate( DeathEffect ).transform.position = transform.position;
+        if( DeathAnimation != null && DeathAnimation.Length != 0 )
+        {
+            anim.SetTrigger( DeathAnimation );
+            Invoke( "Die", 1.0f );
+        }
+        else
+            Die();
+    }
+
+    private void Die()
+    {
         Destroy( gameObject );
         OnDeath.Invoke();
     }
