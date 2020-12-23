@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1340069795097848552}
   - component: {fileID: 3269037760384060713}
   - component: {fileID: 3772249072566864386}
+  - component: {fileID: 3221101848948175654}
   m_Layer: 0
   m_Name: MudExplosion
   m_TagString: Untagged
@@ -4879,3 +4880,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &3221101848948175654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502324915706778173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28115c6d4874a254181e338bfbbce637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 2
+  DeleteDurationReached:
+    m_PersistentCalls:
+      m_Calls: []
