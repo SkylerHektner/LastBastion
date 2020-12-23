@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6e2cdfe8d02ce4bac5d67a2314a748, type: 3}
+  m_Name: TheGauntlet
+  m_EditorClassIdentifier: 
+  Waves:
+  - PassiveEnemies: 01000000
+    PassiveEnemySpawnCadence:
+    - 1
+    SpawnGroups:
+    - {fileID: 11400000, guid: 3750ae585af833543b60f613a78b0499, type: 2}
+    - {fileID: 11400000, guid: 3750ae585af833543b60f613a78b0499, type: 2}
+    - {fileID: 11400000, guid: 3750ae585af833543b60f613a78b0499, type: 2}
+    - {fileID: 11400000, guid: 1da68f7f5c27e4c4c88e39bac23543d3, type: 2}
+    - {fileID: 11400000, guid: 1da68f7f5c27e4c4c88e39bac23543d3, type: 2}
+    - {fileID: 11400000, guid: 1da68f7f5c27e4c4c88e39bac23543d3, type: 2}
+    SpawnGroupSpawnTimes:
+    - 6
+    - 18
+    - 25
+    - 30
+    - 35
+    - 40
+  - PassiveEnemies: 02000000
+    PassiveEnemySpawnCadence:
+    - 1
+    SpawnGroups:
+    - {fileID: 11400000, guid: 6bab43632c8edb94f908cc0135d0e31e, type: 2}
+    - {fileID: 11400000, guid: 6bab43632c8edb94f908cc0135d0e31e, type: 2}
+    - {fileID: 11400000, guid: 375560f1a58830f46b9fc60b67d75af1, type: 2}
+    - {fileID: 11400000, guid: 6bab43632c8edb94f908cc0135d0e31e, type: 2}
+    - {fileID: 11400000, guid: 375560f1a58830f46b9fc60b67d75af1, type: 2}
+    SpawnGroupSpawnTimes:
+    - 6
+    - 18
+    - 25
+    - 30
+    - 35
+  - PassiveEnemies: 0100000001000000
+    PassiveEnemySpawnCadence:
+    - 15
+    - 5
+    SpawnGroups:
+    - {fileID: 11400000, guid: 49659da6bc8a7fc42b75dbbc73f5a2a2, type: 2}
+    - {fileID: 11400000, guid: 49659da6bc8a7fc42b75dbbc73f5a2a2, type: 2}
+    - {fileID: 11400000, guid: 4d19df190af9d2f44be7aaa2f08a63b6, type: 2}
+    SpawnGroupSpawnTimes:
+    - 6
+    - 18
+    - 35
+  - PassiveEnemies: 02000000
+    PassiveEnemySpawnCadence:
+    - 3
+    SpawnGroups:
+    - {fileID: 11400000, guid: 4a91b084aeb4e9b4aac10c6b6ce1e85f, type: 2}
+    - {fileID: 11400000, guid: 4a91b084aeb4e9b4aac10c6b6ce1e85f, type: 2}
+    - {fileID: 11400000, guid: 4a91b084aeb4e9b4aac10c6b6ce1e85f, type: 2}
+    - {fileID: 11400000, guid: 0d49efe2c56d6684ebc71dbcd71ecd34, type: 2}
+    SpawnGroupSpawnTimes:
+    - 6
+    - 20
+    - 30
+    - 40
+  - PassiveEnemies: 0a000000
+    PassiveEnemySpawnCadence:
+    - 3
+    SpawnGroups:
+    - {fileID: 11400000, guid: 4a91b084aeb4e9b4aac10c6b6ce1e85f, type: 2}
+    - {fileID: 11400000, guid: 3750ae585af833543b60f613a78b0499, type: 2}
+    - {fileID: 11400000, guid: 6bab43632c8edb94f908cc0135d0e31e, type: 2}
+    - {fileID: 11400000, guid: 4d19df190af9d2f44be7aaa2f08a63b6, type: 2}
+    SpawnGroupSpawnTimes:
+    - 6
+    - 10
+    - 20
+    - 35
+  - PassiveEnemies: 01000000
+    PassiveEnemySpawnCadence:
+    - 0
+    SpawnGroups:
+    - {fileID: 11400000, guid: 6bab43632c8edb94f908cc0135d0e31e, type: 2}
+    - {fileID: 11400000, guid: 49659da6bc8a7fc42b75dbbc73f5a2a2, type: 2}
+    - {fileID: 11400000, guid: 1da68f7f5c27e4c4c88e39bac23543d3, type: 2}
+    - {fileID: 11400000, guid: 8ee8c34cf95384645937b76b27cb8b7a, type: 2}
+    - {fileID: 11400000, guid: 8ee8c34cf95384645937b76b27cb8b7a, type: 2}
+    - {fileID: 11400000, guid: 5876f2b8347c79a4ab22a01c5a80f31b, type: 2}
+    SpawnGroupSpawnTimes:
+    - 6
+    - 10
+    - 20
+    - 35
+    - 40
+    - 43
+  - PassiveEnemies: 03000000
+    PassiveEnemySpawnCadence:
+    - 1
+    SpawnGroups:
+    - {fileID: 11400000, guid: 1c2caf9383064fe469f51eec1bfba178, type: 2}
+    - {fileID: 11400000, guid: 1c2caf9383064fe469f51eec1bfba178, type: 2}
+    - {fileID: 11400000, guid: 1c2caf9383064fe469f51eec1bfba178, type: 2}
+    - {fileID: 11400000, guid: 1da68f7f5c27e4c4c88e39bac23543d3, type: 2}
+    - {fileID: 11400000, guid: 1c2caf9383064fe469f51eec1bfba178, type: 2}
+    SpawnGroupSpawnTimes:
+    - 6
+    - 12
+    - 15
+    - 17
+    - 21
+  - PassiveEnemies: 
+    PassiveEnemySpawnCadence: []
+    SpawnGroups:
+    - {fileID: 11400000, guid: 8d895542686d0044a8ad6651d3aa2bd6, type: 2}
+    - {fileID: 11400000, guid: 9b304563dfe9fa043be820985a1d2f4a, type: 2}
+    - {fileID: 11400000, guid: 1c13ad0fe75b84f4eb56eabb0f494736, type: 2}
+    - {fileID: 11400000, guid: 8d895542686d0044a8ad6651d3aa2bd6, type: 2}
+    - {fileID: 11400000, guid: 8d895542686d0044a8ad6651d3aa2bd6, type: 2}
+    - {fileID: 11400000, guid: 9b304563dfe9fa043be820985a1d2f4a, type: 2}
+    - {fileID: 11400000, guid: 1c13ad0fe75b84f4eb56eabb0f494736, type: 2}
+    - {fileID: 11400000, guid: 1c13ad0fe75b84f4eb56eabb0f494736, type: 2}
+    - {fileID: 11400000, guid: 1c13ad0fe75b84f4eb56eabb0f494736, type: 2}
+    - {fileID: 11400000, guid: 1c13ad0fe75b84f4eb56eabb0f494736, type: 2}
+    - {fileID: 11400000, guid: 1c13ad0fe75b84f4eb56eabb0f494736, type: 2}
+    - {fileID: 11400000, guid: 49659da6bc8a7fc42b75dbbc73f5a2a2, type: 2}
+    - {fileID: 11400000, guid: 1c13ad0fe75b84f4eb56eabb0f494736, type: 2}
+    - {fileID: 11400000, guid: 1c13ad0fe75b84f4eb56eabb0f494736, type: 2}
+    - {fileID: 11400000, guid: 1c13ad0fe75b84f4eb56eabb0f494736, type: 2}
+    - {fileID: 11400000, guid: 9b304563dfe9fa043be820985a1d2f4a, type: 2}
+    - {fileID: 11400000, guid: 8d895542686d0044a8ad6651d3aa2bd6, type: 2}
+    SpawnGroupSpawnTimes:
+    - 6
+    - 9
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
