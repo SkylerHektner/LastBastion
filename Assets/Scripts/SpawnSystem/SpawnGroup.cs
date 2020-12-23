@@ -21,6 +21,7 @@ public class SpawnGroup : ScriptableObject
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor( typeof( SpawnGroup ) )]
 public class SpawnGroupEdtior : Editor
 {
@@ -94,6 +95,7 @@ public class SpawnGroupEdtior : Editor
         }
     }
 }
+#endif
 
 [Serializable] public class SpawnDictionary : SerializableDictionary<EnemyEnum, int> { }
 

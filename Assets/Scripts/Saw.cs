@@ -33,7 +33,7 @@ public class Saw : MonoBehaviour
             still_dragging = Input.GetMouseButton( 0 );
 #endif
 #if MOBILE && !UNITY_EDITOR
-            still_dragging = Input.GetTouchCount() > 0;
+            still_dragging = Input.touchCount > 0;
 #endif
             if( still_dragging )
             {

@@ -309,6 +309,7 @@ public enum EnemyEnum
 }
 
 // EDITOR
+#if UNITY_EDITOR
 [CustomEditor( typeof( SpawnManager ) )]
 public class SpawnManagerEditor : Editor
 {
@@ -342,3 +343,4 @@ public class SpawnManagerEditor : Editor
 
     }
 }
+#endif

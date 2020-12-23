@@ -76,6 +76,7 @@ public class Rails : MonoBehaviour
 }
 
 // EDITOR
+#if UNITY_EDITOR
 [CustomEditor( typeof( Rails ) )]
 public class RailsEdtior : Editor
 {
@@ -95,3 +96,4 @@ public class RailsEdtior : Editor
 
     }
 }
+#endif

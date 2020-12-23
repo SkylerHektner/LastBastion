@@ -45,7 +45,7 @@ public class SpawnCadenceProfile : ScriptableObject
     }
 }
 
-
+#if UNITY_EDITOR
 [CustomEditor( typeof( SpawnCadenceProfile ) )]
 public class SpawnCadenceProfileEditor : Editor
 {
@@ -185,3 +185,4 @@ public class SpawnCadenceProfileEditor : Editor
         }
     }
 }
+#endif
