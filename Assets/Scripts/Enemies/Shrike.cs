@@ -46,7 +46,7 @@ public class Shrike : Enemy
 
     private void ChangePosition()
     {
-        Vector3 new_pos = new Vector3( transform.position.x, Mathf.Max( Rail.LeftRail.Bottom, transform.position.y - TeleportDistance ) );
+        Vector3 new_pos = new Vector3( transform.position.x, Mathf.Max( Rails.Instance.Bottom, transform.position.y - TeleportDistance ) );
         transform.position = new_pos;
     }
 
