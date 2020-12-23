@@ -16,6 +16,7 @@ public class SpawnCadenceProfile : ScriptableObject
         public List<float> PassiveEnemySpawnCadence;
         public List<SpawnGroup> SpawnGroups;
         public List<float> SpawnGroupSpawnTimes;
+        public bool collapsed = false; // Editor UI Only
 
         public Wave()
         {
@@ -67,110 +68,117 @@ public class SpawnCadenceProfileEditor : Editor
         for( int index = 0; index < spawn_cadence_profile.Waves.Count; ++index )
         {
             SpawnCadenceProfile.Wave wave = spawn_cadence_profile.Waves[index];
-            EditorGUILayout.BeginFoldoutHeaderGroup( true, "------WAVE " + ( wave_num ).ToString() + "------" );
-
-            // passive enemy spawn rates - add new entry
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Label( "Passive Enemy Spawn Rates" );
-            if( GUILayout.Button( "+" ) )
+            bool c = EditorGUILayout.BeginFoldoutHeaderGroup( spawn_cadence_profile.Waves[index].collapsed, "------WAVE " + ( wave_num ).ToString() + "------" );
+            if( c != spawn_cadence_profile.Waves[index].collapsed )
             {
-                wave.PassiveEnemies.Add( EnemyEnum.Skeleton );
-                wave.PassiveEnemySpawnCadence.Add( 0.0f );
+                spawn_cadence_profile.Waves[index].collapsed = c;
                 EditorUtility.SetDirty( target );
             }
-            EditorGUILayout.EndHorizontal();
 
-            // edit passive enemy spawn rates
-            for( int x = 0; x < wave.PassiveEnemies.Count; ++x )
+            if( !c )
             {
-
+                // passive enemy spawn rates - add new entry
                 EditorGUILayout.BeginHorizontal();
-                EnemyEnum enemy = (EnemyEnum)EditorGUILayout.EnumPopup( wave.PassiveEnemies[x] );
-                if( enemy != wave.PassiveEnemies[x] )
+                GUILayout.Label( "Passive Enemy Spawn Rates" );
+                if( GUILayout.Button( "+" ) )
                 {
-                    wave.PassiveEnemies[x] = enemy;
+                    wave.PassiveEnemies.Add( EnemyEnum.Skeleton );
+                    wave.PassiveEnemySpawnCadence.Add( 0.0f );
                     EditorUtility.SetDirty( target );
                 }
-                float enemy_spawn_cadence = EditorGUILayout.DelayedFloatField( wave.PassiveEnemySpawnCadence[x] );
-                if( enemy_spawn_cadence != wave.PassiveEnemySpawnCadence[x] )
+                EditorGUILayout.EndHorizontal();
+
+                // edit passive enemy spawn rates
+                for( int x = 0; x < wave.PassiveEnemies.Count; ++x )
                 {
-                    wave.PassiveEnemySpawnCadence[x] = enemy_spawn_cadence;
+
+                    EditorGUILayout.BeginHorizontal();
+                    EnemyEnum enemy = (EnemyEnum)EditorGUILayout.EnumPopup( wave.PassiveEnemies[x] );
+                    if( enemy != wave.PassiveEnemies[x] )
+                    {
+                        wave.PassiveEnemies[x] = enemy;
+                        EditorUtility.SetDirty( target );
+                    }
+                    float enemy_spawn_cadence = EditorGUILayout.DelayedFloatField( wave.PassiveEnemySpawnCadence[x] );
+                    if( enemy_spawn_cadence != wave.PassiveEnemySpawnCadence[x] )
+                    {
+                        wave.PassiveEnemySpawnCadence[x] = enemy_spawn_cadence;
+                        EditorUtility.SetDirty( target );
+                    }
+                    GUILayout.Label( "Per Second" );
+                    if( GUILayout.Button( "Copy" ) )
+                    {
+                        wave.PassiveEnemies.Insert( x + 1, wave.PassiveEnemies[x] );
+                        wave.PassiveEnemySpawnCadence.Insert( x + 1, wave.PassiveEnemySpawnCadence[x] );
+                        EditorUtility.SetDirty( target );
+                    }
+                    if( GUILayout.Button( "Delete" ) )
+                    {
+                        wave.PassiveEnemies.RemoveAt( x );
+                        wave.PassiveEnemySpawnCadence.RemoveAt( x );
+                        x--;
+                        EditorUtility.SetDirty( target );
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+
+                // SpawnGroups
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label( "Spawn Groups" );
+                if( GUILayout.Button( "+" ) )
+                {
+                    wave.SpawnGroups.Add( null );
+                    wave.SpawnGroupSpawnTimes.Add( 0.0f );
                     EditorUtility.SetDirty( target );
                 }
-                GUILayout.Label( "Per Second" );
-                if( GUILayout.Button( "Copy" ) )
+                EditorGUILayout.EndHorizontal();
+                for( int x = 0; x < wave.SpawnGroups.Count; ++x )
                 {
-                    wave.PassiveEnemies.Insert( x + 1, wave.PassiveEnemies[x] );
-                    wave.PassiveEnemySpawnCadence.Insert( x + 1, wave.PassiveEnemySpawnCadence[x] );
+                    EditorGUILayout.BeginHorizontal();
+                    SpawnGroup group = (SpawnGroup)EditorGUILayout.ObjectField( wave.SpawnGroups[x], typeof( SpawnGroup ), true );
+                    if( wave.SpawnGroups[x] != group )
+                    {
+                        wave.SpawnGroups[x] = group;
+                        EditorUtility.SetDirty( target );
+                    }
+                    GUILayout.Label( "Spawn At Wave Time: " );
+                    float group_spawn_time = EditorGUILayout.FloatField( wave.SpawnGroupSpawnTimes[x] );
+                    if( group_spawn_time != wave.SpawnGroupSpawnTimes[x] )
+                    {
+                        wave.SpawnGroupSpawnTimes[x] = group_spawn_time;
+                        EditorUtility.SetDirty( target );
+                    }
+                    if( GUILayout.Button( "Copy" ) )
+                    {
+                        wave.SpawnGroups.Insert( x + 1, wave.SpawnGroups[x] );
+                        wave.SpawnGroupSpawnTimes.Insert( x + 1, wave.SpawnGroupSpawnTimes[x] );
+                        EditorUtility.SetDirty( target );
+                    }
+                    if( GUILayout.Button( "Delete" ) )
+                    {
+                        wave.SpawnGroups.RemoveAt( x );
+                        wave.SpawnGroupSpawnTimes.RemoveAt( x );
+                        x--;
+                        EditorUtility.SetDirty( target );
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+
+                // delete or duplicate entry
+                EditorGUILayout.BeginHorizontal();
+                if( GUILayout.Button( "Duplicate Wave" ) )
+                {
+                    spawn_cadence_profile.Waves.Insert( index + 1, new SpawnCadenceProfile.Wave( wave ) );
                     EditorUtility.SetDirty( target );
                 }
-                if( GUILayout.Button( "Delete" ) )
+                if( GUILayout.Button( "Delete Wave" ) )
                 {
-                    wave.PassiveEnemies.RemoveAt( x );
-                    wave.PassiveEnemySpawnCadence.RemoveAt( x );
-                    x--;
+                    spawn_cadence_profile.Waves.RemoveAt( index );
+                    index--;
                     EditorUtility.SetDirty( target );
                 }
                 EditorGUILayout.EndHorizontal();
             }
-
-            // SpawnGroups
-            EditorGUILayout.BeginHorizontal();
-            GUILayout.Label( "Spawn Groups" );
-            if( GUILayout.Button( "+" ) )
-            {
-                wave.SpawnGroups.Add( null );
-                wave.SpawnGroupSpawnTimes.Add( 0.0f );
-                EditorUtility.SetDirty( target );
-            }
-            EditorGUILayout.EndHorizontal();
-            for( int x = 0; x < wave.SpawnGroups.Count; ++x )
-            {
-                EditorGUILayout.BeginHorizontal();
-                SpawnGroup group = (SpawnGroup)EditorGUILayout.ObjectField( wave.SpawnGroups[x], typeof( SpawnGroup ), true );
-                if( wave.SpawnGroups[x] != group )
-                {
-                    wave.SpawnGroups[x] = group;
-                    EditorUtility.SetDirty( target );
-                }
-                GUILayout.Label( "Spawn At Wave Time: " );
-                float group_spawn_time = EditorGUILayout.FloatField( wave.SpawnGroupSpawnTimes[x] );
-                if( group_spawn_time != wave.SpawnGroupSpawnTimes[x] )
-                {
-                    wave.SpawnGroupSpawnTimes[x] = group_spawn_time;
-                    EditorUtility.SetDirty( target );
-                }
-                if( GUILayout.Button( "Copy" ) )
-                {
-                    wave.SpawnGroups.Insert( x + 1, wave.SpawnGroups[x] );
-                    wave.SpawnGroupSpawnTimes.Insert( x + 1, wave.SpawnGroupSpawnTimes[x] );
-                    EditorUtility.SetDirty( target );
-                }
-                if( GUILayout.Button( "Delete" ) )
-                {
-                    wave.SpawnGroups.RemoveAt( x );
-                    wave.SpawnGroupSpawnTimes.RemoveAt( x );
-                    x--;
-                    EditorUtility.SetDirty( target );
-                }
-                EditorGUILayout.EndHorizontal();
-            }
-
-            // delete or duplicate entry
-            EditorGUILayout.BeginHorizontal();
-            if( GUILayout.Button( "Duplicate Wave" ) )
-            {
-                spawn_cadence_profile.Waves.Insert( index + 1, new SpawnCadenceProfile.Wave( wave ) );
-                EditorUtility.SetDirty( target );
-            }
-            if( GUILayout.Button( "Delete Wave" ) )
-            {
-                spawn_cadence_profile.Waves.RemoveAt( index );
-                index--;
-                EditorUtility.SetDirty( target );
-            }
-            EditorGUILayout.EndHorizontal();
-
 
             EditorGUILayout.EndFoldoutHeaderGroup();
             wave_num++;
