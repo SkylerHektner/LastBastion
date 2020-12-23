@@ -29,7 +29,7 @@ public class SpawnManager : MonoBehaviour
     public Vector3 PlayableAreaBottomLeft;
 
     private float spawn_timer = -1.0f;
-    private int current_wave = 0;
+    private int current_wave = -1;
     private int cur_spawn_group_index = 0;
     private List<float> passive_spawn_trackers = new List<float>();
     private LinkedList<PendingSpawn> pending_spawns = new LinkedList<PendingSpawn>();
@@ -50,7 +50,7 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        StartWaves();
+        StartNextWave();
     }
 
     private void Update()
@@ -111,10 +111,10 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void StartWaves()
+    public void StartNextWave()
     {
         spawn_timer = 0.0f;
-        current_wave = 0;
+        current_wave++;
         cur_spawn_group_index = 0;
         passive_spawn_trackers.Clear();
         foreach( float time in spawnCadenceProfile.Waves[current_wave].PassiveEnemySpawnCadence )
@@ -124,6 +124,8 @@ public class SpawnManager : MonoBehaviour
     private void WaveComplete()
     {
         spawn_timer = -1.0f; // stop spawning
+        if(current_wave < spawnCadenceProfile.Waves.Count)
+            StartNextWave();
     }
 
     private Vector3 GetRandomSpawnPoint()
