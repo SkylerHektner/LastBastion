@@ -21,11 +21,11 @@ public class Shrike : Enemy
             current_teleport_cooldown -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
     }
 
-    public override void Hit( Vector3 hit_direction )
+    public override void Hit( Vector3 hit_direction, bool can_dodge )
     {
         if( teleporting )
             return;
-        if( Moving && current_teleport_cooldown <= 0.0f )
+        if( Moving && current_teleport_cooldown <= 0.0f && can_dodge )
         {
             last_saw_hit_direction = hit_direction;
             StopMoving();
@@ -33,7 +33,7 @@ public class Shrike : Enemy
         }
         else
         {
-            base.Hit( hit_direction );
+            base.Hit( hit_direction, can_dodge );
         }
     }
 

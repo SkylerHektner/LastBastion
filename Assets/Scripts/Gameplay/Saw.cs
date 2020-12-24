@@ -90,7 +90,7 @@ public class Saw : MonoBehaviour
 
     void OnTriggerEnter2D( Collider2D col )
     {
-        col.gameObject.GetComponent<Enemy>().Hit( move_direction );
+        col.gameObject.GetComponent<Enemy>().Hit( move_direction, true );
     }
 
     private void UpdateDragArrowGraphics()

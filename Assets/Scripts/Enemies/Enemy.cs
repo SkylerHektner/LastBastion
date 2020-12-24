@@ -11,6 +11,12 @@ public class Enemy : MonoBehaviour
     public static long NextEnemyID = 1;
     public long EnemyID {
         get {
+            if( enemyID == 0 )
+            {
+                enemyID = NextEnemyID++;
+                if( NextEnemyID == long.MaxValue )
+                    NextEnemyID = 0;
+            }
             return enemyID == 0 ? ( enemyID = NextEnemyID++ ) : enemyID;
         }
     }
@@ -128,7 +134,7 @@ public class Enemy : MonoBehaviour
         anim.SetBool( "Attacking", Moving );
     }
 
-    public virtual void Hit( Vector3 hit_direction )
+    public virtual void Hit( Vector3 hit_direction, bool can_dodge )
     {
         if( Spawning || Dying ) return; // ignore being hit if we are spawning
 

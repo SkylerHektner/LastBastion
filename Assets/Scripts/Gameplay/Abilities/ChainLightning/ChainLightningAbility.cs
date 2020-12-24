@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class ChainLightningAbility : Ability
 {
-    public static readonly float TIME_STEP = 0.1f;
-
     struct PendingZap
     {
         public float time;
@@ -15,6 +13,7 @@ public class ChainLightningAbility : Ability
         public long EnemyID;
     }
 
+    public ChainLightningAbilityData ability_data;
     private List<PendingZap> pending_zaps = new List<PendingZap>();
     private float cur_time = 0.0f;
     private int cur_zap_index = 0;
@@ -41,7 +40,7 @@ public class ChainLightningAbility : Ability
 
         int t = 0;
         int h = 0;
-        float time = TIME_STEP;
+        float time = ability_data.TimeBetweenZaps;
         while(h < enemies_on_field.Count)
         {
             ++h;
@@ -67,13 +66,16 @@ public class ChainLightningAbility : Ability
             } );
 
             ++t;
-            time += TIME_STEP;
+            time += ability_data.TimeBetweenZaps;
         }
     }
 
     public override void Update( float delta_time )
     {
         base.Update( delta_time );
+        if( pending_zaps.Count == 0 )
+            return;
+
         cur_time += delta_time * GameplayManager.GamePlayTimeScale;
 
         while(pending_zaps[cur_zap_index].time <= cur_time)
@@ -91,12 +93,15 @@ public class ChainLightningAbility : Ability
 
     private void DoZap(PendingZap zap)
     {
-
+        ChainLightningEffect effect = GameObject.Instantiate( ability_data.Effect );
+        LineRenderer line_rend = effect.gameObject.GetComponent<LineRenderer>();
+        line_rend.positionCount = 2;
+        line_rend.SetPosition( 0, zap.last_position );
+        line_rend.SetPosition( 1, zap.position );
+        Enemy en = SpawnManager.Instance.TryGetEnemyByID( zap.EnemyID );
+        if(en)
+        {
+            en.Hit( Vector3.zero, false );
+        }
     }
-}
-
-
-public class ChainLightningAbilityData : ScriptableObject
-{
-
 }

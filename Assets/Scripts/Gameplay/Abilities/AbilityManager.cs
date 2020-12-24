@@ -14,15 +14,64 @@ public class AbilityManager : MonoBehaviour
     public static AbilityManager Instance { get; private set; }
 
     public Vector3 BaseCenter;
+    public ChainLightningAbilityData ChainLightningData;
+
+    private Dictionary<long, Ability> active_abilities = new Dictionary<long, Ability>();
+    private List<long> pending_removals = new List<long>();
 
     private void Start()
     {
         Instance = this;
     }
 
+    private void Update()
+    {
+        foreach( var ab in active_abilities.Values )
+            ab.Update( Time.deltaTime );
+        foreach( var r in pending_removals )
+            active_abilities.Remove( r );
+        pending_removals.Clear();
+    }
+
     public void UseAbility(AbilityEnum ability)
     {
-        Debug.Log( ability.ToString() );
+        Ability ab = null;
+        switch( ability )
+        {
+            case AbilityEnum.TemporalAnomaly:
+                break;
+            case AbilityEnum.ChainLightning:
+                ChainLightningAbility cl = new ChainLightningAbility();
+                cl.ability_data = ChainLightningData;
+                ab = cl;
+                break;
+            case AbilityEnum.Typhoon:
+                break;
+            case AbilityEnum.Sawmageddon:
+                break;
+        }
+
+        Debug.Assert( ab != null, "ERROR: it seems triggered ability " + ability.ToString() + " is not mapped to an Ability class" );
+        if(ab != null)
+        {
+            ab.AM = this;
+            ab.name = ability.ToString();
+            active_abilities.Add( ab.AbilityID, ab );
+            ab.Start();
+        }
+    }
+
+    public void AbilityFinished(long AbilityID)
+    {
+        Debug.Assert( active_abilities.ContainsKey( AbilityID ) );
+        pending_removals.Add( AbilityID );
+    }
+
+    [ContextMenu("Print All Active Abilities")]
+    private void DebugLogAllActiveAbilities()
+    {
+        foreach(var ab in active_abilities)
+            Debug.Log( ab.Value.name );
     }
 }
 
