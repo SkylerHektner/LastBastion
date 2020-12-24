@@ -7,7 +7,7 @@ public class AbilityUIManager : MonoBehaviour
     [SerializeField] float TimeScaleLerpDuration = 0.3f;
     private float TimeScaleReturnToNormalLerpDuratin = 0.1f; // this should always be extremely fast
     [SerializeField] List<GameObject> ShowOnAbilityMenuActive;
-    [SerializeField] Image GameplayFieldScrim;
+    [SerializeField] Animator GameplayFieldScrim;
 
     private bool showing = false;
     private Ability? cur_ability_candidate = null;
@@ -45,6 +45,7 @@ public class AbilityUIManager : MonoBehaviour
         cur_ability_candidate = null;
         GameplayManager.Instance.SetTimeScale( 0.1f, TimeScaleLerpDuration );
         GameplayFieldScrim.gameObject.SetActive( true );
+        GameplayFieldScrim.SetBool( "Fade", true );
     }
 
     private void HideIcons()
@@ -54,6 +55,7 @@ public class AbilityUIManager : MonoBehaviour
         showing = false;
         cur_ability_candidate = null;
         GameplayManager.Instance.SetTimeScale( 1.0f, TimeScaleReturnToNormalLerpDuratin );
+        GameplayFieldScrim.SetBool( "Fade", false );
         GameplayFieldScrim.gameObject.SetActive( false );
     }
 
