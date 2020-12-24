@@ -23,7 +23,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float SpawnStaggerMinTime = 0.02f;
     [SerializeField] float SpawnStaggerMaxTime = 0.07f;
     [SerializeField] int StartWave = 0;
-    [Tooltip( "When spawn groups are spawned using the cluster spawn setting this determines how tightly packed they will be. The cluster is a circle. The radius of the circle is the number of spawns * this number" )]
     public Vector3 SpawnableAreaTopRight;
     public Vector3 SpawnableAreaBottomLeft;
     public Vector3 PlayableAreaTopRight;

@@ -9,6 +9,7 @@ public class Saw : MonoBehaviour
     [SerializeField] float MaxDragDistance = 5.0f; // this is just the max for graphical purposes
     [SerializeField] GameObject DirectionArrow;
     [SerializeField] GameObject DirectionArrowPivot;
+    [SerializeField] float MinimumAngleDegrees = 15;
 
     private bool on_left_side = true;
     private bool dragging = false;
@@ -77,7 +78,7 @@ public class Saw : MonoBehaviour
                 new_pos.x = Rails.Instance.Right;
                 move_direction = Vector3.zero;
             }
-            if(new_pos.x < Rails.Instance.Left)
+            if( new_pos.x < Rails.Instance.Left )
             {
                 new_pos.x = Rails.Instance.Left;
                 move_direction = Vector3.zero;
@@ -94,6 +95,7 @@ public class Saw : MonoBehaviour
 
     private void UpdateDragArrowGraphics()
     {
+        VerifyDragLastPosition();
         Vector3 delta_vec = ( drag_last_position - drag_start_position );
         float drag_dist = Mathf.Min( delta_vec.magnitude, MaxDragDistance );
 
@@ -113,11 +115,26 @@ public class Saw : MonoBehaviour
 
     private void DragEnded()
     {
+        VerifyDragLastPosition();
         dragging = false;
         on_left_side = !on_left_side;
         DirectionArrow.SetActive( false );
         if( move_direction == Vector3.zero )
             move_direction = ( drag_last_position - drag_start_position ).normalized;
+    }
+
+    // corrects the drag last position, if needed, to ensure we don't go past our minimum angle
+    private void VerifyDragLastPosition()
+    {
+        Vector3 delta_vec = ( drag_last_position - drag_start_position );
+        if( delta_vec.x < 0.0f && on_left_side ) delta_vec.x = 0.0f;
+        if( delta_vec.x > 0.0f && !on_left_side ) delta_vec.x = 0.0f;
+        float necessary_x = Mathf.Tan( MinimumAngleDegrees * Mathf.Deg2Rad ) * Mathf.Abs( delta_vec.y );
+        if( necessary_x > Mathf.Abs( delta_vec.x ) )
+        {
+            delta_vec.x = ( on_left_side ? 1.0f : -1.0f ) * necessary_x;
+            drag_last_position = drag_start_position + delta_vec;
+        }
     }
 
     public void DragStarted()
