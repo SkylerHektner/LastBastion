@@ -37,15 +37,11 @@ public class Enemy : MonoBehaviour
             StartMoving();
 
         anim.speed = GameplayManager.GamePlayTimeScale;
-
-
-
     }
 
     public void DamageBase() //  Do my remaining health as damage to the base HP
     {
-        BaseHP PlayerBase = GameObject.FindGameObjectWithTag("Base").GetComponent<BaseHP>();
-        PlayerBase.ReduceHP(CurrentHealth);
+        BaseHP.Instance.ReduceHP(CurrentHealth);
     }
 
 
