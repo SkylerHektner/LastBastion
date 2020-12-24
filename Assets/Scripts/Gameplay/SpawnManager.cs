@@ -51,7 +51,9 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+#if UNITY_EDITOR
         current_wave = StartWave - 2;
+#endif
         StartNextWave();
     }
 
