@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BaseHP : MonoBehaviour
 {
+    public static BaseHP Instance { get; private set; }
+
     public float CurrentHP;
     public float MaxHP;
 
@@ -16,6 +18,7 @@ public class BaseHP : MonoBehaviour
     void Start()
     {
         CurrentHP = MaxHP;
+        Instance = this;
     }
 
 
@@ -43,7 +46,11 @@ public class BaseHP : MonoBehaviour
             }
         }
     }
+}
 
 
+public class PlayerRegistry
+{
+    public static PlayerRegistry Instance { get; private set; }
 
 }
