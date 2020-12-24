@@ -33,7 +33,8 @@ public class SpawnManager : MonoBehaviour
     private int cur_spawn_group_index = 0;
     private List<float> passive_spawn_trackers = new List<float>();
     private LinkedList<PendingSpawn> pending_spawns = new LinkedList<PendingSpawn>();
-    private int num_living_spawned_monsters = 0;
+    public Dictionary<long, Enemy> spawned_enemies { get; private set; } = new Dictionary<long, Enemy>();
+    public List<Enemy> AllSpawnedEnemies { get { return spawned_enemies.Values.ToList<Enemy>(); } }
     struct PendingSpawn
     {
         public float time_left;
@@ -107,7 +108,7 @@ public class SpawnManager : MonoBehaviour
 
             if( cur_spawn_group_index == spawnCadenceProfile.Waves[current_wave].SpawnGroups.Count
                 && pending_spawns.Count == 0
-                && num_living_spawned_monsters == 0 )
+                && spawned_enemies.Count == 0 )
             {
                 WaveComplete();
             }
@@ -251,12 +252,14 @@ public class SpawnManager : MonoBehaviour
     public void RegisterEnemy( Enemy enemy )
     {
         enemy.OnDeath.AddListener( EnemyDied );
-        num_living_spawned_monsters++;
+        Debug.Assert( !spawned_enemies.ContainsKey( enemy.EnemyID ) );
+        spawned_enemies.Add( enemy.EnemyID, enemy );
     }
 
-    private void EnemyDied()
+    private void EnemyDied( long EnemyID )
     {
-        num_living_spawned_monsters--;
+        Debug.Assert( spawned_enemies.ContainsKey( EnemyID ) );
+        spawned_enemies.Remove( EnemyID );
     }
 
     GameObject InstantiateMonster( EnemyEnum enemy, Vector3 position )

@@ -10,7 +10,7 @@ public class AbilityUIManager : MonoBehaviour
     [SerializeField] Animator GameplayFieldScrim;
 
     private bool showing = false;
-    private Ability? cur_ability_candidate = null;
+    private AbilityEnum? cur_ability_candidate = null;
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class AbilityUIManager : MonoBehaviour
             {
                 if( cur_ability_candidate != null )
                 {
-                    AbilityManager.Instance.UseAbility( (Ability)cur_ability_candidate );
+                    AbilityManager.Instance.UseAbility( (AbilityEnum)cur_ability_candidate );
                 }
                 HideIcons();
             }

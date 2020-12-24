@@ -7,7 +7,14 @@ using UnityEngine.Events;
 [RequireComponent( typeof( Animator ) )]
 public class Enemy : MonoBehaviour
 {
-    public UnityEvent OnDeath = new UnityEvent();
+    public UnityEvent<long> OnDeath = new UnityEvent<long>();
+    public static long NextEnemyID = 1;
+    public long EnemyID {
+        get {
+            return enemyID == 0 ? ( enemyID = NextEnemyID++ ) : enemyID;
+        }
+    }
+    private long enemyID = 0;
 
     [SerializeField] float MoveSpeed = 1.0f;
     [SerializeField] int MaxHealth = 1;
@@ -29,6 +36,9 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
+        if( NextEnemyID == long.MaxValue )
+            NextEnemyID = 1;
+
         CurrentHealth = MaxHealth;
         GameplayManager.TimeScaleChanged.AddListener( OnTimeScaleChange );
 
@@ -44,7 +54,7 @@ public class Enemy : MonoBehaviour
 
     public void DamageBase() //  Do my remaining health as damage to the base HP
     {
-        BaseHP.Instance.ReduceHP(CurrentHealth);
+        BaseHP.Instance.ReduceHP( CurrentHealth );
     }
 
 
@@ -129,7 +139,7 @@ public class Enemy : MonoBehaviour
         {
             if( DamagedEffect != null )
                 Instantiate( DamagedEffect ).transform.position = transform.position;
-            if(DamagedAnimation != null && DamagedAnimation.Length > 0)
+            if( DamagedAnimation != null && DamagedAnimation.Length > 0 )
                 anim.SetTrigger( DamagedAnimation );
         }
     }
@@ -153,7 +163,7 @@ public class Enemy : MonoBehaviour
     {
         GameplayManager.TimeScaleChanged.RemoveListener( OnTimeScaleChange );
         Destroy( gameObject );
-        OnDeath.Invoke();
+        OnDeath.Invoke( EnemyID );
     }
 
     private void OnTimeScaleChange()

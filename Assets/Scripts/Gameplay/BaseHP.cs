@@ -47,4 +47,15 @@ public class PlayerRegistry
 {
     public static PlayerRegistry Instance { get; private set; }
 
+    public List<GameObject> players;
+
+    public void RegisterPlayer( GameObject p )
+    {
+        players.Add( p );
+    }
+
+    public void DeregisterPlayer(GameObject p)
+    {
+        players.Remove( p );
+    }
 }
