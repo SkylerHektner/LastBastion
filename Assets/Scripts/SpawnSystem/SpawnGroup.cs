@@ -70,6 +70,7 @@ public class SpawnGroupEdtior : Editor
                 spawn_group.SpawnMap[(EnemyEnum)e]--;
                 EditorUtility.SetDirty( target );
             }
+            GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
         }
 
