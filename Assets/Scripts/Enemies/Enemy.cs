@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     public int CurrentHealth { get; private set; }
 
     protected Animator anim;
+    protected SpriteRenderer s_rend;
 
     //BaseHP PlayerBase;
 
@@ -31,6 +33,7 @@ public class Enemy : MonoBehaviour
         GameplayManager.TimeScaleChanged.AddListener( OnTimeScaleChange );
 
         anim = GetComponent<Animator>();
+        s_rend = GetComponent<SpriteRenderer>();
         if( SpawnEffect || ( SpawnAnimation != null && SpawnAnimation.Length > 0 ) )
             Spawn();
         else
@@ -59,6 +62,8 @@ public class Enemy : MonoBehaviour
             else
                 transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale;
         }
+
+        s_rend.sortingOrder = Convert.ToInt32( -transform.position.y * 100.0f );
     }
 
     public void Spawn()
