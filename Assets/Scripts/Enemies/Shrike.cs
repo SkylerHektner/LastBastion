@@ -18,7 +18,7 @@ public class Shrike : Enemy
         base.Update();
 
         if( current_teleport_cooldown > 0.0f )
-            current_teleport_cooldown -= Time.deltaTime;
+            current_teleport_cooldown -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
     }
 
     public override void Hit( Vector3 hit_direction )

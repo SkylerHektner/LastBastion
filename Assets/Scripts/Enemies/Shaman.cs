@@ -18,7 +18,7 @@ public class Shaman : Enemy
 
         if( Moving )
         {
-            cur_summon_cooldown -= Time.deltaTime;
+            cur_summon_cooldown -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
             if(cur_summon_cooldown <= 0.0f)
             {
                 StopMoving();

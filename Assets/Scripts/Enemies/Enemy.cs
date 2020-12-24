@@ -26,26 +26,29 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         CurrentHealth = MaxHealth;
+        GameplayManager.TimeScaleChanged.AddListener( OnTimeScaleChange );
 
         anim = GetComponent<Animator>();
         if( SpawnEffect || ( SpawnAnimation != null && SpawnAnimation.Length > 0 ) )
             Spawn();
         else
             StartMoving();
+
+        anim.speed = GameplayManager.GamePlayTimeScale;
     }
 
     protected virtual void Update()
     {
         if( Moving )
         {
-            if( transform.position.y - SpawnManager.Instance.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed )
+            if( transform.position.y - SpawnManager.Instance.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed * GameplayManager.GamePlayTimeScale )
             {
                 Moving = false;
                 // TODO: Deal damage to base or attack or something
                 Kill();
             }
             else
-                transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime;
+                transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale;
         }
     }
 
@@ -92,6 +95,7 @@ public class Enemy : MonoBehaviour
     {
         Moving = true;
         anim.SetBool( "Attacking", Moving );
+        anim.speed = GameplayManager.GamePlayTimeScale;
     }
 
     public void StopMoving()
@@ -133,7 +137,13 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
+        GameplayManager.TimeScaleChanged.RemoveListener( OnTimeScaleChange );
         Destroy( gameObject );
         OnDeath.Invoke();
+    }
+
+    private void OnTimeScaleChange()
+    {
+        anim.speed = GameplayManager.GamePlayTimeScale;
     }
 }

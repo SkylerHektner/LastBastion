@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject CarrierSPrefab;
     [SerializeField] float SpawnStaggerMinTime = 0.02f;
     [SerializeField] float SpawnStaggerMaxTime = 0.07f;
+    [SerializeField] int StartWave = 0;
     [Tooltip( "When spawn groups are spawned using the cluster spawn setting this determines how tightly packed they will be. The cluster is a circle. The radius of the circle is the number of spawns * this number" )]
     public Vector3 SpawnableAreaTopRight;
     public Vector3 SpawnableAreaBottomLeft;
@@ -50,6 +51,7 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        current_wave = StartWave - 2;
         StartNextWave();
     }
 
@@ -118,13 +120,20 @@ public class SpawnManager : MonoBehaviour
         cur_spawn_group_index = 0;
         passive_spawn_trackers.Clear();
         foreach( float time in spawnCadenceProfile.Waves[current_wave].PassiveEnemySpawnCadence )
-            passive_spawn_trackers.Add( time );
+        {
+            if( time == 0.0f )
+            {
+                Debug.LogError( "ERROR: Passive Spawn Cadence set to 0 in Spawn Cadence Profile " + spawnCadenceProfile.name + " Wave " + ( current_wave + 1 ).ToString() );
+                continue;
+            }
+            passive_spawn_trackers.Add( 1.0f / time );
+        }
     }
 
     private void WaveComplete()
     {
         spawn_timer = -1.0f; // stop spawning
-        if(current_wave < spawnCadenceProfile.Waves.Count)
+        if( current_wave < spawnCadenceProfile.Waves.Count )
             StartNextWave();
     }
 

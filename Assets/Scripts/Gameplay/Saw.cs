@@ -59,7 +59,7 @@ public class Saw : MonoBehaviour
         if( move_direction != Vector3.zero )
         {
             // hit top or bottom? Bounce
-            Vector3 new_pos = transform.position + move_direction * MoveSpeed * Time.deltaTime;
+            Vector3 new_pos = transform.position + move_direction * MoveSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale;
             if( new_pos.y < Rails.Instance.Bottom )
             {
                 new_pos.y += ( Rails.Instance.Bottom - new_pos.y ) * 2;
