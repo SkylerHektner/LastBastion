@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
 
     protected Animator anim;
 
+    //BaseHP PlayerBase;
+
     protected virtual void Start()
     {
         CurrentHealth = MaxHealth;
@@ -35,7 +37,17 @@ public class Enemy : MonoBehaviour
             StartMoving();
 
         anim.speed = GameplayManager.GamePlayTimeScale;
+
+
+
     }
+
+    public void DamageBase() //  Do my remaining health as damage to the base HP
+    {
+        BaseHP PlayerBase = GameObject.FindGameObjectWithTag("Base").GetComponent<BaseHP>();
+        PlayerBase.ReduceHP(CurrentHealth);
+    }
+
 
     protected virtual void Update()
     {
@@ -45,6 +57,7 @@ public class Enemy : MonoBehaviour
             {
                 Moving = false;
                 // TODO: Deal damage to base or attack or something
+                DamageBase();
                 Kill();
             }
             else
