@@ -27,6 +27,12 @@ public class BaseHP : MonoBehaviour
         CurrentHP -= Damage;
         CurrentHpBar.SetSize(CurrentHP / MaxHP);
         DamageDelay = 1f;
+        Component[] Forcefields = GetComponentsInChildren<Animator>();
+        foreach (Animator Forcefield in Forcefields)
+        {
+            Forcefield.SetTrigger("Damaged");
+        }
+
     }
 
     private void FixedUpdate()
