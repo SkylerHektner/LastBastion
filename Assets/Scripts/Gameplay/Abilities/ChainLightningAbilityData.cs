@@ -6,5 +6,8 @@ using UnityEngine;
 public class ChainLightningAbilityData : ScriptableObject
 {
     public ChainLightningEffect Effect;
-    public float TimeBetweenZaps = 0.1f;
+    public DeleteAfterDuration ZappedEffect;
+    public GameObject SceneWideEffect;
+    public float TimeBetweenZaps = 0.1f; // mostly cosmetic - the delay between each cycle of zaps as the lightning branches
+    public float ZapDuration = 2.0f;
 }

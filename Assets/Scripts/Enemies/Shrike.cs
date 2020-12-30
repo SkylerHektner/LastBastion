@@ -25,7 +25,7 @@ public class Shrike : Enemy
     {
         if( teleporting )
             return;
-        if( Moving && current_teleport_cooldown <= 0.0f && can_dodge )
+        if( Moving && current_teleport_cooldown <= 0.0f && can_dodge && !Zapped )
         {
             last_saw_hit_direction = hit_direction;
             StopMoving();

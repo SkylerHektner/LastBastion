@@ -38,6 +38,9 @@ public class Enemy : MonoBehaviour
     protected Animator anim;
     protected SpriteRenderer s_rend;
 
+    private float zap_duration = -1.0f;
+    public bool Zapped { get { return zap_duration != -1.0f; } }
+
     //BaseHP PlayerBase;
 
     protected virtual void Start()
@@ -77,6 +80,13 @@ public class Enemy : MonoBehaviour
             }
             else
                 transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale;
+        }
+
+        if( zap_duration != -1.0f )
+        {
+            zap_duration -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
+            if( zap_duration <= 0.0f )
+                FinishZap();
         }
 
         s_rend.sortingOrder = Convert.ToInt32( -transform.position.y * 100.0f );
@@ -138,7 +148,11 @@ public class Enemy : MonoBehaviour
     {
         if( Spawning || Dying ) return; // ignore being hit if we are spawning
 
-        CurrentHealth--;
+        if( Zapped )
+            CurrentHealth = 0;
+        else
+            CurrentHealth--;
+
         if( CurrentHealth <= 0 )
             Kill();
         else
@@ -175,5 +189,25 @@ public class Enemy : MonoBehaviour
     private void OnTimeScaleChange()
     {
         anim.speed = GameplayManager.GamePlayTimeScale;
+    }
+
+    protected virtual void FinishZap()
+    {
+        zap_duration = -1.0f;
+        StartMoving();
+    }
+
+    public virtual void ZapForDuration( float duration )
+    {
+        Debug.Assert( duration > 0.0f );
+
+        if( Zapped )
+        {
+            zap_duration = Mathf.Max( duration, zap_duration );
+            return;
+        }
+
+        StopMoving();
+        zap_duration = duration;
     }
 }

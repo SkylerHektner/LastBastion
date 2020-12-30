@@ -22,6 +22,8 @@ public class ChainLightningAbility : Ability
     {
         base.Start();
 
+        GameObject.Instantiate( ability_data.SceneWideEffect );
+
         List<Enemy> enemies_on_field = SpawnManager.Instance.AllSpawnedEnemies;
         if( enemies_on_field.Count == 0 )
         {
@@ -30,7 +32,7 @@ public class ChainLightningAbility : Ability
         }
 
         enemies_on_field.Sort( ( a, b ) => a.gameObject.transform.position.y.CompareTo( b.transform.position.y ) );
-        pending_zaps.Add(new PendingZap()
+        pending_zaps.Add( new PendingZap()
         {
             time = 0.0f,
             position = enemies_on_field[0].transform.position,
@@ -40,15 +42,14 @@ public class ChainLightningAbility : Ability
 
         int t = 0;
         int h = 0;
-        float time = ability_data.TimeBetweenZaps;
-        while(h < enemies_on_field.Count)
+        while( h < enemies_on_field.Count )
         {
             ++h;
             if( h >= enemies_on_field.Count )
                 break;
             pending_zaps.Add( new PendingZap()
             {
-                time = time,
+                time = Mathf.Log( t, 2.0f ) * ability_data.TimeBetweenZaps,
                 position = enemies_on_field[h].transform.position,
                 last_position = enemies_on_field[t].transform.position,
                 EnemyID = enemies_on_field[h].EnemyID,
@@ -59,14 +60,13 @@ public class ChainLightningAbility : Ability
                 break;
             pending_zaps.Add( new PendingZap()
             {
-                time = time,
+                time = Mathf.Log( t, 2.0f ) * ability_data.TimeBetweenZaps,
                 position = enemies_on_field[h].transform.position,
                 last_position = enemies_on_field[t].transform.position,
                 EnemyID = enemies_on_field[h].EnemyID,
             } );
 
             ++t;
-            time += ability_data.TimeBetweenZaps;
         }
     }
 
@@ -78,12 +78,12 @@ public class ChainLightningAbility : Ability
 
         cur_time += delta_time * GameplayManager.GamePlayTimeScale;
 
-        while(pending_zaps[cur_zap_index].time <= cur_time)
+        while( pending_zaps[cur_zap_index].time <= cur_time )
         {
             DoZap( pending_zaps[cur_zap_index] );
             cur_zap_index++;
 
-            if(cur_zap_index == pending_zaps.Count)
+            if( cur_zap_index == pending_zaps.Count )
             {
                 Finish();
                 return;
@@ -91,7 +91,7 @@ public class ChainLightningAbility : Ability
         }
     }
 
-    private void DoZap(PendingZap zap)
+    private void DoZap( PendingZap zap )
     {
         ChainLightningEffect effect = GameObject.Instantiate( ability_data.Effect );
         LineRenderer line_rend = effect.gameObject.GetComponent<LineRenderer>();
@@ -99,9 +99,13 @@ public class ChainLightningAbility : Ability
         line_rend.SetPosition( 0, zap.last_position );
         line_rend.SetPosition( 1, zap.position );
         Enemy en = SpawnManager.Instance.TryGetEnemyByID( zap.EnemyID );
-        if(en)
+        if( en )
         {
-            en.Hit( Vector3.zero, false );
+            en.ZapForDuration( ability_data.ZapDuration );
         }
+
+        DeleteAfterDuration zap_effect = GameObject.Instantiate( ability_data.ZappedEffect );
+        zap_effect.duration = ability_data.ZapDuration;
+        zap_effect.transform.position = zap.position;
     }
 }
