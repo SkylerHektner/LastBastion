@@ -102,10 +102,11 @@ public class ChainLightningAbility : Ability
         if( en )
         {
             en.ZapForDuration( ability_data.ZapDuration );
-        }
 
-        DeleteAfterDuration zap_effect = GameObject.Instantiate( ability_data.ZappedEffect );
-        zap_effect.duration = ability_data.ZapDuration;
-        zap_effect.transform.position = zap.position;
+            DeleteAfterDuration zap_effect = GameObject.Instantiate( ability_data.ZappedEffect );
+            zap_effect.duration = ability_data.ZapDuration;
+            zap_effect.transform.position = zap.position;
+            zap_effect.transform.parent = en.transform;
+        }
     }
 }

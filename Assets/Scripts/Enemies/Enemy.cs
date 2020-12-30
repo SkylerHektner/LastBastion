@@ -116,7 +116,8 @@ public class Enemy : MonoBehaviour
         if( SpawnAnimation == null || SpawnAnimation.Length == 0 )
         {
             Spawning = false;
-            StartMoving();
+            if( !Zapped )
+                StartMoving();
         }
         else
         {
@@ -128,7 +129,8 @@ public class Enemy : MonoBehaviour
     public void SpawnAnimationDone()
     {
         Spawning = false;
-        StartMoving();
+        if( !Zapped )
+            StartMoving();
     }
 
     public virtual void StartMoving()
