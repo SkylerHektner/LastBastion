@@ -284,8 +284,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.5
-      minScalar: 1
+      scalar: 0.5
+      minScalar: 0.25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4833,7 +4833,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9fa6147b7b2951f41b13607bc7242fd4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4851,9 +4851,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: -1391013261
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_RenderMode: 3
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4889,6 +4889,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2758604776316465096}
   - component: {fileID: 2758604776316465099}
+  - component: {fileID: 1107142969}
+  - component: {fileID: -2698463670602845695}
   m_Layer: 0
   m_Name: Mudball
   m_TagString: Untagged
@@ -4962,3 +4964,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1107142969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2758604776316465098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e82276aa1b7db40b8fc3b1ffa9aaf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 20
+  MoveDirection: {x: 0, y: 0, z: 0}
+  CurWallHitBehavior: 1
+  DestroyEffect: {fileID: 502324915706778173, guid: d1c9cdfc425f3d94bbc5e06fe26ebc2a, type: 3}
+  ProjectileHitWallEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-2698463670602845695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2758604776316465098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28115c6d4874a254181e338bfbbce637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 30
+  DeleteDurationReached:
+    m_PersistentCalls:
+      m_Calls: []

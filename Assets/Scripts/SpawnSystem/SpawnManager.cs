@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject ShieldSkeletonPrefab;
     [SerializeField] GameObject PumpkinWarriorPrefab;
     [SerializeField] GameObject ShieldBearerPrefab;
-    [SerializeField] GameObject ArcMagePrefab;
+    [SerializeField] GameObject MudSlingerPrefab;
     [SerializeField] GameObject ShrikePrefab;
     [SerializeField] GameObject ShamanPrefab;
     [SerializeField] GameObject CarrierLPrefab;
@@ -286,8 +286,8 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.ShieldBearer:
                 ret = Instantiate( ShieldBearerPrefab );
                 break;
-            case EnemyEnum.ArcMage:
-                ret = Instantiate( ArcMagePrefab );
+            case EnemyEnum.MudSlinger:
+                ret = Instantiate( MudSlingerPrefab );
                 break;
             case EnemyEnum.Shrike:
                 ret = Instantiate( ShrikePrefab );
@@ -320,7 +320,7 @@ public enum EnemyEnum
     ShieldSkeleton = 2,
     PumpkinWarrior = 3,
     ShieldBearer = 4,
-    ArcMage = 5,
+    MudSlinger = 5,
     Shrike = 6,
     Shaman = 7,
     CarrierL = 8,

@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent( typeof( Projectile ) )]
 public class Saw : MonoBehaviour
 {
+    public static Saw MainSaw;
+
     [SerializeField] float MoveSpeed = 1.0f;
     [SerializeField] float MinDragDistance = 1.0f;
     [SerializeField] float MaxDragDistance = 5.0f; // this is just the max for graphical purposes
     [SerializeField] GameObject DirectionArrow;
     [SerializeField] GameObject DirectionArrowPivot;
     [SerializeField] float MinimumAngleDegrees = 15;
+    [SerializeField] bool IsMainSaw = false;
 
     private bool on_left_side = true;
     private bool dragging = false;
@@ -18,10 +22,20 @@ public class Saw : MonoBehaviour
     private Color drag_arrow_color = new Color( 1, 1, 1, 0 );
 
     private Vector3 move_direction = Vector3.zero;
+    private Projectile proj;
 
     private void Start()
     {
+        if( IsMainSaw )
+        {
+            if( MainSaw != null )
+                Debug.LogError( "There appear to me two main saws?!?" );
+            MainSaw = this;
+        }
+
         DirectionArrow.SetActive( false );
+        proj = GetComponent<Projectile>();
+        proj.ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
     }
 
     private void Update()
@@ -53,42 +67,25 @@ public class Saw : MonoBehaviour
             {
                 DragEnded();
             }
-
-
-        }
-
-        if( move_direction != Vector3.zero )
-        {
-            // hit top or bottom? Bounce
-            Vector3 new_pos = transform.position + move_direction * MoveSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale;
-            if( new_pos.y < Rails.Instance.Bottom )
-            {
-                new_pos.y += ( Rails.Instance.Bottom - new_pos.y ) * 2;
-                move_direction.y = -move_direction.y;
-            }
-            if( new_pos.y > Rails.Instance.Top )
-            {
-                new_pos.y -= ( new_pos.y - Rails.Instance.Top ) * 2;
-                move_direction.y = -move_direction.y;
-            }
-
-            // Hit left or right? Stop
-            if( new_pos.x > Rails.Instance.Right )
-            {
-                new_pos.x = Rails.Instance.Right;
-                move_direction = Vector3.zero;
-            }
-            if( new_pos.x < Rails.Instance.Left )
-            {
-                new_pos.x = Rails.Instance.Left;
-                move_direction = Vector3.zero;
-            }
-
-            transform.position = new_pos;
         }
     }
 
-    void OnTriggerEnter2D( Collider2D col )
+
+    private void OnProjectileHitWall( ProjectileHitInfo hit_info )
+    {
+        if( hit_info.wall == ProjectileHitInfo.Wall.Bottom ||
+            hit_info.wall == ProjectileHitInfo.Wall.Top )
+        {
+            proj.SetWallHitBehavior( Projectile.WallHitBehavior.Bounce );
+        }
+        else if( hit_info.wall == ProjectileHitInfo.Wall.Left ||
+            hit_info.wall == ProjectileHitInfo.Wall.Right )
+        {
+            proj.SetWallHitBehavior( Projectile.WallHitBehavior.Attach );
+            move_direction = Vector3.zero;
+        }
+    }
+    private void OnTriggerEnter2D( Collider2D col )
     {
         col.gameObject.GetComponent<Enemy>().Hit( move_direction, true );
     }
@@ -117,10 +114,14 @@ public class Saw : MonoBehaviour
     {
         VerifyDragLastPosition();
         dragging = false;
-        on_left_side = !on_left_side;
         DirectionArrow.SetActive( false );
         if( move_direction == Vector3.zero )
+        {
+            on_left_side = !on_left_side;
             move_direction = ( drag_last_position - drag_start_position ).normalized;
+            proj.SetProjectileSpeed( MoveSpeed );
+            proj.StartMoveInDirection( move_direction );
+        }
     }
 
     // corrects the drag last position, if needed, to ensure we don't go past our minimum angle

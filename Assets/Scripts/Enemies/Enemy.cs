@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] string SpawnAnimation;
     [SerializeField] GameObject DamagedEffect;
     [SerializeField] string DamagedAnimation;
+    [SerializeField] bool attacks = true;
     public bool Moving { get; private set; }
     public bool Spawning { get; private set; }
     public bool Dying { get; private set; }
@@ -116,7 +117,7 @@ public class Enemy : MonoBehaviour
         if( SpawnAnimation == null || SpawnAnimation.Length == 0 )
         {
             Spawning = false;
-            if( !Zapped )
+            if( !Zapped && attacks )
                 StartMoving();
         }
         else
@@ -129,21 +130,25 @@ public class Enemy : MonoBehaviour
     public void SpawnAnimationDone()
     {
         Spawning = false;
-        if( !Zapped )
+        if( !Zapped && attacks )
             StartMoving();
     }
 
     public virtual void StartMoving()
     {
-        Moving = true;
-        anim.SetBool( "Attacking", Moving );
+        if( attacks )
+        {
+            Moving = true;
+            anim.SetBool( "Attacking", Moving );
+        }
         anim.speed = GameplayManager.GamePlayTimeScale;
     }
 
     public void StopMoving()
     {
         Moving = false;
-        anim.SetBool( "Attacking", Moving );
+        if( attacks )
+            anim.SetBool( "Attacking", Moving );
     }
 
     public virtual void Hit( Vector3 hit_direction, bool can_dodge )
