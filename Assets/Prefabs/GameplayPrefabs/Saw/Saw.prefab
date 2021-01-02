@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4718448608945542942}
   - component: {fileID: 2223291624351186721}
   - component: {fileID: 1436136708}
+  - component: {fileID: 736529155}
   m_Layer: 8
   m_Name: Saw
   m_TagString: Saw
@@ -152,6 +153,27 @@ MonoBehaviour:
   DirectionArrow: {fileID: 365681988941742575}
   DirectionArrowPivot: {fileID: 1714163072110711792}
   MinimumAngleDegrees: 12
+  IsMainSaw: 1
+  animator: {fileID: 1855288180176211213}
+--- !u!114 &736529155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2542418455677443930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e82276aa1b7db40b8fc3b1ffa9aaf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 0
+  MoveDirection: {x: 0, y: 0, z: 0}
+  CurWallHitBehavior: 0
+  DestroyEffect: {fileID: 0}
+  ProjectileHitWallEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2542418455778918364
 GameObject:
   m_ObjectHideFlags: 0

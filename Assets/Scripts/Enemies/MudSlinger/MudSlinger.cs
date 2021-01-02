@@ -5,13 +5,15 @@ using UnityEngine;
 public class MudSlinger : Enemy
 {
     [SerializeField] float MudThrowFrequency = 3.0f; // throws mud every x seconds
-    [SerializeField] Projectile MudThrowProjectile;
+    [SerializeField] MudSlingerProjectile MudThrowProjectile;
     [SerializeField] string MudThrowAnimation;
+    [SerializeField] float CoverInMudDuration = 2.0f;
+    [SerializeField] float CoverInMudMoveSpeedMultiplier = 0.5f;
 
     float mud_throw_cooldown = -1.0f;
     private bool vanished = false;
 
-    private Projectile cur_mud_ball;
+    private MudSlingerProjectile cur_mud_ball;
 
     protected override void Start()
     {
@@ -51,6 +53,8 @@ public class MudSlinger : Enemy
         cur_mud_ball.transform.position = transform.position;
         cur_mud_ball.StartMoveInDirection( Saw.MainSaw.transform.position - transform.position );
         cur_mud_ball.ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
+        cur_mud_ball.SawSlowDuration = CoverInMudDuration;
+        cur_mud_ball.SawMoveSpeedMultiplier = CoverInMudMoveSpeedMultiplier;
     }
 
     private void OnProjectileHitWall( ProjectileHitInfo hit_info )

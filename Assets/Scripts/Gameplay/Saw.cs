@@ -14,6 +14,7 @@ public class Saw : MonoBehaviour
     [SerializeField] GameObject DirectionArrowPivot;
     [SerializeField] float MinimumAngleDegrees = 15;
     [SerializeField] bool IsMainSaw = false;
+    [SerializeField] private Animator animator;
 
     private bool on_left_side = true;
     private bool dragging = false;
@@ -21,8 +22,12 @@ public class Saw : MonoBehaviour
     private Vector3 drag_last_position;
     private Color drag_arrow_color = new Color( 1, 1, 1, 0 );
 
+    bool Moving { get { return move_direction != Vector3.zero; } }
     private Vector3 move_direction = Vector3.zero;
     private Projectile proj;
+
+    private float cover_in_mud_duration = -1.0f;
+    private float cur_move_speed_multiplier = 1.0f;
 
     private void Start()
     {
@@ -68,6 +73,13 @@ public class Saw : MonoBehaviour
                 DragEnded();
             }
         }
+
+        if( cover_in_mud_duration != -1.0f)
+        {
+            cover_in_mud_duration -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
+            if( cover_in_mud_duration <= 0.0f )
+                EndCoverInMud();
+        }
     }
 
 
@@ -87,7 +99,10 @@ public class Saw : MonoBehaviour
     }
     private void OnTriggerEnter2D( Collider2D col )
     {
-        col.gameObject.GetComponent<Enemy>().Hit( move_direction, true );
+        if( col.tag == "Enemy" )
+            col.gameObject.GetComponent<Enemy>().Hit( move_direction, true );
+        else if( col.tag == "Mudball" && !Moving)
+            col.gameObject.GetComponent<MudSlingerProjectile>().HitSaw( this );
     }
 
     private void UpdateDragArrowGraphics()
@@ -115,11 +130,11 @@ public class Saw : MonoBehaviour
         VerifyDragLastPosition();
         dragging = false;
         DirectionArrow.SetActive( false );
-        if( move_direction == Vector3.zero )
+        if( !Moving )
         {
             on_left_side = !on_left_side;
             move_direction = ( drag_last_position - drag_start_position ).normalized;
-            proj.SetProjectileSpeed( MoveSpeed );
+            proj.SetProjectileSpeed( MoveSpeed * cur_move_speed_multiplier );
             proj.StartMoveInDirection( move_direction );
         }
     }
@@ -159,5 +174,24 @@ public class Saw : MonoBehaviour
         DirectionArrow.SetActive( true );
         drag_arrow_color.a = 0.0f;
         DirectionArrow.GetComponent<Renderer>().material.SetColor( "_Color", drag_arrow_color );
+    }
+
+    public void CoverInMud(float duration, float move_speed_mult)
+    {
+        if( cover_in_mud_duration != -1.0f )
+            cover_in_mud_duration = Mathf.Max( duration, cover_in_mud_duration );
+        else
+            cover_in_mud_duration = duration;
+        animator.SetBool( "Muddy", true );
+        cur_move_speed_multiplier = move_speed_mult;
+        proj.SetProjectileSpeed( MoveSpeed * cur_move_speed_multiplier );
+    }
+
+    private void EndCoverInMud()
+    {
+        cover_in_mud_duration = -1.0f;
+        animator.SetBool( "Muddy", false );
+        cur_move_speed_multiplier = 1.0f;
+        proj.SetProjectileSpeed( MoveSpeed * cur_move_speed_multiplier );
     }
 }

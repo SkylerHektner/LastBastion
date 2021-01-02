@@ -1727,30 +1727,6 @@ Transform:
   m_Father: {fileID: 325275182}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &736529151 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2542418455677443930, guid: cfff8a729bd848244af637ebfe89fe44, type: 3}
-  m_PrefabInstance: {fileID: 1436136706}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &736529155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 736529151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61e82276aa1b7db40b8fc3b1ffa9aaf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 0
-  MoveDirection: {x: 0, y: 0, z: 0}
-  CurWallHitBehavior: 0
-  DestroyEffect: {fileID: 0}
-  ProjectileHitWallEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &743359526
 GameObject:
   m_ObjectHideFlags: 0
@@ -2377,7 +2353,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1167876331
 MonoBehaviour:
@@ -11960,10 +11936,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1436136708, guid: cfff8a729bd848244af637ebfe89fe44, type: 3}
-      propertyPath: IsMainSaw
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2542418455677443930, guid: cfff8a729bd848244af637ebfe89fe44, type: 3}
       propertyPath: m_Name
       value: Saw
@@ -12019,7 +11991,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1436136708, guid: cfff8a729bd848244af637ebfe89fe44, type: 3}
   m_PrefabInstance: {fileID: 1436136706}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 736529151}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d12800eda2435734faa4adaa842cf787, type: 3}
@@ -12055,7 +12027,7 @@ Transform:
   m_Children:
   - {fileID: 1845556993}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1460813932
 MonoBehaviour:
@@ -32365,7 +32337,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4424947963591980310, guid: 3d50a8eb5be88604a842366022ec716c, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4424947963591980310, guid: 3d50a8eb5be88604a842366022ec716c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32442,7 +32414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6230442714082570135, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6230442714082570135, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
       propertyPath: m_AnchorMax.x
