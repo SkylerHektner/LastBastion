@@ -15,6 +15,7 @@ public class AbilityManager : MonoBehaviour
 
     public Vector3 BaseCenter;
     public ChainLightningAbilityData ChainLightningData;
+    public TyphoonAbilityData TyphoonData;
 
     private Dictionary<long, Ability> active_abilities = new Dictionary<long, Ability>();
     private List<long> pending_removals = new List<long>();
@@ -41,12 +42,19 @@ public class AbilityManager : MonoBehaviour
             case AbilityEnum.TemporalAnomaly:
                 break;
             case AbilityEnum.ChainLightning:
-                ChainLightningAbility cl = new ChainLightningAbility();
-                cl.ability_data = ChainLightningData;
-                ab = cl;
-                break;
+                {
+                    ChainLightningAbility _ab = new ChainLightningAbility();
+                    _ab.AbilityData = ChainLightningData;
+                    ab = _ab;
+                    break;
+                }
             case AbilityEnum.Typhoon:
-                break;
+                {
+                    TyphoonAbility _ab = new TyphoonAbility();
+                    _ab.AbilityData = TyphoonData;
+                    ab = _ab;
+                    break;
+                }
             case AbilityEnum.Sawmageddon:
                 break;
         }

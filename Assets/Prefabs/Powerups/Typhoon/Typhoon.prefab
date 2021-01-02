@@ -11,13 +11,16 @@ GameObject:
   - component: {fileID: 4424947963591980310}
   - component: {fileID: 4424947963591980313}
   - component: {fileID: 4424947963591980312}
-  m_Layer: 0
+  - component: {fileID: -2243875886491286896}
+  - component: {fileID: 4378100872953187131}
+  - component: {fileID: 8151229189412211715}
+  m_Layer: 11
   m_Name: Typhoon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4424947963591980310
 Transform:
   m_ObjectHideFlags: 0
@@ -25,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4424947963591980315}
-  m_LocalRotation: {x: -0.2588186, y: -0, z: -0, w: 0.965926}
+  m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
   m_LocalPosition: {x: 0.024, y: -0.59, z: -1.633143}
   m_LocalScale: {x: 9.886859, y: 11.345682, z: 4.76549}
   m_Children: []
@@ -102,3 +105,57 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-2243875886491286896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424947963591980315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28115c6d4874a254181e338bfbbce637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 5
+  DeleteDurationReached:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!61 &4378100872953187131
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424947963591980315}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.06, y: 0.32}
+    newSize: {x: 1.06, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.06, y: 0.19}
+  m_EdgeRadius: 0
+--- !u!114 &8151229189412211715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424947963591980315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd16f0e1f0fdc3443beea05366387870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

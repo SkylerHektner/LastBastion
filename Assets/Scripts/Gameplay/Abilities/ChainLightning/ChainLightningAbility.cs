@@ -13,7 +13,7 @@ public class ChainLightningAbility : Ability
         public long EnemyID;
     }
 
-    public ChainLightningAbilityData ability_data;
+    public ChainLightningAbilityData AbilityData;
     private List<PendingZap> pending_zaps = new List<PendingZap>();
     private float cur_time = 0.0f;
     private int cur_zap_index = 0;
@@ -22,7 +22,7 @@ public class ChainLightningAbility : Ability
     {
         base.Start();
 
-        GameObject.Instantiate( ability_data.SceneWideEffect );
+        GameObject.Instantiate( AbilityData.SceneWideEffect );
 
         List<Enemy> enemies_on_field = SpawnManager.Instance.AllSpawnedEnemies;
         if( enemies_on_field.Count == 0 )
@@ -49,7 +49,7 @@ public class ChainLightningAbility : Ability
                 break;
             pending_zaps.Add( new PendingZap()
             {
-                time = Mathf.Log( t, 2.0f ) * ability_data.TimeBetweenZaps,
+                time = Mathf.Log( t, 2.0f ) * AbilityData.TimeBetweenZaps,
                 position = enemies_on_field[h].transform.position,
                 last_position = enemies_on_field[t].transform.position,
                 EnemyID = enemies_on_field[h].EnemyID,
@@ -60,7 +60,7 @@ public class ChainLightningAbility : Ability
                 break;
             pending_zaps.Add( new PendingZap()
             {
-                time = Mathf.Log( t, 2.0f ) * ability_data.TimeBetweenZaps,
+                time = Mathf.Log( t, 2.0f ) * AbilityData.TimeBetweenZaps,
                 position = enemies_on_field[h].transform.position,
                 last_position = enemies_on_field[t].transform.position,
                 EnemyID = enemies_on_field[h].EnemyID,
@@ -93,7 +93,7 @@ public class ChainLightningAbility : Ability
 
     private void DoZap( PendingZap zap )
     {
-        ChainLightningEffect effect = GameObject.Instantiate( ability_data.Effect );
+        ChainLightningEffect effect = GameObject.Instantiate( AbilityData.Effect );
         LineRenderer line_rend = effect.gameObject.GetComponent<LineRenderer>();
         line_rend.positionCount = 2;
         line_rend.SetPosition( 0, zap.last_position );
@@ -101,10 +101,10 @@ public class ChainLightningAbility : Ability
         Enemy en = SpawnManager.Instance.TryGetEnemyByID( zap.EnemyID );
         if( en )
         {
-            en.ZapForDuration( ability_data.ZapDuration );
+            en.ZapForDuration( AbilityData.ZapDuration );
 
-            DeleteAfterDuration zap_effect = GameObject.Instantiate( ability_data.ZappedEffect );
-            zap_effect.duration = ability_data.ZapDuration;
+            DeleteAfterDuration zap_effect = GameObject.Instantiate( AbilityData.ZappedEffect );
+            zap_effect.duration = AbilityData.ZapDuration;
             zap_effect.transform.position = zap.position;
             zap_effect.transform.parent = en.transform;
         }

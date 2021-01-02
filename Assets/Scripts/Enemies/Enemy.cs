@@ -42,8 +42,6 @@ public class Enemy : MonoBehaviour
     private float zap_duration = -1.0f;
     public bool Zapped { get { return zap_duration != -1.0f; } }
 
-    //BaseHP PlayerBase;
-
     protected virtual void Start()
     {
         if( NextEnemyID == long.MaxValue )
@@ -75,7 +73,6 @@ public class Enemy : MonoBehaviour
             if( transform.position.y - SpawnManager.Instance.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed * GameplayManager.GamePlayTimeScale )
             {
                 Moving = false;
-                // TODO: Deal damage to base or attack or something
                 DamageBase();
                 Kill();
             }
