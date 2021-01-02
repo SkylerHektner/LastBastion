@@ -9,5 +9,26 @@ public class MudSlingerProjectile : Projectile
     public void HitSaw(Saw saw)
     {
         saw.CoverInMud( SawSlowDuration, SawMoveSpeedMultiplier );
+        DestroyProjectile();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
+    }
+
+    private void OnProjectileHitWall( ProjectileHitInfo hit_info )
+    {
+        if( hit_info.wall == ProjectileHitInfo.Wall.Left ||
+            hit_info.wall == ProjectileHitInfo.Wall.Right )
+        {
+            SetWallHitBehavior( WallHitBehavior.Destroy );
+        }
+        else if( hit_info.wall == ProjectileHitInfo.Wall.Bottom ||
+            hit_info.wall == ProjectileHitInfo.Wall.Top )
+        {
+            SetWallHitBehavior( WallHitBehavior.Bounce );
+        }
     }
 }

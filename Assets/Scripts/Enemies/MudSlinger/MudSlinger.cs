@@ -13,8 +13,6 @@ public class MudSlinger : Enemy
     float mud_throw_cooldown = -1.0f;
     private bool vanished = false;
 
-    private MudSlingerProjectile cur_mud_ball;
-
     protected override void Start()
     {
         base.Start();
@@ -49,27 +47,11 @@ public class MudSlinger : Enemy
     // triggered by the throw animation when we should throw some mud
     public void ThrowMud( AnimationEvent e )
     {
-        cur_mud_ball = Instantiate( MudThrowProjectile );
-        cur_mud_ball.transform.position = transform.position;
-        cur_mud_ball.StartMoveInDirection( Saw.MainSaw.transform.position - transform.position );
-        cur_mud_ball.ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
-        cur_mud_ball.SawSlowDuration = CoverInMudDuration;
-        cur_mud_ball.SawMoveSpeedMultiplier = CoverInMudMoveSpeedMultiplier;
-    }
-
-    private void OnProjectileHitWall( ProjectileHitInfo hit_info )
-    {
-        if( hit_info.wall == ProjectileHitInfo.Wall.Left ||
-            hit_info.wall == ProjectileHitInfo.Wall.Right )
-        {
-            cur_mud_ball.SetWallHitBehavior( Projectile.WallHitBehavior.Destroy );
-            cur_mud_ball = null;
-        }
-        else if( hit_info.wall == ProjectileHitInfo.Wall.Bottom ||
-            hit_info.wall == ProjectileHitInfo.Wall.Top )
-        {
-            cur_mud_ball.SetWallHitBehavior( Projectile.WallHitBehavior.Bounce );
-        }
+        MudSlingerProjectile mud_ball = Instantiate( MudThrowProjectile );
+        mud_ball.transform.position = transform.position;
+        mud_ball.StartMoveInDirection( Saw.MainSaw.transform.position - transform.position );
+        mud_ball.SawSlowDuration = CoverInMudDuration;
+        mud_ball.SawMoveSpeedMultiplier = CoverInMudMoveSpeedMultiplier;
     }
 
     // triggered by the vanish animation
@@ -89,13 +71,6 @@ public class MudSlinger : Enemy
     {
         base.FinishZap();
         anim.enabled = true;
-    }
-
-    protected override void Die()
-    {
-        if( cur_mud_ball != null )
-            cur_mud_ball.ProjectileHitWallEvent.RemoveListener( OnProjectileHitWall );
-        base.Die();
     }
 
     public override void Hit( Vector3 hit_direction, bool can_dodge )

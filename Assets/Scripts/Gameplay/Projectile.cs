@@ -33,7 +33,12 @@ public class Projectile : MonoBehaviour
         this.MoveDirection = move_direction.normalized;
     }
 
-    private void Update()
+    protected virtual void Start()
+    {
+        // nothing for now
+    }
+
+    protected virtual void Update()
     {
         if( MoveDirection != Vector3.zero )
         {
