@@ -61,7 +61,12 @@ public class AbilityUIManager : MonoBehaviour
 
     public void SetAbilityCandidate( string ability )
     {
-        if( !AbilityManager.AbilityStringMap.ContainsKey( ability ) )
+        if( ability == "None" )
+        {
+            cur_ability_candidate = null;
+            return;
+        }
+        else if( !AbilityManager.AbilityStringMap.ContainsKey( ability ) )
         {
             Debug.LogError( "ERROR: No corresponding ability for ability string " + ability );
             return;
