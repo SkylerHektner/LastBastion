@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
+    public GameObject AbilityInfoScroll;
+
     public static readonly Dictionary<string, AbilityEnum> AbilityStringMap = new Dictionary<string, AbilityEnum>()
     {
         ["TemporalAnomaly"] = AbilityEnum.TemporalAnomaly,
@@ -67,6 +69,7 @@ public class AbilityManager : MonoBehaviour
             active_abilities.Add( ab.AbilityID, ab );
             ab.Start();
         }
+        AbilityInfoScroll.SetActive(false); // hi, I added this.  It just turns off the scroll.
     }
 
     public void AbilityFinished(long AbilityID)
