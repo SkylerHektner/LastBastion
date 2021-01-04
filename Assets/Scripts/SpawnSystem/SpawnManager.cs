@@ -20,6 +20,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject CarrierLPrefab;
     [SerializeField] GameObject CarrierMPrefab;
     [SerializeField] GameObject CarrierSPrefab;
+    [SerializeField] GameObject RedSkeletonPrefab;
     [SerializeField] float SpawnStaggerMinTime = 0.02f;
     [SerializeField] float SpawnStaggerMaxTime = 0.07f;
     [SerializeField] int StartWave = 0;
@@ -304,6 +305,9 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.CarrierS:
                 ret = Instantiate( CarrierSPrefab );
                 break;
+            case EnemyEnum.RedSkeleton:
+                ret = Instantiate( RedSkeletonPrefab );
+                break;
         }
         if( ret )
             ret.transform.position = position;
@@ -326,6 +330,7 @@ public enum EnemyEnum
     CarrierL = 8,
     CarrierM = 9,
     CarrierS = 10,
+    RedSkeleton = 11,
 }
 
 // EDITOR
