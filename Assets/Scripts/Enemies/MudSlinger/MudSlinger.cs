@@ -64,13 +64,21 @@ public class MudSlinger : Enemy
     public override void ZapForDuration( float duration )
     {
         base.ZapForDuration( duration );
-        anim.enabled = false;
+        anim.SetBool( "Zapped", true );
+        vanished = false;
     }
 
     protected override void FinishZap()
     {
         base.FinishZap();
-        anim.enabled = true;
+        anim.SetBool( "Zapped", false );
+        Vanish( new AnimationEvent() );
+    }
+
+    public override void StartMoving()
+    {
+        // never starts moving
+        //base.StartMoving();
     }
 
     public override void Hit( Vector3 hit_direction, bool can_dodge )
