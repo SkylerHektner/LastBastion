@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent( typeof( Projectile ) )]
 public class Saw : MonoBehaviour
 {
-    public static Saw MainSaw;
+    public static Saw Instance;
+
+    // position, direction, speed
+    public UnityEvent<Vector3, Vector3, float> SawFiredEvent = new UnityEvent<Vector3, Vector3, float>();
 
     [SerializeField] float MoveSpeed = 1.0f;
     [SerializeField] float MinDragDistance = 1.0f;
@@ -15,7 +19,6 @@ public class Saw : MonoBehaviour
     [SerializeField] Sprite DirectionArrowGreyedSprite;
     [SerializeField] GameObject DirectionArrowPivot;
     [SerializeField] float MinimumAngleDegrees = 15;
-    [SerializeField] bool IsMainSaw = false;
     [SerializeField] private Animator animator;
 
     private bool on_left_side = true;
@@ -24,7 +27,7 @@ public class Saw : MonoBehaviour
     private Vector3 drag_last_position;
     private Color drag_arrow_color = new Color( 1, 1, 1, 0 );
 
-    bool Moving { get { return move_direction != Vector3.zero; } }
+    private bool Moving { get { return move_direction != Vector3.zero; } }
     private Vector3 move_direction = Vector3.zero;
     private Projectile proj;
 
@@ -33,12 +36,9 @@ public class Saw : MonoBehaviour
 
     private void Start()
     {
-        if( IsMainSaw )
-        {
-            if( MainSaw != null )
-                Debug.LogError( "There appear to me two main saws?!?" );
-            MainSaw = this;
-        }
+        if( Instance != null )
+            Debug.LogError( "There appear to me two main saws?!?" );
+        Instance = this;
 
         DirectionArrow.sprite = DirectionArrowSprite;
         DirectionArrow.gameObject.SetActive( false );
@@ -141,6 +141,7 @@ public class Saw : MonoBehaviour
             move_direction = ( drag_last_position - drag_start_position ).normalized;
             proj.SetProjectileSpeed( MoveSpeed * cur_move_speed_multiplier );
             proj.StartMoveInDirection( move_direction );
+            SawFiredEvent.Invoke( transform.position, move_direction, MoveSpeed );
         }
     }
 

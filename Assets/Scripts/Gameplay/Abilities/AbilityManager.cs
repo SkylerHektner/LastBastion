@@ -18,6 +18,7 @@ public class AbilityManager : MonoBehaviour
     public Vector3 BaseCenter;
     public ChainLightningAbilityData ChainLightningData;
     public TyphoonAbilityData TyphoonData;
+    public SawmageddonAbilityData SawmageddonData;
 
     private Dictionary<long, Ability> active_abilities = new Dictionary<long, Ability>();
     private List<long> pending_removals = new List<long>();
@@ -58,7 +59,12 @@ public class AbilityManager : MonoBehaviour
                     break;
                 }
             case AbilityEnum.Sawmageddon:
-                break;
+                {
+                    SawmageddonAbility _ab = new SawmageddonAbility();
+                    _ab.AbilityData = SawmageddonData;
+                    ab = _ab;
+                    break;
+                }
         }
 
         Debug.Assert( ab != null, "ERROR: it seems triggered ability " + ability.ToString() + " is not mapped to an Ability class" );

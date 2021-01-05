@@ -49,7 +49,7 @@ public class MudSlinger : Enemy
     {
         MudSlingerProjectile mud_ball = Instantiate( MudThrowProjectile );
         mud_ball.transform.position = transform.position;
-        mud_ball.StartMoveInDirection( Saw.MainSaw.transform.position - transform.position );
+        mud_ball.StartMoveInDirection( Saw.Instance.transform.position - transform.position );
         mud_ball.SawSlowDuration = CoverInMudDuration;
         mud_ball.SawMoveSpeedMultiplier = CoverInMudMoveSpeedMultiplier;
     }
