@@ -15,7 +15,7 @@ public class SpectralSaw : Projectile
         if( hit_info.wall == ProjectileHitInfo.Wall.Bottom ||
             hit_info.wall == ProjectileHitInfo.Wall.Top )
         {
-            SetWallHitBehavior( Projectile.WallHitBehavior.Bounce );
+            SetWallHitBehavior( Projectile.WallHitBehavior.Destroy );
         }
         else if( hit_info.wall == ProjectileHitInfo.Wall.Left ||
             hit_info.wall == ProjectileHitInfo.Wall.Right )
