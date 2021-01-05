@@ -242,9 +242,7 @@ public class SpawnManager : MonoBehaviour
     {
         if( delay == 0.0f )
         {
-            var monster = InstantiateMonster( enemy, position );
-            RegisterEnemy( monster.GetComponent<Enemy>() );
-
+            InstantiateMonster( enemy, position );
         }
         else
             pending_spawns.AddLast( new PendingSpawn( delay, enemy, position ) );

@@ -58,6 +58,8 @@ public class Enemy : MonoBehaviour
             StartMoving();
 
         anim.speed = GameplayManager.GamePlayTimeScale;
+
+        SpawnManager.Instance?.RegisterEnemy( this );
     }
 
     public void DamageBase() //  Do my remaining health as damage to the base HP
