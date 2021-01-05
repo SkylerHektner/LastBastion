@@ -10,7 +10,9 @@ public class Saw : MonoBehaviour
     [SerializeField] float MoveSpeed = 1.0f;
     [SerializeField] float MinDragDistance = 1.0f;
     [SerializeField] float MaxDragDistance = 5.0f; // this is just the max for graphical purposes
-    [SerializeField] GameObject DirectionArrow;
+    [SerializeField] SpriteRenderer DirectionArrow;
+    [SerializeField] Sprite DirectionArrowSprite;
+    [SerializeField] Sprite DirectionArrowGreyedSprite;
     [SerializeField] GameObject DirectionArrowPivot;
     [SerializeField] float MinimumAngleDegrees = 15;
     [SerializeField] bool IsMainSaw = false;
@@ -38,7 +40,8 @@ public class Saw : MonoBehaviour
             MainSaw = this;
         }
 
-        DirectionArrow.SetActive( false );
+        DirectionArrow.sprite = DirectionArrowSprite;
+        DirectionArrow.gameObject.SetActive( false );
         proj = GetComponent<Projectile>();
         proj.ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
     }
@@ -74,7 +77,7 @@ public class Saw : MonoBehaviour
             }
         }
 
-        if( cover_in_mud_duration != -1.0f)
+        if( cover_in_mud_duration != -1.0f )
         {
             cover_in_mud_duration -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
             if( cover_in_mud_duration <= 0.0f )
@@ -95,13 +98,15 @@ public class Saw : MonoBehaviour
         {
             proj.SetWallHitBehavior( Projectile.WallHitBehavior.Attach );
             move_direction = Vector3.zero;
+            if( dragging )
+                DirectionArrow.sprite = DirectionArrowSprite;
         }
     }
     private void OnTriggerEnter2D( Collider2D col )
     {
         if( col.tag == "Enemy" )
             col.gameObject.GetComponent<Enemy>().Hit( move_direction, true );
-        else if( col.tag == "Mudball" && !Moving)
+        else if( col.tag == "Mudball" && !Moving )
             col.gameObject.GetComponent<MudSlingerProjectile>().HitSaw( this );
     }
 
@@ -129,7 +134,7 @@ public class Saw : MonoBehaviour
     {
         VerifyDragLastPosition();
         dragging = false;
-        DirectionArrow.SetActive( false );
+        DirectionArrow.gameObject.SetActive( false );
         if( !Moving )
         {
             on_left_side = !on_left_side;
@@ -171,12 +176,13 @@ public class Saw : MonoBehaviour
         drag_start_position = Camera.main.ScreenToWorldPoint( touch_postition );
         dragging = true;
 
-        DirectionArrow.SetActive( true );
+        DirectionArrow.gameObject.SetActive( true );
+        DirectionArrow.sprite = Moving ? DirectionArrowGreyedSprite : DirectionArrowSprite;
         drag_arrow_color.a = 0.0f;
         DirectionArrow.GetComponent<Renderer>().material.SetColor( "_Color", drag_arrow_color );
     }
 
-    public void CoverInMud(float duration, float move_speed_mult)
+    public void CoverInMud( float duration, float move_speed_mult )
     {
         if( cover_in_mud_duration != -1.0f )
             cover_in_mud_duration = Mathf.Max( duration, cover_in_mud_duration );

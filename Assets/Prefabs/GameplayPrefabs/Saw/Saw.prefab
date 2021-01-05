@@ -253,7 +253,9 @@ MonoBehaviour:
   MoveSpeed: 30
   MinDragDistance: 1
   MaxDragDistance: 5
-  DirectionArrow: {fileID: 365681988941742575}
+  DirectionArrow: {fileID: 9116113603133562252}
+  DirectionArrowSprite: {fileID: 21300000, guid: 8aafd0f4fdc18324c912ef1ac34039f4, type: 3}
+  DirectionArrowGreyedSprite: {fileID: 21300000, guid: f900229291c45074d9f7383239f60faa, type: 3}
   DirectionArrowPivot: {fileID: 1714163072110711792}
   MinimumAngleDegrees: 12
   IsMainSaw: 1
@@ -5564,13 +5566,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90a916f3fbd49b8448f32400050d9ff3, type: 3}
+--- !u!212 &9116113603133562252 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1027503225033468495, guid: 90a916f3fbd49b8448f32400050d9ff3, type: 3}
+  m_PrefabInstance: {fileID: 8124667145323935683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3316850196055008013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6829511021168350414, guid: 90a916f3fbd49b8448f32400050d9ff3, type: 3}
-  m_PrefabInstance: {fileID: 8124667145323935683}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &365681988941742575 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8490328099294049836, guid: 90a916f3fbd49b8448f32400050d9ff3, type: 3}
   m_PrefabInstance: {fileID: 8124667145323935683}
   m_PrefabAsset: {fileID: 0}
