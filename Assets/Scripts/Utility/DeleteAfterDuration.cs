@@ -10,9 +10,12 @@ public class DeleteAfterDuration : MonoBehaviour
 
     public UnityEvent DeleteDurationReached = new UnityEvent();
 
+    public bool IgnoreGameplayTimeScale = false;
+
     public void Update()
     {
-        duration -= Time.deltaTime;
+        duration -= Time.deltaTime 
+            * ( IgnoreGameplayTimeScale ? 1.0f : GameplayManager.GamePlayTimeScale );
         if( duration <= 0.0f )
         {
             DeleteDurationReached.Invoke();
