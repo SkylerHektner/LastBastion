@@ -11,6 +11,9 @@ public class LevelScroller : MonoBehaviour
     public int JumpToLevel;
     float BarStartPos = 140;
 
+    float DragBuffer;
+    bool BarMoving;
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -18,7 +21,19 @@ public class LevelScroller : MonoBehaviour
         NumberofElements = Mathf.Floor(LevelBarLength / 250f);
         BarXPos = LevelBar.transform.localPosition.x;
 
+        if (DragBuffer > 0)
+        {
+            DragBuffer -= Time.smoothDeltaTime;
+            if (DragBuffer <= 0)
+            {
+                DragBuffer = 0;
+                RepositionBar();
+            }
+        }
     }
+
+
+    // debug tool
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -27,6 +42,7 @@ public class LevelScroller : MonoBehaviour
         }
     }
 
+    [ContextMenu("JumpToDesiredLevel")]
     public void JumpToDesiredLevel()
     {
         if (JumpToLevel > 1)
@@ -36,6 +52,24 @@ public class LevelScroller : MonoBehaviour
         else
         {
             LevelBar.transform.localPosition = new Vector2(BarStartPos, LevelBar.transform.localPosition.y);
+        }
+    }
+
+    public void SetDragBuffer()
+    {
+        DragBuffer = .2f;
+    }
+
+    public void RepositionBar()
+    {
+        for (int i = 1; i < NumberofElements + 1; i++)
+        {
+            float ReferencePoint = Mathf.Abs(BarStartPos) + 250 * (i - 1);
+            if (Mathf.Abs(BarXPos) < ReferencePoint + 125 && Mathf.Abs(BarXPos) > ReferencePoint - 125) // falls within half of the distance to the next/previous element
+            {
+                LevelBar.transform.localPosition = new Vector2(-ReferencePoint, LevelBar.transform.localPosition.y);
+                break;
+            }
         }
     }
 }
