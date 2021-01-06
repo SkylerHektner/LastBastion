@@ -7,18 +7,8 @@ public class MenuManager : MonoBehaviour
     public GameObject PlayCanvas;
     public Animator Door;
     public GameObject LevelCanvas;
+    public GameObject UpgradesCanvas;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void PlayGame()
     {
@@ -29,5 +19,10 @@ public class MenuManager : MonoBehaviour
     public void ShowLevels()
     {
         LevelCanvas.SetActive(true);
+    }
+
+    public void ShowUpgrades()
+    {
+        UpgradesCanvas.SetActive(true);
     }
 }
