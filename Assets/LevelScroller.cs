@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelScroller : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class LevelScroller : MonoBehaviour
 
     float DragBuffer;
     bool BarMoving;
+
+    public Image DisplayImage;
+    public GameObject LevelContainer;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -33,13 +37,11 @@ public class LevelScroller : MonoBehaviour
     }
 
 
-    // debug tool
-    private void Update()
+    // might have to remove this later on, as it may cause problems with returning from levels
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            JumpToDesiredLevel();
-        }
+        JumpToLevel = 1;
+        JumpToDesiredLevel();
     }
 
     [ContextMenu("JumpToDesiredLevel")]
@@ -53,6 +55,17 @@ public class LevelScroller : MonoBehaviour
         {
             LevelBar.transform.localPosition = new Vector2(BarStartPos, LevelBar.transform.localPosition.y);
         }
+        DisplayLevelImage(JumpToLevel);
+    }
+
+    public void DisplayLevelImage(int LevelIndex)
+    {
+        List<Sprite> LevelList = new List<Sprite>();
+        foreach (Transform level in LevelContainer.transform)
+        {
+            LevelList.Add(level.GetComponent<LoadLevel>().LevelImage);
+        }
+        DisplayImage.sprite = LevelList[LevelIndex - 1];
     }
 
     public void SetDragBuffer()
@@ -68,6 +81,7 @@ public class LevelScroller : MonoBehaviour
             if (Mathf.Abs(BarXPos) < ReferencePoint + 125 && Mathf.Abs(BarXPos) > ReferencePoint - 125) // falls within half of the distance to the next/previous element
             {
                 LevelBar.transform.localPosition = new Vector2(-ReferencePoint, LevelBar.transform.localPosition.y);
+                DisplayLevelImage(i);
                 break;
             }
         }

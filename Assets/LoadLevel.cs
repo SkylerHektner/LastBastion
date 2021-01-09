@@ -11,6 +11,18 @@ public class LoadLevel : MonoBehaviour
     public bool locked;
     public GameObject LockedSymbol;
 
+    public Sprite UnlockedImage;
+    public Sprite LockedImage;
+
+    public Sprite LevelImage; // This is the one referenced by the level scroller.  Don't put anything in this;
+
+
+    // If I don't call this, the image appears blank white at the start.  
+    //This is ok to do because the player only sees this when starting the game and returning from an unlocked level
+    private void Awake() 
+    {
+        LevelImage = UnlockedImage;
+    }
 
     public void Update()
     {
@@ -18,11 +30,13 @@ public class LoadLevel : MonoBehaviour
         {
             LockedSymbol.SetActive(true);
             gameObject.GetComponent<Button>().enabled = false;
+            LevelImage = LockedImage;
         }
         else
         {
             LockedSymbol.SetActive(false);
             gameObject.GetComponent<Button>().enabled = true;
+            LevelImage = UnlockedImage; // Display the requirement to unlock level here
         }
     }
 
