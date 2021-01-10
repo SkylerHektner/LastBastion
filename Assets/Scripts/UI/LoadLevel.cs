@@ -46,6 +46,10 @@ public class LoadLevel : MonoBehaviour
     }
     public void LoadMyLevel()
     {
-        SceneManager.LoadScene( SceneToLoad );
+        Invoke("SceneChange", 1f);
+    }
+    public void SceneChange()
+    {
+        SceneManager.LoadScene(SceneToLoad);
     }
 }

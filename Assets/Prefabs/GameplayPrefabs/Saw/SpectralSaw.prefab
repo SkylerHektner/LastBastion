@@ -216,6 +216,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6abd92634d5eb14bb709c7ba16d6ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveSpeed: 0
+  MoveDirection: {x: 0, y: 0, z: 0}
+  CurWallHitBehavior: 0
+  DestroyEffect: {fileID: 0}
+  ProjectileHitWallEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4969044468455837788
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +445,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.9708953, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.5882353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0, g: 1, b: 0.9393878, a: 1}
