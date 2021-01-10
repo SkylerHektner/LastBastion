@@ -8,21 +8,48 @@ public class InfoPanel : MonoBehaviour
 {
     public TextMeshProUGUI UpgradeName;
     public TextMeshProUGUI UpgradeInfo;
-    public TextMeshProUGUI CoinCost;
+    public TextMeshProUGUI CandyCostText;
+    public TextMeshProUGUI PlayerWealthText;
 
     public Button DenyButton;
     public Button PurchaseButton;
 
+    public UpgradeButton DesiredUpgrade;
+    public int PlayerWealth;
+    public int UpgradeCost;
+
+    public Animator GoodBubble;
+    public Animator BadBubble;
+
 
     public void ConfirmPurchase()
     {
-        // purchase item
+        if (PlayerWealth >= UpgradeCost)
+        {
+            PlayerWealth -= UpgradeCost;
+            if (PlayerWealth <= 0)
+            {
+                PlayerWealth = 0;
+            }
+            DesiredUpgrade.Purchased = true;
+            gameObject.SetActive(false);
+            DenyButton.enabled = false;
+            PurchaseButton.enabled = false;
+            UpdatePlayerWealth();
+            GoodBubble.SetTrigger("Grow");
+        }
+        else
+        {
+            BadBubble.SetTrigger("Grow");
+        }
     }
 
     private void Awake()
     {
-        EnableButtons();
+        //EnableButtons();
     }
+
+
 
     public void DenyPurchase()
     {
@@ -31,10 +58,26 @@ public class InfoPanel : MonoBehaviour
         PurchaseButton.enabled = false;
     }
 
+    public void UpdatePlayerWealth()
+    {
+        PlayerWealthText.text = PlayerWealth.ToString();
+    }
+
     public void EnableButtons()
     {
+        UpdatePlayerWealth();
         DenyButton.enabled = true;
         PurchaseButton.enabled = true;
+
+        // view purchased upgrades, but don't allow a double buy
+        if (DesiredUpgrade.Purchased)
+        {
+            PurchaseButton.interactable = false;
+        }
+        else
+        {
+            PurchaseButton.interactable = true;
+        }
     }
 
     public void HideButtons()

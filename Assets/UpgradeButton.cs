@@ -10,14 +10,45 @@ public class UpgradeButton : MonoBehaviour
     public int MyCost;
     public GameObject InfoBox;
 
+    public bool Purchased;
+
 
     // bring up panel
     public void AskConfirmation()
     {
         InfoBox.SetActive(true);
-        InfoBox.GetComponent<InfoPanel>().UpgradeName.text = MyName;
-        InfoBox.GetComponent<InfoPanel>().UpgradeInfo.text = MyInfo;
-        InfoBox.GetComponent<InfoPanel>().CoinCost.text = MyCost.ToString();
-        InfoBox.GetComponent<InfoPanel>().EnableButtons();
+        InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
+        ThePanel.UpgradeName.text = MyName;
+        ThePanel.UpgradeInfo.text = MyInfo;
+        ThePanel.CandyCostText.text = MyCost.ToString();
+        ThePanel.UpgradeCost = MyCost;
+        ThePanel.DesiredUpgrade = this.gameObject.GetComponent<UpgradeButton>(); // for unlocking
+        ThePanel.EnableButtons();
+    }
+
+    private void OnEnable()
+    {
+        InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
+        ThePanel.UpdatePlayerWealth();
+    }
+
+    private void FixedUpdate()
+    {
+        // disable button if purchased
+        if (Purchased)
+        {
+            ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
+            Color Green = new Color(0/255, 255/255, 31/255);
+            ButtonColor.normalColor = Green;
+            ButtonColor.highlightedColor = ButtonColor.disabledColor;
+            gameObject.GetComponent<Button>().colors = ButtonColor;
+
+        }
+        else
+        {
+            ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
+            ButtonColor.normalColor = new Color(255, 255, 255);
+            gameObject.GetComponent<Button>().colors = ButtonColor;
+        }
     }
 }
