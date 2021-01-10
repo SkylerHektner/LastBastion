@@ -8,7 +8,28 @@ public class LoadLevel : MonoBehaviour
 {
 
     public string SceneToLoad;
-    public bool locked;
+    public bool Locked {
+        get {
+            return locked;
+        }
+        set {
+            locked = value;
+
+            if( locked )
+            {
+                LockedSymbol.SetActive( true );
+                gameObject.GetComponent<Button>().enabled = false;
+                LevelImage = LockedImage;
+            }
+            else
+            {
+                LockedSymbol.SetActive( false );
+                gameObject.GetComponent<Button>().enabled = true;
+                LevelImage = UnlockedImage; // Display the requirement to unlock level here
+            }
+        }
+    }
+    private bool locked;
     public GameObject LockedSymbol;
 
     public Sprite UnlockedImage;
@@ -19,29 +40,12 @@ public class LoadLevel : MonoBehaviour
 
     // If I don't call this, the image appears blank white at the start.  
     //This is ok to do because the player only sees this when starting the game and returning from an unlocked level
-    private void Awake() 
+    private void Awake()
     {
         LevelImage = UnlockedImage;
     }
-
-    public void Update()
-    {
-        if (locked)
-        {
-            LockedSymbol.SetActive(true);
-            gameObject.GetComponent<Button>().enabled = false;
-            LevelImage = LockedImage;
-        }
-        else
-        {
-            LockedSymbol.SetActive(false);
-            gameObject.GetComponent<Button>().enabled = true;
-            LevelImage = UnlockedImage; // Display the requirement to unlock level here
-        }
-    }
-
     public void LoadMyLevel()
     {
-        SceneManager.LoadScene(SceneToLoad);
+        SceneManager.LoadScene( SceneToLoad );
     }
 }
