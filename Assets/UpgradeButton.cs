@@ -10,7 +10,15 @@ public class UpgradeButton : MonoBehaviour
     public int MyCost;
     public GameObject InfoBox;
 
-    public bool Purchased;
+    public bool Purchased { get {
+            return purchased;
+        }
+        set {
+            purchased = value;
+            UpdateButtonColors();
+        }
+    }
+    private bool purchased;
 
 
     // bring up panel
@@ -30,24 +38,23 @@ public class UpgradeButton : MonoBehaviour
     {
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpdatePlayerWealth();
+        UpdateButtonColors();
     }
-
-    private void FixedUpdate()
+    private void UpdateButtonColors()
     {
         // disable button if purchased
-        if (Purchased)
+        if( Purchased )
         {
             ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
-            Color Green = new Color(0/255, 255/255, 31/255);
+            Color Green = new Color( 0 / 255, 255 / 255, 31 / 255 );
             ButtonColor.normalColor = Green;
             ButtonColor.highlightedColor = ButtonColor.disabledColor;
             gameObject.GetComponent<Button>().colors = ButtonColor;
-
         }
         else
         {
             ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
-            ButtonColor.normalColor = new Color(255, 255, 255);
+            ButtonColor.normalColor = new Color( 255, 255, 255 );
             gameObject.GetComponent<Button>().colors = ButtonColor;
         }
     }
