@@ -3903,6 +3903,7 @@ MonoBehaviour:
   Door: {fileID: 81514465}
   LevelCanvas: {fileID: 1847910120}
   UpgradesCanvas: {fileID: 281381528}
+  LevelBar: {fileID: 392126819}
 --- !u!1 &86265974
 GameObject:
   m_ObjectHideFlags: 0
@@ -25100,6 +25101,7 @@ GameObject:
   - component: {fileID: 392126816}
   - component: {fileID: 392126815}
   - component: {fileID: 392126818}
+  - component: {fileID: 392126819}
   m_Layer: 5
   m_Name: ScrollRect
   m_TagString: Untagged
@@ -25229,6 +25231,25 @@ MonoBehaviour:
   LevelContainer: {fileID: 666736615}
   Portal: {fileID: 1761399713}
   Door: {fileID: 81514465}
+--- !u!95 &392126819
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392126813}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3d11a03fd3aa924bb0e4b65d4942d65, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &402912343
 GameObject:
   m_ObjectHideFlags: 0
@@ -27654,7 +27675,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -140, y: 0}
+  m_AnchoredPosition: {x: -139.99998, y: 0}
   m_SizeDelta: {x: 780, y: 46}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &666736617

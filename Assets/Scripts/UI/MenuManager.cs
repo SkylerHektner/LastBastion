@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     public Animator Door;
     public GameObject LevelCanvas;
     public GameObject UpgradesCanvas;
+    public Animator LevelBar;
 
 
     private void Update()
@@ -29,6 +30,7 @@ public class MenuManager : MonoBehaviour
     public void ShowLevels()
     {
         LevelCanvas.SetActive(true);
+        LevelBar.SetTrigger("Appear");
     }
 
     public void ShowUpgrades()
