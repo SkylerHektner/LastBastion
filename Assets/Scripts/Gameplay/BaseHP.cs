@@ -14,6 +14,15 @@ public class BaseHP : MonoBehaviour
 
     float DamageDelay;
 
+    public DeathCanvas DeathCanvas;
+
+    public GameObject HPcanvas;
+    public GameObject ForceField;
+    public GameObject DeathExplosions;
+    public GameObject AbiltyManager;
+    public GameObject SawCanvas;
+    public GameObject PauseCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +40,16 @@ public class BaseHP : MonoBehaviour
         foreach (Animator Forcefield in Forcefields)
         {
             Forcefield.SetTrigger("Damaged");
+        }
+        if (CurrentHP <= 0)
+        {
+            DeathCanvas.DisplayDeathScreen();
+            HPcanvas.SetActive(false);
+            ForceField.SetActive(false);
+            AbiltyManager.SetActive(false);
+            SawCanvas.SetActive(false);
+            PauseCanvas.SetActive(false);
+            DeathExplosions.SetActive(true);
         }
 
     }
