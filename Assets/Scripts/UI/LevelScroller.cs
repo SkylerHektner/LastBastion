@@ -18,6 +18,11 @@ public class LevelScroller : MonoBehaviour
     public Image DisplayImage;
     public GameObject LevelContainer;
 
+    public static int LevelIndex;
+
+    public Animator Portal;
+    public Animator Door;
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -40,22 +45,38 @@ public class LevelScroller : MonoBehaviour
     // might have to remove this later on, as it may cause problems with returning from levels
     private void Awake()
     {
-        JumpToLevel = 1;
-        JumpToDesiredLevel();
+        if (LevelIndex <= 1)
+        {
+            LevelIndex = 1;
+        }
+        if (Spectator.ReturningFromLevel == true)
+        {
+            Door.SetTrigger("Shortcut");
+            JumpToDesiredLevel(LevelIndex);
+            Portal.SetTrigger("Shrink");
+            Spectator.ReturningFromLevel = false;
+            Debug.Log("Returning from level" + Spectator.LevelIndex);
+        }
+        else
+        {
+            LevelIndex = 1;
+            JumpToDesiredLevel(LevelIndex);
+        }
+        Debug.Log("Level index" + LevelIndex);
     }
 
-    [ContextMenu("JumpToDesiredLevel")]
-    public void JumpToDesiredLevel()
+    //[ContextMenu("JumpToDesiredLevel")]
+    public void JumpToDesiredLevel(int Index)
     {
-        if (JumpToLevel > 1)
+        if (Index > 1)
         {
-            LevelBar.transform.localPosition = new Vector2(-(BarStartPos + 250 * (JumpToLevel - 1)), LevelBar.transform.localPosition.y);
+            LevelBar.transform.localPosition = new Vector2(-(BarStartPos + 250 * (Index - 1)), LevelBar.transform.localPosition.y);
         }
         else
         {
             LevelBar.transform.localPosition = new Vector2(BarStartPos, LevelBar.transform.localPosition.y);
         }
-        DisplayLevelImage(JumpToLevel);
+        DisplayLevelImage(Index);
     }
 
     public void DisplayLevelImage(int LevelIndex)
@@ -82,6 +103,11 @@ public class LevelScroller : MonoBehaviour
             {
                 LevelBar.transform.localPosition = new Vector2(-ReferencePoint, LevelBar.transform.localPosition.y);
                 DisplayLevelImage(i);
+                LevelIndex = i;
+                if (LevelIndex <= 1)
+                {
+                    LevelIndex = 1;
+                }
                 break;
             }
         }

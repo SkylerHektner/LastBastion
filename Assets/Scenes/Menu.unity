@@ -23782,6 +23782,7 @@ MonoBehaviour:
   UnlockedImage: {fileID: 21300000, guid: a141fa9c4c455ff49b5b14354be4c3bc, type: 3}
   LockedImage: {fileID: 21300000, guid: f179021026366d94da674e45a533a30e, type: 3}
   LevelImage: {fileID: 0}
+  UpgradesBar: {fileID: 1711358591}
 --- !u!114 &276915040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25226,6 +25227,8 @@ MonoBehaviour:
   JumpToLevel: 2
   DisplayImage: {fileID: 1130815771}
   LevelContainer: {fileID: 666736615}
+  Portal: {fileID: 1761399713}
+  Door: {fileID: 81514465}
 --- !u!1 &402912343
 GameObject:
   m_ObjectHideFlags: 0
@@ -31557,6 +31560,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829615998}
   m_CullTransparentMesh: 0
+--- !u!1 &838727362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 838727363}
+  - component: {fileID: 838727364}
+  m_Layer: 0
+  m_Name: Spectator
+  m_TagString: Spectator
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &838727363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838727362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &838727364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838727362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2763d35fbb453724db84c5f069be28fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &848818153
 GameObject:
   m_ObjectHideFlags: 0
@@ -33562,6 +33608,7 @@ MonoBehaviour:
   UnlockedImage: {fileID: 21300000, guid: f45faa0dfcce68d4a85827c029a3d7e2, type: 3}
   LockedImage: {fileID: 21300000, guid: f179021026366d94da674e45a533a30e, type: 3}
   LevelImage: {fileID: 0}
+  UpgradesBar: {fileID: 1711358591}
 --- !u!1 &968612409
 GameObject:
   m_ObjectHideFlags: 0
@@ -44532,6 +44579,7 @@ MonoBehaviour:
   UnlockedImage: {fileID: 21300000, guid: a141fa9c4c455ff49b5b14354be4c3bc, type: 3}
   LockedImage: {fileID: 21300000, guid: f179021026366d94da674e45a533a30e, type: 3}
   LevelImage: {fileID: 0}
+  UpgradesBar: {fileID: 1711358591}
 --- !u!1 &2097798858
 GameObject:
   m_ObjectHideFlags: 0

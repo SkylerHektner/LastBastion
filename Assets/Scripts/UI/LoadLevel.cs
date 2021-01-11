@@ -36,6 +36,7 @@ public class LoadLevel : MonoBehaviour
     public Sprite LockedImage;
 
     public Sprite LevelImage; // This is the one referenced by the level scroller.  Don't put anything in this;
+    public Animator UpgradesBar;
 
 
     // If I don't call this, the image appears blank white at the start.  
@@ -47,6 +48,10 @@ public class LoadLevel : MonoBehaviour
     public void LoadMyLevel()
     {
         Invoke("SceneChange", 1f);
+        Spectator.LevelIndex = LevelScroller.LevelIndex; // reference index to the button
+        Spectator.ReturningFromLevel = true;
+        Debug.Log(Spectator.LevelIndex);
+        UpgradesBar.SetTrigger("Hide");
     }
     public void SceneChange()
     {

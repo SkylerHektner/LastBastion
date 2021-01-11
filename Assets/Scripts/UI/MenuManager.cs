@@ -10,6 +10,16 @@ public class MenuManager : MonoBehaviour
     public GameObject UpgradesCanvas;
 
 
+    private void Update()
+    {
+        if (Spectator.ReturningFromLevel)
+        {
+            PlayCanvas.SetActive(false);
+            ShowLevels();
+            //Door.SetTrigger("Open");
+        }
+    }
+
     public void PlayGame()
     {
         PlayCanvas.SetActive(false);
