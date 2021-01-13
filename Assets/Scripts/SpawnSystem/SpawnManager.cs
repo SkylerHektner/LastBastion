@@ -319,6 +319,9 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.RedSkeleton:
                 ret = Instantiate( RedSkeletonPrefab );
                 break;
+            case 0:
+                Debug.LogError( "ERROR: Tried to spawn an enemy " + enemy.ToString() + " that hasn't been added to the InstantiateMonster switch" );
+                break;
         }
         if( ret )
             ret.transform.position = position;
