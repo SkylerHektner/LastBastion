@@ -87,6 +87,7 @@ public class LevelScroller : MonoBehaviour
             LevelList.Add(level.GetComponent<LoadLevel>().LevelImage);
         }
         DisplayImage.sprite = LevelList[LevelIndex - 1];
+        Debug.Log("Displaying level  " + LevelIndex + "Image");
     }
 
     public void SetDragBuffer()
