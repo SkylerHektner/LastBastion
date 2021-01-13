@@ -11,13 +11,16 @@ public class SpawnGroup : ScriptableObject
 {
     [SerializeField] public SpawnDictionary SpawnMap;
     [SerializeField] public Layout layout;
-    [SerializeField] public float cluster_density = 2.0f; // per meter squared
+    [SerializeField] public float ClusterDensity = 2.0f; // per meter squared
+    [SerializeField] public float SpawnStaggerMinTime = 0.02f;
+    [SerializeField] public float SpawnStaggerMaxTime = 0.07f;
 
     [System.Serializable]
     public enum Layout
     {
         Cluster,
         Spread,
+        Door,
     }
 }
 
@@ -85,11 +88,37 @@ public class SpawnGroupEdtior : Editor
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField( "Monster Per Meter^2" );
-            float cluster_density = EditorGUILayout.FloatField( spawn_group.cluster_density );
-            if( cluster_density != spawn_group.cluster_density )
+            float cluster_density = EditorGUILayout.FloatField( spawn_group.ClusterDensity );
+            if( cluster_density != spawn_group.ClusterDensity )
             {
                 if( cluster_density <= 0.0f ) cluster_density = 0.1f;
-                spawn_group.cluster_density = cluster_density;
+                spawn_group.ClusterDensity = cluster_density;
+                EditorUtility.SetDirty( target );
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        // spawn stagger times
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField( "Spawn Stagger Min Time" );
+            float spawn_stagger_min_time = EditorGUILayout.FloatField( spawn_group.SpawnStaggerMinTime );
+            if( spawn_stagger_min_time != spawn_group.SpawnStaggerMinTime )
+            {
+                if( spawn_stagger_min_time <= 0.0f ) spawn_stagger_min_time = 0.0f;
+                spawn_group.SpawnStaggerMinTime = spawn_stagger_min_time;
+                EditorUtility.SetDirty( target );
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField( "Spawn Stagger Max Time" );
+            float spawn_stagger_max_time = EditorGUILayout.FloatField( spawn_group.SpawnStaggerMaxTime );
+            if( spawn_stagger_max_time != spawn_group.SpawnStaggerMaxTime )
+            {
+                if( spawn_stagger_max_time <= 0.0f ) spawn_stagger_max_time = 0.0f;
+                spawn_group.SpawnStaggerMaxTime = spawn_stagger_max_time;
                 EditorUtility.SetDirty( target );
             }
             EditorGUILayout.EndHorizontal();

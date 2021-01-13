@@ -21,13 +21,12 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject CarrierMPrefab;
     [SerializeField] GameObject CarrierSPrefab;
     [SerializeField] GameObject RedSkeletonPrefab;
-    [SerializeField] float SpawnStaggerMinTime = 0.02f;
-    [SerializeField] float SpawnStaggerMaxTime = 0.07f;
     [SerializeField] int StartWave = 0;
     public Vector3 SpawnableAreaTopRight;
     public Vector3 SpawnableAreaBottomLeft;
     public Vector3 PlayableAreaTopRight;
     public Vector3 PlayableAreaBottomLeft;
+    public List<Vector3> DoorSpawnPoints = new List<Vector3>();
 
     private float spawn_timer = -1.0f;
     private int current_wave = -1;
@@ -151,7 +150,7 @@ public class SpawnManager : MonoBehaviour
         {
             // determine radius of spawning circle
             float num_spawns = sg.SpawnMap.Aggregate( 0, ( current, next ) => next.Value + current );
-            float desired_area = num_spawns / sg.cluster_density;
+            float desired_area = num_spawns / sg.ClusterDensity;
             float radius = Mathf.Sqrt( desired_area / Mathf.PI );
             if( radius > Mathf.Min( SpawnableAreaTopRight.x - SpawnableAreaBottomLeft.x, SpawnableAreaTopRight.y - SpawnableAreaBottomLeft.y ) / 2.0f )
             {
@@ -173,8 +172,22 @@ public class SpawnManager : MonoBehaviour
                         float random_theta = UnityEngine.Random.Range( 0.0f, Mathf.PI * 2 );
                         Vector3 final_point = new Vector3( Mathf.Cos( random_theta ) * random_radius + circle_center.x, Mathf.Sin( random_theta ) * random_radius + circle_center.y );
                         SpawnMonster( e.Key, final_point, stagger );
-                        stagger += UnityEngine.Random.Range( SpawnStaggerMinTime, SpawnStaggerMaxTime );
+                        stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
                     }
+                }
+            }
+        }
+        else if( sg.layout == SpawnGroup.Layout.Door )
+        {
+            int door_index = UnityEngine.Random.Range( 0, DoorSpawnPoints.Count );
+            float stagger = 0.0f;
+            foreach( var e in sg.SpawnMap )
+            {
+                for( int x = 0; x < e.Value; ++x )
+                {
+                    SpawnMonster( e.Key, DoorSpawnPoints[door_index], stagger );
+                    stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                    door_index = ( door_index + 1 ) % DoorSpawnPoints.Count;
                 }
             }
         }
@@ -188,7 +201,7 @@ public class SpawnManager : MonoBehaviour
     {
         List<Vector3> ret = new List<Vector3>();
         float num_spawns = sg.SpawnMap.Aggregate( 0, ( current, next ) => next.Value + current );
-        float desired_area = num_spawns / sg.cluster_density;
+        float desired_area = num_spawns / sg.ClusterDensity;
         float radius = Mathf.Sqrt( desired_area / Mathf.PI );
 
         float stagger = 0.0f;
@@ -210,7 +223,7 @@ public class SpawnManager : MonoBehaviour
                 else
                 {
                     SpawnMonster( e.Key, final_point, stagger );
-                    stagger += ( should_stagger ? UnityEngine.Random.Range( SpawnStaggerMinTime, SpawnStaggerMaxTime ) : 0.0f );
+                    stagger += ( should_stagger ? UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime ) : 0.0f );
                     ret.Add( final_point );
                 }
             }
@@ -233,7 +246,7 @@ public class SpawnManager : MonoBehaviour
             for( int x = 0; x < e.Value; ++x )
             {
                 SpawnMonster( e.Key, GetRandomSpawnPoint(), stagger );
-                stagger += UnityEngine.Random.Range( SpawnStaggerMinTime, SpawnStaggerMaxTime );
+                stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
             }
         }
     }
@@ -261,7 +274,7 @@ public class SpawnManager : MonoBehaviour
         spawned_enemies.Remove( EnemyID );
     }
 
-    public Enemy TryGetEnemyByID(long id)
+    public Enemy TryGetEnemyByID( long id )
     {
         Enemy ret;
         spawned_enemies.TryGetValue( id, out ret );
@@ -362,6 +375,14 @@ public class SpawnManagerEditor : Editor
             Handles.DrawLine( top_right, bottom_right );
             Handles.DrawLine( bottom_right, bottom_left );
             Handles.DrawLine( bottom_left, top_left );
+        }
+
+        {
+            foreach( Vector3 door_spawn_point in spawn_manager.DoorSpawnPoints )
+            {
+                Handles.color = Color.red;
+                Handles.DrawWireDisc( door_spawn_point, Vector3.forward, 0.2f );
+            }
         }
 
     }
