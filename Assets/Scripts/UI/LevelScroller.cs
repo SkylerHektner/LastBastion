@@ -24,6 +24,10 @@ public class LevelScroller : MonoBehaviour
     public Animator Portal;
     public Animator Door;
 
+    public Image GlowFX;
+    public Image PortalRim;
+    public Color GlowColor;
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -104,7 +108,19 @@ public class LevelScroller : MonoBehaviour
             return;
         }
         DisplayImage.sprite = load_levels[LevelIndex - 1].LevelImage;
+        SwapGlow(LevelIndex - 1);
         Debug.Log("Displaying level  " + LevelIndex + "Image");
+    }
+
+    public void SwapGlow(int Index)
+    {
+        GlowColor.r = load_levels[Index].GlowRGB.x;
+        GlowColor.g = load_levels[Index].GlowRGB.y;
+        GlowColor.b = load_levels[Index].GlowRGB.z;
+        GlowColor.a = load_levels[Index].GlowRGB.w;
+        GlowFX.color = GlowColor;
+        PortalRim.color = GlowColor;
+        Debug.Log("R   "+ GlowColor.r + " G   " + GlowColor.g + "B    " + GlowColor.b);
     }
 
     public void SetDragBuffer()

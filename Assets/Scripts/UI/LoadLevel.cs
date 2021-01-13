@@ -42,6 +42,8 @@ public class LoadLevel : MonoBehaviour
 
     public UnityEvent<int> LockStatusChangedEvent = new UnityEvent<int>();
 
+    public Vector4 GlowRGB;
+
 
     // If I don't call this, the image appears blank white at the start.  
     //This is ok to do because the player only sees this when starting the game and returning from an unlocked level
