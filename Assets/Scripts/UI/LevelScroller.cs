@@ -17,6 +17,7 @@ public class LevelScroller : MonoBehaviour
 
     public Image DisplayImage;
     public GameObject LevelContainer;
+    private List<LoadLevel> load_levels = new List<LoadLevel>();
 
     public static int LevelIndex;
 
@@ -45,6 +46,16 @@ public class LevelScroller : MonoBehaviour
     // might have to remove this later on, as it may cause problems with returning from levels
     private void Awake()
     {
+        load_levels.Clear();
+        foreach( Transform level in LevelContainer.transform )
+        {
+            load_levels.Add( level.GetComponent<LoadLevel>() );
+        }
+        foreach( LoadLevel level in load_levels )
+        {
+            level.LockStatusChangedEvent.AddListener( OnLockedLevelImageChanged );
+        }
+
         if (LevelIndex <= 1)
         {
             LevelIndex = 1;
@@ -79,14 +90,20 @@ public class LevelScroller : MonoBehaviour
         DisplayLevelImage(Index);
     }
 
+    private void OnLockedLevelImageChanged(int level_index)
+    {
+        if( level_index == LevelIndex )
+            DisplayLevelImage( level_index );
+    }
+
     public void DisplayLevelImage(int LevelIndex)
     {
-        List<Sprite> LevelList = new List<Sprite>();
-        foreach (Transform level in LevelContainer.transform)
+        if(LevelIndex > load_levels.Count)
         {
-            LevelList.Add(level.GetComponent<LoadLevel>().LevelImage);
+            Debug.LogWarning( "Warning: Level Index Greater than number of load level buttons that are registered" );
+            return;
         }
-        DisplayImage.sprite = LevelList[LevelIndex - 1];
+        DisplayImage.sprite = load_levels[LevelIndex - 1].LevelImage;
         Debug.Log("Displaying level  " + LevelIndex + "Image");
     }
 
