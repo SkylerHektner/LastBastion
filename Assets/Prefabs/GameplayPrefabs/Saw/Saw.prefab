@@ -250,6 +250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12800eda2435734faa4adaa842cf787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SawFiredEvent:
+    m_PersistentCalls:
+      m_Calls: []
   MoveSpeed: 30
   MinDragDistance: 1
   MaxDragDistance: 5
@@ -258,7 +261,6 @@ MonoBehaviour:
   DirectionArrowGreyedSprite: {fileID: 21300000, guid: f900229291c45074d9f7383239f60faa, type: 3}
   DirectionArrowPivot: {fileID: 1714163072110711792}
   MinimumAngleDegrees: 12
-  IsMainSaw: 1
   animator: {fileID: 1855288180176211213}
 --- !u!114 &736529155
 MonoBehaviour:
