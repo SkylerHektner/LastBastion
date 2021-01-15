@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7789005852123475588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7789005852123475834}
+  - component: {fileID: 7789005852123475835}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7789005852123475834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789005852123475588}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.6506577, y: 0.21717072, z: 6.644272}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7789005852123475835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789005852123475588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6204472daf601374f8521331d132250e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnCadenceProfile: {fileID: 11400000, guid: ca0606c0ed440c04cb0b94adb0f9a7fb, type: 2}
+  DebugStartWave: 1
+  SkeletonPrefab: {fileID: 9130753680679645999, guid: 6190d6c3c3a252a43801b80676198653, type: 3}
+  ShieldSkeletonPrefab: {fileID: 3993805466842966640, guid: b031cf1a28fe9cc49a6f7c648955ab25, type: 3}
+  PumpkinWarriorPrefab: {fileID: 6013094092943625660, guid: e6c5b4b4ce1296d459c6a7752fbf597a, type: 3}
+  ShieldBearerPrefab: {fileID: 3993805466842966640, guid: b031cf1a28fe9cc49a6f7c648955ab25, type: 3}
+  MudSlingerPrefab: {fileID: 7935350043077727019, guid: 1446201d0561a054e862334de0e83750, type: 3}
+  ShrikePrefab: {fileID: 161093999407771307, guid: e1edfff97f6903e4fac0fdd92cdcaf20, type: 3}
+  ShamanPrefab: {fileID: 2898304853937610190, guid: 0c13988d28d1293499319665a84ef1cc, type: 3}
+  CarrierLPrefab: {fileID: 5190907824382444220, guid: ba8735df4590c224abcdafc689c41287, type: 3}
+  CarrierMPrefab: {fileID: 1176881054248071094, guid: 32898645d0f460749a876124910919c0, type: 3}
+  CarrierSPrefab: {fileID: 1222198919188261107, guid: 56afa67539377524b94fec190e10f550, type: 3}
+  RedSkeletonPrefab: {fileID: 3993805466842966640, guid: c9b3f93d31de3fe478ab1124696a4763, type: 3}
+  SpawnableAreaTopRight: {x: 3.93, y: 11.71, z: 0}
+  SpawnableAreaBottomLeft: {x: -3.93, y: 2.27, z: 0}
+  PlayableAreaTopRight: {x: 4.5, y: 11.74, z: 0}
+  PlayableAreaBottomLeft: {x: -4.5, y: 0, z: 0}
+  DoorSpawnPoints: []
+  WaveCounterUI: {fileID: 0}
