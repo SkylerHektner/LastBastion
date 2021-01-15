@@ -16,6 +16,7 @@ public class AbilityManager : MonoBehaviour
     public static AbilityManager Instance { get; private set; }
 
     public Vector3 BaseCenter;
+    public TemporalAnomalyAbilityData TemporalAnomalyData;
     public ChainLightningAbilityData ChainLightningData;
     public TyphoonAbilityData TyphoonData;
     public SawmageddonAbilityData SawmageddonData;
@@ -43,7 +44,12 @@ public class AbilityManager : MonoBehaviour
         switch( ability )
         {
             case AbilityEnum.TemporalAnomaly:
-                break;
+                {
+                    TemporalAnomalyAbility _ab = new TemporalAnomalyAbility();
+                    _ab.AbilityData = TemporalAnomalyData;
+                    ab = _ab;
+                    break;
+                }
             case AbilityEnum.ChainLightning:
                 {
                     ChainLightningAbility _ab = new ChainLightningAbility();
