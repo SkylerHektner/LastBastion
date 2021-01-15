@@ -10,6 +10,8 @@ public class SpawnManager : MonoBehaviour
     public static SpawnManager Instance { get; private set; }
 
     [SerializeField] SpawnCadenceProfile spawnCadenceProfile;
+    [SerializeField] int DebugStartWave = 0;
+    [Header("Enemy Prefabs")]
     [SerializeField] GameObject SkeletonPrefab;
     [SerializeField] GameObject ShieldSkeletonPrefab;
     [SerializeField] GameObject PumpkinWarriorPrefab;
@@ -21,12 +23,14 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject CarrierMPrefab;
     [SerializeField] GameObject CarrierSPrefab;
     [SerializeField] GameObject RedSkeletonPrefab;
-    [SerializeField] int StartWave = 0;
+    [Header("Spawn Area Information")]
     public Vector3 SpawnableAreaTopRight;
     public Vector3 SpawnableAreaBottomLeft;
     public Vector3 PlayableAreaTopRight;
     public Vector3 PlayableAreaBottomLeft;
     public List<Vector3> DoorSpawnPoints = new List<Vector3>();
+    [Header( "Misc" )]
+    [SerializeField] WaveCounter WaveCounterUI;
 
     private float spawn_timer = -1.0f;
     private int current_wave = -1;
@@ -52,7 +56,7 @@ public class SpawnManager : MonoBehaviour
     {
         Instance = this;
 #if UNITY_EDITOR
-        current_wave = StartWave - 2;
+        current_wave = DebugStartWave - 2;
 #endif
         StartNextWave();
     }
@@ -119,6 +123,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawn_timer = 0.0f;
         current_wave++;
+        WaveCounterUI?.ShowNextWave( current_wave + 1 );
         cur_spawn_group_index = 0;
         passive_spawn_trackers.Clear();
         foreach( float time in spawnCadenceProfile.Waves[current_wave].PassiveEnemySpawnCadence )

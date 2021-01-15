@@ -15744,6 +15744,7 @@ GameObject:
   - component: {fileID: 1704366522}
   - component: {fileID: 1704366521}
   - component: {fileID: 1704366524}
+  - component: {fileID: 1704366520}
   m_Layer: 5
   m_Name: WaveCounter
   m_TagString: Untagged
@@ -15751,6 +15752,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1704366520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704366519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade93434ccc1a6646b5a914fbd96c687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaveNumberText: {fileID: 1359376121}
+  Anim: {fileID: 1704366524}
 --- !u!114 &1704366521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16258,6 +16273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCadenceProfile: {fileID: 11400000, guid: ca0606c0ed440c04cb0b94adb0f9a7fb, type: 2}
+  DebugStartWave: 1
   SkeletonPrefab: {fileID: 9130753680679645999, guid: 6190d6c3c3a252a43801b80676198653, type: 3}
   ShieldSkeletonPrefab: {fileID: 3993805466842966640, guid: b031cf1a28fe9cc49a6f7c648955ab25, type: 3}
   PumpkinWarriorPrefab: {fileID: 6013094092943625660, guid: e6c5b4b4ce1296d459c6a7752fbf597a, type: 3}
@@ -16269,12 +16285,12 @@ MonoBehaviour:
   CarrierMPrefab: {fileID: 1176881054248071094, guid: 32898645d0f460749a876124910919c0, type: 3}
   CarrierSPrefab: {fileID: 1222198919188261107, guid: 56afa67539377524b94fec190e10f550, type: 3}
   RedSkeletonPrefab: {fileID: 3993805466842966640, guid: c9b3f93d31de3fe478ab1124696a4763, type: 3}
-  StartWave: 1
   SpawnableAreaTopRight: {x: 3.93, y: 11.71, z: 0}
   SpawnableAreaBottomLeft: {x: -3.93, y: 2.27, z: 0}
   PlayableAreaTopRight: {x: 4.5, y: 11.74, z: 0}
   PlayableAreaBottomLeft: {x: -4.5, y: 0, z: 0}
   DoorSpawnPoints: []
+  WaveCounterUI: {fileID: 1704366520}
 --- !u!4 &1845556993
 Transform:
   m_ObjectHideFlags: 0
