@@ -7,6 +7,7 @@ public class Spectator : MonoBehaviour
 
     public static int LevelIndex;
     public static bool ReturningFromLevel;
+    public int PlayerWealth;
 
     void Awake()
     {

@@ -15,21 +15,23 @@ public class InfoPanel : MonoBehaviour
     public Button PurchaseButton;
 
     public UpgradeButton DesiredUpgrade;
-    public int PlayerWealth;
+    //public int PlayerWealth;
     public int UpgradeCost;
 
     public Animator GoodBubble;
     public Animator BadBubble;
 
+    Spectator Spectator;
+
 
     public void ConfirmPurchase()
     {
-        if (PlayerWealth >= UpgradeCost)
+        if (Spectator.PlayerWealth >= UpgradeCost)
         {
-            PlayerWealth -= UpgradeCost;
-            if (PlayerWealth <= 0)
+            Spectator.PlayerWealth -= UpgradeCost;
+            if (Spectator.PlayerWealth <= 0)
             {
-                PlayerWealth = 0;
+                Spectator.PlayerWealth = 0;
             }
             DesiredUpgrade.Purchased = true;
             gameObject.SetActive(false);
@@ -60,7 +62,8 @@ public class InfoPanel : MonoBehaviour
 
     public void UpdatePlayerWealth()
     {
-        PlayerWealthText.text = PlayerWealth.ToString();
+        Spectator = GameObject.FindGameObjectWithTag("Spectator").GetComponent<Spectator>();
+        PlayerWealthText.text = Spectator.PlayerWealth.ToString();
     }
 
     public void EnableButtons()

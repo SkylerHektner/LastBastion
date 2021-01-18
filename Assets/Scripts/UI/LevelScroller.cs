@@ -109,7 +109,7 @@ public class LevelScroller : MonoBehaviour
         }
         DisplayImage.sprite = load_levels[LevelIndex - 1].LevelImage;
         SwapGlow(LevelIndex - 1);
-        Debug.Log("Displaying level  " + LevelIndex + "Image");
+        //Debug.Log("Displaying level  " + LevelIndex + "Image");
     }
 
     public void SwapGlow(int Index)
@@ -120,7 +120,7 @@ public class LevelScroller : MonoBehaviour
         GlowColor.a = load_levels[Index].GlowRGB.w;
         GlowFX.color = GlowColor;
         PortalRim.color = GlowColor;
-        Debug.Log("R   "+ GlowColor.r + " G   " + GlowColor.g + "B    " + GlowColor.b);
+        //Debug.Log("R   "+ GlowColor.r + " G   " + GlowColor.g + "B    " + GlowColor.b);
     }
 
     public void SetDragBuffer()
