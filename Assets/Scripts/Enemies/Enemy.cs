@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
             NextEnemyID = 1;
 
         CurrentHealth = MaxHealth;
-        GameplayManager.TimeScaleChanged.AddListener( OnTimeScaleChange );
+        GameplayManager.Instance.TimeScaleChanged.AddListener( OnTimeScaleChange );
 
         anim = GetComponent<Animator>();
         s_rend = GetComponent<SpriteRenderer>();
@@ -187,7 +187,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
-        GameplayManager.TimeScaleChanged.RemoveListener( OnTimeScaleChange );
+        GameplayManager.Instance.TimeScaleChanged.RemoveListener( OnTimeScaleChange );
         Destroy( gameObject );
         OnDeath.Invoke( EnemyID );
     }

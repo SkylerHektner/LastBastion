@@ -43,7 +43,7 @@ public class AbilityUIManager : MonoBehaviour
             g.SetActive( true );
         showing = true;
         cur_ability_candidate = null;
-        GameplayManager.Instance.SetTimeScale( 0.1f, TimeScaleLerpDuration );
+        GameplayManager.Instance.SetTimeScale( 0.1f, TimeScaleLerpDuration, GameplayManager.TimeScale.UI );
         GameplayFieldScrim.gameObject.SetActive( true );
         GameplayFieldScrim.SetBool( "Fade", true );
     }
@@ -54,7 +54,7 @@ public class AbilityUIManager : MonoBehaviour
             g.SetActive( false );
         showing = false;
         cur_ability_candidate = null;
-        GameplayManager.Instance.SetTimeScale( 1.0f, TimeScaleReturnToNormalLerpDuratin );
+        GameplayManager.Instance.SetTimeScale( 1.0f, TimeScaleReturnToNormalLerpDuratin, GameplayManager.TimeScale.UI );
         GameplayFieldScrim.SetBool( "Fade", false );
         GameplayFieldScrim.gameObject.SetActive( false );
     }

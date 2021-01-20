@@ -44,6 +44,7 @@ public class Saw : MonoBehaviour
         DirectionArrow.gameObject.SetActive( false );
         proj = GetComponent<Projectile>();
         proj.ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
+        proj.SetTimeScaleFilter( GameplayManager.TimeScale.UI ); // don't pay attention to temporal anomoly time scale
     }
 
     private void Update()

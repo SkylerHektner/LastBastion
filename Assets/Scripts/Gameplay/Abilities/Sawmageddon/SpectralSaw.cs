@@ -8,6 +8,7 @@ public class SpectralSaw : Projectile
     {
         base.Start();
         ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
+        SetTimeScaleFilter( GameplayManager.TimeScale.UI );
     }
 
     private void OnProjectileHitWall( ProjectileHitInfo hit_info )

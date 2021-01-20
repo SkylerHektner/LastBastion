@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float MoveSpeed;
     [SerializeField] protected Vector3 MoveDirection = Vector3.zero;
     [SerializeField] protected WallHitBehavior CurWallHitBehavior;
+    [SerializeField] protected GameplayManager.TimeScale TimeScale = GameplayManager.TimeScale.Combined;
     public GameObject DestroyEffect;
 
     public UnityEvent<ProjectileHitInfo> ProjectileHitWallEvent = new UnityEvent<ProjectileHitInfo>();
@@ -28,6 +29,11 @@ public class Projectile : MonoBehaviour
         MoveSpeed = speed;
     }
 
+    public void SetTimeScaleFilter(GameplayManager.TimeScale scale)
+    {
+        TimeScale = scale;
+    }
+
     public void StartMoveInDirection( Vector3 move_direction )
     {
         this.MoveDirection = move_direction.normalized;
@@ -42,7 +48,7 @@ public class Projectile : MonoBehaviour
     {
         if( MoveDirection != Vector3.zero )
         {
-            Vector3 new_pos = transform.position + MoveDirection * MoveSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale;
+            Vector3 new_pos = transform.position + MoveDirection * MoveSpeed * Time.deltaTime * GameplayManager.Instance.GetTimeScale( TimeScale );
 
             bool hit_wall = false;
             // hit bottom
