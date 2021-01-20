@@ -107,6 +107,7 @@ public class ChainLightningAbility : Ability
             zap_effect.duration = AbilityData.ZapDuration;
             zap_effect.transform.position = zap.position;
             zap_effect.transform.parent = en.transform;
+            en.OnDeath.AddListener( zap_effect.DestroyOnDeathHook );
         }
     }
 }

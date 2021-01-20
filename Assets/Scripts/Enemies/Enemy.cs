@@ -173,6 +173,7 @@ public class Enemy : MonoBehaviour
     public void Kill()
     {
         StopMoving();
+        OnDeath.Invoke( EnemyID );
         Dying = true;
         if( DeathEffect != null )
             Instantiate( DeathEffect ).transform.position = transform.position;
@@ -188,8 +189,8 @@ public class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         GameplayManager.Instance.TimeScaleChanged.RemoveListener( OnTimeScaleChange );
+        
         Destroy( gameObject );
-        OnDeath.Invoke( EnemyID );
     }
 
     private void OnTimeScaleChange()
