@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3533669783349596056}
   - component: {fileID: 4790916748621246754}
   - component: {fileID: 2850094240901804986}
+  - component: {fileID: 213890297599189568}
   m_Layer: 0
   m_Name: ShamanSpawn
   m_TagString: Untagged
@@ -102,6 +103,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &213890297599189568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4788409167276624338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b11517efcdcd14ab2af70f6eaa8eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5764153955619398806
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,3 +163,4 @@ MonoBehaviour:
   DeleteDurationReached:
     m_PersistentCalls:
       m_Calls: []
+  IgnoreGameplayTimeScale: 0

@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1824666046701122352}
   - component: {fileID: 1824666046701122355}
   - component: {fileID: 805624168539284615}
+  - component: {fileID: 5940282243842263139}
   m_Layer: 0
-  m_Name: SeedSpawn
+  m_Name: SeedSpawnS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,6 +123,19 @@ MonoBehaviour:
   DeleteDurationReached:
     m_PersistentCalls:
       m_Calls: []
+  IgnoreGameplayTimeScale: 0
+--- !u!114 &5940282243842263139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824666046701122354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b11517efcdcd14ab2af70f6eaa8eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1824666047409929161
 GameObject:
   m_ObjectHideFlags: 0
