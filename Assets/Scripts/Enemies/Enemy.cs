@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject DamagedEffect;
     [SerializeField] string DamagedAnimation;
     [SerializeField] bool attacks = true;
+    public int PowerupDropValue = 1;
     public bool Moving { get; private set; }
     public bool Spawning { get; private set; }
     public bool Dying { get; private set; }

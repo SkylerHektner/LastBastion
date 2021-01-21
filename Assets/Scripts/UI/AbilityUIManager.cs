@@ -8,6 +8,10 @@ public class AbilityUIManager : MonoBehaviour
     private float TimeScaleReturnToNormalLerpDuratin = 0.1f; // this should always be extremely fast
     [SerializeField] List<GameObject> ShowOnAbilityMenuActive;
     [SerializeField] Animator GameplayFieldScrim;
+    [SerializeField] List<GameObject> ChainLightningUsageSlots = new List<GameObject>();
+    [SerializeField] List<GameObject> SawmageddonUsageSlots = new List<GameObject>();
+    [SerializeField] List<GameObject> TemporalAnomalyUsageSlots = new List<GameObject>();
+    [SerializeField] List<GameObject> TyphoonUsageSlots = new List<GameObject>();
 
     private bool showing = false;
     private AbilityEnum? cur_ability_candidate = null;
@@ -15,6 +19,34 @@ public class AbilityUIManager : MonoBehaviour
     private void Start()
     {
         HideIcons();
+        AbilityManager.Instance.AbilityChargeChangedEvent.AddListener( OnAbilityChargeChanged );
+        Debug.Assert( ChainLightningUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+        Debug.Assert( SawmageddonUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+        Debug.Assert( TemporalAnomalyUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+        Debug.Assert( TyphoonUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+    }
+
+    private void OnAbilityChargeChanged(AbilityEnum ability, int new_charge)
+    {
+        List<GameObject> slot_indicators = null;
+        switch( ability )
+        {
+            case AbilityEnum.TemporalAnomaly:
+                slot_indicators = TemporalAnomalyUsageSlots;
+                break;
+            case AbilityEnum.ChainLightning:
+                slot_indicators = ChainLightningUsageSlots;
+                break;
+            case AbilityEnum.Typhoon:
+                slot_indicators = TyphoonUsageSlots;
+                break;
+            case AbilityEnum.Sawmageddon:
+                slot_indicators = SawmageddonUsageSlots;
+                break;
+        }
+        slot_indicators.ForEach( ( GameObject g ) => g.SetActive( false ) );
+        for( int x = 0; x < new_charge; ++x )
+            slot_indicators[x].SetActive( true );
     }
 
     private void Update()

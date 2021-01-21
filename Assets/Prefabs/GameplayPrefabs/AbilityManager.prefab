@@ -759,7 +759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9001146215154013224
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2330,6 +2330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2991690647362651399}
   - component: {fileID: 2991690647362651392}
+  - component: {fileID: 6555574125599272073}
   m_Layer: 0
   m_Name: AbilityManager
   m_TagString: Untagged
@@ -2364,12 +2365,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e94ad81a7cd62a48be1210ce9db1cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityChargeChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
   AbilityInfoScroll: {fileID: 9219329462558639999}
   BaseCenter: {x: 0, y: 0, z: 0}
   TemporalAnomalyData: {fileID: 11400000, guid: 85088c9ec3511a44fb9c2078a94f6ad5, type: 2}
   ChainLightningData: {fileID: 11400000, guid: f1f6d6f0b00096a449400c37e26461c0, type: 2}
   TyphoonData: {fileID: 11400000, guid: 1ff5b81ad1cfbc74898be900df7f718c, type: 2}
   SawmageddonData: {fileID: 11400000, guid: b8cf0d296183ba446957d7061355047a, type: 2}
+  MaxAbilityCharges: 3
+--- !u!114 &6555574125599272073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991690647362651398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b394d950deac964eb308d8cc9194454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AbilityDropTarget: 250
+  AbilityDropRandomMax: 250
+  AbilitySelectionExpansionFactor: 4
+  ChainLightningDrop: {fileID: 5871076575733930865, guid: 602e4493b30d61e47bf1ea1c40d262c5, type: 3}
+  TemporalAnomalyDrop: {fileID: 7124230497405037864, guid: ea61ca812ea7e34439554729454fb38a, type: 3}
+  SawmageddonDrop: {fileID: 3182044053386899378, guid: b54542da6970424478cab4498123bd8d, type: 3}
+  TyphoonDrop: {fileID: 8163299976162649438, guid: f8e44e21781ef7d44a35da19235f7b08, type: 3}
 --- !u!1 &2991690647411716855
 GameObject:
   m_ObjectHideFlags: 0
@@ -4190,6 +4214,22 @@ MonoBehaviour:
   - {fileID: 2991690647411716855}
   - {fileID: 2991690648016042348}
   GameplayFieldScrim: {fileID: 2991690647538337466}
+  ChainLightningUsageSlots:
+  - {fileID: 4304987670191976782}
+  - {fileID: 1094865390698942443}
+  - {fileID: 4006505985420803120}
+  SawmageddonUsageSlots:
+  - {fileID: 6995086713326087373}
+  - {fileID: 4180969847672886538}
+  - {fileID: 3698589555499423112}
+  TemporalAnomalyUsageSlots:
+  - {fileID: 8209641865961599362}
+  - {fileID: 8898063561149462614}
+  - {fileID: 5427279714049523023}
+  TyphoonUsageSlots:
+  - {fileID: 6064121427451229733}
+  - {fileID: 7795568925120231811}
+  - {fileID: 7015110300290335866}
 --- !u!1 &3035744148361664823
 GameObject:
   m_ObjectHideFlags: 0
@@ -4507,7 +4547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5299227521317975777
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4582,7 +4622,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &115810608244767346
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4752,7 +4792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4055754178114866264
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4827,7 +4867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1907297524497978246
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5311,7 +5351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8976181130153099728
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5670,7 +5710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4006727889029688386
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6217,7 +6257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8581391453906137985
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6292,7 +6332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8850779171178392274
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6578,7 +6618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2708853109351805719
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6878,7 +6918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3400289748121116489
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7271,7 +7311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6763404303552089650
 RectTransform:
   m_ObjectHideFlags: 0

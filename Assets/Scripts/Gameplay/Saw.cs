@@ -109,6 +109,12 @@ public class Saw : MonoBehaviour
             col.gameObject.GetComponent<Enemy>().Hit( move_direction, true );
         else if( col.tag == "Mudball" && !Moving )
             col.gameObject.GetComponent<MudSlingerProjectile>().HitSaw( this );
+        else if( col.tag == "AbilityDrop" )
+        {
+            AbilityDrop drop = col.gameObject.GetComponent<AbilityDrop>();
+            if( !drop.JustSpawned )
+                drop.AddAbilityCharge();
+        }
     }
 
     private void UpdateDragArrowGraphics()

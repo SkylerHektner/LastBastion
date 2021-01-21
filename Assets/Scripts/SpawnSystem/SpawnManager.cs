@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.Events;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class SpawnManager : MonoBehaviour
     private LinkedList<PendingSpawn> pending_spawns = new LinkedList<PendingSpawn>();
     private Dictionary<long, Enemy> spawned_enemies = new Dictionary<long, Enemy>();
     public List<Enemy> AllSpawnedEnemies { get { return spawned_enemies.Values.ToList<Enemy>(); } }
+    public UnityEvent<Enemy> EnemySpawnedEvent = new UnityEvent<Enemy>();
     struct PendingSpawn
     {
         public float time_left;
@@ -260,7 +262,9 @@ public class SpawnManager : MonoBehaviour
     {
         if( delay == 0.0f )
         {
-            InstantiateMonster( enemy, position );
+            GameObject e = InstantiateMonster( enemy, position );
+            if( e != null )
+                EnemySpawnedEvent.Invoke( e.GetComponent<Enemy>() );
         }
         else
             pending_spawns.AddLast( new PendingSpawn( delay, enemy, position ) );
