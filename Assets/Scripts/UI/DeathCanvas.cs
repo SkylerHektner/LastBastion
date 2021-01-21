@@ -8,12 +8,14 @@ public class DeathCanvas : MonoBehaviour
 
     public Animator WaveCounter;
     public GameObject DeathScreen;
+    public GameObject RewardScreen;
 
 
     public void DisplayDeathScreen()
     {
         DeathScreen.SetActive(true);
         WaveCounter.SetBool("Visible", true);
+        RewardScreen.SetActive(false);
     }
 
     public void ExitGame()

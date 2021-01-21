@@ -7,12 +7,14 @@ public class PauseManager : MonoBehaviour
 {
     public Animator WaveCounter;
     public GameObject PauseScreen;
+    public GameObject BonusScreen;
 
     public void ResumeGame()
     {
         WaveCounter.SetBool("Visible", false);
         Time.timeScale = 1;
         PauseScreen.SetActive(false);
+        BonusScreen.SetActive(true);
     }
 
 
@@ -21,7 +23,7 @@ public class PauseManager : MonoBehaviour
         PauseScreen.SetActive(true);
         Time.timeScale = 0;
         WaveCounter.SetBool("Visible", true);
-
+        BonusScreen.SetActive(false);
     }
     private void Update()
     {
