@@ -80,7 +80,6 @@ public class AbilityDropManager : MonoBehaviour
 
             // drop ability
             AbilityEnum ability = (AbilityEnum)selected_index;
-            Debug.Log( "DROPPING ABILITY " + ability.ToString() );
 
             AbilityDrop ab = null;
             switch( ability )
