@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DisplayInfo : MonoBehaviour
 {
@@ -11,6 +12,35 @@ public class DisplayInfo : MonoBehaviour
 
     public TextMeshProUGUI PowerupText;
     public TextMeshProUGUI PowerupInfoText;
+
+    public bool Locked
+    {
+        get
+        {
+            return lockedStatus;
+        }
+        set
+        {
+            lockedStatus = value;
+            if (lockedStatus == true)
+            {
+                LockedSymbol.SetActive(true);
+                PowerupIcon.raycastTarget = false;
+                PowerupSlots.SetActive(false);
+            }
+            else
+            {
+                LockedSymbol.SetActive(false);
+                PowerupIcon.raycastTarget = true;
+                PowerupSlots.SetActive(true);
+            }
+        }
+    }
+    private bool lockedStatus;
+
+    public GameObject LockedSymbol;
+    public Image PowerupIcon;
+    public GameObject PowerupSlots;
 
 
     // used with the pointer scroll over event
@@ -26,5 +56,12 @@ public class DisplayInfo : MonoBehaviour
         PowerupText.text = "";
         PowerupInfoText.text = "";
     }
+
+    [ContextMenu("ToggleLock")]
+    public void ToggleLock()
+    {
+        Locked = !Locked;
+    }
+
 
 }
