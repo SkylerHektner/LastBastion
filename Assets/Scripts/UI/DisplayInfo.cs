@@ -63,5 +63,14 @@ public class DisplayInfo : MonoBehaviour
         Locked = !Locked;
     }
 
+    public void Update()
+    {
+        //debug stuff (simulates hitting a powerup while ability manager is active)
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            PowerupIcon.GetComponent<Animator>().SetBool("Empty", false);
+        }
+    }
+
 
 }
