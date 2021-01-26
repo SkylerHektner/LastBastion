@@ -35,7 +35,7 @@ public class PlayerData
     private static PlayerData _instance;
     private static string GetPath()
     {
-        return Application.persistentDataPath + "PlayerData.txt";
+        return Path.Combine( Application.persistentDataPath, "PlayerData.txt" );
     }
 #if UNITY_EDITOR
     [MenuItem( "Debug/OpenPersistentDataPath" )]
