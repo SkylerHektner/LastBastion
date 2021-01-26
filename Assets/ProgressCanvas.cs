@@ -11,35 +11,33 @@ public class ProgressCanvas : MonoBehaviour
 
     private void Start()
     {
-        Skull.SetBool("Speaking", true);
+        Skull.SetBool( "Speaking", true );
+    }
+
+    public void LoadMenuFromLimboResumeAnimation()
+    {
+        ProgressContent.SetActive( false );
+        Debug.Log( "Loading Menu" );
+        PlayerData.Instance.Limbo.Set( false );
+        Spectator.LevelIndex = 1;
+        Door.SetBool( "Limbo", false );
+    }
+    public void LoadSceneFromLimboResumeAnimation()
+    {
+        Spectator.LevelIndex = PlayerPrefs.GetInt( "LevelIndex" );
+        Spectator.ReturningFromLevel = true;
+        PlayerData.Instance.Limbo.Set( false );
+        SceneManager.LoadScene( PlayerPrefs.GetString( "ExitedScene" ) );
     }
 
     public void ContinueSave()
     {
 
     }
-    public void LoadScene()
-    {
-        Spectator.LevelIndex = PlayerPrefs.GetInt("LevelIndex");
-        Spectator.ReturningFromLevel = true;
-        Spectator.InLimbo = !Spectator.InLimbo;
-        PlayerPrefs.SetInt("Limbo", 0);
-        SceneManager.LoadScene(PlayerPrefs.GetString("ExitedScene"));
-    }
 
     public void DeclineSave()
     {
-        Skull.SetBool("Speaking", false);
+        Skull.SetBool( "Speaking", false );
         // play animation (call load menu at the end)
-    }
-
-    public void LoadMenu()
-    {
-        ProgressContent.SetActive(false);
-        Debug.Log("Loading Menu");
-        Spectator.InLimbo = !Spectator.InLimbo;
-        PlayerPrefs.SetInt("LevelIndex", 1);
-        PlayerPrefs.SetInt("Limbo", 0);
-        Door.SetBool("Limbo", false);
     }
 }

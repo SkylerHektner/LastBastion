@@ -5,55 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class Spectator : MonoBehaviour
 {
-
-    public static int LevelIndex;
     public static bool ReturningFromLevel;
-    public int PlayerWealth;
-    public static bool InLimbo;
+    public static int LevelIndex;
 
-
-    void Awake()
+    private void Awake()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("Spectator");
+        GameObject[] objs = GameObject.FindGameObjectsWithTag( "Spectator" );
 
-        if (objs.Length > 1) // no duplicate spectators
+        if( objs.Length > 1 ) // no duplicate spectators
         {
-            Destroy(this.gameObject);
+            Destroy( this.gameObject );
         }
 
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad( this.gameObject );
+    }
+
+    private void Update()
+    {
+        PlayerData.Instance.Tick();
     }
 
     // used for debugging (call this mid game, then stop the editor, then start at the main menu)
-    [ContextMenu("ToggleLimbo")]
-    public void ToggleLimbo()
+    [ContextMenu( "ToggleLimbo" )]
+    public void TryToggleLimbo()
     {
-        if (SceneManager.GetActiveScene().name != "Menu")
+        if( SceneManager.GetActiveScene().name != "Menu" ) // only save current progress if you are in a current level
         {
-            //InLimbo = !InLimbo;
-            PlayerPrefs.SetInt("LevelIndex", LevelIndex);
-            PlayerPrefs.SetInt("PlayerWealth", PlayerWealth);
-            PlayerPrefs.SetInt("Limbo", 1);
-            PlayerPrefs.SetString("ExitedScene", SceneManager.GetActiveScene().name);
-            Debug.Log(InLimbo);
+            PlayerData.Instance.Limbo.Set( true );
+            PlayerData.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
         }
-
     }
 
     // game is quit mid-game, save my current progress and put me in limbo
     private void OnApplicationQuit()
     {
-        if (SceneManager.GetActiveScene().name != "Menu") // only save current progress if you are in a current level
-        {
-            PlayerPrefs.SetInt("LevelIndex", LevelIndex);
-            PlayerPrefs.SetInt("PlayerWealth", PlayerWealth);
-            PlayerPrefs.SetInt("Limbo", 1);
-            PlayerPrefs.SetString("ExitedScene", SceneManager.GetActiveScene().name);
-            // set current wave here too
-            // save base stats too
-            // save powerup charges
-        }
-
+        // you can comment out this ifdef if you want to test this, or use the context menu instead
+#if !UNITY_EDITOR 
+        TryToggleLimbo();
+#endif
     }
 
 }

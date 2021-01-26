@@ -14,20 +14,20 @@ public class MenuManager : MonoBehaviour
     private void Update()
     {
         // triggers when the player comes to the main menu from quitting the game
-        if (PlayerPrefs.GetInt("Limbo") == 1)
+        if( PlayerData.Instance.Limbo.Get() )
         {
-            Door.SetBool("Limbo", true);
-            PlayCanvas.SetActive(false);
+            Door.SetBool( "Limbo", true );
+            PlayCanvas.SetActive( false );
         }
         else
         {
-            Door.SetBool("Limbo", false);
+            Door.SetBool( "Limbo", false );
         }
 
         // triggers when the player returns from the menu from a portal
-        if (Spectator.ReturningFromLevel)
+        if( Spectator.ReturningFromLevel )
         {
-            PlayCanvas.SetActive(false);
+            PlayCanvas.SetActive( false );
             ShowLevels();
         }
 
@@ -35,42 +35,42 @@ public class MenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-        PlayCanvas.SetActive(false);
-        Door.SetTrigger("Open");
+        PlayCanvas.SetActive( false );
+        Door.SetTrigger( "Open" );
     }
 
     public void ShowLevels()
     {
-        LevelCanvas.SetActive(true);
-        LevelBar.SetTrigger("Appear");
+        LevelCanvas.SetActive( true );
+        LevelBar.SetTrigger( "Appear" );
     }
 
     public void ShowUpgrades()
     {
-        UpgradesCanvas.SetActive(true);
+        UpgradesCanvas.SetActive( true );
     }
 
     // triggered by the animator on the door
     public void ExitLimbo()
     {
-        Spectator.InLimbo = false;
-        PlayCanvas.SetActive(true);
+        PlayerData.Instance.Limbo.Set( false );
+        PlayCanvas.SetActive( true );
     }
 
     // used in the door animator 
     public void HideProgressCanvas()
     {
-        ProgressContent.SetActive(false);
+        ProgressContent.SetActive( false );
     }
 
     public void ShowProgressCanvas()
     {
-        ProgressContent.SetActive(true);
+        ProgressContent.SetActive( true );
     }
 
     public void ShowPlayButton()
     {
-        PlayCanvas.SetActive(true);
+        PlayCanvas.SetActive( true );
     }
 
 }
