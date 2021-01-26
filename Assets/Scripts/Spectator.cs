@@ -44,5 +44,4 @@ public class Spectator : MonoBehaviour
         TryToggleLimbo();
 #endif
     }
-
 }
