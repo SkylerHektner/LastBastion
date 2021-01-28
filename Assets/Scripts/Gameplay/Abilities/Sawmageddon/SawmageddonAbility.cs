@@ -7,6 +7,7 @@ public class SawmageddonAbility : Ability
     public SawmageddonAbilityData AbilityData;
 
     private float time_left = 0.0f;
+    public static float AnimatorDuration;
 
     public override void Start()
     {
@@ -40,8 +41,9 @@ public class SawmageddonAbility : Ability
 
 
         time_left -= delta_time * GameplayManager.GamePlayTimeScale;
+        AnimatorDuration = time_left;
 
-        if( time_left <= 0.0f )
+        if ( time_left <= 0.0f )
             Finish();
     }
 

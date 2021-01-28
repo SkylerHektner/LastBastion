@@ -9,6 +9,7 @@ public class TemporalAnomalyAbility : Ability
 
     private List<Tuple<SpectralSaw, Vector3, float>> pending_saws = new List<Tuple<SpectralSaw, Vector3, float>>();
     private float time_remaining = 0.0f;
+    public static float AnimatorDuration;
     public override void Start()
     {
         base.Start();
@@ -30,7 +31,8 @@ public class TemporalAnomalyAbility : Ability
     {
         base.Update( delta_time );
         time_remaining -= delta_time * GameplayManager.Instance.GetTimeScale( GameplayManager.TimeScale.UI );
-        if( time_remaining <= 0.0f )
+        AnimatorDuration = time_remaining;
+        if ( time_remaining <= 0.0f )
             Finish();
     }
 

@@ -34,6 +34,11 @@ public class Saw : MonoBehaviour
     private float cover_in_mud_duration = -1.0f;
     private float cur_move_speed_multiplier = 1.0f;
 
+    public Animator SawmageddonFX;
+    public Animator AnomalyFX;
+    public Animator TyphoonFX;
+
+
     private void Start()
     {
         if( Instance != null )
@@ -49,7 +54,11 @@ public class Saw : MonoBehaviour
 
     private void Update()
     {
-        if( dragging )
+        SawmageddonFX.SetFloat("Duration", SawmageddonAbility.AnimatorDuration);
+        AnomalyFX.SetFloat("Duration", TemporalAnomalyAbility.AnimatorDuration);
+        TyphoonFX.SetFloat("Duration", TyphoonAbility.AnimatorDuration);
+
+        if ( dragging )
         {
             bool still_dragging;
 
