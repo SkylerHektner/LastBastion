@@ -9,6 +9,7 @@ public class UpgradeButton : MonoBehaviour
     public string MyInfo;
     public int MyCost;
     public GameObject InfoBox;
+    public PlayerData.UpgradeFlags UpgradeFlag;
 
     public bool Purchased { get {
             return purchased;

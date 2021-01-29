@@ -36,6 +36,13 @@ public class Spectator : MonoBehaviour
         }
     }
 
+    // use me for random garbage - I don't matter :D
+    [ContextMenu( "TEST_METHOD" )]
+    private void TEST_METHOD()
+    {
+        PlayerData.Instance.UpgradeUnlockMap.SetUnlock( PlayerData.UpgradeFlags.ChainLighting, true );
+    }
+
     // game is quit mid-game, save my current progress and put me in limbo
     private void OnApplicationQuit()
     {

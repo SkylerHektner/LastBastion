@@ -29,6 +29,7 @@ public class InfoPanel : MonoBehaviour
         if ( cur_player_wealth >= UpgradeCost)
         {
             PlayerData.Instance.PlayerWealth.Set( cur_player_wealth - UpgradeCost );
+            PlayerData.Instance.UpgradeUnlockMap.SetUnlock( DesiredUpgrade.UpgradeFlag, true );
 
             DesiredUpgrade.Purchased = true;
             gameObject.SetActive(false);
