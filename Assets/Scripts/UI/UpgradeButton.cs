@@ -39,6 +39,8 @@ public class UpgradeButton : MonoBehaviour
     {
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpdatePlayerWealth();
+        if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UpgradeFlag ) )
+            Purchased = true;
         UpdateButtonColors();
     }
     private void UpdateButtonColors()
