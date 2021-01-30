@@ -8,9 +8,16 @@ public class BaseHP : MonoBehaviour
 
     public float CurrentHP;
     public float MaxHP;
+    public float CurrentOvershield;
+    public float MaxOvershield;
 
     public HpBar CurrentHpBar;
     public HpBar DamageHpBar;
+    public HpBar OvershieldBar;
+    public Animator OvershieldAnim;
+    float ShieldRecoveryDelay;
+    float ShieldRechargeRate = .1f;
+    public GameObject BrokenGlass;
 
     float DamageDelay;
 
@@ -27,30 +34,51 @@ public class BaseHP : MonoBehaviour
     void Start()
     {
         CurrentHP = MaxHP;
+        CurrentOvershield = MaxOvershield;
         Instance = this;
     }
 
 
     public void ReduceHP(int Damage)
     {
-        CurrentHP -= Damage;
-        CurrentHpBar.SetSize(CurrentHP / MaxHP);
-        DamageDelay = 1f;
-        Component[] Forcefields = GetComponentsInChildren<Animator>();
-        foreach (Animator Forcefield in Forcefields)
+        // if I have overshield, damage that instead
+        if (CurrentOvershield > 0)
         {
-            Forcefield.SetTrigger("Damaged");
+            CurrentOvershield -= Damage;
+            OvershieldAnim.SetBool("Recovering", true);
+            ShieldRecoveryDelay = 5f;
+            if (CurrentOvershield <= 0)
+            {
+                CurrentOvershield = 0;
+                OvershieldAnim.SetBool("Broken", true);
+                OvershieldAnim.SetBool("Recovering", false);
+                BrokenGlass.SetActive(true);
+            }
+            OvershieldBar.SetSize(CurrentOvershield / MaxOvershield);
         }
-        if (CurrentHP <= 0)
+        else
         {
-            DeathCanvas.DisplayDeathScreen();
-            HPcanvas.SetActive(false);
-            ForceField.SetActive(false);
-            AbiltyManager.SetActive(false);
-            SawCanvas.SetActive(false);
-            PauseCanvas.SetActive(false);
-            DeathExplosions.SetActive(true);
+            ShieldRecoveryDelay = 8;
+            CurrentHP -= Damage;
+            CurrentHpBar.SetSize(CurrentHP / MaxHP);
+            DamageDelay = 1f;
+            Component[] Forcefields = GetComponentsInChildren<Animator>();
+            foreach (Animator Forcefield in Forcefields)
+            {
+                Forcefield.SetTrigger("Damaged");
+            }
+            if (CurrentHP <= 0)
+            {
+                DeathCanvas.DisplayDeathScreen();
+                HPcanvas.SetActive(false);
+                ForceField.SetActive(false);
+                AbiltyManager.SetActive(false);
+                SawCanvas.SetActive(false);
+                PauseCanvas.SetActive(false);
+                DeathExplosions.SetActive(true);
+            }
         }
+
 
     }
 
@@ -63,6 +91,26 @@ public class BaseHP : MonoBehaviour
             {
                 DamageHpBar.SetSize(CurrentHP / MaxHP);
             }
+        }
+        // player took damage, begin cooldown before recharging HP
+        if (ShieldRecoveryDelay > 0)
+        {
+            ShieldRecoveryDelay -= Time.smoothDeltaTime;
+            if (ShieldRecoveryDelay <= 0)
+            {
+                OvershieldAnim.SetBool("Recovering", false);
+            }
+        }
+        else if (CurrentOvershield < MaxOvershield && ShieldRecoveryDelay <= 0)
+        {
+            CurrentOvershield += ShieldRechargeRate;
+            BrokenGlass.SetActive(false);
+            OvershieldBar.SetSize(CurrentOvershield / MaxOvershield);
+            OvershieldAnim.SetBool("Broken", false);
+        }
+        if (CurrentOvershield > MaxOvershield)
+        {
+            CurrentOvershield = MaxOvershield;
         }
     }
 }

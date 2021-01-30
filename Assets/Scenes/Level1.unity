@@ -10816,6 +10816,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7462034812445596955, guid: 8c9d85b34b6a52940a151274339d6820, type: 3}
   m_PrefabInstance: {fileID: 3856287841524745387}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1397485414 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8240320761535129628, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+  m_PrefabInstance: {fileID: 6230442712592366784}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de27eab175d6433489e4f8a4d7a20488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &1397485415 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 525886711990139440, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+  m_PrefabInstance: {fileID: 6230442712592366784}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1398365655
 GameObject:
   m_ObjectHideFlags: 0
@@ -31110,6 +31126,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 898178492}
     m_Modifications:
+    - target: {fileID: 2691962163253535635, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6230442713495952329, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.386552
@@ -31222,6 +31242,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6977257868181136837, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
 --- !u!1001 &7014161918484983928
@@ -31267,6 +31291,18 @@ PrefabInstance:
       propertyPath: AbiltyManager
       value: 
       objectReference: {fileID: 138652558}
+    - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
+      propertyPath: MaxOvershield
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
+      propertyPath: OvershieldBar
+      value: 
+      objectReference: {fileID: 1397485414}
+    - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
+      propertyPath: OvershieldAnim
+      value: 
+      objectReference: {fileID: 1397485415}
     - target: {fileID: 7014161918785538338, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: m_RootOrder
       value: 4
