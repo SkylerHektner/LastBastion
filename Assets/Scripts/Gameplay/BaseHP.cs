@@ -18,6 +18,7 @@ public class BaseHP : MonoBehaviour
     float ShieldRecoveryDelay;
     float ShieldRechargeRate = .1f;
     public GameObject BrokenGlass;
+    public GameObject WoundedGlow;
 
     float DamageDelay;
 
@@ -25,6 +26,7 @@ public class BaseHP : MonoBehaviour
 
     public GameObject HPcanvas;
     public GameObject ForceField;
+    public GameObject HpExplosions;
     public GameObject DeathExplosions;
     public GameObject AbiltyManager;
     public GameObject SawCanvas;
@@ -47,6 +49,11 @@ public class BaseHP : MonoBehaviour
             CurrentOvershield -= Damage;
             OvershieldAnim.SetBool("Recovering", true);
             ShieldRecoveryDelay = 5f;
+            Component[] Forcefields = ForceField.GetComponentsInChildren<Animator>();
+            foreach (Animator Forcefield in Forcefields)
+            {
+                Forcefield.SetTrigger("Damaged");
+            }
             if (CurrentOvershield <= 0)
             {
                 CurrentOvershield = 0;
@@ -62,10 +69,14 @@ public class BaseHP : MonoBehaviour
             CurrentHP -= Damage;
             CurrentHpBar.SetSize(CurrentHP / MaxHP);
             DamageDelay = 1f;
-            Component[] Forcefields = GetComponentsInChildren<Animator>();
-            foreach (Animator Forcefield in Forcefields)
+            Component[] Explosions = HpExplosions.GetComponentsInChildren<Animator>();
+            foreach (Animator Explosion in Explosions)
             {
-                Forcefield.SetTrigger("Damaged");
+                Explosion.SetTrigger("Damaged");
+            }
+            if (CurrentHP <= 1)
+            {
+                WoundedGlow.SetActive(true);
             }
             if (CurrentHP <= 0)
             {
@@ -76,6 +87,7 @@ public class BaseHP : MonoBehaviour
                 SawCanvas.SetActive(false);
                 PauseCanvas.SetActive(false);
                 DeathExplosions.SetActive(true);
+                WoundedGlow.SetActive(false);
             }
         }
 

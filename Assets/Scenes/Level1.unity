@@ -806,6 +806,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8093230868566964098, guid: 0e47d8d91b0f2a144aa0e98cc7425581, type: 3}
   m_PrefabInstance: {fileID: 8093230868175664725}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &440845406 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5234620681026759113, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+  m_PrefabInstance: {fileID: 6230442712592366784}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &525416816 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8632035122637487049, guid: 70f04e92c2f10af4e8533665d8d76b9b, type: 3}
@@ -31246,8 +31251,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9064221501032211490, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+--- !u!1 &6230442712592366785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9064221501032211490, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+  m_PrefabInstance: {fileID: 6230442712592366784}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7014161918484983928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31272,6 +31286,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1227849726}
     - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
+      propertyPath: BrokenGlass
+      value: 
+      objectReference: {fileID: 440845406}
+    - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: DamageHpBar
       value: 
       objectReference: {fileID: 2101087057}
@@ -31283,6 +31301,10 @@ PrefabInstance:
       propertyPath: PauseCanvas
       value: 
       objectReference: {fileID: 525416816}
+    - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
+      propertyPath: WoundedGlow
+      value: 
+      objectReference: {fileID: 6230442712592366785}
     - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: CurrentHpBar
       value: 
