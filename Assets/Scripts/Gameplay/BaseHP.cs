@@ -74,7 +74,7 @@ public class BaseHP : MonoBehaviour
             {
                 Explosion.SetTrigger("Damaged");
             }
-            if (CurrentHP <= 1)
+            if (CurrentHP <= 3)
             {
                 WoundedGlow.SetActive(true);
             }
