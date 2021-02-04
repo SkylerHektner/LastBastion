@@ -76,7 +76,7 @@ public class BaseHP : MonoBehaviour
             }
             if (CurrentHP <= 3)
             {
-                WoundedGlow.SetActive(true);
+                //WoundedGlow.SetActive(true);
             }
             if (CurrentHP <= 0)
             {
@@ -87,7 +87,7 @@ public class BaseHP : MonoBehaviour
                 SawCanvas.SetActive(false);
                 PauseCanvas.SetActive(false);
                 DeathExplosions.SetActive(true);
-                WoundedGlow.SetActive(false);
+                //WoundedGlow.SetActive(false);
             }
         }
 
