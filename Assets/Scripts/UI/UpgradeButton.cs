@@ -10,6 +10,9 @@ public class UpgradeButton : MonoBehaviour
     public int MyCost;
     public GameObject InfoBox;
     public PlayerData.UpgradeFlags UpgradeFlag;
+    public GameObject PurchasedGlow;
+    public Sprite Lockedimage;
+    public Sprite UnlockedImage;
 
     public bool Purchased { get {
             return purchased;
@@ -48,17 +51,22 @@ public class UpgradeButton : MonoBehaviour
         // disable button if purchased
         if( Purchased )
         {
-            ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
-            Color Green = new Color( 0 / 255, 255 / 255, 31 / 255 );
-            ButtonColor.normalColor = Green;
-            ButtonColor.highlightedColor = ButtonColor.disabledColor;
-            gameObject.GetComponent<Button>().colors = ButtonColor;
+            //ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
+            //Color Green = new Color( 0 / 255, 255 / 255, 31 / 255 );
+            //ButtonColor.normalColor = Green;
+            //ButtonColor.highlightedColor = ButtonColor.disabledColor;
+            //gameObject.GetComponent<Button>().colors = ButtonColor;
+            PurchasedGlow.SetActive(true);
+            gameObject.GetComponent<Image>().sprite = UnlockedImage;
+
         }
         else
         {
-            ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
-            ButtonColor.normalColor = new Color( 255, 255, 255 );
-            gameObject.GetComponent<Button>().colors = ButtonColor;
+            //ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
+            //ButtonColor.normalColor = new Color( 255, 255, 255 );
+            //gameObject.GetComponent<Button>().colors = ButtonColor;
+            PurchasedGlow.SetActive(false);
+            gameObject.GetComponent<Image>().sprite = Lockedimage;
         }
     }
 }
