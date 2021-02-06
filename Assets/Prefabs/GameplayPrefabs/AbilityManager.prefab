@@ -4123,7 +4123,6 @@ GameObject:
   - component: {fileID: 2991690647411716851}
   - component: {fileID: 2991690647411716850}
   - component: {fileID: 2991690647411716849}
-  - component: {fileID: 2991690647411716844}
   - component: {fileID: 1192937050671209224}
   - component: {fileID: 8081955266996474087}
   m_Layer: 5
@@ -4240,25 +4239,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!95 &2991690647411716844
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2991690647411716855}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 60a4b4eb8418c064685124012b9c80f6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1192937050671209224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4293,7 +4273,7 @@ MonoBehaviour:
   MyAbility: 0
   UnlockFlag: 8
   AbilityUIManagerInstance: {fileID: 2991690649132127053}
-  IconAnimator: {fileID: 2991690647411716844}
+  IconAnimator: {fileID: 3814563057764994}
   FXAnimator: {fileID: 2350993640643898552}
   InfoScroll: {fileID: 9219329462558639999}
   UsageSlotsAnimator: {fileID: 1550693645933637277}
@@ -4406,7 +4386,6 @@ GameObject:
   - component: {fileID: 2991690647550998141}
   - component: {fileID: 2991690647550998140}
   - component: {fileID: 2991690647550998083}
-  - component: {fileID: 2991690647550998142}
   - component: {fileID: 6137920564226095286}
   - component: {fileID: 6478416814407268403}
   m_Layer: 5
@@ -4523,25 +4502,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!95 &2991690647550998142
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2991690647550998081}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 60a4b4eb8418c064685124012b9c80f6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &6137920564226095286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4576,7 +4536,7 @@ MonoBehaviour:
   MyAbility: 1
   UnlockFlag: 0
   AbilityUIManagerInstance: {fileID: 2991690649132127053}
-  IconAnimator: {fileID: 2991690647550998142}
+  IconAnimator: {fileID: 255988742057728690}
   FXAnimator: {fileID: 3922256730092812970}
   InfoScroll: {fileID: 9219329462558639999}
   UsageSlotsAnimator: {fileID: 634761631387721562}
@@ -4594,7 +4554,6 @@ GameObject:
   - component: {fileID: 2991690648016042344}
   - component: {fileID: 2991690648016042351}
   - component: {fileID: 2991690648016042350}
-  - component: {fileID: 2991690648016042345}
   - component: {fileID: 9206555436281552969}
   - component: {fileID: 4397836622085043651}
   m_Layer: 5
@@ -4712,25 +4671,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!95 &2991690648016042345
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2991690648016042348}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 60a4b4eb8418c064685124012b9c80f6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &9206555436281552969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4765,7 +4705,7 @@ MonoBehaviour:
   MyAbility: 2
   UnlockFlag: 4
   AbilityUIManagerInstance: {fileID: 2991690649132127053}
-  IconAnimator: {fileID: 2991690648016042345}
+  IconAnimator: {fileID: 810162839115918014}
   FXAnimator: {fileID: 5791441922123466334}
   InfoScroll: {fileID: 9219329462558639999}
   UsageSlotsAnimator: {fileID: 331177362815699028}
@@ -4916,7 +4856,6 @@ GameObject:
   - component: {fileID: 2991690649091417602}
   - component: {fileID: 2991690649091417601}
   - component: {fileID: 2991690649091417600}
-  - component: {fileID: 2991690649091417603}
   - component: {fileID: 889866793113486230}
   - component: {fileID: 6716719260686986519}
   m_Layer: 5
@@ -5033,25 +4972,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!95 &2991690649091417603
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2991690649091417606}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 60a4b4eb8418c064685124012b9c80f6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &889866793113486230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5086,7 +5006,7 @@ MonoBehaviour:
   MyAbility: 3
   UnlockFlag: 12
   AbilityUIManagerInstance: {fileID: 2991690649132127053}
-  IconAnimator: {fileID: 2991690649091417603}
+  IconAnimator: {fileID: 8252585259836846807}
   FXAnimator: {fileID: 3153251242594441517}
   InfoScroll: {fileID: 9219329462558639999}
   UsageSlotsAnimator: {fileID: 8470352222156305420}

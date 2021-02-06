@@ -14,14 +14,18 @@ public class AbilityUIButton : MonoBehaviour
     public DisplayInfo MyDisplayInfo;
     public GameObject LockedImage;
 
+    private bool hovering = false;
+
     private void Start()
     {
         PlayerData.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
+        AbilityManager.Instance.AbilityChargeChangedEvent.AddListener( OnAbilityChargeChanged );
     }
 
     private void OnDestroy()
     {
         PlayerData.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
+        AbilityManager.Instance.AbilityChargeChangedEvent.RemoveListener( OnAbilityChargeChanged );
     }
 
     private void OnEnable()
@@ -29,7 +33,7 @@ public class AbilityUIButton : MonoBehaviour
         UpdateLockedState();
     }
 
-    private void OnUpgradeUnlockFlagChanged(PlayerData.UpgradeFlags flag, bool value)
+    private void OnUpgradeUnlockFlagChanged( PlayerData.UpgradeFlags flag, bool value )
     {
         if( flag == UnlockFlag )
         {
@@ -37,21 +41,52 @@ public class AbilityUIButton : MonoBehaviour
         }
     }
 
+    private void OnAbilityChargeChanged( AbilityEnum ability, int new_value )
+    {
+        if( ability == MyAbility )
+        {
+            bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
+            IconAnimator.SetBool( "Empty", has_no_charges );
+
+            if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) && hovering )
+            {
+                FXAnimator.SetTrigger( "Glow" );
+                FXAnimator.ResetTrigger( "Hide" );
+            }
+        }
+    }
+
     private void UpdateLockedState()
     {
-        LockedImage.SetActive( !PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) );
+        if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) )
+        {
+            LockedImage.SetActive( false );
+            UsageSlotsAnimator.gameObject.SetActive( true );
+        }
+        else
+        {
+            LockedImage.SetActive( true );
+            UsageSlotsAnimator.gameObject.SetActive( false );
+        }
     }
 
     public void OnPointerEnter()
     {
-        if( AbilityManager.Instance.GetAbilityCharges( MyAbility ) > 0
-            && PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) )
+        hovering = true;
+
+        if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) )
         {
+            bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
+
             AbilityUIManagerInstance.SetAbilityCandidate( MyAbility );
+            IconAnimator.SetBool( "Empty", has_no_charges );
             IconAnimator.SetTrigger( "Hover" );
             IconAnimator.ResetTrigger( "UnHover" );
-            FXAnimator.SetTrigger( "Glow" );
-            FXAnimator.ResetTrigger( "Hide" );
+            if( !has_no_charges )
+            {
+                FXAnimator.SetTrigger( "Glow" );
+                FXAnimator.ResetTrigger( "Hide" );
+            }
             InfoScroll.SetActive( true );
             MyDisplayInfo.DisplayMyInfo();
             UsageSlotsAnimator.SetTrigger( "Grow" );
@@ -61,7 +96,10 @@ public class AbilityUIButton : MonoBehaviour
 
     public void OnPointerExit()
     {
+        hovering = false;
+
         AbilityUIManagerInstance.SetAbilityCandidate( null );
+        IconAnimator.SetBool( "Empty", AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0 );
         IconAnimator.SetTrigger( "UnHover" );
         IconAnimator.ResetTrigger( "Hover" );
         FXAnimator.SetTrigger( "Hide" );
