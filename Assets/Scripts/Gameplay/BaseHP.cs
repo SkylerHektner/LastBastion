@@ -127,7 +127,7 @@ public class BaseHP : MonoBehaviour
     {
         if( DamageDelay > 0 )
         {
-            DamageDelay -= Time.smoothDeltaTime;
+            DamageDelay -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
             if( DamageDelay <= 0 )
             {
                 DamageHpBar.SetSize( CurrentHP / CurrentMaxHP );
@@ -136,7 +136,7 @@ public class BaseHP : MonoBehaviour
         // player took damage, begin cooldown before recharging HP
         if( ShieldRecoveryDelay > 0 )
         {
-            ShieldRecoveryDelay -= Time.smoothDeltaTime;
+            ShieldRecoveryDelay -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
             if( ShieldRecoveryDelay <= 0 )
             {
                 OvershieldAnim.SetBool( "Recovering", false );
@@ -144,7 +144,7 @@ public class BaseHP : MonoBehaviour
         }
         else if( CurrentOvershield < MaxOvershield && ShieldRecoveryDelay <= 0 )
         {
-            CurrentOvershield += ShieldRechargeRate;
+            CurrentOvershield += ShieldRechargeRate * GameplayManager.GamePlayTimeScale;
             BrokenGlass.SetActive( false );
             OvershieldBar.SetSize( CurrentOvershield / MaxOvershield );
             OvershieldAnim.SetBool( "Broken", false );
