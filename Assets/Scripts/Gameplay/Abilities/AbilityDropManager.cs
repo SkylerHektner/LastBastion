@@ -85,25 +85,28 @@ public class AbilityDropManager : MonoBehaviour
             switch( ability )
             {
                 case AbilityEnum.TemporalAnomaly:
-                    ab = TemporalAnomalyDrop;
+                    if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.Anomaly ) )
+                        ab = TemporalAnomalyDrop;
                     break;
                 case AbilityEnum.ChainLightning:
-                    ab = ChainLightningDrop;
+                    if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.ChainLightning ) )
+                        ab = ChainLightningDrop;
                     break;
                 case AbilityEnum.Typhoon:
-                    ab = TyphoonDrop;
+                    if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.Typhoon ) )
+                        ab = TyphoonDrop;
                     break;
                 case AbilityEnum.Sawmageddon:
-                    ab = SawmageddonDrop;
+                    if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.Sawmageddon ) )
+                        ab = SawmageddonDrop;
                     break;
             }
-            Instantiate( ab ).transform.position = pos;
-
-            return true;
+            if( ab )
+            {
+                Instantiate( ab ).transform.position = pos;
+                return true;
+            }
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 }
