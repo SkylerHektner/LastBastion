@@ -20,19 +20,19 @@ public class PlayerData
     // UPGRADES
     public enum UpgradeFlags
     {
-        ChainLightning,                  // not implemented
+        ChainLightning,                  
         ChainLightningStunDuration,      
         ChainLightningStaticOverload,    // not implemented
         ChainLightningLightningRod,      // not implemented
-        Typhoon,                         // not implemented
+        Typhoon,                         
         TyphoonExtendedBBQ,              // not implemented
         TyphoonFlameSaw,                 // not implemented
         TyphoonRoaringFlames,            // not implemented
-        Anomaly,                         // not implemented
+        Anomaly,                         
         AnomalyRicochetSaws,             // not implemented
         AnomalyStasisCoating,            // not implemented
         AnomalySingularity,              // not implemented
-        Sawmageddon,                     // not implemented
+        Sawmageddon,                     
         SawmageddonDuration,             
         SawmageddonProjectiles,          
         SawmageddonComboKiller,          // not implemented
