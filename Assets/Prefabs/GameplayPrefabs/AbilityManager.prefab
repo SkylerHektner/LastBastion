@@ -4125,6 +4125,7 @@ GameObject:
   - component: {fileID: 2991690647411716849}
   - component: {fileID: 2991690647411716844}
   - component: {fileID: 1192937050671209224}
+  - component: {fileID: 8081955266996474087}
   m_Layer: 5
   m_Name: Anomaly
   m_TagString: Untagged
@@ -4211,81 +4212,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2991690649132127053}
-          m_TargetAssemblyTypeName: AbilityUIManager, Assembly-CSharp
-          m_MethodName: SetAbilityCandidate
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: TemporalAnomaly
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3814563057764994}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3814563057764994}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: UnHover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2350993640643898552}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Glow
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2350993640643898552}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hide
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 9219329462558639999}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1192937050671209224}
-          m_TargetAssemblyTypeName: DisplayInfo, Assembly-CSharp
-          m_MethodName: DisplayMyInfo
+        - m_Target: {fileID: 8081955266996474087}
+          m_TargetAssemblyTypeName: AbilityUIButton, Assembly-CSharp
+          m_MethodName: OnPointerEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4293,111 +4222,15 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1550693645933637277}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Grow
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1550693645933637277}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shrink
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3814563057764994}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: UnHover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3814563057764994}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2350993640643898552}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hide
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2350993640643898552}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Glow
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2991690649132127053}
-          m_TargetAssemblyTypeName: AbilityUIManager, Assembly-CSharp
-          m_MethodName: SetAbilityCandidate
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: None
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 9219329462558639999}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1192937050671209224}
-          m_TargetAssemblyTypeName: DisplayInfo, Assembly-CSharp
-          m_MethodName: HideInfo
+        - m_Target: {fileID: 8081955266996474087}
+          m_TargetAssemblyTypeName: AbilityUIButton, Assembly-CSharp
+          m_MethodName: OnPointerExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4405,30 +4238,6 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1550693645933637277}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shrink
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1550693645933637277}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Grow
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!95 &2991690647411716844
@@ -4469,6 +4278,27 @@ MonoBehaviour:
   LockedSymbol: {fileID: 3356571684226326317}
   PowerupIcon: {fileID: 7725055905394878755}
   PowerupSlots: {fileID: 2473887339745702584}
+--- !u!114 &8081955266996474087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991690647411716855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd38e7897ef94042b257cc6a79042cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyAbility: 0
+  UnlockFlag: 8
+  AbilityUIManagerInstance: {fileID: 2991690649132127053}
+  IconAnimator: {fileID: 2991690647411716844}
+  FXAnimator: {fileID: 2350993640643898552}
+  InfoScroll: {fileID: 9219329462558639999}
+  UsageSlotsAnimator: {fileID: 1550693645933637277}
+  MyDisplayInfo: {fileID: 1192937050671209224}
+  LockedImage: {fileID: 3356571684226326317}
 --- !u!1 &2991690647538337470
 GameObject:
   m_ObjectHideFlags: 0
@@ -4578,6 +4408,7 @@ GameObject:
   - component: {fileID: 2991690647550998083}
   - component: {fileID: 2991690647550998142}
   - component: {fileID: 6137920564226095286}
+  - component: {fileID: 6478416814407268403}
   m_Layer: 5
   m_Name: Lightning
   m_TagString: Untagged
@@ -4664,81 +4495,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2991690649132127053}
-          m_TargetAssemblyTypeName: AbilityUIManager, Assembly-CSharp
-          m_MethodName: SetAbilityCandidate
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: ChainLightning
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 255988742057728690}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 255988742057728690}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: UnHover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3922256730092812970}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Glow
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3922256730092812970}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hide
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 9219329462558639999}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 6137920564226095286}
-          m_TargetAssemblyTypeName: DisplayInfo, Assembly-CSharp
-          m_MethodName: DisplayMyInfo
+        - m_Target: {fileID: 6478416814407268403}
+          m_TargetAssemblyTypeName: AbilityUIButton, Assembly-CSharp
+          m_MethodName: OnPointerEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4746,111 +4505,15 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 634761631387721562}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Grow
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 634761631387721562}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shrink
-            m_BoolArgument: 1
+            m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 255988742057728690}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: UnHover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 255988742057728690}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3922256730092812970}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hide
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3922256730092812970}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Glow
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2991690649132127053}
-          m_TargetAssemblyTypeName: AbilityUIManager, Assembly-CSharp
-          m_MethodName: SetAbilityCandidate
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: None
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 9219329462558639999}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 6137920564226095286}
-          m_TargetAssemblyTypeName: DisplayInfo, Assembly-CSharp
-          m_MethodName: HideInfo
+        - m_Target: {fileID: 6478416814407268403}
+          m_TargetAssemblyTypeName: AbilityUIButton, Assembly-CSharp
+          m_MethodName: OnPointerExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4858,30 +4521,6 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 634761631387721562}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shrink
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 634761631387721562}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Grow
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!95 &2991690647550998142
@@ -4922,6 +4561,27 @@ MonoBehaviour:
   LockedSymbol: {fileID: 5196647425773116633}
   PowerupIcon: {fileID: 5600269418780691860}
   PowerupSlots: {fileID: 596027206967237559}
+--- !u!114 &6478416814407268403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991690647550998081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd38e7897ef94042b257cc6a79042cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyAbility: 1
+  UnlockFlag: 0
+  AbilityUIManagerInstance: {fileID: 2991690649132127053}
+  IconAnimator: {fileID: 2991690647550998142}
+  FXAnimator: {fileID: 3922256730092812970}
+  InfoScroll: {fileID: 9219329462558639999}
+  UsageSlotsAnimator: {fileID: 634761631387721562}
+  MyDisplayInfo: {fileID: 6137920564226095286}
+  LockedImage: {fileID: 5196647425773116633}
 --- !u!1 &2991690648016042348
 GameObject:
   m_ObjectHideFlags: 0
@@ -4936,6 +4596,7 @@ GameObject:
   - component: {fileID: 2991690648016042350}
   - component: {fileID: 2991690648016042345}
   - component: {fileID: 9206555436281552969}
+  - component: {fileID: 4397836622085043651}
   m_Layer: 5
   m_Name: Typhoon
   m_TagString: Untagged
@@ -5023,81 +4684,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2991690649132127053}
-          m_TargetAssemblyTypeName: AbilityUIManager, Assembly-CSharp
-          m_MethodName: SetAbilityCandidate
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Typhoon
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 810162839115918014}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 810162839115918014}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: UnHover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 5791441922123466334}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Glow
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 5791441922123466334}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hide
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 9219329462558639999}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 9206555436281552969}
-          m_TargetAssemblyTypeName: DisplayInfo, Assembly-CSharp
-          m_MethodName: DisplayMyInfo
+        - m_Target: {fileID: 4397836622085043651}
+          m_TargetAssemblyTypeName: AbilityUIButton, Assembly-CSharp
+          m_MethodName: OnPointerEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5105,130 +4694,22 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 331177362815699028}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Grow
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 331177362815699028}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shrink
-            m_BoolArgument: 1
+            m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 810162839115918014}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: UnHover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 810162839115918014}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 5791441922123466334}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hide
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 5791441922123466334}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Glow
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2991690649132127053}
-          m_TargetAssemblyTypeName: AbilityUIManager, Assembly-CSharp
-          m_MethodName: SetAbilityCandidate
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: None
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 9219329462558639999}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
+        - m_Target: {fileID: 4397836622085043651}
+          m_TargetAssemblyTypeName: AbilityUIButton, Assembly-CSharp
+          m_MethodName: OnPointerExit
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 331177362815699028}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shrink
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 331177362815699028}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Grow
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!95 &2991690648016042345
@@ -5269,6 +4750,27 @@ MonoBehaviour:
   LockedSymbol: {fileID: 8166963655856082855}
   PowerupIcon: {fileID: 582038620161789525}
   PowerupSlots: {fileID: 902540929440581791}
+--- !u!114 &4397836622085043651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991690648016042348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd38e7897ef94042b257cc6a79042cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyAbility: 2
+  UnlockFlag: 4
+  AbilityUIManagerInstance: {fileID: 2991690649132127053}
+  IconAnimator: {fileID: 2991690648016042345}
+  FXAnimator: {fileID: 5791441922123466334}
+  InfoScroll: {fileID: 9219329462558639999}
+  UsageSlotsAnimator: {fileID: 331177362815699028}
+  MyDisplayInfo: {fileID: 9206555436281552969}
+  LockedImage: {fileID: 8166963655856082855}
 --- !u!1 &2991690648574950836
 GameObject:
   m_ObjectHideFlags: 0
@@ -5374,6 +4876,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Expand
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: SetTrigger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Expand
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2991690649091417606
 GameObject:
   m_ObjectHideFlags: 0
@@ -5388,6 +4918,7 @@ GameObject:
   - component: {fileID: 2991690649091417600}
   - component: {fileID: 2991690649091417603}
   - component: {fileID: 889866793113486230}
+  - component: {fileID: 6716719260686986519}
   m_Layer: 5
   m_Name: Sawmageddon
   m_TagString: Untagged
@@ -5474,81 +5005,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2991690649132127053}
-          m_TargetAssemblyTypeName: AbilityUIManager, Assembly-CSharp
-          m_MethodName: SetAbilityCandidate
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Sawmageddon
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 8252585259836846807}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 8252585259836846807}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: UnHover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3153251242594441517}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Glow
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3153251242594441517}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hide
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 9219329462558639999}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 889866793113486230}
-          m_TargetAssemblyTypeName: DisplayInfo, Assembly-CSharp
-          m_MethodName: DisplayMyInfo
+        - m_Target: {fileID: 6716719260686986519}
+          m_TargetAssemblyTypeName: AbilityUIButton, Assembly-CSharp
+          m_MethodName: OnPointerEnter
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5556,111 +5015,15 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 8470352222156305420}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Grow
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 8470352222156305420}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shrink
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8252585259836846807}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: UnHover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 8252585259836846807}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hover
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3153251242594441517}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Hide
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3153251242594441517}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Glow
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2991690649132127053}
-          m_TargetAssemblyTypeName: AbilityUIManager, Assembly-CSharp
-          m_MethodName: SetAbilityCandidate
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: None
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 9219329462558639999}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 889866793113486230}
-          m_TargetAssemblyTypeName: DisplayInfo, Assembly-CSharp
-          m_MethodName: HideInfo
+        - m_Target: {fileID: 6716719260686986519}
+          m_TargetAssemblyTypeName: AbilityUIButton, Assembly-CSharp
+          m_MethodName: OnPointerExit
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5668,30 +5031,6 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 8470352222156305420}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: SetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shrink
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 8470352222156305420}
-          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-          m_MethodName: ResetTrigger
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Grow
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!95 &2991690649091417603
@@ -5732,6 +5071,27 @@ MonoBehaviour:
   LockedSymbol: {fileID: 388657815213546565}
   PowerupIcon: {fileID: 2894635592488117277}
   PowerupSlots: {fileID: 7095974233760817896}
+--- !u!114 &6716719260686986519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2991690649091417606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd38e7897ef94042b257cc6a79042cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyAbility: 3
+  UnlockFlag: 12
+  AbilityUIManagerInstance: {fileID: 2991690649132127053}
+  IconAnimator: {fileID: 2991690649091417603}
+  FXAnimator: {fileID: 3153251242594441517}
+  InfoScroll: {fileID: 9219329462558639999}
+  UsageSlotsAnimator: {fileID: 8470352222156305420}
+  MyDisplayInfo: {fileID: 889866793113486230}
+  LockedImage: {fileID: 388657815213546565}
 --- !u!1 &2991690649132127056
 GameObject:
   m_ObjectHideFlags: 0

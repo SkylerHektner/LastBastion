@@ -91,19 +91,14 @@ public class AbilityUIManager : MonoBehaviour
         GameplayFieldScrim.gameObject.SetActive( false );
     }
 
-    public void SetAbilityCandidate( string ability )
+    public void SetAbilityCandidate( AbilityEnum? ability )
     {
-        if( ability == "None" )
+        if( ability == null )
         {
             cur_ability_candidate = null;
             return;
         }
-        else if( !AbilityManager.AbilityStringMap.ContainsKey( ability ) )
-        {
-            Debug.LogError( "ERROR: No corresponding ability for ability string " + ability );
-            return;
-        }
-        cur_ability_candidate = AbilityManager.AbilityStringMap[ability];
+        cur_ability_candidate = ability;
     }
 
 }
