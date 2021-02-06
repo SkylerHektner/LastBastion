@@ -7,6 +7,8 @@ public class SawmageddonAbilityData : ScriptableObject
 {
     public SpectralSaw SpectralSawPrefab;
     public float Duration = 5.0f;
-    public float NumberExtraSaws = 2.0f;
+    public float ImprovedDuration = 8.0f;
+    public int NumberExtraSaws = 2;
+    public int ImprovedNumberExtraSaws = 4;
     public float OffsetAngle = 15.0f;
 }

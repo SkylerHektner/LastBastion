@@ -10,4 +10,5 @@ public class ChainLightningAbilityData : ScriptableObject
     public GameObject SceneWideEffect;
     public float TimeBetweenZaps = 0.1f; // mostly cosmetic - the delay between each cycle of zaps as the lightning branches
     public float ZapDuration = 2.0f;
+    public float ImprovedZapDuration = 4.0f;
 }

@@ -101,10 +101,13 @@ public class ChainLightningAbility : Ability
         Enemy en = SpawnManager.Instance.TryGetEnemyByID( zap.EnemyID );
         if( en )
         {
-            en.ZapForDuration( AbilityData.ZapDuration );
+            float duration = PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.ChainLightningStunDuration ) 
+                ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration;
+
+            en.ZapForDuration( duration );
 
             DeleteAfterDuration zap_effect = GameObject.Instantiate( AbilityData.ZappedEffect );
-            zap_effect.duration = AbilityData.ZapDuration;
+            zap_effect.duration = duration;
             zap_effect.transform.position = zap.position;
             zap_effect.transform.parent = en.transform;
             en.OnDeath.AddListener( zap_effect.DestroyOnDeathHook );
