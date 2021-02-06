@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
+[RequireComponent(typeof(Button))]
 public class UpgradeButton : MonoBehaviour
 {
     public string MyName;
@@ -10,7 +12,9 @@ public class UpgradeButton : MonoBehaviour
     public int MyCost;
     public GameObject InfoBox;
     public PlayerData.UpgradeFlags UpgradeFlag;
+    public List<PlayerData.UpgradeFlags> PrerequisiteUpgradeFlags = new List<PlayerData.UpgradeFlags>();
     public GameObject PurchasedGlow;
+    public Sprite VeiledImage;
     public Sprite Lockedimage;
     public Sprite UnlockedImage;
 
@@ -19,11 +23,10 @@ public class UpgradeButton : MonoBehaviour
         }
         set {
             purchased = value;
-            UpdateButtonColors();
+            UpdateButton();
         }
     }
     private bool purchased;
-
 
     // bring up panel
     public void AskConfirmation()
@@ -38,18 +41,41 @@ public class UpgradeButton : MonoBehaviour
         ThePanel.EnableButtons();
     }
 
+    private void Start()
+    {
+        PlayerData.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeFlagChanged );
+    }
+
+    private void OnDestroy()
+    {
+        PlayerData.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeFlagChanged );
+    }
+
+    private void OnUpgradeFlagChanged(PlayerData.UpgradeFlags flag, bool new_value)
+    {
+        if (PlayerData.Instance.UpgradeUnlockMap.GetUnlock(UpgradeFlag))
+            Purchased = true;
+        UpdateButton();
+    }
+
     private void OnEnable()
     {
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpdatePlayerWealth();
         if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UpgradeFlag ) )
             Purchased = true;
-        UpdateButtonColors();
+        UpdateButton();
     }
-    private void UpdateButtonColors()
+    private void UpdateButton()
     {
-        // disable button if purchased
-        if( Purchased )
+        if( PrerequisiteUpgradeFlags.Any( f => !PlayerData.Instance.UpgradeUnlockMap.GetUnlock( f ) ) ) 
+        {
+            // disable button if any pre-reqs not set
+            PurchasedGlow.SetActive(false);
+            gameObject.GetComponent<Image>().sprite = VeiledImage;
+            GetComponent<Button>().enabled = false;
+        }
+        else if( Purchased )
         {
             //ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
             //Color Green = new Color( 0 / 255, 255 / 255, 31 / 255 );
@@ -58,7 +84,7 @@ public class UpgradeButton : MonoBehaviour
             //gameObject.GetComponent<Button>().colors = ButtonColor;
             PurchasedGlow.SetActive(true);
             gameObject.GetComponent<Image>().sprite = UnlockedImage;
-
+            GetComponent<Button>().enabled = true;
         }
         else
         {
@@ -67,6 +93,7 @@ public class UpgradeButton : MonoBehaviour
             //gameObject.GetComponent<Button>().colors = ButtonColor;
             PurchasedGlow.SetActive(false);
             gameObject.GetComponent<Image>().sprite = Lockedimage;
+            GetComponent<Button>().enabled = true;
         }
     }
 }

@@ -40,7 +40,7 @@ public class Spectator : MonoBehaviour
     [ContextMenu( "TEST_METHOD" )]
     private void TEST_METHOD()
     {
-        PlayerData.Instance.UpgradeUnlockMap.SetUnlock( PlayerData.UpgradeFlags.ChainLighting, true );
+        PlayerData.Instance.UpgradeUnlockMap.SetUnlock( PlayerData.UpgradeFlags.ChainLightning, true );
     }
 
     // game is quit mid-game, save my current progress and put me in limbo

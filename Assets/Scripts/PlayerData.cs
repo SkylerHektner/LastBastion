@@ -7,6 +7,7 @@ using System.Diagnostics;
 using UnityEditor;
 using System.Linq;
 using System.Runtime.Serialization;
+using UnityEngine.Events;
 
 public class PlayerData
 {
@@ -19,26 +20,35 @@ public class PlayerData
     // UPGRADES
     public enum UpgradeFlags
     {
-        ChainLighting,
-        ChainLightingStunDuration,
-        ChainLightningPlus,
-        Sawmageddon,
-        SawmageddonPlus,
-        TemporalAnomoly,
-        TemporalAnomolyPlus,
-        Typhoon,
-        TyphoonDuration,
-        TyphoonPlus,
-        TowerHP1,
-        TowerHP2,
-        TowerHP3,
-        TowerOvershield1,
-        TowerOvershield2,
-        SoulCollector,
-        Turrets1,
-        Turrets2,
-        Turrets3,
+        ChainLightning,                  // not implemented
+        ChainLightningStunDuration,      // not implemented
+        ChainLightningStaticOverload,    // not implemented
+        ChainLightningLightningRod,      // not implemented
+        Typhoon,                         // not implemented
+        TyphoonExtendedBBQ,              // not implemented
+        TyphoonFlameSaw,                 // not implemented
+        TyphoonRoaringFlames,            // not implemented
+        Anomaly,                         // not implemented
+        AnomalyRicochetSaws,             // not implemented
+        AnomalyStasisCoating,            // not implemented
+        AnomalySingularity,              // not implemented
+        Sawmageddon,                     // not implemented
+        SawmageddonDuration,             // not implemented
+        SawmageddonProjectiles,          // not implemented
+        SawmageddonComboKiller,          // not implemented
+        BaseOvershield,                  // not implemented
+        SoulCollector,                   // not implemented
+        BaseHP1,                         // not implemented
+        BaseHP2,                         // not implemented
+        BaseHP3,                         // not implemented
+        Turrets1,                        // not implemented
+        Turrets2,                        // not implemented
+        Turrets3,                        // not implemented
+
     }
+
+    // EVENTS
+    public UnityEvent<UpgradeFlags, bool> UpgradeFlagChangedEvent = new UnityEvent<UpgradeFlags, bool>();
 
     // STATICS
     public static PlayerData Instance {
@@ -145,6 +155,7 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
     {
         PlayerData.Instance?.SetDirty();
         unlock_map[flag] = value;
+        PlayerData.Instance?.UpgradeFlagChangedEvent.Invoke( flag, value );
     }
 
     public PlayerUpgradeUnlockMap()
