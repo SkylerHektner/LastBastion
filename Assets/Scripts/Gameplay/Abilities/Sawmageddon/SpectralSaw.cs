@@ -28,6 +28,14 @@ public class SpectralSaw : Projectile
     private void OnTriggerEnter2D( Collider2D col )
     {
         if( col.tag == "Enemy" )
+        {
             col.gameObject.GetComponent<Enemy>().Hit( MoveDirection, true );
+        }
+        else if( col.tag == "AbilityDrop" )
+        {
+            AbilityDrop drop = col.gameObject.GetComponent<AbilityDrop>();
+            if( !drop.JustSpawned )
+                drop.AddAbilityCharge();
+        }
     }
 }
