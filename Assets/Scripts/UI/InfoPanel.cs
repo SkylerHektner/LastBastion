@@ -32,7 +32,8 @@ public class InfoPanel : MonoBehaviour
             PlayerData.Instance.UpgradeUnlockMap.SetUnlock( DesiredUpgrade.UpgradeFlag, true );
 
             DesiredUpgrade.Purchased = true;
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            //gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
             DenyButton.enabled = false;
             PurchaseButton.enabled = false;
             UpdatePlayerWealth();
@@ -53,9 +54,11 @@ public class InfoPanel : MonoBehaviour
 
     public void DenyPurchase()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         DenyButton.enabled = false;
         PurchaseButton.enabled = false;
+        //gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
+
     }
 
     public void UpdatePlayerWealth()

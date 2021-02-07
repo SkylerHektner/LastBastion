@@ -32,6 +32,7 @@ public class UpgradeButton : MonoBehaviour
     public void AskConfirmation()
     {
         InfoBox.SetActive(true);
+        InfoBox.GetComponentInParent<Animator>().SetTrigger("Show");
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpgradeName.text = MyName;
         ThePanel.UpgradeInfo.text = MyInfo;
