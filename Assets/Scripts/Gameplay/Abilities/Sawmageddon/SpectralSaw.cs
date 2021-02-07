@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpectralSaw : Projectile
 {
+    public int NumRemainingExtraBounces = 0;
+
     protected override void Start()
     {
         base.Start();
@@ -13,13 +15,12 @@ public class SpectralSaw : Projectile
 
     private void OnProjectileHitWall( ProjectileHitInfo hit_info )
     {
-        if( hit_info.wall == ProjectileHitInfo.Wall.Bottom ||
-            hit_info.wall == ProjectileHitInfo.Wall.Top )
+        if( NumRemainingExtraBounces > 0 )
         {
-            SetWallHitBehavior( Projectile.WallHitBehavior.Destroy );
+            --NumRemainingExtraBounces;
+            SetWallHitBehavior( Projectile.WallHitBehavior.Bounce );
         }
-        else if( hit_info.wall == ProjectileHitInfo.Wall.Left ||
-            hit_info.wall == ProjectileHitInfo.Wall.Right )
+        else
         {
             SetWallHitBehavior( Projectile.WallHitBehavior.Destroy );
         }

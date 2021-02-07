@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class TemporalAnomalyAbility : Ability
+public class AnomalyAbility : Ability
 {
-    public TemporalAnomalyAbilityData AbilityData;
+    public AnomalyAbilityData AbilityData;
 
     private List<Tuple<SpectralSaw, Vector3, float>> pending_saws = new List<Tuple<SpectralSaw, Vector3, float>>();
     private float time_remaining = 0.0f;
@@ -15,15 +15,14 @@ public class TemporalAnomalyAbility : Ability
         base.Start();
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
         time_remaining = AbilityData.Duration;
-        GameplayManager.Instance.SetTimeScale( AbilityData.GameplaySpeedMultiplier,
-            AbilityData.GameplaySpeedLerpDuration, 
-            GameplayManager.TimeScale.TemporalAnomaly );
     }
 
     private void OnSawFired( Vector3 pos, Vector3 direction, float speed)
     {
         SpectralSaw saw = GameObject.Instantiate( AbilityData.SpectralSawPrefab );
         saw.transform.position = pos;
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyRicochetSaws ) )
+            saw.NumRemainingExtraBounces = AbilityData.RichochetSawExtraBounces;
         pending_saws.Add( new Tuple<SpectralSaw, Vector3, float>( saw, direction, speed ) );
     }
 
@@ -39,10 +38,6 @@ public class TemporalAnomalyAbility : Ability
     public override void Finish()
     {
         base.Finish();
-        
-        GameplayManager.Instance.SetTimeScale( 1.0f,
-            AbilityData.GameplaySpeedLerpDuration,
-            GameplayManager.TimeScale.TemporalAnomaly );
 
         Saw.Instance?.SawFiredEvent?.RemoveListener( OnSawFired );
         

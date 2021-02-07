@@ -55,7 +55,7 @@ public class Saw : MonoBehaviour
     private void Update()
     {
         SawmageddonFX.SetFloat("Duration", SawmageddonAbility.AnimatorDuration);
-        AnomalyFX.SetFloat("Duration", TemporalAnomalyAbility.AnimatorDuration);
+        AnomalyFX.SetFloat("Duration", AnomalyAbility.AnimatorDuration);
         TyphoonFX.SetFloat("Duration", TyphoonAbility.AnimatorDuration);
 
         if ( dragging )

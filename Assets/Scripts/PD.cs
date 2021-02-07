@@ -24,13 +24,13 @@ public class PD
         ChainLightning,                  
         ChainLightningStunDuration,      
         ChainLightningStaticOverload,    // not implemented
-        ChainLightningLightningRod,      // not implemented
+        ChainLightningLightningRod,      
         Typhoon,                         
         TyphoonExtendedBBQ,              // not implemented
         TyphoonFlameSaw,                 // not implemented
         TyphoonRoaringFlames,            // not implemented
         Anomaly,                         
-        AnomalyRicochetSaws,             // not implemented
+        AnomalyRicochetSaws,             
         AnomalyStasisCoating,            // not implemented
         AnomalySingularity,              // not implemented
         Sawmageddon,                     

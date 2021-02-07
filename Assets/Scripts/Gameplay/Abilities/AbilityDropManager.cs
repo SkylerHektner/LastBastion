@@ -36,7 +36,6 @@ public class AbilityDropManager : MonoBehaviour
         if( dead_enemy )
         {
             dead_enemy.OnDeath.RemoveListener( OnEnemyDied );
-            Debug.Log( dead_enemy.PowerupDropValue );
             for( int x = 0; x < dead_enemy.PowerupDropValue; ++x )
             {
                 ++cur_drop_bias;

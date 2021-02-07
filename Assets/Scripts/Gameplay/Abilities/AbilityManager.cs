@@ -5,20 +5,12 @@ using UnityEngine.Events;
 
 public class AbilityManager : MonoBehaviour
 {
-
-    public static readonly Dictionary<string, AbilityEnum> AbilityStringMap = new Dictionary<string, AbilityEnum>()
-    {
-        ["TemporalAnomaly"] = AbilityEnum.TemporalAnomaly,
-        ["ChainLightning"] = AbilityEnum.ChainLightning,
-        ["Typhoon"] = AbilityEnum.Typhoon,
-        ["Sawmageddon"] = AbilityEnum.Sawmageddon,
-    };
     public static AbilityManager Instance { get; private set; }
     public UnityEvent<AbilityEnum, int> AbilityChargeChangedEvent = new UnityEvent<AbilityEnum, int>();
 
     [SerializeField] GameObject AbilityInfoScroll;
     public Vector3 BaseCenter;
-    [SerializeField] TemporalAnomalyAbilityData TemporalAnomalyData;
+    [SerializeField] AnomalyAbilityData AnomalyData;
     [SerializeField] ChainLightningAbilityData ChainLightningData;
     [SerializeField] TyphoonAbilityData TyphoonData;
     [SerializeField] SawmageddonAbilityData SawmageddonData;
@@ -73,8 +65,8 @@ public class AbilityManager : MonoBehaviour
         {
             case AbilityEnum.TemporalAnomaly:
                 {
-                    TemporalAnomalyAbility _ab = new TemporalAnomalyAbility();
-                    _ab.AbilityData = TemporalAnomalyData;
+                    AnomalyAbility _ab = new AnomalyAbility();
+                    _ab.AbilityData = AnomalyData;
                     ab = _ab;
                     break;
                 }
