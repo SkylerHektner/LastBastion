@@ -39,7 +39,7 @@ public class BaseHP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerData.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
+        PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
         UpdateMaxHP();
         CurrentHP = CurrentMaxHP;
         CurrentOvershield = MaxOvershield;
@@ -48,15 +48,15 @@ public class BaseHP : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerData.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
+        PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
     }
 
 
-    private void OnUpgradeUnlockFlagChanged( PlayerData.UpgradeFlags flag, bool value )
+    private void OnUpgradeUnlockFlagChanged( PD.UpgradeFlags flag, bool value )
     {
-        if( flag == PlayerData.UpgradeFlags.BaseHP1
-            || flag == PlayerData.UpgradeFlags.BaseHP2
-            || flag == PlayerData.UpgradeFlags.BaseHP3 )
+        if( flag == PD.UpgradeFlags.BaseHP1
+            || flag == PD.UpgradeFlags.BaseHP2
+            || flag == PD.UpgradeFlags.BaseHP3 )
         {
             UpdateMaxHP();
         }
@@ -65,9 +65,9 @@ public class BaseHP : MonoBehaviour
     private void UpdateMaxHP()
     {
         CurrentMaxHP = BaseMaxHP;
-        CurrentMaxHP += PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.BaseHP1 ) ? MaxHPUpgrade1 : 0;
-        CurrentMaxHP += PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.BaseHP2 ) ? MaxHPUpgrade2 : 0;
-        CurrentMaxHP += PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.BaseHP3 ) ? MaxHPUpgrade3 : 0;
+        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP1 ) ? MaxHPUpgrade1 : 0;
+        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP2 ) ? MaxHPUpgrade2 : 0;
+        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP3 ) ? MaxHPUpgrade3 : 0;
     }
 
     public void ReduceHP( int Damage )

@@ -9,8 +9,10 @@ public class Enemy : MonoBehaviour
 {
     public UnityEvent<long> OnDeath = new UnityEvent<long>();
     public static long NextEnemyID = 1;
-    public long EnemyID {
-        get {
+    public long EnemyID
+    {
+        get
+        {
             if( enemyID == 0 )
             {
                 enemyID = NextEnemyID++;
@@ -31,7 +33,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject DamagedEffect;
     [SerializeField] string DamagedAnimation;
     [SerializeField] bool attacks = true;
-    public int PowerupDropValue = 1;
+    [SerializeField] private int powerupDropValue = 1;
+    public int PowerupDropValue
+    {
+        get
+        {
+            return powerupDropValue * ( Zapped && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningLightningRod ) ? 2 : 1 );
+        }
+    }
+
     public bool Moving { get; private set; }
     public bool Spawning { get; private set; }
     public bool Dying { get; private set; }
@@ -153,7 +163,8 @@ public class Enemy : MonoBehaviour
 
     public virtual void Hit( Vector3 hit_direction, bool can_dodge )
     {
-        if( Spawning || Dying ) return; // ignore being hit if we are spawning
+        if( Spawning || Dying )
+            return; // ignore being hit if we are spawning
 
         if( Zapped )
             CurrentHealth = 0;
@@ -190,7 +201,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Die()
     {
         GameplayManager.Instance.TimeScaleChanged.RemoveListener( OnTimeScaleChange );
-        
+
         Destroy( gameObject );
     }
 

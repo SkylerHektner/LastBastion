@@ -14,7 +14,7 @@ public class MenuManager : MonoBehaviour
     private void Update()
     {
         // triggers when the player comes to the main menu from quitting the game
-        if( PlayerData.Instance.Limbo.Get() )
+        if( PD.Instance.Limbo.Get() )
         {
             Door.SetBool( "Limbo", true );
             PlayCanvas.SetActive( false );
@@ -53,7 +53,7 @@ public class MenuManager : MonoBehaviour
     // triggered by the animator on the door
     public void ExitLimbo()
     {
-        PlayerData.Instance.Limbo.Set( false );
+        PD.Instance.Limbo.Set( false );
         PlayCanvas.SetActive( true );
     }
 

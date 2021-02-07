@@ -36,6 +36,7 @@ public class AbilityDropManager : MonoBehaviour
         if( dead_enemy )
         {
             dead_enemy.OnDeath.RemoveListener( OnEnemyDied );
+            Debug.Log( dead_enemy.PowerupDropValue );
             for( int x = 0; x < dead_enemy.PowerupDropValue; ++x )
             {
                 ++cur_drop_bias;
@@ -85,19 +86,19 @@ public class AbilityDropManager : MonoBehaviour
             switch( ability )
             {
                 case AbilityEnum.TemporalAnomaly:
-                    if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.Anomaly ) )
+                    if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Anomaly ) )
                         ab = TemporalAnomalyDrop;
                     break;
                 case AbilityEnum.ChainLightning:
-                    if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.ChainLightning ) )
+                    if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightning ) )
                         ab = ChainLightningDrop;
                     break;
                 case AbilityEnum.Typhoon:
-                    if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.Typhoon ) )
+                    if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Typhoon ) )
                         ab = TyphoonDrop;
                     break;
                 case AbilityEnum.Sawmageddon:
-                    if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.Sawmageddon ) )
+                    if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Sawmageddon ) )
                         ab = SawmageddonDrop;
                     break;
             }

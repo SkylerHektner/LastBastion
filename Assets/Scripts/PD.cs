@@ -9,7 +9,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using UnityEngine.Events;
 
-public class PlayerData
+// PLAYER DATA
+public class PD
 {
     // DATA
     public PlayerDataField<int> PlayerWealth = new PlayerDataField<int>();
@@ -48,10 +49,10 @@ public class PlayerData
     }
 
     // EVENTS
-    public UnityEvent<UpgradeFlags, bool> UpgradeFlagChangedEvent = new UnityEvent<UpgradeFlags, bool>();
+    [NonSerialized] public UnityEvent<UpgradeFlags, bool> UpgradeFlagChangedEvent = new UnityEvent<UpgradeFlags, bool>();
 
     // STATICS
-    public static PlayerData Instance {
+    public static PD Instance {
         get {
             if( _instance == null )
             {
@@ -59,17 +60,17 @@ public class PlayerData
                 if( File.Exists( path ) )
                 {
                     string data = File.ReadAllText( GetPath() );
-                    _instance = JsonUtility.FromJson<PlayerData>( data );
+                    _instance = JsonUtility.FromJson<PD>( data );
                 }
                 else
                 {
-                    _instance = new PlayerData();
+                    _instance = new PD();
                 }
             }
             return _instance;
         }
     }
-    private static PlayerData _instance;
+    private static PD _instance;
     private static string GetPath()
     {
         return Path.Combine( Application.persistentDataPath, "PlayerData.txt" );
@@ -83,19 +84,19 @@ public class PlayerData
     [MenuItem( "Debug/Add100Candy" )]
     public static void AddMoney()
     {
-        PlayerData.Instance.PlayerWealth.Set( PlayerData.Instance.PlayerWealth.Get() + 100 );
+        PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + 100 );
     }
     [MenuItem( "Debug/DeleteAllPlayerData/NoSeriouslyDeleteItAll" )]
     public static void DeleteAllPlayerData()
     {
-        _instance = new PlayerData();
+        _instance = new PD();
         _instance.SetDirty();
     }
 #endif
 
     // NON STATIC
     private bool dirty = false;
-    ~PlayerData()
+    ~PD()
     {
         SaveData();
     }
@@ -133,34 +134,34 @@ public class PlayerDataField<T>
     public void Set( T _value )
     {
         value = _value;
-        PlayerData.Instance?.SetDirty();
+        PD.Instance?.SetDirty();
     }
 }
 
 [System.Serializable]
 public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
 {
-    private Dictionary<PlayerData.UpgradeFlags, bool> unlock_map = new Dictionary<PlayerData.UpgradeFlags, bool>();
+    private Dictionary<PD.UpgradeFlags, bool> unlock_map = new Dictionary<PD.UpgradeFlags, bool>();
 
     [SerializeField] List<string> serialized_unlock_flags;
 
-    private static Dictionary<string, PlayerData.UpgradeFlags> valid_enum_strings;
+    private static Dictionary<string, PD.UpgradeFlags> valid_enum_strings;
 
-    public bool GetUnlock( PlayerData.UpgradeFlags flag )
+    public bool GetUnlock( PD.UpgradeFlags flag )
     {
         return unlock_map[flag];
     }
 
-    public void SetUnlock( PlayerData.UpgradeFlags flag, bool value )
+    public void SetUnlock( PD.UpgradeFlags flag, bool value )
     {
-        PlayerData.Instance?.SetDirty();
+        PD.Instance?.SetDirty();
         unlock_map[flag] = value;
-        PlayerData.Instance?.UpgradeFlagChangedEvent.Invoke( flag, value );
+        PD.Instance?.UpgradeFlagChangedEvent.Invoke( flag, value );
     }
 
     public PlayerUpgradeUnlockMap()
     {
-        foreach( PlayerData.UpgradeFlags flag in Enum.GetValues( typeof( PlayerData.UpgradeFlags ) ) )
+        foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
         {
             unlock_map.Add( flag, false );
         }
@@ -181,15 +182,15 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         // populate valid_strings lookup map if not created yet
         if( valid_enum_strings == null )
         {
-            valid_enum_strings = new Dictionary<string, PlayerData.UpgradeFlags>();
-            foreach( PlayerData.UpgradeFlags flag in Enum.GetValues( typeof( PlayerData.UpgradeFlags ) ) )
+            valid_enum_strings = new Dictionary<string, PD.UpgradeFlags>();
+            foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
             {
                 valid_enum_strings.Add( flag.ToString(), flag );
             }
         }
 
         // add an entry for every possible unlock flag
-        foreach( PlayerData.UpgradeFlags flag in Enum.GetValues( typeof( PlayerData.UpgradeFlags ) ) )
+        foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
         {
             if( !unlock_map.ContainsKey( flag ) )
                 unlock_map.Add( flag, false );
@@ -200,7 +201,7 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         {
             foreach( string key in serialized_unlock_flags )
             {
-                PlayerData.UpgradeFlags out_flag;
+                PD.UpgradeFlags out_flag;
                 if( valid_enum_strings.TryGetValue( key, out out_flag ) )
                 {
                     unlock_map[out_flag] = true;

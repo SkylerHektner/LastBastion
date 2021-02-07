@@ -101,7 +101,7 @@ public class ChainLightningAbility : Ability
         Enemy en = SpawnManager.Instance.TryGetEnemyByID( zap.EnemyID );
         if( en )
         {
-            float duration = PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.ChainLightningStunDuration ) 
+            float duration = PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStunDuration ) 
                 ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration;
 
             en.ZapForDuration( duration );

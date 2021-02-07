@@ -5,7 +5,7 @@ using UnityEngine;
 public class AbilityUIButton : MonoBehaviour
 {
     public AbilityEnum MyAbility;
-    public PlayerData.UpgradeFlags UnlockFlag;
+    public PD.UpgradeFlags UnlockFlag;
     public AbilityUIManager AbilityUIManagerInstance;
     public Animator IconAnimator;
     public Animator FXAnimator;
@@ -18,13 +18,13 @@ public class AbilityUIButton : MonoBehaviour
 
     private void Start()
     {
-        PlayerData.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
+        PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
         AbilityManager.Instance.AbilityChargeChangedEvent.AddListener( OnAbilityChargeChanged );
     }
 
     private void OnDestroy()
     {
-        PlayerData.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
+        PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
         AbilityManager.Instance.AbilityChargeChangedEvent.RemoveListener( OnAbilityChargeChanged );
     }
 
@@ -33,7 +33,7 @@ public class AbilityUIButton : MonoBehaviour
         UpdateLockedState();
     }
 
-    private void OnUpgradeUnlockFlagChanged( PlayerData.UpgradeFlags flag, bool value )
+    private void OnUpgradeUnlockFlagChanged( PD.UpgradeFlags flag, bool value )
     {
         if( flag == UnlockFlag )
         {
@@ -48,7 +48,7 @@ public class AbilityUIButton : MonoBehaviour
             bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
             IconAnimator.SetBool( "Empty", has_no_charges );
 
-            if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) && hovering )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) && hovering )
             {
                 FXAnimator.SetTrigger( "Glow" );
                 FXAnimator.ResetTrigger( "Hide" );
@@ -58,7 +58,7 @@ public class AbilityUIButton : MonoBehaviour
 
     private void UpdateLockedState()
     {
-        if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) )
         {
             LockedImage.SetActive( false );
             UsageSlotsAnimator.gameObject.SetActive( true );
@@ -74,7 +74,7 @@ public class AbilityUIButton : MonoBehaviour
     {
         hovering = true;
 
-        if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) )
         {
             bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
 

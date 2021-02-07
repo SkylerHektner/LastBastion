@@ -22,7 +22,7 @@ public class Spectator : MonoBehaviour
 
     private void Update()
     {
-        PlayerData.Instance.Tick();
+        PD.Instance.Tick();
     }
 
     // used for debugging (call this mid game, then stop the editor, then start at the main menu)
@@ -31,8 +31,8 @@ public class Spectator : MonoBehaviour
     {
         if( SceneManager.GetActiveScene().name != "Menu" ) // only save current progress if you are in a current level
         {
-            PlayerData.Instance.Limbo.Set( true );
-            PlayerData.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
+            PD.Instance.Limbo.Set( true );
+            PD.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
         }
     }
 
@@ -40,7 +40,7 @@ public class Spectator : MonoBehaviour
     [ContextMenu( "TEST_METHOD" )]
     private void TEST_METHOD()
     {
-        PlayerData.Instance.UpgradeUnlockMap.SetUnlock( PlayerData.UpgradeFlags.ChainLightning, true );
+        PD.Instance.UpgradeUnlockMap.SetUnlock( PD.UpgradeFlags.ChainLightning, true );
     }
 
     // game is quit mid-game, save my current progress and put me in limbo

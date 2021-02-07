@@ -18,7 +18,7 @@ public class ProgressCanvas : MonoBehaviour
     {
         ProgressContent.SetActive( false );
         Debug.Log( "Loading Menu" );
-        PlayerData.Instance.Limbo.Set( false );
+        PD.Instance.Limbo.Set( false );
         Spectator.LevelIndex = 1;
         Door.SetBool( "Limbo", false );
     }
@@ -26,7 +26,7 @@ public class ProgressCanvas : MonoBehaviour
     {
         Spectator.LevelIndex = PlayerPrefs.GetInt( "LevelIndex" );
         Spectator.ReturningFromLevel = true;
-        PlayerData.Instance.Limbo.Set( false );
+        PD.Instance.Limbo.Set( false );
         SceneManager.LoadScene( PlayerPrefs.GetString( "ExitedScene" ) );
     }
 

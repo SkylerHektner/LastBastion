@@ -39,7 +39,7 @@ public class UpgradeViewer : MonoBehaviour
     private void OnEnable()
     {
         Spectator = GameObject.FindGameObjectWithTag("Spectator").GetComponent<Spectator>();
-        PlayerWealthText.text = PlayerData.Instance.PlayerWealth.Get().ToString();
+        PlayerWealthText.text = PD.Instance.PlayerWealth.Get().ToString();
     }
 
     public void ToggleOpen(Animator Coin)

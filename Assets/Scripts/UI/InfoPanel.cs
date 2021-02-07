@@ -25,11 +25,11 @@ public class InfoPanel : MonoBehaviour
 
     public void ConfirmPurchase()
     {
-        int cur_player_wealth = PlayerData.Instance.PlayerWealth.Get();
+        int cur_player_wealth = PD.Instance.PlayerWealth.Get();
         if ( cur_player_wealth >= UpgradeCost)
         {
-            PlayerData.Instance.PlayerWealth.Set( cur_player_wealth - UpgradeCost );
-            PlayerData.Instance.UpgradeUnlockMap.SetUnlock( DesiredUpgrade.UpgradeFlag, true );
+            PD.Instance.PlayerWealth.Set( cur_player_wealth - UpgradeCost );
+            PD.Instance.UpgradeUnlockMap.SetUnlock( DesiredUpgrade.UpgradeFlag, true );
 
             DesiredUpgrade.Purchased = true;
             //gameObject.SetActive(false);
@@ -64,7 +64,7 @@ public class InfoPanel : MonoBehaviour
     public void UpdatePlayerWealth()
     {
         Spectator = GameObject.FindGameObjectWithTag("Spectator").GetComponent<Spectator>();
-        PlayerWealthText.text = PlayerData.Instance.PlayerWealth.Get().ToString();
+        PlayerWealthText.text = PD.Instance.PlayerWealth.Get().ToString();
     }
 
     public void EnableButtons()

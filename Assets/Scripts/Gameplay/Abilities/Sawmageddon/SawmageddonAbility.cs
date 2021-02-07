@@ -12,14 +12,14 @@ public class SawmageddonAbility : Ability
     public override void Start()
     {
         base.Start();
-        time_left = PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.SawmageddonDuration )
+        time_left = PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonDuration )
             ? AbilityData.ImprovedDuration : AbilityData.Duration;
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
     }
 
     private void OnSawFired( Vector3 pos, Vector3 direction, float speed )
     {
-        int num_extra_saws = PlayerData.Instance.UpgradeUnlockMap.GetUnlock( PlayerData.UpgradeFlags.SawmageddonProjectiles )
+        int num_extra_saws = PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonProjectiles )
             ? AbilityData.ImprovedNumberExtraSaws : AbilityData.NumberExtraSaws;
         for( int x = 0; x < num_extra_saws; ++x )
         {

@@ -11,8 +11,8 @@ public class UpgradeButton : MonoBehaviour
     public string MyInfo;
     public int MyCost;
     public GameObject InfoBox;
-    public PlayerData.UpgradeFlags UpgradeFlag;
-    public List<PlayerData.UpgradeFlags> PrerequisiteUpgradeFlags = new List<PlayerData.UpgradeFlags>();
+    public PD.UpgradeFlags UpgradeFlag;
+    public List<PD.UpgradeFlags> PrerequisiteUpgradeFlags = new List<PD.UpgradeFlags>();
     public GameObject PurchasedGlow;
     public Sprite VeiledImage;
     public Sprite Lockedimage;
@@ -44,17 +44,17 @@ public class UpgradeButton : MonoBehaviour
 
     private void Start()
     {
-        PlayerData.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeFlagChanged );
+        PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeFlagChanged );
     }
 
     private void OnDestroy()
     {
-        PlayerData.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeFlagChanged );
+        PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeFlagChanged );
     }
 
-    private void OnUpgradeFlagChanged(PlayerData.UpgradeFlags flag, bool new_value)
+    private void OnUpgradeFlagChanged(PD.UpgradeFlags flag, bool new_value)
     {
-        if (PlayerData.Instance.UpgradeUnlockMap.GetUnlock(UpgradeFlag))
+        if (PD.Instance.UpgradeUnlockMap.GetUnlock(UpgradeFlag))
             Purchased = true;
         UpdateButton();
     }
@@ -63,13 +63,13 @@ public class UpgradeButton : MonoBehaviour
     {
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpdatePlayerWealth();
-        if( PlayerData.Instance.UpgradeUnlockMap.GetUnlock( UpgradeFlag ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( UpgradeFlag ) )
             Purchased = true;
         UpdateButton();
     }
     private void UpdateButton()
     {
-        if( PrerequisiteUpgradeFlags.Any( f => !PlayerData.Instance.UpgradeUnlockMap.GetUnlock( f ) ) ) 
+        if( PrerequisiteUpgradeFlags.Any( f => !PD.Instance.UpgradeUnlockMap.GetUnlock( f ) ) ) 
         {
             // disable button if any pre-reqs not set
             PurchasedGlow.SetActive(false);
