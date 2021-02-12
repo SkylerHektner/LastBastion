@@ -70,6 +70,12 @@ public class BaseHP : MonoBehaviour
         CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP3 ) ? MaxHPUpgrade3 : 0;
     }
 
+    [ContextMenu("KillPlayer")]
+    public void KillPLayer()
+    {
+        ReduceHP(1000);
+    }
+
     public void ReduceHP( int Damage )
     {
         // if I have overshield, damage that instead
