@@ -8,7 +8,11 @@ public class AbilityManager : MonoBehaviour
     public static AbilityManager Instance { get; private set; }
     public UnityEvent<AbilityEnum, int> AbilityChargeChangedEvent = new UnityEvent<AbilityEnum, int>();
 
-    [SerializeField] GameObject AbilityInfoScroll;
+    [SerializeField] GameObject AbilityInfoScroll1;
+    [SerializeField] GameObject AbilityInfoScroll2;
+    [SerializeField] GameObject AbilityInfoScroll3;
+    [SerializeField] GameObject AbilityInfoScroll4;
+
     public Vector3 BaseCenter;
     [SerializeField] AnomalyAbilityData AnomalyData;
     [SerializeField] ChainLightningAbilityData ChainLightningData;
@@ -54,7 +58,12 @@ public class AbilityManager : MonoBehaviour
 
     public bool UseAbility(AbilityEnum ability)
     {
-        if( ability_charges[(int)ability] <= 0 )
+        AbilityInfoScroll1.SetActive(false); // hi, I added this.  It just turns off the scroll.
+        AbilityInfoScroll2.SetActive(false);
+        AbilityInfoScroll3.SetActive(false);
+        AbilityInfoScroll4.SetActive(false);
+
+        if ( ability_charges[(int)ability] <= 0 )
             return false;
 
         ability_charges[(int)ability]--;
@@ -101,7 +110,6 @@ public class AbilityManager : MonoBehaviour
             active_abilities.Add( ab.AbilityID, ab );
             ab.Start();
         }
-        AbilityInfoScroll.SetActive(false); // hi, I added this.  It just turns off the scroll.
 
         return true;
     }
