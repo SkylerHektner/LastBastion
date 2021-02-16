@@ -32,12 +32,12 @@ public class PD
         Anomaly,                         
         AnomalyRicochetSaws,             
         AnomalyStasisCoating,            // not implemented
-        AnomalySingularity,              // not implemented
+        AnomalySingularity,              
         Sawmageddon,                     
         SawmageddonDuration,             
         SawmageddonProjectiles,          
         SawmageddonComboKiller,          // not implemented
-        BaseOvershield,                  // not implemented
+        BaseOvershield,                  
         SoulCollector,                   // not implemented
         BaseHP1,                         
         BaseHP2,                         
