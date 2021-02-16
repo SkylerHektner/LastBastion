@@ -161,10 +161,19 @@ public class Enemy : MonoBehaviour
             anim.SetBool( "Attacking", Moving );
     }
 
-    public virtual void Hit( Vector3 hit_direction, bool can_dodge, int damage = 1 )
+    public void Hit( Vector3 hit_direction, bool can_dodge )
+    {
+        bool died;
+        Hit( hit_direction, can_dodge, out died );
+    }
+
+    public virtual void Hit( Vector3 hit_direction, bool can_dodge, out bool died, int damage = 1 )
     {
         if( Spawning || Dying )
+        {
+            died = false;
             return; // ignore being hit if we are spawning
+        }
 
         if( Zapped )
             CurrentHealth = 0;
@@ -172,9 +181,13 @@ public class Enemy : MonoBehaviour
             CurrentHealth -= damage;
 
         if( CurrentHealth <= 0 )
+        {
+            died = true;
             Kill();
+        }
         else
         {
+            died = false;
             if( DamagedEffect != null )
                 Instantiate( DamagedEffect ).transform.position = transform.position;
             if( DamagedAnimation != null && DamagedAnimation.Length > 0 )

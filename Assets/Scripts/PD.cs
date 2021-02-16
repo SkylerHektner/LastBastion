@@ -28,7 +28,7 @@ public class PD
         Typhoon,                         
         TyphoonExtendedBBQ,              // not implemented
         TyphoonFlameSaw,                 
-        TyphoonRoaringFlames,            // not implemented
+        TyphoonRoaringFlames,            
         Anomaly,                         
         AnomalyRicochetSaws,             
         AnomalyStasisCoating,            // not implemented
@@ -45,7 +45,6 @@ public class PD
         Turrets1,                        // not implemented
         Turrets2,                        // not implemented
         Turrets3,                        // not implemented
-
     }
 
     // EVENTS

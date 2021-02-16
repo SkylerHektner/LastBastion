@@ -6,18 +6,26 @@ public class TyphoonAbility : Ability
 {
     public static float AnimatorDuration;
     public static TyphoonAbility ActiveTyphoon { get; private set; }
-    
+
     public TyphoonAbilityData AbilityData;
     private float time_remaining = 0.0f;
     private DeleteAfterDuration ActiveTyphoonDeleteAfterDuration;
+
+    private float roaring_flames_duration_carryover = 1.0f;
+    bool listening = false;
 
     public override void Start()
     {
         base.Start();
         ActiveTyphoonDeleteAfterDuration = GameObject.Instantiate( AbilityData.Effect ).GetComponent<DeleteAfterDuration>();
-        ActiveTyphoonDeleteAfterDuration.duration = AbilityData.Duration;
-        time_remaining = AbilityData.Duration;
+        SetDuration( AbilityData.Duration );
+        roaring_flames_duration_carryover = AbilityData.Duration * 0.5f;
         ActiveTyphoon = this;
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames ) )
+        {
+            Saw.Instance.KilledEnemyEvent.AddListener( OnSawKilledEnemy );
+            listening = true;
+        }
     }
 
     public override void Update( float delta_time )
@@ -29,7 +37,7 @@ public class TyphoonAbility : Ability
             Finish();
     }
 
-    public void SetSawOnFire(Saw saw)
+    public void SetSawOnFire( Saw saw )
     {
         if( !PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonFlameSaw ) )
             return;
@@ -39,17 +47,37 @@ public class TyphoonAbility : Ability
     public override void Finish()
     {
         ActiveTyphoon = null;
-
+        if( listening )
+        {
+            Saw.Instance.KilledEnemyEvent.RemoveListener( OnSawKilledEnemy );
+            listening = false;
+        }
         base.Finish();
     }
 
     public override bool OnAbilityUsedWhileAlreadyActive()
     {
-        time_remaining += AbilityData.Duration;
-        Debug.Assert( ActiveTyphoonDeleteAfterDuration != null );
-        if( ActiveTyphoonDeleteAfterDuration != null)
-            ActiveTyphoonDeleteAfterDuration.duration += AbilityData.Duration;
+        SetDuration( time_remaining + AbilityData.Duration );
+        roaring_flames_duration_carryover = AbilityData.Duration * 0.5f;
+
         // return true to cancel new ability construction
         return true;
+    }
+
+    private void SetDuration( float duration )
+    {
+        time_remaining = duration;
+        Debug.Assert( ActiveTyphoonDeleteAfterDuration != null );
+        if( ActiveTyphoonDeleteAfterDuration != null )
+            ActiveTyphoonDeleteAfterDuration.duration = time_remaining;
+    }
+
+    private void OnSawKilledEnemy( long ID )
+    {
+        if( Saw.Instance.OnFire )
+        {
+            SetDuration( time_remaining + roaring_flames_duration_carryover );
+            roaring_flames_duration_carryover *= 0.5f; // infinitely decreasing geometric series
+        }
     }
 }
