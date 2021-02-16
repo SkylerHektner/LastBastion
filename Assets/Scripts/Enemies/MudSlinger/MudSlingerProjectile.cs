@@ -8,7 +8,7 @@ public class MudSlingerProjectile : Projectile
     [HideInInspector] public float SawMoveSpeedMultiplier;
     public void HitSaw(Saw saw)
     {
-        saw.CoverInMud( SawSlowDuration, SawMoveSpeedMultiplier );
+        saw.TryCoverInMud( SawSlowDuration, SawMoveSpeedMultiplier );
         DestroyProjectile();
     }
 

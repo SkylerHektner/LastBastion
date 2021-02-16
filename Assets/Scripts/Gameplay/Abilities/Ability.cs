@@ -21,6 +21,7 @@ public class Ability
 
 
     public AbilityManager AM;
+    public AbilityEnum ability;
 
     public virtual void Start()
     {
@@ -35,5 +36,12 @@ public class Ability
     public virtual void Finish()
     {
         AM.AbilityFinished( AbilityID );
+    }
+
+    // return true if we should proceed with construction of new ability instance
+    // return false if we should cancel new ability construction
+    public virtual bool OnAbilityUsedWhileAlreadyActive()
+    {
+        return true;
     }
 }

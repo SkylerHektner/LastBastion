@@ -81,9 +81,9 @@ public class MudSlinger : Enemy
         //base.StartMoving();
     }
 
-    public override void Hit( Vector3 hit_direction, bool can_dodge )
+    public override void Hit( Vector3 hit_direction, bool can_dodge, int damage = 1 )
     {
         if( !vanished )
-            base.Hit( hit_direction, can_dodge );
+            base.Hit( hit_direction, can_dodge, damage );
     }
 }

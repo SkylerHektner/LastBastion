@@ -161,7 +161,7 @@ public class Enemy : MonoBehaviour
             anim.SetBool( "Attacking", Moving );
     }
 
-    public virtual void Hit( Vector3 hit_direction, bool can_dodge )
+    public virtual void Hit( Vector3 hit_direction, bool can_dodge, int damage = 1 )
     {
         if( Spawning || Dying )
             return; // ignore being hit if we are spawning
@@ -169,7 +169,7 @@ public class Enemy : MonoBehaviour
         if( Zapped )
             CurrentHealth = 0;
         else
-            CurrentHealth--;
+            CurrentHealth -= damage;
 
         if( CurrentHealth <= 0 )
             Kill();

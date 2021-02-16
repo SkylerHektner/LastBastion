@@ -27,7 +27,7 @@ public class PD
         ChainLightningLightningRod,      
         Typhoon,                         
         TyphoonExtendedBBQ,              // not implemented
-        TyphoonFlameSaw,                 // not implemented
+        TyphoonFlameSaw,                 
         TyphoonRoaringFlames,            // not implemented
         Anomaly,                         
         AnomalyRicochetSaws,             

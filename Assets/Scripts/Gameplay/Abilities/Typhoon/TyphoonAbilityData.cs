@@ -6,5 +6,8 @@ using UnityEngine;
 public class TyphoonAbilityData : ScriptableObject
 {
     public GameObject Effect;
-    public float duration = 5.0f;
+    public float Duration = 5.0f;
+    public float FlameSawDuration = 4.0f;
+    public int FlameSawExtraDamage = 1;
+    public float FlameSawMovementSpeedMultiplier = 1.5f;
 }

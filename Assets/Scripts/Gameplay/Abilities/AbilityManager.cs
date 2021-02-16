@@ -40,71 +40,86 @@ public class AbilityManager : MonoBehaviour
         pending_removals.Clear();
     }
 
-    public void AddAbilityCharge(AbilityEnum ability)
+    public void AddAbilityCharge( AbilityEnum ability )
     {
         Debug.Assert( ability != AbilityEnum.NUM_ABILITIES );
-        if( ability_charges[(int)ability] < MaxAbilityCharges)
+        if( ability_charges[(int)ability] < MaxAbilityCharges )
         {
             ability_charges[(int)ability]++;
             AbilityChargeChangedEvent.Invoke( ability, ability_charges[(int)ability] );
         }
     }
 
-    public int GetAbilityCharges(AbilityEnum ability)
+    public int GetAbilityCharges( AbilityEnum ability )
     {
         Debug.Assert( ability != AbilityEnum.NUM_ABILITIES );
         return ability_charges[(int)ability];
     }
 
-    public bool UseAbility(AbilityEnum ability)
+    public bool UseAbility( AbilityEnum ability )
     {
-        AbilityInfoScroll1.SetActive(false); // hi, I added this.  It just turns off the scroll.
-        AbilityInfoScroll2.SetActive(false);
-        AbilityInfoScroll3.SetActive(false);
-        AbilityInfoScroll4.SetActive(false);
+        // TODO: Move this to AbilityUIManager
+        AbilityInfoScroll1.SetActive( false ); // hi, I added this.  It just turns off the scroll.
+        AbilityInfoScroll2.SetActive( false );
+        AbilityInfoScroll3.SetActive( false );
+        AbilityInfoScroll4.SetActive( false );
 
-        if ( ability_charges[(int)ability] <= 0 )
+        if( ability_charges[(int)ability] <= 0 )
             return false;
 
         ability_charges[(int)ability]--;
         AbilityChargeChangedEvent.Invoke( ability, ability_charges[(int)ability] );
 
+        // check if this ability is already active and consult the ability instance to see if we proceed with construction
+        bool cancel_construction = false;
+        foreach( Ability active_ab in active_abilities.Values )
+        {
+            if( active_ab.ability == ability )
+            {
+                cancel_construction |= active_ab.OnAbilityUsedWhileAlreadyActive();
+            }
+        }
+
+        if( cancel_construction )
+            return false; // EARLY RETURN
+
         Ability ab = null;
         switch( ability )
         {
             case AbilityEnum.TemporalAnomaly:
-                {
-                    AnomalyAbility _ab = new AnomalyAbility();
-                    _ab.AbilityData = AnomalyData;
-                    ab = _ab;
-                    break;
-                }
+            {
+                AnomalyAbility _ab = new AnomalyAbility();
+                _ab.AbilityData = AnomalyData;
+                ab = _ab;
+                break;
+            }
             case AbilityEnum.ChainLightning:
-                {
-                    ChainLightningAbility _ab = new ChainLightningAbility();
-                    _ab.AbilityData = ChainLightningData;
-                    ab = _ab;
-                    break;
-                }
+            {
+                ChainLightningAbility _ab = new ChainLightningAbility();
+                _ab.AbilityData = ChainLightningData;
+                ab = _ab;
+                break;
+            }
             case AbilityEnum.Typhoon:
-                {
-                    TyphoonAbility _ab = new TyphoonAbility();
-                    _ab.AbilityData = TyphoonData;
-                    ab = _ab;
-                    break;
-                }
+            {
+                TyphoonAbility _ab = new TyphoonAbility();
+                _ab.AbilityData = TyphoonData;
+                ab = _ab;
+                break;
+            }
             case AbilityEnum.Sawmageddon:
-                {
-                    SawmageddonAbility _ab = new SawmageddonAbility();
-                    _ab.AbilityData = SawmageddonData;
-                    ab = _ab;
-                    break;
-                }
+            {
+                SawmageddonAbility _ab = new SawmageddonAbility();
+                _ab.AbilityData = SawmageddonData;
+                ab = _ab;
+                break;
+            }
         }
 
         Debug.Assert( ab != null, "ERROR: it seems triggered ability " + ability.ToString() + " is not mapped to an Ability class" );
-        if(ab != null)
+        if( ab != null )
         {
+            ab.ability = ability;
             ab.AM = this;
             ab.name = ability.ToString();
             active_abilities.Add( ab.AbilityID, ab );
@@ -114,16 +129,16 @@ public class AbilityManager : MonoBehaviour
         return true;
     }
 
-    public void AbilityFinished(long AbilityID)
+    public void AbilityFinished( long AbilityID )
     {
         Debug.Assert( active_abilities.ContainsKey( AbilityID ) );
         pending_removals.Add( AbilityID );
     }
 
-    [ContextMenu("Print All Active Abilities")]
+    [ContextMenu( "Print All Active Abilities" )]
     private void DebugLogAllActiveAbilities()
     {
-        foreach(var ab in active_abilities)
+        foreach( var ab in active_abilities )
             Debug.Log( ab.Value.name );
     }
 }

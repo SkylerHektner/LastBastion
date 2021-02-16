@@ -31,8 +31,13 @@ public class Saw : MonoBehaviour
     private Vector3 move_direction = Vector3.zero;
     private Projectile proj;
 
+    public bool OnFire { get { return on_fire_duration > 0.0f; } }
+    private float on_fire_duration = -1.0f;
+    private int on_fire_extra_damage = 0;
+    private float on_fire_movespeed_multiplier = 1.0f;
+
     private float cover_in_mud_duration = -1.0f;
-    private float cur_move_speed_multiplier = 1.0f;
+    private float covered_in_mud_movespeed_multiplier = 1.0f;
 
     public Animator SawmageddonFX;
     public Animator AnomalyFX;
@@ -54,11 +59,17 @@ public class Saw : MonoBehaviour
 
     private void Update()
     {
-        SawmageddonFX.SetFloat("Duration", SawmageddonAbility.AnimatorDuration);
-        AnomalyFX.SetFloat("Duration", AnomalyAbility.AnimatorDuration);
-        TyphoonFX.SetFloat("Duration", TyphoonAbility.AnimatorDuration);
+        if( OnFire )
+        {
+            on_fire_duration -= Time.deltaTime;
+            if( on_fire_duration <= 0.0f )
+                EndOnFire();
+            TyphoonFX.SetFloat( "Duration", on_fire_duration );
+        }
+        AnomalyFX.SetFloat( "Duration", AnomalyAbility.AnimatorDuration );
+        SawmageddonFX.SetFloat( "Duration", SawmageddonAbility.AnimatorDuration );
 
-        if ( dragging )
+        if( dragging )
         {
             bool still_dragging;
 
@@ -102,6 +113,14 @@ public class Saw : MonoBehaviour
             hit_info.wall == ProjectileHitInfo.Wall.Top )
         {
             proj.SetWallHitBehavior( Projectile.WallHitBehavior.Bounce );
+
+            // light saw on fire if flame saw upgrade and typhoon active
+            if( hit_info.wall == ProjectileHitInfo.Wall.Bottom 
+                && TyphoonAbility.ActiveTyphoon != null 
+                && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonFlameSaw ) )
+            {
+                TyphoonAbility.ActiveTyphoon.SetSawOnFire( this );
+            }
         }
         else if( hit_info.wall == ProjectileHitInfo.Wall.Left ||
             hit_info.wall == ProjectileHitInfo.Wall.Right )
@@ -115,7 +134,7 @@ public class Saw : MonoBehaviour
     private void OnTriggerEnter2D( Collider2D col )
     {
         if( col.tag == "Enemy" )
-            col.gameObject.GetComponent<Enemy>().Hit( move_direction, true );
+            col.gameObject.GetComponent<Enemy>().Hit( move_direction, true, 1 + ( OnFire ? on_fire_extra_damage : 0 ) );
         else if( col.tag == "Mudball" && !Moving )
             col.gameObject.GetComponent<MudSlingerProjectile>().HitSaw( this );
         else if( col.tag == "AbilityDrop" )
@@ -155,7 +174,7 @@ public class Saw : MonoBehaviour
         {
             on_left_side = !on_left_side;
             move_direction = ( drag_last_position - drag_start_position ).normalized;
-            proj.SetProjectileSpeed( MoveSpeed * cur_move_speed_multiplier );
+            proj.SetProjectileSpeed( MoveSpeed * covered_in_mud_movespeed_multiplier * on_fire_movespeed_multiplier );
             proj.StartMoveInDirection( move_direction );
             SawFiredEvent.Invoke( transform.position, move_direction, MoveSpeed );
         }
@@ -165,8 +184,10 @@ public class Saw : MonoBehaviour
     private void VerifyDragLastPosition()
     {
         Vector3 delta_vec = ( drag_last_position - drag_start_position );
-        if( delta_vec.x < 0.0f && on_left_side ) delta_vec.x = 0.0f;
-        if( delta_vec.x > 0.0f && !on_left_side ) delta_vec.x = 0.0f;
+        if( delta_vec.x < 0.0f && on_left_side )
+            delta_vec.x = 0.0f;
+        if( delta_vec.x > 0.0f && !on_left_side )
+            delta_vec.x = 0.0f;
         float necessary_x = Mathf.Tan( MinimumAngleDegrees * Mathf.Deg2Rad ) * Mathf.Abs( delta_vec.y );
         if( necessary_x > Mathf.Abs( delta_vec.x ) )
         {
@@ -199,22 +220,46 @@ public class Saw : MonoBehaviour
         DirectionArrow.GetComponent<Renderer>().material.SetColor( "_Color", drag_arrow_color );
     }
 
-    public void CoverInMud( float duration, float move_speed_mult )
+    public void TryCoverInMud( float duration, float move_speed_mult )
     {
+        if( OnFire ) // flaming saws don't get covered in mud
+            return;
+
         if( cover_in_mud_duration != -1.0f )
             cover_in_mud_duration = Mathf.Max( duration, cover_in_mud_duration );
         else
             cover_in_mud_duration = duration;
         animator.SetBool( "Muddy", true );
-        cur_move_speed_multiplier = move_speed_mult;
-        proj.SetProjectileSpeed( MoveSpeed * cur_move_speed_multiplier );
+        covered_in_mud_movespeed_multiplier = move_speed_mult;
+        proj.SetProjectileSpeed( MoveSpeed * covered_in_mud_movespeed_multiplier );
     }
 
     private void EndCoverInMud()
     {
         cover_in_mud_duration = -1.0f;
         animator.SetBool( "Muddy", false );
-        cur_move_speed_multiplier = 1.0f;
-        proj.SetProjectileSpeed( MoveSpeed * cur_move_speed_multiplier );
+        covered_in_mud_movespeed_multiplier = 1.0f;
+        proj.SetProjectileSpeed( MoveSpeed * covered_in_mud_movespeed_multiplier );
+    }
+
+    public void SetOnFire( float duration, int extra_damage, float move_speed_multiplier )
+    {
+        // if already on fire keep effect with longest duration
+        if( on_fire_duration < duration )
+        {
+            on_fire_duration = duration;
+            on_fire_extra_damage = extra_damage;
+            on_fire_movespeed_multiplier = move_speed_multiplier;
+
+            // set new movespeed on proj
+            proj.SetProjectileSpeed( MoveSpeed * covered_in_mud_movespeed_multiplier * on_fire_movespeed_multiplier );
+        }
+    }
+
+    private void EndOnFire()
+    {
+        on_fire_duration = -1.0f;
+        on_fire_extra_damage = 0;
+        on_fire_movespeed_multiplier = 1.0f;
     }
 }
