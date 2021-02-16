@@ -13,13 +13,8 @@ public class ShowBaseParts : MonoBehaviour
     public GameObject SawMaggeddonConnectors;
     public GameObject RecoverHPBar;
     public GameObject SawmageddonBoxes;
+    public GameObject Overshield;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -77,6 +72,16 @@ public class ShowBaseParts : MonoBehaviour
         else
         {
             SawmageddonBoxes.SetActive(false);
+        }
+
+        // HP overshield
+        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseOvershield))
+        {
+            Overshield.SetActive(true);
+        }
+        else
+        {
+            Overshield.SetActive(false);
         }
     }
 

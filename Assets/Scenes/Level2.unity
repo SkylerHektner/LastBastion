@@ -10826,7 +10826,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8240320761535129628, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
   m_PrefabInstance: {fileID: 6230442712592366784}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6230442712592366786}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de27eab175d6433489e4f8a4d7a20488, type: 3}
@@ -12366,6 +12366,10 @@ PrefabInstance:
     - target: {fileID: 5690782324264133874, guid: 38c90ae28673cef498cbe8422a51f2b0, type: 3}
       propertyPath: m_Name
       value: EnergyCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690782324264133874, guid: 38c90ae28673cef498cbe8422a51f2b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5690782324264133878, guid: 38c90ae28673cef498cbe8422a51f2b0, type: 3}
       propertyPath: m_Pivot.x
@@ -31399,6 +31403,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9064221501032211490, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
   m_PrefabInstance: {fileID: 6230442712592366784}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6230442712592366786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1760607688986351179, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+  m_PrefabInstance: {fileID: 6230442712592366784}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7014161918484983928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31514,6 +31523,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7118325095076530804, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
+      propertyPath: Overshield
+      value: 
+      objectReference: {fileID: 6230442712592366786}
     - target: {fileID: 7118325095076530804, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: RecoverHPBar
       value: 

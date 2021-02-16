@@ -79,7 +79,7 @@ public class BaseHP : MonoBehaviour
     public void ReduceHP( int Damage )
     {
         // if I have overshield, damage that instead
-        if( CurrentOvershield > 0 )
+        if( CurrentOvershield > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseOvershield))
         {
             CurrentOvershield -= Damage;
             OvershieldAnim.SetBool( "Recovering", true );
