@@ -21,7 +21,8 @@ public class TyphoonAbility : Ability
         SetDuration( AbilityData.Duration );
         roaring_flames_duration_carryover = AbilityData.Duration * 0.5f;
         ActiveTyphoon = this;
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames )
+            || PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.TyphoonExtendedBBQ ) )
         {
             Saw.Instance.KilledEnemyEvent.AddListener( OnSawKilledEnemy );
             listening = true;
@@ -76,8 +77,17 @@ public class TyphoonAbility : Ability
     {
         if( Saw.Instance.OnFire )
         {
-            SetDuration( time_remaining + roaring_flames_duration_carryover );
-            roaring_flames_duration_carryover *= 0.5f; // infinitely decreasing geometric series
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames ) )
+            {
+                SetDuration( time_remaining + roaring_flames_duration_carryover );
+                roaring_flames_duration_carryover *= 0.5f; // infinitely decreasing geometric series
+            }
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonExtendedBBQ ) )
+            {
+                TyphoonFlamingCorpse corpse = GameObject.Instantiate( AbilityData.FlamingCorpsePrefab );
+                corpse.Setup( AbilityData.ExtendedBBQRadius, AbilityData.ExtendedBBQDamageTickRate );
+                corpse.transform.position = enemy_position;
+            }
         }
     }
 }

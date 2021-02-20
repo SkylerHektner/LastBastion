@@ -10,4 +10,7 @@ public class TyphoonAbilityData : ScriptableObject
     public float FlameSawDuration = 4.0f;
     public int FlameSawExtraDamage = 1;
     public float FlameSawMovementSpeedMultiplier = 1.5f;
+    public float ExtendedBBQRadius = 1.0f;
+    public float ExtendedBBQDamageTickRate = 0.5f;
+    public TyphoonFlamingCorpse FlamingCorpsePrefab;
 }

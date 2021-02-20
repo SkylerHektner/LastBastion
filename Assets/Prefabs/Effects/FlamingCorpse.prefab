@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7606203901266447153}
   - component: {fileID: 7606203901266447154}
   - component: {fileID: 7606203901266447152}
+  - component: {fileID: 630879451015028046}
   m_Layer: 0
   m_Name: FlamingCorpse
   m_TagString: Untagged
@@ -117,11 +118,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28115c6d4874a254181e338bfbbce637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 5
+  duration: 3
   DeleteDurationReached:
     m_PersistentCalls:
       m_Calls: []
   IgnoreGameplayTimeScale: 0
+--- !u!114 &630879451015028046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606203901266447156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1a0c49f2c3a304888de85566170e70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7606203901486153077
 GameObject:
   m_ObjectHideFlags: 0
