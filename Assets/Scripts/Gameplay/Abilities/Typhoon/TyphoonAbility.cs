@@ -72,7 +72,7 @@ public class TyphoonAbility : Ability
             ActiveTyphoonDeleteAfterDuration.duration = time_remaining;
     }
 
-    private void OnSawKilledEnemy( long ID )
+    private void OnSawKilledEnemy( Vector3 enemy_position )
     {
         if( Saw.Instance.OnFire )
         {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ChainLightningAbility : Ability
 {
@@ -17,6 +18,10 @@ public class ChainLightningAbility : Ability
     private List<PendingZap> pending_zaps = new List<PendingZap>();
     private float cur_time = 0.0f;
     private int cur_zap_index = 0;
+    private float zapped_enemy_tracking_time = 0.0f;
+
+    private bool listening = false;
+    private int static_overload_layermask;
 
     public override void Start()
     {
@@ -49,7 +54,7 @@ public class ChainLightningAbility : Ability
                 break;
             pending_zaps.Add( new PendingZap()
             {
-                time = Mathf.Log( t, 2.0f ) * AbilityData.TimeBetweenZaps,
+                time = Mathf.Log( t + 1, 2.0f ) * AbilityData.TimeBetweenZaps,
                 position = enemies_on_field[h].transform.position,
                 last_position = enemies_on_field[t].transform.position,
                 EnemyID = enemies_on_field[h].EnemyID,
@@ -60,13 +65,21 @@ public class ChainLightningAbility : Ability
                 break;
             pending_zaps.Add( new PendingZap()
             {
-                time = Mathf.Log( t, 2.0f ) * AbilityData.TimeBetweenZaps,
+                time = Mathf.Log( t + 1, 2.0f ) * AbilityData.TimeBetweenZaps,
                 position = enemies_on_field[h].transform.position,
                 last_position = enemies_on_field[t].transform.position,
                 EnemyID = enemies_on_field[h].EnemyID,
             } );
 
             ++t;
+        }
+
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload ) )
+        {
+            Saw.Instance.KilledEnemyEvent.AddListener( OnSawKilledEnemy );
+            listening = true;
+            static_overload_layermask = LayerMask.GetMask( "Enemy" );
+            zapped_enemy_tracking_time = pending_zaps.Last().time + GetZapDuration() + 1.0f; // once second extra, just to be safe
         }
     }
 
@@ -77,18 +90,28 @@ public class ChainLightningAbility : Ability
             return;
 
         cur_time += delta_time * GameplayManager.GamePlayTimeScale;
+        zapped_enemy_tracking_time -= delta_time * GameplayManager.GamePlayTimeScale;
 
-        while( pending_zaps[cur_zap_index].time <= cur_time )
+        while( cur_zap_index < pending_zaps.Count && pending_zaps[cur_zap_index].time <= cur_time )
         {
             DoZap( pending_zaps[cur_zap_index] );
             cur_zap_index++;
-
-            if( cur_zap_index == pending_zaps.Count )
-            {
-                Finish();
-                return;
-            }
         }
+
+        if( zapped_enemy_tracking_time <= 0.0f && cur_zap_index == pending_zaps.Count )
+        {
+            Finish();
+        }
+    }
+
+    public override void Finish()
+    {
+        if( listening )
+        {
+            Saw.Instance.KilledEnemyEvent.RemoveListener( OnSawKilledEnemy );
+            listening = false;
+        }
+        base.Finish();
     }
 
     private void DoZap( PendingZap zap )
@@ -101,9 +124,7 @@ public class ChainLightningAbility : Ability
         Enemy en = SpawnManager.Instance.TryGetEnemyByID( zap.EnemyID );
         if( en )
         {
-            float duration = PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStunDuration ) 
-                ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration;
-
+            float duration = GetZapDuration();
             en.ZapForDuration( duration );
 
             DeleteAfterDuration zap_effect = GameObject.Instantiate( AbilityData.ZappedEffect );
@@ -112,5 +133,23 @@ public class ChainLightningAbility : Ability
             zap_effect.transform.parent = en.transform;
             en.OnDeath.AddListener( zap_effect.DestroyOnDeathHook );
         }
+    }
+
+    private void OnSawKilledEnemy( Vector3 enemy_position )
+    {
+        Debug.Assert( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload ) ); // shouldn't be listening unless this was true
+        Collider2D[] hit = Physics2D.OverlapCircleAll( enemy_position, AbilityData.StaticOverloadExplosionRadius, static_overload_layermask );
+        for( int x = 0; x < hit.Length; ++x )
+        {
+            Enemy en = hit[x].gameObject.GetComponent<Enemy>();
+            en.Hit( ( en.transform.position - enemy_position ).normalized, true );
+            GameObject.Instantiate( AbilityData.StaticOverloadExplosionEffect ).transform.position = enemy_position;
+        }
+    }
+
+    private float GetZapDuration()
+    {
+        return PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStunDuration )
+                ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration;
     }
 }
