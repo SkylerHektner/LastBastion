@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour
         Bounce,
         Attach,
         Destroy,
+        DoNothing, // danger zone https://www.youtube.com/watch?v=siwpn14IE7E
     }
 
     public void SetWallHitBehavior( WallHitBehavior behavior )

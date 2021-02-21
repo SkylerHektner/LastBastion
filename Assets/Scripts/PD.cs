@@ -21,27 +21,27 @@ public class PD
     // UPGRADES
     public enum UpgradeFlags
     {
-        ChainLightning,                  
-        ChainLightningStunDuration,      
+        ChainLightning,
+        ChainLightningStunDuration,
         ChainLightningStaticOverload,    // not implemented
-        ChainLightningLightningRod,      
-        Typhoon,                         
+        ChainLightningLightningRod,
+        Typhoon,
         TyphoonExtendedBBQ,              // not implemented
-        TyphoonFlameSaw,                 
-        TyphoonRoaringFlames,            
-        Anomaly,                         
-        AnomalyRicochetSaws,             
+        TyphoonFlameSaw,
+        TyphoonRoaringFlames,
+        Anomaly,
+        AnomalyRicochetSaws,
         AnomalyStasisCoating,            // not implemented
-        AnomalySingularity,              
-        Sawmageddon,                     
-        SawmageddonDuration,             
-        SawmageddonProjectiles,          
+        AnomalySingularity,
+        Sawmageddon,
+        SawmageddonDuration,
+        SawmageddonProjectiles,
         SawmageddonComboKiller,          // not implemented
-        BaseOvershield,                  
+        BaseOvershield,
         SoulCollector,                   // not implemented
-        BaseHP1,                         
-        BaseHP2,                         
-        BaseHP3,                         
+        BaseHP1,
+        BaseHP2,
+        BaseHP3,
         Turrets1,                        // not implemented
         Turrets2,                        // not implemented
         Turrets3,                        // not implemented
@@ -51,8 +51,10 @@ public class PD
     [NonSerialized] public UnityEvent<UpgradeFlags, bool> UpgradeFlagChangedEvent = new UnityEvent<UpgradeFlags, bool>();
 
     // STATICS
-    public static PD Instance {
-        get {
+    public static PD Instance
+    {
+        get
+        {
             if( _instance == null )
             {
                 string path = GetPath();
@@ -88,8 +90,17 @@ public class PD
     [MenuItem( "Debug/DeleteAllPlayerData/NoSeriouslyDeleteItAll" )]
     public static void DeleteAllPlayerData()
     {
+        File.Delete( GetPath() );
         _instance = new PD();
         _instance.SetDirty();
+    }
+    [MenuItem( "Debug/UnlockEverything" )]
+    public static void UnlockEverything()
+    {
+        foreach( UpgradeFlags flag in Enum.GetValues( typeof( UpgradeFlags ) ) )
+        {
+            _instance.UpgradeUnlockMap.SetUnlock( flag, true );
+        }
     }
 #endif
 

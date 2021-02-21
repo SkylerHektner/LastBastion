@@ -2,46 +2,99 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent( typeof( CircleCollider2D ) )]
 public class Turret : MonoBehaviour
 {
-
-    public float RotationMax;
-    public float RotationMin;
-    bool EnemySighted;
-    public Transform MaxSightRange;
-    public GameObject PivotPoint;
     public float FireRate;
+    public float RotationSpeed = 45.0f; // degrees per second
+    public Projectile ProjectilePrefab;
+    public Transform ProjectileSpawnPoint;
 
-    private void FixedUpdate()
+    private float range;
+    private Enemy current_target;
+    private Animator anim;
+    private Quaternion start_rotation;
+
+    private void Start()
     {
-        PivotPoint.GetComponent<Animator>().SetFloat("FireRate", FireRate); // animation speed for firing anim
-        RaycastingEnemy();
-        if (EnemySighted)
+        range = GetComponent<CircleCollider2D>().radius;
+        GetComponent<Animator>().SetFloat( "FireRate", FireRate ); // animation speed for firing anim
+        anim = GetComponent<Animator>();
+        start_rotation = transform.rotation;
+    }
+
+    private void Update()
+    {
+        ValidateCurrentTarget();
+        if( current_target != null )
         {
             // enemy sighted, fire!
-            PivotPoint.GetComponent<Animator>().SetBool("Detected", true);
+            bool facing = TryRotateToTarget();
+            anim.SetBool( "Detected", facing );
         }
         else
         {
             // search for enemies
-            PivotPoint.GetComponent<Animator>().SetBool("Detected", false);
+            anim.SetBool( "Detected", false );
+            VisualSearchForEnemy();
         }
     }
 
-    public void SearchForEnemy()
+
+    // return true if facing target
+    private bool TryRotateToTarget()
     {
-        // rotate between max and min rotation angles while not doing anything
+        if( current_target == null )
+            return false;
+
+        // what fresh hell is this
+        Vector3 delta = current_target.transform.position - transform.position;
+        float needed_z = -Mathf.Atan( delta.x / delta.y ) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            Quaternion.Euler( 0, 0, needed_z ),
+            RotationSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale );
+        return Mathf.Abs( ( needed_z - transform.rotation.eulerAngles.z ) % 360.0f ) < 5.0f;
+    }
+    private void VisualSearchForEnemy()
+    {
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            start_rotation,
+            RotationSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale );
     }
 
     public void FireBullet() // called by pivot animator
     {
-        // instantiate projectile prefab
-        Debug.Log("Pew Pew Pew");
+        ValidateCurrentTarget();
+        if( current_target != null )
+        {
+            Projectile proj = GameObject.Instantiate( ProjectilePrefab );
+            proj.transform.position = ProjectileSpawnPoint.position;
+            proj.StartMoveInDirection( current_target.transform.position - transform.position );
+        }
     }
 
-    void RaycastingEnemy()
+    private void OnTriggerStay2D( Collider2D collision )
     {
-        Debug.DrawLine(PivotPoint.transform.position, MaxSightRange.position, Color.green);  // during playtime, projects a line from a start point to and end point
-        EnemySighted = Physics2D.Linecast(PivotPoint.transform.position, MaxSightRange.position, 1 << LayerMask.NameToLayer("Enemy")); // returns true if line touches an enemy (1<<8)
+        Enemy en = collision.attachedRigidbody.gameObject.GetComponent<Enemy>();
+        Debug.Assert( en != null );
+        ValidateCurrentTarget();
+        if( current_target == null )
+        {
+            current_target = en;
+        }
+    }
+
+    private void ValidateCurrentTarget()
+    {
+        if( current_target != null )
+        {
+            float allowed_range = range + current_target.GetComponent<CircleCollider2D>().radius + 1.0f;
+            if( ( current_target.transform.position - transform.position ).sqrMagnitude > allowed_range * allowed_range )
+            {
+                current_target = null;
+            }
+        }
     }
 }

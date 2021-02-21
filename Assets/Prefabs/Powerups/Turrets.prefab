@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &810111201619587456
+--- !u!1 &3192769420168929650
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,27 +8,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4094572790950931438}
-  m_Layer: 0
-  m_Name: SightRange
+  - component: {fileID: 2107046623679752514}
+  m_Layer: 13
+  m_Name: ProjectileSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4094572790950931438
+--- !u!4 &2107046623679752514
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810111201619587456}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_GameObject: {fileID: 3192769420168929650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3746666709561917522}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3226624016352146898
 GameObject:
@@ -59,8 +59,8 @@ Transform:
   m_LocalPosition: {x: 7.936, y: -0.379, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1100504695740615547}
   - {fileID: 3204019475152699226}
+  - {fileID: 7449835396028015410}
   m_Father: {fileID: 3746666711474548972}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95,11 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e748ce95b198a9e4387ddca487d29e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationMax: 40
-  RotationMin: 0
-  MaxSightRange: {fileID: 1100504695740615547}
-  PivotPoint: {fileID: 3226624016352146898}
   FireRate: 1
+  RotationSpeed: 1
+  ProjectilePrefab: {fileID: 3712740565576112665, guid: 7f3793806130e134bb23f4bf1846d013, type: 3}
+  ProjectileSpawnPoint: {fileID: 7449835396028015410}
 --- !u!1 &3746666709561917521
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +110,7 @@ GameObject:
   - component: {fileID: 3746666709561917522}
   - component: {fileID: 3746666709561917523}
   - component: {fileID: 3525828674141721698}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PivotL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,8 +128,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.379, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4094572790950931438}
   - {fileID: 3746666709579590554}
+  - {fileID: 2107046623679752514}
   m_Father: {fileID: 3746666711474548972}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -165,11 +164,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e748ce95b198a9e4387ddca487d29e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationMax: 0
-  RotationMin: -40
-  MaxSightRange: {fileID: 4094572790950931438}
-  PivotPoint: {fileID: 3746666709561917521}
   FireRate: 1
+  RotationSpeed: 1
+  ProjectilePrefab: {fileID: 3712740565576112665, guid: 7f3793806130e134bb23f4bf1846d013, type: 3}
+  ProjectileSpawnPoint: {fileID: 2107046623679752514}
 --- !u!1 &3746666709579590553
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +197,7 @@ Transform:
   m_LocalScale: {x: 1.2686462, y: 1.2686462, z: 1.2686461}
   m_Children: []
   m_Father: {fileID: 3746666709561917522}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3746666709579590555
 SpriteRenderer:
@@ -368,7 +366,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4075183338414515604
+--- !u!1 &4856976205233405659
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,27 +374,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1100504695740615547}
-  m_Layer: 0
-  m_Name: SightRange
+  - component: {fileID: 7449835396028015410}
+  m_Layer: 13
+  m_Name: ProjectileSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1100504695740615547
+--- !u!4 &7449835396028015410
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4075183338414515604}
+  m_GameObject: {fileID: 4856976205233405659}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7910019525597846246}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6909180600481452944
 GameObject:
@@ -509,7 +507,7 @@ Transform:
   m_LocalScale: {x: 1.2686462, y: 1.2686462, z: 1.2686461}
   m_Children: []
   m_Father: {fileID: 7910019525597846246}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4910389125120415794
 SpriteRenderer:

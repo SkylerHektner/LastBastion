@@ -12270,7 +12270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9130753680679645992, guid: 6190d6c3c3a252a43801b80676198653, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.386556
+      value: 7.1
       objectReference: {fileID: 0}
     - target: {fileID: 9130753680679645992, guid: 6190d6c3c3a252a43801b80676198653, type: 3}
       propertyPath: m_LocalPosition.z
@@ -31639,29 +31639,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 1460813931}
     m_Modifications:
     - target: {fileID: 2978434701163337342, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
-      propertyPath: FirerRate
-      value: 1
+      propertyPath: RotationSpeed
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 7014161918785538336, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: m_Name
       value: PlayerBase
       objectReference: {fileID: 0}
-    - target: {fileID: 7014161918785538336, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
-      propertyPath: MaxHP
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: HPcanvas
       value: 
       objectReference: {fileID: 349338767}
-    - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
-      propertyPath: BaseMaxHP
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: SawCanvas
       value: 
@@ -31694,10 +31682,6 @@ PrefabInstance:
       propertyPath: AbiltyManager
       value: 
       objectReference: {fileID: 138652558}
-    - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
-      propertyPath: MaxOvershield
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: OvershieldBar
       value: 
@@ -31758,25 +31742,12 @@ PrefabInstance:
       propertyPath: RecoverHPBar
       value: 
       objectReference: {fileID: 764143609}
-    - target: {fileID: 7118325095076530804, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
-      propertyPath: SawMaggeddonConnectors
-      value: 
-      objectReference: {fileID: 7014161918484983929}
-    - target: {fileID: 8394089797307259130, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.936
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006645734667991602, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.926
+    - target: {fileID: 7400491233847447179, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
+      propertyPath: RotationSpeed
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
---- !u!1 &7014161918484983929 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8498279397783287359, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
-  m_PrefabInstance: {fileID: 7014161918484983928}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7789005850479351931
 PrefabInstance:
   m_ObjectHideFlags: 0
