@@ -15,6 +15,8 @@ public class ShowBaseParts : MonoBehaviour
     public GameObject SawmageddonBoxes;
     public GameObject Overshield;
 
+    public GameObject Turrets;
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -82,6 +84,16 @@ public class ShowBaseParts : MonoBehaviour
         else
         {
             Overshield.SetActive(false);
+        }
+
+        // Turrets
+        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.Turrets1))
+        {
+            Turrets.SetActive(true);
+        }
+        else
+        {
+            Turrets.SetActive(false);
         }
     }
 

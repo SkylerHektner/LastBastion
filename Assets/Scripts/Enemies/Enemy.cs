@@ -73,9 +73,9 @@ public class Enemy : MonoBehaviour
         SpawnManager.Instance?.RegisterEnemy( this );
     }
 
-    public void DamageBase() //  Do my remaining health as damage to the base HP
+    public void DamageBase() //  Do my max health as damage to the base HP
     {
-        BaseHP.Instance.ReduceHP( CurrentHealth );
+        BaseHP.Instance.ReduceHP( MaxHealth );
     }
 
 

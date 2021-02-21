@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b6e2cdfe8d02ce4bac5d67a2314a748, type: 3}
-  m_Name: L2Cadence
+  m_Name: L3Cadence
   m_EditorClassIdentifier: 
   Waves:
   - PassiveEnemies: 
@@ -18,6 +18,7 @@ MonoBehaviour:
     SpawnGroups:
     - {fileID: 11400000, guid: fa41591e7469cd64ebea71d1513e05b5, type: 2}
     - {fileID: 11400000, guid: cbb06549a77b72f47ae0cbaffd0af86b, type: 2}
+    - {fileID: 11400000, guid: 6249456f867ac0c4c9b97f4e9f400745, type: 2}
     - {fileID: 11400000, guid: cc7c56a29bd40d748963bacf8147bea8, type: 2}
     - {fileID: 11400000, guid: 0325f6f2c242eb140a6bc7428ed945c7, type: 2}
     - {fileID: 11400000, guid: cbb06549a77b72f47ae0cbaffd0af86b, type: 2}
@@ -25,7 +26,8 @@ MonoBehaviour:
     SpawnGroupSpawnTimes:
     - 3
     - 6
-    - 12
+    - 10
+    - 13
     - 20
     - 25
     - 30
@@ -258,4 +260,115 @@ MonoBehaviour:
     - 36
     - 36
     - 42
+    collapsed: 1
+  - PassiveEnemies: 
+    PassiveEnemySpawnCadence: []
+    SpawnGroups:
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: 6249456f867ac0c4c9b97f4e9f400745, type: 2}
+    - {fileID: 11400000, guid: 6249456f867ac0c4c9b97f4e9f400745, type: 2}
+    - {fileID: 11400000, guid: 876de346d30ed5f45a45c0300718d956, type: 2}
+    - {fileID: 11400000, guid: 53dc6da83c43b8b419cad100ee29cb6e, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: 876de346d30ed5f45a45c0300718d956, type: 2}
+    - {fileID: 11400000, guid: cc7c56a29bd40d748963bacf8147bea8, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: cc7c56a29bd40d748963bacf8147bea8, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: 6249456f867ac0c4c9b97f4e9f400745, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    SpawnGroupSpawnTimes:
+    - 3
+    - 10
+    - 15
+    - 20
+    - 23
+    - 25
+    - 30
+    - 30
+    - 35
+    - 35
+    - 42
+    - 42
+    - 50
+    - 50
+    - 55
+    - 55
+    collapsed: 1
+  - PassiveEnemies: 
+    PassiveEnemySpawnCadence: []
+    SpawnGroups:
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: cbb06549a77b72f47ae0cbaffd0af86b, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: cbb06549a77b72f47ae0cbaffd0af86b, type: 2}
+    - {fileID: 11400000, guid: 0325f6f2c242eb140a6bc7428ed945c7, type: 2}
+    - {fileID: 11400000, guid: 0325f6f2c242eb140a6bc7428ed945c7, type: 2}
+    - {fileID: 11400000, guid: 0325f6f2c242eb140a6bc7428ed945c7, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: 53dc6da83c43b8b419cad100ee29cb6e, type: 2}
+    - {fileID: 11400000, guid: 0325f6f2c242eb140a6bc7428ed945c7, type: 2}
+    - {fileID: 11400000, guid: 0325f6f2c242eb140a6bc7428ed945c7, type: 2}
+    - {fileID: 11400000, guid: 876de346d30ed5f45a45c0300718d956, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    SpawnGroupSpawnTimes:
+    - 3
+    - 6
+    - 12
+    - 12
+    - 20
+    - 25
+    - 30
+    - 35
+    - 40
+    - 50
+    - 50
+    - 60
+    - 60
+    collapsed: 1
+  - PassiveEnemies: 
+    PassiveEnemySpawnCadence: []
+    SpawnGroups:
+    - {fileID: 11400000, guid: 53dc6da83c43b8b419cad100ee29cb6e, type: 2}
+    - {fileID: 11400000, guid: 53dc6da83c43b8b419cad100ee29cb6e, type: 2}
+    - {fileID: 11400000, guid: c79bb963a8c01494a899511db5fe6d8a, type: 2}
+    - {fileID: 11400000, guid: cc7c56a29bd40d748963bacf8147bea8, type: 2}
+    - {fileID: 11400000, guid: cc7c56a29bd40d748963bacf8147bea8, type: 2}
+    - {fileID: 11400000, guid: c79bb963a8c01494a899511db5fe6d8a, type: 2}
+    - {fileID: 11400000, guid: c79bb963a8c01494a899511db5fe6d8a, type: 2}
+    - {fileID: 11400000, guid: 6249456f867ac0c4c9b97f4e9f400745, type: 2}
+    - {fileID: 11400000, guid: 6249456f867ac0c4c9b97f4e9f400745, type: 2}
+    - {fileID: 11400000, guid: 735044b2558bd6b44a4d6b1f01902cb4, type: 2}
+    - {fileID: 11400000, guid: 876de346d30ed5f45a45c0300718d956, type: 2}
+    - {fileID: 11400000, guid: 876de346d30ed5f45a45c0300718d956, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: cbb06549a77b72f47ae0cbaffd0af86b, type: 2}
+    - {fileID: 11400000, guid: cbb06549a77b72f47ae0cbaffd0af86b, type: 2}
+    - {fileID: 11400000, guid: cc7c56a29bd40d748963bacf8147bea8, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    - {fileID: 11400000, guid: c367f386d00a2ec4aaa05ed9f986b94e, type: 2}
+    SpawnGroupSpawnTimes:
+    - 3
+    - 3
+    - 4
+    - 8
+    - 10
+    - 11
+    - 13
+    - 20
+    - 23
+    - 26
+    - 28
+    - 28
+    - 33
+    - 38
+    - 45
+    - 56
+    - 65
+    - 66
+    - 67
     collapsed: 1
