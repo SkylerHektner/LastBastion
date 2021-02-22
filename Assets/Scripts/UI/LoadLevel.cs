@@ -43,6 +43,7 @@ public class LoadLevel : MonoBehaviour
     public UnityEvent<int> LockStatusChangedEvent = new UnityEvent<int>();
 
     public Vector4 GlowRGB;
+    public Animator LevelInfo;
 
 
     // If I don't call this, the image appears blank white at the start.  
@@ -54,17 +55,13 @@ public class LoadLevel : MonoBehaviour
         Locked = false;
         bool my_bool = Locked;
     }
-    public void LoadMyLevel()
+
+
+    public void ShowContract()
     {
-        Invoke( "SceneChange", 1f );
-        Spectator.LevelIndex = LevelScroller.LevelIndex; // reference index to the button
-        Spectator.ReturningFromLevel = true;
-        Debug.Log( Spectator.LevelIndex );
-        UpgradesBar.SetTrigger( "Hide" );
-    }
-    public void SceneChange()
-    {
-        SceneManager.LoadScene( SceneToLoad );
+        LevelInfo.SetBool("Open", true);
+        LevelPopup.SceneName = SceneToLoad; // tell the popup what scene I want it to load
+        UpgradesBar.SetTrigger("Hide");
     }
 
 
