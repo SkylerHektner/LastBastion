@@ -50,5 +50,10 @@ public class SawmageddonAbility : Ability
             Finish();
     }
 
-
+    public override bool OnAbilityUsedWhileAlreadyActive()
+    {
+        time_left += AbilityData.Duration;
+        // return true to cancel new ability construction
+        return true;
+    }
 }

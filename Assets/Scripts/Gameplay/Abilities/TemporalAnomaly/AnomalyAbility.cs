@@ -63,4 +63,11 @@ public class AnomalyAbility : Ability
             saw_projectile.StartMoveInDirection( pending_saw.Item2 );
         }
     }
+
+    public override bool OnAbilityUsedWhileAlreadyActive()
+    {
+        time_remaining += AbilityData.Duration;
+        // return true to cancel new ability construction
+        return true;
+    }
 }
