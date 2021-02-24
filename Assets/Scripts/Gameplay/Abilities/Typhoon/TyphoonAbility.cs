@@ -34,13 +34,14 @@ public class TyphoonAbility : Ability
         base.Update( delta_time );
         time_remaining -= delta_time * GameplayManager.Instance.GetTimeScale( GameplayManager.TimeScale.Combined );
         AnimatorDuration = time_remaining;
-        if( time_remaining <= 0.0f )
+        if( time_remaining <= 0.0f && !Saw.Instance.OnFire )
             Finish();
     }
 
     public void SetSawOnFire( Saw saw )
     {
-        if( !PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonFlameSaw ) )
+        if( !PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonFlameSaw )
+            || time_remaining <= 0.0f )
             return;
         saw.SetOnFire( AbilityData.FlameSawDuration, AbilityData.FlameSawExtraDamage, AbilityData.FlameSawMovementSpeedMultiplier );
     }
@@ -77,7 +78,7 @@ public class TyphoonAbility : Ability
     {
         if( Saw.Instance.OnFire )
         {
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames ) && time_remaining >= 0.0f )
             {
                 SetDuration( time_remaining + roaring_flames_duration_carryover );
                 roaring_flames_duration_carryover *= 0.5f; // infinitely decreasing geometric series
