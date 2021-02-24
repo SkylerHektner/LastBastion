@@ -22,7 +22,8 @@ public class Spectator : MonoBehaviour
 
     private void Update()
     {
-        PD.Instance.Tick();
+        if( GameplayManager.Instance == null )
+            PD.Instance.Tick();
     }
 
     // used for debugging (call this mid game, then stop the editor, then start at the main menu)

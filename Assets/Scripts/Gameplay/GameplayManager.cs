@@ -75,4 +75,9 @@ public class GameplayManager : MonoBehaviour
         time_scales[(int)scale] = target;
         TimeScaleChanged.Invoke();
     }
+
+    private void Update()
+    {
+        PD.Instance.Tick();
+    }
 }

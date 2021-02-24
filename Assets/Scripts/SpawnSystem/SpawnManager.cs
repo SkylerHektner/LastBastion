@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] SpawnCadenceProfile spawnCadenceProfile;
     [SerializeField] int DebugStartWave = 0;
-    [Header("Enemy Prefabs")]
+    [Header( "Enemy Prefabs" )]
     [SerializeField] GameObject SkeletonPrefab;
     [SerializeField] GameObject ShieldSkeletonPrefab;
     [SerializeField] GameObject PumpkinWarriorPrefab;
@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject CarrierMPrefab;
     [SerializeField] GameObject CarrierSPrefab;
     [SerializeField] GameObject RedSkeletonPrefab;
-    [Header("Spawn Area Information")]
+    [Header( "Spawn Area Information" )]
     public Vector3 SpawnableAreaTopRight;
     public Vector3 SpawnableAreaBottomLeft;
     public Vector3 PlayableAreaTopRight;
@@ -141,6 +141,17 @@ public class SpawnManager : MonoBehaviour
 
     private void WaveComplete()
     {
+        // if this is the first time completing this wave, mark it as complete and grant the player a reward
+        if( !PD.Instance.LevelCompletionMap.GetWaveCompletion( spawnCadenceProfile.LevelIdentifier, current_wave ) )
+        {
+            PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.LevelIdentifier, current_wave, true );
+            PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + spawnCadenceProfile.Waves[current_wave].CompletionReward );
+        }
+        // if this was the final wave then mark the level complete
+        if( current_wave == spawnCadenceProfile.Waves.Count - 1 && !PD.Instance.LevelCompletionMap.GetLevelCompletion( spawnCadenceProfile.LevelIdentifier ) )
+        {
+            PD.Instance.LevelCompletionMap.SetLevelCompletion( spawnCadenceProfile.LevelIdentifier, true );
+        }
         spawn_timer = -1.0f; // stop spawning
         if( current_wave < spawnCadenceProfile.Waves.Count )
             StartNextWave();
@@ -305,7 +316,7 @@ public class SpawnManager : MonoBehaviour
                 ret = Instantiate( PumpkinWarriorPrefab );
                 break;
             case EnemyEnum.Bolter:
-                ret = Instantiate(BolterPrefab);
+                ret = Instantiate( BolterPrefab );
                 break;
             case EnemyEnum.MudSlinger:
                 ret = Instantiate( MudSlingerPrefab );

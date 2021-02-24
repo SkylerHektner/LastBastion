@@ -7,11 +7,13 @@ using System;
 [CreateAssetMenu( fileName = "SpawnCadenceProfile", menuName = "ScriptableObjects/SpawnCadenceProfile", order = 0 )]
 public class SpawnCadenceProfile : ScriptableObject
 {
+    public string LevelIdentifier = "CHANGE_ME";
     public List<Wave> Waves;
 
     [Serializable]
     public class Wave
     {
+        public int CompletionReward = 0;
         public List<EnemyEnum> PassiveEnemies;
         public List<float> PassiveEnemySpawnCadence;
         public List<SpawnGroup> SpawnGroups;
@@ -53,6 +55,18 @@ public class SpawnCadenceProfileEditor : Editor
     {
         SpawnCadenceProfile spawn_cadence_profile = (SpawnCadenceProfile)target;
 
+        // Level Identifier
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label( "Level Identifier" );
+        string level_identifier = GUILayout.TextField( spawn_cadence_profile.LevelIdentifier );
+        if( level_identifier != spawn_cadence_profile.LevelIdentifier )
+        {
+            EditorUtility.SetDirty( target );
+            spawn_cadence_profile.LevelIdentifier = level_identifier;
+        }
+        EditorGUILayout.EndHorizontal();
+
+        // Waves
         if( spawn_cadence_profile.Waves == null )
         {
             spawn_cadence_profile.Waves = new List<SpawnCadenceProfile.Wave>();
@@ -77,6 +91,17 @@ public class SpawnCadenceProfileEditor : Editor
 
             if( !c )
             {
+                // Wave Completion Reward
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label( "Wave Completion Reward" );
+                int completion_reward = EditorGUILayout.IntField( wave.CompletionReward );
+                if( completion_reward != wave.CompletionReward )
+                {
+                    EditorUtility.SetDirty( target );
+                    wave.CompletionReward = completion_reward;
+                }
+                EditorGUILayout.EndHorizontal();
+
                 // passive enemy spawn rates - add new entry
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Label( "Passive Enemy Spawn Rates" );

@@ -17,6 +17,7 @@ public class PD
     public PlayerDataField<bool> Limbo = new PlayerDataField<bool>();
     public PlayerDataField<string> ExitedScene = new PlayerDataField<string>();
     public PlayerUpgradeUnlockMap UpgradeUnlockMap = new PlayerUpgradeUnlockMap();
+    public PlayerLevelCompletionMap LevelCompletionMap = new PlayerLevelCompletionMap();
 
     // UPGRADES
     public enum UpgradeFlags
@@ -164,8 +165,8 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
 
     public void SetUnlock( PD.UpgradeFlags flag, bool value )
     {
-        PD.Instance?.SetDirty();
         unlock_map[flag] = value;
+        PD.Instance?.SetDirty();
         PD.Instance?.UpgradeFlagChangedEvent.Invoke( flag, value );
     }
 
@@ -222,5 +223,120 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
                 }
             }
         }
+    }
+}
+
+[System.Serializable]
+public class LevelCompletionData
+{
+    public string LevelIdentifier;
+    public bool Complete = false;
+    public List<int> CompletedWaves = new List<int>();
+}
+
+[System.Serializable]
+public class PlayerLevelCompletionMap : ISerializationCallbackReceiver
+{
+    private Dictionary<string, LevelCompletionData> level_map = new Dictionary<string, LevelCompletionData>();
+    [SerializeField] private List<LevelCompletionData> serialized_level_completion_data = new List<LevelCompletionData>();
+
+    public bool GetLevelCompletion(string level_identifier)
+    {
+        return GetLevelCompletionData( level_identifier ).Complete;
+    }
+
+    public void SetLevelCompletion( string level_identifier, bool completion )
+    {
+        GetLevelCompletionData( level_identifier ).Complete = completion;
+        PD.Instance?.SetDirty();
+    }
+
+    public bool GetWaveCompletion(string level_identifier, int wave)
+    {
+        return GetLevelCompletionData( level_identifier ).CompletedWaves.Contains( wave );
+    }
+
+    public void SetWaveCompletion(string level_identifier, int wave, bool complete)
+    {
+        LevelCompletionData data = GetLevelCompletionData( level_identifier );
+        if(complete && !data.CompletedWaves.Contains(wave))
+        {
+            data.CompletedWaves.Add( wave );
+            PD.Instance?.SetDirty();
+        }
+        else if (!complete && data.CompletedWaves.Contains(wave))
+        {
+            data.CompletedWaves.Remove( wave );
+            PD.Instance?.SetDirty();
+        }
+    }
+
+    private LevelCompletionData GetLevelCompletionData( string level_identifier )
+    {
+        LevelCompletionData data;
+        if( level_map.TryGetValue( level_identifier, out data ) )
+        {
+            return data;
+        }
+        else
+        {
+            data = new LevelCompletionData();
+            data.LevelIdentifier = level_identifier;
+            level_map.Add( level_identifier, data );
+            PD.Instance?.SetDirty();
+            return data;
+        }
+    }
+
+    public void OnBeforeSerialize()
+    {
+        serialized_level_completion_data.Clear();
+        foreach(LevelCompletionData data in level_map.Values)
+        {
+            serialized_level_completion_data.Add( data );
+        }
+    }
+
+    public void OnAfterDeserialize()
+    {
+        foreach(LevelCompletionData data in serialized_level_completion_data)
+        {
+            level_map.Add( data.LevelIdentifier, data );
+        }
+        serialized_level_completion_data.Clear();
+    }
+}
+
+[System.Serializable]
+public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
+{
+    [SerializeField]
+    private List<TKey> keys = new List<TKey>();
+
+    [SerializeField]
+    private List<TValue> values = new List<TValue>();
+
+    // save the dictionary to lists
+    public void OnBeforeSerialize()
+    {
+        keys.Clear();
+        values.Clear();
+        foreach( KeyValuePair<TKey, TValue> pair in this )
+        {
+            keys.Add( pair.Key );
+            values.Add( pair.Value );
+        }
+    }
+
+    // load dictionary from lists
+    public void OnAfterDeserialize()
+    {
+        this.Clear();
+
+        if( keys.Count != values.Count )
+            throw new System.Exception( string.Format( "there are {0} keys and {1} values after deserialization. Make sure that both key and value types are serializable." ) );
+
+        for( int i = 0; i < keys.Count; i++ )
+            this.Add( keys[i], values[i] );
     }
 }
