@@ -6,15 +6,21 @@ using System;
 public class AnomalyAbility : Ability
 {
     public AnomalyAbilityData AbilityData;
+    public static float AnimatorDuration;
 
     private List<Tuple<SpectralSaw, Vector3, float>> pending_saws = new List<Tuple<SpectralSaw, Vector3, float>>();
     private float time_remaining = 0.0f;
-    public static float AnimatorDuration;
+    private List<long> stasis_coated_enemies = new List<long>();
     public override void Start()
     {
         base.Start();
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
         time_remaining = AbilityData.Duration;
+
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyStasisCoating ) )
+        {
+            Saw.Instance?.SawHitEnemyEvent?.AddListener( OnSawHitEnemy );
+        }
     }
 
     private void OnSawFired( Vector3 pos, Vector3 direction, float speed )
@@ -28,15 +34,27 @@ public class AnomalyAbility : Ability
         if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalySingularity ) )
         {
             SpectralSaw mirror_saw = GameObject.Instantiate( AbilityData.SpectralSawPrefab );
-            
+
             // mirror to other side
-            pos.x = -pos.x; 
+            pos.x = -pos.x;
             direction.x = -direction.x;
-            
+
             mirror_saw.transform.position = pos;
             if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyRicochetSaws ) )
                 mirror_saw.NumRemainingExtraBounces = AbilityData.RichochetSawExtraBounces;
             pending_saws.Add( new Tuple<SpectralSaw, Vector3, float>( mirror_saw, direction, speed ) );
+        }
+    }
+
+    private void OnSawHitEnemy( long id )
+    {
+        Debug.Assert( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyStasisCoating ) );
+        Enemy en = SpawnManager.Instance.TryGetEnemyByID( id );
+        if( en != null )
+        {
+            stasis_coated_enemies.Add( id );
+            en.StasisCoat( AbilityData.StasisTouchReplacementMaterial );
+            GameObject.Instantiate( AbilityData.StasisTouchEffectPrefab );
         }
     }
 
@@ -54,6 +72,7 @@ public class AnomalyAbility : Ability
         base.Finish();
 
         Saw.Instance?.SawFiredEvent?.RemoveListener( OnSawFired );
+        Saw.Instance?.SawHitEnemyEvent?.RemoveListener( OnSawHitEnemy );
 
         foreach( var pending_saw in pending_saws )
         {
@@ -61,6 +80,13 @@ public class AnomalyAbility : Ability
             Debug.Assert( saw_projectile != null );
             saw_projectile.SetProjectileSpeed( pending_saw.Item3 );
             saw_projectile.StartMoveInDirection( pending_saw.Item2 );
+        }
+
+        foreach( long id in stasis_coated_enemies )
+        {
+            Enemy en = SpawnManager.Instance.TryGetEnemyByID( id );
+            if( en != null )
+                en.EndStatisCoating();
         }
     }
 

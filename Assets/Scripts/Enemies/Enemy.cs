@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent( typeof( Animator ) )]
+[RequireComponent( typeof( SpriteRenderer ) )]
 public class Enemy : MonoBehaviour
 {
     public UnityEvent<long> OnDeath = new UnityEvent<long>();
@@ -52,6 +53,8 @@ public class Enemy : MonoBehaviour
 
     private float zap_duration = -1.0f;
     public bool Zapped { get { return zap_duration != -1.0f; } }
+    public bool StasisCoated { get; protected set; }
+    private Material original_mat;
 
     protected virtual void Start()
     {
@@ -63,6 +66,7 @@ public class Enemy : MonoBehaviour
 
         anim = GetComponent<Animator>();
         s_rend = GetComponent<SpriteRenderer>();
+        original_mat = s_rend.material;
         if( SpawnEffect || ( SpawnAnimation != null && SpawnAnimation.Length > 0 ) )
             Spawn();
         else
@@ -127,7 +131,7 @@ public class Enemy : MonoBehaviour
         if( SpawnAnimation == null || SpawnAnimation.Length == 0 )
         {
             Spawning = false;
-            if( !Zapped && attacks )
+            if( !Zapped && attacks && !StasisCoated )
                 StartMoving();
         }
         else
@@ -140,7 +144,7 @@ public class Enemy : MonoBehaviour
     public void SpawnAnimationDone()
     {
         Spawning = false;
-        if( !Zapped && attacks )
+        if( !Zapped && attacks && !StasisCoated )
             StartMoving();
     }
 
@@ -164,13 +168,16 @@ public class Enemy : MonoBehaviour
     public void Hit( Vector3 hit_direction, bool can_dodge )
     {
         bool died;
-        Hit( hit_direction, can_dodge, out died );
+        bool dodged;
+        Hit( hit_direction, can_dodge, out died, out dodged );
     }
 
-    public virtual void Hit( Vector3 hit_direction, bool can_dodge, out bool died, int damage = 1 )
+    public virtual void Hit( Vector3 hit_direction, bool can_dodge, out bool died, out bool dodged, int damage = 1 )
     {
+        dodged = false;
         if( Spawning || Dying )
         {
+            dodged = true; // if they're spawning or dying did they dodge it? Hmmm. Sure, I guess so
             died = false;
             return; // ignore being hit if we are spawning
         }
@@ -241,5 +248,21 @@ public class Enemy : MonoBehaviour
 
         StopMoving();
         zap_duration = duration;
+    }
+
+    public void StasisCoat( Material replacement_mat )
+    {
+        if( StasisCoated )
+            return;
+        s_rend.material = replacement_mat;
+        StasisCoated = true;
+        StopMoving();
+    }
+
+    public void EndStatisCoating()
+    {
+        s_rend.material = original_mat;
+        StasisCoated = false;
+        StartMoving();
     }
 }

@@ -8,4 +8,6 @@ public class AnomalyAbilityData : ScriptableObject
     public float Duration = 5.0f;
     public int RichochetSawExtraBounces = 1;
     public SpectralSaw SpectralSawPrefab;
+    public GameObject StasisTouchEffectPrefab;
+    public Material StasisTouchReplacementMaterial;
 }

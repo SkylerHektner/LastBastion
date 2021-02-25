@@ -11,6 +11,7 @@ public class Saw : MonoBehaviour
     // position, direction, speed
     public UnityEvent<Vector3, Vector3, float> SawFiredEvent = new UnityEvent<Vector3, Vector3, float>();
     public UnityEvent<Vector3> KilledEnemyEvent = new UnityEvent<Vector3>();
+    public UnityEvent<long> SawHitEnemyEvent = new UnityEvent<long>();
 
     [SerializeField] float MoveSpeed = 1.0f;
     [SerializeField] float MinDragDistance = 1.0f;
@@ -141,10 +142,14 @@ public class Saw : MonoBehaviour
             Vector3 pos = en.transform.position;
 
             bool died;
-            en.Hit( move_direction, true, out died, 1 + ( OnFire ? on_fire_extra_damage : 0 ) );
+            bool dodged;
+            long id = en.EnemyID;
+            en.Hit( move_direction, true, out died, out dodged, 1 + ( OnFire ? on_fire_extra_damage : 0 ) );
 
             if( died )
                 KilledEnemyEvent.Invoke( pos );
+            if( !dodged )
+                SawHitEnemyEvent.Invoke( id );
         }
         else if( col.tag == "Mudball" && !Moving )
             col.gameObject.GetComponent<MudSlingerProjectile>().HitSaw( this );

@@ -30,7 +30,7 @@ public class MudSlinger : Enemy
 
         if( mud_throw_cooldown != -1.0f )
         {
-            mud_throw_cooldown -= Time.deltaTime * GameplayManager.GamePlayTimeScale * ( Zapped ? 0.0f : 1.0f );
+            mud_throw_cooldown -= Time.deltaTime * GameplayManager.GamePlayTimeScale * ( ( Zapped || StasisCoated ) ? 0.0f : 1.0f );
 
             if( mud_throw_cooldown <= 0.0f )
                 StartThrowMud();
@@ -81,15 +81,16 @@ public class MudSlinger : Enemy
         //base.StartMoving();
     }
 
-    public override void Hit( Vector3 hit_direction, bool can_dodge, out bool died, int damage = 1 )
+    public override void Hit( Vector3 hit_direction, bool can_dodge, out bool died, out bool dodged, int damage = 1 )
     {
         if( !vanished )
         {
-            base.Hit( hit_direction, can_dodge, out died, damage );
+            base.Hit( hit_direction, can_dodge, out died, out dodged, damage );
         }
         else
         {
             died = false;
+            dodged = true;
         }
     }
 }
