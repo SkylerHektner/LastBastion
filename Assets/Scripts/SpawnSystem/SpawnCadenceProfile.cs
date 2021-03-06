@@ -19,6 +19,7 @@ public class SpawnCadenceProfile : ScriptableObject
         public List<SpawnGroup> SpawnGroups;
         public List<float> SpawnGroupSpawnTimes;
         public bool collapsed = false; // Editor UI Only
+        public string AnimationTrigger;
 
         public Wave()
         {
@@ -43,6 +44,8 @@ public class SpawnCadenceProfile : ScriptableObject
                 SpawnGroups.Add( e );
             foreach( var e in other.SpawnGroupSpawnTimes )
                 SpawnGroupSpawnTimes.Add( e );
+
+            AnimationTrigger = other.AnimationTrigger;
         }
     }
 }
@@ -99,6 +102,17 @@ public class SpawnCadenceProfileEditor : Editor
                 {
                     EditorUtility.SetDirty( target );
                     wave.CompletionReward = completion_reward;
+                }
+                EditorGUILayout.EndHorizontal();
+
+                // Animation Trigger
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Label( "Animation Trigger" );
+                string animation_trigger = EditorGUILayout.TextField( wave.AnimationTrigger );
+                if( animation_trigger != wave.AnimationTrigger )
+                {
+                    EditorUtility.SetDirty( target );
+                    wave.AnimationTrigger = animation_trigger;
                 }
                 EditorGUILayout.EndHorizontal();
 

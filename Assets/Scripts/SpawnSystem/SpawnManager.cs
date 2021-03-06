@@ -41,6 +41,7 @@ public class SpawnManager : MonoBehaviour
     private Dictionary<long, Enemy> spawned_enemies = new Dictionary<long, Enemy>();
     public List<Enemy> AllSpawnedEnemies { get { return spawned_enemies.Values.ToList<Enemy>(); } }
     public UnityEvent<Enemy> EnemySpawnedEvent = new UnityEvent<Enemy>();
+    public List<Animator> AnimationTriggerListeners = new List<Animator>();
     struct PendingSpawn
     {
         public float time_left;
@@ -128,6 +129,20 @@ public class SpawnManager : MonoBehaviour
         WaveCounterUI?.ShowNextWave( current_wave + 1 );
         cur_spawn_group_index = 0;
         passive_spawn_trackers.Clear();
+        if( !string.IsNullOrEmpty( spawnCadenceProfile.Waves[current_wave].AnimationTrigger ) )
+        {
+            var triggers = spawnCadenceProfile.Waves[current_wave].AnimationTrigger.Split( ',' ).Select( s => s.Trim() );
+            foreach( Animator anim in AnimationTriggerListeners )
+            {
+                foreach( string trigger in triggers )
+                {
+                    if( anim.parameters.Any( p => p.name == trigger ) )
+                    {
+                        anim.SetTrigger( trigger );
+                    }
+                }
+            }
+        }
         foreach( float time in spawnCadenceProfile.Waves[current_wave].PassiveEnemySpawnCadence )
         {
             if( time == 0.0f )
