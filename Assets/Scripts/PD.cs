@@ -102,6 +102,15 @@ public class PD
         {
             _instance.UpgradeUnlockMap.SetUnlock( flag, true );
         }
+        PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level1", true );
+        PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level2", true );
+        PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level3", true );
+        PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level4", true );
+        PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level5", true );
+        PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level6", true );
+        PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level7", true );
+        PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level8", true );
+        PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level9", true );
     }
 #endif
 
