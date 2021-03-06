@@ -4852,7 +4852,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1391013261
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_RenderMode: 3
   m_SortMode: 0
@@ -4953,7 +4953,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1391013261
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: -7399686728578280167, guid: 959d1235872cb0c48973b122357c467c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4978,10 +4978,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28115c6d4874a254181e338bfbbce637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 30
+  duration: 3
   DeleteDurationReached:
     m_PersistentCalls:
       m_Calls: []
+  IgnoreGameplayTimeScale: 0
 --- !u!58 &101339259
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5031,10 +5032,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928295838920b5e488c6ccc4c2e4fd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 20
+  MoveSpeed: 25
   MoveDirection: {x: 0, y: 0, z: 0}
   CurWallHitBehavior: 0
+  TimeScale: 0
   DestroyEffect: {fileID: 502324915706778173, guid: d1c9cdfc425f3d94bbc5e06fe26ebc2a, type: 3}
   ProjectileHitWallEvent:
     m_PersistentCalls:
       m_Calls: []
+  SawSlowDuration: 0
+  SawMoveSpeedMultiplier: 0
