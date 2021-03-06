@@ -168,8 +168,16 @@ public class SpawnManager : MonoBehaviour
             PD.Instance.LevelCompletionMap.SetLevelCompletion( spawnCadenceProfile.LevelIdentifier, true );
         }
         spawn_timer = -1.0f; // stop spawning
-        if( current_wave < spawnCadenceProfile.Waves.Count )
+        if( current_wave < spawnCadenceProfile.Waves.Count - 1 )
             StartNextWave();
+        else
+            SpawnCadenceComplete();
+    }
+
+    private void SpawnCadenceComplete()
+    {
+        Debug.Assert( VictoryScreen.instance != null );
+        VictoryScreen.instance?.DisplayVictory();
     }
 
     private Vector3 GetRandomSpawnPoint()

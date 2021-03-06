@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class VictoryScreen : MonoBehaviour
 {
+    public static VictoryScreen instance;
+
     public GameObject VictoryPopup;
     public GameObject PauseCanvas;
     public GameObject SawCanvas;
     public GameObject AbilityManager;
 
+    public void Start()
+    {
+        instance = this;
+    }
 
     [ContextMenu("DisplayVictory")]
     public void DisplayVictory()
