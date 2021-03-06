@@ -67,6 +67,7 @@ public class LevelScroller : MonoBehaviour
         if (Spectator.ReturningFromLevel == true)
         {
             Door.SetTrigger("Shortcut");
+            LevelIndex = Spectator.LevelIndex;
             JumpToDesiredLevel(LevelIndex);
             Portal.SetTrigger("Shrink");
             Spectator.ReturningFromLevel = false;

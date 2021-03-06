@@ -24,10 +24,10 @@ public class ProgressCanvas : MonoBehaviour
     }
     public void LoadSceneFromLimboResumeAnimation()
     {
-        Spectator.LevelIndex = PlayerPrefs.GetInt( "LevelIndex" );
+        Spectator.LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
         Spectator.ReturningFromLevel = true;
         PD.Instance.Limbo.Set( false );
-        SceneManager.LoadScene( PlayerPrefs.GetString( "ExitedScene" ) );
+        SceneManager.LoadScene( PD.Instance.ExitedScene.Get() );
     }
 
     public void ContinueSave()

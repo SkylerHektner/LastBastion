@@ -16,6 +16,7 @@ public class PD
     public PlayerDataField<int> PlayerWealth = new PlayerDataField<int>();
     public PlayerDataField<bool> Limbo = new PlayerDataField<bool>();
     public PlayerDataField<string> ExitedScene = new PlayerDataField<string>();
+    public PlayerDataField<int> StoredLimboLevelIndex = new PlayerDataField<int>();
     public PlayerUpgradeUnlockMap UpgradeUnlockMap = new PlayerUpgradeUnlockMap();
     public PlayerLevelCompletionMap LevelCompletionMap = new PlayerLevelCompletionMap();
 

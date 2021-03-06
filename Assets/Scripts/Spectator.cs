@@ -34,14 +34,8 @@ public class Spectator : MonoBehaviour
         {
             PD.Instance.Limbo.Set( true );
             PD.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
+            PD.Instance.StoredLimboLevelIndex.Set( Spectator.LevelIndex );
         }
-    }
-
-    // use me for random garbage - I don't matter :D
-    [ContextMenu( "TEST_METHOD" )]
-    private void TEST_METHOD()
-    {
-        PD.Instance.UpgradeUnlockMap.SetUnlock( PD.UpgradeFlags.ChainLightning, true );
     }
 
     // game is quit mid-game, save my current progress and put me in limbo
