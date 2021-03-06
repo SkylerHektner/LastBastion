@@ -8,11 +8,17 @@ using UnityEngine.UI;
 public class LoadLevel : MonoBehaviour
 {
     public string SceneToLoad;
-    public bool Locked {
-        get {
+    // list of level identifiers that must be marked complete for level to be unlocked
+    public List<string> RequiredLevelCompletion = new List<string>();
+
+    public bool Locked
+    {
+        get
+        {
             return locked;
         }
-        set {
+        set
+        {
             locked = value;
 
             if( locked )
@@ -52,16 +58,16 @@ public class LoadLevel : MonoBehaviour
     {
         LevelImage = UnlockedImage;
 
-        Locked = false;
-        bool my_bool = Locked;
+        Locked = !RequiredLevelCompletion.TrueForAll( level_identifier =>
+            PD.Instance.LevelCompletionMap.GetLevelCompletion( level_identifier ) );
     }
 
 
     public void ShowContract()
     {
-        LevelInfo.SetBool("Open", true);
+        LevelInfo.SetBool( "Open", true );
         LevelPopup.SceneName = SceneToLoad; // tell the popup what scene I want it to load
-        UpgradesBar.SetTrigger("Hide");
+        UpgradesBar.SetTrigger( "Hide" );
     }
 
 
