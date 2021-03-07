@@ -16,6 +16,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject SkeletonPrefab;
     [SerializeField] GameObject ShieldSkeletonPrefab;
     [SerializeField] GameObject PumpkinWarriorPrefab;
+    [SerializeField] GameObject PumpKINGPrefab;
     [SerializeField] GameObject BolterPrefab;
     [SerializeField] GameObject MudSlingerPrefab;
     [SerializeField] GameObject ShrikePrefab;
@@ -338,6 +339,9 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.PumpkinWarrior:
                 ret = Instantiate( PumpkinWarriorPrefab );
                 break;
+            case EnemyEnum.PumpKING:
+                ret = Instantiate(PumpKINGPrefab);
+                break;
             case EnemyEnum.Bolter:
                 ret = Instantiate( BolterPrefab );
                 break;
@@ -388,6 +392,7 @@ public enum EnemyEnum
     CarrierM = 9,
     CarrierS = 10,
     RedSkeleton = 11,
+    PumpKING = 12,
 }
 
 // EDITOR

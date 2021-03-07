@@ -35,6 +35,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] string DamagedAnimation;
     [SerializeField] bool attacks = true;
     [SerializeField] private int powerupDropValue = 1;
+    public bool PumpKING;
+
     public int PowerupDropValue
     {
         get
@@ -182,12 +184,26 @@ public class Enemy : MonoBehaviour
             return; // ignore being hit if we are spawning
         }
 
-        if( Zapped )
-            CurrentHealth = 0;
+        if (Zapped)
+            if (PumpKING) // no 1 hitting bosses
+            {
+                CurrentHealth -= 1;
+                gameObject.GetComponent<Animator>().SetFloat("CurrentHP", CurrentHealth);
+            }
+            else
+            {
+                CurrentHealth = 0;
+            }
         else
+        {
             CurrentHealth -= damage;
+            if (PumpKING)
+            {
+                gameObject.GetComponent<Animator>().SetFloat("CurrentHP", CurrentHealth);
+            }
+        }
 
-        if( CurrentHealth <= 0 )
+        if ( CurrentHealth <= 0 )
         {
             died = true;
             Kill();

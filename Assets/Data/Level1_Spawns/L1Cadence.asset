@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6e2cdfe8d02ce4bac5d67a2314a748, type: 3}
   m_Name: L1Cadence
   m_EditorClassIdentifier: 
+  LevelIdentifier: CHANGE_ME
   Waves:
-  - PassiveEnemies: 
+  - CompletionReward: 0
+    PassiveEnemies: 
     PassiveEnemySpawnCadence: []
     SpawnGroups:
     - {fileID: 11400000, guid: 53dc6da83c43b8b419cad100ee29cb6e, type: 2}
@@ -22,7 +24,9 @@ MonoBehaviour:
     - 3
     - 6
     collapsed: 1
-  - PassiveEnemies: 
+    AnimationTrigger: 
+  - CompletionReward: 0
+    PassiveEnemies: 
     PassiveEnemySpawnCadence: []
     SpawnGroups:
     - {fileID: 11400000, guid: fa41591e7469cd64ebea71d1513e05b5, type: 2}
@@ -33,7 +37,9 @@ MonoBehaviour:
     - 8
     - 12
     collapsed: 1
-  - PassiveEnemies: 
+    AnimationTrigger: 
+  - CompletionReward: 0
+    PassiveEnemies: 
     PassiveEnemySpawnCadence: []
     SpawnGroups:
     - {fileID: 11400000, guid: 735044b2558bd6b44a4d6b1f01902cb4, type: 2}
@@ -48,7 +54,9 @@ MonoBehaviour:
     - 12
     - 17
     collapsed: 1
-  - PassiveEnemies: 01000000
+    AnimationTrigger: 
+  - CompletionReward: 0
+    PassiveEnemies: 01000000
     PassiveEnemySpawnCadence:
     - 1
     SpawnGroups:
@@ -64,7 +72,9 @@ MonoBehaviour:
     - 24
     - 28
     collapsed: 1
-  - PassiveEnemies: 
+    AnimationTrigger: 
+  - CompletionReward: 0
+    PassiveEnemies: 
     PassiveEnemySpawnCadence: []
     SpawnGroups:
     - {fileID: 11400000, guid: cbb06549a77b72f47ae0cbaffd0af86b, type: 2}
@@ -83,3 +93,4 @@ MonoBehaviour:
     - 22
     - 24
     collapsed: 1
+    AnimationTrigger: 
