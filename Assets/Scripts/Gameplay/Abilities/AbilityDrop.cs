@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AbilityDrop : MonoBehaviour
 {
     public AbilityEnum ability;
     public bool JustSpawned = true;
+    public float DespawnTimer;
+    Animator Crystal;
 
     private void Start()
     {
         Invoke( "ToggleJustSpawnedOff", 0.1f );
+        Crystal = gameObject.GetComponent<Animator>();
     }
 
     private void ToggleJustSpawnedOff()
@@ -28,5 +32,11 @@ public class AbilityDrop : MonoBehaviour
     private void AnimEnd()
     {
         Destroy( gameObject );
+    }
+
+    private void FixedUpdate()
+    {
+        DespawnTimer -= Time.smoothDeltaTime * GameplayManager.GamePlayTimeScale;
+        Crystal.SetFloat("DespawnTimer", DespawnTimer);
     }
 }

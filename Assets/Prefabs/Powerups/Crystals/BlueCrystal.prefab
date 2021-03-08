@@ -179,6 +179,8 @@ GameObject:
   - component: {fileID: 1961617149}
   - component: {fileID: 1961617148}
   - component: {fileID: 5871076575733930865}
+  - component: {fileID: 1177496272251211295}
+  - component: {fileID: 5481074968770862468}
   m_Layer: 12
   m_Name: BlueCrystal
   m_TagString: AbilityDrop
@@ -322,3 +324,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability: 1
   JustSpawned: 1
+  DespawnTimer: 10
+--- !u!114 &1177496272251211295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8734898698075878155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28115c6d4874a254181e338bfbbce637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 10
+  DeleteDurationReached:
+    m_PersistentCalls:
+      m_Calls: []
+  IgnoreGameplayTimeScale: 0
+--- !u!114 &5481074968770862468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8734898698075878155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b11517efcdcd14ab2af70f6eaa8eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
