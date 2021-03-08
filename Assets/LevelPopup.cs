@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelPopup : MonoBehaviour
 {
@@ -9,7 +10,29 @@ public class LevelPopup : MonoBehaviour
     public int Index;
     public Animator UpgradesBar;
     public Animator Portal;
+    public TextMeshProUGUI GameModeText;
+    public TextMeshProUGUI CompletionPayout;
+    public TextMeshProUGUI ChallengeText;
+    public TextMeshProUGUI Description;
 
+    public GameObject ScratchoutTitle;
+    public GameObject ScratchoutChallenge;
+
+    private void Update()
+    {
+        if (SceneName != null)
+        {
+            if (PD.Instance.LevelCompletionMap.GetLevelCompletion(SceneName)) // scratch out reward if claimed
+            {
+                ScratchoutTitle.SetActive(true);
+            }
+            else
+            {
+                ScratchoutTitle.SetActive(false);
+            }
+        }
+
+    }
 
     public void AcceptContract() // called by animator
     {

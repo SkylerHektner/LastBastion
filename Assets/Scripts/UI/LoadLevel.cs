@@ -51,6 +51,33 @@ public class LoadLevel : MonoBehaviour
     public Vector4 GlowRGB;
     public Animator LevelInfo;
 
+    public string MyGameModeText;
+    public string MyDescription;
+    public int MyCompletionPayout;
+    public string MyChallenge;
+
+
+    public LevelPopup ContractPopup;
+
+    //private bool ChallengeCompleted
+    //{
+    //    get
+    //    {
+    //        // return pd data later
+    //    }
+    //    set
+    //    {
+    //        if (ChallengeCompleted) // scratch out challeng if claimed
+    //        {
+    //            ScratchoutChallenge.SetActive(true);
+    //        }
+    //        else
+    //        {
+    //            ScratchoutChallenge.SetActive(false);
+    //        }
+    //    }
+    //}
+
 
     // If I don't call this, the image appears blank white at the start.  
     //This is ok to do because the player only sees this when starting the game and returning from an unlocked level
@@ -65,9 +92,21 @@ public class LoadLevel : MonoBehaviour
 
     public void ShowContract()
     {
-        LevelInfo.SetBool( "Open", true );
+        LevelInfo.SetBool("Open", true);
         LevelPopup.SceneName = SceneToLoad; // tell the popup what scene I want it to load
-        UpgradesBar.SetTrigger( "Hide" );
+        UpgradesBar.SetTrigger("Hide");
+        // load contract info
+        UpdateContract();
+    }
+
+    public void UpdateContract()
+    {
+        ContractPopup.CompletionPayout.text = MyCompletionPayout.ToString();
+        ContractPopup.GameModeText.text = MyGameModeText;
+        ContractPopup.Description.text = MyDescription;
+
+        ContractPopup.ChallengeText.text = MyChallenge;
+
     }
 
 

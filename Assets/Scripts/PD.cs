@@ -47,6 +47,7 @@ public class PD
         Turrets1,                        // not implemented
         Turrets2,                        // not implemented
         Turrets3,                        // not implemented
+        Turrets4,
     }
 
     // EVENTS
