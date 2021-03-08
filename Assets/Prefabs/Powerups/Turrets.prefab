@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 7910019525597846246}
   - component: {fileID: 7157325867773149993}
   - component: {fileID: 9153592056529915031}
+  - component: {fileID: 801222539217121800}
   m_Layer: 0
   m_Name: PivotR
   m_TagString: Untagged
@@ -99,6 +100,18 @@ MonoBehaviour:
   RotationSpeed: 1
   ProjectilePrefab: {fileID: 3712740565576112665, guid: 7f3793806130e134bb23f4bf1846d013, type: 3}
   ProjectileSpawnPoint: {fileID: 7449835396028015410}
+--- !u!114 &801222539217121800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226624016352146898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b11517efcdcd14ab2af70f6eaa8eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3746666709561917521
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,6 +123,7 @@ GameObject:
   - component: {fileID: 3746666709561917522}
   - component: {fileID: 3746666709561917523}
   - component: {fileID: 3525828674141721698}
+  - component: {fileID: 693946182272722106}
   m_Layer: 13
   m_Name: PivotL
   m_TagString: Untagged
@@ -168,6 +182,18 @@ MonoBehaviour:
   RotationSpeed: 1
   ProjectilePrefab: {fileID: 3712740565576112665, guid: 7f3793806130e134bb23f4bf1846d013, type: 3}
   ProjectileSpawnPoint: {fileID: 2107046623679752514}
+--- !u!114 &693946182272722106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3746666709561917521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b11517efcdcd14ab2af70f6eaa8eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3746666709579590553
 GameObject:
   m_ObjectHideFlags: 0
