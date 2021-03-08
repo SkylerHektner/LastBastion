@@ -33,9 +33,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] string SpawnAnimation;
     [SerializeField] GameObject DamagedEffect;
     [SerializeField] string DamagedAnimation;
+    [SerializeField] string CurrentHealthAnimationParameter;
     [SerializeField] bool attacks = true;
     [SerializeField] private int powerupDropValue = 1;
-    public bool PumpKING;
+    [SerializeField] bool ImmuneToZapBonusDamage;
 
     public int PowerupDropValue
     {
@@ -184,26 +185,19 @@ public class Enemy : MonoBehaviour
             return; // ignore being hit if we are spawning
         }
 
-        if (Zapped)
-            if (PumpKING) // no 1 hitting bosses
-            {
-                CurrentHealth -= 1;
-                gameObject.GetComponent<Animator>().SetFloat("CurrentHP", CurrentHealth);
-            }
-            else
-            {
-                CurrentHealth = 0;
-            }
+        if( Zapped && !ImmuneToZapBonusDamage )
+        {
+            CurrentHealth = 0;
+        }
         else
         {
             CurrentHealth -= damage;
-            if (PumpKING)
-            {
-                gameObject.GetComponent<Animator>().SetFloat("CurrentHP", CurrentHealth);
-            }
         }
 
-        if ( CurrentHealth <= 0 )
+        if( !string.IsNullOrEmpty( CurrentHealthAnimationParameter ) )
+            anim.SetFloat( CurrentHealthAnimationParameter, CurrentHealth );
+
+        if( CurrentHealth <= 0 )
         {
             died = true;
             Kill();
@@ -213,7 +207,7 @@ public class Enemy : MonoBehaviour
             died = false;
             if( DamagedEffect != null )
                 Instantiate( DamagedEffect ).transform.position = transform.position;
-            if( DamagedAnimation != null && DamagedAnimation.Length > 0 )
+            if( !string.IsNullOrEmpty( DamagedAnimation ) )
                 anim.SetTrigger( DamagedAnimation );
         }
     }
