@@ -13,7 +13,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: CurrentHP
-    m_EventTreshold: 20
+    m_EventTreshold: 35
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3644043179635262167}
   m_Solo: 0
@@ -123,7 +123,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: CurrentHP
-    m_EventTreshold: 10
+    m_EventTreshold: 20
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8212118932394174720}
   m_Solo: 0
@@ -186,7 +186,7 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: CurrentHP
     m_Type: 1
-    m_DefaultFloat: 30
+    m_DefaultFloat: 50
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
