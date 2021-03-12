@@ -260,6 +260,9 @@ public class Saw : MonoBehaviour
 
     public void SetOnFire( float duration, int extra_damage, float move_speed_multiplier )
     {
+        if( cover_in_mud_duration > 0.0f )
+            EndCoverInMud(); // clear cover in mud status effect if we have it
+
         // if already on fire keep effect with longest duration
         if( on_fire_duration < duration )
         {
