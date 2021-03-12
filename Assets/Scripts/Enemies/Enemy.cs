@@ -88,6 +88,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+
         if( Moving )
         {
             if( transform.position.y - SpawnManager.Instance.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed * GameplayManager.GamePlayTimeScale )

@@ -8210,9 +8210,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1391013261
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -6605649985525735650, guid: 03f98a28e23b5814f8bb121fdfe93aa1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9130,9 +9130,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1391013261
-  m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -3870541607752106652, guid: 03f98a28e23b5814f8bb121fdfe93aa1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -28148,7 +28148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28985,7 +28985,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1167876331
 MonoBehaviour:
@@ -35750,6 +35750,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 898178492}
     m_Modifications:
+    - target: {fileID: 1752228630966197940, guid: b676cb13affb64e45b3e53ed3237e5e1, type: 3}
+      propertyPath: m_text
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 1752228630982217184, guid: b676cb13affb64e45b3e53ed3237e5e1, type: 3}
       propertyPath: m_Name
       value: VictoryCanvas
@@ -36535,9 +36539,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1434744865}
     - target: {fileID: 7789005852123475835, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
+      propertyPath: DebugStartWave
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7789005852123475835, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
       propertyPath: spawnCadenceProfile
       value: 
-      objectReference: {fileID: 11400000, guid: 0339f0daa59a09b40a884670b31ccd2a, type: 2}
+      objectReference: {fileID: 11400000, guid: 1f16ff1e496eb9d4d9f22b758f71d39f, type: 2}
     - target: {fileID: 7789005852123475835, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
       propertyPath: PlayableAreaTopRight.y
       value: 10.85
@@ -36566,6 +36574,14 @@ PrefabInstance:
       propertyPath: DoorSpawnPoints.Array.data[0].y
       value: 12.7
       objectReference: {fileID: 0}
+    - target: {fileID: 7789005852123475835, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
+      propertyPath: AnimationTriggerListeners.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7789005852123475835, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
+      propertyPath: AnimationTriggerListeners.Array.data[0]
+      value: 
+      objectReference: {fileID: 843995728}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
 --- !u!1001 &8093230868175664725
