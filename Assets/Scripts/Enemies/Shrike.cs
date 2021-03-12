@@ -10,6 +10,7 @@ public class Shrike : Enemy
 
     private float current_teleport_cooldown = 0.0f;
     private bool teleporting = false;
+    private Vector3 teleport_direction = Vector3.zero;
 
     private Vector3 last_saw_hit_direction;
 
@@ -33,7 +34,7 @@ public class Shrike : Enemy
         {
             last_saw_hit_direction = hit_direction;
             StopMoving();
-            Teleport();
+            Teleport(hit_direction);
             died = false;
             dodged = true;
         }
@@ -43,8 +44,19 @@ public class Shrike : Enemy
         }
     }
 
-    private void Teleport()
+    private void Teleport(Vector3 hit_direction)
     {
+        if(hit_direction != Vector3.zero)
+        {
+            Vector3 perp_clockwise = MathUtility.PerpendicularClockwise( hit_direction );
+            Vector3 perp_counter_clockwise = MathUtility.PerpendicularCounterClockwise( hit_direction );
+            teleport_direction = ( perp_clockwise.y > 0 ? perp_clockwise : perp_counter_clockwise ).normalized;
+        }
+        else
+        {
+            teleport_direction.x = 0; teleport_direction.y = 1; teleport_direction.z = 0;
+        }
+        
         anim.SetTrigger( "Teleport" );
         Invoke( "TeleportFinished", TeleportDuration );
         Invoke( "ChangePosition", TeleportDuration * 0.5f );
@@ -52,7 +64,9 @@ public class Shrike : Enemy
 
     private void ChangePosition()
     {
-        Vector3 new_pos = new Vector3( transform.position.x, Mathf.Max( Rails.Instance.Bottom, transform.position.y - TeleportDistance ) );
+        Vector3 new_pos = transform.position + teleport_direction * TeleportDistance;
+        new_pos.y = Mathf.Clamp( new_pos.y, Rails.Instance.Bottom, Rails.Instance.Top );
+        new_pos.x = Mathf.Clamp( new_pos.x, Rails.Instance.Left, Rails.Instance.Right );
         transform.position = new_pos;
     }
 
