@@ -70,16 +70,23 @@ public class BaseHP : MonoBehaviour
         CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP3 ) ? MaxHPUpgrade3 : 0;
     }
 
-    [ContextMenu("KillPlayer")]
+    [ContextMenu( "KillPlayer" )]
     public void KillPLayer()
     {
-        ReduceHP(1000);
+        ReduceHP( 1000 );
     }
 
     public void ReduceHP( int Damage )
     {
+        // if somehow the player already won let's just ignore that...
+        if( GameplayManager.PlayerWinState == GameplayManager.PlayerState.Won )
+        {
+            Debug.LogWarning( "Player base took damage despite player already having won" );
+            return;
+        }
+
         // if I have overshield, damage that instead
-        if( CurrentOvershield > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseOvershield))
+        if( CurrentOvershield > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseOvershield ) )
         {
             CurrentOvershield -= Damage;
             OvershieldAnim.SetBool( "Recovering", true );
@@ -123,10 +130,9 @@ public class BaseHP : MonoBehaviour
                 PauseCanvas.SetActive( false );
                 DeathExplosions.SetActive( true );
                 WoundedGlow.SetActive( false );
+                GameplayManager.PlayerWinState = GameplayManager.PlayerState.Lost;
             }
         }
-
-
     }
 
     private void FixedUpdate()

@@ -9,13 +9,22 @@ using UnityEngine.Events;
 public class GameplayManager : MonoBehaviour
 {
     public static GameplayManager Instance { get; private set; }
+
+    // WIN LOSS STATE
+    public enum PlayerState
+    {
+        Active,
+        Won,
+        Lost
+    }
+    public static PlayerState PlayerWinState = PlayerState.Active;
+
+    // TIME SCALE
     public static float GamePlayTimeScale {
         get {
             return Instance.GetTimeScale( TimeScale.Combined );
         }
     }
-
-    // TIME SCALE
     public enum TimeScale
     {
         Combined,

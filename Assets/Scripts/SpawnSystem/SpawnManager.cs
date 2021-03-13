@@ -163,7 +163,7 @@ public class SpawnManager : MonoBehaviour
         if( !PD.Instance.LevelCompletionMap.GetWaveCompletion( spawnCadenceProfile.LevelIdentifier, current_wave ) )
         {
             int reward = spawnCadenceProfile.Waves[current_wave].CompletionReward;
-            if(reward > 0)
+            if( reward > 0 )
             {
                 PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.LevelIdentifier, current_wave, true );
                 PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + reward );
@@ -184,8 +184,13 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnCadenceComplete()
     {
-        Debug.Assert( VictoryScreen.instance != null );
-        VictoryScreen.instance?.DisplayVictory(total_level_earnings);
+        if( GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
+        {
+            GameplayManager.PlayerWinState = GameplayManager.PlayerState.Won;
+            Debug.Assert( VictoryScreen.instance != null );
+            VictoryScreen.instance?.DisplayVictory( total_level_earnings );
+        }
+
     }
 
     private Vector3 GetRandomSpawnPoint()
@@ -348,7 +353,7 @@ public class SpawnManager : MonoBehaviour
                 ret = Instantiate( PumpkinWarriorPrefab );
                 break;
             case EnemyEnum.PumpKING:
-                ret = Instantiate(PumpKINGPrefab);
+                ret = Instantiate( PumpKINGPrefab );
                 break;
             case EnemyEnum.Bolter:
                 ret = Instantiate( BolterPrefab );
