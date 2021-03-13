@@ -22,7 +22,7 @@ public class TyphoonAbility : Ability
         roaring_flames_duration_carryover = AbilityData.Duration * 0.5f;
         ActiveTyphoon = this;
         if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames )
-            || PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.TyphoonExtendedBBQ ) )
+            || PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonExtendedBBQ ) )
         {
             Saw.Instance.KilledEnemyEvent.AddListener( OnSawKilledEnemy );
             listening = true;
@@ -90,5 +90,12 @@ public class TyphoonAbility : Ability
                 corpse.transform.position = enemy_position;
             }
         }
+    }
+
+    public override void OnSceneExit()
+    {
+        if( ActiveTyphoon != null )
+            GameObject.Destroy( ActiveTyphoonDeleteAfterDuration.gameObject );
+        base.OnSceneExit();
     }
 }

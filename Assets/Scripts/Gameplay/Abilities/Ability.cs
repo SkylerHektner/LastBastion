@@ -44,4 +44,9 @@ public class Ability
     {
         return true;
     }
+
+    public virtual void OnSceneExit()
+    {
+
+    }
 }

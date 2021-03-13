@@ -141,6 +141,12 @@ public class AbilityManager : MonoBehaviour
         foreach( var ab in active_abilities )
             Debug.Log( ab.Value.name );
     }
+
+    private void OnDestroy()
+    {
+        foreach( var ab in active_abilities )
+            ab.Value.OnSceneExit();
+    }
 }
 
 public enum AbilityEnum
