@@ -190,12 +190,9 @@ public class Enemy : MonoBehaviour
 
         if( Zapped && !ImmuneToZapBonusDamage )
         {
-            CurrentHealth = 0;
+            ++damage;
         }
-        else
-        {
-            CurrentHealth -= damage;
-        }
+        CurrentHealth -= damage;
 
         if( !string.IsNullOrEmpty( CurrentHealthAnimationParameter ) )
             anim.SetFloat( CurrentHealthAnimationParameter, CurrentHealth );
