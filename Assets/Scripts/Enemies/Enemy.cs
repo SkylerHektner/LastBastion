@@ -77,7 +77,9 @@ public class Enemy : MonoBehaviour
 
         anim.speed = GameplayManager.GamePlayTimeScale;
 
-        SpawnManager.Instance?.RegisterEnemy( this );
+        // if we haven't been registered, register ourselves (useful debugging feature for monsters that were in the scene at start)
+        if( SpawnManager.Instance.TryGetEnemyByID( enemyID ) == null )
+            SpawnManager.Instance?.RegisterEnemy( this );
     }
 
     public void DamageBase() //  Do my max health as damage to the base HP
@@ -213,7 +215,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Kill()
+    public virtual void Kill()
     {
         StopMoving();
         OnDeath.Invoke( EnemyID );

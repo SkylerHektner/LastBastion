@@ -39,7 +39,6 @@ public class AbilityDropManager : MonoBehaviour
             for( int x = 0; x < dead_enemy.PowerupDropValue; ++x )
             {
                 ++cur_drop_bias;
-                // TODO: Allow multiple powerups to drop from one enemy?
                 if( TryDropPowerup( dead_enemy.transform.position ) )
                     break;
             }

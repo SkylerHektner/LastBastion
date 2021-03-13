@@ -6,10 +6,10 @@ public class Carrier : Enemy
 {
     [SerializeField] SpawnGroup OnDeathSpawnGroup;
 
-    protected override void Die()
+    public override void Kill()
     {
         if( OnDeathSpawnGroup )
             SpawnManager.Instance.SpawnSpawnGroup( OnDeathSpawnGroup, transform.position, false );
-        base.Die();
+        base.Kill();
     }
 }
