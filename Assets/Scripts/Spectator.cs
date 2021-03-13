@@ -30,7 +30,8 @@ public class Spectator : MonoBehaviour
     [ContextMenu( "ToggleLimbo" )]
     public void TryToggleLimbo()
     {
-        if( SceneManager.GetActiveScene().name != "Menu" ) // only save current progress if you are in a current level
+        if( SceneManager.GetActiveScene().name != "Menu" 
+            && GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
         {
             PD.Instance.Limbo.Set( true );
             PD.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
