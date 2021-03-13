@@ -85,9 +85,12 @@ public class TyphoonAbility : Ability
             }
             if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonExtendedBBQ ) )
             {
-                TyphoonFlamingCorpse corpse = GameObject.Instantiate( AbilityData.FlamingCorpsePrefab );
-                corpse.Setup( AbilityData.ExtendedBBQRadius, AbilityData.ExtendedBBQDamageTickRate );
-                corpse.transform.position = enemy_position;
+                if( Random.Range( 0.0f, 1.0f ) < AbilityData.ExtendedBBQCorpseChance )
+                {
+                    TyphoonFlamingCorpse corpse = GameObject.Instantiate( AbilityData.FlamingCorpsePrefab );
+                    corpse.Setup( AbilityData.ExtendedBBQRadius, AbilityData.ExtendedBBQDamageTickRate );
+                    corpse.transform.position = enemy_position;
+                }
             }
         }
     }
