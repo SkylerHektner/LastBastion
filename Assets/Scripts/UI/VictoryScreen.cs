@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,7 @@ public class VictoryScreen : MonoBehaviour
     public GameObject PauseCanvas;
     public GameObject SawCanvas;
     public GameObject AbilityManager;
+    public TextMeshProUGUI CandyGivenText;
 
     public void Start()
     {
@@ -18,12 +20,17 @@ public class VictoryScreen : MonoBehaviour
     }
 
     [ContextMenu("DisplayVictory")]
-    public void DisplayVictory()
+    public void DisplayVictory(int total_level_earnings)
     {
         VictoryPopup.SetActive(true);
         PauseCanvas.SetActive(false);
         SawCanvas.SetActive(false);
         AbilityManager.SetActive(false);
+
+        if( CandyGivenText == null )
+            Debug.LogError( "CandyGivenText not assigned in victory screen", this );
+        if( CandyGivenText != null )
+            CandyGivenText.text = total_level_earnings.ToString();
     }
 
     public void LoadMenu()

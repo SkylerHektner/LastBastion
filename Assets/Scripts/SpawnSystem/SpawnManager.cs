@@ -43,6 +43,8 @@ public class SpawnManager : MonoBehaviour
     public List<Enemy> AllSpawnedEnemies { get { return spawned_enemies.Values.ToList<Enemy>(); } }
     public UnityEvent<Enemy> EnemySpawnedEvent = new UnityEvent<Enemy>();
     public List<Animator> AnimationTriggerListeners = new List<Animator>();
+    private int total_level_earnings = 0;
+
     struct PendingSpawn
     {
         public float time_left;
@@ -160,8 +162,13 @@ public class SpawnManager : MonoBehaviour
         // if this is the first time completing this wave, mark it as complete and grant the player a reward
         if( !PD.Instance.LevelCompletionMap.GetWaveCompletion( spawnCadenceProfile.LevelIdentifier, current_wave ) )
         {
-            PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.LevelIdentifier, current_wave, true );
-            PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + spawnCadenceProfile.Waves[current_wave].CompletionReward );
+            int reward = spawnCadenceProfile.Waves[current_wave].CompletionReward;
+            if(reward > 0)
+            {
+                PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.LevelIdentifier, current_wave, true );
+                PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + reward );
+                total_level_earnings += reward;
+            }
         }
         // if this was the final wave then mark the level complete
         if( current_wave == spawnCadenceProfile.Waves.Count - 1 && !PD.Instance.LevelCompletionMap.GetLevelCompletion( spawnCadenceProfile.LevelIdentifier ) )
@@ -178,7 +185,7 @@ public class SpawnManager : MonoBehaviour
     private void SpawnCadenceComplete()
     {
         Debug.Assert( VictoryScreen.instance != null );
-        VictoryScreen.instance?.DisplayVictory();
+        VictoryScreen.instance?.DisplayVictory(total_level_earnings);
     }
 
     private Vector3 GetRandomSpawnPoint()
