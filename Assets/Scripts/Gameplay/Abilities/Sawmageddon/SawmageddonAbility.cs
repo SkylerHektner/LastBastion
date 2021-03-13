@@ -21,6 +21,7 @@ public class SawmageddonAbility : Ability
     {
         int num_extra_saws = PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonProjectiles )
             ? AbilityData.ImprovedNumberExtraSaws : AbilityData.NumberExtraSaws;
+        HashSet<long> shared_collision_set = new HashSet<long>();
         for( int x = 0; x < num_extra_saws; ++x )
         {
             int angle_mult = ( x % 2 == 1 ? -1 : 1 ) * ( x / 2 + 1 );
@@ -29,6 +30,7 @@ public class SawmageddonAbility : Ability
             spec_saw.gameObject.transform.position = pos;
             spec_saw.SetProjectileSpeed( speed );
             spec_saw.StartMoveInDirection( new_direction );
+            spec_saw.SetSharedCollisionSet( shared_collision_set );
         }
     }
 
