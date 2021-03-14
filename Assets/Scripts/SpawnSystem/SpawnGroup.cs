@@ -21,6 +21,7 @@ public class SpawnGroup : ScriptableObject
         Cluster,
         Spread,
         Door,
+        Boss,
     }
 }
 

@@ -31,6 +31,7 @@ public class SpawnManager : MonoBehaviour
     public Vector3 PlayableAreaTopRight;
     public Vector3 PlayableAreaBottomLeft;
     public List<Vector3> DoorSpawnPoints = new List<Vector3>();
+    public Vector3 BossSpawnPoint = Vector3.zero;
     [Header( "Misc" )]
     [SerializeField] WaveCounter WaveCounterUI;
 
@@ -245,6 +246,18 @@ public class SpawnManager : MonoBehaviour
                 }
             }
         }
+        else if( sg.layout == SpawnGroup.Layout.Boss )
+        {
+            float stagger = 0.0f;
+            foreach( var e in sg.SpawnMap )
+            {
+                for( int x = 0; x < e.Value; ++x )
+                {
+                    SpawnMonster( e.Key, BossSpawnPoint, stagger );
+                    stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                }
+            }
+        }
         else
         {
             SpawnGroupRandomPlacement( sg );
@@ -447,6 +460,11 @@ public class SpawnManagerEditor : Editor
                 Handles.color = Color.red;
                 Handles.DrawWireDisc( door_spawn_point, Vector3.forward, 0.2f );
             }
+        }
+
+        {
+            Handles.color = Color.magenta;
+            Handles.DrawWireDisc( spawn_manager.BossSpawnPoint, Vector3.forward, 0.2f );
         }
 
     }
