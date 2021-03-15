@@ -25,13 +25,13 @@ public class PauseManager : MonoBehaviour
         WaveCounter.SetBool("Visible", true);
         BonusScreen.SetActive(false);
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseGame();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        PauseGame();
+    //    }
+    //}
 
     public void ExitGame()
     {

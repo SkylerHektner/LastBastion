@@ -12,12 +12,12 @@ public class RewardCanvas : MonoBehaviour
         RewardScreen.SetTrigger("Display");
     }
 
-    // Gotta remember to delete this debug stuff
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DisplayReward();
-        }
-    }
+    //// Gotta remember to delete this debug stuff
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        DisplayReward();
+    //    }
+    //}
 }

@@ -25,6 +25,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject CarrierMPrefab;
     [SerializeField] GameObject CarrierSPrefab;
     [SerializeField] GameObject RedSkeletonPrefab;
+    [SerializeField] GameObject SkullyBossPrefab;
+
     [Header( "Spawn Area Information" )]
     public Vector3 SpawnableAreaTopRight;
     public Vector3 SpawnableAreaBottomLeft;
@@ -392,6 +394,9 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.RedSkeleton:
                 ret = Instantiate( RedSkeletonPrefab );
                 break;
+            case EnemyEnum.SkullyBoss:
+                ret = Instantiate(SkullyBossPrefab);
+                break;
             case 0:
                 Debug.LogError( "ERROR: Tried to spawn an enemy " + enemy.ToString() + " that hasn't been added to the InstantiateMonster switch" );
                 break;
@@ -419,6 +424,7 @@ public enum EnemyEnum
     CarrierS = 10,
     RedSkeleton = 11,
     PumpKING = 12,
+    SkullyBoss = 13,
 }
 
 // EDITOR
