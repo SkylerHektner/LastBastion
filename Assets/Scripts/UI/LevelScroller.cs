@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class LevelScroller : MonoBehaviour
+public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
     public RectTransform LevelBar;
     public float BarXPos;
@@ -27,6 +28,8 @@ public class LevelScroller : MonoBehaviour
     public Image GlowFX;
     public Image PortalRim;
     public Color GlowColor;
+
+    bool Dragging;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -126,8 +129,13 @@ public class LevelScroller : MonoBehaviour
 
     public void SetDragBuffer()
     {
-        DragBuffer = .2f;
+        if (Dragging == false)
+        {
+            DragBuffer = .05f;
+        }
     }
+
+    
 
     public void RepositionBar()
     {
@@ -146,5 +154,17 @@ public class LevelScroller : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        Dragging = true;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Dragging = false;
+        SetDragBuffer();
+        gameObject.GetComponent<ScrollRect>().velocity = Vector2.zero;
     }
 }
