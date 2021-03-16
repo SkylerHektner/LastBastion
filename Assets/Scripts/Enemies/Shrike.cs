@@ -13,13 +13,21 @@ public class Shrike : Enemy
     private Vector3 teleport_direction = Vector3.zero;
 
     private Vector3 last_saw_hit_direction;
+    public GameObject TeleportFX;
 
     protected override void Update()
     {
         base.Update();
 
-        if( current_teleport_cooldown > 0.0f )
+        if( current_teleport_cooldown > 0.0f)
+        {
             current_teleport_cooldown -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
+            TeleportFX.SetActive(true);
+        }
+        else
+        {
+            TeleportFX.SetActive(false);
+        }
     }
 
     public override void Hit( Vector3 hit_direction, bool can_dodge, out bool died, out bool dodged, int damage = 1 )
