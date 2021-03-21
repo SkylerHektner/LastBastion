@@ -23,9 +23,9 @@ public class DeleteAfterDuration : MonoBehaviour
         }
     }
 
-    public void DestroyOnDeathHook(long EnemyID)
+    public void DestroyOnDeathHook(Enemy en)
     {
-        SpawnManager.Instance.TryGetEnemyByID( EnemyID )?.OnDeath.RemoveListener( DestroyOnDeathHook );
+        en.DeathEvent.RemoveListener( DestroyOnDeathHook );
         Destroy( gameObject );
     }
 }

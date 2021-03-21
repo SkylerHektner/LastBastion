@@ -7,6 +7,7 @@ public class AbilityManager : MonoBehaviour
 {
     public static AbilityManager Instance { get; private set; }
     public UnityEvent<AbilityEnum, int> AbilityChargeChangedEvent = new UnityEvent<AbilityEnum, int>();
+    public UnityEvent<AbilityEnum> AbilityUsedEvent = new UnityEvent<AbilityEnum>();
 
     [SerializeField] GameObject AbilityInfoScroll1;
     [SerializeField] GameObject AbilityInfoScroll2;
@@ -69,6 +70,7 @@ public class AbilityManager : MonoBehaviour
 
         ability_charges[(int)ability]--;
         AbilityChargeChangedEvent.Invoke( ability, ability_charges[(int)ability] );
+        AbilityUsedEvent.Invoke( ability );
 
         // check if this ability is already active and consult the ability instance to see if we proceed with construction
         bool cancel_construction = false;

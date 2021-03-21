@@ -8,7 +8,7 @@ using UnityEngine.Events;
 [RequireComponent( typeof( SpriteRenderer ) )]
 public class Enemy : MonoBehaviour
 {
-    public UnityEvent<long> OnDeath = new UnityEvent<long>();
+    public UnityEvent<Enemy> DeathEvent = new UnityEvent<Enemy>();
     public static long NextEnemyID = 1;
     public long EnemyID
     {
@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
     public bool Spawning { get; private set; }
     public bool Dying { get; private set; }
     public int CurrentHealth { get; private set; }
+    public bool AffectedByPowerups { get { return Zapped || StasisCoated; } }
 
     protected Animator anim;
     protected SpriteRenderer s_rend;
@@ -215,7 +216,7 @@ public class Enemy : MonoBehaviour
     public virtual void Kill()
     {
         StopMoving();
-        OnDeath.Invoke( EnemyID );
+        DeathEvent.Invoke( this );
         Dying = true;
         if( DeathEffect != null )
             Instantiate( DeathEffect ).transform.position = transform.position;

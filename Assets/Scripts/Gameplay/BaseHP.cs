@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseHP : MonoBehaviour
 {
     public static BaseHP Instance { get; private set; }
+    public UnityEvent<int> DamageTakenEvent = new UnityEvent<int>();
 
     [ReadOnly] public float CurrentHP;
     [ReadOnly] public float CurrentMaxHP;
@@ -84,6 +86,8 @@ public class BaseHP : MonoBehaviour
             Debug.LogWarning( "Player base took damage despite player already having won" );
             return;
         }
+
+        DamageTakenEvent.Invoke( Damage );
 
         // if I have overshield, damage that instead
         if( CurrentOvershield > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseOvershield ) )

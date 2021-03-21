@@ -190,10 +190,26 @@ public class SpawnManager : MonoBehaviour
         if( GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
         {
             GameplayManager.PlayerWinState = GameplayManager.PlayerState.Won;
-            Debug.Assert( VictoryScreen.instance != null );
-            VictoryScreen.instance?.DisplayVictory( total_level_earnings );
-        }
 
+            bool challenge_success = false;
+            if(spawnCadenceProfile.LevelChallenge != null)
+            {
+                challenge_success = GameplayManager.Instance.Challenges.EvaluateChallengeSuccess( spawnCadenceProfile.LevelChallenge );
+                if(challenge_success)
+                {
+                    Debug.Assert( spawnCadenceProfile.LevelChallenge.Reward > 0, 
+                        String.Format( "ERROR: Spawn Cadence {0} has succeeded but has not been assigned any reward", spawnCadenceProfile.LevelChallenge.name ) );
+                    PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + spawnCadenceProfile.LevelChallenge.Reward );
+                    total_level_earnings += spawnCadenceProfile.LevelChallenge.Reward;
+                }
+            }
+
+            Debug.Assert( VictoryScreen.instance != null );
+            VictoryScreen.instance?.DisplayVictory( total_level_earnings, 
+                spawnCadenceProfile.LevelChallenge != null, 
+                challenge_success, 
+                spawnCadenceProfile.LevelChallenge?.ChallengeDescription );
+        }
     }
 
     private Vector3 GetRandomSpawnPoint()
@@ -335,15 +351,15 @@ public class SpawnManager : MonoBehaviour
 
     public void RegisterEnemy( Enemy enemy )
     {
-        enemy.OnDeath.AddListener( EnemyDied );
+        enemy.DeathEvent.AddListener( EnemyDied );
         Debug.Assert( !spawned_enemies.ContainsKey( enemy.EnemyID ) );
         spawned_enemies.Add( enemy.EnemyID, enemy );
     }
 
-    private void EnemyDied( long EnemyID )
+    private void EnemyDied( Enemy en )
     {
-        Debug.Assert( spawned_enemies.ContainsKey( EnemyID ) );
-        spawned_enemies.Remove( EnemyID );
+        Debug.Assert( spawned_enemies.ContainsKey( en.EnemyID ) );
+        spawned_enemies.Remove( en.EnemyID );
     }
 
     public Enemy TryGetEnemyByID( long id )
@@ -395,7 +411,7 @@ public class SpawnManager : MonoBehaviour
                 ret = Instantiate( RedSkeletonPrefab );
                 break;
             case EnemyEnum.SkullyBoss:
-                ret = Instantiate(SkullyBossPrefab);
+                ret = Instantiate( SkullyBossPrefab );
                 break;
             case 0:
                 Debug.LogError( "ERROR: Tried to spawn an enemy " + enemy.ToString() + " that hasn't been added to the InstantiateMonster switch" );

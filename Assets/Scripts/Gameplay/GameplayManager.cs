@@ -10,6 +10,9 @@ public class GameplayManager : MonoBehaviour
 {
     public static GameplayManager Instance { get; private set; }
 
+    // CHALLENGES
+    public ChallengesTracker Challenges { get; private set; } = new ChallengesTracker();
+
     // WIN LOSS STATE
     public enum PlayerState
     {
@@ -20,8 +23,10 @@ public class GameplayManager : MonoBehaviour
     public static PlayerState PlayerWinState = PlayerState.Active;
 
     // TIME SCALE
-    public static float GamePlayTimeScale {
-        get {
+    public static float GamePlayTimeScale
+    {
+        get
+        {
             return Instance.GetTimeScale( TimeScale.Combined );
         }
     }
@@ -49,13 +54,20 @@ public class GameplayManager : MonoBehaviour
 
     private void Start()
     {
+
+        Invoke( "StartChallenges", 0.1f ); // we have to delay this otherwise we run into script execution order problems
         Debug.Assert( Instance == null );
         Instance = this;
-        for(int x = 0; x < (int)TimeScale.NUM_TIME_SCALES; ++x)
+        for( int x = 0; x < (int)TimeScale.NUM_TIME_SCALES; ++x )
         {
             time_scales.Add( 1.0f );
             time_scale_lerps.Add( null );
         }
+    }
+
+    private void StartChallenges()
+    {
+        Challenges?.Start();
     }
 
     public void SetTimeScale( float new_val, float lerp_duration, TimeScale scale )
@@ -88,5 +100,11 @@ public class GameplayManager : MonoBehaviour
     private void Update()
     {
         PD.Instance.Tick();
+        Challenges?.Tick( Time.deltaTime * GamePlayTimeScale );
+    }
+
+    private void OnDestroy()
+    {
+        Challenges?.End();
     }
 }

@@ -12,6 +12,7 @@ public class Saw : MonoBehaviour
     public UnityEvent<Vector3, Vector3, float> SawFiredEvent = new UnityEvent<Vector3, Vector3, float>();
     public UnityEvent<Vector3> KilledEnemyEvent = new UnityEvent<Vector3>();
     public UnityEvent<long> SawHitEnemyEvent = new UnityEvent<long>();
+    public UnityEvent SawMuddiedEvent = new UnityEvent();
 
     [SerializeField] float MoveSpeed = 1.0f;
     [SerializeField] float MinDragDistance = 1.0f;
@@ -240,6 +241,8 @@ public class Saw : MonoBehaviour
     {
         if( OnFire ) // flaming saws don't get covered in mud
             return;
+
+        SawMuddiedEvent.Invoke();
 
         if( cover_in_mud_duration != -1.0f )
             cover_in_mud_duration = Mathf.Max( duration, cover_in_mud_duration );

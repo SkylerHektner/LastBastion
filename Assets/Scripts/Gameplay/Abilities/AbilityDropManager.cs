@@ -27,25 +27,17 @@ public class AbilityDropManager : MonoBehaviour
 
     private void OnEnemySpawned( Enemy enemy )
     {
-        enemy.OnDeath.AddListener( OnEnemyDied );
+        enemy.DeathEvent.AddListener( OnEnemyDied );
     }
 
-    private void OnEnemyDied( long ID )
+    private void OnEnemyDied( Enemy en )
     {
-        Enemy dead_enemy = SpawnManager.Instance.TryGetEnemyByID( ID );
-        if( dead_enemy )
+        en.DeathEvent.RemoveListener( OnEnemyDied );
+        for( int x = 0; x < en.PowerupDropValue; ++x )
         {
-            dead_enemy.OnDeath.RemoveListener( OnEnemyDied );
-            for( int x = 0; x < dead_enemy.PowerupDropValue; ++x )
-            {
-                ++cur_drop_bias;
-                if( TryDropPowerup( dead_enemy.transform.position ) )
-                    break;
-            }
-        }
-        else
-        {
-            Debug.LogError( "ERROR: dead enemy not found in Ability Drop Manager" );
+            ++cur_drop_bias;
+            if( TryDropPowerup( en.transform.position ) )
+                break;
         }
     }
 

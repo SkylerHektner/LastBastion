@@ -8,6 +8,7 @@ using System;
 public class SpawnCadenceProfile : ScriptableObject
 {
     public string LevelIdentifier = "CHANGE_ME";
+    public Challenge LevelChallenge;
     public List<Wave> Waves;
 
     [Serializable]
@@ -66,6 +67,16 @@ public class SpawnCadenceProfileEditor : Editor
         {
             EditorUtility.SetDirty( target );
             spawn_cadence_profile.LevelIdentifier = level_identifier;
+        }
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label( "Level Challenge" );
+        Challenge challenge = (Challenge)EditorGUILayout.ObjectField( spawn_cadence_profile.LevelChallenge, typeof( Challenge ), true );
+        if( spawn_cadence_profile.LevelChallenge != challenge )
+        {
+            spawn_cadence_profile.LevelChallenge = challenge;
+            EditorUtility.SetDirty( target );
         }
         EditorGUILayout.EndHorizontal();
 
