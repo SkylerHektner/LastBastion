@@ -74,15 +74,12 @@ public class ChallengesTracker
 
     private void OnEnemyDied( Enemy en )
     {
-        if( en && en.AffectedByPowerups )
+        Debug.Assert( en != null );
+        if( en.AffectedByPowerups )
         {
             ++NumEnemiesKilledWhileEffectedByPowerups;
             en.DeathEvent.RemoveListener( OnEnemyDied );
             TrackedEnemies.Remove( en.EnemyID );
-        }
-        else
-        {
-            Debug.LogError( "ERROR: Challenges Tracker couldn't find enemy that died" );
         }
     }
 
