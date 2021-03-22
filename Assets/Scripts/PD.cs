@@ -19,6 +19,7 @@ public class PD
     public PlayerDataField<int> StoredLimboLevelIndex = new PlayerDataField<int>();
     public PlayerUpgradeUnlockMap UpgradeUnlockMap = new PlayerUpgradeUnlockMap();
     public PlayerLevelCompletionMap LevelCompletionMap = new PlayerLevelCompletionMap();
+    public PDList<string> PlayerChallengeCompletionList = new PDList<string>();
 
     // UPGRADES
     public enum UpgradeFlags
@@ -251,7 +252,7 @@ public class PlayerLevelCompletionMap : ISerializationCallbackReceiver
     private Dictionary<string, LevelCompletionData> level_map = new Dictionary<string, LevelCompletionData>();
     [SerializeField] private List<LevelCompletionData> serialized_level_completion_data = new List<LevelCompletionData>();
 
-    public bool GetLevelCompletion(string level_identifier)
+    public bool GetLevelCompletion( string level_identifier )
     {
         return GetLevelCompletionData( level_identifier ).Complete;
     }
@@ -262,20 +263,20 @@ public class PlayerLevelCompletionMap : ISerializationCallbackReceiver
         PD.Instance?.SetDirty();
     }
 
-    public bool GetWaveCompletion(string level_identifier, int wave)
+    public bool GetWaveCompletion( string level_identifier, int wave )
     {
         return GetLevelCompletionData( level_identifier ).CompletedWaves.Contains( wave );
     }
 
-    public void SetWaveCompletion(string level_identifier, int wave, bool complete)
+    public void SetWaveCompletion( string level_identifier, int wave, bool complete )
     {
         LevelCompletionData data = GetLevelCompletionData( level_identifier );
-        if(complete && !data.CompletedWaves.Contains(wave))
+        if( complete && !data.CompletedWaves.Contains( wave ) )
         {
             data.CompletedWaves.Add( wave );
             PD.Instance?.SetDirty();
         }
-        else if (!complete && data.CompletedWaves.Contains(wave))
+        else if( !complete && data.CompletedWaves.Contains( wave ) )
         {
             data.CompletedWaves.Remove( wave );
             PD.Instance?.SetDirty();
@@ -302,7 +303,7 @@ public class PlayerLevelCompletionMap : ISerializationCallbackReceiver
     public void OnBeforeSerialize()
     {
         serialized_level_completion_data.Clear();
-        foreach(LevelCompletionData data in level_map.Values)
+        foreach( LevelCompletionData data in level_map.Values )
         {
             serialized_level_completion_data.Add( data );
         }
@@ -310,7 +311,7 @@ public class PlayerLevelCompletionMap : ISerializationCallbackReceiver
 
     public void OnAfterDeserialize()
     {
-        foreach(LevelCompletionData data in serialized_level_completion_data)
+        foreach( LevelCompletionData data in serialized_level_completion_data )
         {
             level_map.Add( data.LevelIdentifier, data );
         }
@@ -349,5 +350,78 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
 
         for( int i = 0; i < keys.Count; i++ )
             this.Add( keys[i], values[i] );
+    }
+}
+
+// only for use with primitive types
+[Serializable]
+public class PDList<T> : IList<T>
+{
+    [SerializeField]
+    private List<T> list = new List<T>();
+
+    public int Count => list.Count;
+
+    public bool IsReadOnly => false;
+
+    public T this[int index] { get => list[index]; set => list[index] = value; }
+
+    public int IndexOf( T item )
+    {
+        return list.IndexOf( item );
+    }
+
+    public void Insert( int index, T item )
+    {
+        list.Insert( index, item );
+        PD.Instance?.SetDirty();
+    }
+
+    public void RemoveAt( int index )
+    {
+        list.RemoveAt( index );
+        PD.Instance?.SetDirty();
+    }
+
+    public void Add( T item )
+    {
+        list.Add( item );
+        PD.Instance?.SetDirty();
+    }
+
+    public void Clear()
+    {
+        list.Clear();
+        PD.Instance?.SetDirty();
+    }
+
+    public bool Contains( T item )
+    {
+        return list.Contains( item );
+    }
+
+    public void CopyTo( T[] array, int arrayIndex )
+    {
+        list.CopyTo( array, arrayIndex );
+    }
+
+    public bool Remove( T item )
+    {
+        bool result = list.Remove( item );
+        if( result )
+            PD.Instance?.SetDirty();
+        return result;
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        PD.Instance?.SetDirty(); // sucks but we don't know if they've modified anything while iterating
+        return list.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        PD.Instance?.SetDirty(); // sucks but we don't know if they've modified anything while iterating
+        return list.GetEnumerator();
     }
 }

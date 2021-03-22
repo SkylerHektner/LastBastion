@@ -192,7 +192,9 @@ public class SpawnManager : MonoBehaviour
             GameplayManager.PlayerWinState = GameplayManager.PlayerState.Won;
 
             bool challenge_success = false;
-            if(spawnCadenceProfile.LevelChallenge != null)
+            bool has_challenge = spawnCadenceProfile.LevelChallenge != null 
+                && !PD.Instance.PlayerChallengeCompletionList.Contains(spawnCadenceProfile.LevelChallenge.UniqueChallengeID);
+            if( has_challenge )
             {
                 challenge_success = GameplayManager.Instance.Challenges.EvaluateChallengeSuccess( spawnCadenceProfile.LevelChallenge );
                 if(challenge_success)
@@ -200,13 +202,14 @@ public class SpawnManager : MonoBehaviour
                     Debug.Assert( spawnCadenceProfile.LevelChallenge.Reward > 0, 
                         String.Format( "ERROR: Spawn Cadence {0} has succeeded but has not been assigned any reward", spawnCadenceProfile.LevelChallenge.name ) );
                     PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + spawnCadenceProfile.LevelChallenge.Reward );
+                    PD.Instance.PlayerChallengeCompletionList.Add( spawnCadenceProfile.LevelChallenge.UniqueChallengeID );
                     total_level_earnings += spawnCadenceProfile.LevelChallenge.Reward;
                 }
             }
 
             Debug.Assert( VictoryScreen.instance != null );
-            VictoryScreen.instance?.DisplayVictory( total_level_earnings, 
-                spawnCadenceProfile.LevelChallenge != null, 
+            VictoryScreen.instance?.DisplayVictory( total_level_earnings,
+                has_challenge, 
                 challenge_success, 
                 spawnCadenceProfile.LevelChallenge?.ChallengeDescription );
         }
