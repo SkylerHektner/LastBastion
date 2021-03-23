@@ -174,8 +174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Double Tap
-  MyInfo: Not implemented
+  MyName: Power Surge
+  MyInfo: Temporarily increases the fire rate of your turrets after the use of chain
+    lightning
   MyCost: 100
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 22
@@ -9993,7 +9994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Flame Glaze
-  MyInfo: Allows the saw to catch flame if bounced through fire, gaining additional
+  MyInfo: Allows the saw to catch flame if bounced through fire, boosting speed &
     damage
   MyCost: 65
   InfoBox: {fileID: 238644933}
@@ -10340,8 +10341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Triple Threat
-  MyInfo: Not implemented
+  MyName: Collateral Damage
+  MyInfo: Enables piercing shots while sawmageddon is active
   MyCost: 150
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 23
@@ -10681,7 +10682,7 @@ RectTransform:
   m_GameObject: {fileID: 137781691}
   m_LocalRotation: {x: -0.0000037998022, y: -0.000003933901, z: -1, w: -0.000003099441}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3467785, y: 0.5355113, z: 0.47716266}
+  m_LocalScale: {x: 1.346779, y: 0.5355113, z: 0.4771627}
   m_Children: []
   m_Father: {fileID: 871542974}
   m_RootOrder: 1
@@ -10911,8 +10912,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 52, y: -120}
-  m_SizeDelta: {x: 439, y: 1}
+  m_AnchoredPosition: {x: 56, y: -120}
+  m_SizeDelta: {x: 514, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &164562681
 MonoBehaviour:
@@ -10927,8 +10928,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 90
-    m_Right: 75
+    m_Left: 120
+    m_Right: 120
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
@@ -30635,7 +30636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Chain Lightning
-  MyInfo: 'Fire a beam of electricity that briefly stuns every target on screen '
+  MyInfo: Fire a beam of electricity that briefly stuns all visible targets
   MyCost: 10
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 0
@@ -31548,7 +31549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Stasis Coating
-  MyInfo: Enemies touched by the saw are frozen in time for a short duration
+  MyInfo: Enemies touched by the anomaly saw are frozen in time for a short duration
   MyCost: 65
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 10
@@ -33963,7 +33964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Friendly Fire
-  MyInfo: Gain 2 turrets on both sides of your base
+  MyInfo: Adds 2 slow firing sentry turrets to your base
   MyCost: 80
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 21
@@ -34169,7 +34170,7 @@ RectTransform:
   m_GameObject: {fileID: 448914037}
   m_LocalRotation: {x: -0.000003188848, y: -1, z: -0.00000014224996, w: 0.0000028185702}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3467785, y: 0.5355113, z: 0.47716266}
+  m_LocalScale: {x: 1.346779, y: 0.5355113, z: 0.4771627}
   m_Children: []
   m_Father: {fileID: 871542974}
   m_RootOrder: 0
@@ -34838,7 +34839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &472573469
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36268,7 +36269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 52, y: -120}
+  m_AnchoredPosition: {x: 56, y: -120}
   m_SizeDelta: {x: 439, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &566341468
@@ -36284,8 +36285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 90
-    m_Right: 75
+    m_Left: 120
+    m_Right: 120
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
@@ -36693,7 +36694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Lightning Rod
-  MyInfo: Stunned enemies have a higher chance of dropping crystals
+  MyInfo: Paralyzed enemies have a higher chance of dropping crystals
   MyCost: 50
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 3
@@ -38378,7 +38379,7 @@ RectTransform:
   m_GameObject: {fileID: 670937647}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.000071164475}
-  m_LocalScale: {x: 1.0155743, y: 0.84097564, z: 0.84097546}
+  m_LocalScale: {x: 1.015574, y: 0.84097564, z: 0.8409755}
   m_Children:
   - {fileID: 1679510419}
   - {fileID: 1592313401}
@@ -42188,7 +42189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 52, y: -120}
+  m_AnchoredPosition: {x: 56, y: -120}
   m_SizeDelta: {x: 439, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &789961142
@@ -42204,8 +42205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 90
-    m_Right: 75
+    m_Left: 120
+    m_Right: 120
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
@@ -43785,7 +43786,7 @@ RectTransform:
   m_GameObject: {fileID: 871542973}
   m_LocalRotation: {x: -0, y: -0, z: -0.70710576, w: 0.7071079}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.8007145, y: 0.15059565, z: 3.2000496}
+  m_LocalScale: {x: 5.2714577, y: 0.16536258, z: 3.5138369}
   m_Children:
   - {fileID: 448914038}
   - {fileID: 137781692}
@@ -43797,7 +43798,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -736}
+  m_AnchoredPosition: {x: 0, y: -740}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &871542975
@@ -44875,7 +44876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 90.5, y: 0}
+  m_AnchoredPosition: {x: 120.5, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &933678915
@@ -45147,7 +45148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Static Overload
-  MyInfo: Stunned enemies have a higher chance of dropping crystals
+  MyInfo: Stunned enemies have a chance to explode when killed, dealing damage to
+    nearby enemies
   MyCost: 50
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 2
@@ -46426,7 +46428,7 @@ RectTransform:
   m_GameObject: {fileID: 1026520206}
   m_LocalRotation: {x: -0, y: -0, z: 0.70710576, w: 0.7071079}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.317, y: 0.15680166, z: 0.23523389}
+  m_LocalScale: {x: 5.317, y: 0.15680166, z: 0.2352339}
   m_Children:
   - {fileID: 1779687427}
   - {fileID: 789961141}
@@ -46440,7 +46442,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.5, y: 2}
-  m_SizeDelta: {x: 73.40378, y: 471.0937}
+  m_SizeDelta: {x: 97.671, y: 471.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1026520208
 MonoBehaviour:
@@ -47302,7 +47304,7 @@ RectTransform:
   m_GameObject: {fileID: 1057790803}
   m_LocalRotation: {x: -1, y: -0, z: -0, w: 0.0000029504295}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0155743, y: 0.84097564, z: 0.84097546}
+  m_LocalScale: {x: 1.015574, y: 0.84097564, z: 0.8409755}
   m_Children:
   - {fileID: 2127426437}
   - {fileID: 1102356600}
@@ -47892,7 +47894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Battery Pack
-  MyInfo: Stunned enemies remain paralyzed for a longer duration
+  MyInfo: Zapped enemies remain paralyzed for a longer duration
   MyCost: 25
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 1
@@ -48033,7 +48035,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 34, y: -120}
+  m_AnchoredPosition: {x: 56, y: -120}
   m_SizeDelta: {x: 348, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1098723560
@@ -48049,8 +48051,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 90
-    m_Right: 75
+    m_Left: 120
+    m_Right: 120
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
@@ -48511,7 +48513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 363.5, y: 0}
+  m_AnchoredPosition: {x: 393.5, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1134090250
@@ -49122,7 +49124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Singularity
-  MyInfo: Summons a temporary copies of the saw in a mirrored reality
+  MyInfo: Summons a temporary copy of the saw in a mirrored reality
   MyCost: 80
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 11
@@ -53868,7 +53870,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Extended BBQ
-  MyInfo: Kills with the flaming saw leave piles of burning remnants
+  MyInfo: Kills with the flaming saw have a chance to leave behind a lethal flaming
+    pile
   MyCost: 100
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 5
@@ -55413,7 +55416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 52, y: -120}
+  m_AnchoredPosition: {x: 56, y: -120}
   m_SizeDelta: {x: 439, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1548294215
@@ -55429,8 +55432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 90
-    m_Right: 75
+    m_Left: 120
+    m_Right: 120
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
@@ -56408,7 +56411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 181.5, y: 0}
+  m_AnchoredPosition: {x: 211.5, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1611433721
@@ -56470,16 +56473,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: 4th powerup
-  MyInfo: Not implemented
+  MyName: Timed Payload
+  MyInfo: Shots freeze targets while temporal anomaly is active
   MyCost: 200
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 24
   PrerequisiteUpgradeFlags: 17000000
   PurchasedGlow: {fileID: 2017365419}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: 5b5e71b17acb28845b463fcc4f2835a9, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: da2784c5cd83148428eaa7972b947f17, type: 3}
+  Lockedimage: {fileID: 21300000, guid: ef6b5514b82e2a04ea80d01c12b1760d, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: 8e3e8dae3b282634ab05129a60772a61, type: 3}
 --- !u!114 &1618789843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56556,7 +56559,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5b5e71b17acb28845b463fcc4f2835a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef6b5514b82e2a04ea80d01c12b1760d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -56776,7 +56779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Temporal Anomaly
-  MyInfo: Creates copies of the saw and releases them all at once
+  MyInfo: Saves temporary copies of the saw and releases them all at once
   MyCost: 10
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 8
@@ -57355,7 +57358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 272.5, y: 0}
+  m_AnchoredPosition: {x: 302.5, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1681109235
@@ -58610,7 +58613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 52, y: -120}
+  m_AnchoredPosition: {x: 56, y: -120}
   m_SizeDelta: {x: 439, y: 1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1779687428
@@ -58626,8 +58629,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 90
-    m_Right: 75
+    m_Left: 120
+    m_Right: 120
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
@@ -60481,7 +60484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Overshield
-  MyInfo: Enables a recharging overshield that protects your base
+  MyInfo: Enables a rechargeable overshield to protect your base
   MyCost: 150
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 16
