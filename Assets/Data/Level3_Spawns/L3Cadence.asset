@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: L3Cadence
   m_EditorClassIdentifier: 
   LevelIdentifier: Level3
+  LevelChallenge: {fileID: 11400000, guid: f90b57621ced290438a5e2fafb04ef50, type: 2}
   Waves:
   - CompletionReward: 0
     PassiveEnemies: 
@@ -37,7 +38,7 @@ MonoBehaviour:
     - 12
     collapsed: 1
     AnimationTrigger: 
-  - CompletionReward: 50
+  - CompletionReward: 0
     PassiveEnemies: 
     PassiveEnemySpawnCadence: []
     SpawnGroups:
@@ -56,7 +57,7 @@ MonoBehaviour:
     - 15
     - 18
     - 20
-    collapsed: 0
+    collapsed: 1
     AnimationTrigger: Door
   - CompletionReward: 0
     PassiveEnemies: 
@@ -271,7 +272,7 @@ MonoBehaviour:
     - 38
     collapsed: 1
     AnimationTrigger: Door
-  - CompletionReward: 0
+  - CompletionReward: 50
     PassiveEnemies: 
     PassiveEnemySpawnCadence: []
     SpawnGroups:
@@ -332,5 +333,5 @@ MonoBehaviour:
     - 55
     - 55
     - 55
-    collapsed: 1
+    collapsed: 0
     AnimationTrigger: Door
