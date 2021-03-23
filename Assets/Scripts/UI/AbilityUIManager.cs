@@ -14,7 +14,7 @@ public class AbilityUIManager : MonoBehaviour
     [SerializeField] List<GameObject> TyphoonUsageSlots = new List<GameObject>();
 
     private bool showing = false;
-    private AbilityEnum? cur_ability_candidate = null;
+    private AbilityUIButton currentHovering;
 
     private void Start()
     {
@@ -60,10 +60,8 @@ public class AbilityUIManager : MonoBehaviour
             if( Input.touchCount == 0 )
 #endif
             {
-                if( cur_ability_candidate != null )
-                {
-                    AbilityManager.Instance.UseAbility( (AbilityEnum)cur_ability_candidate );
-                }
+                if( currentHovering )
+                    AbilityManager.Instance.UseAbility( currentHovering.MyAbility );
                 HideIcons();
             }
         }
@@ -74,7 +72,6 @@ public class AbilityUIManager : MonoBehaviour
         foreach( var g in ShowOnAbilityMenuActive )
             g.SetActive( true );
         showing = true;
-        cur_ability_candidate = null;
         GameplayManager.Instance.SetTimeScale( 0.1f, TimeScaleLerpDuration, GameplayManager.TimeScale.UI );
         GameplayFieldScrim.gameObject.SetActive( true );
         GameplayFieldScrim.SetBool( "Fade", true );
@@ -85,20 +82,13 @@ public class AbilityUIManager : MonoBehaviour
         foreach( var g in ShowOnAbilityMenuActive )
             g.SetActive( false );
         showing = false;
-        cur_ability_candidate = null;
         GameplayManager.Instance.SetTimeScale( 1.0f, TimeScaleReturnToNormalLerpDuratin, GameplayManager.TimeScale.UI );
         GameplayFieldScrim.SetBool( "Fade", false );
         GameplayFieldScrim.gameObject.SetActive( false );
     }
 
-    public void SetAbilityCandidate( AbilityEnum? ability )
+    public void SetCurrentHovering( AbilityUIButton button )
     {
-        if( ability == null )
-        {
-            cur_ability_candidate = null;
-            return;
-        }
-        cur_ability_candidate = ability;
+        currentHovering = button;
     }
-
 }

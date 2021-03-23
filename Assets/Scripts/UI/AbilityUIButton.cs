@@ -76,9 +76,10 @@ public class AbilityUIButton : MonoBehaviour
 
         if( PD.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) )
         {
+            AbilityUIManagerInstance.SetCurrentHovering( this );
+
             bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
 
-            AbilityUIManagerInstance.SetAbilityCandidate( MyAbility );
             IconAnimator.SetBool( "Empty", has_no_charges );
             IconAnimator.SetTrigger( "Hover" );
             IconAnimator.ResetTrigger( "UnHover" );
@@ -97,8 +98,8 @@ public class AbilityUIButton : MonoBehaviour
     public void OnPointerExit()
     {
         hovering = false;
+        Invoke( "ClearCurrentHovering", 0.1f );
 
-        AbilityUIManagerInstance.SetAbilityCandidate( null );
         IconAnimator.SetBool( "Empty", AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0 );
         IconAnimator.SetTrigger( "UnHover" );
         IconAnimator.ResetTrigger( "Hover" );
@@ -108,5 +109,10 @@ public class AbilityUIButton : MonoBehaviour
         MyDisplayInfo.HideInfo();
         UsageSlotsAnimator.SetTrigger( "Shrink" );
         UsageSlotsAnimator.ResetTrigger( "Grow" );
+    }
+
+    private void ClearCurrentHovering()
+    {
+        AbilityUIManagerInstance.SetCurrentHovering( null );
     }
 }
