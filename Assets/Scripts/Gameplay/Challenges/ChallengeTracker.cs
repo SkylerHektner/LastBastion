@@ -8,7 +8,7 @@ public class ChallengesTracker
     public bool DamageTaken { get; private set; } = false;
     public bool CrystalsUsed { get; private set; } = false;
     public bool SawMuddied { get; private set; } = false;
-    public int NumEnemiesKilledWhileEffectedByPowerups { get; private set; } = 0;
+    public int NumZappedEnemiesKilled { get; private set; } = 0;
     public float TotalLevelTimePassed { get; private set; } = 0.0f;
 
     private List<long> TrackedEnemies = new List<long>();
@@ -45,14 +45,14 @@ public class ChallengesTracker
         Debug.Log( "DamageTaken" + DamageTaken );
         Debug.Log( "CrystalsUsed" + CrystalsUsed );
         Debug.Log( "SawMuddied" + SawMuddied );
-        Debug.Log( "NumEnemiesKilledWhileEffectedByPowerups" + NumEnemiesKilledWhileEffectedByPowerups );
+        Debug.Log( "NumEnemiesKilledWhileEffectedByPowerups" + NumZappedEnemiesKilled );
         Debug.Log( "TotalLevelTimePassed" + TotalLevelTimePassed );
 
         bool success = true;
         success &= !( challenge.CannotTakeDamage && DamageTaken );
         success &= !( challenge.CannotUseCrystals && CrystalsUsed );
         success &= !( challenge.CannotMuddySaw && SawMuddied );
-        success &= !( challenge.MustKillXPowerupEffectedEnemys > NumEnemiesKilledWhileEffectedByPowerups );
+        success &= !( challenge.MustKillXZappedEnemys > NumZappedEnemiesKilled );
         success &= !( challenge.LevelTimeLimit < TotalLevelTimePassed );
         return success;
     }
@@ -75,9 +75,9 @@ public class ChallengesTracker
     private void OnEnemyDied( Enemy en )
     {
         Debug.Assert( en != null );
-        if( en.AffectedByPowerups )
+        if( en.Zapped )
         {
-            ++NumEnemiesKilledWhileEffectedByPowerups;
+            ++NumZappedEnemiesKilled;
             en.DeathEvent.RemoveListener( OnEnemyDied );
             TrackedEnemies.Remove( en.EnemyID );
         }

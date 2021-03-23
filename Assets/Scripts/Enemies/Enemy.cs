@@ -50,7 +50,6 @@ public class Enemy : MonoBehaviour
     public bool Spawning { get; private set; }
     public bool Dying { get; private set; }
     public int CurrentHealth { get; private set; }
-    public bool AffectedByPowerups { get { return Zapped || StasisCoated; } }
 
     protected Animator anim;
     protected SpriteRenderer s_rend;

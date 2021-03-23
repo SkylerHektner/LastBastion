@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 public class LoadLevel : MonoBehaviour
 {
-    public string SceneToLoad;
+    public SpawnCadenceProfile SpawnCadence;
     // list of level identifiers that must be marked complete for level to be unlocked
     public List<string> RequiredLevelCompletion = new List<string>();
 
@@ -53,8 +54,6 @@ public class LoadLevel : MonoBehaviour
 
     public string MyGameModeText;
     public string MyDescription;
-    public int MyCompletionPayout;
-    public string MyChallenge;
 
 
     public LevelPopup ContractPopup;
@@ -92,21 +91,30 @@ public class LoadLevel : MonoBehaviour
 
     public void ShowContract()
     {
-        LevelInfo.SetBool("Open", true);
-        LevelPopup.SceneName = SceneToLoad; // tell the popup what scene I want it to load
-        UpgradesBar.SetTrigger("Hide");
+        LevelInfo.SetBool( "Open", true );
+        LevelPopup.ActivePopupSpawnCadence = SpawnCadence; // tell the popup what scene I want it to load
+        UpgradesBar.SetTrigger( "Hide" );
         // load contract info
         UpdateContract();
     }
 
     public void UpdateContract()
     {
-        ContractPopup.CompletionPayout.text = MyCompletionPayout.ToString();
         ContractPopup.GameModeText.text = MyGameModeText;
         ContractPopup.Description.text = MyDescription;
 
-        ContractPopup.ChallengeText.text = MyChallenge;
-
+        Debug.Assert( SpawnCadence != null );
+        Challenge challenge = SpawnCadence.LevelChallenge;
+        if( challenge != null )
+        {
+            ContractPopup.CompletionPayout.text = SpawnCadence.Waves.Select( w => w.CompletionReward ).Sum().ToString();
+            ContractPopup.ChallengeText.text = challenge.ChallengeDescription;
+        }
+        else
+        {
+            ContractPopup.CompletionPayout.text = "";
+            ContractPopup.ChallengeText.text = "";
+        }
     }
 
 

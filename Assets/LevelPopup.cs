@@ -6,7 +6,7 @@ using TMPro;
 
 public class LevelPopup : MonoBehaviour
 {
-    public static string SceneName;
+    public static SpawnCadenceProfile ActivePopupSpawnCadence;
     public int Index;
     public Animator UpgradesBar;
     public Animator Portal;
@@ -20,18 +20,12 @@ public class LevelPopup : MonoBehaviour
 
     private void Update()
     {
-        if (SceneName != null)
+        if ( ActivePopupSpawnCadence != null)
         {
-            if (PD.Instance.LevelCompletionMap.GetLevelCompletion(SceneName)) // scratch out reward if claimed
-            {
-                ScratchoutTitle.SetActive(true);
-            }
-            else
-            {
-                ScratchoutTitle.SetActive(false);
-            }
+            ScratchoutTitle.SetActive( PD.Instance.LevelCompletionMap.GetLevelCompletion( ActivePopupSpawnCadence.LevelIdentifier ) );
+            ScratchoutChallenge.SetActive( ActivePopupSpawnCadence.LevelChallenge != null
+                && PD.Instance.PlayerChallengeCompletionList.Contains( ActivePopupSpawnCadence.LevelChallenge.UniqueChallengeID ) );
         }
-
     }
 
     public void AcceptContract() // called by animator
@@ -53,7 +47,7 @@ public class LevelPopup : MonoBehaviour
 
     public void SceneChange()
     {
-        SceneManager.LoadScene(SceneName);
+        SceneManager.LoadScene( ActivePopupSpawnCadence.LevelIdentifier );
     }
 
     public void DeclineContract()
