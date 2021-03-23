@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpectralSaw : Projectile
 {
     public int NumRemainingExtraBounces = 0;
+    public UnityEvent<Vector3> SawKilledEnemyEvent = new UnityEvent<Vector3>();
 
     private HashSet<long> shared_collision_set = null;
 
@@ -35,8 +37,14 @@ public class SpectralSaw : Projectile
             Enemy en = col.gameObject.GetComponent<Enemy>();
             if( shared_collision_set == null || !shared_collision_set.Contains( en.EnemyID ) )
             {
-                en.Hit( MoveDirection, true );
+                bool died;
+                bool dodged;
+                en.Hit( MoveDirection, true, out died, out dodged );
                 shared_collision_set?.Add( en.EnemyID );
+                if( died )
+                {
+                    SawKilledEnemyEvent.Invoke( en.transform.position );
+                }
             }
         }
         else if( col.tag == "AbilityDrop" )

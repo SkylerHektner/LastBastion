@@ -10,7 +10,7 @@ public class Saw : MonoBehaviour
 
     // position, direction, speed
     public UnityEvent<Vector3, Vector3, float> SawFiredEvent = new UnityEvent<Vector3, Vector3, float>();
-    public UnityEvent<Vector3> KilledEnemyEvent = new UnityEvent<Vector3>();
+    public UnityEvent<Vector3> SawKilledEnemyEvent = new UnityEvent<Vector3>();
     public UnityEvent<long> SawHitEnemyEvent = new UnityEvent<long>();
     public UnityEvent SawMuddiedEvent = new UnityEvent();
 
@@ -148,7 +148,7 @@ public class Saw : MonoBehaviour
             en.Hit( move_direction, true, out died, out dodged, 1 + ( OnFire ? on_fire_extra_damage : 0 ) );
 
             if( died )
-                KilledEnemyEvent.Invoke( pos );
+                SawKilledEnemyEvent.Invoke( pos );
             if( !dodged )
                 SawHitEnemyEvent.Invoke( id );
         }

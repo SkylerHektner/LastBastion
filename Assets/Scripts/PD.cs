@@ -26,22 +26,21 @@ public class PD
     {
         ChainLightning,
         ChainLightningStunDuration,
-        ChainLightningStaticOverload,    // not implemented
+        ChainLightningStaticOverload,    
         ChainLightningLightningRod,
         Typhoon,
-        TyphoonExtendedBBQ,              // not implemented
+        TyphoonExtendedBBQ,              
         TyphoonFlameSaw,
         TyphoonRoaringFlames,
         Anomaly,
         AnomalyRicochetSaws,
-        AnomalyStasisCoating,            // not implemented
+        AnomalyStasisCoating,            
         AnomalySingularity,
         Sawmageddon,
         SawmageddonDuration,
         SawmageddonProjectiles,
-        SawmageddonComboKiller,          // not implemented
+        SawmageddonComboKiller,          
         BaseOvershield,
-        SoulCollector,                   // not implemented
         BaseHP1,
         BaseHP2,
         BaseHP3,

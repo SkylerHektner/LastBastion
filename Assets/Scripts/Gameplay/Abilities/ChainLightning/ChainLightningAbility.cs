@@ -76,7 +76,7 @@ public class ChainLightningAbility : Ability
 
         if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload ) )
         {
-            Saw.Instance.KilledEnemyEvent.AddListener( OnSawKilledEnemy );
+            Saw.Instance.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
             listening = true;
             static_overload_layermask = LayerMask.GetMask( "Enemy" );
             zapped_enemy_tracking_time = pending_zaps.Last().time + GetZapDuration() + 1.0f; // once second extra, just to be safe
@@ -108,7 +108,7 @@ public class ChainLightningAbility : Ability
     {
         if( listening )
         {
-            Saw.Instance.KilledEnemyEvent.RemoveListener( OnSawKilledEnemy );
+            Saw.Instance.SawKilledEnemyEvent.RemoveListener( OnSawKilledEnemy );
             listening = false;
         }
         base.Finish();

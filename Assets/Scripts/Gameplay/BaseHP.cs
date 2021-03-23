@@ -120,10 +120,7 @@ public class BaseHP : MonoBehaviour
             {
                 Explosion.SetTrigger( "Damaged" );
             }
-            if( CurrentHP <= 3 )
-            {
-                WoundedGlow.SetActive( true );
-            }
+            WoundedGlow.SetActive( CurrentHP <= 3 );
             if( CurrentHP <= 0 )
             {
                 DeathCanvas.DisplayDeathScreen();
@@ -137,6 +134,13 @@ public class BaseHP : MonoBehaviour
                 GameplayManager.PlayerWinState = GameplayManager.PlayerState.Lost;
             }
         }
+    }
+
+    public void Heal(int Amount)
+    {
+        CurrentHP = Mathf.Min( CurrentHP + Amount, CurrentMaxHP );
+        CurrentHpBar.SetSize( CurrentHP / CurrentMaxHP );
+        WoundedGlow.SetActive( CurrentHP <= 3 );
     }
 
     private void FixedUpdate()

@@ -11,4 +11,6 @@ public class SawmageddonAbilityData : ScriptableObject
     public int NumberExtraSaws = 2;
     public int ImprovedNumberExtraSaws = 4;
     public float OffsetAngle = 15.0f;
+    public int ComboKillerHPRegainKillsBase = 20;
+    public float ComboKillerHPRegainScaleFactor = 1.5f;
 }

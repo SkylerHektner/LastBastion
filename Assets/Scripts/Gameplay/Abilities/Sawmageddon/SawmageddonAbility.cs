@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +10,25 @@ public class SawmageddonAbility : Ability
     private float time_left = 0.0f;
     public static float AnimatorDuration;
 
+    private int combo_killer_max = -1;
+    private int cur_combo_killer_kills = 0;
+
+    private bool listening = false;
+
     public override void Start()
     {
         base.Start();
         time_left = PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonDuration )
             ? AbilityData.ImprovedDuration : AbilityData.Duration;
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonComboKiller ) )
+        {
+            combo_killer_max = AbilityData.ComboKillerHPRegainKillsBase;
+            Saw.Instance?.SawKilledEnemyEvent?.AddListener( OnSawKilledEnemy );
+            listening = true;
+            ComboKillerDisplay.Instance?.gameObject.SetActive( true );
+            Debug.Assert( ComboKillerDisplay.Instance != null );
+        }
     }
 
     private void OnSawFired( Vector3 pos, Vector3 direction, float speed )
@@ -31,12 +45,19 @@ public class SawmageddonAbility : Ability
             spec_saw.SetProjectileSpeed( speed );
             spec_saw.StartMoveInDirection( new_direction );
             spec_saw.SetSharedCollisionSet( shared_collision_set );
+            spec_saw.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
         }
     }
 
     public override void Finish()
     {
         Saw.Instance?.SawFiredEvent?.RemoveListener( OnSawFired );
+        if( listening )
+        {
+            Saw.Instance?.SawKilledEnemyEvent?.RemoveListener( OnSawKilledEnemy );
+            ComboKillerDisplay.Instance.gameObject.SetActive( false );
+            Debug.Assert( ComboKillerDisplay.Instance != null );
+        }
         base.Finish();
     }
 
@@ -57,5 +78,19 @@ public class SawmageddonAbility : Ability
         time_left += AbilityData.Duration;
         // return true to cancel new ability construction
         return true;
+    }
+
+    private void OnSawKilledEnemy( Vector3 enemy_position )
+    {
+        cur_combo_killer_kills++;
+
+        if( cur_combo_killer_kills >= combo_killer_max )
+        {
+            cur_combo_killer_kills = 0;
+            combo_killer_max = Mathf.RoundToInt( combo_killer_max * AbilityData.ComboKillerHPRegainScaleFactor );
+            BaseHP.Instance?.Heal( 1 );
+        }
+        Debug.Assert( ComboKillerDisplay.Instance != null );
+        ComboKillerDisplay.Instance?.SetChargeAmount( cur_combo_killer_kills, combo_killer_max );
     }
 }

@@ -6,10 +6,11 @@ public class HpBar : MonoBehaviour
 {
     public Animator HurtFX;
     // scales healthbar
-    public void SetSize(float sizeNormalized)
+    public void SetSize( float sizeNormalized )
     {
-        transform.localScale = new Vector3(sizeNormalized, 1f);
-        HurtFX.SetTrigger("Damaged");
+        transform.localScale = new Vector3( sizeNormalized, 1f );
+        if( HurtFX != null )
+            HurtFX.SetTrigger( "Damaged" );
     }
 
 }

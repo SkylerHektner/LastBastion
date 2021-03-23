@@ -24,7 +24,7 @@ public class TyphoonAbility : Ability
         if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames )
             || PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonExtendedBBQ ) )
         {
-            Saw.Instance.KilledEnemyEvent.AddListener( OnSawKilledEnemy );
+            Saw.Instance.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
             listening = true;
         }
     }
@@ -51,7 +51,7 @@ public class TyphoonAbility : Ability
         ActiveTyphoon = null;
         if( listening )
         {
-            Saw.Instance.KilledEnemyEvent.RemoveListener( OnSawKilledEnemy );
+            Saw.Instance.SawKilledEnemyEvent.RemoveListener( OnSawKilledEnemy );
             listening = false;
         }
         base.Finish();
