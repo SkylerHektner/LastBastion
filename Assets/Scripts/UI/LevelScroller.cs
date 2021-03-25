@@ -78,8 +78,9 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         else
         {
-            LevelIndex = 1;
-            JumpToDesiredLevel(LevelIndex);
+            //LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
+            JumpToDesiredLevel(PD.Instance.StoredLimboLevelIndex.Get());
+            Debug.Log("Not returning from a level");
         }
         Debug.Log("Level index" + LevelIndex);
     }
@@ -87,14 +88,14 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //[ContextMenu("JumpToDesiredLevel")]
     public void JumpToDesiredLevel(int Index)
     {
-        if (Index > 1)
+        if (Index > 0)
         {
             LevelBar.transform.localPosition = new Vector2(-(BarStartPos + 250 * (Index - 1)), LevelBar.transform.localPosition.y);
         }
-        else
-        {
-            LevelBar.transform.localPosition = new Vector2(BarStartPos, LevelBar.transform.localPosition.y);
-        }
+        //else
+        //{
+        //    LevelBar.transform.localPosition = new Vector2(BarStartPos, LevelBar.transform.localPosition.y);
+        //}
         DisplayLevelImage(Index);
     }
 
@@ -111,8 +112,14 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             Debug.LogWarning( "Warning: Level Index Greater than number of load level buttons that are registered" );
             return;
         }
+        if (LevelIndex <= 0)
+        {
+            LevelIndex = 1;
+        }
         DisplayImage.sprite = load_levels[LevelIndex - 1].LevelImage;
         SwapGlow(LevelIndex - 1);
+
+
         //Debug.Log("Displaying level  " + LevelIndex + "Image");
     }
 
@@ -151,9 +158,12 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 {
                     LevelIndex = 1;
                 }
+                Debug.Log("This is level " + LevelIndex + " selected");
+                Spectator.LevelIndex = LevelIndex;
                 break;
             }
         }
+
     }
 
     public void OnBeginDrag(PointerEventData eventData)

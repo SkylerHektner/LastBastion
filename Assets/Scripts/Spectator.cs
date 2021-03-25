@@ -37,6 +37,11 @@ public class Spectator : MonoBehaviour
             PD.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
             PD.Instance.StoredLimboLevelIndex.Set( Spectator.LevelIndex );
         }
+        else
+        {
+            PD.Instance.StoredLimboLevelIndex.Set(Spectator.LevelIndex);
+        }
+        Debug.Log("Storing index: " + PD.Instance.StoredLimboLevelIndex.Get());
     }
 
     // game is quit mid-game, save my current progress and put me in limbo
