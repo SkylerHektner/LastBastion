@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6e2cdfe8d02ce4bac5d67a2314a748, type: 3}
+  m_Name: EZ_Challenge_TEST
+  m_EditorClassIdentifier: 
+  LevelIdentifier: EZ_CHALLANGE_TEST
+  LevelChallenge: {fileID: 11400000, guid: a9846b3b2a210fc4dbf81290b5ecf81b, type: 2}
+  Waves:
+  - CompletionReward: 0
+    PassiveEnemies: 
+    PassiveEnemySpawnCadence: []
+    SpawnGroups:
+    - {fileID: 11400000, guid: 8d895542686d0044a8ad6651d3aa2bd6, type: 2}
+    - {fileID: 11400000, guid: 8d895542686d0044a8ad6651d3aa2bd6, type: 2}
+    - {fileID: 11400000, guid: 8d895542686d0044a8ad6651d3aa2bd6, type: 2}
+    SpawnGroupSpawnTimes:
+    - 3
+    - 3
+    - 3
+    collapsed: 0
+    AnimationTrigger: 
