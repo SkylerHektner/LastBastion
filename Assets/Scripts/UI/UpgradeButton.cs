@@ -56,7 +56,7 @@ public class UpgradeButton : MonoBehaviour
     {
         if (PD.Instance.UpgradeUnlockMap.GetUnlock(UpgradeFlag))
             Purchased = true;
-        //UpdateButton();
+        UpdateButton();
     }
 
     private void OnEnable()
@@ -81,7 +81,8 @@ public class UpgradeButton : MonoBehaviour
     {
         PurchasedGlow.SetActive(true);
         gameObject.GetComponent<Image>().sprite = UnlockedImage;
-        UpdateButton();
+        PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() - MyCost );
+        PD.Instance.UpgradeUnlockMap.SetUnlock( UpgradeFlag, true );
     }
 
     private void UpdateButton()

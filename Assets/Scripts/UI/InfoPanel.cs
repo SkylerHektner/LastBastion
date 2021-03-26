@@ -29,9 +29,6 @@ public class InfoPanel : MonoBehaviour
         int cur_player_wealth = PD.Instance.PlayerWealth.Get();
         if ( cur_player_wealth >= UpgradeCost)
         {
-            PD.Instance.PlayerWealth.Set( cur_player_wealth - UpgradeCost );
-            PD.Instance.UpgradeUnlockMap.SetUnlock( DesiredUpgrade.UpgradeFlag, true );
-
             DesiredUpgrade.Purchased = true;
             DesiredUpgrade.GetComponent<Animator>().SetTrigger("Unlock"); // play cool unlock animation when purchased
             //gameObject.SetActive(false);
