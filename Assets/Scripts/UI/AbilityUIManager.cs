@@ -75,6 +75,7 @@ public class AbilityUIManager : MonoBehaviour
         GameplayManager.Instance.SetTimeScale( 0.1f, TimeScaleLerpDuration, GameplayManager.TimeScale.UI );
         GameplayFieldScrim.gameObject.SetActive( true );
         GameplayFieldScrim.SetBool( "Fade", true );
+        currentHovering = null;
     }
 
     private void HideIcons()
@@ -85,6 +86,7 @@ public class AbilityUIManager : MonoBehaviour
         GameplayManager.Instance.SetTimeScale( 1.0f, TimeScaleReturnToNormalLerpDuratin, GameplayManager.TimeScale.UI );
         GameplayFieldScrim.SetBool( "Fade", false );
         GameplayFieldScrim.gameObject.SetActive( false );
+        currentHovering = null;
     }
 
     public void SetCurrentHovering( AbilityUIButton button )
