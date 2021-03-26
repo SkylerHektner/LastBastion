@@ -85,16 +85,18 @@ public class LoadLevel : MonoBehaviour
         ContractPopup.Description.text = MyDescription;
 
         Debug.Assert( SpawnCadence != null );
+        ContractPopup.CompletionPayout.text = SpawnCadence.Waves.Select( w => w.CompletionReward ).Sum().ToString();
+
         Challenge challenge = SpawnCadence.LevelChallenge;
         if( challenge != null )
         {
-            ContractPopup.CompletionPayout.text = SpawnCadence.Waves.Select( w => w.CompletionReward ).Sum().ToString();
             ContractPopup.ChallengeText.text = challenge.ChallengeDescription;
+            ContractPopup.ChallengeOptionalTextDecorator.gameObject.SetActive( true );
         }
         else
         {
-            ContractPopup.CompletionPayout.text = "";
             ContractPopup.ChallengeText.text = "";
+            ContractPopup.ChallengeOptionalTextDecorator.gameObject.SetActive( false );
         }
     }
 

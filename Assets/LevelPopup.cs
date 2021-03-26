@@ -13,6 +13,7 @@ public class LevelPopup : MonoBehaviour
     public TextMeshProUGUI GameModeText;
     public TextMeshProUGUI CompletionPayout;
     public TextMeshProUGUI ChallengeText;
+    public TextMeshProUGUI ChallengeOptionalTextDecorator;
     public TextMeshProUGUI Description;
 
     public GameObject ScratchoutTitle;
