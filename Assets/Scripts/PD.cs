@@ -24,30 +24,30 @@ public class PD
     // UPGRADES
     public enum UpgradeFlags
     {
-        ChainLightning,
-        ChainLightningStunDuration,
-        ChainLightningStaticOverload,    
-        ChainLightningLightningRod,
-        Typhoon,
-        TyphoonExtendedBBQ,              
-        TyphoonFlameSaw,
-        TyphoonRoaringFlames,
-        Anomaly,
-        AnomalyRicochetSaws,
-        AnomalyStasisCoating,            
-        AnomalySingularity,
-        Sawmageddon,
-        SawmageddonDuration,
-        SawmageddonProjectiles,
-        SawmageddonComboKiller,          
-        BaseOvershield,
-        BaseHP1,
-        BaseHP2,
-        BaseHP3,
-        Turrets1,                        // not implemented
-        Turrets2,                        // not implemented
-        Turrets3,                        // not implemented
-        Turrets4,
+        ChainLightning = 0,
+        ChainLightningStunDuration = 1,
+        ChainLightningStaticOverload = 2,    
+        ChainLightningLightningRod = 3,
+        Typhoon = 4,
+        TyphoonExtendedBBQ = 5,              
+        TyphoonFlameSaw = 6,
+        TyphoonRoaringFlames = 7,
+        Anomaly = 8,
+        AnomalyRicochetSaws = 9,
+        AnomalyStasisCoating = 10,            
+        AnomalySingularity = 11,
+        Sawmageddon = 12,
+        SawmageddonDuration = 13,
+        SawmageddonProjectiles = 14,
+        SawmageddonComboKiller = 15,
+        BaseOvershield = 16,
+        BaseHP1 = 17,
+        BaseHP2 = 18,
+        BaseHP3 = 19,
+        Turrets1 = 20,                        // not implemented
+        Turrets2 = 21,                        // not implemented
+        Turrets3 = 22,                        // not implemented
+        Turrets4 = 23,
     }
 
     // EVENTS
