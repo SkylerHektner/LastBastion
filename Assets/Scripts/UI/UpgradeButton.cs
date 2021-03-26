@@ -83,6 +83,8 @@ public class UpgradeButton : MonoBehaviour
         gameObject.GetComponent<Image>().sprite = UnlockedImage;
         PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() - MyCost );
         PD.Instance.UpgradeUnlockMap.SetUnlock( UpgradeFlag, true );
+        InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
+        ThePanel.UpdatePlayerWealth();
     }
 
     private void UpdateButton()
