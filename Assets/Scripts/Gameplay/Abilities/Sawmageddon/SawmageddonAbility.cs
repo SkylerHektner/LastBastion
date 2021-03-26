@@ -45,7 +45,9 @@ public class SawmageddonAbility : Ability
             spec_saw.SetProjectileSpeed( speed );
             spec_saw.StartMoveInDirection( new_direction );
             spec_saw.SetSharedCollisionSet( shared_collision_set );
-            spec_saw.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
+
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonComboKiller ) )
+                spec_saw.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
         }
     }
 
