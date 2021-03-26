@@ -33,6 +33,7 @@ public class InfoPanel : MonoBehaviour
             PD.Instance.UpgradeUnlockMap.SetUnlock( DesiredUpgrade.UpgradeFlag, true );
 
             DesiredUpgrade.Purchased = true;
+            DesiredUpgrade.GetComponent<Animator>().SetTrigger("Unlock"); // play cool unlock animation when purchased
             //gameObject.SetActive(false);
             //gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
             DenyButton.enabled = false;

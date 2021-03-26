@@ -23,7 +23,7 @@ public class UpgradeButton : MonoBehaviour
         }
         set {
             purchased = value;
-            UpdateButton();
+            //UpdateButton();
         }
     }
     private bool purchased;
@@ -56,20 +56,38 @@ public class UpgradeButton : MonoBehaviour
     {
         if (PD.Instance.UpgradeUnlockMap.GetUnlock(UpgradeFlag))
             Purchased = true;
-        UpdateButton();
+        //UpdateButton();
     }
 
     private void OnEnable()
     {
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpdatePlayerWealth();
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( UpgradeFlag ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( UpgradeFlag ))
+        {
             Purchased = true;
+            PurchasedGlow.SetActive(true);
+        }
+        else
+        {
+            PurchasedGlow.SetActive(false);
+            Purchased = false;
+        }
+
         UpdateButton();
     }
+
+    public void EnableGlow() // Called by unlock animation
+    {
+        PurchasedGlow.SetActive(true);
+        gameObject.GetComponent<Image>().sprite = UnlockedImage;
+        UpdateButton();
+    }
+
     private void UpdateButton()
     {
-        if( PrerequisiteUpgradeFlags.Any( f => !PD.Instance.UpgradeUnlockMap.GetUnlock( f ) ) ) 
+
+        if ( PrerequisiteUpgradeFlags.Any( f => !PD.Instance.UpgradeUnlockMap.GetUnlock( f ) ) ) 
         {
             // disable button if any pre-reqs not set
             PurchasedGlow.SetActive(false);
@@ -78,23 +96,16 @@ public class UpgradeButton : MonoBehaviour
         }
         else if( Purchased )
         {
-            //ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
-            //Color Green = new Color( 0 / 255, 255 / 255, 31 / 255 );
-            //ButtonColor.normalColor = Green;
-            //ButtonColor.highlightedColor = ButtonColor.disabledColor;
-            //gameObject.GetComponent<Button>().colors = ButtonColor;
-            PurchasedGlow.SetActive(true);
+            //PurchasedGlow.SetActive(true);
             gameObject.GetComponent<Image>().sprite = UnlockedImage;
             GetComponent<Button>().enabled = true;
         }
         else
         {
-            //ColorBlock ButtonColor = gameObject.GetComponent<Button>().colors;
-            //ButtonColor.normalColor = new Color( 255, 255, 255 );
-            //gameObject.GetComponent<Button>().colors = ButtonColor;
-            PurchasedGlow.SetActive(false);
+            //PurchasedGlow.SetActive(false);
             gameObject.GetComponent<Image>().sprite = Lockedimage;
             GetComponent<Button>().enabled = true;
         }
     }
+
 }
