@@ -96,4 +96,10 @@ public class AnomalyAbility : Ability
         // return true to cancel new ability construction
         return true;
     }
+
+    public override void OnSceneExit()
+    {
+        AnimatorDuration = 0.0f;
+        base.OnSceneExit();
+    }
 }

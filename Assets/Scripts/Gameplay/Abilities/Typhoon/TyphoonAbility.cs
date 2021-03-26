@@ -97,8 +97,8 @@ public class TyphoonAbility : Ability
 
     public override void OnSceneExit()
     {
-        if( ActiveTyphoon != null )
-            GameObject.Destroy( ActiveTyphoonDeleteAfterDuration.gameObject );
+        ActiveTyphoon = null;
+        AnimatorDuration = 0.0f;
         base.OnSceneExit();
     }
 }

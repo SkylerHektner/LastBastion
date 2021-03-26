@@ -96,4 +96,10 @@ public class SawmageddonAbility : Ability
         Debug.Assert( ComboKillerDisplay.Instance != null );
         ComboKillerDisplay.Instance?.SetChargeAmount( cur_combo_killer_kills, combo_killer_max );
     }
+
+    public override void OnSceneExit()
+    {
+        AnimatorDuration = 0.0f;
+        base.OnSceneExit();
+    }
 }
