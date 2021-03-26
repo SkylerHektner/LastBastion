@@ -10,7 +10,7 @@ public class UpgradeViewer : MonoBehaviour
     public List<Animator> CoinsList;
     public List<GameObject> UpgradesList;
     bool Open;
-    public ScrollRect ScrollRect;
+    public List<GameObject> PowerupScrolls;
     Color GlowColor;
     public Image ColorL;
     public Image ColorR;
@@ -27,12 +27,21 @@ public class UpgradeViewer : MonoBehaviour
             if (CoinsList[i].GetBool("Selected") == true) // if the button is on and glowing
             {
                 UpgradesList[i].SetActive(true);
-                ScrollRect.content = UpgradesList[i].GetComponent<RectTransform>();
+                PowerupScrolls[i].SetActive(true);
             }
             else
             {
                 UpgradesList[i].SetActive(false);
+                PowerupScrolls[i].SetActive(false);
             }
+        }
+
+    }
+    public void HideContent()
+    {
+        for (int i = 0; i < CoinsList.Count; i++)
+        {
+            UpgradesList[i].SetActive(false);
         }
 
     }
@@ -56,7 +65,7 @@ public class UpgradeViewer : MonoBehaviour
             BigScroll.SetBool("Open", true);
             Coin.SetBool("Selected", true);
             Open = true;
-            SetContent();
+            //SetContent();
         }
         else if (Open && Coin.GetBool("Selected") == false)
         {
