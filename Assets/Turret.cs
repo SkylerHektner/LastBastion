@@ -13,6 +13,8 @@ public class Turret : MonoBehaviour
     public float PowerSurgeRotationSpeed = 70.0f;
     public float PowerSurgeDuration = 4.0f;
     public TurretProjectile ProjectilePrefab;
+    public TurretProjectile SlowingProjectilePrefab;
+    public TurretProjectile DefaultProjectile;
     public Transform ProjectileSpawnPoint;
 
     private float range;
@@ -24,6 +26,14 @@ public class Turret : MonoBehaviour
     private bool collateral_damage_active = false;
     private bool timed_payload_active = false;
 
+    public GameObject PowerSurgeGlowL;
+    public GameObject PowerSurgeGlowR;
+    public GameObject SawmageddonGlowL;
+    public GameObject SawmageddonGlowR;
+    public GameObject AnomalyGlowL;
+    public GameObject AnomalyGlowR;
+
+
     private void Start()
     {
         range = GetComponent<CircleCollider2D>().radius;
@@ -31,6 +41,7 @@ public class Turret : MonoBehaviour
         anim = GetComponent<Animator>();
         start_rotation = transform.rotation;
         AbilityManager.Instance.AbilityUsedEvent.AddListener( OnAbilityUsed );
+        ProjectilePrefab = DefaultProjectile;
     }
 
     private void Update()
@@ -157,31 +168,46 @@ public class Turret : MonoBehaviour
     {
         power_surge_timer = PowerSurgeDuration;
         GetComponent<Animator>().SetFloat( "FireRate", PowerSurgeFireRate ); // animation speed for firing anim
+        PowerSurgeGlowL.SetActive(true);
+        PowerSurgeGlowR.SetActive(true);
+
     }
 
     private void EndPowerSurge()
     {
         power_surge_timer = 0.0f;
         GetComponent<Animator>().SetFloat( "FireRate", FireRate ); // animation speed for firing anim
+        PowerSurgeGlowL.SetActive(false);
+        PowerSurgeGlowR.SetActive(false);
     }
 
     private void StartCollateralDamage()
     {
         collateral_damage_active = true;
+        SawmageddonGlowL.SetActive(true);
+        SawmageddonGlowR.SetActive(true);
     }
 
     private void EndCollateralDamage()
     {
         collateral_damage_active = false;
+        SawmageddonGlowL.SetActive(false);
+        SawmageddonGlowR.SetActive(false);
     }
 
     private void StartTimedPayload()
     {
         timed_payload_active = true;
+        ProjectilePrefab = SlowingProjectilePrefab;
+        AnomalyGlowL.SetActive(true);
+        AnomalyGlowR.SetActive(true);
     }
 
     private void EndTimedPayload()
     {
         timed_payload_active = false;
+        ProjectilePrefab = DefaultProjectile;
+        AnomalyGlowL.SetActive(false);
+        AnomalyGlowR.SetActive(false);
     }
 }
