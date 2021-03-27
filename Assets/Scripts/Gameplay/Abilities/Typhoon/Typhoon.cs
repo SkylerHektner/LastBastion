@@ -12,7 +12,7 @@ public class Typhoon : MonoBehaviour
             Enemy en = col.gameObject.GetComponent<Enemy>();
 
             // hit em till they dead
-            while( en != null && !en.Dying )
+            while( en != null && !en.Dying && !en.ImmuneToTyphoon)
                 en.Hit( Vector3.up, false );
         }
     }

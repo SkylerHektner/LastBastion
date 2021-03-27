@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446512daffa941f4cb0d2f3082865b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeath:
+  DeathEvent:
     m_PersistentCalls:
       m_Calls: []
   MoveSpeed: 0.5
@@ -132,6 +132,7 @@ MonoBehaviour:
   attacks: 1
   powerupDropValue: 1
   ImmuneToZapBonusDamage: 1
+  ImmuneToTyphoon: 1
 --- !u!58 &406882177323731115
 CircleCollider2D:
   m_ObjectHideFlags: 0

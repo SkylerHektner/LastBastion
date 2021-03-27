@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool attacks = true;
     [SerializeField] private int powerupDropValue = 1;
     [SerializeField] bool ImmuneToZapBonusDamage;
+    public bool ImmuneToTyphoon = false;
 
     public int PowerupDropValue
     {
