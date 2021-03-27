@@ -44,10 +44,10 @@ public class PD
         BaseHP1 = 17,
         BaseHP2 = 18,
         BaseHP3 = 19,
-        Turrets1 = 20,                        // not implemented
-        Turrets2 = 21,                        // not implemented
-        Turrets3 = 22,                        // not implemented
-        Turrets4 = 23,
+        Turrets = 20,                        
+        TurretsPowerSurge = 21,              
+        TurretsCollateralDamage = 22,        
+        TurretsTimedPaylod = 23,
     }
 
     // EVENTS

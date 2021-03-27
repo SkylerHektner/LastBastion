@@ -5,9 +5,14 @@ using UnityEngine;
 [RequireComponent( typeof( CircleCollider2D ) )]
 public class Turret : MonoBehaviour
 {
-    public float FireRate;
+    public float TrueRotationSpeed { get { return power_surge_timer > 0.0f ? PowerSurgeRotationSpeed : RotationSpeed; } }
+
+    public float FireRate = 1.0f;
+    public float PowerSurgeFireRate = 2.0f;
     public float RotationSpeed = 45.0f; // degrees per second
-    public Projectile ProjectilePrefab;
+    public float PowerSurgeRotationSpeed = 70.0f;
+    public float PowerSurgeDuration = 4.0f;
+    public TurretProjectile ProjectilePrefab;
     public Transform ProjectileSpawnPoint;
 
     private float range;
@@ -15,12 +20,17 @@ public class Turret : MonoBehaviour
     private Animator anim;
     private Quaternion start_rotation;
 
+    private float power_surge_timer = 0.0f;
+    private bool collateral_damage_active = false;
+    private bool timed_payload_active = false;
+
     private void Start()
     {
         range = GetComponent<CircleCollider2D>().radius;
         GetComponent<Animator>().SetFloat( "FireRate", FireRate ); // animation speed for firing anim
         anim = GetComponent<Animator>();
         start_rotation = transform.rotation;
+        AbilityManager.Instance.AbilityUsedEvent.AddListener( OnAbilityUsed );
     }
 
     private void Update()
@@ -38,6 +48,23 @@ public class Turret : MonoBehaviour
             anim.SetBool( "Detected", false );
             VisualSearchForEnemy();
         }
+
+        if( power_surge_timer > 0.0f)
+        {
+            power_surge_timer -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
+            if( power_surge_timer <= 0.0f )
+                EndPowerSurge();
+        }
+
+        if( collateral_damage_active && SawmageddonAbility.ActiveSawmageddon == null )
+        {
+            EndCollateralDamage();
+        }
+
+        if( timed_payload_active && AnomalyAbility.ActiveAnomaly == null )
+        {
+            EndTimedPayload();
+        }
     }
 
 
@@ -53,7 +80,7 @@ public class Turret : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             Quaternion.Euler( 0, 0, needed_z ),
-            RotationSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale );
+            TrueRotationSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale );
         return Mathf.Abs( ( needed_z - transform.rotation.eulerAngles.z ) % 360.0f ) < 5.0f;
     }
     private void VisualSearchForEnemy()
@@ -61,7 +88,7 @@ public class Turret : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             start_rotation,
-            RotationSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale );
+            TrueRotationSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale );
     }
 
     public void FireBullet() // called by pivot animator
@@ -69,9 +96,13 @@ public class Turret : MonoBehaviour
         ValidateCurrentTarget();
         if( current_target != null )
         {
-            Projectile proj = GameObject.Instantiate( ProjectilePrefab );
+            TurretProjectile proj = GameObject.Instantiate( ProjectilePrefab );
             proj.transform.position = ProjectileSpawnPoint.position;
             proj.StartMoveInDirection( current_target.transform.position - transform.position );
+            if( collateral_damage_active )
+                proj.ShouldPierce = true;
+            if( timed_payload_active )
+                proj.ShouldFreeze = true;
         }
     }
 
@@ -96,5 +127,61 @@ public class Turret : MonoBehaviour
                 current_target = null;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        AbilityManager.Instance?.AbilityUsedEvent.RemoveListener( OnAbilityUsed );
+    }
+
+    private void OnAbilityUsed( AbilityEnum ability )
+    {
+        if( ability == AbilityEnum.ChainLightning &&
+            PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TurretsPowerSurge ) )
+        {
+            StartPowerSurge();
+        }
+        else if( ability == AbilityEnum.Sawmageddon &&
+            PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TurretsCollateralDamage ) )
+        {
+            StartCollateralDamage();
+        }
+        else if( ability == AbilityEnum.TemporalAnomaly &&
+            PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TurretsTimedPaylod ) )
+        {
+            StartTimedPayload();
+        }
+    }
+
+    private void StartPowerSurge()
+    {
+        power_surge_timer = PowerSurgeDuration;
+        GetComponent<Animator>().SetFloat( "FireRate", PowerSurgeFireRate ); // animation speed for firing anim
+    }
+
+    private void EndPowerSurge()
+    {
+        power_surge_timer = 0.0f;
+        GetComponent<Animator>().SetFloat( "FireRate", FireRate ); // animation speed for firing anim
+    }
+
+    private void StartCollateralDamage()
+    {
+        collateral_damage_active = true;
+    }
+
+    private void EndCollateralDamage()
+    {
+        collateral_damage_active = false;
+    }
+
+    private void StartTimedPayload()
+    {
+        timed_payload_active = true;
+    }
+
+    private void EndTimedPayload()
+    {
+        timed_payload_active = false;
     }
 }

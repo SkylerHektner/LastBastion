@@ -5833,6 +5833,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c836c29b2e6a6a945b2a4d7c07a34a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DamageTakenEvent:
+    m_PersistentCalls:
+      m_Calls: []
   CurrentHP: 0
   CurrentMaxHP: 0
   BaseMaxHP: 10
@@ -8769,7 +8772,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 415845846759991324, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
+    - {fileID: 1652679399456577477, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
 --- !u!4 &3045859891117535984 stripped
 Transform:

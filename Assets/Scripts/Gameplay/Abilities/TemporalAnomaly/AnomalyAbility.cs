@@ -5,8 +5,10 @@ using System;
 
 public class AnomalyAbility : Ability
 {
-    public AnomalyAbilityData AbilityData;
+    public static AnomalyAbility ActiveAnomaly { get; private set; }
     public static float AnimatorDuration;
+
+    public AnomalyAbilityData AbilityData;
 
     private List<Tuple<SpectralSaw, Vector3, float>> pending_saws = new List<Tuple<SpectralSaw, Vector3, float>>();
     private float time_remaining = 0.0f;
@@ -14,6 +16,7 @@ public class AnomalyAbility : Ability
     public override void Start()
     {
         base.Start();
+        ActiveAnomaly = this;
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
         time_remaining = AbilityData.Duration;
 
@@ -52,10 +55,15 @@ public class AnomalyAbility : Ability
         Enemy en = SpawnManager.Instance.TryGetEnemyByID( id );
         if( en != null )
         {
-            stasis_coated_enemies.Add( id );
-            en.StasisCoat( AbilityData.StasisTouchReplacementMaterial );
-            GameObject.Instantiate( AbilityData.StasisTouchEffectPrefab );
+            StasisCoatEnemy( en );
         }
+    }
+
+    public void StasisCoatEnemy( Enemy en )
+    {
+        stasis_coated_enemies.Add( en.EnemyID );
+        en.StasisCoat( AbilityData.StasisTouchReplacementMaterial );
+        GameObject.Instantiate( AbilityData.StasisTouchEffectPrefab );
     }
 
     public override void Update( float delta_time )
@@ -88,6 +96,8 @@ public class AnomalyAbility : Ability
             if( en != null )
                 en.EndStatisCoating();
         }
+
+        ActiveAnomaly = null;
     }
 
     public override bool OnAbilityUsedWhileAlreadyActive()
@@ -100,6 +110,7 @@ public class AnomalyAbility : Ability
     public override void OnSceneExit()
     {
         AnimatorDuration = 0.0f;
+        ActiveAnomaly = this;
         base.OnSceneExit();
     }
 }

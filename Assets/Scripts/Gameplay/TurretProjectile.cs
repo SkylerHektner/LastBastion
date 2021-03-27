@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TurretProjectile : Projectile
 {
+    public bool ShouldPierce { get; set; } = false;
+    public bool ShouldFreeze { get; set; } = false;
+
     protected override void Start()
     {
         base.Start();
@@ -25,8 +28,13 @@ public class TurretProjectile : Projectile
     {
         if( col.tag == "Enemy" )
         {
+            if( ShouldFreeze && AnomalyAbility.ActiveAnomaly != null )
+            {
+                AnomalyAbility.ActiveAnomaly.StasisCoatEnemy( col.gameObject.GetComponent<Enemy>() );
+            }
             col.gameObject.GetComponent<Enemy>().Hit( MoveDirection, true );
-            DestroyProjectile();
+            if( !ShouldPierce )
+                DestroyProjectile();
         }
     }
 }

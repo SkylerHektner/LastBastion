@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class SawmageddonAbility : Ability
 {
+    public static SawmageddonAbility ActiveSawmageddon { get; private set; }
+    public static float AnimatorDuration;
+
     public SawmageddonAbilityData AbilityData;
 
     private float time_left = 0.0f;
-    public static float AnimatorDuration;
-
     private int combo_killer_max = -1;
     private int cur_combo_killer_kills = 0;
 
@@ -18,6 +19,7 @@ public class SawmageddonAbility : Ability
     public override void Start()
     {
         base.Start();
+        ActiveSawmageddon = this;
         time_left = PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonDuration )
             ? AbilityData.ImprovedDuration : AbilityData.Duration;
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
@@ -60,13 +62,13 @@ public class SawmageddonAbility : Ability
             ComboKillerDisplay.Instance.gameObject.SetActive( false );
             Debug.Assert( ComboKillerDisplay.Instance != null );
         }
+        ActiveSawmageddon = null;
         base.Finish();
     }
 
     public override void Update( float delta_time )
     {
         base.Update( delta_time );
-
 
         time_left -= delta_time * GameplayManager.GamePlayTimeScale;
         AnimatorDuration = time_left;
@@ -100,6 +102,7 @@ public class SawmageddonAbility : Ability
     public override void OnSceneExit()
     {
         AnimatorDuration = 0.0f;
+        ActiveSawmageddon = null;
         base.OnSceneExit();
     }
 }

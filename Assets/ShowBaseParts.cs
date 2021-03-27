@@ -87,7 +87,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         // Turrets
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.Turrets1))
+        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.Turrets))
         {
             Turrets.SetActive(true);
         }
