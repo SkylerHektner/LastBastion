@@ -36,7 +36,7 @@ public class AbilityDrop : MonoBehaviour
 
     private void FixedUpdate()
     {
-        DespawnTimer -= Time.smoothDeltaTime * GameplayManager.GamePlayTimeScale;
+        DespawnTimer -= Time.smoothDeltaTime * GameplayManager.TimeScale;
         Crystal.SetFloat("DespawnTimer", DespawnTimer);
     }
 }

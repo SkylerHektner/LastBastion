@@ -32,7 +32,7 @@ public class TyphoonAbility : Ability
     public override void Update( float delta_time )
     {
         base.Update( delta_time );
-        time_remaining -= delta_time * GameplayManager.Instance.GetTimeScale( GameplayManager.TimeScale.Combined );
+        time_remaining -= delta_time * GameplayManager.TimeScale;
         AnimatorDuration = time_remaining;
         if( time_remaining <= 0.0f && !Saw.Instance.OnFire )
             Finish();

@@ -70,7 +70,7 @@ public class SawmageddonAbility : Ability
     {
         base.Update( delta_time );
 
-        time_left -= delta_time * GameplayManager.GamePlayTimeScale;
+        time_left -= delta_time * GameplayManager.TimeScale;
         AnimatorDuration = time_left;
 
         if( time_left <= 0.0f )

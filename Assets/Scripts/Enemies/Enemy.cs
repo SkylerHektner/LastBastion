@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
         else
             StartMoving();
 
-        anim.speed = GameplayManager.GamePlayTimeScale;
+        anim.speed = GameplayManager.TimeScale;
 
         // if we haven't been registered, register ourselves (useful debugging feature for monsters that were in the scene at start)
         if( SpawnManager.Instance.TryGetEnemyByID( enemyID ) == null )
@@ -93,19 +93,19 @@ public class Enemy : MonoBehaviour
 
         if( Moving )
         {
-            if( transform.position.y - SpawnManager.Instance.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed * GameplayManager.GamePlayTimeScale )
+            if( transform.position.y - SpawnManager.Instance.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed * GameplayManager.TimeScale )
             {
                 Moving = false;
                 DamageBase();
                 Kill();
             }
             else
-                transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale;
+                transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime * GameplayManager.TimeScale;
         }
 
         if( zap_duration != -1.0f )
         {
-            zap_duration -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
+            zap_duration -= Time.deltaTime * GameplayManager.TimeScale;
             if( zap_duration <= 0.0f )
                 FinishZap();
         }
@@ -161,7 +161,7 @@ public class Enemy : MonoBehaviour
             Moving = true;
             anim.SetBool( "Attacking", Moving );
         }
-        anim.speed = GameplayManager.GamePlayTimeScale;
+        anim.speed = GameplayManager.TimeScale;
     }
 
     public void StopMoving()
@@ -237,7 +237,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTimeScaleChange()
     {
-        anim.speed = GameplayManager.GamePlayTimeScale;
+        anim.speed = GameplayManager.TimeScale;
     }
 
     protected virtual void FinishZap()

@@ -20,7 +20,7 @@ public class TyphoonFlamingCorpse : MonoBehaviour
 
     private void Update()
     {
-        tick_time -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
+        tick_time -= Time.deltaTime * GameplayManager.TimeScale;
 
         if( tick_time <= 0.0f )
         {

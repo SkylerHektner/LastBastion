@@ -72,7 +72,7 @@ public class AbilityUIManager : MonoBehaviour
         foreach( var g in ShowOnAbilityMenuActive )
             g.SetActive( true );
         showing = true;
-        GameplayManager.Instance.SetTimeScale( 0.1f, TimeScaleLerpDuration, GameplayManager.TimeScale.UI );
+        GameplayManager.Instance.SetTimeScale( 0.1f, TimeScaleLerpDuration );
         GameplayFieldScrim.gameObject.SetActive( true );
         GameplayFieldScrim.SetBool( "Fade", true );
         currentHovering = null;
@@ -83,7 +83,7 @@ public class AbilityUIManager : MonoBehaviour
         foreach( var g in ShowOnAbilityMenuActive )
             g.SetActive( false );
         showing = false;
-        GameplayManager.Instance.SetTimeScale( 1.0f, TimeScaleReturnToNormalLerpDuratin, GameplayManager.TimeScale.UI );
+        GameplayManager.Instance.SetTimeScale( 1.0f, TimeScaleReturnToNormalLerpDuratin );
         GameplayFieldScrim.SetBool( "Fade", false );
         GameplayFieldScrim.gameObject.SetActive( false );
         currentHovering = null;

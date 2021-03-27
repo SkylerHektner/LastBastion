@@ -21,7 +21,7 @@ public class Shrike : Enemy
 
         if( current_teleport_cooldown > 0.0f)
         {
-            current_teleport_cooldown -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
+            current_teleport_cooldown -= Time.deltaTime * GameplayManager.TimeScale;
             TeleportFX.SetActive(true);
         }
         else

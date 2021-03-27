@@ -69,7 +69,7 @@ public class AnomalyAbility : Ability
     public override void Update( float delta_time )
     {
         base.Update( delta_time );
-        time_remaining -= delta_time * GameplayManager.Instance.GetTimeScale( GameplayManager.TimeScale.UI );
+        time_remaining -= delta_time * GameplayManager.TimeScale;
         AnimatorDuration = time_remaining;
         if( time_remaining <= 0.0f )
             Finish();

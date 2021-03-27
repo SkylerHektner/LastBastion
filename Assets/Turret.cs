@@ -51,7 +51,7 @@ public class Turret : MonoBehaviour
 
         if( power_surge_timer > 0.0f)
         {
-            power_surge_timer -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
+            power_surge_timer -= Time.deltaTime * GameplayManager.TimeScale;
             if( power_surge_timer <= 0.0f )
                 EndPowerSurge();
         }
@@ -80,7 +80,7 @@ public class Turret : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             Quaternion.Euler( 0, 0, needed_z ),
-            TrueRotationSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale );
+            TrueRotationSpeed * Time.deltaTime * GameplayManager.TimeScale );
         return Mathf.Abs( ( needed_z - transform.rotation.eulerAngles.z ) % 360.0f ) < 5.0f;
     }
     private void VisualSearchForEnemy()
@@ -88,7 +88,7 @@ public class Turret : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             start_rotation,
-            TrueRotationSpeed * Time.deltaTime * GameplayManager.GamePlayTimeScale );
+            TrueRotationSpeed * Time.deltaTime * GameplayManager.TimeScale );
     }
 
     public void FireBullet() // called by pivot animator

@@ -30,7 +30,7 @@ public class MudSlinger : Enemy
 
         if( mud_throw_cooldown != -1.0f )
         {
-            mud_throw_cooldown -= Time.deltaTime * GameplayManager.GamePlayTimeScale * ( ( Zapped || StasisCoated ) ? 0.0f : 1.0f );
+            mud_throw_cooldown -= Time.deltaTime * GameplayManager.TimeScale * ( ( Zapped || StasisCoated ) ? 0.0f : 1.0f );
 
             if( mud_throw_cooldown <= 0.0f )
                 StartThrowMud();

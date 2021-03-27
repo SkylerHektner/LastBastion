@@ -89,8 +89,8 @@ public class ChainLightningAbility : Ability
         if( pending_zaps.Count == 0 )
             return;
 
-        cur_time += delta_time * GameplayManager.GamePlayTimeScale;
-        zapped_enemy_tracking_time -= delta_time * GameplayManager.GamePlayTimeScale;
+        cur_time += delta_time * GameplayManager.TimeScale;
+        zapped_enemy_tracking_time -= delta_time * GameplayManager.TimeScale;
 
         while( cur_zap_index < pending_zaps.Count && pending_zaps[cur_zap_index].time <= cur_time )
         {

@@ -10,12 +10,12 @@ public class TimeScaleAwareEffect : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         GameplayManager.Instance.TimeScaleChanged.AddListener( OnTimeScaleChanged );
-        anim.speed = GameplayManager.GamePlayTimeScale;
+        anim.speed = GameplayManager.TimeScale;
     }
 
     private void OnTimeScaleChanged()
     {
-        anim.speed = GameplayManager.GamePlayTimeScale;
+        anim.speed = GameplayManager.TimeScale;
     }
 
     private void OnDestroy()

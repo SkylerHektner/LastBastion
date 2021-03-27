@@ -486,6 +486,15 @@ MonoBehaviour:
   SawFiredEvent:
     m_PersistentCalls:
       m_Calls: []
+  SawKilledEnemyEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  SawHitEnemyEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  SawMuddiedEvent:
+    m_PersistentCalls:
+      m_Calls: []
   MoveSpeed: 30
   MinDragDistance: 1
   MaxDragDistance: 5
@@ -513,7 +522,6 @@ MonoBehaviour:
   MoveSpeed: 0
   MoveDirection: {x: 0, y: 0, z: 0}
   CurWallHitBehavior: 0
-  TimeScale: 0
   DestroyEffect: {fileID: 0}
   ProjectileHitWallEvent:
     m_PersistentCalls:
@@ -529,6 +537,7 @@ GameObject:
   - component: {fileID: 2542418455778918367}
   - component: {fileID: 2542418455778918366}
   - component: {fileID: 1855288180176211213}
+  - component: {fileID: 4390663566984472936}
   m_Layer: 8
   m_Name: SawSprite
   m_TagString: Untagged
@@ -620,6 +629,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4390663566984472936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2542418455778918364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52b11517efcdcd14ab2af70f6eaa8eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2637685675289452812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,7 +1291,7 @@ ParticleSystem:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7343333148819854537}
-  serializedVersion: 6
+  serializedVersion: 7
   lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
@@ -4909,19 +4930,20 @@ ParticleSystem:
     range: {x: 0, y: 1}
   CollisionModule:
     enabled: 0
-    serializedVersion: 3
+    serializedVersion: 4
     type: 0
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
     multiplyColliderForceByCollisionAngle: 1
-    plane0: {fileID: 0}
-    plane1: {fileID: 0}
-    plane2: {fileID: 0}
-    plane3: {fileID: 0}
-    plane4: {fileID: 0}
-    plane5: {fileID: 0}
+    m_Planes:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     m_Dampen:
       serializedVersion: 2
       minMaxState: 0
@@ -5095,17 +5117,20 @@ ParticleSystem:
     interiorCollisions: 0
   TriggerModule:
     enabled: 0
-    collisionShape0: {fileID: 0}
-    collisionShape1: {fileID: 0}
-    collisionShape2: {fileID: 0}
-    collisionShape3: {fileID: 0}
-    collisionShape4: {fileID: 0}
-    collisionShape5: {fileID: 0}
+    serializedVersion: 2
     inside: 1
     outside: 0
     enter: 0
     exit: 0
+    colliderQueryMode: 0
     radiusScale: 1
+    primitives:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   SubModule:
     serializedVersion: 2
     enabled: 0

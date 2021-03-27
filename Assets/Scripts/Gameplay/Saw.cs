@@ -57,7 +57,6 @@ public class Saw : MonoBehaviour
         DirectionArrow.gameObject.SetActive( false );
         proj = GetComponent<Projectile>();
         proj.ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
-        proj.SetTimeScaleFilter( GameplayManager.TimeScale.UI ); // don't pay attention to temporal anomoly time scale
     }
 
     private void Update()
@@ -103,7 +102,7 @@ public class Saw : MonoBehaviour
 
         if( cover_in_mud_duration != -1.0f )
         {
-            cover_in_mud_duration -= Time.deltaTime * GameplayManager.GamePlayTimeScale;
+            cover_in_mud_duration -= Time.deltaTime * GameplayManager.TimeScale;
             if( cover_in_mud_duration <= 0.0f )
                 EndCoverInMud();
         }
