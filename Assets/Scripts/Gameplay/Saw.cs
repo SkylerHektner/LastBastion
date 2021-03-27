@@ -63,7 +63,7 @@ public class Saw : MonoBehaviour
     {
         if( OnFire )
         {
-            on_fire_duration -= Time.deltaTime;
+            on_fire_duration -= Time.deltaTime * GameplayManager.TimeScale;
             if( on_fire_duration <= 0.0f )
                 EndOnFire();
             TyphoonFX.SetFloat( "Duration", on_fire_duration );

@@ -79,7 +79,7 @@ public class SpawnManager : MonoBehaviour
             {
                 var next = it.Next;
                 var ps = it.Value;
-                ps.time_left -= Time.deltaTime;
+                ps.time_left -= Time.deltaTime * GameplayManager.TimeScale;
                 it.Value = ps;
                 if( ps.time_left < 0.0f )
                 {
@@ -93,7 +93,7 @@ public class SpawnManager : MonoBehaviour
         if( spawn_timer != -1.0f )
         {
             // increment spawn timer
-            spawn_timer += Time.deltaTime;
+            spawn_timer += Time.deltaTime * GameplayManager.TimeScale;
 
             // manage passive mob spawns
             // NO PASSIVE MOBS SPAWN AFTER LAST SPAWN GROUP HAS BEEN TRIGGERED
@@ -101,7 +101,7 @@ public class SpawnManager : MonoBehaviour
             {
                 for( int x = 0; x < passive_spawn_trackers.Count; ++x )
                 {
-                    passive_spawn_trackers[x] -= Time.deltaTime;
+                    passive_spawn_trackers[x] -= Time.deltaTime * GameplayManager.TimeScale;
                     if( passive_spawn_trackers[x] < 0.0f )
                     {
                         passive_spawn_trackers[x] += spawnCadenceProfile.Waves[current_wave].PassiveEnemySpawnCadence[x];
