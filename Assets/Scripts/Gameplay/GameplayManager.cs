@@ -24,7 +24,24 @@ public class GameplayManager : MonoBehaviour
         Won,
         Lost
     }
-    public static PlayerState PlayerWinState = PlayerState.Active;
+    public static PlayerState PlayerWinState {
+        get
+        {
+            return playerWinState;
+        }
+        set
+        {
+            playerWinState = value;
+
+            // kind of a hack, but we need to make sure that the player doesn't enter limbo
+            // if they paused a level but came back and finished it without closing the application completely
+            if( value != PlayerState.Active )
+            {
+                PD.Instance?.Limbo.Set( false );
+            }
+        }
+    }
+    private static PlayerState playerWinState = PlayerState.Active;
 
     // TIME SCALE
     public static float TimeScale

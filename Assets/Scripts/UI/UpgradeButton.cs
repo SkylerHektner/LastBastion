@@ -8,6 +8,7 @@ using System.Linq;
 public class UpgradeButton : MonoBehaviour
 {
     public string MyName;
+    [Multiline( 5 )]
     public string MyInfo;
     public int MyCost;
     public GameObject InfoBox;

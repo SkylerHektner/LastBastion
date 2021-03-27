@@ -39,7 +39,7 @@ public class Spectator : MonoBehaviour
         }
         else
         {
-            PD.Instance.StoredLimboLevelIndex.Set(Spectator.LevelIndex);
+            PD.Instance.StoredLimboLevelIndex.Set( Spectator.LevelIndex );
         }
         Debug.Log("Storing index: " + PD.Instance.StoredLimboLevelIndex.Get());
     }
@@ -51,5 +51,16 @@ public class Spectator : MonoBehaviour
 #if !UNITY_EDITOR 
         TryToggleLimbo();
 #endif
+    }
+
+    private void OnApplicationPause( bool pause )
+    {
+        if(pause)
+        {
+#if !UNITY_EDITOR
+        TryToggleLimbo();
+#endif
+            PauseManager.Instance?.PauseGame();
+        }
     }
 }

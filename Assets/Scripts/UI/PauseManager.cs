@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
+    public static PauseManager Instance;
+
     public Animator WaveCounter;
     public GameObject PauseScreen;
     public GameObject BonusScreen;
@@ -44,4 +46,13 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    private void Start()
+    {
+        PauseManager.Instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        PauseManager.Instance = null;
+    }
 }
