@@ -39,6 +39,7 @@ public class PauseManager : MonoBehaviour
     {
         Invoke("LoadMenu", 1f);
         Time.timeScale = 1;
+        PD.Instance?.Limbo.Set( false );
     }
 
     public void LoadMenu()
