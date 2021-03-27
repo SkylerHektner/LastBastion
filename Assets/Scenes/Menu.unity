@@ -182,7 +182,7 @@ MonoBehaviour:
   MyCost: 100
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 21
-  PrerequisiteUpgradeFlags: 14000000
+  PrerequisiteUpgradeFlags: 1400000000000000
   PurchasedGlow: {fileID: 1046580293}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
   Lockedimage: {fileID: 21300000, guid: 37fc41b9c04d2dc4f9a18aac8235f5de, type: 3}
@@ -10017,8 +10017,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Flame Glaze
-  MyInfo: Allows the saw to catch flame if bounced through fire, boosting speed &
-    damage
+  MyInfo: Allows your saw to catch flame if bounced through fire, boosting speed
+    & damage
   MyCost: 65
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 6
@@ -10386,11 +10386,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Collateral Damage
-  MyInfo: Enables piercing shots while sawmageddon is active
+  MyInfo: Turrets fire piercing shots while sawmageddon is active
   MyCost: 150
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 22
-  PrerequisiteUpgradeFlags: 15000000
+  PrerequisiteUpgradeFlags: 140000000c000000
   PurchasedGlow: {fileID: 1111071821}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
   Lockedimage: {fileID: 21300000, guid: 5b5e71b17acb28845b463fcc4f2835a9, type: 3}
@@ -30735,7 +30735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Chain Lightning
-  MyInfo: Fire a beam of electricity that briefly stuns all visible targets
+  MyInfo: Fire an arcing beam of electricity that briefly paralyzes all visible targets
   MyCost: 10
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 0
@@ -31669,7 +31669,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Stasis Coating
-  MyInfo: Enemies touched by the anomaly saw are frozen in time for a short duration
+  MyInfo: Enemies you hit during Temporal Anomaly are locked in Stasis until the
+    Anomaly ends
   MyCost: 65
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 10
@@ -32394,7 +32395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Pyromaniac
-  MyInfo: Kills with the flaming saw slow down its burnout timer
+  MyInfo: Kills with the flaming saw slow down your burnout timer
   MyCost: 25
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 7
@@ -45778,8 +45779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Static Overload
-  MyInfo: Stunned enemies have a chance to explode when killed, dealing damage to
-    nearby enemies
+  MyInfo: Paralyzed enemies explode when killed, dealing damage to nearby enemies
   MyCost: 50
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 2
@@ -48835,7 +48835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Battery Pack
-  MyInfo: Zapped enemies remain paralyzed for a longer duration
+  MyInfo: Paralyzed enemies remain paralyzed for a longer duration
   MyCost: 25
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 1
@@ -50140,7 +50140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Singularity
-  MyInfo: Summons a temporary copy of the saw in a mirrored reality
+  MyInfo: The Anomaly mirrors reality, repeating saw launches in parallel
   MyCost: 80
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 11
@@ -51002,7 +51002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Frenzy Blade
-  MyInfo: Fire more saws for more time
+  MyInfo: Increase the duration of your Sawmageddon
   MyCost: 25
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 13
@@ -57929,11 +57929,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Timed Payload
-  MyInfo: Shots freeze targets while temporal anomaly is active
+  MyInfo: Turret shots freeze targets while temporal anomaly is active
   MyCost: 200
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 23
-  PrerequisiteUpgradeFlags: 16000000
+  PrerequisiteUpgradeFlags: 1400000008000000
   PurchasedGlow: {fileID: 2017365419}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
   Lockedimage: {fileID: 21300000, guid: ef6b5514b82e2a04ea80d01c12b1760d, type: 3}
@@ -58330,7 +58330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyName: Temporal Anomaly
-  MyInfo: Saves temporary copies of the saw and releases them all at once
+  MyInfo: Create a Temporal Anomaly which repeats every saw launch that happened
+    during its duration
   MyCost: 10
   InfoBox: {fileID: 238644933}
   UpgradeFlag: 8
