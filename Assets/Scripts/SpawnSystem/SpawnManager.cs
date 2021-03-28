@@ -67,6 +67,7 @@ public class SpawnManager : MonoBehaviour
 #if UNITY_EDITOR
         current_wave = DebugStartWave - 2;
 #endif
+        GameplayManager.PlayerWinState = GameplayManager.PlayerState.Active;
         StartNextWave();
     }
 
