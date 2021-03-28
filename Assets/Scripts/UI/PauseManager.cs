@@ -10,6 +10,7 @@ public class PauseManager : MonoBehaviour
     public Animator WaveCounter;
     public GameObject PauseScreen;
     public GameObject BonusScreen;
+    public GameObject PauseButton;
 
     public void ResumeGame()
     {
@@ -17,6 +18,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1;
         PauseScreen.SetActive(false);
         BonusScreen.SetActive(true);
+        PauseButton.SetActive(true);
     }
 
 
@@ -26,14 +28,8 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0;
         WaveCounter.SetBool("Visible", true);
         BonusScreen.SetActive(false);
+        PauseButton.SetActive(false);
     }
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Escape))
-    //    {
-    //        PauseGame();
-    //    }
-    //}
 
     public void ExitGame()
     {
