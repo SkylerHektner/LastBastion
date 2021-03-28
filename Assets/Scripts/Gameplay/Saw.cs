@@ -49,8 +49,10 @@ public class Saw : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
         if( Instance != null )
             Debug.LogError( "There appear to me two main saws?!?" );
+#endif
         Instance = this;
 
         DirectionArrow.sprite = DirectionArrowSprite;
@@ -216,7 +218,9 @@ public class Saw : MonoBehaviour
     {
         if( dragging )
         {
+#if UNITY_EDITOR
             Debug.LogWarning( "Somehow a drag has started even though we're in a drag???!?!?!?!?!???!?!!?!??" );
+#endif
             return;
         }
 

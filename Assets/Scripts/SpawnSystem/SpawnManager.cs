@@ -153,7 +153,9 @@ public class SpawnManager : MonoBehaviour
         {
             if( time == 0.0f )
             {
+#if UNITY_EDITOR
                 Debug.LogError( "ERROR: Passive Spawn Cadence set to 0 in Spawn Cadence Profile " + spawnCadenceProfile.name + " Wave " + ( current_wave + 1 ).ToString() );
+#endif
                 continue;
             }
             passive_spawn_trackers.Add( 1.0f / time );
@@ -230,7 +232,9 @@ public class SpawnManager : MonoBehaviour
             float radius = Mathf.Sqrt( desired_area / Mathf.PI );
             if( radius > Mathf.Min( SpawnableAreaTopRight.x - SpawnableAreaBottomLeft.x, SpawnableAreaTopRight.y - SpawnableAreaBottomLeft.y ) / 2.0f )
             {
+#if UNITY_EDITOR
                 Debug.LogError( "ERROR: Spawning Density not high enough in spawn group (" + sg.name + ")to fit all desired spawns in cluster inside play space - falling back to random distribution" );
+#endif
                 SpawnGroupRandomPlacement( sg );
             }
             else
@@ -306,14 +310,18 @@ public class SpawnManager : MonoBehaviour
                     final_point = new Vector3( Mathf.Cos( random_theta ) * random_radius + circle_center.x, Mathf.Sin( random_theta ) * random_radius + circle_center.y );
                     ++loop_depth;
                 } while( !PointInsidePlayableArea( final_point ) && loop_depth < 100 );
-                if( loop_depth >= 100 )
-                    Debug.LogError( "ERROR: Could not find spawn point inside playable area. Spawn Aborted" );
-                else
+                if( loop_depth < 100 )
                 {
                     SpawnMonster( e.Key, final_point, stagger );
                     stagger += ( should_stagger ? UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime ) : 0.0f );
                     ret.Add( final_point );
                 }
+#if UNITY_EDITOR
+                else
+                {
+                    Debug.LogError( "ERROR: Could not find spawn point inside playable area. Spawn Aborted" );
+                }
+#endif
             }
         }
 
@@ -417,7 +425,9 @@ public class SpawnManager : MonoBehaviour
                 ret = Instantiate( SkullyBossPrefab );
                 break;
             case 0:
+#if UNITY_EDITOR
                 Debug.LogError( "ERROR: Tried to spawn an enemy " + enemy.ToString() + " that hasn't been added to the InstantiateMonster switch" );
+#endif
                 break;
         }
         if( ret )

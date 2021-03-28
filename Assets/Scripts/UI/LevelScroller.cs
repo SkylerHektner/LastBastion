@@ -74,15 +74,21 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             JumpToDesiredLevel(LevelIndex);
             Portal.SetTrigger("Shrink");
             Spectator.ReturningFromLevel = false;
+#if UNITY_EDITOR
             Debug.Log("Returning from level" + Spectator.LevelIndex);
+#endif
         }
         else
         {
             //LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
             JumpToDesiredLevel(PD.Instance.StoredLimboLevelIndex.Get());
+#if UNITY_EDITOR
             Debug.Log("Not returning from a level");
+#endif
         }
+#if UNITY_EDITOR
         Debug.Log("Level index" + LevelIndex);
+#endif
     }
 
     //[ContextMenu("JumpToDesiredLevel")]
@@ -109,7 +115,9 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     {
         if(LevelIndex > load_levels.Count)
         {
+#if UNITY_EDITOR
             Debug.LogWarning( "Warning: Level Index Greater than number of load level buttons that are registered" );
+#endif
             return;
         }
         if (LevelIndex <= 0)

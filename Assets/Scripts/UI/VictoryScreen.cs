@@ -30,8 +30,10 @@ public class VictoryScreen : MonoBehaviour
         SawCanvas.SetActive( false );
         AbilityManager.SetActive( false );
 
+#if UNITY_EDITOR
         if( CandyGivenText == null )
             Debug.LogError( "CandyGivenText not assigned in victory screen", this );
+#endif
         if( CandyGivenText != null )
             CandyGivenText.text = total_level_earnings.ToString();
 

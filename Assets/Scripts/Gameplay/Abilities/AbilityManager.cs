@@ -137,12 +137,14 @@ public class AbilityManager : MonoBehaviour
         pending_removals.Add( AbilityID );
     }
 
+#if UNITY_EDITOR
     [ContextMenu( "Print All Active Abilities" )]
     private void DebugLogAllActiveAbilities()
     {
         foreach( var ab in active_abilities )
             Debug.Log( ab.Value.name );
     }
+#endif
 
     private void OnDestroy()
     {

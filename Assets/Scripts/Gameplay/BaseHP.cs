@@ -83,7 +83,9 @@ public class BaseHP : MonoBehaviour
         // if somehow the player already won let's just ignore that...
         if( GameplayManager.PlayerWinState == GameplayManager.PlayerState.Won )
         {
+#if UNITY_EDITOR
             Debug.LogWarning( "Player base took damage despite player already having won" );
+#endif
             return;
         }
 

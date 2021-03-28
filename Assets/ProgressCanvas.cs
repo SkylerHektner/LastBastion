@@ -17,7 +17,9 @@ public class ProgressCanvas : MonoBehaviour
     public void LoadMenuFromLimboResumeAnimation()
     {
         ProgressContent.SetActive( false );
+#if UNITY_EDITOR
         Debug.Log( "Loading Menu" );
+#endif
         PD.Instance.Limbo.Set( false );
         Spectator.LevelIndex = 1;
         Door.SetBool( "Limbo", false );

@@ -182,11 +182,13 @@ namespace LetterboxCamera
                 letterBoxCamera.clearFlags = CameraClearFlags.Color;
                 letterBoxCamera.name = "Letter Box Camera";
 
+#if UNITY_EDITOR
                 for (int i = 0; i < cameras.Count; i++) {
                     if (cameras[i].camera.depth == -100) {
                         Debug.LogError(cameras[i].camera.name + " has a depth of -100 and may conflict with the Letter Box Camera in Forced Camera Ratio!");
                     }
                 }
+#endif
             }
 
             if (forceRatioOnAwake) {

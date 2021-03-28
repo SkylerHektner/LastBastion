@@ -41,7 +41,9 @@ public class Spectator : MonoBehaviour
         {
             PD.Instance.StoredLimboLevelIndex.Set( Spectator.LevelIndex );
         }
+#if UNITY_EDITOR
         Debug.Log("Storing index: " + PD.Instance.StoredLimboLevelIndex.Get());
+#endif
     }
 
     // game is quit mid-game, save my current progress and put me in limbo

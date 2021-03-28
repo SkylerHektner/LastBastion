@@ -228,10 +228,12 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
                 {
                     unlock_map[out_flag] = true;
                 }
+#if UNITY_EDITOR
                 else
                 {
                     UnityEngine.Debug.LogWarning( "Unable to find player data unlock flag. Ignoring: " + key );
                 }
+#endif
             }
         }
     }

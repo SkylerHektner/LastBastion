@@ -42,12 +42,6 @@ public class ChallengesTracker
 
     public bool EvaluateChallengeSuccess( Challenge challenge )
     {
-        Debug.Log( "DamageTaken" + DamageTaken );
-        Debug.Log( "CrystalsUsed" + CrystalsUsed );
-        Debug.Log( "SawMuddied" + SawMuddied );
-        Debug.Log( "NumEnemiesKilledWhileEffectedByPowerups" + NumZappedEnemiesKilled );
-        Debug.Log( "TotalLevelTimePassed" + TotalLevelTimePassed );
-
         bool success = true;
         success &= !( challenge.CannotTakeDamage && DamageTaken );
         success &= !( challenge.CannotUseCrystals && CrystalsUsed );
