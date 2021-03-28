@@ -126,9 +126,6 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         DisplayImage.sprite = load_levels[LevelIndex - 1].LevelImage;
         SwapGlow(LevelIndex - 1);
-
-
-        //Debug.Log("Displaying level  " + LevelIndex + "Image");
     }
 
     public void SwapGlow(int Index)
@@ -139,7 +136,6 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         GlowColor.a = load_levels[Index].GlowRGB.w;
         GlowFX.color = GlowColor;
         PortalRim.color = GlowColor;
-        //Debug.Log("R   "+ GlowColor.r + " G   " + GlowColor.g + "B    " + GlowColor.b);
     }
 
     public void SetDragBuffer()
@@ -166,7 +162,9 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 {
                     LevelIndex = 1;
                 }
+#if UNITY_EDITOR
                 Debug.Log("This is level " + LevelIndex + " selected");
+#endif
                 Spectator.LevelIndex = LevelIndex;
                 break;
             }
