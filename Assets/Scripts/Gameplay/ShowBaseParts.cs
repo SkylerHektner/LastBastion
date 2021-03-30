@@ -16,6 +16,10 @@ public class ShowBaseParts : MonoBehaviour
     public GameObject Overshield;
 
     public GameObject Turrets;
+    public GameObject HP1Visuals;
+    public GameObject HP2Visuals;
+    public GameObject HP3Visuals;
+
 
 
     // Update is called once per frame
@@ -94,6 +98,34 @@ public class ShowBaseParts : MonoBehaviour
         else
         {
             Turrets.SetActive(false);
+        }
+
+        // HP 1
+        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseHP1))
+        {
+            HP1Visuals.SetActive(true);
+        }
+        else
+        {
+            HP1Visuals.SetActive(false);
+        }
+        // HP 2
+        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseHP2))
+        {
+            HP2Visuals.SetActive(true);
+        }
+        else
+        {
+            HP2Visuals.SetActive(false);
+        }
+        // HP 3
+        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseHP3))
+        {
+            HP3Visuals.SetActive(true);
+        }
+        else
+        {
+            HP3Visuals.SetActive(false);
         }
     }
 
