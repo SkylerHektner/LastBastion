@@ -35,7 +35,7 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     void FixedUpdate()
     {
         LevelBarLength = LevelBar.GetComponent<RectTransform>().rect.width;
-        NumberofElements = Mathf.Floor(LevelBarLength / 250f);
+        NumberofElements = Mathf.Floor(LevelBarLength / 190f);
         BarXPos = LevelBar.transform.localPosition.x;
 
         if (DragBuffer > 0)
@@ -96,7 +96,7 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     {
         if (Index > 0)
         {
-            LevelBar.transform.localPosition = new Vector2(-(BarStartPos + 250 * (Index - 1)), LevelBar.transform.localPosition.y);
+            LevelBar.transform.localPosition = new Vector2(-(BarStartPos + 190 * (Index - 1)), LevelBar.transform.localPosition.y);
         }
         //else
         //{
@@ -152,8 +152,8 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     {
         for (int i = 1; i < NumberofElements + 1; i++)
         {
-            float ReferencePoint = Mathf.Abs(BarStartPos) + 250 * (i - 1);
-            if (Mathf.Abs(BarXPos) < ReferencePoint + 125 && Mathf.Abs(BarXPos) > ReferencePoint - 125) // falls within half of the distance to the next/previous element
+            float ReferencePoint = Mathf.Abs(BarStartPos) + 190 * (i - 1);
+            if (Mathf.Abs(BarXPos) < ReferencePoint + 95 && Mathf.Abs(BarXPos) > ReferencePoint - 95) // falls within half of the distance to the next/previous element
             {
                 LevelBar.transform.localPosition = new Vector2(-ReferencePoint, LevelBar.transform.localPosition.y);
                 DisplayLevelImage(i);
