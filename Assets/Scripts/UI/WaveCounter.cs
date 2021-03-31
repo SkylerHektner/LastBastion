@@ -7,10 +7,12 @@ public class WaveCounter : MonoBehaviour
 {
     [SerializeField] TMP_Text WaveNumberText;
     [SerializeField] Animator Anim;
+    public string CurrentWave;
 
     public void ShowNextWave(int wave)
     {
         WaveNumberText.SetText( wave.ToString() );
         Anim.SetTrigger( "Appear" );
+        CurrentWave = wave.ToString();
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class DeathCanvas : MonoBehaviour
 {
@@ -10,11 +12,14 @@ public class DeathCanvas : MonoBehaviour
     public GameObject DeathScreen;
     public GameObject RewardScreen;
     public GameObject SendSawCanvas;
+    public TextMeshProUGUI WaveText;
+
 
     public void DisplayDeathScreen()
     {
         DeathScreen.SetActive(true);
-        WaveCounter.SetBool("Visible", true);
+        WaveText.text = ("Wave  " + WaveCounter.GetComponent<WaveCounter>().CurrentWave);
+        //WaveCounter.SetBool("Visible", true);
         RewardScreen.SetActive(false);
         SendSawCanvas.SetActive(false);
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseManager : MonoBehaviour
 {
@@ -11,10 +12,11 @@ public class PauseManager : MonoBehaviour
     public GameObject PauseScreen;
     public GameObject BonusScreen;
     public GameObject PauseButton;
+    public TextMeshProUGUI CurrentWaveText;
 
     public void ResumeGame()
     {
-        WaveCounter.SetBool("Visible", false);
+        //WaveCounter.SetBool("Visible", false);
         Time.timeScale = 1;
         PauseScreen.SetActive(false);
         BonusScreen.SetActive(true);
@@ -26,7 +28,8 @@ public class PauseManager : MonoBehaviour
     {
         PauseScreen.SetActive(true);
         Time.timeScale = 0;
-        WaveCounter.SetBool("Visible", true);
+        WaveCounter.SetTrigger("Hide");
+        CurrentWaveText.text = ("Wave  " + WaveCounter.GetComponent<WaveCounter>().CurrentWave);
         BonusScreen.SetActive(false);
         PauseButton.SetActive(false);
     }
