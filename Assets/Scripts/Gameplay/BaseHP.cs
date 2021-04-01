@@ -30,7 +30,8 @@ public class BaseHP : MonoBehaviour
 
     public DeathCanvas DeathCanvas;
 
-    public GameObject HPcanvas;
+    public GameObject BrokenHpBar;
+
     public GameObject ForceField;
     public GameObject HpExplosions;
     public GameObject DeathExplosions;
@@ -115,6 +116,10 @@ public class BaseHP : MonoBehaviour
         {
             ShieldRecoveryDelay = 8;
             CurrentHP -= Damage;
+            if (CurrentHP <= 0)
+            {
+                CurrentHP = 0;
+            }
             CurrentHpBar.SetSize( CurrentHP / CurrentMaxHP );
             DamageDelay = 1f;
             Component[] Explosions = HpExplosions.GetComponentsInChildren<Animator>();
@@ -126,7 +131,10 @@ public class BaseHP : MonoBehaviour
             if( CurrentHP <= 0 )
             {
                 DeathCanvas.DisplayDeathScreen();
-                HPcanvas.SetActive( false );
+                CurrentHpBar.gameObject.SetActive(false);
+                DamageHpBar.gameObject.SetActive(false);
+                OvershieldBar.gameObject.SetActive(false);
+                BrokenHpBar.SetActive( true );
                 ForceField.SetActive( false );
                 AbiltyManager.SetActive( false );
                 SawCanvas.SetActive( false );

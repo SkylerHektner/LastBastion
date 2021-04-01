@@ -40364,8 +40364,8 @@ Transform:
   - {fileID: 1393575247}
   - {fileID: 1227849727}
   - {fileID: 349338768}
-  - {fileID: 303462746}
   - {fileID: 138652560}
+  - {fileID: 303462746}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41356,7 +41356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991690647362651399, guid: 17b6f6348ed3e194d813fade6bbf49f9, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2991690647362651399, guid: 17b6f6348ed3e194d813fade6bbf49f9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -70965,18 +70965,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 58419035}
-    - target: {fileID: 2797901439481135750, guid: be008be75897a0a40a94739e18ac5d21, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2797901439481135750, guid: be008be75897a0a40a94739e18ac5d21, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2797901439481135750, guid: be008be75897a0a40a94739e18ac5d21, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -905795583
-      objectReference: {fileID: 0}
     - target: {fileID: 2797901439481135751, guid: be008be75897a0a40a94739e18ac5d21, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -71937,6 +71925,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1760607688986351179, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
   m_PrefabInstance: {fileID: 6230442712592366784}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6230442712592366787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6007557359472376133, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+  m_PrefabInstance: {fileID: 6230442712592366784}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6272332900410272648
 GameObject:
   m_ObjectHideFlags: 1
@@ -72092,6 +72085,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 440845406}
     - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
+      propertyPath: BrokenHpBar
+      value: 
+      objectReference: {fileID: 6230442712592366787}
+    - target: {fileID: 7014161918785538337, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: DamageHpBar
       value: 
       objectReference: {fileID: 2101087057}
@@ -72125,7 +72122,7 @@ PrefabInstance:
       objectReference: {fileID: 1397485415}
     - target: {fileID: 7014161918785538338, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7014161918785538338, guid: cbfe69067fdfa1844b59e637dc41b26e, type: 3}
       propertyPath: m_LocalPosition.x
