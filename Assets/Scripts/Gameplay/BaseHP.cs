@@ -150,7 +150,9 @@ public class BaseHP : MonoBehaviour
     {
         CurrentHP = Mathf.Min( CurrentHP + Amount, CurrentMaxHP );
         CurrentHpBar.SetSize( CurrentHP / CurrentMaxHP );
-        WoundedGlow.SetActive( CurrentHP <= 3 );
+        CurrentHpBar.PlayHealAnim();
+        WoundedGlow.SetActive( CurrentHP <= 3 ); // I like this :)
+        // play cool effect here
     }
 
     private void FixedUpdate()

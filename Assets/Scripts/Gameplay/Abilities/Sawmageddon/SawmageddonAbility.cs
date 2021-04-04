@@ -92,8 +92,7 @@ public class SawmageddonAbility : Ability
         {
             cur_combo_killer_kills = 0;
             combo_killer_max = Mathf.RoundToInt( combo_killer_max * AbilityData.ComboKillerHPRegainScaleFactor );
-            BaseHP.Instance?.Heal( 1 );
-            // insert cool effect here?
+            BaseHP.Instance?.Heal( 3 );
         }
         Debug.Assert( ComboKillerDisplay.Instance != null );
         ComboKillerDisplay.Instance?.SetChargeAmount( cur_combo_killer_kills, combo_killer_max );
