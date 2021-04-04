@@ -38,11 +38,11 @@ public class Ability
         AM.AbilityFinished( AbilityID );
     }
 
-    // return true if we should proceed with construction of new ability instance
-    // return false if we should cancel new ability construction
+    // return false if we should proceed with construction of new ability instance
+    // return true if we should cancel new ability construction
     public virtual bool OnAbilityUsedWhileAlreadyActive()
     {
-        return true;
+        return false;
     }
 
     public virtual void OnSceneExit()

@@ -20,7 +20,7 @@ public class ChainLightningAbility : Ability
     private int cur_zap_index = 0;
     private float zapped_enemy_tracking_time = 0.0f;
 
-    private bool listening = false;
+    private List<long> listening_enemies = new List<long>();
     private int static_overload_layermask;
 
     public override void Start()
@@ -76,8 +76,6 @@ public class ChainLightningAbility : Ability
 
         if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload ) )
         {
-            Saw.Instance.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
-            listening = true;
             static_overload_layermask = LayerMask.GetMask( "Enemy" );
             zapped_enemy_tracking_time = pending_zaps.Last().time + GetZapDuration() + 1.0f; // once second extra, just to be safe
         }
@@ -106,10 +104,10 @@ public class ChainLightningAbility : Ability
 
     public override void Finish()
     {
-        if( listening )
+        foreach( long id in listening_enemies )
         {
-            Saw.Instance.SawKilledEnemyEvent.RemoveListener( OnSawKilledEnemy );
-            listening = false;
+            Enemy en = SpawnManager.Instance.TryGetEnemyByID( id );
+            en?.DeathEvent.RemoveListener( OnEnemyDeath );
         }
         base.Finish();
     }
@@ -132,18 +130,32 @@ public class ChainLightningAbility : Ability
             zap_effect.transform.position = zap.position;
             zap_effect.transform.parent = en.transform;
             en.DeathEvent.AddListener( zap_effect.DestroyOnDeathHook );
+
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload ) )
+            {
+                en.DeathEvent.AddListener( OnEnemyDeath );
+            }
         }
     }
 
-    private void OnSawKilledEnemy( Vector3 enemy_position )
+    private void OnEnemyDeath( Enemy en )
     {
         Debug.Assert( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload ) ); // shouldn't be listening unless this was true
-        Collider2D[] hit = Physics2D.OverlapCircleAll( enemy_position, AbilityData.StaticOverloadExplosionRadius, static_overload_layermask );
-        for( int x = 0; x < hit.Length; ++x )
+        en.DeathEvent.RemoveListener( OnEnemyDeath ); // fun fact - if you remove this you get a sick stack overflow!
+
+        if( en.Zapped && en.DeathSource != DamageSource.StaticOverloadExplosion )
         {
-            Enemy en = hit[x].gameObject.GetComponent<Enemy>();
-            en.Hit( ( en.transform.position - enemy_position ).normalized, true, DamageSource.StaticOverloadExplosion );
+            Vector3 enemy_position = en.transform.position;
             GameObject.Instantiate( AbilityData.StaticOverloadExplosionEffect ).transform.position = enemy_position;
+            Collider2D[] hit = Physics2D.OverlapCircleAll( enemy_position, AbilityData.StaticOverloadExplosionRadius, static_overload_layermask );
+            for( int x = 0; x < hit.Length; ++x )
+            {
+                Enemy hit_en = hit[x].gameObject.GetComponent<Enemy>();
+                if( hit_en.EnemyID != en.EnemyID )
+                {
+                    hit_en.Hit( ( hit_en.transform.position - enemy_position ).normalized, true, DamageSource.StaticOverloadExplosion );
+                }
+            }
         }
     }
 
