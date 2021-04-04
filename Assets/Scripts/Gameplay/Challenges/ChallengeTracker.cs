@@ -9,6 +9,7 @@ public class ChallengesTracker
     public bool CrystalsUsed { get; private set; } = false;
     public bool SawMuddied { get; private set; } = false;
     public int NumZappedEnemiesKilled { get; private set; } = 0;
+    public int NumEnemiesKilledWithFire { get; private set; } = 0;
     public float TotalLevelTimePassed { get; private set; } = 0.0f;
 
     private List<long> TrackedEnemies = new List<long>();
@@ -42,6 +43,8 @@ public class ChallengesTracker
 
     public bool EvaluateChallengeSuccess( Challenge challenge )
     {
+        Debug.Log( NumEnemiesKilledWithFire );
+
         bool success = true;
         success &= !( challenge.CannotTakeDamage && DamageTaken );
         success &= !( challenge.CannotUseCrystals && CrystalsUsed );
@@ -69,12 +72,21 @@ public class ChallengesTracker
     private void OnEnemyDied( Enemy en )
     {
         Debug.Assert( en != null );
+
         if( en.Zapped )
         {
             ++NumZappedEnemiesKilled;
-            en.DeathEvent.RemoveListener( OnEnemyDied );
-            TrackedEnemies.Remove( en.EnemyID );
         }
+
+        if( en.DeathSource == DamageSource.FlamingSaw
+            || en.DeathSource == DamageSource.Typhoon
+            || en.DeathSource == DamageSource.TyphoonFlamingCorpse )
+        {
+            ++NumEnemiesKilledWithFire;
+        }
+
+        TrackedEnemies.Remove( en.EnemyID );
+        en.DeathEvent.RemoveListener( OnEnemyDied );
     }
 
     private void OnEnemySpawned( Enemy en )

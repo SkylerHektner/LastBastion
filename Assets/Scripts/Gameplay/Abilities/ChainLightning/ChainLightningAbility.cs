@@ -142,7 +142,7 @@ public class ChainLightningAbility : Ability
         for( int x = 0; x < hit.Length; ++x )
         {
             Enemy en = hit[x].gameObject.GetComponent<Enemy>();
-            en.Hit( ( en.transform.position - enemy_position ).normalized, true );
+            en.Hit( ( en.transform.position - enemy_position ).normalized, true, DamageSource.StaticOverloadExplosion );
             GameObject.Instantiate( AbilityData.StaticOverloadExplosionEffect ).transform.position = enemy_position;
         }
     }

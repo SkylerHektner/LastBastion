@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
             return enemyID == 0 ? ( enemyID = NextEnemyID++ ) : enemyID;
         }
     }
+    public DamageSource DeathSource { get; private set; } = DamageSource.UNSET;
     private long enemyID = 0;
 
     [SerializeField] float MoveSpeed = 1.0f;
@@ -172,14 +173,14 @@ public class Enemy : MonoBehaviour
             anim.SetBool( "Attacking", Moving );
     }
 
-    public void Hit( Vector3 hit_direction, bool can_dodge )
+    public void Hit( Vector3 hit_direction, bool can_dodge, DamageSource source )
     {
         bool died;
         bool dodged;
-        Hit( hit_direction, can_dodge, out died, out dodged );
+        Hit( hit_direction, can_dodge, source, out died, out dodged );
     }
 
-    public virtual void Hit( Vector3 hit_direction, bool can_dodge, out bool died, out bool dodged, int damage = 1 )
+    public virtual void Hit( Vector3 hit_direction, bool can_dodge, DamageSource source, out bool died, out bool dodged, int damage = 1 )
     {
         dodged = false;
         if( Spawning || Dying )
@@ -201,6 +202,7 @@ public class Enemy : MonoBehaviour
         if( CurrentHealth <= 0 )
         {
             died = true;
+            DeathSource = source;
             Kill();
         }
         else
@@ -276,4 +278,16 @@ public class Enemy : MonoBehaviour
         StasisCoated = false;
         StartMoving();
     }
+}
+
+public enum DamageSource
+{
+    Saw,
+    FlamingSaw,
+    SpectralSaw,
+    Typhoon,
+    TyphoonFlamingCorpse,
+    StaticOverloadExplosion,
+    Turret,
+    UNSET,
 }

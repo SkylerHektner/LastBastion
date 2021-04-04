@@ -13,7 +13,7 @@ public class Typhoon : MonoBehaviour
 
             // hit em till they dead
             while( en != null && !en.Dying && !en.ImmuneToTyphoon)
-                en.Hit( Vector3.up, false );
+                en.Hit( Vector3.up, false, DamageSource.Typhoon );
         }
     }
 }

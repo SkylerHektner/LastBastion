@@ -146,7 +146,12 @@ public class Saw : MonoBehaviour
             bool died;
             bool dodged;
             long id = en.EnemyID;
-            en.Hit( move_direction, true, out died, out dodged, 1 + ( OnFire ? on_fire_extra_damage : 0 ) );
+            en.Hit( move_direction, 
+                true, 
+                OnFire ? DamageSource.FlamingSaw : DamageSource.Saw, 
+                out died, 
+                out dodged, 
+                1 + ( OnFire ? on_fire_extra_damage : 0 ) );
 
             if( died )
                 SawKilledEnemyEvent.Invoke( pos );

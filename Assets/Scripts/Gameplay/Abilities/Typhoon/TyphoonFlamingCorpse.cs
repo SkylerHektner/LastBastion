@@ -30,7 +30,7 @@ public class TyphoonFlamingCorpse : MonoBehaviour
             for( int x = 0; x < hit.Length; ++x )
             {
                 Enemy en = hit[x].gameObject.GetComponent<Enemy>();
-                en.Hit( ( en.transform.position - transform.position ).normalized, true );
+                en.Hit( ( en.transform.position - transform.position ).normalized, true, DamageSource.TyphoonFlamingCorpse );
             }
         }
     }

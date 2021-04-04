@@ -32,7 +32,7 @@ public class TurretProjectile : Projectile
             {
                 AnomalyAbility.ActiveAnomaly.StasisCoatEnemy( col.gameObject.GetComponent<Enemy>() );
             }
-            col.gameObject.GetComponent<Enemy>().Hit( MoveDirection, true );
+            col.gameObject.GetComponent<Enemy>().Hit( MoveDirection, true, DamageSource.Turret );
             if( !ShouldPierce )
                 DestroyProjectile();
         }

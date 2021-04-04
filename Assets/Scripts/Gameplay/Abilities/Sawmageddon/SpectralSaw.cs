@@ -38,7 +38,7 @@ public class SpectralSaw : Projectile
             {
                 bool died;
                 bool dodged;
-                en.Hit( MoveDirection, true, out died, out dodged );
+                en.Hit( MoveDirection, true, DamageSource.SpectralSaw, out died, out dodged );
                 shared_collision_set?.Add( en.EnemyID );
                 if( died )
                 {
