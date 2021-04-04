@@ -35,7 +35,7 @@ public class MenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-        PlayCanvas.SetActive( false );
+        //PlayCanvas.SetActive( false );
         Door.SetTrigger( "Open" );
     }
 
