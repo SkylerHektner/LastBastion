@@ -158,7 +158,7 @@ public class Turret : MonoBehaviour
         {
             StartCollateralDamage();
         }
-        else if( ability == AbilityEnum.TemporalAnomaly &&
+        else if( ability == AbilityEnum.Anomaly &&
             PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TurretsTimedPaylod ) )
         {
             StartTimedPayload();

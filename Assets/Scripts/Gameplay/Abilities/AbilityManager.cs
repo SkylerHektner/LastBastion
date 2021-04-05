@@ -30,6 +30,14 @@ public class AbilityManager : MonoBehaviour
         Instance = this;
         for( int x = 0; x < (int)AbilityEnum.NUM_ABILITIES; ++x )
             ability_charges.Add( 0 );
+
+        if( PD.Instance.Limbo.Get() )
+        {
+            foreach( var kvp in PD.Instance.StoredLimboAbilityCharges )
+            {
+                AddAbilityCharge( kvp.Key, kvp.Value );
+            }
+        }
     }
 
     private void Update()
@@ -41,12 +49,12 @@ public class AbilityManager : MonoBehaviour
         pending_removals.Clear();
     }
 
-    public void AddAbilityCharge( AbilityEnum ability )
+    public void AddAbilityCharge( AbilityEnum ability, int num = 1 )
     {
         Debug.Assert( ability != AbilityEnum.NUM_ABILITIES );
         if( ability_charges[(int)ability] < MaxAbilityCharges )
         {
-            ability_charges[(int)ability]++;
+            ability_charges[(int)ability] = Mathf.Min( ability_charges[(int)ability] + num, MaxAbilityCharges );
             AbilityChargeChangedEvent.Invoke( ability, ability_charges[(int)ability] );
         }
     }
@@ -88,7 +96,7 @@ public class AbilityManager : MonoBehaviour
         Ability ab = null;
         switch( ability )
         {
-            case AbilityEnum.TemporalAnomaly:
+            case AbilityEnum.Anomaly:
             {
                 AnomalyAbility _ab = new AnomalyAbility();
                 _ab.AbilityData = AnomalyData;
@@ -155,7 +163,7 @@ public class AbilityManager : MonoBehaviour
 
 public enum AbilityEnum
 {
-    TemporalAnomaly = 0,
+    Anomaly = 0,
     ChainLightning = 1,
     Typhoon = 2,
     Sawmageddon = 3,

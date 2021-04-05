@@ -28,7 +28,6 @@ public class ProgressCanvas : MonoBehaviour
     {
         Spectator.LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
         Spectator.ReturningFromLevel = true;
-        PD.Instance.Limbo.Set( false );
         SceneManager.LoadScene( PD.Instance.ExitedScene.Get() );
     }
 

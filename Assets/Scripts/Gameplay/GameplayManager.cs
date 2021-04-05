@@ -12,10 +12,7 @@ public class GameplayManager : MonoBehaviour
 
     // CHALLENGES
     public ChallengesTracker Challenges { get; private set; } = new ChallengesTracker();
-    private void StartChallenges()
-    {
-        Challenges?.Start();
-    }
+    
 
     // WIN LOSS STATE
     public enum PlayerState
@@ -82,10 +79,19 @@ public class GameplayManager : MonoBehaviour
     // MONOBEHAVIOR
     private void Start()
     {
-        Invoke( "StartChallenges", 0.1f ); // we have to delay this otherwise we run into script execution order problems
+        Invoke( "LateStart", 0.1f ); // we have to delay this otherwise we run into script execution order problems
         Debug.Assert( Instance == null );
         Instance = this;
         TimeScale = 1.0f;
+    }
+    private void LateStart()
+    {
+        Challenges?.Start();
+
+        if( PD.Instance.Limbo.Get() )
+        {
+            PD.Instance.Limbo.Set( false );
+        }
     }
 
     private void Update()

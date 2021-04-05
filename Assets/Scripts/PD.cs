@@ -14,12 +14,15 @@ public class PD
 {
     // DATA
     public PlayerDataField<int> PlayerWealth = new PlayerDataField<int>();
-    public PlayerDataField<bool> Limbo = new PlayerDataField<bool>();
-    public PlayerDataField<string> ExitedScene = new PlayerDataField<string>();
-    public PlayerDataField<int> StoredLimboLevelIndex = new PlayerDataField<int>();
     public PlayerUpgradeUnlockMap UpgradeUnlockMap = new PlayerUpgradeUnlockMap();
     public PlayerLevelCompletionMap LevelCompletionMap = new PlayerLevelCompletionMap();
     public PDList<string> PlayerChallengeCompletionList = new PDList<string>();
+    // limbo data
+    public PlayerDataField<bool> Limbo = new PlayerDataField<bool>();
+    public PlayerDataField<string> ExitedScene = new PlayerDataField<string>();
+    public PlayerDataField<int> StoredLimboLevelIndex = new PlayerDataField<int>();
+    public PlayerDataField<int> StoredLimboCurrentWave = new PlayerDataField<int>();
+    public SerializableDictionary<AbilityEnum, int> StoredLimboAbilityCharges = new SerializableDictionary<AbilityEnum, int>();
 
     // UPGRADES
     public enum UpgradeFlags

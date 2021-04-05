@@ -75,7 +75,7 @@ public class AbilityDropManager : MonoBehaviour
             AbilityDrop ab = null;
             switch( ability )
             {
-                case AbilityEnum.TemporalAnomaly:
+                case AbilityEnum.Anomaly:
                     if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Anomaly ) )
                         ab = TemporalAnomalyDrop;
                     break;

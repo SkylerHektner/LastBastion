@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,15 +31,24 @@ public class Spectator : MonoBehaviour
     [ContextMenu( "ToggleLimbo" )]
     public void TryToggleLimbo()
     {
-        if( SceneManager.GetActiveScene().name != "Menu" 
+        if( SceneManager.GetActiveScene().name != "Menu"
             && GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
         {
             PD.Instance.Limbo.Set( true );
             PD.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
+            PD.Instance.StoredLimboLevelIndex.Set( Spectator.LevelIndex );
+            PD.Instance.StoredLimboCurrentWave.Set( SpawnManager.Instance.CurrentWave );
+            PD.Instance.StoredLimboAbilityCharges.Clear();
+
+            // I really wish this could be a compile time assert ):
+            Debug.Assert( (int)AbilityEnum.NUM_ABILITIES == 4 );
+            PD.Instance.StoredLimboAbilityCharges[AbilityEnum.ChainLightning] = AbilityManager.Instance.GetAbilityCharges( AbilityEnum.ChainLightning );
+            PD.Instance.StoredLimboAbilityCharges[AbilityEnum.Sawmageddon] = AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Sawmageddon );
+            PD.Instance.StoredLimboAbilityCharges[AbilityEnum.Anomaly] = AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Anomaly );
+            PD.Instance.StoredLimboAbilityCharges[AbilityEnum.Typhoon] = AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Typhoon );
         }
-        PD.Instance.StoredLimboLevelIndex.Set( Spectator.LevelIndex );
 #if UNITY_EDITOR
-        Debug.Log("Storing index: " + PD.Instance.StoredLimboLevelIndex.Get());
+        Debug.Log( "Limbo Activated - Storing index: " + PD.Instance.StoredLimboLevelIndex.Get() );
 #endif
     }
 
@@ -53,7 +63,7 @@ public class Spectator : MonoBehaviour
 
     private void OnApplicationPause( bool pause )
     {
-        if(pause)
+        if( pause )
         {
 #if !UNITY_EDITOR
         TryToggleLimbo();

@@ -10,7 +10,7 @@ public class AbilityUIManager : MonoBehaviour
     [SerializeField] Animator GameplayFieldScrim;
     [SerializeField] List<GameObject> ChainLightningUsageSlots = new List<GameObject>();
     [SerializeField] List<GameObject> SawmageddonUsageSlots = new List<GameObject>();
-    [SerializeField] List<GameObject> TemporalAnomalyUsageSlots = new List<GameObject>();
+    [SerializeField] List<GameObject> AnomalyUsageSlots = new List<GameObject>();
     [SerializeField] List<GameObject> TyphoonUsageSlots = new List<GameObject>();
 
     private bool showing = false;
@@ -22,8 +22,10 @@ public class AbilityUIManager : MonoBehaviour
         AbilityManager.Instance.AbilityChargeChangedEvent.AddListener( OnAbilityChargeChanged );
         Debug.Assert( ChainLightningUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
         Debug.Assert( SawmageddonUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
-        Debug.Assert( TemporalAnomalyUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+        Debug.Assert( AnomalyUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
         Debug.Assert( TyphoonUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+
+        UpdateAllSlotIndicators();
     }
 
     private void OnAbilityChargeChanged(AbilityEnum ability, int new_charge)
@@ -31,8 +33,8 @@ public class AbilityUIManager : MonoBehaviour
         List<GameObject> slot_indicators = null;
         switch( ability )
         {
-            case AbilityEnum.TemporalAnomaly:
-                slot_indicators = TemporalAnomalyUsageSlots;
+            case AbilityEnum.Anomaly:
+                slot_indicators = AnomalyUsageSlots;
                 break;
             case AbilityEnum.ChainLightning:
                 slot_indicators = ChainLightningUsageSlots;
@@ -47,6 +49,25 @@ public class AbilityUIManager : MonoBehaviour
         slot_indicators.ForEach( ( GameObject g ) => g.SetActive( false ) );
         for( int x = 0; x < new_charge; ++x )
             slot_indicators[x].SetActive( true );
+    }
+
+    private void UpdateAllSlotIndicators()
+    {
+        AnomalyUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
+        for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges(AbilityEnum.Anomaly); ++x )
+            AnomalyUsageSlots[x].SetActive( true );
+
+        TyphoonUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
+        for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Typhoon ); ++x )
+            TyphoonUsageSlots[x].SetActive( true );
+
+        ChainLightningUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
+        for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges( AbilityEnum.ChainLightning ); ++x )
+            ChainLightningUsageSlots[x].SetActive( true );
+
+        SawmageddonUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
+        for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Sawmageddon ); ++x )
+            SawmageddonUsageSlots[x].SetActive( true );
     }
 
     private void Update()
