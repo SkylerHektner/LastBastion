@@ -14,7 +14,7 @@ public class AbilityUIManager : MonoBehaviour
     [SerializeField] List<GameObject> TyphoonUsageSlots = new List<GameObject>();
 
     private bool showing = false;
-    private AbilityUIButton currentHovering;
+    public AbilityUIButton CurrentHovering { get; private set; }
 
     private void Start()
     {
@@ -60,8 +60,8 @@ public class AbilityUIManager : MonoBehaviour
             if( Input.touchCount == 0 )
 #endif
             {
-                if( currentHovering )
-                    AbilityManager.Instance.UseAbility( currentHovering.MyAbility );
+                if( CurrentHovering )
+                    AbilityManager.Instance.UseAbility( CurrentHovering.MyAbility );
                 HideIcons();
             }
         }
@@ -75,7 +75,7 @@ public class AbilityUIManager : MonoBehaviour
         GameplayManager.Instance.SetTimeScale( 0.1f, TimeScaleLerpDuration );
         GameplayFieldScrim.gameObject.SetActive( true );
         GameplayFieldScrim.SetBool( "Fade", true );
-        currentHovering = null;
+        CurrentHovering = null;
     }
 
     private void HideIcons()
@@ -86,11 +86,11 @@ public class AbilityUIManager : MonoBehaviour
         GameplayManager.Instance.SetTimeScale( 1.0f, TimeScaleReturnToNormalLerpDuratin );
         GameplayFieldScrim.SetBool( "Fade", false );
         GameplayFieldScrim.gameObject.SetActive( false );
-        currentHovering = null;
+        CurrentHovering = null;
     }
 
     public void SetCurrentHovering( AbilityUIButton button )
     {
-        currentHovering = button;
+        CurrentHovering = button;
     }
 }

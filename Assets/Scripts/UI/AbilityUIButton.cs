@@ -113,6 +113,7 @@ public class AbilityUIButton : MonoBehaviour
 
     private void ClearCurrentHovering()
     {
-        AbilityUIManagerInstance.SetCurrentHovering( null );
+        if( AbilityUIManagerInstance.CurrentHovering == this )
+            AbilityUIManagerInstance.SetCurrentHovering( null );
     }
 }
