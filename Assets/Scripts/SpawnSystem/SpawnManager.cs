@@ -73,6 +73,10 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
+        // EARLY RETURN - SPAWN MANAGER ONLY ACTIVE IF GAMEPLAY STATE IS ACTIVE
+        if( GameplayManager.PlayerWinState != GameplayManager.PlayerState.Active )
+            return;
+
         //manage pending spawns
         if( pending_spawns.Count != 0 )
         {

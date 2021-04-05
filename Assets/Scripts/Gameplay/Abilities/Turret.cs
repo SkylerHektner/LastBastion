@@ -47,7 +47,8 @@ public class Turret : MonoBehaviour
     private void Update()
     {
         ValidateCurrentTarget();
-        if( current_target != null )
+        if( current_target != null 
+            && GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
         {
             // enemy sighted, fire!
             bool facing = TryRotateToTarget();
@@ -60,7 +61,7 @@ public class Turret : MonoBehaviour
             VisualSearchForEnemy();
         }
 
-        if( power_surge_timer > 0.0f)
+        if( power_surge_timer > 0.0f )
         {
             power_surge_timer -= Time.deltaTime * GameplayManager.TimeScale;
             if( power_surge_timer <= 0.0f )

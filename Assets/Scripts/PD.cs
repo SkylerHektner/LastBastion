@@ -114,6 +114,17 @@ public class PD
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level8", true );
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level9", true );
     }
+
+    [MenuItem("Debug/EndTheSuffering")]
+    public static void KillMyself()
+    {
+        BaseHP.Instance?.ReduceHP( 9001 );
+        BaseHP.Instance?.ReduceHP( 9001 );
+        BaseHP.Instance?.ReduceHP( 9001 );
+        BaseHP.Instance?.ReduceHP( 9001 );
+        BaseHP.Instance?.ReduceHP( 9001 );
+        BaseHP.Instance?.ReduceHP( 9001 );
+    }
 #endif
 
     // NON STATIC
