@@ -43,6 +43,7 @@ public class MenuManager : MonoBehaviour
     {
         LevelCanvas.SetActive( true );
         LevelBar.SetTrigger( "Appear" );
+        PlayCanvas.SetActive(false);
     }
 
     public void ShowUpgrades()
