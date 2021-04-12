@@ -31,6 +31,9 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     bool Dragging;
     public float DistanceBetweenElements;
+    public List<GameObject> LevelList;
+    public GameObject ArrowL;
+    public GameObject ArrowR;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -87,6 +90,7 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             Debug.Log("Not returning from a level");
 #endif
         }
+        UpdateAnimators(LevelIndex);
 #if UNITY_EDITOR
         Debug.Log("Level index" + LevelIndex);
 #endif
@@ -97,9 +101,42 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     {
         if (Index > 0)
         {
-            LevelBar.transform.localPosition = new Vector2(-(BarStartPos + 190 * (Index - 1)), LevelBar.transform.localPosition.y);
+            LevelBar.transform.localPosition = new Vector2(-(BarStartPos + DistanceBetweenElements * (Index - 1)), LevelBar.transform.localPosition.y);
+        }
+        if (Index <= 1)
+        {
+            ArrowL.SetActive(false);
+        }
+        else if (Index == NumberofElements - 1)
+        {
+            ArrowR.SetActive(false);
+        }
+        else if (Index >= 1 && Index < NumberofElements)
+        {
+            ArrowL.SetActive(true);
+            ArrowR.SetActive(true);
         }
         DisplayLevelImage(Index);
+        UpdateAnimators(Index);
+    }
+
+    public void UpdateAnimators(int Index)
+    {
+        Index = Index - 1;
+        for (int i = 0; i < LevelList.Count; i++)
+        {
+            if (i == Index)
+            {
+                LevelList[i].GetComponent<Animator>().SetBool("Active", true);
+                LevelList[i].GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                LevelList[i].GetComponent<Animator>().SetBool("Active", false);
+                LevelList[i].GetComponent<Button>().interactable = false;
+
+            }
+        }
     }
 
 
@@ -146,7 +183,7 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void ShiftNextLevel()
     {
-        if (LevelIndex < NumberofElements)
+        if (LevelIndex < NumberofElements - 1)
         {
             LevelIndex = LevelIndex + 1;
             JumpToDesiredLevel(LevelIndex);

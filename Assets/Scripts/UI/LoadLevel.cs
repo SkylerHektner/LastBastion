@@ -59,6 +59,7 @@ public class LoadLevel : MonoBehaviour
     public LevelPopup ContractPopup;
 
 
+
     // If I don't call this, the image appears blank white at the start.  
     //This is ok to do because the player only sees this when starting the game and returning from an unlocked level
     private void Awake()
@@ -77,6 +78,7 @@ public class LoadLevel : MonoBehaviour
         UpgradesBar.SetTrigger( "Hide" );
         // load contract info
         UpdateContract();
+        ContractPopup.DisableArrows();
     }
 
     public void UpdateContract()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class LevelPopup : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class LevelPopup : MonoBehaviour
     public GameObject ScratchoutTitle;
     public GameObject ScratchoutChallenge;
 
+    public GameObject ArrowR;
+    public GameObject ArrowL;
+
     private void Update()
     {
         if ( ActivePopupSpawnCadence != null)
@@ -29,9 +33,16 @@ public class LevelPopup : MonoBehaviour
         }
     }
 
+    public void DisableArrows()
+    {
+        ArrowR.GetComponent<Button>().enabled = false;
+        ArrowR.GetComponent<Image>().enabled = false;
+        ArrowL.GetComponent<Button>().enabled = false;
+        ArrowL.GetComponent<Image>().enabled = false;
+    }
+
     public void AcceptContract() // called by animator
     {
-
         Portal.SetTrigger("Grow");
         Invoke("SceneChange", 1f);
         Spectator.LevelIndex = LevelScroller.LevelIndex; // reference index to the button
@@ -46,6 +57,8 @@ public class LevelPopup : MonoBehaviour
     public void ShrinkContract()
     {
         gameObject.GetComponent<Animator>().SetTrigger("Accepted");
+        ArrowL.SetActive(false);
+        ArrowR.SetActive(false);
     }
 
     public void SceneChange()
@@ -57,5 +70,9 @@ public class LevelPopup : MonoBehaviour
     {
         gameObject.GetComponent<Animator>().SetBool("Open", false);
         UpgradesBar.SetTrigger("Appear");
+        ArrowR.GetComponent<Button>().enabled = true;
+        ArrowR.GetComponent<Image>().enabled = true;
+        ArrowL.GetComponent<Button>().enabled = true;
+        ArrowL.GetComponent<Image>().enabled = true;
     }
 }
