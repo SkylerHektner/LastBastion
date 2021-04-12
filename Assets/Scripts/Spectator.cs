@@ -8,6 +8,7 @@ public class Spectator : MonoBehaviour
 {
     public static bool ReturningFromLevel;
     public static int LevelIndex;
+    public static bool WitnessedVictory;
 
     private void Awake()
     {

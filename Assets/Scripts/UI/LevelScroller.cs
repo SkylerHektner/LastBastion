@@ -30,23 +30,24 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public Color GlowColor;
 
     bool Dragging;
+    public float DistanceBetweenElements;
 
     // Update is called once per frame
     void FixedUpdate()
     {
         LevelBarLength = LevelBar.GetComponent<RectTransform>().rect.width;
-        NumberofElements = Mathf.Floor(LevelBarLength / 190f);
+        NumberofElements = Mathf.Floor(LevelBarLength / DistanceBetweenElements);
         BarXPos = LevelBar.transform.localPosition.x;
 
-        if (DragBuffer > 0)
-        {
-            DragBuffer -= Time.smoothDeltaTime;
-            if (DragBuffer <= 0)
-            {
-                DragBuffer = 0;
-                RepositionBar();
-            }
-        }
+        //if (DragBuffer > 0)
+        //{
+        //    DragBuffer -= Time.smoothDeltaTime;
+        //    if (DragBuffer <= 0)
+        //    {
+        //        DragBuffer = 0;
+        //        RepositionBar();
+        //    }
+        //}
     }
 
 
@@ -98,12 +99,9 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         {
             LevelBar.transform.localPosition = new Vector2(-(BarStartPos + 190 * (Index - 1)), LevelBar.transform.localPosition.y);
         }
-        //else
-        //{
-        //    LevelBar.transform.localPosition = new Vector2(BarStartPos, LevelBar.transform.localPosition.y);
-        //}
         DisplayLevelImage(Index);
     }
+
 
     private void OnLockedLevelImageChanged(int level_index)
     {
@@ -146,14 +144,34 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
     }
 
-    
+    public void ShiftNextLevel()
+    {
+        if (LevelIndex < NumberofElements)
+        {
+            LevelIndex = LevelIndex + 1;
+            JumpToDesiredLevel(LevelIndex);
+        }
+        Debug.Log(LevelIndex);
+
+    }
+    public void ShiftPreviousLevel()
+    {
+        LevelIndex = LevelIndex - 1;
+        if (LevelIndex < 1)
+        {
+            LevelIndex = 1;
+        }
+        JumpToDesiredLevel(LevelIndex);
+        Debug.Log(LevelIndex);
+    }
+
 
     public void RepositionBar()
     {
         for (int i = 1; i < NumberofElements + 1; i++)
         {
-            float ReferencePoint = Mathf.Abs(BarStartPos) + 190 * (i - 1);
-            if (Mathf.Abs(BarXPos) < ReferencePoint + 95 && Mathf.Abs(BarXPos) > ReferencePoint - 95) // falls within half of the distance to the next/previous element
+            float ReferencePoint = Mathf.Abs(BarStartPos) + DistanceBetweenElements * (i - 1);
+            if (Mathf.Abs(BarXPos) < ReferencePoint + DistanceBetweenElements/2 && Mathf.Abs(BarXPos) > ReferencePoint - DistanceBetweenElements/2) // falls within half of the distance to the next/previous element
             {
                 LevelBar.transform.localPosition = new Vector2(-ReferencePoint, LevelBar.transform.localPosition.y);
                 DisplayLevelImage(i);

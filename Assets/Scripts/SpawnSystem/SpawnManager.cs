@@ -185,6 +185,7 @@ public class SpawnManager : MonoBehaviour
                 PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.LevelIdentifier, CurrentWave, true );
                 PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + reward );
                 total_level_earnings += reward;
+                Spectator.WitnessedVictory = true; // enables a popup on the menu screen for "New level unlocked!" notification
             }
         }
         // if this was the final wave then mark the level complete
