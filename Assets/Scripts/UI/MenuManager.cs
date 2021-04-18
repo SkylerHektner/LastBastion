@@ -5,7 +5,7 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     public GameObject PlayCanvas;
-    public Animator Door;
+    //public Animator Door;
     public GameObject LevelCanvas;
     public GameObject UpgradesCanvas;
     public Animator LevelBar;
@@ -16,12 +16,12 @@ public class MenuManager : MonoBehaviour
         // triggers when the player comes to the main menu from quitting the game
         if( PD.Instance.Limbo.Get() )
         {
-            Door.SetBool( "Limbo", true );
+            //Door.SetBool( "Limbo", true );
             PlayCanvas.SetActive( false );
         }
         else
         {
-            Door.SetBool( "Limbo", false );
+            //Door.SetBool( "Limbo", false );
         }
 
         // triggers when the player returns from the menu from a portal
@@ -36,7 +36,7 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         //PlayCanvas.SetActive( false );
-        Door.SetTrigger( "Open" );
+        //Door.SetTrigger( "Open" );
     }
 
     public void ShowLevels()
