@@ -19,7 +19,7 @@ public class InfoPanel : MonoBehaviour
 
     public Animator GoodBubble;
     public Animator BadBubble;
-    public Animator Skull;
+    //public Animator Skull;
 
     Spectator Spectator;
 
@@ -37,12 +37,15 @@ public class InfoPanel : MonoBehaviour
             PurchaseButton.enabled = false;
             UpdatePlayerWealth();
             GoodBubble.SetTrigger("Grow");
-            Skull.SetTrigger("Speak");
+            //Skull.SetTrigger("Speak");
+            PlayerWealthText.GetComponent<Animator>().SetTrigger("Buy");
         }
         else
         {
             BadBubble.SetTrigger("Grow");
-            Skull.SetTrigger("Speak");
+            //Skull.SetTrigger("Speak");
+            PlayerWealthText.GetComponent<Animator>().SetTrigger("Yell");
+
         }
     }
 

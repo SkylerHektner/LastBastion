@@ -9,6 +9,7 @@ public class CameraUIMover : MonoBehaviour
 
     public Transform LevelsZone;
     public Transform MainZone;
+    public Transform UpgradesZone;
 
     public float CameraSpeed;
    
@@ -30,5 +31,10 @@ public class CameraUIMover : MonoBehaviour
     public void LoadMainMenu()
     {
         CurrentDestination = MainZone;
+    }
+
+    public void LoadUpgradesMenu()
+    {
+        CurrentDestination = UpgradesZone;
     }
 }
