@@ -15,7 +15,7 @@ public class CameraUIMover : MonoBehaviour
    
 
 
-    private void Update()
+    private void FixedUpdate()
     {
         Camera.transform.position = Vector3.MoveTowards(Camera.transform.position, CurrentDestination.position, CameraSpeed); // constantly move the camera to the "Current Destination"
     }
