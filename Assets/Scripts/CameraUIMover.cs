@@ -11,8 +11,7 @@ public class CameraUIMover : MonoBehaviour
     public Transform MainZone;
     public Transform UpgradesZone;
 
-    public float CameraSpeed;
-   
+    public float CameraSpeed;   
 
 
     private void FixedUpdate()
@@ -29,10 +28,13 @@ public class CameraUIMover : MonoBehaviour
 
     public void LoadLevelShortcut() // triggers when returning from a campaign level
     {
-        Debug.Log("COminf from a level");
         CurrentDestination = LevelsZone;
         Camera.transform.position = CurrentDestination.position;
+    }
 
+    public void ShowUpgradeTree(Transform UpgradeLocation)
+    {
+        CurrentDestination = UpgradeLocation;
     }
 
     [ContextMenu("LoadMainMenu")]
