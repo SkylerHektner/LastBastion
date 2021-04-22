@@ -27,6 +27,14 @@ public class CameraUIMover : MonoBehaviour
         CurrentDestination = LevelsZone;
     }
 
+    public void LoadLevelShortcut() // triggers when returning from a campaign level
+    {
+        Debug.Log("COminf from a level");
+        CurrentDestination = LevelsZone;
+        Camera.transform.position = CurrentDestination.position;
+
+    }
+
     [ContextMenu("LoadMainMenu")]
     public void LoadMainMenu()
     {

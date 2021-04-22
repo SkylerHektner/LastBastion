@@ -27,7 +27,8 @@ public class InfoPanel : MonoBehaviour
     public void ConfirmPurchase()
     {
         int cur_player_wealth = PD.Instance.PlayerWealth.Get();
-        if ( cur_player_wealth >= UpgradeCost)
+
+        if ( cur_player_wealth >= UpgradeCost) // player has enough to purchase the upgrade
         {
             DesiredUpgrade.Purchased = true;
             DesiredUpgrade.GetComponent<Animator>().SetTrigger("Unlock"); // play cool unlock animation when purchased
@@ -39,8 +40,9 @@ public class InfoPanel : MonoBehaviour
             GoodBubble.SetTrigger("Grow");
             //Skull.SetTrigger("Speak");
             PlayerWealthText.GetComponent<Animator>().SetTrigger("Buy");
+            gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
         }
-        else
+        else // player is too poor
         {
             BadBubble.SetTrigger("Grow");
             //Skull.SetTrigger("Speak");
@@ -61,6 +63,7 @@ public class InfoPanel : MonoBehaviour
         //gameObject.SetActive(false);
         DenyButton.enabled = false;
         PurchaseButton.enabled = false;
+        gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
         //gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
 
     }

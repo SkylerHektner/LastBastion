@@ -45,7 +45,6 @@ public class LoadLevel : MonoBehaviour
     public Sprite LockedImage;
 
     public Sprite LevelImage; // This is the one referenced by the level scroller.  Don't put anything in this;
-    public Animator UpgradesBar;
 
     public UnityEvent<int> LockStatusChangedEvent = new UnityEvent<int>();
 
@@ -75,7 +74,7 @@ public class LoadLevel : MonoBehaviour
     {
         LevelInfo.SetBool( "Open", true );
         LevelPopup.ActivePopupSpawnCadence = SpawnCadence; // tell the popup what scene I want it to load
-        UpgradesBar.SetTrigger( "Hide" );
+        //UpgradesBar.SetTrigger( "Hide" );
         // load contract info
         UpdateContract();
         ContractPopup.DisableArrows();

@@ -9,7 +9,6 @@ public class LevelPopup : MonoBehaviour
 {
     public static SpawnCadenceProfile ActivePopupSpawnCadence;
     public int Index;
-    public Animator UpgradesBar;
     public Animator Portal;
     public TextMeshProUGUI GameModeText;
     public TextMeshProUGUI CompletionPayout;
@@ -22,6 +21,8 @@ public class LevelPopup : MonoBehaviour
 
     public GameObject ArrowR;
     public GameObject ArrowL;
+    public Button HomeButton;
+    public Button UpgradesButton;
 
     private void Update()
     {
@@ -50,13 +51,14 @@ public class LevelPopup : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log(Spectator.LevelIndex);
 #endif
-        UpgradesBar.SetTrigger("Hide");
         gameObject.GetComponent<Animator>().SetBool("Open", false);
     }
 
     public void ShrinkContract()
     {
         gameObject.GetComponent<Animator>().SetTrigger("Accepted");
+        HomeButton.enabled = false;
+        UpgradesButton.enabled = false;
         ArrowL.SetActive(false);
         ArrowR.SetActive(false);
     }
@@ -69,7 +71,6 @@ public class LevelPopup : MonoBehaviour
     public void DeclineContract()
     {
         gameObject.GetComponent<Animator>().SetBool("Open", false);
-        UpgradesBar.SetTrigger("Appear");
         ArrowR.GetComponent<Button>().enabled = true;
         ArrowR.GetComponent<Image>().enabled = true;
         ArrowL.GetComponent<Button>().enabled = true;

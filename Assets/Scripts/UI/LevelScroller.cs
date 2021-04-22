@@ -23,7 +23,7 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public static int LevelIndex;
 
     public Animator Portal;
-    public Animator Door;
+    ////public Animator Door;
 
     public Image GlowFX;
     public Image PortalRim;
@@ -73,7 +73,7 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         if (Spectator.ReturningFromLevel == true)
         {
-            Door.SetTrigger("Shortcut");
+            ////Door.SetTrigger("Shortcut");
             LevelIndex = Spectator.LevelIndex;
             JumpToDesiredLevel(LevelIndex);
             Portal.SetTrigger("Shrink");

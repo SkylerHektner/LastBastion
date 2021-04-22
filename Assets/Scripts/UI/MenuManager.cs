@@ -4,46 +4,36 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    public GameObject PlayCanvas;
-    //public Animator Door;
     public GameObject LevelCanvas;
     public GameObject UpgradesCanvas;
     public Animator LevelBar;
     public GameObject ProgressContent;
+    public CameraUIMover CameraMover;
+    public Animator CampaignPortal;
+    public Animator MenuOptions;
 
-    private void Update()
+    private void Awake()
     {
-        // triggers when the player comes to the main menu from quitting the game
-        if( PD.Instance.Limbo.Get() )
-        {
-            //Door.SetBool( "Limbo", true );
-            PlayCanvas.SetActive( false );
-        }
-        else
-        {
-            //Door.SetBool( "Limbo", false );
-        }
 
         // triggers when the player returns from the menu from a portal
         if( Spectator.ReturningFromLevel )
         {
-            PlayCanvas.SetActive( false );
-            ShowLevels();
+            Debug.Log("Returning from level");
+            //ReturnFromCampaignLevel();
+            CameraMover.LoadLevelShortcut();
+            CampaignPortal.SetTrigger("Shrink");
+            MenuOptions.SetTrigger("Skip");
         }
 
     }
 
-    public void PlayGame()
-    {
-        //PlayCanvas.SetActive( false );
-        //Door.SetTrigger( "Open" );
-    }
-
     public void ShowLevels()
     {
+        CameraMover.LoadLevelShortcut();
+
         LevelCanvas.SetActive( true );
         LevelBar.SetTrigger( "Appear" );
-        PlayCanvas.SetActive(false);
+
     }
 
     public void ShowUpgrades()
@@ -55,7 +45,7 @@ public class MenuManager : MonoBehaviour
     public void ExitLimbo()
     {
         PD.Instance.Limbo.Set( false );
-        PlayCanvas.SetActive( true );
+        ////PlayCanvas.SetActive( true );
     }
 
     // used in the door animator 
@@ -71,7 +61,7 @@ public class MenuManager : MonoBehaviour
 
     public void ShowPlayButton()
     {
-        PlayCanvas.SetActive( true );
+        ////PlayCanvas.SetActive( true );
     }
 
 }
