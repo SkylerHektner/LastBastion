@@ -18,6 +18,7 @@ public class UpgradeButton : MonoBehaviour
     public Sprite VeiledImage;
     public Sprite Lockedimage;
     public Sprite UnlockedImage;
+    public GameObject AvailableGlow;
 
     public bool Purchased { get {
             return purchased;
@@ -86,6 +87,7 @@ public class UpgradeButton : MonoBehaviour
         PD.Instance.UpgradeUnlockMap.SetUnlock( UpgradeFlag, true );
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpdatePlayerWealth();
+        AvailableGlow.SetActive(false);
     }
 
     private void UpdateButton()
@@ -109,6 +111,8 @@ public class UpgradeButton : MonoBehaviour
             //PurchasedGlow.SetActive(false);
             gameObject.GetComponent<Image>().sprite = Lockedimage;
             GetComponent<Button>().enabled = true;
+            AvailableGlow.SetActive(true);
+
         }
     }
 
