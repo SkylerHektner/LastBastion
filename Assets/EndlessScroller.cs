@@ -30,6 +30,8 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public List<GameObject> LevelList;
     public GameObject ArrowL;
     public GameObject ArrowR;
+    bool Moving;
+    int TargetIndex;
 
 
     // Update is called once per frame
@@ -38,6 +40,10 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         LevelBarLength = LevelBar.GetComponent<RectTransform>().rect.width;
         NumberofElements = Mathf.Floor(LevelBarLength / DistanceBetweenElements);
         BarXPos = LevelBar.transform.localPosition.x;
+        if (Moving)
+        {
+            SlideToDesiredLevel(TargetIndex);
+        }
 
         //if (DragBuffer > 0)
         //{
@@ -64,10 +70,15 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             //level.LockStatusChangedEvent.AddListener(OnLockedLevelImageChanged);
         }
 
+
         if (EndlessLevelIndex <= 1)
         {
             EndlessLevelIndex = 1;
         }
+        //if (EndlessLevelIndex <= 0)
+        //{
+        //    EndlessLevelIndex = 0;
+        //}
         if (Spectator.ReturningFromLevel == true)
         {
             //Door.SetTrigger("Shortcut");
@@ -83,6 +94,7 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             JumpToDesiredLevel(EndlessLevelIndex);
             //LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
             //JumpToDesiredLevel(PD.Instance.StoredLimboLevelIndex.Get());
+
 #if UNITY_EDITOR
             Debug.Log("Not returning from endless");
 #endif
@@ -113,8 +125,42 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             ArrowL.SetActive(true);
             ArrowR.SetActive(true);
         }
+        TargetIndex = Index;
         DisplayLevelImage(Index);
         UpdateAnimators(Index);
+    }
+
+    public void SlideToDesiredLevel(int TaretIndex)
+    {
+        float moveSpeed = 5f;
+        Vector2 TargetPos = new Vector2(-(BarStartPos + DistanceBetweenElements * (TargetIndex - 1)), LevelBar.transform.localPosition.y);
+        LevelBar.transform.localPosition = Vector2.MoveTowards(LevelBar.transform.localPosition, TargetPos, moveSpeed);
+        if (EndlessLevelIndex <= 1)
+        {
+            ArrowL.SetActive(false);
+        }
+        else if (EndlessLevelIndex == NumberofElements)
+        {
+            ArrowR.SetActive(false);
+        }
+        else if (EndlessLevelIndex >= 1 && EndlessLevelIndex < NumberofElements)
+        {
+            ArrowL.SetActive(true);
+            ArrowR.SetActive(true);
+        }
+
+        if (LevelBar.transform.localPosition.x == TargetPos.x)
+        {
+            //Moving = false;
+            LevelList[TargetIndex - 1].GetComponentInChildren<SurvivalDoor>().MyButton.gameObject.SetActive(true);
+            LevelList[TargetIndex - 1].GetComponentInChildren<SurvivalDoor>().MyButton.interactable = true;
+
+        }
+        else
+        {
+            LevelList[TargetIndex - 1].GetComponentInChildren<SurvivalDoor>().MyButton.gameObject.SetActive(false);
+            LevelList[TargetIndex - 1].GetComponentInChildren<SurvivalDoor>().MyButton.interactable = false;
+        }
     }
 
     public void UpdateAnimators(int Index)
@@ -124,13 +170,13 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         {
             if (i == Index)
             {
-                LevelList[i].GetComponentInChildren<SurvivalDoor>().OpenDoor();
-                LevelList[i].GetComponentInChildren<SurvivalDoor>().MyButton.interactable = true;
+                //LevelList[i].GetComponentInChildren<SurvivalDoor>().OpenDoor();
+                //LevelList[i].GetComponentInChildren<SurvivalDoor>().MyButton.interactable = true;
             }
             else
             {
-                LevelList[i].GetComponentInChildren<SurvivalDoor>().CloseDoor();
-                LevelList[i].GetComponentInChildren<SurvivalDoor>().MyButton.interactable = false;
+                //LevelList[i].GetComponentInChildren<SurvivalDoor>().CloseDoor();
+                //LevelList[i].GetComponentInChildren<SurvivalDoor>().MyButton.interactable = false;
 
             }
         }
@@ -171,20 +217,30 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     {
         if (EndlessLevelIndex < NumberofElements)
         {
+            LevelList[EndlessLevelIndex - 1].GetComponentInChildren<SurvivalDoor>().MyButton.gameObject.SetActive(false);
             EndlessLevelIndex = EndlessLevelIndex + 1;
-            JumpToDesiredLevel(EndlessLevelIndex);
+            //JumpToDesiredLevel(EndlessLevelIndex);
+            TargetIndex = EndlessLevelIndex;
+            SlideToDesiredLevel(EndlessLevelIndex);
+            Moving = true;
+            // toggle off buttons while moving
+            LevelList[TargetIndex - 1].GetComponentInChildren<SurvivalDoor>().MyButton.gameObject.SetActive(false);
         }
         Debug.Log(EndlessLevelIndex);
 
     }
     public void ShiftPreviousLevel()
     {
+        LevelList[TargetIndex - 1].GetComponentInChildren<SurvivalDoor>().MyButton.gameObject.SetActive(false);
         EndlessLevelIndex = EndlessLevelIndex - 1;
         if (EndlessLevelIndex < 0)
         {
             EndlessLevelIndex = 0;
         }
-        JumpToDesiredLevel(EndlessLevelIndex);
+        //JumpToDesiredLevel(EndlessLevelIndex);
+        TargetIndex = EndlessLevelIndex;
+        SlideToDesiredLevel(EndlessLevelIndex);
+        Moving = true;
         Debug.Log(EndlessLevelIndex);
     }
 
@@ -196,7 +252,10 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             float ReferencePoint = Mathf.Abs(BarStartPos) + DistanceBetweenElements * (i - 1);
             if (Mathf.Abs(BarXPos) < ReferencePoint + DistanceBetweenElements / 2 && Mathf.Abs(BarXPos) > ReferencePoint - DistanceBetweenElements / 2) // falls within half of the distance to the next/previous element
             {
-                LevelBar.transform.localPosition = new Vector2(-ReferencePoint, LevelBar.transform.localPosition.y);
+                float moveSpeed = .5f;
+                //LevelBar.transform.localPosition = new Vector2(-ReferencePoint, LevelBar.transform.localPosition.y);
+                Vector2 TargetPos = new Vector2(-ReferencePoint, LevelBar.transform.localPosition.y);
+                LevelBar.transform.localPosition = Vector2.MoveTowards(LevelBar.transform.localPosition, TargetPos, moveSpeed);
                 DisplayLevelImage(i);
                 EndlessLevelIndex = i;
                 if (EndlessLevelIndex <= 1)
