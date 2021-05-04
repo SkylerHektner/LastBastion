@@ -67,30 +67,41 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             level.LockStatusChangedEvent.AddListener( OnLockedLevelImageChanged );
         }
 
-        if (LevelIndex <= 1)
-        {
-            LevelIndex = 1;
-        }
         if (Spectator.ReturningFromLevel == true)
         {
             ////Door.SetTrigger("Shortcut");
             LevelIndex = Spectator.LevelIndex;
+
+            if (LevelIndex <= 1)
+            {
+                LevelIndex = 1;
+            }
             JumpToDesiredLevel(LevelIndex);
             Portal.SetTrigger("Shrink");
             Spectator.ReturningFromLevel = false;
+            UpdateAnimators(LevelIndex);
+
 #if UNITY_EDITOR
             Debug.Log("Returning from level" + Spectator.LevelIndex);
+
 #endif
         }
         else
         {
-            //LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
-            JumpToDesiredLevel(PD.Instance.StoredLimboLevelIndex.Get());
+            LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
+            Debug.Log("STORED INDEX" + PD.Instance.StoredLimboLevelIndex.Get());
+
+            if (LevelIndex <= 1)
+            {
+                LevelIndex = 1;
+            }
+            JumpToDesiredLevel(LevelIndex);
+            UpdateAnimators(LevelIndex);
+
 #if UNITY_EDITOR
             Debug.Log("Not returning from a level");
 #endif
         }
-        UpdateAnimators(LevelIndex);
 #if UNITY_EDITOR
         Debug.Log("Level index" + LevelIndex);
 #endif
@@ -107,11 +118,11 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         {
             ArrowL.SetActive(false);
         }
-        else if (Index == NumberofElements - 1)
+        else if (Index >= LevelList.Count)
         {
             ArrowR.SetActive(false);
         }
-        else if (Index >= 1 && Index < NumberofElements)
+        else if (Index >= 1 && Index < LevelList.Count)
         {
             ArrowL.SetActive(true);
             ArrowR.SetActive(true);
@@ -183,7 +194,7 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void ShiftNextLevel()
     {
-        if (LevelIndex < NumberofElements - 1)
+        if (LevelIndex < LevelList.Count)
         {
             LevelIndex = LevelIndex + 1;
             JumpToDesiredLevel(LevelIndex);

@@ -14,42 +14,37 @@ public class SurvivalDoor : MonoBehaviour
     public string SceneToLoad;
     public Image DoorPortal;
     public Color GlowColor;
+    public EndlessScroller ScrollBar;
 
-    //public void Update()
-    //{
-    //        HighestScore.text == // highest score.text
-    //}
+    public void Update()
+    {
+        //HighestScore.text == // highest score.text
+        DoorPortal.color = GlowColor;
+    }
 
     public void OpenDoor()
     {
-        DoorPortal.color = GlowColor;
+        Spectator.SurvivalIndex = EndlessScroller.EndlessLevelIndex; // reference index to the button
+        //DoorPortal.color = GlowColor;
         MyDoor.SetTrigger("Open");
+        ScrollBar.ArrowL.GetComponent<Button>().interactable = false;
+        ScrollBar.ArrowR.GetComponent<Button>().interactable = false;
+        ScrollBar.HomeButton.interactable = false;
     }
 
     public void CloseDoor()
     {
-        DoorPortal.color = GlowColor;
+        //DoorPortal.color = GlowColor;
         MyDoor.SetTrigger("Close");
     }
 
-    public void AskConfirmation() // ask before loading level
-    {
-        //ConfirmationMenu.SetActive(true);
-    }
-
-    //public void DenyConfirmation()
-    //{
-
-    //}
-
-    //public void AcceptConfirmation()
-    //{
-
-    //}
 
     // called by door animator
     public void LoadLevel()
     {
+        Spectator.SurvivalIndex = EndlessScroller.EndlessLevelIndex; // reference index to the button
+        Spectator.ReturningFromSurvival = true;
+        PD.Instance.StoredLimboSurvivalIndex.Set(Spectator.SurvivalIndex);
         SceneManager.LoadScene(SceneToLoad);
     }
 

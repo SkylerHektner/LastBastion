@@ -24,7 +24,7 @@ public class ProgressCanvas : MonoBehaviour
         Spectator.LevelIndex = 1;
         Door.SetBool( "Limbo", false );
     }
-    public void LoadSceneFromLimboResumeAnimation()
+    public void LoadSceneFromLimboResumeAnimation() // need to make a separate case here for survival
     {
         Spectator.LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
         Spectator.ReturningFromLevel = true;

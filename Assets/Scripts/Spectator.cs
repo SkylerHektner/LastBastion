@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class Spectator : MonoBehaviour
 {
     public static bool ReturningFromLevel;
+    public static bool ReturningFromSurvival;
     public static int LevelIndex;
+    public static int SurvivalIndex;
+
     public static bool WitnessedVictory;
 
     private void Awake()
@@ -37,7 +40,8 @@ public class Spectator : MonoBehaviour
         {
             PD.Instance.Limbo.Set( true );
             PD.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
-            PD.Instance.StoredLimboLevelIndex.Set( Spectator.LevelIndex );
+            PD.Instance.StoredLimboLevelIndex.Set(Spectator.LevelIndex);
+            PD.Instance.StoredLimboSurvivalIndex.Set(Spectator.SurvivalIndex);
             PD.Instance.StoredLimboCurrentWave.Set( SpawnManager.Instance.CurrentWave );
             PD.Instance.StoredLimboAbilityCharges.Clear();
 

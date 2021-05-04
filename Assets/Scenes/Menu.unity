@@ -2749,7 +2749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &169599929
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14789,7 +14789,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 81514467}
         m_TargetAssemblyTypeName: CameraUIMover, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+        m_MethodName: ExitSurvivalArea
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16127,7 +16127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &853972409
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18221,9 +18221,10 @@ MonoBehaviour:
   MyDoor: {fileID: 947182859}
   HighestScore: {fileID: 962027809}
   MyButton: {fileID: 1418098550}
-  SceneToLoad: Level1
+  SceneToLoad: Level2
   DoorPortal: {fileID: 1026135273}
   GlowColor: {r: 0.3976899, g: 0.6431373, b: 0.3764706, a: 1}
+  ScrollBar: {fileID: 1558151433}
 --- !u!95 &947182859
 Animator:
   serializedVersion: 3
@@ -19064,7 +19065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &989415180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20743,7 +20744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1034018573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20877,7 +20878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1034647198
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25400,7 +25401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1262812531
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28169,7 +28170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1360989994
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30065,7 +30066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1426094617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33004,6 +33005,8 @@ MonoBehaviour:
   - {fileID: 1901777113}
   ArrowL: {fileID: 1316974843}
   ArrowR: {fileID: 1791956599}
+  FloatingSkull: {fileID: 395721204}
+  HomeButton: {fileID: 817333902}
 --- !u!95 &1558151434
 Animator:
   serializedVersion: 3
@@ -40898,9 +40901,10 @@ MonoBehaviour:
   MyDoor: {fileID: 1901777116}
   HighestScore: {fileID: 1350776172}
   MyButton: {fileID: 854413772}
-  SceneToLoad: Level1
+  SceneToLoad: Level3
   DoorPortal: {fileID: 1632823403}
   GlowColor: {r: 0.6431373, g: 0.5638063, b: 0.3764706, a: 1}
+  ScrollBar: {fileID: 1558151433}
 --- !u!95 &1901777116
 Animator:
   serializedVersion: 3
@@ -44608,6 +44612,7 @@ MonoBehaviour:
   SceneToLoad: Level1
   DoorPortal: {fileID: 1199467207}
   GlowColor: {r: 0.6415094, g: 0.37764326, b: 0.6021504, a: 1}
+  ScrollBar: {fileID: 1558151433}
 --- !u!95 &2063588698
 Animator:
   serializedVersion: 3

@@ -32,6 +32,8 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public GameObject ArrowR;
     bool Moving;
     int TargetIndex;
+    public Animator FloatingSkull;
+    public Button HomeButton;
 
 
     // Update is called once per frame
@@ -71,37 +73,42 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
 
 
-        if (EndlessLevelIndex <= 1)
-        {
-            EndlessLevelIndex = 1;
-        }
+
         //if (EndlessLevelIndex <= 0)
         //{
         //    EndlessLevelIndex = 0;
         //}
-        if (Spectator.ReturningFromLevel == true)
+        if (Spectator.ReturningFromSurvival == true)
         {
-            //Door.SetTrigger("Shortcut");
-            //EndlessLevelIndex = Spectator.LevelIndex;
+            FloatingSkull.SetTrigger("SurvivalSkip");
+            EndlessLevelIndex = Spectator.SurvivalIndex;
+            if (EndlessLevelIndex <= 1)
+            {
+                EndlessLevelIndex = 1;
+            }
+            LevelList[EndlessLevelIndex-1].GetComponent<Animator>().SetTrigger("Close");
             JumpToDesiredLevel(EndlessLevelIndex);
-            Spectator.ReturningFromLevel = false;
+            Spectator.ReturningFromSurvival = false;
 #if UNITY_EDITOR
-            Debug.Log("Returning from endless" + Spectator.LevelIndex);
+            //Debug.Log("Returning from survival door " + Spectator.SurvivalIndex);
 #endif
         }
         else
         {
             JumpToDesiredLevel(EndlessLevelIndex);
-            //LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
-            //JumpToDesiredLevel(PD.Instance.StoredLimboLevelIndex.Get());
-
+            EndlessLevelIndex = PD.Instance.StoredLimboSurvivalIndex.Get();
+            if (EndlessLevelIndex <= 1)
+            {
+                EndlessLevelIndex = 1;
+            }
+            JumpToDesiredLevel(EndlessLevelIndex);
 #if UNITY_EDITOR
-            Debug.Log("Not returning from endless");
+            //Debug.Log("Not returning from survival");
 #endif
         }
         UpdateAnimators(EndlessLevelIndex);
 #if UNITY_EDITOR
-        Debug.Log("Endless index" + EndlessLevelIndex);
+        //Debug.Log("Survival index" + EndlessLevelIndex);
 #endif
     }
 
@@ -263,7 +270,7 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                     EndlessLevelIndex = 1;
                 }
 #if UNITY_EDITOR
-                Debug.Log("This is endless level " + EndlessLevelIndex + " selected");
+                //Debug.Log("This is endless level " + EndlessLevelIndex + " selected");
 #endif
                 //Spectator.LevelIndex = EndlessLevelIndex;
                 break;

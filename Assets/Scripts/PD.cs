@@ -22,6 +22,7 @@ public class PD
     public PlayerDataField<string> ExitedScene = new PlayerDataField<string>();
     public PlayerDataField<int> StoredLimboLevelIndex = new PlayerDataField<int>();
     public PlayerDataField<int> StoredLimboCurrentWave = new PlayerDataField<int>();
+    public PlayerDataField<int> StoredLimboSurvivalIndex = new PlayerDataField<int>();
     public SerializableDictionary<AbilityEnum, int> StoredLimboAbilityCharges = new SerializableDictionary<AbilityEnum, int>();
 
     // UPGRADES

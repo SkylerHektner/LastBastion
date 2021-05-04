@@ -71,4 +71,16 @@ public class CameraUIMover : MonoBehaviour
         MoveDelay = 1f;
         Delayed = true;
     }
+
+    public void LoadSurvivalShortcut() // triggers when returning from survival
+    {
+        CurrentDestination = SurvivalZone;
+        Camera.transform.position = CurrentDestination.position;
+    }
+
+    public void ExitSurvivalArea()
+    {
+        CurrentDestination = MainZone;
+        CameraSpeed = 3f;
+    }
 }

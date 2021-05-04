@@ -35,6 +35,12 @@ public class MenuManager : MonoBehaviour
             CampaignPortal.SetTrigger("Shrink");
             MenuOptions.SetTrigger("Skip");
         }
+        else if (Spectator.ReturningFromSurvival)
+        {
+            Debug.Log("Returning from survival");
+            CameraMover.LoadSurvivalShortcut();
+            MenuOptions.SetTrigger("Skip");
+        }
 
     }
 
@@ -125,11 +131,6 @@ public class MenuManager : MonoBehaviour
     public void ShowProgressCanvas()
     {
         ProgressContent.SetActive( true );
-    }
-
-    public void ShowPlayButton()
-    {
-        ////PlayCanvas.SetActive( true );
     }
 
 }
