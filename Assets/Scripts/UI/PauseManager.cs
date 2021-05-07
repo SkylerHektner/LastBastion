@@ -13,6 +13,7 @@ public class PauseManager : MonoBehaviour
     public GameObject BonusScreen;
     public GameObject PauseButton;
     public TextMeshProUGUI CurrentWaveText;
+    public Animator ConfirmationMenu;
 
     public void ResumeGame()
     {
@@ -21,6 +22,12 @@ public class PauseManager : MonoBehaviour
         PauseScreen.SetActive(false);
         BonusScreen.SetActive(true);
         PauseButton.SetActive(true);
+    }
+    public void DelayedResume()
+    {
+        Time.timeScale = 1;
+        Invoke("ResumeGame", .5f);
+        DenyConfirmation();
     }
 
 
@@ -54,5 +61,15 @@ public class PauseManager : MonoBehaviour
     private void OnDestroy()
     {
         PauseManager.Instance = null;
+    }
+
+    public void AskConfirmation()
+    {
+        ConfirmationMenu.SetBool("Confirming", true);
+
+    }
+    public void DenyConfirmation()
+    {
+        ConfirmationMenu.SetBool("Confirming", false);
     }
 }
