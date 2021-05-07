@@ -42,6 +42,10 @@ public class VictoryScreen : MonoBehaviour
             ChallengeDisplay.SetActive( true );
             ChallengeSuccessNotifierText.text = challenge_succeeded ? "Challenge Complete!" : "Challenge Failed";
             ChallengeDescriptionText.text = challenge_description_text;
+            if (ChallengeSuccessNotifierText.text == "Challenge Complete!")
+            {
+                ChallengeDisplay.GetComponent<Animator>().SetBool("Winner", true);
+            }
         }
     }
 
