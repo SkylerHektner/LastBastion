@@ -13,7 +13,6 @@ public class UpgradeButton : MonoBehaviour
     public int MyCost;
     public GameObject InfoBox;
     public PD.UpgradeFlags UpgradeFlag;
-    public List<PD.UpgradeFlags> PrerequisiteUpgradeFlags = new List<PD.UpgradeFlags>();
     public GameObject PurchasedGlow;
     public Sprite VeiledImage;
     public Sprite Lockedimage;
@@ -93,7 +92,7 @@ public class UpgradeButton : MonoBehaviour
     private void UpdateButton()
     {
 
-        if ( PrerequisiteUpgradeFlags.Any( f => !PD.Instance.UpgradeUnlockMap.GetUnlock( f ) ) ) 
+        if ( PD.Instance.UpgradeFlagDependencyMap[UpgradeFlag].Any( f => !PD.Instance.UpgradeUnlockMap.GetUnlock( f ) ) ) 
         {
             // disable button if any pre-reqs not set
             PurchasedGlow.SetActive(false);

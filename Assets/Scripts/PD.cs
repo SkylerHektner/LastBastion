@@ -30,15 +30,15 @@ public class PD
     {
         ChainLightning = 0,
         ChainLightningStunDuration = 1,
-        ChainLightningStaticOverload = 2,    
+        ChainLightningStaticOverload = 2,
         ChainLightningLightningRod = 3,
         Typhoon = 4,
-        TyphoonExtendedBBQ = 5,              
+        TyphoonExtendedBBQ = 5,
         TyphoonFlameSaw = 6,
         TyphoonRoaringFlames = 7,
         Anomaly = 8,
         AnomalyRicochetSaws = 9,
-        AnomalyStasisCoating = 10,            
+        AnomalyStasisCoating = 10,
         AnomalySingularity = 11,
         Sawmageddon = 12,
         SawmageddonDuration = 13,
@@ -48,11 +48,39 @@ public class PD
         BaseHP1 = 17,
         BaseHP2 = 18,
         BaseHP3 = 19,
-        Turrets = 20,                        
-        TurretsPowerSurge = 21,              
-        TurretsCollateralDamage = 22,        
+        Turrets = 20,
+        TurretsPowerSurge = 21,
+        TurretsCollateralDamage = 22,
         TurretsTimedPaylod = 23,
     }
+
+    public readonly Dictionary<UpgradeFlags, List<UpgradeFlags>> UpgradeFlagDependencyMap = new Dictionary<UpgradeFlags, List<UpgradeFlags>>
+    {
+        { UpgradeFlags.ChainLightning, new List<UpgradeFlags> { } },
+        { UpgradeFlags.ChainLightningStunDuration, new List<UpgradeFlags> { UpgradeFlags.ChainLightning } },
+        { UpgradeFlags.ChainLightningLightningRod, new List<UpgradeFlags> { UpgradeFlags.ChainLightning, UpgradeFlags.ChainLightningStunDuration } },
+        { UpgradeFlags.ChainLightningStaticOverload, new List<UpgradeFlags> { UpgradeFlags.ChainLightning, UpgradeFlags.ChainLightningStunDuration, UpgradeFlags.ChainLightningLightningRod } },
+        { UpgradeFlags.Typhoon, new List<UpgradeFlags> { } },
+        { UpgradeFlags.TyphoonFlameSaw, new List<UpgradeFlags> { UpgradeFlags.Typhoon } },
+        { UpgradeFlags.TyphoonRoaringFlames, new List<UpgradeFlags> { UpgradeFlags.Typhoon, UpgradeFlags.TyphoonFlameSaw } },
+        { UpgradeFlags.TyphoonExtendedBBQ, new List<UpgradeFlags> { UpgradeFlags.Typhoon, UpgradeFlags.TyphoonFlameSaw, UpgradeFlags.TyphoonRoaringFlames } },
+        { UpgradeFlags.Anomaly, new List<UpgradeFlags> { } },
+        { UpgradeFlags.AnomalyRicochetSaws, new List<UpgradeFlags> { UpgradeFlags.Anomaly } },
+        { UpgradeFlags.AnomalyStasisCoating, new List<UpgradeFlags> { UpgradeFlags.Anomaly, UpgradeFlags.AnomalyRicochetSaws } },
+        { UpgradeFlags.AnomalySingularity, new List<UpgradeFlags> { UpgradeFlags.Anomaly, UpgradeFlags.AnomalyRicochetSaws, UpgradeFlags.AnomalyStasisCoating } },
+        { UpgradeFlags.Sawmageddon, new List<UpgradeFlags> { } },
+        { UpgradeFlags.SawmageddonDuration, new List<UpgradeFlags> { UpgradeFlags.Sawmageddon } },
+        { UpgradeFlags.SawmageddonProjectiles, new List<UpgradeFlags> { UpgradeFlags.Sawmageddon, UpgradeFlags.SawmageddonDuration } },
+        { UpgradeFlags.SawmageddonComboKiller, new List<UpgradeFlags> { UpgradeFlags.Sawmageddon, UpgradeFlags.SawmageddonDuration, UpgradeFlags.SawmageddonProjectiles } },
+        { UpgradeFlags.BaseHP1, new List<UpgradeFlags> { } },
+        { UpgradeFlags.BaseHP2, new List<UpgradeFlags> { UpgradeFlags.BaseHP1 } },
+        { UpgradeFlags.BaseHP3, new List<UpgradeFlags> { UpgradeFlags.BaseHP1, UpgradeFlags.BaseHP2 } },
+        { UpgradeFlags.BaseOvershield, new List<UpgradeFlags> { UpgradeFlags.BaseHP1, UpgradeFlags.BaseHP2, UpgradeFlags.BaseHP3 } },
+        { UpgradeFlags.Turrets, new List<UpgradeFlags> { } },
+        { UpgradeFlags.TurretsPowerSurge, new List<UpgradeFlags> { UpgradeFlags.Turrets, UpgradeFlags.ChainLightning } },
+        { UpgradeFlags.TurretsCollateralDamage, new List<UpgradeFlags> { UpgradeFlags.Turrets, UpgradeFlags.Sawmageddon } },
+        { UpgradeFlags.TurretsTimedPaylod, new List<UpgradeFlags> { UpgradeFlags.Turrets, UpgradeFlags.Anomaly } },
+    };
 
     // EVENTS
     [NonSerialized] public UnityEvent<UpgradeFlags, bool> UpgradeFlagChangedEvent = new UnityEvent<UpgradeFlags, bool>();
@@ -89,10 +117,10 @@ public class PD
     {
         Process.Start( Application.persistentDataPath );
     }
-    [MenuItem( "Debug/Add100Candy" )]
+    [MenuItem( "Debug/Add1000Candy" )]
     public static void AddMoney()
     {
-        PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + 100 );
+        PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + 1000 );
     }
     [MenuItem( "Debug/DeleteAllPlayerData/NoSeriouslyDeleteItAll" )]
     public static void DeleteAllPlayerData()
@@ -119,7 +147,7 @@ public class PD
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level9", true );
     }
 
-    [MenuItem("Debug/EndTheSuffering")]
+    [MenuItem( "Debug/EndTheSuffering" )]
     public static void KillMyself()
     {
         BaseHP.Instance?.ReduceHP( 9001 );
