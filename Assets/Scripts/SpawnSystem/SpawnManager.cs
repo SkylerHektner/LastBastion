@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance { get; private set; }
 
-    [SerializeField] SpawnCadenceProfile spawnCadenceProfile;
+    [SerializeField] BaseSpawnCadenceProfile spawnCadenceProfile;
     [SerializeField] int DebugStartWave = 0;
     [Header( "Enemy Prefabs" )]
     [SerializeField] GameObject SkeletonPrefab;
@@ -37,7 +37,9 @@ public class SpawnManager : MonoBehaviour
     [Header( "Misc" )]
     [SerializeField] WaveCounter WaveCounterUI;
 
-    public int CurrentWave { get; private set; } = -1;
+    public SpawnWave CurrentWave { get; private set; } = null;
+    [ReadOnly] public int CurrentWaveIndex = -1;
+
     public List<Enemy> AllSpawnedEnemies { get { return spawned_enemies.Values.ToList<Enemy>(); } }
     public UnityEvent<Enemy> EnemySpawnedEvent = new UnityEvent<Enemy>();
     public List<Animator> AnimationTriggerListeners = new List<Animator>();
@@ -67,11 +69,12 @@ public class SpawnManager : MonoBehaviour
     {
         Instance = this;
 #if UNITY_EDITOR
-        CurrentWave = DebugStartWave - 2;
+        CurrentWaveIndex = DebugStartWave - 2;
 #endif
+
         if( PD.Instance.Limbo.Get() )
         {
-            CurrentWave = PD.Instance.StoredLimboCurrentWave.Get() - 1; // subtract one since we immediately start next wave
+            CurrentWaveIndex = PD.Instance.StoredLimboCurrentWave.Get() - 1; // subtract one since we immediately start next wave
         }
 
         GameplayManager.PlayerWinState = GameplayManager.PlayerState.Active;
@@ -109,29 +112,29 @@ public class SpawnManager : MonoBehaviour
 
             // manage passive mob spawns
             // NO PASSIVE MOBS SPAWN AFTER LAST SPAWN GROUP HAS BEEN TRIGGERED
-            if( cur_spawn_group_index < spawnCadenceProfile.Waves[CurrentWave].SpawnGroups.Count )
+            if( cur_spawn_group_index < CurrentWave.SpawnGroups.Count )
             {
                 for( int x = 0; x < passive_spawn_trackers.Count; ++x )
                 {
                     passive_spawn_trackers[x] -= Time.deltaTime * GameplayManager.TimeScale;
                     if( passive_spawn_trackers[x] < 0.0f )
                     {
-                        passive_spawn_trackers[x] += spawnCadenceProfile.Waves[CurrentWave].PassiveEnemySpawnCadence[x];
-                        SpawnMonster( spawnCadenceProfile.Waves[CurrentWave].PassiveEnemies[x], GetRandomSpawnPoint() );
+                        passive_spawn_trackers[x] += CurrentWave.PassiveEnemySpawnCadence[x];
+                        SpawnMonster( CurrentWave.PassiveEnemies[x], GetRandomSpawnPoint() );
                     }
                 }
             }
 
             // manage spawn groups
-            while( cur_spawn_group_index < spawnCadenceProfile.Waves[CurrentWave].SpawnGroups.Count &&
-                spawn_timer > spawnCadenceProfile.Waves[CurrentWave].SpawnGroupSpawnTimes[cur_spawn_group_index] )
+            while( cur_spawn_group_index < CurrentWave.SpawnGroups.Count &&
+                spawn_timer > CurrentWave.SpawnGroupSpawnTimes[cur_spawn_group_index] )
             {
 
-                SpawnSpawnGroup( spawnCadenceProfile.Waves[CurrentWave].SpawnGroups[cur_spawn_group_index] );
+                SpawnSpawnGroup( CurrentWave.SpawnGroups[cur_spawn_group_index] );
                 cur_spawn_group_index++;
             }
 
-            if( cur_spawn_group_index == spawnCadenceProfile.Waves[CurrentWave].SpawnGroups.Count
+            if( cur_spawn_group_index == CurrentWave.SpawnGroups.Count
                 && pending_spawns.Count == 0
                 && spawned_enemies.Count == 0 )
             {
@@ -143,13 +146,14 @@ public class SpawnManager : MonoBehaviour
     public void StartNextWave()
     {
         spawn_timer = 0.0f;
-        CurrentWave++;
-        WaveCounterUI?.ShowNextWave( CurrentWave + 1 );
+        CurrentWaveIndex++;
+        CurrentWave = spawnCadenceProfile.GetWave( CurrentWaveIndex );
+        WaveCounterUI?.ShowNextWave( CurrentWaveIndex + 1 );
         cur_spawn_group_index = 0;
         passive_spawn_trackers.Clear();
-        if( !string.IsNullOrEmpty( spawnCadenceProfile.Waves[CurrentWave].AnimationTrigger ) )
+        if( !string.IsNullOrEmpty( CurrentWave.AnimationTrigger ) )
         {
-            var triggers = spawnCadenceProfile.Waves[CurrentWave].AnimationTrigger.Split( ',' ).Select( s => s.Trim() );
+            var triggers = CurrentWave.AnimationTrigger.Split( ',' ).Select( s => s.Trim() );
             foreach( Animator anim in AnimationTriggerListeners )
             {
                 foreach( string trigger in triggers )
@@ -161,12 +165,12 @@ public class SpawnManager : MonoBehaviour
                 }
             }
         }
-        foreach( float time in spawnCadenceProfile.Waves[CurrentWave].PassiveEnemySpawnCadence )
+        foreach( float time in CurrentWave.PassiveEnemySpawnCadence )
         {
             if( time == 0.0f )
             {
 #if UNITY_EDITOR
-                Debug.LogError( "ERROR: Passive Spawn Cadence set to 0 in Spawn Cadence Profile " + spawnCadenceProfile.name + " Wave " + ( CurrentWave + 1 ).ToString() );
+                Debug.LogError( "ERROR: Passive Spawn Cadence set to 0 in Spawn Cadence Profile " + spawnCadenceProfile.GetName() + " Wave " + ( CurrentWaveIndex + 1 ).ToString() );
 #endif
                 continue;
             }
@@ -177,24 +181,24 @@ public class SpawnManager : MonoBehaviour
     private void WaveComplete()
     {
         // if this is the first time completing this wave, mark it as complete and grant the player a reward
-        if( !PD.Instance.LevelCompletionMap.GetWaveCompletion( spawnCadenceProfile.LevelIdentifier, CurrentWave ) )
+        if( !PD.Instance.LevelCompletionMap.GetWaveCompletion( spawnCadenceProfile.GetLevelIdentifier(), CurrentWaveIndex ) )
         {
-            int reward = spawnCadenceProfile.Waves[CurrentWave].CompletionReward;
+            int reward = CurrentWave.CompletionReward;
             if( reward > 0 )
             {
-                PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.LevelIdentifier, CurrentWave, true );
+                PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.GetLevelIdentifier(), CurrentWaveIndex, true );
                 PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + reward );
                 total_level_earnings += reward;
                 Spectator.WitnessedVictory = true; // enables a popup on the menu screen for "New level unlocked!" notification
             }
         }
         // if this was the final wave then mark the level complete
-        if( CurrentWave == spawnCadenceProfile.Waves.Count - 1 && !PD.Instance.LevelCompletionMap.GetLevelCompletion( spawnCadenceProfile.LevelIdentifier ) )
+        if( CurrentWaveIndex == spawnCadenceProfile.GetWaveCount() - 1 && !PD.Instance.LevelCompletionMap.GetLevelCompletion( spawnCadenceProfile.GetLevelIdentifier() ) )
         {
-            PD.Instance.LevelCompletionMap.SetLevelCompletion( spawnCadenceProfile.LevelIdentifier, true );
+            PD.Instance.LevelCompletionMap.SetLevelCompletion( spawnCadenceProfile.GetLevelIdentifier(), true );
         }
         spawn_timer = -1.0f; // stop spawning
-        if( CurrentWave < spawnCadenceProfile.Waves.Count - 1 )
+        if( CurrentWaveIndex < spawnCadenceProfile.GetWaveCount() - 1 )
             StartNextWave();
         else
             SpawnCadenceComplete();
@@ -207,18 +211,18 @@ public class SpawnManager : MonoBehaviour
             GameplayManager.PlayerWinState = GameplayManager.PlayerState.Won;
 
             bool challenge_success = false;
-            bool has_challenge = spawnCadenceProfile.LevelChallenge != null
-                && !PD.Instance.PlayerChallengeCompletionList.Contains( spawnCadenceProfile.LevelChallenge.UniqueChallengeID );
+            bool has_challenge = spawnCadenceProfile.GetChallenge() != null
+                && !PD.Instance.PlayerChallengeCompletionList.Contains( spawnCadenceProfile.GetChallenge().UniqueChallengeID );
             if( has_challenge )
             {
-                challenge_success = GameplayManager.Instance.Challenges.EvaluateChallengeSuccess( spawnCadenceProfile.LevelChallenge );
+                challenge_success = GameplayManager.Instance.Challenges.EvaluateChallengeSuccess( spawnCadenceProfile.GetChallenge() );
                 if( challenge_success )
                 {
-                    Debug.Assert( spawnCadenceProfile.LevelChallenge.Reward > 0,
-                        String.Format( "ERROR: Spawn Cadence {0} has succeeded but has not been assigned any reward", spawnCadenceProfile.LevelChallenge.name ) );
-                    PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + spawnCadenceProfile.LevelChallenge.Reward );
-                    PD.Instance.PlayerChallengeCompletionList.Add( spawnCadenceProfile.LevelChallenge.UniqueChallengeID );
-                    total_level_earnings += spawnCadenceProfile.LevelChallenge.Reward;
+                    Debug.Assert( spawnCadenceProfile.GetChallenge().Reward > 0,
+                        String.Format( "ERROR: Spawn Cadence {0} has succeeded but has not been assigned any reward", spawnCadenceProfile.GetChallenge().name ) );
+                    PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + spawnCadenceProfile.GetChallenge().Reward );
+                    PD.Instance.PlayerChallengeCompletionList.Add( spawnCadenceProfile.GetChallenge().UniqueChallengeID );
+                    total_level_earnings += spawnCadenceProfile.GetChallenge().Reward;
                 }
             }
 
@@ -226,7 +230,7 @@ public class SpawnManager : MonoBehaviour
             VictoryScreen.instance?.DisplayVictory( total_level_earnings,
                 has_challenge,
                 challenge_success,
-                spawnCadenceProfile.LevelChallenge?.ChallengeDescription );
+                spawnCadenceProfile.GetChallenge()?.ChallengeDescription );
         }
     }
 

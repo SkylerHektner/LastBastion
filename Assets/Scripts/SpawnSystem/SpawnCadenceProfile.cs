@@ -5,49 +5,36 @@ using UnityEditor;
 using System;
 
 [CreateAssetMenu( fileName = "SpawnCadenceProfile", menuName = "ScriptableObjects/SpawnCadenceProfile", order = 0 )]
-public class SpawnCadenceProfile : ScriptableObject
+public class SpawnCadenceProfile : BaseSpawnCadenceProfile
 {
     public string LevelIdentifier = "CHANGE_ME";
     public Challenge LevelChallenge;
-    public List<Wave> Waves;
+    public List<SpawnWave> Waves;
 
-    [Serializable]
-    public class Wave
+    public override Challenge GetChallenge()
     {
-        public int CompletionReward = 0;
-        public List<EnemyEnum> PassiveEnemies;
-        public List<float> PassiveEnemySpawnCadence;
-        public List<SpawnGroup> SpawnGroups;
-        public List<float> SpawnGroupSpawnTimes;
-        public bool collapsed = false; // Editor UI Only
-        public string AnimationTrigger;
+        return LevelChallenge;
+    }
 
-        public Wave()
-        {
-            PassiveEnemies = new List<EnemyEnum>();
-            PassiveEnemySpawnCadence = new List<float>();
-            SpawnGroups = new List<SpawnGroup>();
-            SpawnGroupSpawnTimes = new List<float>();
-        }
+    public override string GetLevelIdentifier()
+    {
+        return LevelIdentifier;
+    }
 
-        public Wave( Wave other )
-        {
-            PassiveEnemies = new List<EnemyEnum>();
-            PassiveEnemySpawnCadence = new List<float>();
-            SpawnGroups = new List<SpawnGroup>();
-            SpawnGroupSpawnTimes = new List<float>();
+    public override string GetName()
+    {
+        return name;
+    }
 
-            foreach( var e in other.PassiveEnemies )
-                PassiveEnemies.Add( e );
-            foreach( var e in other.PassiveEnemySpawnCadence )
-                PassiveEnemySpawnCadence.Add( e );
-            foreach( var e in other.SpawnGroups )
-                SpawnGroups.Add( e );
-            foreach( var e in other.SpawnGroupSpawnTimes )
-                SpawnGroupSpawnTimes.Add( e );
+    public override SpawnWave GetWave(int wave_number)
+    {
+        Debug.Assert( wave_number < Waves.Count, "ERROR: Requesting wave beyond index of current spawn cadence profile" );
+        return Waves.Count < wave_number ? Waves[wave_number] : null;
+    }
 
-            AnimationTrigger = other.AnimationTrigger;
-        }
+    public override int GetWaveCount()
+    {
+        return Waves.Count;
     }
 }
 
@@ -83,19 +70,19 @@ public class SpawnCadenceProfileEditor : Editor
         // Waves
         if( spawn_cadence_profile.Waves == null )
         {
-            spawn_cadence_profile.Waves = new List<SpawnCadenceProfile.Wave>();
+            spawn_cadence_profile.Waves = new List<SpawnWave>();
         }
 
         if( GUILayout.Button( "Add Wave" ) )
         {
-            spawn_cadence_profile.Waves.Add( new SpawnCadenceProfile.Wave() );
+            spawn_cadence_profile.Waves.Add( new SpawnWave() );
             EditorUtility.SetDirty( target );
         }
 
         int wave_num = 1;
         for( int index = 0; index < spawn_cadence_profile.Waves.Count; ++index )
         {
-            SpawnCadenceProfile.Wave wave = spawn_cadence_profile.Waves[index];
+            SpawnWave wave = spawn_cadence_profile.Waves[index];
             bool c = EditorGUILayout.BeginFoldoutHeaderGroup( spawn_cadence_profile.Waves[index].collapsed, "------WAVE " + ( wave_num ).ToString() + "------" );
             if( c != spawn_cadence_profile.Waves[index].collapsed )
             {
@@ -218,7 +205,7 @@ public class SpawnCadenceProfileEditor : Editor
                 EditorGUILayout.BeginHorizontal();
                 if( GUILayout.Button( "Duplicate Wave" ) )
                 {
-                    spawn_cadence_profile.Waves.Insert( index + 1, new SpawnCadenceProfile.Wave( wave ) );
+                    spawn_cadence_profile.Waves.Insert( index + 1, new SpawnWave( wave ) );
                     EditorUtility.SetDirty( target );
                 }
                 if( GUILayout.Button( "Delete Wave" ) )

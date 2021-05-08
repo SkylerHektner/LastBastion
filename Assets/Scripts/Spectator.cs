@@ -42,7 +42,7 @@ public class Spectator : MonoBehaviour
             PD.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
             PD.Instance.StoredLimboLevelIndex.Set(Spectator.LevelIndex);
             PD.Instance.StoredLimboSurvivalIndex.Set(Spectator.SurvivalIndex);
-            PD.Instance.StoredLimboCurrentWave.Set( SpawnManager.Instance.CurrentWave );
+            PD.Instance.StoredLimboCurrentWave.Set( SpawnManager.Instance.CurrentWaveIndex );
             PD.Instance.StoredLimboAbilityCharges.Clear();
 
             // I really wish this could be a compile time assert ):
