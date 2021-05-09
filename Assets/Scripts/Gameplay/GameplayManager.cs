@@ -12,7 +12,9 @@ public class GameplayManager : MonoBehaviour
 
     // CHALLENGES
     public ChallengesTracker Challenges { get; private set; } = new ChallengesTracker();
-    
+
+    // ENVIRONEMNT
+    public Environment ActiveEnvironment;
 
     // WIN LOSS STATE
     public enum PlayerState

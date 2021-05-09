@@ -16922,6 +16922,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 659509266}
+  - component: {fileID: 659509267}
   m_Layer: 0
   m_Name: ENVIRONMENT_BOILER (Void)
   m_TagString: Untagged
@@ -16946,6 +16947,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &659509267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659509265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658866e616a73d42aab3d9da832ac76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnableAreaTopRight: {x: 3.65, y: 10.8, z: 0}
+  SpawnableAreaBottomLeft: {x: -3.65, y: 2.27, z: 0}
+  PlayableAreaTopRight: {x: 4.5, y: 11.21, z: 0}
+  PlayableAreaBottomLeft: {x: -4.5, y: 0, z: 0}
+  DoorSpawnPoints: []
+  BossSpawnPoint: {x: -0.05, y: 14.5, z: 0}
+  AnimationTriggerListeners:
+  - {fileID: 1670743747}
+  - {fileID: 1284157959}
+  - {fileID: 58419039}
 --- !u!1 &668844491
 GameObject:
   m_ObjectHideFlags: 0
@@ -17119,6 +17142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 694702852}
+  - component: {fileID: 694702853}
   m_Layer: 0
   m_Name: ENVIRONMENT_BOILER
   m_TagString: Untagged
@@ -17142,6 +17166,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &694702853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694702851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658866e616a73d42aab3d9da832ac76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnableAreaTopRight: {x: 3.65, y: 10.8, z: 0}
+  SpawnableAreaBottomLeft: {x: -3.65, y: 2.27, z: 0}
+  PlayableAreaTopRight: {x: 3.8, y: 11.21, z: 0}
+  PlayableAreaBottomLeft: {x: -3.84, y: 0, z: 0}
+  DoorSpawnPoints:
+  - {x: -2.48, y: 12.13, z: 0}
+  - {x: 2.51, y: 12.13, z: 0}
+  BossSpawnPoint: {x: -0.05, y: 14.5, z: 0}
+  AnimationTriggerListeners:
+  - {fileID: 1670743747}
+  - {fileID: 1284157959}
+  - {fileID: 58419039}
 --- !u!1 &713071849
 GameObject:
   m_ObjectHideFlags: 0
@@ -17172,7 +17220,7 @@ RectTransform:
   m_LocalScale: {x: 0.42362142, y: 1.5011196, z: 1.5011196}
   m_Children: []
   m_Father: {fileID: 425696702}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -40381,6 +40429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594486bb8ec0b2745b3f0ba47a0a5c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveEnvironment: {fileID: 694702853}
   TimeScaleChanged:
     m_PersistentCalls:
       m_Calls: []

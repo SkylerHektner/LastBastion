@@ -27,13 +27,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject RedSkeletonPrefab;
     [SerializeField] GameObject SkullyBossPrefab;
 
-    [Header( "Spawn Area Information" )]
-    public Vector3 SpawnableAreaTopRight;
-    public Vector3 SpawnableAreaBottomLeft;
-    public Vector3 PlayableAreaTopRight;
-    public Vector3 PlayableAreaBottomLeft;
-    public List<Vector3> DoorSpawnPoints = new List<Vector3>();
-    public Vector3 BossSpawnPoint = Vector3.zero;
     [Header( "Misc" )]
     [SerializeField] WaveCounter WaveCounterUI;
 
@@ -42,7 +35,6 @@ public class SpawnManager : MonoBehaviour
 
     public List<Enemy> AllSpawnedEnemies { get { return spawned_enemies.Values.ToList<Enemy>(); } }
     public UnityEvent<Enemy> EnemySpawnedEvent = new UnityEvent<Enemy>();
-    public List<Animator> AnimationTriggerListeners = new List<Animator>();
 
     private float spawn_timer = -1.0f;
     private int cur_spawn_group_index = 0;
@@ -154,7 +146,7 @@ public class SpawnManager : MonoBehaviour
         if( !string.IsNullOrEmpty( CurrentWave.AnimationTrigger ) )
         {
             var triggers = CurrentWave.AnimationTrigger.Split( ',' ).Select( s => s.Trim() );
-            foreach( Animator anim in AnimationTriggerListeners )
+            foreach( Animator anim in GameplayManager.Instance.ActiveEnvironment.AnimationTriggerListeners )
             {
                 foreach( string trigger in triggers )
                 {
@@ -236,6 +228,8 @@ public class SpawnManager : MonoBehaviour
 
     private Vector3 GetRandomSpawnPoint()
     {
+        Vector3 SpawnableAreaBottomLeft = GameplayManager.Instance.ActiveEnvironment.SpawnableAreaBottomLeft;
+        Vector3 SpawnableAreaTopRight = GameplayManager.Instance.ActiveEnvironment.SpawnableAreaTopRight;
         return new Vector3( UnityEngine.Random.Range( SpawnableAreaBottomLeft.x, SpawnableAreaTopRight.x ), UnityEngine.Random.Range( SpawnableAreaBottomLeft.y, SpawnableAreaTopRight.y ), 0 );
     }
 
@@ -247,6 +241,8 @@ public class SpawnManager : MonoBehaviour
             float num_spawns = sg.SpawnMap.Aggregate( 0, ( current, next ) => next.Value + current );
             float desired_area = num_spawns / sg.ClusterDensity;
             float radius = Mathf.Sqrt( desired_area / Mathf.PI );
+            Vector3 SpawnableAreaBottomLeft = GameplayManager.Instance.ActiveEnvironment.SpawnableAreaBottomLeft;
+            Vector3 SpawnableAreaTopRight = GameplayManager.Instance.ActiveEnvironment.SpawnableAreaTopRight;
             if( radius > Mathf.Min( SpawnableAreaTopRight.x - SpawnableAreaBottomLeft.x, SpawnableAreaTopRight.y - SpawnableAreaBottomLeft.y ) / 2.0f )
             {
 #if UNITY_EDITOR
@@ -276,15 +272,15 @@ public class SpawnManager : MonoBehaviour
         }
         else if( sg.layout == SpawnGroup.Layout.Door )
         {
-            int door_index = UnityEngine.Random.Range( 0, DoorSpawnPoints.Count );
+            int door_index = UnityEngine.Random.Range( 0, GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count );
             float stagger = 0.0f;
             foreach( var e in sg.SpawnMap )
             {
                 for( int x = 0; x < e.Value; ++x )
                 {
-                    SpawnMonster( e.Key, DoorSpawnPoints[door_index], stagger );
+                    SpawnMonster( e.Key, GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints[door_index], stagger );
                     stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
-                    door_index = ( door_index + 1 ) % DoorSpawnPoints.Count;
+                    door_index = ( door_index + 1 ) % GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count;
                 }
             }
         }
@@ -295,7 +291,7 @@ public class SpawnManager : MonoBehaviour
             {
                 for( int x = 0; x < e.Value; ++x )
                 {
-                    SpawnMonster( e.Key, BossSpawnPoint, stagger );
+                    SpawnMonster( e.Key, GameplayManager.Instance.ActiveEnvironment.BossSpawnPoint, stagger );
                     stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
                 }
             }
@@ -347,6 +343,9 @@ public class SpawnManager : MonoBehaviour
 
     public bool PointInsidePlayableArea( Vector3 point )
     {
+        Vector3 PlayableAreaBottomLeft = GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft;
+        Vector3 PlayableAreaTopRight = GameplayManager.Instance.ActiveEnvironment.PlayableAreaTopRight;
+
         return ( point.x > PlayableAreaBottomLeft.x && point.x < PlayableAreaTopRight.x
             && point.y < PlayableAreaTopRight.y && point.y > PlayableAreaBottomLeft.y );
     }
@@ -472,53 +471,3 @@ public enum EnemyEnum
     PumpKING = 12,
     SkullyBoss = 13,
 }
-
-// EDITOR
-#if UNITY_EDITOR
-[CustomEditor( typeof( SpawnManager ) )]
-public class SpawnManagerEditor : Editor
-{
-    private void OnSceneGUI()
-    {
-        SpawnManager spawn_manager = (SpawnManager)target;
-
-        {
-            Vector3 top_right = spawn_manager.SpawnableAreaTopRight;
-            Vector3 bottom_left = spawn_manager.SpawnableAreaBottomLeft;
-            Vector3 top_left = new Vector3( bottom_left.x, top_right.y, ( bottom_left.z + top_right.z ) / 2.0f );
-            Vector3 bottom_right = new Vector3( top_right.x, bottom_left.y, ( bottom_left.z + top_right.z ) / 2.0f );
-            Handles.color = Color.cyan;
-            Handles.DrawLine( top_left, top_right );
-            Handles.DrawLine( top_right, bottom_right );
-            Handles.DrawLine( bottom_right, bottom_left );
-            Handles.DrawLine( bottom_left, top_left );
-        }
-
-        {
-            Vector3 top_right = spawn_manager.PlayableAreaTopRight;
-            Vector3 bottom_left = spawn_manager.PlayableAreaBottomLeft;
-            Vector3 top_left = new Vector3( bottom_left.x, top_right.y, ( bottom_left.z + top_right.z ) / 2.0f );
-            Vector3 bottom_right = new Vector3( top_right.x, bottom_left.y, ( bottom_left.z + top_right.z ) / 2.0f );
-            Handles.color = Color.green;
-            Handles.DrawLine( top_left, top_right );
-            Handles.DrawLine( top_right, bottom_right );
-            Handles.DrawLine( bottom_right, bottom_left );
-            Handles.DrawLine( bottom_left, top_left );
-        }
-
-        {
-            foreach( Vector3 door_spawn_point in spawn_manager.DoorSpawnPoints )
-            {
-                Handles.color = Color.red;
-                Handles.DrawWireDisc( door_spawn_point, Vector3.forward, 0.2f );
-            }
-        }
-
-        {
-            Handles.color = Color.magenta;
-            Handles.DrawWireDisc( spawn_manager.BossSpawnPoint, Vector3.forward, 0.2f );
-        }
-
-    }
-}
-#endif

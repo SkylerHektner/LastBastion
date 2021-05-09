@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour
 
         if( Moving )
         {
-            if( transform.position.y - SpawnManager.Instance.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed * GameplayManager.TimeScale )
+            if( transform.position.y - GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed * GameplayManager.TimeScale )
             {
                 Moving = false;
                 DamageBase();

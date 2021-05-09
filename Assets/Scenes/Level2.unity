@@ -7085,6 +7085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 694702852}
+  - component: {fileID: 694702853}
   m_Layer: 0
   m_Name: ENVIRONMENT_BOILER
   m_TagString: Untagged
@@ -7104,9 +7105,29 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 621001627}
+  - {fileID: 941707368}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &694702853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694702851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c658866e616a73d42aab3d9da832ac76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnableAreaTopRight: {x: 3.93, y: 11.71, z: 0}
+  SpawnableAreaBottomLeft: {x: -3.93, y: 2.27, z: 0}
+  PlayableAreaTopRight: {x: 4.5, y: 11.9, z: 0}
+  PlayableAreaBottomLeft: {x: -4.5, y: 0, z: 0}
+  DoorSpawnPoints: []
+  BossSpawnPoint: {x: 0, y: 0, z: 0}
+  AnimationTriggerListeners: []
 --- !u!1 &764143609 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5690782324264133874, guid: 38c90ae28673cef498cbe8422a51f2b0, type: 3}
@@ -7422,7 +7443,7 @@ Transform:
   - {fileID: 349338768}
   - {fileID: 419348951}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &901737720 stripped
 RectTransform:
@@ -7434,7 +7455,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 694702852}
     m_Modifications:
     - target: {fileID: 462886699251991711, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_Size.x
@@ -25954,11 +25975,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25974,15 +25995,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9126621210793938141, guid: 5527c61773349a5459366ee2315a001c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -27192,7 +27213,7 @@ Transform:
   - {fileID: 1227849727}
   - {fileID: 303462746}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1460813932
 MonoBehaviour:
@@ -27206,6 +27227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594486bb8ec0b2745b3f0ba47a0a5c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveEnvironment: {fileID: 694702853}
   TimeScaleChanged:
     m_PersistentCalls:
       m_Calls: []
