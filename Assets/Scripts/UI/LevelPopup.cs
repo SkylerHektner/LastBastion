@@ -77,4 +77,15 @@ public class LevelPopup : MonoBehaviour
         ArrowL.GetComponent<Button>().enabled = true;
         ArrowL.GetComponent<Image>().enabled = true;
     }
+
+    public void DisableButtons()
+    {
+        HomeButton.enabled = false;
+        UpgradesButton.enabled = false;
+    }
+    public void EnableButtons()
+    {
+        HomeButton.enabled = true;
+        UpgradesButton.enabled = true;
+    }
 }
