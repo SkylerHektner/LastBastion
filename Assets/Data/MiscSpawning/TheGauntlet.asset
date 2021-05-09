@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6e2cdfe8d02ce4bac5d67a2314a748, type: 3}
   m_Name: TheGauntlet
   m_EditorClassIdentifier: 
+  LevelIdentifier: CHANGE_ME
+  LevelChallenge: {fileID: 0}
   Waves:
-  - PassiveEnemies: 01000000
+  - CompletionReward: 0
+    PassiveEnemies: 01000000
     PassiveEnemySpawnCadence:
     - 1
     SpawnGroups:
@@ -26,8 +29,10 @@ MonoBehaviour:
     - 18
     - 25
     - 30
-    collapsed: 0
-  - PassiveEnemies: 02000000
+    collapsed: 1
+    AnimationTrigger: Portal, Tower
+  - CompletionReward: 0
+    PassiveEnemies: 02000000
     PassiveEnemySpawnCadence:
     - 1
     SpawnGroups:
@@ -41,7 +46,9 @@ MonoBehaviour:
     - 25
     - 30
     collapsed: 1
-  - PassiveEnemies: 0100000001000000
+    AnimationTrigger: Portal, Tower
+  - CompletionReward: 0
+    PassiveEnemies: 0100000001000000
     PassiveEnemySpawnCadence:
     - 15
     - 5
@@ -54,7 +61,9 @@ MonoBehaviour:
     - 18
     - 35
     collapsed: 1
-  - PassiveEnemies: 02000000
+    AnimationTrigger: 
+  - CompletionReward: 0
+    PassiveEnemies: 02000000
     PassiveEnemySpawnCadence:
     - 3
     SpawnGroups:
@@ -68,7 +77,9 @@ MonoBehaviour:
     - 30
     - 40
     collapsed: 1
-  - PassiveEnemies: 0a000000
+    AnimationTrigger: Portal, Tower
+  - CompletionReward: 0
+    PassiveEnemies: 0a000000
     PassiveEnemySpawnCadence:
     - 3
     SpawnGroups:
@@ -82,7 +93,9 @@ MonoBehaviour:
     - 20
     - 35
     collapsed: 1
-  - PassiveEnemies: 
+    AnimationTrigger: Portal, Tower
+  - CompletionReward: 0
+    PassiveEnemies: 
     PassiveEnemySpawnCadence: []
     SpawnGroups:
     - {fileID: 11400000, guid: 6bab43632c8edb94f908cc0135d0e31e, type: 2}
@@ -99,7 +112,9 @@ MonoBehaviour:
     - 40
     - 43
     collapsed: 1
-  - PassiveEnemies: 03000000
+    AnimationTrigger: 
+  - CompletionReward: 0
+    PassiveEnemies: 03000000
     PassiveEnemySpawnCadence:
     - 1
     SpawnGroups:
@@ -115,7 +130,9 @@ MonoBehaviour:
     - 17
     - 21
     collapsed: 1
-  - PassiveEnemies: 
+    AnimationTrigger: 
+  - CompletionReward: 0
+    PassiveEnemies: 
     PassiveEnemySpawnCadence: []
     SpawnGroups:
     - {fileID: 11400000, guid: 8d895542686d0044a8ad6651d3aa2bd6, type: 2}
@@ -154,3 +171,4 @@ MonoBehaviour:
     - 25
     - 26
     collapsed: 1
+    AnimationTrigger: 
