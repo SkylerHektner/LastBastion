@@ -29,7 +29,7 @@ public class SpawnCadenceProfile : BaseSpawnCadenceProfile
     public override SpawnWave GetWave(int wave_number)
     {
         Debug.Assert( wave_number < Waves.Count, "ERROR: Requesting wave beyond index of current spawn cadence profile" );
-        return Waves.Count < wave_number ? Waves[wave_number] : null;
+        return Waves.Count > wave_number ? Waves[wave_number] : null;
     }
 
     public override int GetWaveCount()
