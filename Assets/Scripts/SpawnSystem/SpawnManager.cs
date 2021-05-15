@@ -35,12 +35,14 @@ public class SpawnManager : MonoBehaviour
 
     public List<Enemy> AllSpawnedEnemies { get { return spawned_enemies.Values.ToList<Enemy>(); } }
     public UnityEvent<Enemy> EnemySpawnedEvent = new UnityEvent<Enemy>();
+    public UnityEvent<int> WaveCompletedEvent = new UnityEvent<int>(); // pass completed wave number (not 0 based)
 
     private float spawn_timer = -1.0f;
     private int cur_spawn_group_index = 0;
     private List<float> passive_spawn_trackers = new List<float>();
     private LinkedList<PendingSpawn> pending_spawns = new LinkedList<PendingSpawn>();
     private Dictionary<long, Enemy> spawned_enemies = new Dictionary<long, Enemy>();
+    private bool defer_next_wave_start = false;
 
     private int total_level_earnings = 0;
 
@@ -56,6 +58,66 @@ public class SpawnManager : MonoBehaviour
             position = _position;
         }
     }
+
+    // PUBLIC METHODS
+    public void SetNewSpawnCadence( BaseSpawnCadenceProfile new_profile )
+    {
+        Debug.Assert( spawn_timer == -1.0f, "ERROR: Please only change the spawn cadence when the spawn manager is NOT spawning" );
+
+        spawnCadenceProfile = new_profile;
+    }
+
+    // if invoked, the next wave will not start until YOU call StartNextWave
+    public void DeferNextWaveStart()
+    {
+        defer_next_wave_start = true;
+    }
+
+    // Start the next wave. If no next wave, finish the cadence
+    public void StartNextWave()
+    {
+        defer_next_wave_start = false;
+        CurrentWaveIndex++;
+
+        if( CurrentWaveIndex >= spawnCadenceProfile.GetWaveCount() )
+        {
+            SpawnCadenceComplete();
+            return;
+        }
+
+        spawn_timer = 0.0f;
+        CurrentWave = spawnCadenceProfile.GetWave( CurrentWaveIndex );
+        WaveCounterUI?.ShowNextWave( CurrentWaveIndex + 1 );
+        cur_spawn_group_index = 0;
+        passive_spawn_trackers.Clear();
+        if( !string.IsNullOrEmpty( CurrentWave.AnimationTrigger ) )
+        {
+            var triggers = CurrentWave.AnimationTrigger.Split( ',' ).Select( s => s.Trim() );
+            foreach( Animator anim in GameplayManager.Instance.ActiveEnvironment.AnimationTriggerListeners )
+            {
+                foreach( string trigger in triggers )
+                {
+                    if( anim.parameters.Any( p => p.name == trigger ) )
+                    {
+                        anim.SetTrigger( trigger );
+                    }
+                }
+            }
+        }
+        foreach( float time in CurrentWave.PassiveEnemySpawnCadence )
+        {
+            if( time == 0.0f )
+            {
+#if UNITY_EDITOR
+                Debug.LogError( "ERROR: Passive Spawn Cadence set to 0 in Spawn Cadence Profile " + spawnCadenceProfile.GetName() + " Wave " + ( CurrentWaveIndex + 1 ).ToString() );
+#endif
+                continue;
+            }
+            passive_spawn_trackers.Add( 1.0f / time );
+        }
+    }
+
+    // PRIVATE METHODS
 
     private void Start()
     {
@@ -135,41 +197,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public void StartNextWave()
-    {
-        spawn_timer = 0.0f;
-        CurrentWaveIndex++;
-        CurrentWave = spawnCadenceProfile.GetWave( CurrentWaveIndex );
-        WaveCounterUI?.ShowNextWave( CurrentWaveIndex + 1 );
-        cur_spawn_group_index = 0;
-        passive_spawn_trackers.Clear();
-        if( !string.IsNullOrEmpty( CurrentWave.AnimationTrigger ) )
-        {
-            var triggers = CurrentWave.AnimationTrigger.Split( ',' ).Select( s => s.Trim() );
-            foreach( Animator anim in GameplayManager.Instance.ActiveEnvironment.AnimationTriggerListeners )
-            {
-                foreach( string trigger in triggers )
-                {
-                    if( anim.parameters.Any( p => p.name == trigger ) )
-                    {
-                        anim.SetTrigger( trigger );
-                    }
-                }
-            }
-        }
-        foreach( float time in CurrentWave.PassiveEnemySpawnCadence )
-        {
-            if( time == 0.0f )
-            {
-#if UNITY_EDITOR
-                Debug.LogError( "ERROR: Passive Spawn Cadence set to 0 in Spawn Cadence Profile " + spawnCadenceProfile.GetName() + " Wave " + ( CurrentWaveIndex + 1 ).ToString() );
-#endif
-                continue;
-            }
-            passive_spawn_trackers.Add( 1.0f / time );
-        }
-    }
-
     private void WaveComplete()
     {
         // if this is the first time completing this wave, mark it as complete and grant the player a reward
@@ -190,10 +217,11 @@ public class SpawnManager : MonoBehaviour
             PD.Instance.LevelCompletionMap.SetLevelCompletion( spawnCadenceProfile.GetLevelIdentifier(), true );
         }
         spawn_timer = -1.0f; // stop spawning
-        if( CurrentWaveIndex < spawnCadenceProfile.GetWaveCount() - 1 )
+
+        WaveCompletedEvent.Invoke( CurrentWaveIndex + 1 );
+
+        if( !defer_next_wave_start )
             StartNextWave();
-        else
-            SpawnCadenceComplete();
     }
 
     private void SpawnCadenceComplete()
@@ -272,6 +300,9 @@ public class SpawnManager : MonoBehaviour
         }
         else if( sg.layout == SpawnGroup.Layout.Door )
         {
+            Debug.Assert( GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count > 0, 
+                "ERROR: Trying to spawn monster from door in an environment with no configured door spawn points" );
+
             int door_index = UnityEngine.Random.Range( 0, GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count );
             float stagger = 0.0f;
             foreach( var e in sg.SpawnMap )

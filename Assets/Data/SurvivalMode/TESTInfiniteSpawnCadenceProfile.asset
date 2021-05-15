@@ -10,24 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3aad8d6cf4c9ee45ba6d7a7b3efbb59, type: 3}
-  m_Name: InfiniteSpawnCadenceProfile
+  m_Name: TESTInfiniteSpawnCadenceProfile
   m_EditorClassIdentifier: 
+  CadenceEnvironment: {fileID: 2143936606943668072, guid: 425f39c3c082f2648886bdb29ed6f84b, type: 3}
   NumStartSpawns: 10
   NumAdditionalSpawnsPerWave: 5
   BaseWaveDuration: 5
   AdditionalWaveDurationPerSpawn: 0.1
-  WavesPerUnlockFlag: 3
-  WavesPerChallengeModifier: 0
   SpawnGroupData:
   - SG: {fileID: 11400000, guid: 8d895542686d0044a8ad6651d3aa2bd6, type: 2}
     StartWave: 1
     SpawnWeighting: 1000
-  - SG: {fileID: 11400000, guid: 9458200e01ea54342bb7ae67ffd5b15c, type: 2}
+  - SG: {fileID: 11400000, guid: c79bb963a8c01494a899511db5fe6d8a, type: 2}
     StartWave: 2
-    SpawnWeighting: 200
-  - SG: {fileID: 11400000, guid: 6bab43632c8edb94f908cc0135d0e31e, type: 2}
+    SpawnWeighting: 500
+  - SG: {fileID: 11400000, guid: 14da60d7c4447e04ca4b70d05dbaf495, type: 2}
     StartWave: 3
     SpawnWeighting: 100
-  - SG: {fileID: 11400000, guid: 375560f1a58830f46b9fc60b67d75af1, type: 2}
-    StartWave: 4
-    SpawnWeighting: 50

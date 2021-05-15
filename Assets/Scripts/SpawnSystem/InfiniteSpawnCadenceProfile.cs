@@ -19,12 +19,11 @@ public class InfiniteSpawnCadenceProfile : BaseSpawnCadenceProfile
         [System.NonSerialized] public bool deleting = false;
     }
 
+    public Environment CadenceEnvironment;
     public int NumStartSpawns;
     public int NumAdditionalSpawnsPerWave;
     public float BaseWaveDuration;
     public float AdditionalWaveDurationPerSpawn;
-    public int WavesPerUnlockFlag;
-    public int WavesPerChallengeModifier;
     public List<InfiniteSpawnGroup> SpawnGroupData = new List<InfiniteSpawnGroup>();
 
     private Dictionary<int, SpawnWave> SpawnWaveCache = new Dictionary<int, SpawnWave>();
@@ -96,12 +95,12 @@ public class InfiniteSpawnCadenceProfileEditor : Editor
     {
         InfiniteSpawnCadenceProfile InfiniteSpawnCadence = (InfiniteSpawnCadenceProfile)target;
 
+        InfiniteSpawnCadence.CadenceEnvironment = (Environment)CustomEditorUtilities.AutoDirtyUnityObject( 
+            InfiniteSpawnCadence.CadenceEnvironment, typeof( Environment ), "Environment", InfiniteSpawnCadence );
         CustomEditorUtilities.AutoDirtyLabeledInt( ref InfiniteSpawnCadence.NumStartSpawns, "Base Number of Spawns", target );
         CustomEditorUtilities.AutoDirtyLabeledInt( ref InfiniteSpawnCadence.NumAdditionalSpawnsPerWave, "Additional Spawns Per Wave", target );
         CustomEditorUtilities.AutoDirtyLabeledFloat( ref InfiniteSpawnCadence.BaseWaveDuration, "Base Wave Duration", target );
         CustomEditorUtilities.AutoDirtyLabeledFloat( ref InfiniteSpawnCadence.AdditionalWaveDurationPerSpawn, "Additional Wave Duration Per Spawn", target );
-        CustomEditorUtilities.AutoDirtyLabeledInt( ref InfiniteSpawnCadence.WavesPerUnlockFlag, "Waves Per Unlock Flag", target );
-        CustomEditorUtilities.AutoDirtyLabeledInt( ref InfiniteSpawnCadence.NumAdditionalSpawnsPerWave, "Waves Per Challenge Modifier", target );
 
         EditorGUILayout.LabelField( "------ SPAWN GROUP DATA ------" );
         if( GUILayout.Button( "Add New" ) )
