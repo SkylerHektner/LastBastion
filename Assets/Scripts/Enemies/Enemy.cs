@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
     {
         get
         {
-            return powerupDropValue * ( Zapped && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningLightningRod ) ? 2 : 1 );
+            return powerupDropValue * ( Zapped && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningLightningRod, GameplayManager.Instance.Survival ) ? 2 : 1 );
         }
     }
 

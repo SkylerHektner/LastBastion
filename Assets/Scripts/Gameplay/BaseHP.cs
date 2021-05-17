@@ -68,9 +68,9 @@ public class BaseHP : MonoBehaviour
     private void UpdateMaxHP()
     {
         CurrentMaxHP = BaseMaxHP;
-        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP1 ) ? MaxHPUpgrade1 : 0;
-        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP2 ) ? MaxHPUpgrade2 : 0;
-        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP3 ) ? MaxHPUpgrade3 : 0;
+        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP1, GameplayManager.Instance.Survival ) ? MaxHPUpgrade1 : 0;
+        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP2, GameplayManager.Instance.Survival ) ? MaxHPUpgrade2 : 0;
+        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP3, GameplayManager.Instance.Survival ) ? MaxHPUpgrade3 : 0;
     }
 
     [ContextMenu( "KillPlayer" )]
@@ -93,7 +93,7 @@ public class BaseHP : MonoBehaviour
         DamageTakenEvent.Invoke( Damage );
 
         // if I have overshield, damage that instead
-        if( CurrentOvershield > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseOvershield ) )
+        if( CurrentOvershield > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseOvershield, GameplayManager.Instance.Survival ) )
         {
             CurrentOvershield -= Damage;
             OvershieldAnim.SetBool( "Recovering", true );

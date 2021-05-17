@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,6 +14,9 @@ public class GameplayManager : MonoBehaviour
     // CHALLENGES
     public ChallengesTracker Challenges { get; private set; } = new ChallengesTracker();
 
+    // SURIVAL
+    public bool Survival;
+
     // ENVIRONEMNT
     public Environment ActiveEnvironment;
 
@@ -23,7 +27,8 @@ public class GameplayManager : MonoBehaviour
         Won,
         Lost
     }
-    public static PlayerState PlayerWinState {
+    public static PlayerState PlayerWinState
+    {
         get
         {
             return playerWinState;
@@ -85,6 +90,15 @@ public class GameplayManager : MonoBehaviour
         Debug.Assert( Instance == null );
         Instance = this;
         TimeScale = 1.0f;
+
+        // clear out all survival unlock flags every time we start
+        if( Survival )
+        {
+            foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
+            {
+                PD.Instance.UpgradeUnlockMap.SetUnlock( flag, false, true );
+            }
+        }
     }
     private void LateStart()
     {

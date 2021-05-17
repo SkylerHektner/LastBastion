@@ -74,7 +74,7 @@ public class ChainLightningAbility : Ability
             ++t;
         }
 
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload, GameplayManager.Instance.Survival ) )
         {
             static_overload_layermask = LayerMask.GetMask( "Enemy" );
             zapped_enemy_tracking_time = pending_zaps.Last().time + GetZapDuration() + 1.0f; // once second extra, just to be safe
@@ -131,7 +131,7 @@ public class ChainLightningAbility : Ability
             zap_effect.transform.parent = en.transform;
             en.DeathEvent.AddListener( zap_effect.DestroyOnDeathHook );
 
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload, GameplayManager.Instance.Survival ) )
             {
                 en.DeathEvent.AddListener( OnEnemyDeath );
             }
@@ -140,7 +140,7 @@ public class ChainLightningAbility : Ability
 
     private void OnEnemyDeath( Enemy en )
     {
-        Debug.Assert( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload ) ); // shouldn't be listening unless this was true
+        Debug.Assert( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload, GameplayManager.Instance.Survival ) ); // shouldn't be listening unless this was true
         en.DeathEvent.RemoveListener( OnEnemyDeath ); // fun fact - if you remove this you get a sick stack overflow!
 
         if( en.Zapped && en.DeathSource != DamageSource.StaticOverloadExplosion )
@@ -161,7 +161,7 @@ public class ChainLightningAbility : Ability
 
     private float GetZapDuration()
     {
-        return PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStunDuration )
+        return PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStunDuration, GameplayManager.Instance.Survival )
                 ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration;
     }
 }

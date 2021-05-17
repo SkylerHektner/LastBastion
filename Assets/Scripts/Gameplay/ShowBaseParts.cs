@@ -26,106 +26,106 @@ public class ShowBaseParts : MonoBehaviour
     void FixedUpdate()
     {
         /// TYPHOON
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.Typhoon)) // Typhoon purchased? Show parts
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Typhoon, GameplayManager.Instance.Survival ) ) // Typhoon purchased? Show parts
         {
-            FuelBars.SetActive(true);
-            if (TyphoonAbility.AnimatorDuration > 0)
+            FuelBars.SetActive( true );
+            if( TyphoonAbility.AnimatorDuration > 0 )
             {
-                FuelBarR.SetSize(TyphoonAbility.AnimatorDuration / 5); // replace 5 with fuel maximum amount
-                FuelBarL.SetSize(TyphoonAbility.AnimatorDuration / 5);
+                FuelBarR.SetSize( TyphoonAbility.AnimatorDuration / 5 ); // replace 5 with fuel maximum amount
+                FuelBarL.SetSize( TyphoonAbility.AnimatorDuration / 5 );
             }
         }
         else
         {
-            FuelBars.SetActive(false);
+            FuelBars.SetActive( false );
         }
 
         /// CHAIN LIGHTNING
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.ChainLightning))
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightning, GameplayManager.Instance.Survival ) )
         {
-            LightningNubs.SetActive(true);
+            LightningNubs.SetActive( true );
         }
         else
         {
-            LightningNubs.SetActive(false);
+            LightningNubs.SetActive( false );
         }
 
         /// TEMPORAL ANOMALY
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.Anomaly))
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Anomaly, GameplayManager.Instance.Survival ) )
         {
-            AnomalyBars.SetActive(true);
+            AnomalyBars.SetActive( true );
         }
         else
         {
-            AnomalyBars.SetActive(false);
+            AnomalyBars.SetActive( false );
         }
 
         /// Sawmageddon HP Bar
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.Sawmageddon))
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Sawmageddon, GameplayManager.Instance.Survival ) )
         {
-            SawmageddonBoxes.SetActive(true);
-            if (SawmageddonAbility.AnimatorDuration > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.SawmageddonComboKiller)) // only show while active
+            SawmageddonBoxes.SetActive( true );
+            if( SawmageddonAbility.AnimatorDuration > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) ) // only show while active
             {
-                SawMaggeddonConnectors.SetActive(true);
-                RecoverHPBar.SetActive(true);
+                SawMaggeddonConnectors.SetActive( true );
+                RecoverHPBar.SetActive( true );
             }
             else
             {
-                SawMaggeddonConnectors.SetActive(false);
-                RecoverHPBar.SetActive(false);
+                SawMaggeddonConnectors.SetActive( false );
+                RecoverHPBar.SetActive( false );
             }
         }
         else
         {
-            SawmageddonBoxes.SetActive(false);
+            SawmageddonBoxes.SetActive( false );
         }
 
         // HP overshield
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseOvershield))
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseOvershield, GameplayManager.Instance.Survival ) )
         {
-            Overshield.SetActive(true);
+            Overshield.SetActive( true );
         }
         else
         {
-            Overshield.SetActive(false);
+            Overshield.SetActive( false );
         }
 
         // Turrets
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.Turrets))
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Turrets, GameplayManager.Instance.Survival ) )
         {
-            Turrets.SetActive(true);
+            Turrets.SetActive( true );
         }
         else
         {
-            Turrets.SetActive(false);
+            Turrets.SetActive( false );
         }
 
         // HP 1
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseHP1))
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP1, GameplayManager.Instance.Survival ) )
         {
-            HP1Visuals.SetActive(true);
+            HP1Visuals.SetActive( true );
         }
         else
         {
-            HP1Visuals.SetActive(false);
+            HP1Visuals.SetActive( false );
         }
         // HP 2
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseHP2))
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP2, GameplayManager.Instance.Survival ) )
         {
-            HP2Visuals.SetActive(true);
+            HP2Visuals.SetActive( true );
         }
         else
         {
-            HP2Visuals.SetActive(false);
+            HP2Visuals.SetActive( false );
         }
         // HP 3
-        if (PD.Instance.UpgradeUnlockMap.GetUnlock(PD.UpgradeFlags.BaseHP3))
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP3, GameplayManager.Instance.Survival ) )
         {
-            HP3Visuals.SetActive(true);
+            HP3Visuals.SetActive( true );
         }
         else
         {
-            HP3Visuals.SetActive(false);
+            HP3Visuals.SetActive( false );
         }
     }
 

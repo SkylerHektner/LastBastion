@@ -121,7 +121,7 @@ public class Saw : MonoBehaviour
             // light saw on fire if flame saw upgrade and typhoon active
             if( hit_info.wall == ProjectileHitInfo.Wall.Bottom 
                 && TyphoonAbility.ActiveTyphoon != null 
-                && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonFlameSaw ) )
+                && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonFlameSaw, GameplayManager.Instance.Survival ) )
             {
                 TyphoonAbility.ActiveTyphoon.SetSawOnFire( this );
             }

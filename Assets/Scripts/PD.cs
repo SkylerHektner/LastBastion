@@ -133,7 +133,8 @@ public class PD
     {
         foreach( UpgradeFlags flag in Enum.GetValues( typeof( UpgradeFlags ) ) )
         {
-            _instance.UpgradeUnlockMap.SetUnlock( flag, true );
+            _instance.UpgradeUnlockMap.SetUnlock( flag, true, false );
+            _instance.UpgradeUnlockMap.SetUnlock( flag, true, true );
         }
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level1", true );
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level2", true );
@@ -205,20 +206,30 @@ public class PlayerDataField<T>
 [System.Serializable]
 public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
 {
-    private Dictionary<PD.UpgradeFlags, bool> unlock_map = new Dictionary<PD.UpgradeFlags, bool>();
+    private Dictionary<PD.UpgradeFlags, bool> campaign_unlock_map = new Dictionary<PD.UpgradeFlags, bool>();
+    private Dictionary<PD.UpgradeFlags, bool> survival_unlock_map = new Dictionary<PD.UpgradeFlags, bool>();
 
-    [SerializeField] List<string> serialized_unlock_flags;
+    [SerializeField] List<string> serialized_campaign_unlock_flags;
+    [SerializeField] List<string> serialized_survival_unlock_flags;
 
     private static Dictionary<string, PD.UpgradeFlags> valid_enum_strings;
 
-    public bool GetUnlock( PD.UpgradeFlags flag )
+    public bool GetUnlock( PD.UpgradeFlags flag, bool survival )
     {
-        return unlock_map[flag];
+        return survival ? survival_unlock_map[flag] : campaign_unlock_map[flag];
     }
 
-    public void SetUnlock( PD.UpgradeFlags flag, bool value )
+    public void SetUnlock( PD.UpgradeFlags flag, bool value, bool survival )
     {
-        unlock_map[flag] = value;
+        if( survival )
+        {
+            survival_unlock_map[flag] = value;
+        }
+        else
+        {
+            campaign_unlock_map[flag] = value;
+        }
+
         PD.Instance?.SetDirty();
         PD.Instance?.UpgradeFlagChangedEvent.Invoke( flag, value );
     }
@@ -227,17 +238,25 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
     {
         foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
         {
-            unlock_map.Add( flag, false );
+            campaign_unlock_map.Add( flag, false );
+            survival_unlock_map.Add( flag, false );
         }
     }
 
     public void OnBeforeSerialize()
     {
-        serialized_unlock_flags = new List<string>();
-        foreach( var kvp in unlock_map )
+        serialized_campaign_unlock_flags = new List<string>();
+        foreach( var kvp in campaign_unlock_map )
         {
             if( kvp.Value )
-                serialized_unlock_flags.Add( kvp.Key.ToString() );
+                serialized_campaign_unlock_flags.Add( kvp.Key.ToString() );
+        }
+
+        serialized_survival_unlock_flags = new List<string>();
+        foreach( var kvp in survival_unlock_map )
+        {
+            if( kvp.Value )
+                serialized_survival_unlock_flags.Add( kvp.Key.ToString() );
         }
     }
 
@@ -256,24 +275,45 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         // add an entry for every possible unlock flag
         foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
         {
-            if( !unlock_map.ContainsKey( flag ) )
-                unlock_map.Add( flag, false );
+            if( !campaign_unlock_map.ContainsKey( flag ) )
+                campaign_unlock_map.Add( flag, false );
+
+            if( !survival_unlock_map.ContainsKey( flag ) )
+                survival_unlock_map.Add( flag, false );
         }
 
         // set valid entries
-        if( serialized_unlock_flags != null )
+        if( serialized_campaign_unlock_flags != null )
         {
-            foreach( string key in serialized_unlock_flags )
+            foreach( string key in serialized_campaign_unlock_flags )
             {
                 PD.UpgradeFlags out_flag;
                 if( valid_enum_strings.TryGetValue( key, out out_flag ) )
                 {
-                    unlock_map[out_flag] = true;
+                    campaign_unlock_map[out_flag] = true;
                 }
 #if UNITY_EDITOR
                 else
                 {
-                    UnityEngine.Debug.LogWarning( "Unable to find player data unlock flag. Ignoring: " + key );
+                    UnityEngine.Debug.LogWarning( "Unable to find player data campaign unlock flag. Ignoring: " + key );
+                }
+#endif
+            }
+        }
+
+        if( serialized_survival_unlock_flags != null )
+        {
+            foreach( string key in serialized_survival_unlock_flags )
+            {
+                PD.UpgradeFlags out_flag;
+                if( valid_enum_strings.TryGetValue( key, out out_flag ) )
+                {
+                    survival_unlock_map[out_flag] = true;
+                }
+#if UNITY_EDITOR
+                else
+                {
+                    UnityEngine.Debug.LogWarning( "Unable to find player data survival unlock flag. Ignoring: " + key );
                 }
 #endif
             }

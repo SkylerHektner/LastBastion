@@ -21,8 +21,8 @@ public class TyphoonAbility : Ability
         SetDuration( AbilityData.Duration );
         roaring_flames_duration_carryover = AbilityData.Duration * 0.5f;
         ActiveTyphoon = this;
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames )
-            || PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonExtendedBBQ ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames, GameplayManager.Instance.Survival )
+            || PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonExtendedBBQ, GameplayManager.Instance.Survival ) )
         {
             Saw.Instance.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
             listening = true;
@@ -40,7 +40,7 @@ public class TyphoonAbility : Ability
 
     public void SetSawOnFire( Saw saw )
     {
-        if( !PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonFlameSaw )
+        if( !PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonFlameSaw, GameplayManager.Instance.Survival )
             || time_remaining <= 0.0f )
             return;
         saw.SetOnFire( AbilityData.FlameSawDuration, AbilityData.FlameSawExtraDamage, AbilityData.FlameSawMovementSpeedMultiplier );
@@ -78,12 +78,12 @@ public class TyphoonAbility : Ability
     {
         if( Saw.Instance.OnFire )
         {
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames ) && time_remaining >= 0.0f )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames, GameplayManager.Instance.Survival ) && time_remaining >= 0.0f )
             {
                 SetDuration( time_remaining + roaring_flames_duration_carryover );
                 roaring_flames_duration_carryover *= 0.5f; // infinitely decreasing geometric series
             }
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonExtendedBBQ ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonExtendedBBQ, GameplayManager.Instance.Survival ) )
             {
                 if( Random.Range( 0.0f, 1.0f ) < AbilityData.ExtendedBBQCorpseChance )
                 {
