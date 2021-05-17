@@ -43,14 +43,6 @@ public class Spectator : MonoBehaviour
             PD.Instance.StoredLimboLevelIndex.Set(Spectator.LevelIndex);
             PD.Instance.StoredLimboSurvivalIndex.Set(Spectator.SurvivalIndex);
             PD.Instance.StoredLimboCurrentWave.Set( SpawnManager.Instance.CurrentWaveIndex );
-            PD.Instance.StoredLimboAbilityCharges.Clear();
-
-            // I really wish this could be a compile time assert ):
-            Debug.Assert( (int)AbilityEnum.NUM_ABILITIES == 4 );
-            PD.Instance.StoredLimboAbilityCharges[AbilityEnum.ChainLightning] = AbilityManager.Instance.GetAbilityCharges( AbilityEnum.ChainLightning );
-            PD.Instance.StoredLimboAbilityCharges[AbilityEnum.Sawmageddon] = AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Sawmageddon );
-            PD.Instance.StoredLimboAbilityCharges[AbilityEnum.Anomaly] = AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Anomaly );
-            PD.Instance.StoredLimboAbilityCharges[AbilityEnum.Typhoon] = AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Typhoon );
         }
 #if UNITY_EDITOR
         Debug.Log( "Limbo Activated - Storing index: " + PD.Instance.StoredLimboLevelIndex.Get() );

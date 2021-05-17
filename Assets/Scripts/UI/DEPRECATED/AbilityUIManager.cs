@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// DEPRECATED
+/// </summary>
 public class AbilityUIManager : MonoBehaviour
 {
     [SerializeField] float TimeScaleLerpDuration = 0.3f;
@@ -19,11 +22,11 @@ public class AbilityUIManager : MonoBehaviour
     private void Start()
     {
         HideIcons();
-        AbilityManager.Instance.AbilityChargeChangedEvent.AddListener( OnAbilityChargeChanged );
-        Debug.Assert( ChainLightningUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
-        Debug.Assert( SawmageddonUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
-        Debug.Assert( AnomalyUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
-        Debug.Assert( TyphoonUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+        //AbilityManager.Instance.AbilityChargeChangedEvent.AddListener( OnAbilityChargeChanged );
+        //Debug.Assert( ChainLightningUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+        //Debug.Assert( SawmageddonUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+        //Debug.Assert( AnomalyUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
+        //Debug.Assert( TyphoonUsageSlots.Count == AbilityManager.Instance.MaxAbilityCharges );
 
         UpdateAllSlotIndicators();
     }
@@ -53,21 +56,21 @@ public class AbilityUIManager : MonoBehaviour
 
     private void UpdateAllSlotIndicators()
     {
-        AnomalyUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
-        for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges(AbilityEnum.Anomaly); ++x )
-            AnomalyUsageSlots[x].SetActive( true );
+        //AnomalyUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
+        //for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges(AbilityEnum.Anomaly); ++x )
+        //    AnomalyUsageSlots[x].SetActive( true );
 
-        TyphoonUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
-        for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Typhoon ); ++x )
-            TyphoonUsageSlots[x].SetActive( true );
+        //TyphoonUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
+        //for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Typhoon ); ++x )
+        //    TyphoonUsageSlots[x].SetActive( true );
 
-        ChainLightningUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
-        for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges( AbilityEnum.ChainLightning ); ++x )
-            ChainLightningUsageSlots[x].SetActive( true );
+        //ChainLightningUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
+        //for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges( AbilityEnum.ChainLightning ); ++x )
+        //    ChainLightningUsageSlots[x].SetActive( true );
 
-        SawmageddonUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
-        for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Sawmageddon ); ++x )
-            SawmageddonUsageSlots[x].SetActive( true );
+        //SawmageddonUsageSlots.ForEach( ( GameObject g ) => g.SetActive( false ) );
+        //for( int x = 0; x < AbilityManager.Instance.GetAbilityCharges( AbilityEnum.Sawmageddon ); ++x )
+        //    SawmageddonUsageSlots[x].SetActive( true );
     }
 
     private void Update()

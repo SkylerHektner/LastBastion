@@ -21,9 +21,9 @@ public class AbilityDrop : MonoBehaviour
         JustSpawned = false;
     }
 
-    public void AddAbilityCharge()
+    public void UseAbility()
     {
-        AbilityManager.Instance.AddAbilityCharge( ability );
+        AbilityManager.Instance.UseAbility( ability );
         GetComponent<Animator>().SetTrigger( "Crushed" );
         GetComponent<CircleCollider2D>().enabled = false;
         Invoke( "AnimEnd", 1.0f );

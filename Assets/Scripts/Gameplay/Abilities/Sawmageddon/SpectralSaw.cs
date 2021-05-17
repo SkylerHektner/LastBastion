@@ -50,7 +50,7 @@ public class SpectralSaw : Projectile
         {
             AbilityDrop drop = col.gameObject.GetComponent<AbilityDrop>();
             if( !drop.JustSpawned )
-                drop.AddAbilityCharge();
+                drop.UseAbility();
         }
     }
 

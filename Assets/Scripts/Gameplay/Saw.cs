@@ -164,7 +164,7 @@ public class Saw : MonoBehaviour
         {
             AbilityDrop drop = col.gameObject.GetComponent<AbilityDrop>();
             if( !drop.JustSpawned )
-                drop.AddAbilityCharge();
+                drop.UseAbility();
         }
     }
 

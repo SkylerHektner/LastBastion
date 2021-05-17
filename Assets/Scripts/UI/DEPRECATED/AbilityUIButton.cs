@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// DEPRECATED
+/// </summary>
 public class AbilityUIButton : MonoBehaviour
 {
     public AbilityEnum MyAbility;
@@ -19,13 +22,11 @@ public class AbilityUIButton : MonoBehaviour
     private void Start()
     {
         PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
-        AbilityManager.Instance.AbilityChargeChangedEvent.AddListener( OnAbilityChargeChanged );
     }
 
     private void OnDestroy()
     {
         PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
-        AbilityManager.Instance.AbilityChargeChangedEvent.RemoveListener( OnAbilityChargeChanged );
     }
 
     private void OnEnable()
@@ -45,8 +46,9 @@ public class AbilityUIButton : MonoBehaviour
     {
         if( ability == MyAbility )
         {
-            bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
-            IconAnimator.SetBool( "Empty", has_no_charges );
+            // DEPRECTATED BEHAVIOR
+            // bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
+            // IconAnimator.SetBool( "Empty", has_no_charges );
 
             if( PD.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag ) && hovering )
             {
@@ -78,16 +80,16 @@ public class AbilityUIButton : MonoBehaviour
         {
             AbilityUIManagerInstance.SetCurrentHovering( this );
 
-            bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
+            //bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
 
-            IconAnimator.SetBool( "Empty", has_no_charges );
+            //IconAnimator.SetBool( "Empty", has_no_charges );
             IconAnimator.SetTrigger( "Hover" );
             IconAnimator.ResetTrigger( "UnHover" );
-            if( !has_no_charges )
-            {
-                FXAnimator.SetTrigger( "Glow" );
-                FXAnimator.ResetTrigger( "Hide" );
-            }
+            //if( !has_no_charges )
+            //{
+            //    FXAnimator.SetTrigger( "Glow" );
+            //    FXAnimator.ResetTrigger( "Hide" );
+            //}
             InfoScroll.SetActive( true );
             MyDisplayInfo.DisplayMyInfo();
             UsageSlotsAnimator.SetTrigger( "Grow" );
@@ -100,7 +102,7 @@ public class AbilityUIButton : MonoBehaviour
         hovering = false;
         Invoke( "ClearCurrentHovering", 0.1f );
 
-        IconAnimator.SetBool( "Empty", AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0 );
+        //IconAnimator.SetBool( "Empty", AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0 );
         IconAnimator.SetTrigger( "UnHover" );
         IconAnimator.ResetTrigger( "Hover" );
         FXAnimator.SetTrigger( "Hide" );
