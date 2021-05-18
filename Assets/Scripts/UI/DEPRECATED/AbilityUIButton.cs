@@ -8,7 +8,7 @@ using UnityEngine;
 public class AbilityUIButton : MonoBehaviour
 {
     public AbilityEnum MyAbility;
-    public PD.UpgradeFlags UnlockFlag;
+    public PD.UnlockFlags UnlockFlag;
     public AbilityUIManager AbilityUIManagerInstance;
     public Animator IconAnimator;
     public Animator FXAnimator;
@@ -34,7 +34,7 @@ public class AbilityUIButton : MonoBehaviour
         UpdateLockedState();
     }
 
-    private void OnUpgradeUnlockFlagChanged( PD.UpgradeFlags flag, bool value )
+    private void OnUpgradeUnlockFlagChanged( PD.UnlockFlags flag, bool value )
     {
         if( flag == UnlockFlag )
         {

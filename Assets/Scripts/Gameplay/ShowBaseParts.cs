@@ -26,7 +26,7 @@ public class ShowBaseParts : MonoBehaviour
     void FixedUpdate()
     {
         /// TYPHOON
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Typhoon, GameplayManager.Instance.Survival ) ) // Typhoon purchased? Show parts
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.Typhoon, GameplayManager.Instance.Survival ) ) // Typhoon purchased? Show parts
         {
             FuelBars.SetActive( true );
             if( TyphoonAbility.AnimatorDuration > 0 )
@@ -41,7 +41,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         /// CHAIN LIGHTNING
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightning, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.ChainLightning, GameplayManager.Instance.Survival ) )
         {
             LightningNubs.SetActive( true );
         }
@@ -51,7 +51,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         /// TEMPORAL ANOMALY
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Anomaly, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.Anomaly, GameplayManager.Instance.Survival ) )
         {
             AnomalyBars.SetActive( true );
         }
@@ -61,10 +61,10 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         /// Sawmageddon HP Bar
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Sawmageddon, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.Sawmageddon, GameplayManager.Instance.Survival ) )
         {
             SawmageddonBoxes.SetActive( true );
-            if( SawmageddonAbility.AnimatorDuration > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) ) // only show while active
+            if( SawmageddonAbility.AnimatorDuration > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) ) // only show while active
             {
                 SawMaggeddonConnectors.SetActive( true );
                 RecoverHPBar.SetActive( true );
@@ -81,7 +81,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         // HP overshield
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseOvershield, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.BaseOvershield, GameplayManager.Instance.Survival ) )
         {
             Overshield.SetActive( true );
         }
@@ -91,7 +91,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         // Turrets
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.Turrets, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.Turrets, GameplayManager.Instance.Survival ) )
         {
             Turrets.SetActive( true );
         }
@@ -101,7 +101,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         // HP 1
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP1, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.BaseHP1, GameplayManager.Instance.Survival ) )
         {
             HP1Visuals.SetActive( true );
         }
@@ -110,7 +110,7 @@ public class ShowBaseParts : MonoBehaviour
             HP1Visuals.SetActive( false );
         }
         // HP 2
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP2, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.BaseHP2, GameplayManager.Instance.Survival ) )
         {
             HP2Visuals.SetActive( true );
         }
@@ -119,7 +119,7 @@ public class ShowBaseParts : MonoBehaviour
             HP2Visuals.SetActive( false );
         }
         // HP 3
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.BaseHP3, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.BaseHP3, GameplayManager.Instance.Survival ) )
         {
             HP3Visuals.SetActive( true );
         }

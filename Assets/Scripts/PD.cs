@@ -25,7 +25,7 @@ public class PD
     public PlayerDataField<int> StoredLimboSurvivalIndex = new PlayerDataField<int>();
 
     // UPGRADES
-    public enum UpgradeFlags
+    public enum UnlockFlags
     {
         ChainLightning = 0,
         ChainLightningStunDuration = 1,
@@ -53,36 +53,36 @@ public class PD
         TurretsTimedPaylod = 23,
     }
 
-    public readonly Dictionary<UpgradeFlags, List<UpgradeFlags>> UpgradeFlagDependencyMap = new Dictionary<UpgradeFlags, List<UpgradeFlags>>
+    public readonly Dictionary<UnlockFlags, List<UnlockFlags>> UpgradeFlagDependencyMap = new Dictionary<UnlockFlags, List<UnlockFlags>>
     {
-        { UpgradeFlags.ChainLightning, new List<UpgradeFlags> { } },
-        { UpgradeFlags.ChainLightningStunDuration, new List<UpgradeFlags> { UpgradeFlags.ChainLightning } },
-        { UpgradeFlags.ChainLightningLightningRod, new List<UpgradeFlags> { UpgradeFlags.ChainLightning, UpgradeFlags.ChainLightningStunDuration } },
-        { UpgradeFlags.ChainLightningStaticOverload, new List<UpgradeFlags> { UpgradeFlags.ChainLightning, UpgradeFlags.ChainLightningStunDuration, UpgradeFlags.ChainLightningLightningRod } },
-        { UpgradeFlags.Typhoon, new List<UpgradeFlags> { } },
-        { UpgradeFlags.TyphoonFlameSaw, new List<UpgradeFlags> { UpgradeFlags.Typhoon } },
-        { UpgradeFlags.TyphoonRoaringFlames, new List<UpgradeFlags> { UpgradeFlags.Typhoon, UpgradeFlags.TyphoonFlameSaw } },
-        { UpgradeFlags.TyphoonExtendedBBQ, new List<UpgradeFlags> { UpgradeFlags.Typhoon, UpgradeFlags.TyphoonFlameSaw, UpgradeFlags.TyphoonRoaringFlames } },
-        { UpgradeFlags.Anomaly, new List<UpgradeFlags> { } },
-        { UpgradeFlags.AnomalyRicochetSaws, new List<UpgradeFlags> { UpgradeFlags.Anomaly } },
-        { UpgradeFlags.AnomalyStasisCoating, new List<UpgradeFlags> { UpgradeFlags.Anomaly, UpgradeFlags.AnomalyRicochetSaws } },
-        { UpgradeFlags.AnomalySingularity, new List<UpgradeFlags> { UpgradeFlags.Anomaly, UpgradeFlags.AnomalyRicochetSaws, UpgradeFlags.AnomalyStasisCoating } },
-        { UpgradeFlags.Sawmageddon, new List<UpgradeFlags> { } },
-        { UpgradeFlags.SawmageddonDuration, new List<UpgradeFlags> { UpgradeFlags.Sawmageddon } },
-        { UpgradeFlags.SawmageddonProjectiles, new List<UpgradeFlags> { UpgradeFlags.Sawmageddon, UpgradeFlags.SawmageddonDuration } },
-        { UpgradeFlags.SawmageddonComboKiller, new List<UpgradeFlags> { UpgradeFlags.Sawmageddon, UpgradeFlags.SawmageddonDuration, UpgradeFlags.SawmageddonProjectiles } },
-        { UpgradeFlags.BaseHP1, new List<UpgradeFlags> { } },
-        { UpgradeFlags.BaseHP2, new List<UpgradeFlags> { UpgradeFlags.BaseHP1 } },
-        { UpgradeFlags.BaseHP3, new List<UpgradeFlags> { UpgradeFlags.BaseHP1, UpgradeFlags.BaseHP2 } },
-        { UpgradeFlags.BaseOvershield, new List<UpgradeFlags> { UpgradeFlags.BaseHP1, UpgradeFlags.BaseHP2, UpgradeFlags.BaseHP3 } },
-        { UpgradeFlags.Turrets, new List<UpgradeFlags> { } },
-        { UpgradeFlags.TurretsPowerSurge, new List<UpgradeFlags> { UpgradeFlags.Turrets, UpgradeFlags.ChainLightning } },
-        { UpgradeFlags.TurretsCollateralDamage, new List<UpgradeFlags> { UpgradeFlags.Turrets, UpgradeFlags.Sawmageddon } },
-        { UpgradeFlags.TurretsTimedPaylod, new List<UpgradeFlags> { UpgradeFlags.Turrets, UpgradeFlags.Anomaly } },
+        { UnlockFlags.ChainLightning, new List<UnlockFlags> { } },
+        { UnlockFlags.ChainLightningStunDuration, new List<UnlockFlags> { UnlockFlags.ChainLightning } },
+        { UnlockFlags.ChainLightningLightningRod, new List<UnlockFlags> { UnlockFlags.ChainLightning, UnlockFlags.ChainLightningStunDuration } },
+        { UnlockFlags.ChainLightningStaticOverload, new List<UnlockFlags> { UnlockFlags.ChainLightning, UnlockFlags.ChainLightningStunDuration, UnlockFlags.ChainLightningLightningRod } },
+        { UnlockFlags.Typhoon, new List<UnlockFlags> { } },
+        { UnlockFlags.TyphoonFlameSaw, new List<UnlockFlags> { UnlockFlags.Typhoon } },
+        { UnlockFlags.TyphoonRoaringFlames, new List<UnlockFlags> { UnlockFlags.Typhoon, UnlockFlags.TyphoonFlameSaw } },
+        { UnlockFlags.TyphoonExtendedBBQ, new List<UnlockFlags> { UnlockFlags.Typhoon, UnlockFlags.TyphoonFlameSaw, UnlockFlags.TyphoonRoaringFlames } },
+        { UnlockFlags.Anomaly, new List<UnlockFlags> { } },
+        { UnlockFlags.AnomalyRicochetSaws, new List<UnlockFlags> { UnlockFlags.Anomaly } },
+        { UnlockFlags.AnomalyStasisCoating, new List<UnlockFlags> { UnlockFlags.Anomaly, UnlockFlags.AnomalyRicochetSaws } },
+        { UnlockFlags.AnomalySingularity, new List<UnlockFlags> { UnlockFlags.Anomaly, UnlockFlags.AnomalyRicochetSaws, UnlockFlags.AnomalyStasisCoating } },
+        { UnlockFlags.Sawmageddon, new List<UnlockFlags> { } },
+        { UnlockFlags.SawmageddonDuration, new List<UnlockFlags> { UnlockFlags.Sawmageddon } },
+        { UnlockFlags.SawmageddonProjectiles, new List<UnlockFlags> { UnlockFlags.Sawmageddon, UnlockFlags.SawmageddonDuration } },
+        { UnlockFlags.SawmageddonComboKiller, new List<UnlockFlags> { UnlockFlags.Sawmageddon, UnlockFlags.SawmageddonDuration, UnlockFlags.SawmageddonProjectiles } },
+        { UnlockFlags.BaseHP1, new List<UnlockFlags> { } },
+        { UnlockFlags.BaseHP2, new List<UnlockFlags> { UnlockFlags.BaseHP1 } },
+        { UnlockFlags.BaseHP3, new List<UnlockFlags> { UnlockFlags.BaseHP1, UnlockFlags.BaseHP2 } },
+        { UnlockFlags.BaseOvershield, new List<UnlockFlags> { UnlockFlags.BaseHP1, UnlockFlags.BaseHP2, UnlockFlags.BaseHP3 } },
+        { UnlockFlags.Turrets, new List<UnlockFlags> { } },
+        { UnlockFlags.TurretsPowerSurge, new List<UnlockFlags> { UnlockFlags.Turrets, UnlockFlags.ChainLightning } },
+        { UnlockFlags.TurretsCollateralDamage, new List<UnlockFlags> { UnlockFlags.Turrets, UnlockFlags.Sawmageddon } },
+        { UnlockFlags.TurretsTimedPaylod, new List<UnlockFlags> { UnlockFlags.Turrets, UnlockFlags.Anomaly } },
     };
 
     // EVENTS
-    [NonSerialized] public UnityEvent<UpgradeFlags, bool> UpgradeFlagChangedEvent = new UnityEvent<UpgradeFlags, bool>();
+    [NonSerialized] public UnityEvent<UnlockFlags, bool> UpgradeFlagChangedEvent = new UnityEvent<UnlockFlags, bool>();
 
     // STATICS
     public static PD Instance
@@ -131,7 +131,7 @@ public class PD
     [MenuItem( "Debug/UnlockEverything" )]
     public static void UnlockEverything()
     {
-        foreach( UpgradeFlags flag in Enum.GetValues( typeof( UpgradeFlags ) ) )
+        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
             _instance.UpgradeUnlockMap.SetUnlock( flag, true, false );
             _instance.UpgradeUnlockMap.SetUnlock( flag, true, true );
@@ -206,20 +206,20 @@ public class PlayerDataField<T>
 [System.Serializable]
 public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
 {
-    private Dictionary<PD.UpgradeFlags, bool> campaign_unlock_map = new Dictionary<PD.UpgradeFlags, bool>();
-    private Dictionary<PD.UpgradeFlags, bool> survival_unlock_map = new Dictionary<PD.UpgradeFlags, bool>();
+    private Dictionary<PD.UnlockFlags, bool> campaign_unlock_map = new Dictionary<PD.UnlockFlags, bool>();
+    private Dictionary<PD.UnlockFlags, bool> survival_unlock_map = new Dictionary<PD.UnlockFlags, bool>();
 
     [SerializeField] List<string> serialized_campaign_unlock_flags;
     [SerializeField] List<string> serialized_survival_unlock_flags;
 
-    private static Dictionary<string, PD.UpgradeFlags> valid_enum_strings;
+    private static Dictionary<string, PD.UnlockFlags> valid_enum_strings;
 
-    public bool GetUnlock( PD.UpgradeFlags flag, bool survival )
+    public bool GetUnlock( PD.UnlockFlags flag, bool survival )
     {
         return survival ? survival_unlock_map[flag] : campaign_unlock_map[flag];
     }
 
-    public void SetUnlock( PD.UpgradeFlags flag, bool value, bool survival )
+    public void SetUnlock( PD.UnlockFlags flag, bool value, bool survival )
     {
         if( survival )
         {
@@ -236,7 +236,7 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
 
     public PlayerUpgradeUnlockMap()
     {
-        foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
+        foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
         {
             campaign_unlock_map.Add( flag, false );
             survival_unlock_map.Add( flag, false );
@@ -265,15 +265,15 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         // populate valid_strings lookup map if not created yet
         if( valid_enum_strings == null )
         {
-            valid_enum_strings = new Dictionary<string, PD.UpgradeFlags>();
-            foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
+            valid_enum_strings = new Dictionary<string, PD.UnlockFlags>();
+            foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
             {
                 valid_enum_strings.Add( flag.ToString(), flag );
             }
         }
 
         // add an entry for every possible unlock flag
-        foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
+        foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
         {
             if( !campaign_unlock_map.ContainsKey( flag ) )
                 campaign_unlock_map.Add( flag, false );
@@ -287,7 +287,7 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         {
             foreach( string key in serialized_campaign_unlock_flags )
             {
-                PD.UpgradeFlags out_flag;
+                PD.UnlockFlags out_flag;
                 if( valid_enum_strings.TryGetValue( key, out out_flag ) )
                 {
                     campaign_unlock_map[out_flag] = true;
@@ -305,7 +305,7 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         {
             foreach( string key in serialized_survival_unlock_flags )
             {
-                PD.UpgradeFlags out_flag;
+                PD.UnlockFlags out_flag;
                 if( valid_enum_strings.TryGetValue( key, out out_flag ) )
                 {
                     survival_unlock_map[out_flag] = true;

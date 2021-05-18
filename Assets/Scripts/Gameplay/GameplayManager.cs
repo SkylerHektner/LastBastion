@@ -94,7 +94,7 @@ public class GameplayManager : MonoBehaviour
         // clear out all survival unlock flags every time we start
         if( Survival )
         {
-            foreach( PD.UpgradeFlags flag in Enum.GetValues( typeof( PD.UpgradeFlags ) ) )
+            foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
             {
                 PD.Instance.UpgradeUnlockMap.SetUnlock( flag, false, true );
             }

@@ -12,7 +12,7 @@ public class UpgradeButton : MonoBehaviour
     public string MyInfo;
     public int MyCost;
     public GameObject InfoBox;
-    public PD.UpgradeFlags UpgradeFlag;
+    public PD.UnlockFlags UpgradeFlag;
     public GameObject PurchasedGlow;
     public Sprite VeiledImage;
     public Sprite Lockedimage;
@@ -57,7 +57,7 @@ public class UpgradeButton : MonoBehaviour
         PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeFlagChanged );
     }
 
-    private void OnUpgradeFlagChanged( PD.UpgradeFlags flag, bool new_value )
+    private void OnUpgradeFlagChanged( PD.UnlockFlags flag, bool new_value )
     {
         if( PD.Instance.UpgradeUnlockMap.GetUnlock( UpgradeFlag, false ) )
             Purchased = true;

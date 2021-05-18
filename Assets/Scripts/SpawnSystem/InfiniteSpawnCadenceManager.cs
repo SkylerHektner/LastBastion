@@ -7,6 +7,7 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
     [SerializeField] int NumWavesPerEnvironmentSwap = 5;
     [SerializeField] List<InfiniteSpawnCadenceProfile> SpawnCadences = new List<InfiniteSpawnCadenceProfile>();
     public SpawnManager spawnManager;
+    public SurvivalCardsUI survivalCardsUI;
 
     private InfiniteSpawnCadenceProfile cur_spawn_cadence = null;
     private Environment cur_environment = null;
@@ -38,10 +39,10 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
     {
         if( wave_number % NumWavesPerEnvironmentSwap == 0 )
         {
-            // TODO: ADD ME BACK IN ONCE THIS IS NOT INSTANT
-            //SpawnManager.Instance.DeferNextWaveStart();
-
+            SpawnManager.Instance.DeferNextWaveStart();
             PickNewSpawnCadenceProfile();
+            survivalCardsUI.gameObject.SetActive( true );
+            survivalCardsUI.ShowUpgrades();
         }
     }
 
@@ -70,8 +71,5 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
         cur_environment = Instantiate( cur_spawn_cadence.CadenceEnvironment );
         GameplayManager.Instance.ActiveEnvironment = cur_environment;
         spawnManager.SetNewSpawnCadence( cur_spawn_cadence );
-
-        // TODO: ADD ME BACK IN ONCE THIS IS NOT INSTANT
-        // SpawnManager.Instance.StartNextWave();
     }
 }

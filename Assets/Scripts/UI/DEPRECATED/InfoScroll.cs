@@ -25,7 +25,7 @@ public class InfoScroll : MonoBehaviour
         if( Lightning )
         {
             //// Lightning Rod
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningLightningRod, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.ChainLightningLightningRod, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -33,7 +33,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Lightning Stun Duration
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStunDuration, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.ChainLightningStunDuration, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -41,7 +41,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon2.SetActive( true ); }
 
             //// Static Overload
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.ChainLightningStaticOverload, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.ChainLightningStaticOverload, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon3.SetActive( false );
             }
@@ -51,7 +51,7 @@ public class InfoScroll : MonoBehaviour
         if( Sawmageddon )
         {
             //// Sawmageddon Duration
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonDuration, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.SawmageddonDuration, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -59,7 +59,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Sawmageddon Projectiles
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonProjectiles, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.SawmageddonProjectiles, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -67,7 +67,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon2.SetActive( true ); }
 
             //// Sawmageddon HP Steal
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon3.SetActive( false );
             }
@@ -77,7 +77,7 @@ public class InfoScroll : MonoBehaviour
         if( Anomaly )
         {
             //// Anomaly Ricochet
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyRicochetSaws, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.AnomalyRicochetSaws, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -85,7 +85,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Anomaly Mirror Saw
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalySingularity, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.AnomalySingularity, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -93,7 +93,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon2.SetActive( true ); }
 
             //// Anomaly Stasis
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyStasisCoating, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.AnomalyStasisCoating, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon3.SetActive( false );
             }
@@ -103,7 +103,7 @@ public class InfoScroll : MonoBehaviour
         if( Typhoon )
         {
             //// Extended BBQ
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonExtendedBBQ, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.TyphoonExtendedBBQ, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -111,7 +111,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Flame Saw
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonFlameSaw, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.TyphoonFlameSaw, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -122,7 +122,7 @@ public class InfoScroll : MonoBehaviour
             }
 
             //// Roaring Flames
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.TyphoonRoaringFlames, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.TyphoonRoaringFlames, GameplayManager.Instance.Survival ) )
             {
                 LockedIcon3.SetActive( false );
             }

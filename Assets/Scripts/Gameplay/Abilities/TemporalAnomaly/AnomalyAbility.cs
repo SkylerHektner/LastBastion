@@ -20,7 +20,7 @@ public class AnomalyAbility : Ability
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
         time_remaining = AbilityData.Duration;
 
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyStasisCoating, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.AnomalyStasisCoating, GameplayManager.Instance.Survival ) )
         {
             Saw.Instance?.SawHitEnemyEvent?.AddListener( OnSawHitEnemy );
         }
@@ -30,11 +30,11 @@ public class AnomalyAbility : Ability
     {
         SpectralSaw saw = GameObject.Instantiate( AbilityData.SpectralSawPrefab );
         saw.transform.position = pos;
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyRicochetSaws, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.AnomalyRicochetSaws, GameplayManager.Instance.Survival ) )
             saw.NumRemainingExtraBounces = AbilityData.RichochetSawExtraBounces;
         pending_saws.Add( new Tuple<SpectralSaw, Vector3, float>( saw, direction, speed ) );
 
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalySingularity, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.AnomalySingularity, GameplayManager.Instance.Survival ) )
         {
             SpectralSaw mirror_saw = GameObject.Instantiate( AbilityData.SpectralSawPrefab );
 
@@ -43,7 +43,7 @@ public class AnomalyAbility : Ability
             direction.x = -direction.x;
 
             mirror_saw.transform.position = pos;
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyRicochetSaws, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.AnomalyRicochetSaws, GameplayManager.Instance.Survival ) )
                 mirror_saw.NumRemainingExtraBounces = AbilityData.RichochetSawExtraBounces;
             pending_saws.Add( new Tuple<SpectralSaw, Vector3, float>( mirror_saw, direction, speed ) );
         }
@@ -51,7 +51,7 @@ public class AnomalyAbility : Ability
 
     private void OnSawHitEnemy( long id )
     {
-        Debug.Assert( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UpgradeFlags.AnomalyStasisCoating, GameplayManager.Instance.Survival ) );
+        Debug.Assert( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.AnomalyStasisCoating, GameplayManager.Instance.Survival ) );
         Enemy en = SpawnManager.Instance.TryGetEnemyByID( id );
         if( en != null )
         {
