@@ -28,11 +28,14 @@ public class SurvivalCardsUI : MonoBehaviour
 
     public void ShowUpgrades()
     {
+        List<PD.UnlockFlags> unlock_flags = GenerateUnlockOptions();
 
+        // TODO: Disseminate this information to the cards
     }
 
     public void ConfirmUpgrade()
     {
+        // TODO: Modify player unlock map based on the confirmed card
 
         // wave start was deferred for the menu, let it play now
         SpawnManager.Instance.StartNextWave();
