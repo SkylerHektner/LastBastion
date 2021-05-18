@@ -300,7 +300,7 @@ public class SpawnManager : MonoBehaviour
         }
         else if( sg.layout == SpawnGroup.Layout.Door )
         {
-            Debug.Assert( GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count > 0, 
+            Debug.Assert( GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count > 0,
                 "ERROR: Trying to spawn monster from door in an environment with no configured door spawn points" );
 
             int door_index = UnityEngine.Random.Range( 0, GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count );
@@ -324,6 +324,32 @@ public class SpawnManager : MonoBehaviour
                 {
                     SpawnMonster( e.Key, GameplayManager.Instance.ActiveEnvironment.BossSpawnPoint, stagger );
                     stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                }
+            }
+        }
+        else if( sg.layout == SpawnGroup.Layout.Custom )
+        {
+            float stagger = 0.0f;
+            int index = 0;
+            foreach( var e in sg.SpawnMap )
+            {
+                for( int x = 0; x < e.Value; ++x )
+                {
+                    Debug.Assert( index < sg.custom_layout_positions.Count );
+
+                    // relative coordinates are considering top-left as (0,0)
+                    Vector2 top_left = new Vector2(
+                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.x,
+                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaTopRight.y );
+                    Vector2 deltas = new Vector2(
+                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaTopRight.x - top_left.x,
+                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.y - top_left.y  );
+                    Vector3 spawn_point = new Vector3(
+                        top_left.x + deltas.x * sg.custom_layout_positions[index].x,
+                        top_left.y + deltas.y * sg.custom_layout_positions[index].y );
+                    SpawnMonster( e.Key, spawn_point, stagger );
+                    stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                    index++;
                 }
             }
         }
