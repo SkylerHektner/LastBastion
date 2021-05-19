@@ -198,6 +198,7 @@ public class SpawnGroupEdtior : Editor
 
 [Serializable] public class SpawnDictionary : SerializableDictionary<EnemyEnum, int> { }
 
+#if UNITY_EDITOR
 public class CustomSpawnLayoutEditor : EditorWindow
 {
     private static GUIStyle label_style = new GUIStyle();
@@ -412,4 +413,4 @@ public class CustomSpawnLayoutEditor : EditorWindow
         }
     }
 }
-
+#endif
