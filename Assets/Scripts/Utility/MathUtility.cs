@@ -4,8 +4,16 @@ using UnityEngine;
 
 public static class MathUtility
 {
+    // reflects a vector along a line 
+    // https://math.stackexchange.com/questions/13261/how-to-get-a-reflection-vector
+    public static Vector2 ReflectVector(Vector2 input_vec, Vector2 reflection_vec)
+    {
+        reflection_vec.Normalize();
+        return input_vec - 2 * ( Vector2.Dot( input_vec, reflection_vec ) * reflection_vec );
+    }
+
     // all rotations are done counter clockwise. use negative radians to go clockwise
-    public static Vector3 RotateVector2D(Vector3 vec, float radians)
+    public static Vector3 RotateVector2D( Vector3 vec, float radians )
     {
         float cos_rad = Mathf.Cos( radians );
         float sin_rad = Mathf.Sin( radians );

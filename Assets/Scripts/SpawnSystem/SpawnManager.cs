@@ -26,6 +26,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject CarrierSPrefab;
     [SerializeField] GameObject RedSkeletonPrefab;
     [SerializeField] GameObject SkullyBossPrefab;
+    [SerializeField] GameObject BlackHolePrefab;
+    [SerializeField] GameObject BouncerPrefab;
 
     [Header( "Misc" )]
     [SerializeField] WaveCounter WaveCounterUI;
@@ -497,6 +499,12 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.SkullyBoss:
                 ret = Instantiate( SkullyBossPrefab );
                 break;
+            case EnemyEnum.BlackHole:
+                ret = Instantiate( BlackHolePrefab );
+                break;
+            case EnemyEnum.Bouncer:
+                ret = Instantiate( BouncerPrefab );
+                break;
             case 0:
 #if UNITY_EDITOR
                 Debug.LogError( "ERROR: Tried to spawn an enemy " + enemy.ToString() + " that hasn't been added to the InstantiateMonster switch" );
@@ -527,4 +535,6 @@ public enum EnemyEnum
     RedSkeleton = 11,
     PumpKING = 12,
     SkullyBoss = 13,
+    BlackHole = 14,
+    Bouncer = 15,
 }

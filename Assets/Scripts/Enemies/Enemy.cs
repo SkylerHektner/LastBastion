@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int powerupDropValue = 1;
     [SerializeField] bool ImmuneToZapBonusDamage;
     public bool ImmuneToTyphoon = false;
+    public bool Bouncy = false; // if true, the saw will bounce off the creature upon colliding (bounce angle on circular collider)
 
     public int PowerupDropValue
     {

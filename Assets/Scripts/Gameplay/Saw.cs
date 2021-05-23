@@ -13,6 +13,9 @@ public class Saw : MonoBehaviour
     public UnityEvent<Vector3> SawKilledEnemyEvent = new UnityEvent<Vector3>();
     public UnityEvent<long> SawHitEnemyEvent = new UnityEvent<long>();
     public UnityEvent SawMuddiedEvent = new UnityEvent();
+    public bool Moving { get { return MoveDirection != Vector3.zero; } }
+    public float AdjustedMoveSpeed { get { return MoveSpeed * covered_in_mud_movespeed_multiplier * on_fire_movespeed_multiplier; } }
+    public Vector3 MoveDirection { get { return proj.GetMoveDirection(); } }
 
     [SerializeField] float MoveSpeed = 1.0f;
     [SerializeField] float MinDragDistance = 1.0f;
@@ -23,15 +26,14 @@ public class Saw : MonoBehaviour
     [SerializeField] GameObject DirectionArrowPivot;
     [SerializeField] float MinimumAngleDegrees = 15;
     [SerializeField] private Animator animator;
+    [SerializeField] float SawCorrectionTime = 3.0f; // if saw hasn't hit a wall in this time a correction mechanism resets its position
 
-    private bool on_left_side = true;
+    private bool on_left_side { get { return transform.position.x < 0.0f; } }
     private bool dragging = false;
     private Vector3 drag_start_position;
     private Vector3 drag_last_position;
     private Color drag_arrow_color = new Color( 1, 1, 1, 0 );
 
-    private bool Moving { get { return move_direction != Vector3.zero; } }
-    private Vector3 move_direction = Vector3.zero;
     private Projectile proj;
 
     public bool OnFire { get { return on_fire_duration > 0.0f; } }
@@ -42,10 +44,17 @@ public class Saw : MonoBehaviour
     private float cover_in_mud_duration = -1.0f;
     private float covered_in_mud_movespeed_multiplier = 1.0f;
 
+    private float correction_timer = 0.0f;
+
     public Animator SawmageddonFX;
     public Animator AnomalyFX;
     public Animator TyphoonFX;
 
+    public void SetMoveDirection( Vector3 move_direction, float speed )
+    {
+        proj.SetProjectileSpeed( speed );
+        proj.StartMoveInDirection( move_direction );
+    }
 
     private void Start()
     {
@@ -63,6 +72,17 @@ public class Saw : MonoBehaviour
 
     private void Update()
     {
+        if( Moving )
+        {
+            correction_timer += Time.deltaTime;
+            if( correction_timer > SawCorrectionTime )
+            {
+                correction_timer = 0.0f;
+                Vector3 rails_center_left = new Vector3( Rails.Instance.Left, Rails.Instance.Bottom + Rails.Instance.Top / 2, 0.0f );
+                SetMoveDirection( ( rails_center_left - transform.position ).normalized, AdjustedMoveSpeed );
+            }
+        }
+
         if( OnFire )
         {
             on_fire_duration -= Time.deltaTime * GameplayManager.TimeScale;
@@ -119,8 +139,8 @@ public class Saw : MonoBehaviour
             proj.SetWallHitBehavior( Projectile.WallHitBehavior.Bounce );
 
             // light saw on fire if flame saw upgrade and typhoon active
-            if( hit_info.wall == ProjectileHitInfo.Wall.Bottom 
-                && TyphoonAbility.ActiveTyphoon != null 
+            if( hit_info.wall == ProjectileHitInfo.Wall.Bottom
+                && TyphoonAbility.ActiveTyphoon != null
                 && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.TyphoonFlameSaw, GameplayManager.Instance.Survival ) )
             {
                 TyphoonAbility.ActiveTyphoon.SetSawOnFire( this );
@@ -130,7 +150,6 @@ public class Saw : MonoBehaviour
             hit_info.wall == ProjectileHitInfo.Wall.Right )
         {
             proj.SetWallHitBehavior( Projectile.WallHitBehavior.Attach );
-            move_direction = Vector3.zero;
             if( dragging )
                 DirectionArrow.sprite = DirectionArrowSprite;
         }
@@ -146,17 +165,35 @@ public class Saw : MonoBehaviour
             bool died;
             bool dodged;
             long id = en.EnemyID;
-            en.Hit( move_direction, 
-                true, 
-                OnFire ? DamageSource.FlamingSaw : DamageSource.Saw, 
-                out died, 
-                out dodged, 
+            en.Hit( MoveDirection,
+                true,
+                OnFire ? DamageSource.FlamingSaw : DamageSource.Saw,
+                out died,
+                out dodged,
                 1 + ( OnFire ? on_fire_extra_damage : 0 ) );
 
             if( died )
                 SawKilledEnemyEvent.Invoke( pos );
             if( !dodged )
                 SawHitEnemyEvent.Invoke( id );
+
+            if( !died && en.Bouncy && AnomalyAbility.ActiveAnomaly == null /*anomaly allows the saw to bypass bounce*/ )
+            {
+                Vector2 new_move_direction = MathUtility.ReflectVector( MoveDirection, transform.position - en.transform.position );
+                // some safety to make sure our new move direction isn't too up/down
+                if( new_move_direction.x == 0.0f )
+                    new_move_direction.x = 0.01f;
+                float theta = Mathf.Atan( new_move_direction.y / new_move_direction.x );
+                float delta = ( Mathf.PI * 0.5f ) - Mathf.Abs( theta );
+                if( delta < MinimumAngleDegrees * Mathf.Deg2Rad )
+                {
+                    Debug.Log( "Correcting Bounce Direction" );
+                    new_move_direction.x = 0;
+                    new_move_direction = MathUtility.RotateVector2D( new_move_direction, MinimumAngleDegrees * Mathf.Deg2Rad * -Mathf.Sign( theta ) );
+                }
+
+                SetMoveDirection( new_move_direction, AdjustedMoveSpeed );
+            }
         }
         else if( col.tag == "Mudball" && !Moving )
             col.gameObject.GetComponent<MudSlingerProjectile>().HitSaw( this );
@@ -195,11 +232,9 @@ public class Saw : MonoBehaviour
         DirectionArrow.gameObject.SetActive( false );
         if( !Moving )
         {
-            on_left_side = !on_left_side;
-            move_direction = ( drag_last_position - drag_start_position ).normalized;
-            proj.SetProjectileSpeed( MoveSpeed * covered_in_mud_movespeed_multiplier * on_fire_movespeed_multiplier );
-            proj.StartMoveInDirection( move_direction );
-            SawFiredEvent.Invoke( transform.position, move_direction, MoveSpeed );
+            SetMoveDirection( ( drag_last_position - drag_start_position ).normalized, AdjustedMoveSpeed );
+            SawFiredEvent.Invoke( transform.position, MoveDirection, MoveSpeed );
+            correction_timer = 0.0f;
         }
     }
 
@@ -258,7 +293,7 @@ public class Saw : MonoBehaviour
             cover_in_mud_duration = duration;
         animator.SetBool( "Muddy", true );
         covered_in_mud_movespeed_multiplier = move_speed_mult;
-        proj.SetProjectileSpeed( MoveSpeed * covered_in_mud_movespeed_multiplier );
+        proj.SetProjectileSpeed( AdjustedMoveSpeed );
     }
 
     private void EndCoverInMud()
@@ -266,7 +301,7 @@ public class Saw : MonoBehaviour
         cover_in_mud_duration = -1.0f;
         animator.SetBool( "Muddy", false );
         covered_in_mud_movespeed_multiplier = 1.0f;
-        proj.SetProjectileSpeed( MoveSpeed * covered_in_mud_movespeed_multiplier );
+        proj.SetProjectileSpeed( AdjustedMoveSpeed );
     }
 
     public void SetOnFire( float duration, int extra_damage, float move_speed_multiplier )
@@ -282,7 +317,7 @@ public class Saw : MonoBehaviour
             on_fire_movespeed_multiplier = move_speed_multiplier;
 
             // set new movespeed on proj
-            proj.SetProjectileSpeed( MoveSpeed * covered_in_mud_movespeed_multiplier * on_fire_movespeed_multiplier );
+            proj.SetProjectileSpeed( AdjustedMoveSpeed );
         }
     }
 

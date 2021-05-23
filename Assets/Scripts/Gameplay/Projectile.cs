@@ -33,6 +33,10 @@ public class Projectile : MonoBehaviour
     {
         this.MoveDirection = move_direction.normalized;
     }
+    public Vector3 GetMoveDirection()
+    {
+        return this.MoveDirection;
+    }
 
     protected virtual void Start()
     {
