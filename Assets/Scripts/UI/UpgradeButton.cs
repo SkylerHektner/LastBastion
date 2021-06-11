@@ -7,10 +7,7 @@ using System.Linq;
 [RequireComponent( typeof( Button ) )]
 public class UpgradeButton : MonoBehaviour
 {
-    public string MyName;
-    [Multiline( 5 )]
-    public string MyInfo;
-    public int MyCost;
+    public UnlockFlagUIInformation UnlockFlagInformation;
     public GameObject InfoBox;
     public PD.UnlockFlags UpgradeFlag;
     public GameObject PurchasedGlow;
@@ -39,10 +36,10 @@ public class UpgradeButton : MonoBehaviour
         InfoBox.SetActive( true );
         InfoBox.GetComponentInParent<Animator>().SetTrigger( "Show" );
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
-        ThePanel.UpgradeName.text = MyName;
-        ThePanel.UpgradeInfo.text = MyInfo;
-        ThePanel.CandyCostText.text = MyCost.ToString();
-        ThePanel.UpgradeCost = MyCost;
+        ThePanel.UpgradeName.text = UnlockFlagInformation.UnlockName;
+        ThePanel.UpgradeInfo.text = UnlockFlagInformation.Description;
+        ThePanel.CandyCostText.text = UnlockFlagInformation.CampaignCost.ToString();
+        ThePanel.UpgradeCost = UnlockFlagInformation.CampaignCost;
         ThePanel.DesiredUpgrade = this.gameObject.GetComponent<UpgradeButton>(); // for unlocking
         ThePanel.EnableButtons();
     }
@@ -86,7 +83,7 @@ public class UpgradeButton : MonoBehaviour
     {
         PurchasedGlow.SetActive( true );
         gameObject.GetComponent<Image>().sprite = UnlockedImage;
-        PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() - MyCost );
+        PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() - UnlockFlagInformation.CampaignCost );
         PD.Instance.UpgradeUnlockMap.SetUnlock( UpgradeFlag, true, false );
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpdatePlayerWealth();
