@@ -58,14 +58,17 @@ MonoBehaviour:
   CarrierSPrefab: {fileID: 1222198919188261107, guid: 56afa67539377524b94fec190e10f550, type: 3}
   RedSkeletonPrefab: {fileID: 3993805466842966640, guid: c9b3f93d31de3fe478ab1124696a4763, type: 3}
   SkullyBossPrefab: {fileID: 6263273399785863529, guid: acfade13fb56dcb40a67d34fabb285e7, type: 3}
-  SpawnableAreaTopRight: {x: 3.93, y: 11.71, z: 0}
-  SpawnableAreaBottomLeft: {x: -3.93, y: 2.27, z: 0}
-  PlayableAreaTopRight: {x: 4.5, y: 11.74, z: 0}
-  PlayableAreaBottomLeft: {x: -4.5, y: 0, z: 0}
-  DoorSpawnPoints: []
-  BossSpawnPoint: {x: 0, y: 0, z: 0}
+  BlackHolePrefab: {fileID: 5736563096712201287, guid: 753a5d53f6f2dad48950bb07b67e8539, type: 3}
+  BouncerPrefab: {fileID: 2478682672113855452, guid: 7b2507bef550c95489435997bd307a32, type: 3}
+  GhostiePrefab: {fileID: 9130753680679645999, guid: b012d54166e4985419f053e1d3d240eb, type: 3}
+  BomberPrefab: {fileID: 9130753680679645999, guid: 63ec3b5f2f4b1b74581d4710e2cc2db2, type: 3}
+  MudCarrierLPrefab: {fileID: 5190907824382444220, guid: 8cce3f88a30435c49bb8eeba8d843b4a, type: 3}
+  MudCarrierSPrefab: {fileID: 1222198919188261107, guid: 13ade04c11ab4144d95bd8860d23e591, type: 3}
   WaveCounterUI: {fileID: 0}
+  CurrentWaveIndex: -1
   EnemySpawnedEvent:
     m_PersistentCalls:
       m_Calls: []
-  AnimationTriggerListeners: []
+  WaveCompletedEvent:
+    m_PersistentCalls:
+      m_Calls: []
