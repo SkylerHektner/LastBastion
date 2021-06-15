@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool ImmuneToZapBonusDamage;
     public bool ImmuneToTyphoon = false;
     public bool Bouncy = false; // if true, the saw will bounce off the creature upon colliding (bounce angle on circular collider)
+    [SerializeField] int PlayerBaseBonusDamage;
 
     public int PowerupDropValue
     {
@@ -87,7 +88,9 @@ public class Enemy : MonoBehaviour
 
     public void DamageBase() //  Do my max health as damage to the base HP
     {
-        BaseHP.Instance.ReduceHP( MaxHealth );
+        BaseHP.Instance.ReduceHP( MaxHealth + PlayerBaseBonusDamage );
+
+        // function overridden in Boomer
     }
 
 
@@ -290,5 +293,6 @@ public enum DamageSource
     TyphoonFlamingCorpse,
     StaticOverloadExplosion,
     Turret,
+    BoomerDeathExplosion,
     UNSET,
 }
