@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2053825059}
   - component: {fileID: 2053825061}
   m_Layer: 9
-  m_Name: Shrike
+  m_Name: Shrike2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161093999407771307}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalPosition: {x: -0.1193, y: 0, z: 0}
+  m_LocalScale: {x: 1.48272, y: 1.2, z: 1}
   m_Children:
   - {fileID: 5615663307692429108}
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1688259491
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 8793639957104055765, guid: 11172f771d9d32544a41cf4d5d60a4fd, type: 3}
+  m_Sprite: {fileID: 8793639957104055765, guid: ae2e3e20ea87d514c8b83340d5df1213, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,7 +97,7 @@ Animator:
   m_GameObject: {fileID: 161093999407771307}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0ed7c71770a7dd6419d0aef80626701b, type: 2}
+  m_Controller: {fileID: 22100000, guid: 2682fb4720f90b348bfa517a206f8ce4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -140,9 +140,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.49}
+  m_Offset: {x: 0.029311825, y: 0.034355767}
   serializedVersion: 2
-  m_Radius: 0.56
+  m_Radius: 0.50137603
 --- !u!114 &2053825061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,8 +202,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253118630203601470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.019, y: -0.16, z: 0}
-  m_LocalScale: {x: 2.2341115, y: 1.9218163, z: 1.9218163}
+  m_LocalPosition: {x: 0, y: 0.46, z: 0}
+  m_LocalScale: {x: 2.6081743, y: 2.3875892, z: 2.6805494}
   m_Children: []
   m_Father: {fileID: 161093999407771309}
   m_RootOrder: 0
@@ -248,15 +248,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2329416498939653415, guid: f0f2e282db52b4d4fa2a79c599065bb7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0.75189495, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.0004885, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &6861840718853773691
