@@ -187,7 +187,6 @@ public class Saw : MonoBehaviour
                 float delta = ( Mathf.PI * 0.5f ) - Mathf.Abs( theta );
                 if( delta < MinimumAngleDegrees * Mathf.Deg2Rad )
                 {
-                    Debug.Log( "Correcting Bounce Direction" );
                     new_move_direction.x = 0;
                     new_move_direction = MathUtility.RotateVector2D( new_move_direction, MinimumAngleDegrees * Mathf.Deg2Rad * -Mathf.Sign( theta ) );
                 }
