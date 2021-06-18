@@ -32,6 +32,10 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject BomberPrefab;
     [SerializeField] GameObject MudCarrierLPrefab;
     [SerializeField] GameObject MudCarrierSPrefab;
+    [SerializeField] GameObject Shrike2Prefab;
+    [SerializeField] GameObject Shaman2Prefab;
+    [SerializeField] GameObject BlackSkeletonPrefab;
+
 
 
     [Header( "Misc" )]
@@ -522,6 +526,15 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.MudCarrierS:
                 ret = Instantiate(MudCarrierSPrefab);
                 break;
+            case EnemyEnum.Shrike2:
+                ret = Instantiate(MudCarrierSPrefab);
+                break;
+            case EnemyEnum.Shaman2:
+                ret = Instantiate(MudCarrierSPrefab);
+                break;
+            case EnemyEnum.BlackSkeleton:
+                ret = Instantiate(BlackSkeletonPrefab);
+                break;
             case 0:
 #if UNITY_EDITOR
                 Debug.LogError( "ERROR: Tried to spawn an enemy " + enemy.ToString() + " that hasn't been added to the InstantiateMonster switch" );
@@ -558,5 +571,8 @@ public enum EnemyEnum
     Bomber = 17,
     MudCarrierL = 18,
     MudCarrierS = 19,
+    Shrike2 = 20,
+    Shaman2 = 21,
+    BlackSkeleton = 22,
 
 }

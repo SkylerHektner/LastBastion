@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1688259491
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: -3039438157099490418, guid: aa1a784e447326641ba88a60f1ad58a4, type: 3}
+  m_Sprite: {fileID: -7308292388938493882, guid: 713719383a6dd774984672cb7cac410a, type: 3}
   m_Color: {r: 1, g: 0.2679245, b: 0.2679245, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 3993805466842966640}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4888073d5161f4f458052d6e9ed4d1c1, type: 2}
+  m_Controller: {fileID: 22100000, guid: a795afbc23cf07943bb6ca32b172ff61, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -117,11 +117,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446512daffa941f4cb0d2f3082865b54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeath:
+  DeathEvent:
     m_PersistentCalls:
       m_Calls: []
   MoveSpeed: 1
-  MaxHealth: 2
+  MaxHealth: 1
   DeathEffect: {fileID: 2016558233288798309, guid: bd5b043a6d3857d4eb7245d13c7ad9ab, type: 3}
   DeathAnimation: 
   SpawnEffect: {fileID: 1824666046701122354, guid: 2e51fe9a16c598b458adb27d14f789a2, type: 3}
@@ -132,6 +132,9 @@ MonoBehaviour:
   attacks: 1
   powerupDropValue: 0
   ImmuneToZapBonusDamage: 0
+  ImmuneToTyphoon: 0
+  Bouncy: 0
+  PlayerBaseBonusDamage: 0
 --- !u!58 &4324015993595593424
 CircleCollider2D:
   m_ObjectHideFlags: 0
