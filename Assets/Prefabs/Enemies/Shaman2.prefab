@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1269854270}
   - component: {fileID: 1269854271}
   m_Layer: 9
-  m_Name: Shaman
+  m_Name: Shaman2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1688259491
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1882347247711912902, guid: f9827bdbb594f67419e218d723c75d93, type: 3}
+  m_Sprite: {fileID: 8793639957104055765, guid: 75b4273f540a7ff44a5f0d826a54b152, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 2898304853937610190}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a24625280e3dae04a82eec599321cacb, type: 2}
+  m_Controller: {fileID: 22100000, guid: 17b600f44bf26704eb19fe0bbf3733ec, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -139,9 +139,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.022619814, y: -0.30058637}
+  m_Offset: {x: -0.013016462, y: -0.1834954}
   serializedVersion: 2
-  m_Radius: 0.33007595
+  m_Radius: 0.3606211
 --- !u!114 &1269854271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,10 +158,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   MoveSpeed: 1
-  MaxHealth: 2
-  DeathEffect: {fileID: 2016558233288798309, guid: 67530806c8403734aad806c709ee82f8, type: 3}
+  MaxHealth: 3
+  DeathEffect: {fileID: 2016558233288798309, guid: ed93d1c1c4d12364c8966ef0a0df7614, type: 3}
   DeathAnimation: Killed
-  SpawnEffect: {fileID: 5764153955619398806, guid: 13d8d879b3dcb784c84ac1b6d65739ca, type: 3}
+  SpawnEffect: {fileID: 5764153955619398806, guid: f8aaff6c461672541aea0eb827621425, type: 3}
   SpawnAnimation: 
   DamagedEffect: {fileID: 0}
   DamagedAnimation: Damaged
