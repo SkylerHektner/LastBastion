@@ -11,6 +11,8 @@ public class CameraUIMover : MonoBehaviour
     public Transform MainZone;
     public Transform UpgradesZone;
     public Transform SurvivalZone;
+    public Transform SettingsZone;
+
 
     public float CameraSpeed;   // default is .8f
 
@@ -41,6 +43,7 @@ public class CameraUIMover : MonoBehaviour
     public void LoadLevels()
     {
         CurrentDestination = LevelsZone;
+        CameraSpeed = .8f;
     }
 
     public void LoadLevelShortcut() // triggers when returning from a campaign level
@@ -83,5 +86,17 @@ public class CameraUIMover : MonoBehaviour
     {
         CurrentDestination = MainZone;
         CameraSpeed = 3f;
+    }
+
+    public void LoadSettings()
+    {
+        CurrentDestination = SettingsZone;
+        CameraSpeed = 1.5f;
+    }
+
+    public void ExitSettings()
+    {
+        CurrentDestination = MainZone;
+        CameraSpeed = 1.5f;
     }
 }
