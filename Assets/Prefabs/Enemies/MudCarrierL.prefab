@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5190907824382444222}
   - component: {fileID: 5190907824382444223}
   - component: {fileID: 5190907824382444217}
-  - component: {fileID: 1932373575529214009}
   - component: {fileID: 2044003591208679622}
   - component: {fileID: 6197866650984814816}
   - component: {fileID: 8582711822743472201}
@@ -106,36 +105,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1932373575529214009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5190907824382444220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f7f49a2e24e66640a3bddae56870b49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  MoveSpeed: 0.1
-  MaxHealth: 3
-  DeathEffect: {fileID: 0}
-  DeathAnimation: Killed
-  SpawnEffect: {fileID: 0}
-  SpawnAnimation: 
-  DamagedEffect: {fileID: 0}
-  DamagedAnimation: Damaged
-  CurrentHealthAnimationParameter: 
-  attacks: 1
-  powerupDropValue: 1
-  ImmuneToZapBonusDamage: 0
-  ImmuneToTyphoon: 0
-  Bouncy: 0
-  OnDeathSpawnGroup: {fileID: 11400000, guid: ab58a13f615f81b4d923d7d397402e9c, type: 2}
 --- !u!58 &2044003591208679622
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -202,8 +171,10 @@ MonoBehaviour:
   ImmuneToZapBonusDamage: 0
   ImmuneToTyphoon: 0
   Bouncy: 0
+  PlayerBaseBonusDamage: 0
   SummonEffect: {fileID: 502324915706778173, guid: d1c9cdfc425f3d94bbc5e06fe26ebc2a, type: 3}
   SummonSpawnGroup: {fileID: 11400000, guid: ab58a13f615f81b4d923d7d397402e9c, type: 2}
   SummonAnimation: Summon
   SummonDuration: 0.65
   SummonCooldown: 2.5
+  OnDeathSpawnGroup: {fileID: 11400000, guid: ab58a13f615f81b4d923d7d397402e9c, type: 2}

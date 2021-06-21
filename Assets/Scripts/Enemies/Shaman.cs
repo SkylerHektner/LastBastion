@@ -9,6 +9,7 @@ public class Shaman : Enemy
     [SerializeField] string SummonAnimation;
     [SerializeField] float SummonDuration = 0.5f;
     [SerializeField] float SummonCooldown = 1.0f;
+    [SerializeField] SpawnGroup OnDeathSpawnGroup;
 
     private float cur_summon_cooldown = 0.0f;
 
@@ -16,15 +17,22 @@ public class Shaman : Enemy
     {
         base.Update();
 
-        if( Moving )
+        if( Moving && !string.IsNullOrEmpty( SummonAnimation ) )
         {
             cur_summon_cooldown -= Time.deltaTime * GameplayManager.TimeScale;
-            if(cur_summon_cooldown <= 0.0f)
+            if( cur_summon_cooldown <= 0.0f )
             {
                 StopMoving();
                 Summon();
             }
         }
+    }
+
+    public override void Kill()
+    {
+        if( OnDeathSpawnGroup )
+            SpawnManager.Instance.SpawnSpawnGroup( OnDeathSpawnGroup, transform.position, false );
+        base.Kill();
     }
 
     public override void StartMoving()
