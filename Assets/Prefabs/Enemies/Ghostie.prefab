@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9130753680679645998}
   - component: {fileID: 646756494}
   - component: {fileID: 646756495}
-  - component: {fileID: 646756493}
+  - component: {fileID: 1742929837}
   m_Layer: 9
   m_Name: Ghostie
   m_TagString: Enemy
@@ -142,7 +142,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &646756493
+--- !u!114 &1742929837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9130753680679645999}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 446512daffa941f4cb0d2f3082865b54, type: 3}
+  m_Script: {fileID: 11500000, guid: b4bd75a8d7c307a40a5575f446740ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DeathEvent:
@@ -164,10 +164,14 @@ MonoBehaviour:
   SpawnEffect: {fileID: 0}
   SpawnAnimation: 
   DamagedEffect: {fileID: 0}
-  DamagedAnimation: Vanish
+  DamagedAnimation: 
   CurrentHealthAnimationParameter: 
   attacks: 1
   powerupDropValue: 1
   ImmuneToZapBonusDamage: 0
   ImmuneToTyphoon: 0
   Bouncy: 0
+  PlayerBaseBonusDamage: 0
+  VanishCooldown: 3
+  VanishDuration: 1.5
+  VanishAnimation: Vanish
