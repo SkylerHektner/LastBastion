@@ -12,5 +12,5 @@ public class UnlockFlagUIInformation : ScriptableObject
     [Multiline( 5 )]
     public string Description;
     public int CampaignCost;
-    public Image UIIcon;
+    public Sprite SurvivalIcon;
 }
