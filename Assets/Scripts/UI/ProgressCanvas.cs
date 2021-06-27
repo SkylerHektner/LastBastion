@@ -5,7 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ProgressCanvas : MonoBehaviour
 {
-    public Animator Door;
+    public Animator BlackBG;
+    public Animator StarClustersA;
+    public Animator StarClustersB;
+
     public Animator Skull;
     public GameObject ProgressContent;
 
@@ -22,7 +25,6 @@ public class ProgressCanvas : MonoBehaviour
 #endif
         PD.Instance.Limbo.Set( false );
         Spectator.LevelIndex = 1;
-        Door.SetBool( "Limbo", false );
     }
     public void LoadSceneFromLimboResumeAnimation() // need to make a separate case here for survival
     {
@@ -40,5 +42,17 @@ public class ProgressCanvas : MonoBehaviour
     {
         Skull.SetBool( "Speaking", false );
         // play animation (call load menu at the end)
+    }
+
+    public void TriggerBlackFadeFX()
+    {
+        BlackBG.SetTrigger("Fade");
+    }
+
+    public void TriggerStarsFadeFX()
+    {
+        StarClustersA.SetTrigger("Fade");
+        StarClustersB.SetTrigger("Fade");
+
     }
 }
