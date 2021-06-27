@@ -41,7 +41,6 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
         {
             SpawnManager.Instance.DeferNextWaveStart();
             PickNewSpawnCadenceProfile();
-            survivalCardsUI.gameObject.SetActive( true );
             survivalCardsUI.ShowUpgrades();
         }
     }
