@@ -36,8 +36,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject Shaman2Prefab;
     [SerializeField] GameObject BlackSkeletonPrefab;
 
-
-
     [Header( "Misc" )]
     [SerializeField] WaveCounter WaveCounterUI;
 
@@ -159,7 +157,9 @@ public class SpawnManager : MonoBehaviour
             {
                 var next = it.Next;
                 var ps = it.Value;
-                ps.time_left -= Time.deltaTime * GameplayManager.TimeScale;
+                ps.time_left -= Time.deltaTime * GameplayManager.TimeScale *
+                    ( PD.Instance.UnlockMap.Get(UnlockFlags.EnemySpawnSpeedCurse, GameplayManager.Instance.Survival) ?
+                    GameplayManager.Instance.EnemySpawnSpeedCurseMultiplier : 1.0f );
                 it.Value = ps;
                 if( ps.time_left < 0.0f )
                 {
@@ -181,7 +181,9 @@ public class SpawnManager : MonoBehaviour
             {
                 for( int x = 0; x < passive_spawn_trackers.Count; ++x )
                 {
-                    passive_spawn_trackers[x] -= Time.deltaTime * GameplayManager.TimeScale;
+                    passive_spawn_trackers[x] -= Time.deltaTime * GameplayManager.TimeScale *
+                        ( PD.Instance.UnlockMap.Get( UnlockFlags.EnemySpawnSpeedCurse, GameplayManager.Instance.Survival ) ?
+                        GameplayManager.Instance.EnemySpawnSpeedCurseMultiplier : 1.0f );
                     if( passive_spawn_trackers[x] < 0.0f )
                     {
                         passive_spawn_trackers[x] += CurrentWave.PassiveEnemySpawnCadence[x];

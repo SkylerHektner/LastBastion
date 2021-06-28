@@ -10,13 +10,13 @@ public class SurvivalCardsUI : MonoBehaviour
     [SerializeField] List<SurvivalCardsUICard> Cards;
     [SerializeField] SurvivalCardsUIDescriptionBox DescriptionBox;
 
-    private Dictionary<PD.UnlockFlags, UnlockFlagUIInformation> ui_info_map = new Dictionary<PD.UnlockFlags, UnlockFlagUIInformation>();
+    private Dictionary<UnlockFlags, UnlockFlagUIInformation> ui_info_map = new Dictionary<UnlockFlags, UnlockFlagUIInformation>();
     private SurvivalCardsUICard current_selected_card;
 
     private void Start()
     {
 #if UNITY_EDITOR
-        foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
+        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
             Debug.Assert( unlockFlagUIInformation.Count( ui_info => ui_info.UnlockFlag == flag ) == 1,
                 $"ERROR: Survival Cards UI missing unlock flag ui information for unlock flag {flag}" );
@@ -44,7 +44,7 @@ public class SurvivalCardsUI : MonoBehaviour
             PopulateUIMap();
         }
 
-        List<PD.UnlockFlags> unlock_flags = GenerateUnlockOptions();
+        List<UnlockFlags> unlock_flags = GenerateUnlockOptions();
         for( int x = 0; x < Cards.Count; ++x )
         {
             if( unlock_flags.Count > x )
@@ -81,7 +81,7 @@ public class SurvivalCardsUI : MonoBehaviour
     public void ConfirmUpgrade()
     {
         Debug.Assert( current_selected_card != null );
-        PD.Instance.UpgradeUnlockMap.SetUnlock( current_selected_card.Information.UnlockFlag, true, true );
+        PD.Instance.UnlockMap.Set( current_selected_card.Information.UnlockFlag, true, true );
         current_selected_card.ShowLockAnimation();
 
         // wave start was deferred for the menu, let it play now
@@ -94,16 +94,16 @@ public class SurvivalCardsUI : MonoBehaviour
     }
 
     // returns a list of up to three unlock flags randomly based on current unlock state
-    private List<PD.UnlockFlags> GenerateUnlockOptions()
+    private List<UnlockFlags> GenerateUnlockOptions()
     {
-        List<PD.UnlockFlags> ret = new List<PD.UnlockFlags>();
+        List<UnlockFlags> ret = new List<UnlockFlags>();
 
-        List<PD.UnlockFlags> options = new List<PD.UnlockFlags>();
+        List<UnlockFlags> options = new List<UnlockFlags>();
 
-        foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
+        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
-            if( !PD.Instance.UpgradeUnlockMap.GetUnlock( flag, GameplayManager.Instance.Survival )
-                && PD.Instance.UpgradeFlagDependencyMap[flag].All( f => PD.Instance.UpgradeUnlockMap.GetUnlock( f, GameplayManager.Instance.Survival ) ) )
+            if( !PD.Instance.UnlockMap.Get( flag, GameplayManager.Instance.Survival )
+                && PD.Instance.UnlockFlagDependencyMap[flag].All( f => PD.Instance.UnlockMap.Get( f, GameplayManager.Instance.Survival ) ) )
             {
                 options.Add( flag );
             }

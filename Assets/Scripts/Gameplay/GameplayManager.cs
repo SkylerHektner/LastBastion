@@ -15,9 +15,20 @@ public class GameplayManager : MonoBehaviour
     public ChallengesTracker Challenges { get; private set; } = new ChallengesTracker();
 
     // SURIVAL
+    [Header( "Survival Variables" )]
     public bool Survival;
 
+    // CURSE VARIABLE VALUES
+    [Header("Curse Variables")]
+    public float EnemyMoveSpeedCurseMultiplier = 1.2f;
+    public float EnemySpawnSpeedCurseMultiplier = 1.3f;
+    public float SawRadiusCurseMultiplier = 0.8f;
+    public float SawMovementSpeedCurseMultiplier = 0.8f;
+    [Range(0.0f, 1.0f)]
+    public float CrystalDropChanceCurseMultiplier = 0.7f;
+
     // ENVIRONEMNT
+    [Header( "Environment Variables" )]
     public Environment ActiveEnvironment;
 
     // WIN LOSS STATE
@@ -61,7 +72,7 @@ public class GameplayManager : MonoBehaviour
         }
     }
     private static float gamePlayTimeScale;
-    public UnityEvent TimeScaleChanged = new UnityEvent();
+    [HideInInspector] public UnityEvent TimeScaleChanged = new UnityEvent();
 
     public void SetTimeScale( float new_val, float lerp_duration )
     {
@@ -86,6 +97,7 @@ public class GameplayManager : MonoBehaviour
     // MONOBEHAVIOR
     private void Start()
     {
+        PD.Instance.Start();
         Invoke( "LateStart", 0.1f ); // we have to delay this otherwise we run into script execution order problems
         Debug.Assert( Instance == null );
         Instance = this;
@@ -94,9 +106,9 @@ public class GameplayManager : MonoBehaviour
         // clear out all survival unlock flags every time we start
         if( Survival )
         {
-            foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
+            foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
             {
-                PD.Instance.UpgradeUnlockMap.SetUnlock( flag, false, true );
+                PD.Instance.UnlockMap.Set( flag, false, true );
             }
         }
     }

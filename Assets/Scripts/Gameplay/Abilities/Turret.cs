@@ -149,17 +149,17 @@ public class Turret : MonoBehaviour
     private void OnAbilityUsed( AbilityEnum ability )
     {
         if( ability == AbilityEnum.ChainLightning &&
-            PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.TurretsPowerSurge, GameplayManager.Instance.Survival ) )
+            PD.Instance.UnlockMap.Get( UnlockFlags.TurretsPowerSurge, GameplayManager.Instance.Survival ) )
         {
             StartPowerSurge();
         }
         else if( ability == AbilityEnum.Sawmageddon &&
-            PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.TurretsCollateralDamage, GameplayManager.Instance.Survival ) )
+            PD.Instance.UnlockMap.Get( UnlockFlags.TurretsCollateralDamage, GameplayManager.Instance.Survival ) )
         {
             StartCollateralDamage();
         }
         else if( ability == AbilityEnum.Anomaly &&
-            PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.TurretsTimedPaylod, GameplayManager.Instance.Survival ) )
+            PD.Instance.UnlockMap.Get( UnlockFlags.TurretsTimedPaylod, GameplayManager.Instance.Survival ) )
         {
             StartTimedPayload();
         }

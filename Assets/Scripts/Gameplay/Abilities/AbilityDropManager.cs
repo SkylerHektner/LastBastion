@@ -45,7 +45,12 @@ public class AbilityDropManager : MonoBehaviour
     {
         int seed = Random.Range( 0, AbilityDropRandomMax );
         seed += cur_drop_bias;
-        if( seed >= AbilityDropTarget )
+
+        bool curse_failure = Random.Range( 0.0f, 1.0f ) <
+            ( PD.Instance.UnlockMap.Get( UnlockFlags.CrystalDropChanceCurse, GameplayManager.Instance.Survival ) ?
+            GameplayManager.Instance.CrystalDropChanceCurseMultiplier : 1.1f );
+
+        if( seed >= AbilityDropTarget && !curse_failure )
         {
             // pick an ability
             float min_roll = float.MaxValue;
@@ -76,19 +81,19 @@ public class AbilityDropManager : MonoBehaviour
             switch( ability )
             {
                 case AbilityEnum.Anomaly:
-                    if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.Anomaly, GameplayManager.Instance.Survival ) )
+                    if( PD.Instance.UnlockMap.Get( UnlockFlags.Anomaly, GameplayManager.Instance.Survival ) )
                         ab = TemporalAnomalyDrop;
                     break;
                 case AbilityEnum.ChainLightning:
-                    if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.ChainLightning, GameplayManager.Instance.Survival ) )
+                    if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightning, GameplayManager.Instance.Survival ) )
                         ab = ChainLightningDrop;
                     break;
                 case AbilityEnum.Typhoon:
-                    if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.Typhoon, GameplayManager.Instance.Survival ) )
+                    if( PD.Instance.UnlockMap.Get( UnlockFlags.Typhoon, GameplayManager.Instance.Survival ) )
                         ab = TyphoonDrop;
                     break;
                 case AbilityEnum.Sawmageddon:
-                    if( PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.Sawmageddon, GameplayManager.Instance.Survival ) )
+                    if( PD.Instance.UnlockMap.Get( UnlockFlags.Sawmageddon, GameplayManager.Instance.Survival ) )
                         ab = SawmageddonDrop;
                     break;
             }

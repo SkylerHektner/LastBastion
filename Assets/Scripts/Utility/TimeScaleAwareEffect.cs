@@ -20,6 +20,6 @@ public class TimeScaleAwareEffect : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameplayManager.Instance.TimeScaleChanged.RemoveListener( OnTimeScaleChanged );
+        GameplayManager.Instance?.TimeScaleChanged.RemoveListener( OnTimeScaleChanged );
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class UnlockFlagUIInformation : ScriptableObject
 {
-    public PD.UnlockFlags UnlockFlag;
+    public UnlockFlags UnlockFlag;
     public string UnlockName;
     [Multiline( 5 )]
     public string Description;

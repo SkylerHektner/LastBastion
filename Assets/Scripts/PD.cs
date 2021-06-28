@@ -9,12 +9,51 @@ using System.Linq;
 using System.Runtime.Serialization;
 using UnityEngine.Events;
 
+// UNLOCK FLAGS
+//      When adding new Unlock Flags remember to 
+//          1) Update the UnlockFlagDependencyMap
+//          2) Update the UnlockFlagCurseMap
+public enum UnlockFlags
+{
+    ChainLightning = 0,
+    ChainLightningStunDuration = 1,
+    ChainLightningStaticOverload = 2,
+    ChainLightningLightningRod = 3,
+    Typhoon = 4,
+    TyphoonExtendedBBQ = 5,
+    TyphoonFlameSaw = 6,
+    TyphoonRoaringFlames = 7,
+    Anomaly = 8,
+    AnomalyRicochetSaws = 9,
+    AnomalyStasisCoating = 10,
+    AnomalySingularity = 11,
+    Sawmageddon = 12,
+    SawmageddonDuration = 13,
+    SawmageddonProjectiles = 14,
+    SawmageddonComboKiller = 15,
+    BaseOvershield = 16,
+    BaseHP1 = 17,
+    BaseHP2 = 18,
+    BaseHP3 = 19,
+    Turrets = 20,
+    TurretsPowerSurge = 21,
+    TurretsCollateralDamage = 22,
+    TurretsTimedPaylod = 23,
+
+    // CURSE FLAGS
+    EnemyMovementSpeedCurse = 24,
+    EnemySpawnSpeedCurse = 25,
+    SawRadiusCurse = 26,
+    SawMovementSpeedCurse = 27,
+    CrystalDropChanceCurse = 28,
+}
+
 // PLAYER DATA
 public class PD
 {
     // DATA
     public PlayerDataField<int> PlayerWealth = new PlayerDataField<int>();
-    public PlayerUpgradeUnlockMap UpgradeUnlockMap = new PlayerUpgradeUnlockMap();
+    public PlayerUpgradeUnlockMap UnlockMap = new PlayerUpgradeUnlockMap();
     public PlayerLevelCompletionMap LevelCompletionMap = new PlayerLevelCompletionMap();
     public PDList<string> PlayerChallengeCompletionList = new PDList<string>();
     // limbo data
@@ -24,37 +63,9 @@ public class PD
     public PlayerDataField<int> StoredLimboCurrentWave = new PlayerDataField<int>();
     public PlayerDataField<int> StoredLimboSurvivalIndex = new PlayerDataField<int>();
 
-    // UPGRADES
-    public enum UnlockFlags
+    public readonly Dictionary<UnlockFlags, List<UnlockFlags>> UnlockFlagDependencyMap = new Dictionary<UnlockFlags, List<UnlockFlags>>
     {
-        ChainLightning = 0,
-        ChainLightningStunDuration = 1,
-        ChainLightningStaticOverload = 2,
-        ChainLightningLightningRod = 3,
-        Typhoon = 4,
-        TyphoonExtendedBBQ = 5,
-        TyphoonFlameSaw = 6,
-        TyphoonRoaringFlames = 7,
-        Anomaly = 8,
-        AnomalyRicochetSaws = 9,
-        AnomalyStasisCoating = 10,
-        AnomalySingularity = 11,
-        Sawmageddon = 12,
-        SawmageddonDuration = 13,
-        SawmageddonProjectiles = 14,
-        SawmageddonComboKiller = 15,
-        BaseOvershield = 16,
-        BaseHP1 = 17,
-        BaseHP2 = 18,
-        BaseHP3 = 19,
-        Turrets = 20,
-        TurretsPowerSurge = 21,
-        TurretsCollateralDamage = 22,
-        TurretsTimedPaylod = 23,
-    }
-
-    public readonly Dictionary<UnlockFlags, List<UnlockFlags>> UpgradeFlagDependencyMap = new Dictionary<UnlockFlags, List<UnlockFlags>>
-    {
+        // boons
         { UnlockFlags.ChainLightning, new List<UnlockFlags> { } },
         { UnlockFlags.ChainLightningStunDuration, new List<UnlockFlags> { UnlockFlags.ChainLightning } },
         { UnlockFlags.ChainLightningLightningRod, new List<UnlockFlags> { UnlockFlags.ChainLightning, UnlockFlags.ChainLightningStunDuration } },
@@ -79,6 +90,49 @@ public class PD
         { UnlockFlags.TurretsPowerSurge, new List<UnlockFlags> { UnlockFlags.Turrets, UnlockFlags.ChainLightning } },
         { UnlockFlags.TurretsCollateralDamage, new List<UnlockFlags> { UnlockFlags.Turrets, UnlockFlags.Sawmageddon } },
         { UnlockFlags.TurretsTimedPaylod, new List<UnlockFlags> { UnlockFlags.Turrets, UnlockFlags.Anomaly } },
+
+        // curse
+        { UnlockFlags.EnemyMovementSpeedCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.EnemySpawnSpeedCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.SawRadiusCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.SawMovementSpeedCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.CrystalDropChanceCurse, new List<UnlockFlags> { } },
+    };
+
+    public readonly Dictionary<UnlockFlags, bool> UnlockFlagCurseMap = new Dictionary<UnlockFlags, bool>
+    {
+        // boon
+        { UnlockFlags.ChainLightning, false },
+        { UnlockFlags.ChainLightningStunDuration, false },
+        { UnlockFlags.ChainLightningLightningRod, false },
+        { UnlockFlags.ChainLightningStaticOverload, false },
+        { UnlockFlags.Typhoon, false },
+        { UnlockFlags.TyphoonFlameSaw, false },
+        { UnlockFlags.TyphoonRoaringFlames, false },
+        { UnlockFlags.TyphoonExtendedBBQ, false },
+        { UnlockFlags.Anomaly, false },
+        { UnlockFlags.AnomalyRicochetSaws, false },
+        { UnlockFlags.AnomalyStasisCoating, false },
+        { UnlockFlags.AnomalySingularity, false },
+        { UnlockFlags.Sawmageddon, false },
+        { UnlockFlags.SawmageddonDuration, false },
+        { UnlockFlags.SawmageddonProjectiles, false },
+        { UnlockFlags.SawmageddonComboKiller, false },
+        { UnlockFlags.BaseHP1, false },
+        { UnlockFlags.BaseHP2, false },
+        { UnlockFlags.BaseHP3, false },
+        { UnlockFlags.BaseOvershield, false },
+        { UnlockFlags.Turrets, false },
+        { UnlockFlags.TurretsPowerSurge, false },
+        { UnlockFlags.TurretsCollateralDamage, false },
+        { UnlockFlags.TurretsTimedPaylod, false },
+
+        // curse
+        { UnlockFlags.EnemyMovementSpeedCurse, true },
+        { UnlockFlags.EnemySpawnSpeedCurse, true },
+        { UnlockFlags.SawRadiusCurse, true },
+        { UnlockFlags.SawMovementSpeedCurse, true },
+        { UnlockFlags.CrystalDropChanceCurse, true },
     };
 
     // EVENTS
@@ -133,8 +187,11 @@ public class PD
     {
         foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
-            _instance.UpgradeUnlockMap.SetUnlock( flag, true, false );
-            _instance.UpgradeUnlockMap.SetUnlock( flag, true, true );
+            if( !PD.Instance.UnlockFlagCurseMap[flag] )
+            {
+                _instance.UnlockMap.Set( flag, true, false );
+                _instance.UnlockMap.Set( flag, true, true );
+            }
         }
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level1", true );
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level2", true );
@@ -145,6 +202,30 @@ public class PD
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level7", true );
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level8", true );
         PD.Instance.LevelCompletionMap.SetLevelCompletion( "Level9", true );
+    }
+    [MenuItem("Debug/EnableAllCurses")]
+    public static void EnableAllCurses()
+    {
+        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
+        {
+            if( PD.Instance.UnlockFlagCurseMap[flag] )
+            {
+                _instance.UnlockMap.Set( flag, true, false );
+                _instance.UnlockMap.Set( flag, true, true );
+            }
+        }
+    }
+    [MenuItem( "Debug/DisableAllCurses" )]
+    public static void DisableAllCurses()
+    {
+        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
+        {
+            if( PD.Instance.UnlockFlagCurseMap[flag] )
+            {
+                _instance.UnlockMap.Set( flag, false, false );
+                _instance.UnlockMap.Set( flag, false, true );
+            }
+        }
     }
 
     [MenuItem( "Debug/EndTheSuffering" )]
@@ -186,6 +267,24 @@ public class PD
         File.WriteAllText( GetPath(), data );
         dirty = false;
     }
+
+    public void Start()
+    {
+# if UNITY_EDITOR
+        // this is really just here for debug purposes
+        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
+        {
+            if( !UnlockFlagDependencyMap.ContainsKey( flag ) )
+            {
+                UnityEngine.Debug.LogError( $"UnlockFlagDependencyMap missing entry for Unlock Flag {flag}" );
+            }
+            if( !UnlockFlagCurseMap.ContainsKey( flag ) )
+            {
+                UnityEngine.Debug.LogError( $"UnlockFlagCurseMap missing entry for Unlock Flag {flag}" );
+            }
+        }
+# endif
+    }
 }
 
 [System.Serializable]
@@ -206,20 +305,20 @@ public class PlayerDataField<T>
 [System.Serializable]
 public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
 {
-    private Dictionary<PD.UnlockFlags, bool> campaign_unlock_map = new Dictionary<PD.UnlockFlags, bool>();
-    private Dictionary<PD.UnlockFlags, bool> survival_unlock_map = new Dictionary<PD.UnlockFlags, bool>();
+    private Dictionary<UnlockFlags, bool> campaign_unlock_map = new Dictionary<UnlockFlags, bool>();
+    private Dictionary<UnlockFlags, bool> survival_unlock_map = new Dictionary<UnlockFlags, bool>();
 
     [SerializeField] List<string> serialized_campaign_unlock_flags;
     [SerializeField] List<string> serialized_survival_unlock_flags;
 
-    private static Dictionary<string, PD.UnlockFlags> valid_enum_strings;
+    private static Dictionary<string, UnlockFlags> valid_enum_strings;
 
-    public bool GetUnlock( PD.UnlockFlags flag, bool survival )
+    public bool Get( UnlockFlags flag, bool survival )
     {
         return survival ? survival_unlock_map[flag] : campaign_unlock_map[flag];
     }
 
-    public void SetUnlock( PD.UnlockFlags flag, bool value, bool survival )
+    public void Set( UnlockFlags flag, bool value, bool survival )
     {
         if( survival )
         {
@@ -236,7 +335,7 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
 
     public PlayerUpgradeUnlockMap()
     {
-        foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
+        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
             campaign_unlock_map.Add( flag, false );
             survival_unlock_map.Add( flag, false );
@@ -265,15 +364,15 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         // populate valid_strings lookup map if not created yet
         if( valid_enum_strings == null )
         {
-            valid_enum_strings = new Dictionary<string, PD.UnlockFlags>();
-            foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
+            valid_enum_strings = new Dictionary<string, UnlockFlags>();
+            foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
             {
                 valid_enum_strings.Add( flag.ToString(), flag );
             }
         }
 
         // add an entry for every possible unlock flag
-        foreach( PD.UnlockFlags flag in Enum.GetValues( typeof( PD.UnlockFlags ) ) )
+        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
             if( !campaign_unlock_map.ContainsKey( flag ) )
                 campaign_unlock_map.Add( flag, false );
@@ -287,7 +386,7 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         {
             foreach( string key in serialized_campaign_unlock_flags )
             {
-                PD.UnlockFlags out_flag;
+                UnlockFlags out_flag;
                 if( valid_enum_strings.TryGetValue( key, out out_flag ) )
                 {
                     campaign_unlock_map[out_flag] = true;
@@ -305,7 +404,7 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         {
             foreach( string key in serialized_survival_unlock_flags )
             {
-                PD.UnlockFlags out_flag;
+                UnlockFlags out_flag;
                 if( valid_enum_strings.TryGetValue( key, out out_flag ) )
                 {
                     survival_unlock_map[out_flag] = true;

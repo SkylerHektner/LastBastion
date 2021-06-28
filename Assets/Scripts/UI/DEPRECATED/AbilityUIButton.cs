@@ -8,7 +8,7 @@ using UnityEngine;
 public class AbilityUIButton : MonoBehaviour
 {
     public AbilityEnum MyAbility;
-    public PD.UnlockFlags UnlockFlag;
+    public UnlockFlags UnlockFlag;
     public AbilityUIManager AbilityUIManagerInstance;
     public Animator IconAnimator;
     public Animator FXAnimator;
@@ -34,7 +34,7 @@ public class AbilityUIButton : MonoBehaviour
         UpdateLockedState();
     }
 
-    private void OnUpgradeUnlockFlagChanged( PD.UnlockFlags flag, bool value )
+    private void OnUpgradeUnlockFlagChanged( UnlockFlags flag, bool value )
     {
         if( flag == UnlockFlag )
         {
@@ -50,7 +50,7 @@ public class AbilityUIButton : MonoBehaviour
             // bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
             // IconAnimator.SetBool( "Empty", has_no_charges );
 
-            if( PD.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag, GameplayManager.Instance.Survival ) && hovering )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag, GameplayManager.Instance.Survival ) && hovering )
             {
                 FXAnimator.SetTrigger( "Glow" );
                 FXAnimator.ResetTrigger( "Hide" );
@@ -60,7 +60,7 @@ public class AbilityUIButton : MonoBehaviour
 
     private void UpdateLockedState()
     {
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag, GameplayManager.Instance.Survival ) )
         {
             LockedImage.SetActive( false );
             UsageSlotsAnimator.gameObject.SetActive( true );
@@ -76,7 +76,7 @@ public class AbilityUIButton : MonoBehaviour
     {
         hovering = true;
 
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( UnlockFlag, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag, GameplayManager.Instance.Survival ) )
         {
             AbilityUIManagerInstance.SetCurrentHovering( this );
 

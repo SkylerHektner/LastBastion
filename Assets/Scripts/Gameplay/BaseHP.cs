@@ -55,11 +55,11 @@ public class BaseHP : MonoBehaviour
     }
 
 
-    private void OnUpgradeUnlockFlagChanged( PD.UnlockFlags flag, bool value )
+    private void OnUpgradeUnlockFlagChanged( UnlockFlags flag, bool value )
     {
-        if( flag == PD.UnlockFlags.BaseHP1
-            || flag == PD.UnlockFlags.BaseHP2
-            || flag == PD.UnlockFlags.BaseHP3 )
+        if( flag == UnlockFlags.BaseHP1
+            || flag == UnlockFlags.BaseHP2
+            || flag == UnlockFlags.BaseHP3 )
         {
             UpdateMaxHP();
         }
@@ -68,9 +68,9 @@ public class BaseHP : MonoBehaviour
     private void UpdateMaxHP()
     {
         CurrentMaxHP = BaseMaxHP;
-        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.BaseHP1, GameplayManager.Instance.Survival ) ? MaxHPUpgrade1 : 0;
-        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.BaseHP2, GameplayManager.Instance.Survival ) ? MaxHPUpgrade2 : 0;
-        CurrentMaxHP += PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.BaseHP3, GameplayManager.Instance.Survival ) ? MaxHPUpgrade3 : 0;
+        CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP1, GameplayManager.Instance.Survival ) ? MaxHPUpgrade1 : 0;
+        CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP2, GameplayManager.Instance.Survival ) ? MaxHPUpgrade2 : 0;
+        CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP3, GameplayManager.Instance.Survival ) ? MaxHPUpgrade3 : 0;
     }
 
     [ContextMenu( "KillPlayer" )]
@@ -93,7 +93,7 @@ public class BaseHP : MonoBehaviour
         DamageTakenEvent.Invoke( Damage );
 
         // if I have overshield, damage that instead
-        if( CurrentOvershield > 0 && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.BaseOvershield, GameplayManager.Instance.Survival ) )
+        if( CurrentOvershield > 0 && PD.Instance.UnlockMap.Get( UnlockFlags.BaseOvershield, GameplayManager.Instance.Survival ) )
         {
             CurrentOvershield -= Damage;
             OvershieldAnim.SetBool( "Recovering", true );

@@ -9,7 +9,7 @@ public class UpgradeButton : MonoBehaviour
 {
     public UnlockFlagUIInformation UnlockFlagInformation;
     public GameObject InfoBox;
-    public PD.UnlockFlags UpgradeFlag;
+    public UnlockFlags UpgradeFlag;
     public GameObject PurchasedGlow;
     public Sprite VeiledImage;
     public Sprite Lockedimage;
@@ -54,9 +54,9 @@ public class UpgradeButton : MonoBehaviour
         PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeFlagChanged );
     }
 
-    private void OnUpgradeFlagChanged( PD.UnlockFlags flag, bool new_value )
+    private void OnUpgradeFlagChanged( UnlockFlags flag, bool new_value )
     {
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( UpgradeFlag, false ) )
+        if( PD.Instance.UnlockMap.Get( UpgradeFlag, false ) )
             Purchased = true;
         UpdateButton();
     }
@@ -65,7 +65,7 @@ public class UpgradeButton : MonoBehaviour
     {
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpdatePlayerWealth();
-        if( PD.Instance.UpgradeUnlockMap.GetUnlock( UpgradeFlag, false ) )
+        if( PD.Instance.UnlockMap.Get( UpgradeFlag, false ) )
         {
             Purchased = true;
             PurchasedGlow.SetActive( true );
@@ -84,7 +84,7 @@ public class UpgradeButton : MonoBehaviour
         PurchasedGlow.SetActive( true );
         gameObject.GetComponent<Image>().sprite = UnlockedImage;
         PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() - UnlockFlagInformation.CampaignCost );
-        PD.Instance.UpgradeUnlockMap.SetUnlock( UpgradeFlag, true, false );
+        PD.Instance.UnlockMap.Set( UpgradeFlag, true, false );
         InfoPanel ThePanel = InfoBox.GetComponent<InfoPanel>();
         ThePanel.UpdatePlayerWealth();
         AvailableGlow.SetActive( false );
@@ -93,7 +93,7 @@ public class UpgradeButton : MonoBehaviour
     private void UpdateButton()
     {
 
-        if( PD.Instance.UpgradeFlagDependencyMap[UpgradeFlag].Any( f => !PD.Instance.UpgradeUnlockMap.GetUnlock( f, false ) ) )
+        if( PD.Instance.UnlockFlagDependencyMap[UpgradeFlag].Any( f => !PD.Instance.UnlockMap.Get( f, false ) ) )
         {
             // disable button if any pre-reqs not set
             PurchasedGlow.SetActive( false );

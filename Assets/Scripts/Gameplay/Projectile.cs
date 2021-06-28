@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] float MoveSpeed;
+    [ReadOnly] [SerializeField] float MoveSpeed;
     [SerializeField] protected Vector3 MoveDirection = Vector3.zero;
     [SerializeField] protected WallHitBehavior CurWallHitBehavior;
     public GameObject DestroyEffect;

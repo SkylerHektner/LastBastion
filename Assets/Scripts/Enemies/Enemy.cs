@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
     {
         get
         {
-            return powerupDropValue * ( Zapped && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.ChainLightningLightningRod, GameplayManager.Instance.Survival ) ? 2 : 1 );
+            return powerupDropValue * ( Zapped && PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningLightningRod, GameplayManager.Instance.Survival ) ? 2 : 1 );
         }
     }
 
@@ -99,14 +99,24 @@ public class Enemy : MonoBehaviour
 
         if( Moving )
         {
-            if( transform.position.y - GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.y < Time.deltaTime * MoveSpeed * GameplayManager.TimeScale )
+            float move_delta = MoveSpeed * Time.deltaTime * GameplayManager.TimeScale;
+            if( PD.Instance.UnlockMap.Get( 
+                UnlockFlags.EnemyMovementSpeedCurse, 
+                GameplayManager.Instance.Survival ) )
+            {
+                move_delta *= GameplayManager.Instance.EnemyMoveSpeedCurseMultiplier;
+            }
+
+            if( transform.position.y - GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.y < move_delta )
             {
                 Moving = false;
                 DamageBase();
                 Kill();
             }
             else
-                transform.position = transform.position + Vector3.down * MoveSpeed * Time.deltaTime * GameplayManager.TimeScale;
+            {
+                transform.position = transform.position + Vector3.down * move_delta;
+            }
         }
 
         if( zap_duration != -1.0f )

@@ -14,7 +14,15 @@ public class Saw : MonoBehaviour
     public UnityEvent<long> SawHitEnemyEvent = new UnityEvent<long>();
     public UnityEvent SawMuddiedEvent = new UnityEvent();
     public bool Moving { get { return MoveDirection != Vector3.zero; } }
-    public float AdjustedMoveSpeed { get { return MoveSpeed * covered_in_mud_movespeed_multiplier * on_fire_movespeed_multiplier; } }
+    public float AdjustedMoveSpeed
+    {
+        get
+        {
+            return MoveSpeed * covered_in_mud_movespeed_multiplier * on_fire_movespeed_multiplier *
+                ( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse, GameplayManager.Instance.Survival ) ?
+                GameplayManager.Instance.SawMovementSpeedCurseMultiplier : 1.0f );
+        }
+    }
     public Vector3 MoveDirection { get { return proj.GetMoveDirection(); } }
 
     [SerializeField] float MoveSpeed = 1.0f;
@@ -46,6 +54,8 @@ public class Saw : MonoBehaviour
 
     private float correction_timer = 0.0f;
 
+    private Vector3 original_scale = Vector3.zero;
+
     public Animator SawmageddonFX;
     public Animator AnomalyFX;
     public Animator TyphoonFX;
@@ -68,6 +78,8 @@ public class Saw : MonoBehaviour
         DirectionArrow.gameObject.SetActive( false );
         proj = GetComponent<Projectile>();
         proj.ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
+        PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUnlockFlagChanged );
+        UpdateSawRadius();
     }
 
     private void Update()
@@ -130,7 +142,6 @@ public class Saw : MonoBehaviour
         }
     }
 
-
     private void OnProjectileHitWall( ProjectileHitInfo hit_info )
     {
         if( hit_info.wall == ProjectileHitInfo.Wall.Bottom ||
@@ -141,7 +152,7 @@ public class Saw : MonoBehaviour
             // light saw on fire if flame saw upgrade and typhoon active
             if( hit_info.wall == ProjectileHitInfo.Wall.Bottom
                 && TyphoonAbility.ActiveTyphoon != null
-                && PD.Instance.UpgradeUnlockMap.GetUnlock( PD.UnlockFlags.TyphoonFlameSaw, GameplayManager.Instance.Survival ) )
+                && PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonFlameSaw, GameplayManager.Instance.Survival ) )
             {
                 TyphoonAbility.ActiveTyphoon.SetSawOnFire( this );
             }
@@ -154,6 +165,7 @@ public class Saw : MonoBehaviour
                 DirectionArrow.sprite = DirectionArrowSprite;
         }
     }
+
     private void OnTriggerEnter2D( Collider2D col )
     {
         if( col.tag == "Enemy" )
@@ -223,7 +235,6 @@ public class Saw : MonoBehaviour
 
         DirectionArrow.GetComponent<Renderer>().material.SetColor( "_Color", drag_arrow_color );
     }
-
     private void DragEnded()
     {
         VerifyDragLastPosition();
@@ -325,5 +336,27 @@ public class Saw : MonoBehaviour
         on_fire_duration = -1.0f;
         on_fire_extra_damage = 0;
         on_fire_movespeed_multiplier = 1.0f;
+    }
+
+    private void OnUnlockFlagChanged( UnlockFlags flag, bool value )
+    {
+        if( flag == UnlockFlags.SawRadiusCurse )
+            UpdateSawRadius();
+        else if( flag == UnlockFlags.SawMovementSpeedCurse )
+            proj.SetProjectileSpeed( AdjustedMoveSpeed );
+    }
+
+    private void UpdateSawRadius()
+    {
+        if( original_scale == Vector3.zero )
+        {
+            original_scale = transform.localScale;
+        }
+
+        float scale_multiplier =
+            PD.Instance.UnlockMap.Get( UnlockFlags.SawRadiusCurse, GameplayManager.Instance.Survival ) ?
+            GameplayManager.Instance.SawRadiusCurseMultiplier : 1.0f;
+
+        transform.localScale = original_scale * scale_multiplier;
     }
 }
