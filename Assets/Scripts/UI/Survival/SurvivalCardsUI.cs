@@ -130,6 +130,7 @@ public class SurvivalCardsUI : MonoBehaviour
     public void SetInactive()
     {
         gameObject.SetActive( false );
+        ContinueButton.gameObject.SetActive(false);
     }
 
     // returns a list of up to three unlock flags randomly based on current unlock state
