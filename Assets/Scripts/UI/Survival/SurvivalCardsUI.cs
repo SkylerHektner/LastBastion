@@ -109,7 +109,7 @@ public class SurvivalCardsUI : MonoBehaviour
             }
         }
 
-        while( ret.Count < 3 && options.Count > 0 )
+        while( ret.Count < 6 && options.Count > 0 )
         {
             int random_index = UnityEngine.Random.Range( 0, options.Count );
             ret.Add( options[random_index] );
