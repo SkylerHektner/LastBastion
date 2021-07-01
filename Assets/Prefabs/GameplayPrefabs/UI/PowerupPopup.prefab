@@ -546,6 +546,9 @@ MonoBehaviour:
   - {fileID: 1778689526226654294}
   - {fileID: 2350080311856814389}
   DescriptionBox: {fileID: 5873109031201547687}
+  PositiveBackgroundEffects: {fileID: 3976800685177867490}
+  NegativeBackgroundEffects: {fileID: 5905006815198747450}
+  ContinueButton: {fileID: 1007617255918428426}
 --- !u!1 &1007617255260083242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,6 +1023,7 @@ MonoBehaviour:
   GlowImage: {fileID: 1007617255383570906}
   ButtonImage: {fileID: 1007617256016993719}
   Anim: {fileID: 1007617255782006267}
+  CurseCard: 0
   Information: {fileID: 0}
 --- !u!1 &1007617255889967659
 GameObject:
@@ -1206,7 +1210,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1007617255160036732}
         m_TargetAssemblyTypeName: SurvivalCardsUI, Assembly-CSharp
-        m_MethodName: ConfirmUpgrade
+        m_MethodName: ConfirmOptions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1688,7 +1692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pick 1 Bonus...
+  m_text: Pick a Bonus...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c99307c8b02a88469920c713a6746dd, type: 2}
   m_sharedMaterial: {fileID: -2529497904981089767, guid: 1c99307c8b02a88469920c713a6746dd, type: 2}
@@ -2132,6 +2136,7 @@ MonoBehaviour:
   GlowImage: {fileID: 1007617256599688476}
   ButtonImage: {fileID: 1007617256044729181}
   Anim: {fileID: 1007617256323613876}
+  CurseCard: 0
   Information: {fileID: 0}
 --- !u!1 &1007617256361800528
 GameObject:
@@ -2217,6 +2222,7 @@ MonoBehaviour:
   GlowImage: {fileID: 1007617255421867402}
   ButtonImage: {fileID: 1007617256955589624}
   Anim: {fileID: 1007617256361800530}
+  CurseCard: 0
   Information: {fileID: 0}
 --- !u!1 &1007617256442079260
 GameObject:
@@ -2968,6 +2974,7 @@ MonoBehaviour:
   GlowImage: {fileID: 6113161140518884056}
   ButtonImage: {fileID: 2415253917665991319}
   Anim: {fileID: 4487302305120297120}
+  CurseCard: 1
   Information: {fileID: 0}
 --- !u!1 &1376438752676466415
 GameObject:
@@ -3751,6 +3758,7 @@ MonoBehaviour:
   GlowImage: {fileID: 1356992186536727123}
   ButtonImage: {fileID: 7167137307566981758}
   Anim: {fileID: 7377013761462855493}
+  CurseCard: 1
   Information: {fileID: 0}
 --- !u!1 &6467571710737089557
 GameObject:
@@ -4595,6 +4603,7 @@ MonoBehaviour:
   GlowImage: {fileID: 6927248584393218673}
   ButtonImage: {fileID: 4278913081970532856}
   Anim: {fileID: 5941464968278731508}
+  CurseCard: 1
   Information: {fileID: 0}
 --- !u!1 &8183142675455715067
 GameObject:
@@ -4661,7 +4670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ...and 1 Curse
+  m_text: ...and a Curse
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c99307c8b02a88469920c713a6746dd, type: 2}
   m_sharedMaterial: {fileID: -2529497904981089767, guid: 1c99307c8b02a88469920c713a6746dd, type: 2}

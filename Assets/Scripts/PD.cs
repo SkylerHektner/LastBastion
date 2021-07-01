@@ -63,6 +63,7 @@ public class PD
     public PlayerDataField<int> StoredLimboCurrentWave = new PlayerDataField<int>();
     public PlayerDataField<int> StoredLimboSurvivalIndex = new PlayerDataField<int>();
 
+    // a dictionary containing information about the dependencies of each unlock flag
     public readonly Dictionary<UnlockFlags, List<UnlockFlags>> UnlockFlagDependencyMap = new Dictionary<UnlockFlags, List<UnlockFlags>>
     {
         // boons
@@ -99,6 +100,7 @@ public class PD
         { UnlockFlags.CrystalDropChanceCurse, new List<UnlockFlags> { } },
     };
 
+    // a dictionary containing information about whether an unlock flag is a curse
     public readonly Dictionary<UnlockFlags, bool> UnlockFlagCurseMap = new Dictionary<UnlockFlags, bool>
     {
         // boon

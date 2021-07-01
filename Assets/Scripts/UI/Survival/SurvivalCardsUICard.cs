@@ -8,6 +8,7 @@ public class SurvivalCardsUICard : MonoBehaviour
     [SerializeField] Image GlowImage;
     [SerializeField] Image ButtonImage;
     [SerializeField] Animator Anim;
+    public bool CurseCard;
     [HideInInspector] public UnlockFlagUIInformation Information;
 
     public void Start()
