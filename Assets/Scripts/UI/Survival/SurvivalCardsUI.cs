@@ -79,6 +79,7 @@ public class SurvivalCardsUI : MonoBehaviour
         ResetCardGlowsAndBackground( false );
         ContinueButton.gameObject.SetActive( false );
         gameObject.SetActive( true );
+        TryEnableContinueButton();
     }
 
     public void OnSurvivalCardClicked( SurvivalCardsUICard card )
@@ -97,7 +98,8 @@ public class SurvivalCardsUI : MonoBehaviour
 
     private void TryEnableContinueButton()
     {
-        if( selected_boon_card != null && selected_curse_card != null )
+        if( ( selected_boon_card != null || !Cards.Where( c => !c.CurseCard ).Any( c => c.gameObject.activeInHierarchy ) )
+            && ( selected_curse_card != null || !Cards.Where( c => c.CurseCard ).Any( c => c.gameObject.activeInHierarchy ) ) )
             ContinueButton.gameObject.SetActive( true );
     }
 
@@ -116,11 +118,10 @@ public class SurvivalCardsUI : MonoBehaviour
 
     public void ConfirmOptions()
     {
-        Debug.Assert( selected_boon_card != null );
-        Debug.Assert( selected_curse_card != null );
-
-        PD.Instance.UnlockMap.Set( selected_boon_card.Information.UnlockFlag, true, true );
-        PD.Instance.UnlockMap.Set( selected_curse_card.Information.UnlockFlag, true, true );
+        if( selected_boon_card != null )
+            PD.Instance.UnlockMap.Set( selected_boon_card.Information.UnlockFlag, true, true );
+        if( selected_curse_card != null )
+            PD.Instance.UnlockMap.Set( selected_curse_card.Information.UnlockFlag, true, true );
 
         // wave start was deferred for the menu, let it play now
         SpawnManager.Instance.StartNextWave();
