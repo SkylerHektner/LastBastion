@@ -123,6 +123,12 @@ public class SurvivalCardsUI : MonoBehaviour
         if( selected_curse_card != null )
             PD.Instance.UnlockMap.Set( selected_curse_card.Information.UnlockFlag, true, true );
 
+        selected_boon_card?.ShowLockAnimation();
+        selected_curse_card?.ShowLockAnimation();
+
+        selected_boon_card = null;
+        selected_curse_card = null;
+
         // wave start was deferred for the menu, let it play now
         SpawnManager.Instance.StartNextWave();
     }
