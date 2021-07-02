@@ -26,6 +26,8 @@ public class GameplayManager : MonoBehaviour
     public float SawMovementSpeedCurseMultiplier = 0.8f;
     [Range(0.0f, 1.0f)]
     public float CrystalDropChanceCurseMultiplier = 0.7f;
+    public float AbilityDurationCurseMultiplier = 0.7f;
+    public float SkeletonUpgradeCurseChance = 0.1f;
 
     // ENVIRONEMNT
     [Header( "Environment Variables" )]

@@ -20,8 +20,9 @@ public class SawmageddonAbility : Ability
     {
         base.Start();
         ActiveSawmageddon = this;
-        time_left = PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonDuration, GameplayManager.Instance.Survival )
-            ? AbilityData.ImprovedDuration : AbilityData.Duration;
+        time_left = ( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonDuration )
+            ? AbilityData.ImprovedDuration : AbilityData.Duration )
+            * GetAbilityDurationMultiplier();
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
         if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) )
         {

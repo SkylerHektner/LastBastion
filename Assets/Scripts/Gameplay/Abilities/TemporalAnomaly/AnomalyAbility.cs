@@ -18,7 +18,7 @@ public class AnomalyAbility : Ability
         base.Start();
         ActiveAnomaly = this;
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
-        time_remaining = AbilityData.Duration;
+        time_remaining = AbilityData.Duration * GetAbilityDurationMultiplier();
 
         if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyStasisCoating, GameplayManager.Instance.Survival ) )
         {
@@ -109,7 +109,7 @@ public class AnomalyAbility : Ability
 
     public override bool OnAbilityUsedWhileAlreadyActive()
     {
-        time_remaining += AbilityData.Duration;
+        time_remaining += AbilityData.Duration * GetAbilityDurationMultiplier();
         // return true to cancel new ability construction
         return true;
     }

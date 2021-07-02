@@ -46,6 +46,8 @@ public enum UnlockFlags
     SawRadiusCurse = 26,
     SawMovementSpeedCurse = 27,
     CrystalDropChanceCurse = 28,
+    AbilityDurationCurse = 29,
+    SkeletonUpgradeCurse = 30,
 }
 
 // PLAYER DATA
@@ -98,6 +100,8 @@ public class PD
         { UnlockFlags.SawRadiusCurse, new List<UnlockFlags> { } },
         { UnlockFlags.SawMovementSpeedCurse, new List<UnlockFlags> { } },
         { UnlockFlags.CrystalDropChanceCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.AbilityDurationCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.SkeletonUpgradeCurse, new List<UnlockFlags> { } },
     };
 
     // a dictionary containing information about whether an unlock flag is a curse
@@ -135,6 +139,8 @@ public class PD
         { UnlockFlags.SawRadiusCurse, true },
         { UnlockFlags.SawMovementSpeedCurse, true },
         { UnlockFlags.CrystalDropChanceCurse, true },
+        { UnlockFlags.AbilityDurationCurse, true },
+        { UnlockFlags.SkeletonUpgradeCurse, true },
     };
 
     // EVENTS
@@ -314,6 +320,12 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
     [SerializeField] List<string> serialized_survival_unlock_flags;
 
     private static Dictionary<string, UnlockFlags> valid_enum_strings;
+
+    public bool Get( UnlockFlags flag )
+    {
+        UnityEngine.Debug.Assert( GameplayManager.Instance != null );
+        return GameplayManager.Instance.Survival ? survival_unlock_map[flag] : campaign_unlock_map[flag];
+    }
 
     public bool Get( UnlockFlags flag, bool survival )
     {

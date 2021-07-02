@@ -46,11 +46,11 @@ public class AbilityDropManager : MonoBehaviour
         int seed = Random.Range( 0, AbilityDropRandomMax );
         seed += cur_drop_bias;
 
-        bool curse_failure = Random.Range( 0.0f, 1.0f ) <
-            ( PD.Instance.UnlockMap.Get( UnlockFlags.CrystalDropChanceCurse, GameplayManager.Instance.Survival ) ?
+        bool curse_avoided = Random.Range( 0.0f, 1.0f ) <
+            ( PD.Instance.UnlockMap.Get( UnlockFlags.CrystalDropChanceCurse ) ?
             GameplayManager.Instance.CrystalDropChanceCurseMultiplier : 1.1f );
 
-        if( seed >= AbilityDropTarget && !curse_failure )
+        if( seed >= AbilityDropTarget && curse_avoided )
         {
             // pick an ability
             float min_roll = float.MaxValue;

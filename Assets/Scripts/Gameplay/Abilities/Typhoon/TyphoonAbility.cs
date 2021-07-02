@@ -18,8 +18,8 @@ public class TyphoonAbility : Ability
     {
         base.Start();
         ActiveTyphoonDeleteAfterDuration = GameObject.Instantiate( AbilityData.Effect ).GetComponent<DeleteAfterDuration>();
-        SetDuration( AbilityData.Duration );
-        roaring_flames_duration_carryover = AbilityData.Duration * 0.5f;
+        SetDuration( AbilityData.Duration * GetAbilityDurationMultiplier() );
+        roaring_flames_duration_carryover = AbilityData.Duration * 0.5f * GetAbilityDurationMultiplier();
         ActiveTyphoon = this;
         if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonRoaringFlames, GameplayManager.Instance.Survival )
             || PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonExtendedBBQ, GameplayManager.Instance.Survival ) )
@@ -59,7 +59,7 @@ public class TyphoonAbility : Ability
 
     public override bool OnAbilityUsedWhileAlreadyActive()
     {
-        SetDuration( time_remaining + AbilityData.Duration );
+        SetDuration( time_remaining + AbilityData.Duration * GetAbilityDurationMultiplier() );
         roaring_flames_duration_carryover = AbilityData.Duration * 0.5f;
 
         // return true to cancel new ability construction

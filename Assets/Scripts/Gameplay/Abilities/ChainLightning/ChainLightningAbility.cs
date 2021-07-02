@@ -161,7 +161,8 @@ public class ChainLightningAbility : Ability
 
     private float GetZapDuration()
     {
-        return PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStunDuration, GameplayManager.Instance.Survival )
-                ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration;
+        return ( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStunDuration )
+                ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration ) 
+                * GetAbilityDurationMultiplier();
     }
 }

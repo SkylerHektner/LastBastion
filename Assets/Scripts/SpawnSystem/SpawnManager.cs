@@ -437,6 +437,7 @@ public class SpawnManager : MonoBehaviour
     {
         if( delay == 0.0f )
         {
+            enemy = TryUpgradeEnemy( enemy );
             Enemy e = InstantiateMonster( enemy, position ).GetComponent<Enemy>();
             if( e != null )
                 EnemySpawnedEvent.Invoke( e );
@@ -444,6 +445,30 @@ public class SpawnManager : MonoBehaviour
         }
         else
             pending_spawns.AddLast( new PendingSpawn( delay, enemy, position ) );
+    }
+
+    // used by SkeletonUpgradeCurse
+    private EnemyEnum TryUpgradeEnemy(EnemyEnum e)
+    {
+        if( !PD.Instance.UnlockMap.Get( UnlockFlags.SkeletonUpgradeCurse ) )
+            return e;
+
+        if( SkeletonHashSet.IsSkeleton( e ) && GameplayManager.Instance.SkeletonUpgradeCurseChance < UnityEngine.Random.Range( 0.0f, 1.0f ) )
+        {
+            WeightedSelector<EnemyEnum> selector = new WeightedSelector<EnemyEnum>();
+            selector.AddItem( EnemyEnum.BlackHole, 10);
+            selector.AddItem( EnemyEnum.Bolter, 20);
+            selector.AddItem( EnemyEnum.Bouncer, 10);
+            selector.AddItem( EnemyEnum.PumpkinWarrior, 20);
+            selector.AddItem( EnemyEnum.Shaman, 15);
+            selector.AddItem( EnemyEnum.Shrike, 15);
+            selector.AddItem( EnemyEnum.MudSlinger, 15);
+            selector.AddItem( EnemyEnum.Ghostie, 10);
+            selector.AddItem( EnemyEnum.CarrierL, 15);
+            return selector.GetItem();
+        }
+
+        return e;
     }
 
     public void RegisterEnemy( Enemy enemy )
@@ -548,9 +573,12 @@ public class SpawnManager : MonoBehaviour
 
         return ret;
     }
-
 }
 
+
+/// <summary>
+/// IF YOU ADD A NEW ENEMY PLEASE UPDATE THE SKELETON HASH SET IF RELEVANT
+/// </summary>
 [System.Serializable]
 public enum EnemyEnum
 {
@@ -576,5 +604,21 @@ public enum EnemyEnum
     Shrike2 = 20,
     Shaman2 = 21,
     BlackSkeleton = 22,
+}
 
+class SkeletonHashSet
+{
+    // Used for SkeletonUpgradeCurse
+    private static readonly HashSet<EnemyEnum> skeleton_set = new HashSet<EnemyEnum>()
+    {
+        EnemyEnum.Skeleton,
+        EnemyEnum.ShieldSkeleton,
+        EnemyEnum.BlackSkeleton,
+        EnemyEnum.RedSkeleton
+    };
+
+    public static bool IsSkeleton(EnemyEnum e)
+    {
+        return skeleton_set.Contains( e );
+    }
 }
