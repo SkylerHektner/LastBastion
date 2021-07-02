@@ -25,7 +25,7 @@ public class InfoScroll : MonoBehaviour
         if( Lightning )
         {
             //// Lightning Rod
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningLightningRod, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningLightningRod ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -33,7 +33,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Lightning Stun Duration
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStunDuration, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStunDuration ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -41,7 +41,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon2.SetActive( true ); }
 
             //// Static Overload
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStaticOverload, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStaticOverload ) )
             {
                 LockedIcon3.SetActive( false );
             }
@@ -51,7 +51,7 @@ public class InfoScroll : MonoBehaviour
         if( Sawmageddon )
         {
             //// Sawmageddon Duration
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonDuration, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonDuration ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -59,7 +59,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Sawmageddon Projectiles
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonProjectiles, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonProjectiles ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -67,7 +67,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon2.SetActive( true ); }
 
             //// Sawmageddon HP Steal
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller ) )
             {
                 LockedIcon3.SetActive( false );
             }
@@ -77,7 +77,7 @@ public class InfoScroll : MonoBehaviour
         if( Anomaly )
         {
             //// Anomaly Ricochet
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyRicochetSaws, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyRicochetSaws ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -85,7 +85,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Anomaly Mirror Saw
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalySingularity, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalySingularity ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -93,7 +93,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon2.SetActive( true ); }
 
             //// Anomaly Stasis
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyStasisCoating, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyStasisCoating ) )
             {
                 LockedIcon3.SetActive( false );
             }
@@ -103,7 +103,7 @@ public class InfoScroll : MonoBehaviour
         if( Typhoon )
         {
             //// Extended BBQ
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonExtendedBBQ, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonExtendedBBQ ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -111,7 +111,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Flame Saw
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonFlameSaw, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonFlameSaw ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -122,7 +122,7 @@ public class InfoScroll : MonoBehaviour
             }
 
             //// Roaring Flames
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonRoaringFlames, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonRoaringFlames ) )
             {
                 LockedIcon3.SetActive( false );
             }

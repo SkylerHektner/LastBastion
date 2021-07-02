@@ -149,7 +149,7 @@ public class SurvivalCardsUI : MonoBehaviour
         foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
             if( !PD.Instance.UnlockMap.Get( flag, GameplayManager.Instance.Survival )
-                && PD.Instance.UnlockFlagDependencyMap[flag].All( f => PD.Instance.UnlockMap.Get( f, GameplayManager.Instance.Survival ) )
+                && PD.Instance.UnlockFlagDependencyMap[flag].All( f => PD.Instance.UnlockMap.Get( f, true ) )
                 && ( curse_unlocks ? PD.Instance.UnlockFlagCurseMap[flag] : !PD.Instance.UnlockFlagCurseMap[flag] ) )
             {
                 options.Add( flag );

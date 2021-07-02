@@ -26,7 +26,7 @@ public class ShowBaseParts : MonoBehaviour
     void FixedUpdate()
     {
         /// TYPHOON
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.Typhoon, GameplayManager.Instance.Survival ) ) // Typhoon purchased? Show parts
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.Typhoon ) ) // Typhoon purchased? Show parts
         {
             FuelBars.SetActive( true );
             if( TyphoonAbility.AnimatorDuration > 0 )
@@ -41,7 +41,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         /// CHAIN LIGHTNING
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightning, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightning ) )
         {
             LightningNubs.SetActive( true );
         }
@@ -51,7 +51,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         /// TEMPORAL ANOMALY
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.Anomaly, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.Anomaly ) )
         {
             AnomalyBars.SetActive( true );
         }
@@ -61,7 +61,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         /// Sawmageddon HP Bar
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.Sawmageddon, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.Sawmageddon ) )
         {
             SawmageddonBoxes.SetActive( true );
             if( SawmageddonAbility.AnimatorDuration > 0 && PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) ) // only show while active
@@ -81,7 +81,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         // HP overshield
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.BaseOvershield, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.BaseOvershield ) )
         {
             Overshield.SetActive( true );
         }
@@ -91,7 +91,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         // Turrets
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.Turrets, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.Turrets ) )
         {
             Turrets.SetActive( true );
         }
@@ -101,7 +101,7 @@ public class ShowBaseParts : MonoBehaviour
         }
 
         // HP 1
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP1, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP1 ) )
         {
             HP1Visuals.SetActive( true );
         }
@@ -110,7 +110,7 @@ public class ShowBaseParts : MonoBehaviour
             HP1Visuals.SetActive( false );
         }
         // HP 2
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP2, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP2 ) )
         {
             HP2Visuals.SetActive( true );
         }
@@ -119,7 +119,7 @@ public class ShowBaseParts : MonoBehaviour
             HP2Visuals.SetActive( false );
         }
         // HP 3
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP3, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP3 ) )
         {
             HP3Visuals.SetActive( true );
         }

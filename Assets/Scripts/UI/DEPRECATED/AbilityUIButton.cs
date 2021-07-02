@@ -50,7 +50,7 @@ public class AbilityUIButton : MonoBehaviour
             // bool has_no_charges = AbilityManager.Instance.GetAbilityCharges( MyAbility ) <= 0;
             // IconAnimator.SetBool( "Empty", has_no_charges );
 
-            if( PD.Instance.UnlockMap.Get( UnlockFlag, GameplayManager.Instance.Survival ) && hovering )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag ) && hovering )
             {
                 FXAnimator.SetTrigger( "Glow" );
                 FXAnimator.ResetTrigger( "Hide" );
@@ -60,7 +60,7 @@ public class AbilityUIButton : MonoBehaviour
 
     private void UpdateLockedState()
     {
-        if( PD.Instance.UnlockMap.Get( UnlockFlag, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag ) )
         {
             LockedImage.SetActive( false );
             UsageSlotsAnimator.gameObject.SetActive( true );
@@ -76,7 +76,7 @@ public class AbilityUIButton : MonoBehaviour
     {
         hovering = true;
 
-        if( PD.Instance.UnlockMap.Get( UnlockFlag, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag ) )
         {
             AbilityUIManagerInstance.SetCurrentHovering( this );
 

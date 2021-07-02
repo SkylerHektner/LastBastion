@@ -24,7 +24,7 @@ public class SawmageddonAbility : Ability
             ? AbilityData.ImprovedDuration : AbilityData.Duration )
             * GetAbilityDurationMultiplier();
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller ) )
         {
             combo_killer_max = AbilityData.ComboKillerHPRegainKillsBase;
             Saw.Instance?.SawKilledEnemyEvent?.AddListener( OnSawKilledEnemy );
@@ -36,7 +36,7 @@ public class SawmageddonAbility : Ability
 
     private void OnSawFired( Vector3 pos, Vector3 direction, float speed )
     {
-        int num_extra_saws = PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonProjectiles, GameplayManager.Instance.Survival )
+        int num_extra_saws = PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonProjectiles )
             ? AbilityData.ImprovedNumberExtraSaws : AbilityData.NumberExtraSaws;
         HashSet<long> shared_collision_set = new HashSet<long>();
         for( int x = 0; x < num_extra_saws; ++x )
@@ -49,7 +49,7 @@ public class SawmageddonAbility : Ability
             spec_saw.StartMoveInDirection( new_direction );
             spec_saw.SetSharedCollisionSet( shared_collision_set );
 
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller, GameplayManager.Instance.Survival ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller ) )
                 spec_saw.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
         }
     }

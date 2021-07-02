@@ -19,7 +19,7 @@ public class Saw : MonoBehaviour
         get
         {
             return MoveSpeed * covered_in_mud_movespeed_multiplier * on_fire_movespeed_multiplier *
-                ( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse, GameplayManager.Instance.Survival ) ?
+                ( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse ) ?
                 GameplayManager.Instance.SawMovementSpeedCurseMultiplier : 1.0f );
         }
     }
@@ -152,7 +152,7 @@ public class Saw : MonoBehaviour
             // light saw on fire if flame saw upgrade and typhoon active
             if( hit_info.wall == ProjectileHitInfo.Wall.Bottom
                 && TyphoonAbility.ActiveTyphoon != null
-                && PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonFlameSaw, GameplayManager.Instance.Survival ) )
+                && PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonFlameSaw ) )
             {
                 TyphoonAbility.ActiveTyphoon.SetSawOnFire( this );
             }
@@ -354,7 +354,7 @@ public class Saw : MonoBehaviour
         }
 
         float scale_multiplier =
-            PD.Instance.UnlockMap.Get( UnlockFlags.SawRadiusCurse, GameplayManager.Instance.Survival ) ?
+            PD.Instance.UnlockMap.Get( UnlockFlags.SawRadiusCurse ) ?
             GameplayManager.Instance.SawRadiusCurseMultiplier : 1.0f;
 
         transform.localScale = original_scale * scale_multiplier;
