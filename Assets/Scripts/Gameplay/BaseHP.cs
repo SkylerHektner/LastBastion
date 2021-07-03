@@ -54,7 +54,6 @@ public class BaseHP : MonoBehaviour
         PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
     }
 
-
     private void OnUpgradeUnlockFlagChanged( UnlockFlags flag, bool value )
     {
         if( flag == UnlockFlags.BaseHP1
@@ -62,15 +61,20 @@ public class BaseHP : MonoBehaviour
             || flag == UnlockFlags.BaseHP3 )
         {
             UpdateMaxHP();
+            UpdateHPBar();
         }
     }
 
     private void UpdateMaxHP()
     {
+        float delta = CurrentMaxHP - CurrentHP;
+
         CurrentMaxHP = BaseMaxHP;
         CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP1 ) ? MaxHPUpgrade1 : 0;
         CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP2 ) ? MaxHPUpgrade2 : 0;
         CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP3 ) ? MaxHPUpgrade3 : 0;
+
+        CurrentHP = CurrentMaxHP - delta;
     }
 
     [ContextMenu( "KillPlayer" )]
@@ -120,14 +124,13 @@ public class BaseHP : MonoBehaviour
             {
                 CurrentHP = 0;
             }
-            CurrentHpBar.SetSize( CurrentHP / CurrentMaxHP );
             DamageDelay = 1f;
             Component[] Explosions = HpExplosions.GetComponentsInChildren<Animator>();
             foreach( Animator Explosion in Explosions )
             {
                 Explosion.SetTrigger( "Damaged" );
             }
-            WoundedGlow.SetActive( CurrentHP <= 3 );
+            UpdateHPBar();
             if( CurrentHP <= 0 )
             {
                 DeathCanvas.DisplayDeathScreen();
@@ -149,10 +152,14 @@ public class BaseHP : MonoBehaviour
     public void Heal(int Amount)
     {
         CurrentHP = Mathf.Min( CurrentHP + Amount, CurrentMaxHP );
-        CurrentHpBar.SetSize( CurrentHP / CurrentMaxHP );
+        UpdateHPBar();
         CurrentHpBar.PlayHealAnim();
-        WoundedGlow.SetActive( CurrentHP <= 3 ); // I like this :)
-        // play cool effect here
+    }
+
+    private void UpdateHPBar()
+    {
+        CurrentHpBar.SetSize( CurrentHP / CurrentMaxHP );
+        WoundedGlow.SetActive( CurrentHP <= 3 );
     }
 
     private void FixedUpdate()
