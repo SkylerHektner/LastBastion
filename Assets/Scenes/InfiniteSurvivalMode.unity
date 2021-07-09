@@ -614,6 +614,8 @@ MonoBehaviour:
   SawRadiusCurseMultiplier: 0.8
   SawMovementSpeedCurseMultiplier: 0.8
   CrystalDropChanceCurseMultiplier: 0.7
+  AbilityDurationCurseMultiplier: 0.7
+  SkeletonUpgradeCurseChance: 0.1
   ActiveEnvironment: {fileID: 0}
   TimeScaleChanged:
     m_PersistentCalls:
@@ -1829,7 +1831,7 @@ PrefabInstance:
     - target: {fileID: 7789005852123475835, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
       propertyPath: spawnCadenceProfile
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 40cc538ef39f650438a3ba2be28b6e6e, type: 2}
     - target: {fileID: 7789005852123475835, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
       propertyPath: DoorSpawnPoints.Array.size
       value: 2
@@ -1897,17 +1899,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b223ac363351fa47a3be4a429a9bc06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumWavesPerEnvironmentSwap: 1
+  NumWavesPerEnvironmentSwap: 4
   SpawnCadences:
   - {fileID: 11400000, guid: 40cc538ef39f650438a3ba2be28b6e6e, type: 2}
   - {fileID: 11400000, guid: cbe24c9de6ae7fd4db7d16194a63a210, type: 2}
-  - {fileID: 11400000, guid: aec85a7b523cfc34a83d97abe2bd9c8e, type: 2}
-  - {fileID: 11400000, guid: 4c58d8f142e82654dae361f0abfc391e, type: 2}
-  - {fileID: 11400000, guid: 32ed370b2909a2c4ead7c0d361baa531, type: 2}
-  - {fileID: 11400000, guid: 925d5149260f1344090bd2fde8b94189, type: 2}
-  - {fileID: 11400000, guid: 0bb2d2dc5932f8e489e80674678104f3, type: 2}
   - {fileID: 11400000, guid: 7940a69e640ae3047879f5f1bc0329d0, type: 2}
-  - {fileID: 11400000, guid: edcdbb16a26eeae49a84347f1763b2a1, type: 2}
   spawnManager: {fileID: 7789005850479351934}
   survivalCardsUI: {fileID: 2144326368}
 --- !u!114 &7789005850479351934 stripped

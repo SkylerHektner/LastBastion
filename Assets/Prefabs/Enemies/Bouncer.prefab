@@ -273,7 +273,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   MoveSpeed: 0.5
-  MaxHealth: 5
+  MaxHealth: 2
   DeathEffect: {fileID: 6827540284969801, guid: 99555b1ae64507f409f624a869c5499b, type: 3}
   DeathAnimation: Killed
   SpawnEffect: {fileID: 1824666046701122354, guid: f69fe95f022a48a4db81873d3b79cce4, type: 3}
@@ -283,6 +283,7 @@ MonoBehaviour:
   CurrentHealthAnimationParameter: BouncerHP
   attacks: 1
   powerupDropValue: 3
-  ImmuneToZapBonusDamage: 1
-  ImmuneToTyphoon: 1
+  ImmuneToZapBonusDamage: 0
+  ImmuneToTyphoon: 0
   Bouncy: 1
+  PlayerBaseBonusDamage: 0

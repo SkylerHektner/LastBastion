@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3aad8d6cf4c9ee45ba6d7a7b3efbb59, type: 3}
+  m_Name: InfiniteSpawnCadence(Lava)
+  m_EditorClassIdentifier: 
+  CadenceEnvironment: {fileID: 1806665556532446348, guid: d1d404698b3a9ed449a577e790091a5a, type: 3}
+  NumStartSpawns: 1
+  NumAdditionalSpawnsPerWave: 1
+  BaseWaveDuration: 1
+  AdditionalWaveDurationPerSpawn: 2
+  SpawnGroupData:
+  - SG: {fileID: 11400000, guid: 5369e8d492be2b641a22beb7375da84a, type: 2}
+    StartWave: 1
+    SpawnWeighting: 2
+  - SG: {fileID: 11400000, guid: 49c64edb7eb02bb44aadd4c72749fb25, type: 2}
+    StartWave: 1
+    SpawnWeighting: 2
+  - SG: {fileID: 11400000, guid: e4d0858f655ec8a45b94fd13be3eea1a, type: 2}
+    StartWave: 1
+    SpawnWeighting: 1
+  - SG: {fileID: 11400000, guid: bc6cfa6bd8a2e6e4186e77c18863c642, type: 2}
+    StartWave: 1
+    SpawnWeighting: 3
+  - SG: {fileID: 11400000, guid: 58963841647b85b4c8d99392693e247a, type: 2}
+    StartWave: 1
+    SpawnWeighting: 3
+  - SG: {fileID: 11400000, guid: cbd31e625e44e0547880e09ee4c74569, type: 2}
+    StartWave: 5
+    SpawnWeighting: 5
+  - SG: {fileID: 11400000, guid: bb1a1ea197f94c44ab5c998beb2e26ad, type: 2}
+    StartWave: 5
+    SpawnWeighting: 5
+  - SG: {fileID: 11400000, guid: 827c14cffc5f92c46b65980159ff72b1, type: 2}
+    StartWave: 5
+    SpawnWeighting: 4
+  - SG: {fileID: 11400000, guid: defca960bbb8c484d934ff6d88c85429, type: 2}
+    StartWave: 5
+    SpawnWeighting: 4
+  - SG: {fileID: 11400000, guid: 7f5a5ddc99a4dd7409353723999c212c, type: 2}
+    StartWave: 5
+    SpawnWeighting: 5
+  - SG: {fileID: 11400000, guid: e8985e4a09984c64486be183b8d23d88, type: 2}
+    StartWave: 9
+    SpawnWeighting: 4
+  - SG: {fileID: 11400000, guid: 736e40f80233582409c9aaf7c0248a5a, type: 2}
+    StartWave: 9
+    SpawnWeighting: 6
+  - SG: {fileID: 11400000, guid: 10ea625f016e84f4e9a3f31c475033a7, type: 2}
+    StartWave: 9
+    SpawnWeighting: 5
+  - SG: {fileID: 11400000, guid: 76953db8b9fd5ca4cb52bcdb66c0277a, type: 2}
+    StartWave: 9
+    SpawnWeighting: 6
+  - SG: {fileID: 11400000, guid: 5aee2ccbdb3b5bc428541a237ac0d17f, type: 2}
+    StartWave: 9
+    SpawnWeighting: 4
+  - SG: {fileID: 11400000, guid: b457bfe38cbf70a449f8012a064e2e85, type: 2}
+    StartWave: 17
+    SpawnWeighting: 8
+  - SG: {fileID: 11400000, guid: 3d4a26e3d05565549945018a9cfc431f, type: 2}
+    StartWave: 17
+    SpawnWeighting: 12
+  - SG: {fileID: 11400000, guid: 8ddcb6ddc7d909b42a115e7497c66537, type: 2}
+    StartWave: 17
+    SpawnWeighting: 12
+  - SG: {fileID: 11400000, guid: f82cae9d7a1e86a449bb8732c92e96c8, type: 2}
+    StartWave: 17
+    SpawnWeighting: 10
+  - SG: {fileID: 11400000, guid: b4ab48a64f15f4e468b3f417340f097d, type: 2}
+    StartWave: 17
+    SpawnWeighting: 11

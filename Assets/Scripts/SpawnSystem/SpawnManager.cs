@@ -554,10 +554,10 @@ public class SpawnManager : MonoBehaviour
                 ret = Instantiate(MudCarrierSPrefab);
                 break;
             case EnemyEnum.Shrike2:
-                ret = Instantiate(MudCarrierSPrefab);
+                ret = Instantiate(Shrike2Prefab);
                 break;
             case EnemyEnum.Shaman2:
-                ret = Instantiate(MudCarrierSPrefab);
+                ret = Instantiate(Shaman2Prefab);
                 break;
             case EnemyEnum.BlackSkeleton:
                 ret = Instantiate(BlackSkeletonPrefab);
