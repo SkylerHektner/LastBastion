@@ -453,7 +453,7 @@ public class SpawnManager : MonoBehaviour
         if( !PD.Instance.UnlockMap.Get( UnlockFlags.SkeletonUpgradeCurse ) )
             return e;
 
-        if( SkeletonHashSet.IsSkeleton( e ) && GameplayManager.Instance.SkeletonUpgradeCurseChance < UnityEngine.Random.Range( 0.0f, 1.0f ) )
+        if( SkeletonHashSet.IsSkeleton( e ) && GameplayManager.Instance.SkeletonUpgradeCurseChance > UnityEngine.Random.Range( 0.0f, 1.0f ) )
         {
             WeightedSelector<EnemyEnum> selector = new WeightedSelector<EnemyEnum>();
             selector.AddItem( EnemyEnum.BlackHole, 10);
