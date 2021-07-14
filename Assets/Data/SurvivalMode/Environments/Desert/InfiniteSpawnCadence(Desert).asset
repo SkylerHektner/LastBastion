@@ -14,10 +14,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CadenceEnvironment: {fileID: 2241978124423426206, guid: 5ff428fffb368564b864cf65251be761, type: 3}
   NumStartSpawns: 1
-  NumAdditionalSpawnsPerWave: 0
-  BaseWaveDuration: 1
-  AdditionalWaveDurationPerSpawn: 0
+  NumAdditionalSpawnsPerWave: 1
+  BaseWaveDuration: 5
+  AdditionalWaveDurationPerSpawn: 1
   SpawnGroupData:
-  - SG: {fileID: 11400000, guid: 35bdae353ce11df41af39616abb9d303, type: 2}
+  - SG: {fileID: 11400000, guid: 948559d26a0aed64f847ea3955102202, type: 2}
     StartWave: 1
+    SpawnWeighting: 1
+  - SG: {fileID: 11400000, guid: 6364c30ee6b1fe94fbfaf44b35bdbfb7, type: 2}
+    StartWave: 1
+    SpawnWeighting: 2
+  - SG: {fileID: 11400000, guid: 025200008053f6a4ca641c79033af4dd, type: 2}
+    StartWave: 1
+    SpawnWeighting: 2
+  - SG: {fileID: 11400000, guid: dfc239f3cb6a1304d9b960bd63def6a4, type: 2}
+    StartWave: 1
+    SpawnWeighting: 2
+  - SG: {fileID: 11400000, guid: f94a244dc470b144e9ec19f2f09a68c9, type: 2}
+    StartWave: 1
+    SpawnWeighting: 2
+  - SG: {fileID: 11400000, guid: ee6cfdab1a5429647a9238e55fd7b04f, type: 2}
+    StartWave: 5
+    SpawnWeighting: 2
+  - SG: {fileID: 11400000, guid: c2b6d21395f3c474a8c345a561b17692, type: 2}
+    StartWave: 5
+    SpawnWeighting: 1
+  - SG: {fileID: 11400000, guid: 67539812a83e37f42b168aba98bb6a18, type: 2}
+    StartWave: 5
+    SpawnWeighting: 3
+  - SG: {fileID: 11400000, guid: 1bb25f3b32a4eeb44b53c6e69ca6ec64, type: 2}
+    StartWave: 9
+    SpawnWeighting: 3
+  - SG: {fileID: 11400000, guid: 44550323ff26bb849ba6db85f62492e2, type: 2}
+    StartWave: 9
+    SpawnWeighting: 2
+  - SG: {fileID: 11400000, guid: 9704c9f7934c99f4e9efd6f9d45c9638, type: 2}
+    StartWave: 9
+    SpawnWeighting: 2
+  - SG: {fileID: 11400000, guid: 08b188ca7012b1c40b630c36cadbd9f6, type: 2}
+    StartWave: 9
+    SpawnWeighting: 3
+  - SG: {fileID: 11400000, guid: d178a106e5b73cd4f922ed3d11baa825, type: 2}
+    StartWave: 9
+    SpawnWeighting: 1
+  - SG: {fileID: 11400000, guid: a62ba800e3dad18479c86c6220e456f7, type: 2}
+    StartWave: 17
+    SpawnWeighting: 3
+  - SG: {fileID: 11400000, guid: 300df2fc702c8344f96baf6bfcd2eed8, type: 2}
+    StartWave: 17
+    SpawnWeighting: 3
+  - SG: {fileID: 11400000, guid: 23d0f6c59faf87447afc5cfba2b5599d, type: 2}
+    StartWave: 17
+    SpawnWeighting: 4
+  - SG: {fileID: 11400000, guid: 3c05b0e3b5b0a59429e1bb9d03440e96, type: 2}
+    StartWave: 17
+    SpawnWeighting: 1
+  - SG: {fileID: 11400000, guid: a4320622ec9e8984fbf67fc04632bbc6, type: 2}
+    StartWave: 17
     SpawnWeighting: 1
