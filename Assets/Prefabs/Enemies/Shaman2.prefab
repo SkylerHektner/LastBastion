@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2898304853937610190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.41, y: 10.48, z: 0}
-  m_LocalScale: {x: 2.3, y: 2.3, z: 2.3}
+  m_LocalScale: {x: 2.7139997, y: 2.7139997, z: 2.7139997}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   MoveSpeed: 1
-  MaxHealth: 3
+  MaxHealth: 5
   DeathEffect: {fileID: 2016558233288798309, guid: ed93d1c1c4d12364c8966ef0a0df7614, type: 3}
   DeathAnimation: Killed
   SpawnEffect: {fileID: 5764153955619398806, guid: f8aaff6c461672541aea0eb827621425, type: 3}
@@ -177,3 +177,4 @@ MonoBehaviour:
   SummonAnimation: Summon
   SummonDuration: 0.86
   SummonCooldown: 1.5
+  OnDeathSpawnGroup: {fileID: 0}
