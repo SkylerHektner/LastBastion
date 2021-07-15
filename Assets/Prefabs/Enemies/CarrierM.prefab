@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7f49a2e24e66640a3bddae56870b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeath:
+  DeathEvent:
     m_PersistentCalls:
       m_Calls: []
   MoveSpeed: 0.8
@@ -130,8 +130,11 @@ MonoBehaviour:
   DamagedAnimation: Damaged
   CurrentHealthAnimationParameter: 
   attacks: 1
-  powerupDropValue: 1
+  powerupDropValue: 2
   ImmuneToZapBonusDamage: 0
+  ImmuneToTyphoon: 0
+  Bouncy: 0
+  PlayerBaseBonusDamage: 0
   OnDeathSpawnGroup: {fileID: 11400000, guid: 91e1cd40f0fc38f4e91bff4d74988249, type: 2}
 --- !u!58 &3818391782978863361
 CircleCollider2D:
