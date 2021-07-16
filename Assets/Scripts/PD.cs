@@ -48,6 +48,13 @@ public enum UnlockFlags
     CrystalDropChanceCurse = 28,
     AbilityDurationCurse = 29,
     SkeletonUpgradeCurse = 30,
+    BolterUpgradeCurse = 31,
+    ShieldSkeletonUpgradeCurse = 32,
+    PumpkinUpgradeCurse = 33,
+    CarrierUpgradeCurse = 34,
+    MudSlingerUpgradeCurse = 35,
+    ShrikeUpgradeCurse = 36,
+    SummonerUpgradeCurse = 37,
 }
 
 // PLAYER DATA
@@ -102,6 +109,13 @@ public class PD
         { UnlockFlags.CrystalDropChanceCurse, new List<UnlockFlags> { } },
         { UnlockFlags.AbilityDurationCurse, new List<UnlockFlags> { } },
         { UnlockFlags.SkeletonUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.BolterUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.ShieldSkeletonUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.PumpkinUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.CarrierUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.MudSlingerUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.ShrikeUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.SummonerUpgradeCurse, new List<UnlockFlags> { } },
     };
 
     // a dictionary containing information about whether an unlock flag is a curse
@@ -141,6 +155,13 @@ public class PD
         { UnlockFlags.CrystalDropChanceCurse, true },
         { UnlockFlags.AbilityDurationCurse, true },
         { UnlockFlags.SkeletonUpgradeCurse, true },
+        { UnlockFlags.BolterUpgradeCurse, true },
+        { UnlockFlags.ShieldSkeletonUpgradeCurse, true },
+        { UnlockFlags.PumpkinUpgradeCurse, true },
+        { UnlockFlags.CarrierUpgradeCurse, true },
+        { UnlockFlags.MudSlingerUpgradeCurse, true },
+        { UnlockFlags.ShrikeUpgradeCurse, true },
+        { UnlockFlags.SummonerUpgradeCurse, true },
     };
 
     // EVENTS

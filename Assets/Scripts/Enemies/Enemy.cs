@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour
 
         if( Moving )
         {
-            float move_delta = MoveSpeed * Time.deltaTime * GameplayManager.TimeScale;
+            float move_delta = GetMoveSpeed() * Time.deltaTime * GameplayManager.TimeScale;
             if( PD.Instance.UnlockMap.Get( 
                 UnlockFlags.EnemyMovementSpeedCurse, 
                 GameplayManager.Instance.Survival ) )
@@ -291,6 +291,11 @@ public class Enemy : MonoBehaviour
         s_rend.material = original_mat;
         StasisCoated = false;
         StartMoving();
+    }
+
+    protected virtual float GetMoveSpeed()
+    {
+        return MoveSpeed;
     }
 }
 
