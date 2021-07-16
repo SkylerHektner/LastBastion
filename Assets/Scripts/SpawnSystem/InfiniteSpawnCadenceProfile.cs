@@ -38,12 +38,14 @@ public class InfiniteSpawnCadenceProfile : BaseSpawnCadenceProfile
             float wave_duration = BaseWaveDuration + AdditionalWaveDurationPerSpawn * num_spawn_groups;
             float delay_between_spawns = wave_duration / num_spawn_groups;
 
+            SpawnGroup last_selected_group = null;
+
             for( int x = 0; x < num_spawn_groups; ++x )
             {
                 WeightedSelector<SpawnGroup> group_selector = new WeightedSelector<SpawnGroup>();
                 foreach( InfiniteSpawnGroup group in SpawnGroupData )
                 {
-                    if( group.StartWave - 1 <= wave_number )
+                    if( group.StartWave - 1 <= wave_number && group.SG != last_selected_group )
                     {
                         group_selector.AddItem( group.SG, group.SpawnWeighting );
                     }
@@ -53,6 +55,7 @@ public class InfiniteSpawnCadenceProfile : BaseSpawnCadenceProfile
                 {
                     wave.SpawnGroups.Add( group_selector.GetItem() );
                     wave.SpawnGroupSpawnTimes.Add( delay_between_spawns * x );
+                    last_selected_group = group_selector.GetItem();
                 }
                 else
                 {
