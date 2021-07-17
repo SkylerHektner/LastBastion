@@ -5,11 +5,21 @@ using UnityEngine;
 public class Carrier : Enemy
 {
     [SerializeField] SpawnGroup OnDeathSpawnGroup;
+    [SerializeField] SpawnGroup CurseOnDeathSpawnGroup; // the spawn group for if you have the carrier curse
+
+    protected override void Start()
+    {
+        base.Start();
+        if( OnDeathSpawnGroup != null && CurseOnDeathSpawnGroup == null )
+            Debug.LogWarning( "WARNING: Carrier missing curse on death spawn group - is this an oversight?" );
+    }
 
     public override void Kill()
     {
-        if( OnDeathSpawnGroup )
-            SpawnManager.Instance.SpawnSpawnGroup( OnDeathSpawnGroup, transform.position, false );
+        SpawnGroup group = PD.Instance.UnlockMap.Get( UnlockFlags.CarrierUpgradeCurse ) ?
+            CurseOnDeathSpawnGroup : OnDeathSpawnGroup;
+        if( group )
+            SpawnManager.Instance.SpawnSpawnGroup( group, transform.position, false );
         base.Kill();
     }
 }
