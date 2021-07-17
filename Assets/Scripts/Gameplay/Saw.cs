@@ -18,9 +18,12 @@ public class Saw : MonoBehaviour
     {
         get
         {
-            return MoveSpeed * covered_in_mud_movespeed_multiplier * on_fire_movespeed_multiplier *
-                ( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse ) ?
-                GameplayManager.Instance.SawMovementSpeedCurseMultiplier : 1.0f );
+            return MoveSpeed 
+                * covered_in_mud_movespeed_multiplier 
+                * on_fire_movespeed_multiplier 
+                * skeleton_shield_break_movespeed_multiplier
+                * ( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse ) ?
+                    GameplayManager.Instance.SawMovementSpeedCurseMultiplier : 1.0f );
         }
     }
     public Vector3 MoveDirection { get { return proj.GetMoveDirection(); } }
@@ -51,6 +54,8 @@ public class Saw : MonoBehaviour
 
     private float cover_in_mud_duration = -1.0f;
     private float covered_in_mud_movespeed_multiplier = 1.0f;
+
+    private float skeleton_shield_break_movespeed_multiplier = 1.0f;
 
     private float correction_timer = 0.0f;
 
@@ -163,6 +168,7 @@ public class Saw : MonoBehaviour
             proj.SetWallHitBehavior( Projectile.WallHitBehavior.Attach );
             if( dragging )
                 DirectionArrow.sprite = DirectionArrowSprite;
+            skeleton_shield_break_movespeed_multiplier = 1.0f; // reset when saw attaches to wall
         }
     }
 
@@ -358,5 +364,11 @@ public class Saw : MonoBehaviour
             GameplayManager.Instance.SawRadiusCurseMultiplier : 1.0f;
 
         transform.localScale = original_scale * scale_multiplier;
+    }
+
+    public void SetShieldBreakMovespeedMultiplier(float multilpier)
+    {
+        skeleton_shield_break_movespeed_multiplier = multilpier;
+        proj.SetProjectileSpeed( AdjustedMoveSpeed );
     }
 }

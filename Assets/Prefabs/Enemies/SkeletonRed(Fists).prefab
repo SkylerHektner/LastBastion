@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 3993805466842966647}
   - component: {fileID: 3993805466842966646}
   - component: {fileID: 3993805466842966641}
-  - component: {fileID: 6567463315226212438}
+  - component: {fileID: 4460076864628827490}
   - component: {fileID: 4324015993595593424}
   - component: {fileID: -6377693938440733747}
   m_Layer: 9
-  m_Name: SkeletonRed(Shield)
+  m_Name: SkeletonRed(Fists)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,7 +105,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6567463315226212438
+--- !u!114 &4460076864628827490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3993805466842966640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 446512daffa941f4cb0d2f3082865b54, type: 3}
+  m_Script: {fileID: 11500000, guid: 2104270a51de20e40b94917dfca023b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DeathEvent:
@@ -135,6 +135,7 @@ MonoBehaviour:
   ImmuneToTyphoon: 0
   Bouncy: 0
   PlayerBaseBonusDamage: 0
+  ShieldSkeletonUpgradeCurseMovespeedMultiplier: 0.7
 --- !u!58 &4324015993595593424
 CircleCollider2D:
   m_ObjectHideFlags: 0
