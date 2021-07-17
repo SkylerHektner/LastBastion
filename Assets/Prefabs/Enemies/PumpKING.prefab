@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3049668331137656629}
   - component: {fileID: 3049668331137656628}
   - component: {fileID: 3049668331137656587}
-  - component: {fileID: 8728068472773307986}
+  - component: {fileID: -6322143877061518555}
   - component: {fileID: 406882177323731115}
   - component: {fileID: 3780547244560414551}
   m_Layer: 9
@@ -105,7 +105,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8728068472773307986
+--- !u!114 &-6322143877061518555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3049668331137656586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 446512daffa941f4cb0d2f3082865b54, type: 3}
+  m_Script: {fileID: 11500000, guid: d7787198d454cbb44a9568af85ba2836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DeathEvent:
@@ -133,6 +133,8 @@ MonoBehaviour:
   powerupDropValue: 1
   ImmuneToZapBonusDamage: 1
   ImmuneToTyphoon: 1
+  Bouncy: 0
+  PlayerBaseBonusDamage: 0
 --- !u!58 &406882177323731115
 CircleCollider2D:
   m_ObjectHideFlags: 0

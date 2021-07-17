@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     private long enemyID = 0;
 
     [SerializeField] float MoveSpeed = 1.0f;
-    [SerializeField] int MaxHealth = 1;
+    [SerializeField] protected int MaxHealth = 1;
     [SerializeField] GameObject DeathEffect;
     [SerializeField] string DeathAnimation;
     [SerializeField] GameObject SpawnEffect;

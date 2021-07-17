@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6013094092943625603}
   - component: {fileID: 6013094092943625602}
   - component: {fileID: 6013094092943625661}
-  - component: {fileID: 606078180}
+  - component: {fileID: 7486803171172816636}
   - component: {fileID: 8972820993353572893}
   - component: {fileID: 5573037104575454689}
   m_Layer: 9
@@ -105,7 +105,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &606078180
+--- !u!114 &7486803171172816636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,10 +114,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6013094092943625660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 446512daffa941f4cb0d2f3082865b54, type: 3}
+  m_Script: {fileID: 11500000, guid: d7787198d454cbb44a9568af85ba2836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeath:
+  DeathEvent:
     m_PersistentCalls:
       m_Calls: []
   MoveSpeed: 1
@@ -128,6 +128,13 @@ MonoBehaviour:
   SpawnAnimation: 
   DamagedEffect: {fileID: 2491468217934139110, guid: 0af7a9bb1c3a39946b5f8beac636331b, type: 3}
   DamagedAnimation: Damaged
+  CurrentHealthAnimationParameter: 
+  attacks: 1
+  powerupDropValue: 1
+  ImmuneToZapBonusDamage: 0
+  ImmuneToTyphoon: 0
+  Bouncy: 0
+  PlayerBaseBonusDamage: 0
 --- !u!58 &8972820993353572893
 CircleCollider2D:
   m_ObjectHideFlags: 0
