@@ -19,14 +19,14 @@ public class Shrike : Enemy
     {
         base.Update();
 
-        if( current_teleport_cooldown > 0.0f)
+        if( current_teleport_cooldown > 0.0f )
         {
             current_teleport_cooldown -= Time.deltaTime * GameplayManager.TimeScale;
-            TeleportFX.SetActive(true);
+            TeleportFX.SetActive( true );
         }
         else
         {
-            TeleportFX.SetActive(false);
+            TeleportFX.SetActive( false );
         }
     }
 
@@ -42,7 +42,7 @@ public class Shrike : Enemy
         {
             last_saw_hit_direction = hit_direction;
             StopMoving();
-            Teleport(hit_direction);
+            Teleport( hit_direction );
             died = false;
             dodged = true;
         }
@@ -52,19 +52,23 @@ public class Shrike : Enemy
         }
     }
 
-    private void Teleport(Vector3 hit_direction)
+    private void Teleport( Vector3 hit_direction )
     {
-        if(hit_direction != Vector3.zero)
+        if( hit_direction != Vector3.zero )
         {
             Vector3 perp_clockwise = MathUtility.PerpendicularClockwise( hit_direction );
             Vector3 perp_counter_clockwise = MathUtility.PerpendicularCounterClockwise( hit_direction );
-            teleport_direction = ( perp_clockwise.y > 0 ? perp_clockwise : perp_counter_clockwise ).normalized;
+            float desired_sign = PD.Instance.UnlockMap.Get( UnlockFlags.ShrikeUpgradeCurse ) ? -1.0f : 1.0f;
+            teleport_direction = ( Mathf.Sign( perp_clockwise.y ) == Mathf.Sign( desired_sign )
+                ? perp_clockwise : perp_counter_clockwise ).normalized;
         }
         else
         {
-            teleport_direction.x = 0; teleport_direction.y = 1; teleport_direction.z = 0;
+            teleport_direction.x = 0;
+            teleport_direction.y = 1;
+            teleport_direction.z = 0;
         }
-        
+
         anim.SetTrigger( "Teleport" );
         Invoke( "TeleportFinished", TeleportDuration );
         Invoke( "ChangePosition", TeleportDuration * 0.5f );
