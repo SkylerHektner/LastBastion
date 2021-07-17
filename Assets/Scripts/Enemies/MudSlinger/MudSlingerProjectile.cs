@@ -6,10 +6,13 @@ public class MudSlingerProjectile : Projectile
 {
     [HideInInspector] public float SawSlowDuration;
     [HideInInspector] public float SawMoveSpeedMultiplier;
-    public void HitSaw(Saw saw)
+    public void HitSaw( Saw saw )
     {
-        saw.TryCoverInMud( SawSlowDuration, SawMoveSpeedMultiplier );
-        DestroyProjectile();
+        if( !saw.Moving || PD.Instance.UnlockMap.Get( UnlockFlags.MudSlingerUpgradeCurse ) )
+        {
+            saw.TryCoverInMud( SawSlowDuration, SawMoveSpeedMultiplier );
+            DestroyProjectile();
+        }
     }
 
     protected override void Start()
