@@ -212,7 +212,7 @@ public class Saw : MonoBehaviour
                 SetMoveDirection( new_move_direction, AdjustedMoveSpeed );
             }
         }
-        else if( col.tag == "Mudball" && !Moving )
+        else if( col.tag == "Mudball" )
             col.gameObject.GetComponent<MudSlingerProjectile>().HitSaw( this );
         else if( col.tag == "AbilityDrop" )
         {
