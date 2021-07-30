@@ -26307,7 +26307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1167876330
 Transform:
   m_ObjectHideFlags: 0
@@ -27227,6 +27227,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594486bb8ec0b2745b3f0ba47a0a5c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Survival: 0
+  EnemyMoveSpeedCurseMultiplier: 1.2
+  EnemySpawnSpeedCurseMultiplier: 1.3
+  SawRadiusCurseMultiplier: 0.8
+  SawMovementSpeedCurseMultiplier: 0.8
+  CrystalDropChanceCurseMultiplier: 0.7
+  AbilityDurationCurseMultiplier: 0.7
+  SkeletonUpgradeCurseChance: 0.1
   ActiveEnvironment: {fileID: 694702853}
   TimeScaleChanged:
     m_PersistentCalls:
@@ -32602,6 +32610,10 @@ PrefabInstance:
       propertyPath: WaveCounterUI
       value: 
       objectReference: {fileID: 8542500472662515308}
+    - target: {fileID: 7789005852123475835, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
+      propertyPath: DebugStartWave
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7789005852123475835, guid: 156739dd600f3c7409c167d4cfe174c4, type: 3}
       propertyPath: spawnCadenceProfile
       value: 
