@@ -22,6 +22,8 @@ public class PauseManager : MonoBehaviour
         PauseScreen.SetActive(false);
         BonusScreen.SetActive(true);
         PauseButton.SetActive(true);
+        WaveCounter.ResetTrigger("Hide");
+
     }
     public void DelayedResume()
     {
