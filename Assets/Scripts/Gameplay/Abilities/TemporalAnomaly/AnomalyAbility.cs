@@ -63,7 +63,8 @@ public class AnomalyAbility : Ability
     {
         stasis_coated_enemies.Add( en.EnemyID );
         en.StasisCoat( AbilityData.StasisTouchReplacementMaterial );
-        GameObject.Instantiate( AbilityData.StasisTouchEffectPrefab );
+        GameObject effect = GameObject.Instantiate( AbilityData.StasisTouchEffectPrefab );
+        effect.transform.position = en.transform.position;
     }
 
     public override void Update( float delta_time )
