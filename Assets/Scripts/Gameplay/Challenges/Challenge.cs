@@ -12,6 +12,7 @@ public class Challenge : ScriptableObject
     public bool CannotMuddySaw = false;
     public int MustKillXZappedEnemys = int.MinValue;
     public int MustKillXEnemysWithFire = int.MinValue;
+    public int MustUseXCrystals = int.MinValue;
     public float LevelTimeLimit = float.MaxValue;
     [Multiline(5)]
     public string ChallengeDescription;

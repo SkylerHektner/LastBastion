@@ -158,7 +158,7 @@ public class SpawnManager : MonoBehaviour
                 var next = it.Next;
                 var ps = it.Value;
                 ps.time_left -= Time.deltaTime * GameplayManager.TimeScale *
-                    ( PD.Instance.UnlockMap.Get(UnlockFlags.EnemySpawnSpeedCurse ) ?
+                    ( PD.Instance.UnlockMap.Get( UnlockFlags.EnemySpawnSpeedCurse ) ?
                     GameplayManager.Instance.EnemySpawnSpeedCurseMultiplier : 1.0f );
                 it.Value = ps;
                 if( ps.time_left < 0.0f )
@@ -356,7 +356,7 @@ public class SpawnManager : MonoBehaviour
                         GameplayManager.Instance.ActiveEnvironment.PlayableAreaTopRight.y );
                     Vector2 deltas = new Vector2(
                         GameplayManager.Instance.ActiveEnvironment.PlayableAreaTopRight.x - top_left.x,
-                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.y - top_left.y  );
+                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.y - top_left.y );
                     Vector3 spawn_point = new Vector3(
                         top_left.x + deltas.x * sg.custom_layout_positions[index].x,
                         top_left.y + deltas.y * sg.custom_layout_positions[index].y );
@@ -437,7 +437,7 @@ public class SpawnManager : MonoBehaviour
     {
         if( delay == 0.0f )
         {
-            enemy = TryUpgradeEnemy( enemy );
+            enemy = CheckForSkeletonUpgrade( enemy );
             Enemy e = InstantiateMonster( enemy, position ).GetComponent<Enemy>();
             if( e != null )
                 EnemySpawnedEvent.Invoke( e );
@@ -448,24 +448,15 @@ public class SpawnManager : MonoBehaviour
     }
 
     // used by SkeletonUpgradeCurse
-    private EnemyEnum TryUpgradeEnemy(EnemyEnum e)
+    private EnemyEnum CheckForSkeletonUpgrade( EnemyEnum e )
     {
         if( !PD.Instance.UnlockMap.Get( UnlockFlags.SkeletonUpgradeCurse ) )
             return e;
 
-        if( SkeletonHashSet.IsSkeleton( e ) && GameplayManager.Instance.SkeletonUpgradeCurseChance > UnityEngine.Random.Range( 0.0f, 1.0f ) )
+        if( GameplayManager.Instance.SkeletonUpgradeCurseChance > UnityEngine.Random.Range( 0.0f, 1.0f ) &&
+            SkeletonHashSet.EnemyUpgradeMap.TryGetValue( e, out EnemyEnum upgraded_enemy ) )
         {
-            WeightedSelector<EnemyEnum> selector = new WeightedSelector<EnemyEnum>();
-            selector.AddItem( EnemyEnum.BlackHole, 10);
-            selector.AddItem( EnemyEnum.Bolter, 20);
-            selector.AddItem( EnemyEnum.Bouncer, 10);
-            selector.AddItem( EnemyEnum.PumpkinWarrior, 20);
-            selector.AddItem( EnemyEnum.Shaman, 15);
-            selector.AddItem( EnemyEnum.Shrike, 15);
-            selector.AddItem( EnemyEnum.MudSlinger, 15);
-            selector.AddItem( EnemyEnum.Ghostie, 10);
-            selector.AddItem( EnemyEnum.CarrierL, 15);
-            return selector.GetItem();
+            return upgraded_enemy;
         }
 
         return e;
@@ -542,25 +533,25 @@ public class SpawnManager : MonoBehaviour
                 ret = Instantiate( BouncerPrefab );
                 break;
             case EnemyEnum.Ghostie:
-                ret = Instantiate(GhostiePrefab);
+                ret = Instantiate( GhostiePrefab );
                 break;
             case EnemyEnum.Bomber:
-                ret = Instantiate(BomberPrefab);
+                ret = Instantiate( BomberPrefab );
                 break;
             case EnemyEnum.MudCarrierL:
-                ret = Instantiate(MudCarrierLPrefab);
+                ret = Instantiate( MudCarrierLPrefab );
                 break;
             case EnemyEnum.MudCarrierS:
-                ret = Instantiate(MudCarrierSPrefab);
+                ret = Instantiate( MudCarrierSPrefab );
                 break;
             case EnemyEnum.Shrike2:
-                ret = Instantiate(Shrike2Prefab);
+                ret = Instantiate( Shrike2Prefab );
                 break;
             case EnemyEnum.Shaman2:
-                ret = Instantiate(Shaman2Prefab);
+                ret = Instantiate( Shaman2Prefab );
                 break;
             case EnemyEnum.BlackSkeleton:
-                ret = Instantiate(BlackSkeletonPrefab);
+                ret = Instantiate( BlackSkeletonPrefab );
                 break;
             case 0:
 #if UNITY_EDITOR
@@ -609,16 +600,9 @@ public enum EnemyEnum
 class SkeletonHashSet
 {
     // Used for SkeletonUpgradeCurse
-    private static readonly HashSet<EnemyEnum> skeleton_set = new HashSet<EnemyEnum>()
+    public static readonly Dictionary<EnemyEnum, EnemyEnum> EnemyUpgradeMap = new Dictionary<EnemyEnum, EnemyEnum>()
     {
-        EnemyEnum.Skeleton,
-        EnemyEnum.ShieldSkeleton,
-        EnemyEnum.BlackSkeleton,
-        EnemyEnum.RedSkeleton
+        {  EnemyEnum.Skeleton, EnemyEnum.ShieldSkeleton },
+        { EnemyEnum.ShieldSkeleton, EnemyEnum.BlackSkeleton }
     };
-
-    public static bool IsSkeleton(EnemyEnum e)
-    {
-        return skeleton_set.Contains( e );
-    }
 }

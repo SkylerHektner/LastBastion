@@ -6,7 +6,7 @@ using UnityEngine;
 public class ChallengesTracker
 {
     public bool DamageTaken { get; private set; } = false;
-    public bool CrystalsUsed { get; private set; } = false;
+    public int CrystalsUsed { get; private set; } = 0;
     public bool SawMuddied { get; private set; } = false;
     public int NumZappedEnemiesKilled { get; private set; } = 0;
     public int NumEnemiesKilledWithFire { get; private set; } = 0;
@@ -45,10 +45,11 @@ public class ChallengesTracker
     {
         bool success = true;
         success &= !( challenge.CannotTakeDamage && DamageTaken );
-        success &= !( challenge.CannotUseCrystals && CrystalsUsed );
+        success &= !( challenge.CannotUseCrystals && ( CrystalsUsed > 0 ) );
         success &= !( challenge.CannotMuddySaw && SawMuddied );
         success &= !( challenge.MustKillXZappedEnemys > NumZappedEnemiesKilled );
         success &= !( challenge.MustKillXEnemysWithFire > NumEnemiesKilledWithFire );
+        success &= !( challenge.MustUseXCrystals > CrystalsUsed );
         success &= !( challenge.LevelTimeLimit < TotalLevelTimePassed );
         return success;
     }
@@ -60,7 +61,7 @@ public class ChallengesTracker
 
     private void OnCrystalUsed( AbilityEnum ability )
     {
-        CrystalsUsed = true;
+        ++CrystalsUsed;
     }
 
     private void OnSawMuddied()
