@@ -6,26 +6,18 @@ using UnityEngine.Events;
 public class AbilityDrop : MonoBehaviour
 {
     public AbilityEnum ability;
-    public bool JustSpawned = true;
     public float DespawnTimer;
     Animator Crystal;
 
     private void Start()
     {
-        Invoke( "ToggleJustSpawnedOff", 0.1f );
         Crystal = gameObject.GetComponent<Animator>();
-    }
-
-    private void ToggleJustSpawnedOff()
-    {
-        JustSpawned = false;
     }
 
     public void UseAbility()
     {
         AbilityManager.Instance.UseAbility( ability );
         GetComponent<Animator>().SetTrigger( "Crushed" );
-        GetComponent<CircleCollider2D>().enabled = false;
         Invoke( "AnimEnd", 1.0f );
     }
 

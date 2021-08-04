@@ -217,8 +217,7 @@ public class Saw : MonoBehaviour
         else if( col.tag == "AbilityDrop" )
         {
             AbilityDrop drop = col.gameObject.GetComponent<AbilityDrop>();
-            if( !drop.JustSpawned )
-                drop.UseAbility();
+            drop.UseAbility();
         }
     }
 
