@@ -6,12 +6,20 @@ public class Shaman : Enemy
 {
     [SerializeField] GameObject SummonEffect;
     [SerializeField] SpawnGroup SummonSpawnGroup;
+    [SerializeField] SpawnGroup CurseSummonSpawnGroup; // the spawn group to use if our curse flag is active
     [SerializeField] string SummonAnimation;
     [SerializeField] float SummonDuration = 0.5f;
     [SerializeField] float SummonCooldown = 1.0f;
     [SerializeField] SpawnGroup OnDeathSpawnGroup;
 
     private float cur_summon_cooldown = 0.0f;
+
+    protected override void Start()
+    {
+        base.Start();
+        Debug.Assert( SummonSpawnGroup );
+        Debug.Assert( CurseSummonSpawnGroup );
+    }
 
     protected override void Update()
     {
@@ -44,7 +52,8 @@ public class Shaman : Enemy
     private void Summon()
     {
         anim.SetTrigger( SummonAnimation );
-        List<Vector3> spawn_points = SpawnManager.Instance.SpawnSpawnGroup( SummonSpawnGroup, transform.position, false );
+        SpawnGroup group = PD.Instance.UnlockMap.Get( UnlockFlags.SummonerUpgradeCurse ) ? CurseSummonSpawnGroup : SummonSpawnGroup;
+        List<Vector3> spawn_points = SpawnManager.Instance.SpawnSpawnGroup( group, transform.position, false );
         foreach( var p in spawn_points )
             Instantiate( SummonEffect ).transform.position = p;
         Invoke( "FinishSummon", SummonDuration );
