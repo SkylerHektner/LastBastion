@@ -43,13 +43,12 @@ public class ChallengesTracker
 
     public bool EvaluateChallengeSuccess( Challenge challenge )
     {
-        Debug.Log( NumEnemiesKilledWithFire );
-
         bool success = true;
         success &= !( challenge.CannotTakeDamage && DamageTaken );
         success &= !( challenge.CannotUseCrystals && CrystalsUsed );
         success &= !( challenge.CannotMuddySaw && SawMuddied );
         success &= !( challenge.MustKillXZappedEnemys > NumZappedEnemiesKilled );
+        success &= !( challenge.MustKillXEnemysWithFire > NumEnemiesKilledWithFire );
         success &= !( challenge.LevelTimeLimit < TotalLevelTimePassed );
         return success;
     }
