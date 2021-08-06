@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HurtFX: {fileID: 5306160239912254079}
+  HealFX: {fileID: 0}
 --- !u!95 &4349794487045836381
 Animator:
   serializedVersion: 3
@@ -3991,6 +3992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HurtFX: {fileID: 6248427504492248640}
+  HealFX: {fileID: 0}
 --- !u!1 &3115134675809911752
 GameObject:
   m_ObjectHideFlags: 0
@@ -7618,6 +7620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HurtFX: {fileID: 6248427504492248640}
+  HealFX: {fileID: 0}
 --- !u!1 &5249925804061880560
 GameObject:
   m_ObjectHideFlags: 0
@@ -12484,7 +12487,7 @@ MonoBehaviour:
   BrokenGlass: {fileID: 0}
   WoundedGlow: {fileID: 0}
   DeathCanvas: {fileID: 0}
-  HPcanvas: {fileID: 0}
+  BrokenHpBar: {fileID: 0}
   ForceField: {fileID: 7014161918646282732}
   HpExplosions: {fileID: 5803158675463986521}
   DeathExplosions: {fileID: 7014161919354846950}
@@ -16673,6 +16676,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7014161918571045839}
     m_Modifications:
+    - target: {fileID: 3127842310739794792, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3226624016352146898, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -16753,9 +16760,15 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 8270157040820822842, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 415845846759991324, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
     - {fileID: 1652679399456577477, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
+    - {fileID: 8270157040820822842, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
+    - {fileID: 3127842310739794792, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0e0a6897728b11441b48daa47d3c843b, type: 3}
 --- !u!1 &3045859891117535886 stripped
 GameObject:
@@ -16831,6 +16844,10 @@ PrefabInstance:
     - target: {fileID: 3472724062287739007, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614858993791536556, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4789185761812659360, guid: bb2d34488f729cc4ab0f4ac39471a688, type: 3}
       propertyPath: m_AnchoredPosition.x
