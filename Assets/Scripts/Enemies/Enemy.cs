@@ -57,6 +57,9 @@ public class Enemy : MonoBehaviour
 
     protected Animator anim;
     protected SpriteRenderer s_rend;
+    public bool MagmaBouncer;
+    public AnimatorOverrideController MagmaBouncerAnim; // magama bouncer animation overrides
+    [SerializeField] GameObject MagmaSpawnEffect;
 
     private float zap_duration = -1.0f;
     public bool Zapped { get { return zap_duration != -1.0f; } }
@@ -97,11 +100,17 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (MagmaBouncer)
+        {
+            SpawnEffect = MagmaSpawnEffect;
+            anim.runtimeAnimatorController = MagmaBouncerAnim;
+        }
         if( !string.IsNullOrEmpty( CurrentHealthAnimationParameter ) )
             anim.SetFloat( CurrentHealthAnimationParameter, CurrentHealth );
 
         if( Moving )
         {
+            anim.SetBool("Attacking", Moving);
             float move_delta = GetMoveSpeed()
                 * Time.deltaTime
                 * GameplayManager.TimeScale
@@ -131,7 +140,11 @@ public class Enemy : MonoBehaviour
 
     public void Spawn()
     {
-        if( SpawnEffect )
+        if (MagmaBouncer)
+        {
+            SpawnEffect = MagmaSpawnEffect;
+        }
+        if ( SpawnEffect )
         {
             var spawn_effect = Instantiate( SpawnEffect );
             spawn_effect.transform.position = transform.position;
