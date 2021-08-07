@@ -84,6 +84,7 @@ public class Enemy : MonoBehaviour
         // if we haven't been registered, register ourselves (useful debugging feature for monsters that were in the scene at start)
         if( SpawnManager.Instance.TryGetEnemyByID( enemyID ) == null )
             SpawnManager.Instance?.RegisterEnemy( this );
+
     }
 
     public void DamageBase() //  Do my max health as damage to the base HP
@@ -96,8 +97,10 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (!string.IsNullOrEmpty(CurrentHealthAnimationParameter))
+            anim.SetFloat(CurrentHealthAnimationParameter, CurrentHealth);
 
-        if( Moving )
+        if ( Moving )
         {
             float move_delta = GetMoveSpeed() * Time.deltaTime * GameplayManager.TimeScale;
             if( PD.Instance.UnlockMap.Get( 
@@ -145,6 +148,7 @@ public class Enemy : MonoBehaviour
         }
 
         Spawning = true;
+
     }
 
     public void SpawnEffectDone()
@@ -161,6 +165,8 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger( "Spawn" );
             Invoke( "SpawnAnimationDone", 1.0f );
         }
+        if (!string.IsNullOrEmpty(CurrentHealthAnimationParameter))
+            anim.SetFloat(CurrentHealthAnimationParameter, CurrentHealth);
     }
 
     public void SpawnAnimationDone()
