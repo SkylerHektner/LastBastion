@@ -20,14 +20,99 @@ public class GameplayManager : MonoBehaviour
 
     // CURSE VARIABLE VALUES
     [Header("Curse Variables")]
-    public float EnemyMoveSpeedCurseMultiplier = 1.2f;
-    public float EnemySpawnSpeedCurseMultiplier = 1.3f;
-    public float SawRadiusCurseMultiplier = 0.8f;
-    public float SawMovementSpeedCurseMultiplier = 0.8f;
-    [Range(0.0f, 1.0f)]
-    public float CrystalDropChanceCurseMultiplier = 0.7f;
-    public float AbilityDurationCurseMultiplier = 0.7f;
+    [SerializeField] private float enemyMoveSpeedCurseMultiplier = 1.15f;
+    [SerializeField] private float enemyMoveSpeedCurseMultiplier2 = 1.3f;
+    [SerializeField] private float enemySpawnSpeedCurseMultiplier = 1.2f;
+    [SerializeField] private float enemySpawnSpeedCurseMultiplier2 = 1.4f;
+    [SerializeField] private float sawRadiusCurseMultiplier = 0.85f;
+    [SerializeField] private float sawRadiusCurseMultiplier2 = 0.75f;
+    [SerializeField] private float sawMovementSpeedCurseMultiplier = 0.9f;
+    [SerializeField] private float sawMovementSpeedCurseMultiplier2 = 0.8f;
+    [Range( 0.0f, 1.0f )]
+    [SerializeField] private float crystalDropChanceCurseMultiplier = 0.75f;
+    [Range( 0.0f, 1.0f )]
+    [SerializeField] private float crystalDropChanceCurseMultiplier2 = 0.55f;
+    [SerializeField] private float abilityDurationCurseMultiplier = 0.8f;
+    [SerializeField] private float abilityDurationCurseMultiplier2 = 0.65f;
     public float SkeletonUpgradeCurseChance = 0.1f;
+
+    public float EnemyMoveSpeedCurseMultiplier
+    {
+        get
+        {
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.EnemyMovementSpeedCurse2 ) )
+                return enemyMoveSpeedCurseMultiplier2;
+            else if( PD.Instance.UnlockMap.Get( UnlockFlags.EnemyMovementSpeedCurse ) )
+                return enemyMoveSpeedCurseMultiplier;
+            else
+                return 1.0f;
+        }
+    }
+
+    public float EnemySpawnSpeedCurseMultiplier
+    {
+        get
+        {
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.EnemySpawnSpeedCurse2 ) )
+                return enemySpawnSpeedCurseMultiplier2;
+            else if( PD.Instance.UnlockMap.Get( UnlockFlags.EnemySpawnSpeedCurse ) )
+                return enemySpawnSpeedCurseMultiplier;
+            else
+                return 1.0f;
+        }
+    }
+
+    public float SawRadiusCurseMultiplier
+    {
+        get
+        {
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawRadiusCurse2 ) )
+                return sawRadiusCurseMultiplier2;
+            else if( PD.Instance.UnlockMap.Get( UnlockFlags.SawRadiusCurse ) )
+                return sawRadiusCurseMultiplier;
+            else
+                return 1.0f;
+        }
+    }
+
+    public float SawMovementSpeedCurseMultiplier
+    {
+        get
+        {
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse2 ) )
+                return sawMovementSpeedCurseMultiplier2;
+            else if( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse ) )
+                return sawMovementSpeedCurseMultiplier;
+            else
+                return 1.0f;
+        }
+    }
+
+    public float CrystalDropChanceCurseMultiplier
+    {
+        get
+        {
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.CrystalDropChanceCurse2 ) )
+                return crystalDropChanceCurseMultiplier2;
+            else if( PD.Instance.UnlockMap.Get( UnlockFlags.CrystalDropChanceCurse ) )
+                return crystalDropChanceCurseMultiplier;
+            else
+                return 1.1f;
+        }
+    }
+
+    public float AbilityDurationCurseMultiplier
+    {
+        get
+        {
+            if( PD.Instance.UnlockMap.Get( UnlockFlags.AbilityDurationCurse2 ) )
+                return abilityDurationCurseMultiplier2;
+            else if( PD.Instance.UnlockMap.Get( UnlockFlags.AbilityDurationCurse ) )
+                return abilityDurationCurseMultiplier;
+            else
+                return 1.0f;
+        }
+    }
 
     // ENVIRONEMNT
     [Header( "Environment Variables" )]

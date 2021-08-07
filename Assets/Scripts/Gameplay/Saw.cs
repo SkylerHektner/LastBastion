@@ -18,12 +18,11 @@ public class Saw : MonoBehaviour
     {
         get
         {
-            return MoveSpeed 
-                * covered_in_mud_movespeed_multiplier 
-                * on_fire_movespeed_multiplier 
+            return MoveSpeed
+                * covered_in_mud_movespeed_multiplier
+                * on_fire_movespeed_multiplier
                 * skeleton_shield_break_movespeed_multiplier
-                * ( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse ) ?
-                    GameplayManager.Instance.SawMovementSpeedCurseMultiplier : 1.0f );
+                * GameplayManager.Instance.SawMovementSpeedCurseMultiplier;
         }
     }
     public Vector3 MoveDirection { get { return proj.GetMoveDirection(); } }
@@ -358,9 +357,7 @@ public class Saw : MonoBehaviour
             original_scale = transform.localScale;
         }
 
-        float scale_multiplier =
-            PD.Instance.UnlockMap.Get( UnlockFlags.SawRadiusCurse ) ?
-            GameplayManager.Instance.SawRadiusCurseMultiplier : 1.0f;
+        float scale_multiplier = GameplayManager.Instance.SawRadiusCurseMultiplier;
 
         transform.localScale = original_scale * scale_multiplier;
     }

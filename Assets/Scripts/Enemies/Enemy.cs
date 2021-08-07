@@ -97,18 +97,15 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (!string.IsNullOrEmpty(CurrentHealthAnimationParameter))
-            anim.SetFloat(CurrentHealthAnimationParameter, CurrentHealth);
+        if( !string.IsNullOrEmpty( CurrentHealthAnimationParameter ) )
+            anim.SetFloat( CurrentHealthAnimationParameter, CurrentHealth );
 
-        if ( Moving )
+        if( Moving )
         {
-            float move_delta = GetMoveSpeed() * Time.deltaTime * GameplayManager.TimeScale;
-            if( PD.Instance.UnlockMap.Get( 
-                UnlockFlags.EnemyMovementSpeedCurse, 
-                GameplayManager.Instance.Survival ) )
-            {
-                move_delta *= GameplayManager.Instance.EnemyMoveSpeedCurseMultiplier;
-            }
+            float move_delta = GetMoveSpeed()
+                * Time.deltaTime
+                * GameplayManager.TimeScale
+                * GameplayManager.Instance.EnemyMoveSpeedCurseMultiplier;
 
             if( transform.position.y - GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.y < move_delta )
             {
@@ -165,8 +162,8 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger( "Spawn" );
             Invoke( "SpawnAnimationDone", 1.0f );
         }
-        if (!string.IsNullOrEmpty(CurrentHealthAnimationParameter))
-            anim.SetFloat(CurrentHealthAnimationParameter, CurrentHealth);
+        if( !string.IsNullOrEmpty( CurrentHealthAnimationParameter ) )
+            anim.SetFloat( CurrentHealthAnimationParameter, CurrentHealth );
     }
 
     public void SpawnAnimationDone()

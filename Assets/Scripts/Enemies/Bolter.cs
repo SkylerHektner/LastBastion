@@ -29,13 +29,10 @@ public class Bolter : Enemy
         {
             // zig to the zag
             Vector3 zag_direction = zagging_left ? Vector3.left : Vector3.right;
-            float delta = CurseZigZagSpeed * Time.deltaTime * GameplayManager.TimeScale;
-            if( PD.Instance.UnlockMap.Get(
-                UnlockFlags.EnemyMovementSpeedCurse,
-                GameplayManager.Instance.Survival ) )
-            {
-                delta *= GameplayManager.Instance.EnemyMoveSpeedCurseMultiplier;
-            }
+            float delta = CurseZigZagSpeed 
+                * Time.deltaTime 
+                * GameplayManager.TimeScale
+                * GameplayManager.Instance.EnemyMoveSpeedCurseMultiplier;
 
             Vector3 new_position = transform.position + zag_direction * delta;
             if( new_position.x < GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.x )

@@ -52,6 +52,6 @@ public class Ability
 
     protected float GetAbilityDurationMultiplier()
     {
-        return PD.Instance.UnlockMap.Get( UnlockFlags.AbilityDurationCurse ) ? GameplayManager.Instance.AbilityDurationCurseMultiplier : 1.0f;
+        return GameplayManager.Instance.AbilityDurationCurseMultiplier;
     }
 }
