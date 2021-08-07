@@ -134,14 +134,16 @@ public class SurvivalCardsUI : MonoBehaviour
         selected_boon_card = null;
         selected_curse_card = null;
 
-        // wave start was deferred for the menu, let it play now
-        //SpawnManager.Instance.StartNextWave();
+        // call here to hide the transition while the screen is blacked out
+        InfiniteSpawnCadenceManager.Instance.PickNewSpawnCadenceProfile();
     }
 
     public void SetInactive()
     {
         gameObject.SetActive( false );
         ContinueButton.gameObject.SetActive( false );
+
+        // start the wave when we disable this menu
         SpawnManager.Instance.StartNextWave();
     }
 

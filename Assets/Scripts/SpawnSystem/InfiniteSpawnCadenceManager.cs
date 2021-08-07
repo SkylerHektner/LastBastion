@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InfiniteSpawnCadenceManager : MonoBehaviour
 {
+    public static InfiniteSpawnCadenceManager Instance;
+
     [SerializeField] int NumWavesPerEnvironmentSwap = 5;
     [SerializeField] List<InfiniteSpawnCadenceProfile> SpawnCadences = new List<InfiniteSpawnCadenceProfile>();
     public SpawnManager spawnManager;
@@ -15,6 +17,8 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
+
         if( SpawnCadences.Count <= 1 )
         {
             Debug.LogError( "ERROR: Infinite Spawn Cadence Manager is designed to work with at least 2 cadences" );
@@ -40,12 +44,11 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
         if( wave_number % NumWavesPerEnvironmentSwap == 0 )
         {
             SpawnManager.Instance.DeferNextWaveStart();
-            PickNewSpawnCadenceProfile();
             survivalCardsUI.ShowUpgrades();
         }
     }
 
-    private void PickNewSpawnCadenceProfile()
+    public void PickNewSpawnCadenceProfile()
     {
         WeightedSelector<InfiniteSpawnCadenceProfile> profile_selector = new WeightedSelector<InfiniteSpawnCadenceProfile>();
         foreach( InfiniteSpawnCadenceProfile profile in SpawnCadences )
