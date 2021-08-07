@@ -13,6 +13,7 @@ public class SurvivalCardsUI : MonoBehaviour
     [SerializeField] GameObject PositiveBackgroundEffects;
     [SerializeField] GameObject NegativeBackgroundEffects;
     [SerializeField] Button ContinueButton;
+    [SerializeField] Animator Anim;
 
     private SurvivalCardsUICard selected_curse_card;
     private SurvivalCardsUICard selected_boon_card;
@@ -35,7 +36,8 @@ public class SurvivalCardsUI : MonoBehaviour
         Debug.Assert( DescriptionBox != null );
         Debug.Assert( PositiveBackgroundEffects != null );
         Debug.Assert( NegativeBackgroundEffects != null );
-        Debug.Assert( ContinueButton );
+        Debug.Assert( ContinueButton != null );
+        Debug.Assert( Anim != null );
     }
 
     private void PopulateUIMap()
@@ -57,11 +59,13 @@ public class SurvivalCardsUI : MonoBehaviour
             PopulateUIMap();
         }
 
-        var boon_unlock_flags = GenerateUnlockOptions( false ).GetEnumerator();
-        var curse_unlock_flags = GenerateUnlockOptions( true ).GetEnumerator();
+        var boon_unlock_flags = GenerateUnlockOptions( false );
+        var curse_unlock_flags = GenerateUnlockOptions( true );
+        var boon_unlock_flags_iterator = boon_unlock_flags.GetEnumerator();
+        var curse_unlock_flags_iterator = curse_unlock_flags.GetEnumerator();
         foreach( SurvivalCardsUICard card in Cards )
         {
-            var unlock_flags_enumerator = card.CurseCard ? curse_unlock_flags : boon_unlock_flags;
+            var unlock_flags_enumerator = card.CurseCard ? curse_unlock_flags_iterator : boon_unlock_flags_iterator;
             if( unlock_flags_enumerator.MoveNext() )
             {
                 card.Information = ui_info_map[unlock_flags_enumerator.Current];
@@ -71,14 +75,15 @@ public class SurvivalCardsUI : MonoBehaviour
             {
                 card.gameObject.SetActive( false );
             }
-            curse_unlock_flags = card.CurseCard ? unlock_flags_enumerator : curse_unlock_flags;
-            boon_unlock_flags = !card.CurseCard ? unlock_flags_enumerator : boon_unlock_flags;
+            curse_unlock_flags_iterator = card.CurseCard ? unlock_flags_enumerator : curse_unlock_flags_iterator;
+            boon_unlock_flags_iterator = !card.CurseCard ? unlock_flags_enumerator : boon_unlock_flags_iterator;
         }
 
         ResetCardGlowsAndBackground( true );
         ResetCardGlowsAndBackground( false );
         ContinueButton.gameObject.SetActive( false );
         gameObject.SetActive( true );
+        Anim.SetBool( "Empty", boon_unlock_flags.Count == 0 && curse_unlock_flags.Count == 0 );
         TryEnableContinueButton();
     }
 
@@ -136,7 +141,7 @@ public class SurvivalCardsUI : MonoBehaviour
     public void SetInactive()
     {
         gameObject.SetActive( false );
-        ContinueButton.gameObject.SetActive(false);
+        ContinueButton.gameObject.SetActive( false );
         SpawnManager.Instance.StartNextWave();
     }
 

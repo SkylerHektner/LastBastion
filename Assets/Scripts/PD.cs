@@ -55,6 +55,16 @@ public enum UnlockFlags
     MudSlingerUpgradeCurse = 35,
     ShrikeUpgradeCurse = 36,
     SummonerUpgradeCurse = 37,
+    EnemyMovementSpeedCurse2 = 38,
+    EnemySpawnSpeedCurse2 = 39,
+    SawRadiusCurse2 = 40,
+    SawMovementSpeedCurse2 = 41,
+    CrystalDropChanceCurse2 = 42,
+    AbilityDurationCurse2 = 43,
+    GhostUpgradeCurse = 44,
+    BlackholeUpgradeCurse = 45,
+    BouncerUpgradeCurse = 46,
+    BomberUpgradeCurse = 47,
 }
 
 // PLAYER DATA
@@ -108,6 +118,13 @@ public class PD
         { UnlockFlags.SawMovementSpeedCurse, new List<UnlockFlags> { } },
         { UnlockFlags.CrystalDropChanceCurse, new List<UnlockFlags> { } },
         { UnlockFlags.AbilityDurationCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.EnemyMovementSpeedCurse2, new List<UnlockFlags> { UnlockFlags.EnemyMovementSpeedCurse } },
+        { UnlockFlags.EnemySpawnSpeedCurse2, new List<UnlockFlags> { UnlockFlags.EnemySpawnSpeedCurse } },
+        { UnlockFlags.SawRadiusCurse2, new List<UnlockFlags> { UnlockFlags.SawRadiusCurse } },
+        { UnlockFlags.SawMovementSpeedCurse2, new List<UnlockFlags> { UnlockFlags.SawMovementSpeedCurse } },
+        { UnlockFlags.CrystalDropChanceCurse2, new List<UnlockFlags> { UnlockFlags.CrystalDropChanceCurse } },
+        { UnlockFlags.AbilityDurationCurse2, new List<UnlockFlags> { UnlockFlags.AbilityDurationCurse } },
+
         { UnlockFlags.SkeletonUpgradeCurse, new List<UnlockFlags> { } },
         { UnlockFlags.BolterUpgradeCurse, new List<UnlockFlags> { } },
         { UnlockFlags.ShieldSkeletonUpgradeCurse, new List<UnlockFlags> { } },
@@ -116,6 +133,10 @@ public class PD
         { UnlockFlags.MudSlingerUpgradeCurse, new List<UnlockFlags> { } },
         { UnlockFlags.ShrikeUpgradeCurse, new List<UnlockFlags> { } },
         { UnlockFlags.SummonerUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.GhostUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.BlackholeUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.BouncerUpgradeCurse, new List<UnlockFlags> { } },
+        { UnlockFlags.BomberUpgradeCurse, new List<UnlockFlags> { } },
     };
 
     // a dictionary containing information about whether an unlock flag is a curse
@@ -154,6 +175,13 @@ public class PD
         { UnlockFlags.SawMovementSpeedCurse, true },
         { UnlockFlags.CrystalDropChanceCurse, true },
         { UnlockFlags.AbilityDurationCurse, true },
+        { UnlockFlags.EnemyMovementSpeedCurse2, true },
+        { UnlockFlags.EnemySpawnSpeedCurse2, true },
+        { UnlockFlags.SawRadiusCurse2, true },
+        { UnlockFlags.SawMovementSpeedCurse2, true },
+        { UnlockFlags.CrystalDropChanceCurse2, true },
+        { UnlockFlags.AbilityDurationCurse2, true },
+
         { UnlockFlags.SkeletonUpgradeCurse, true },
         { UnlockFlags.BolterUpgradeCurse, true },
         { UnlockFlags.ShieldSkeletonUpgradeCurse, true },
@@ -162,6 +190,10 @@ public class PD
         { UnlockFlags.MudSlingerUpgradeCurse, true },
         { UnlockFlags.ShrikeUpgradeCurse, true },
         { UnlockFlags.SummonerUpgradeCurse, true },
+        { UnlockFlags.GhostUpgradeCurse, true },
+        { UnlockFlags.BlackholeUpgradeCurse, true },
+        { UnlockFlags.BouncerUpgradeCurse, true },
+        { UnlockFlags.BomberUpgradeCurse, true },
     };
 
     // EVENTS
