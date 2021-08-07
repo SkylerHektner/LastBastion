@@ -46,59 +46,64 @@ public class AbilityDropManager : MonoBehaviour
         int seed = Random.Range( 0, AbilityDropRandomMax );
         seed += cur_drop_bias;
 
-        bool curse_avoided = Random.Range( 0.0f, 1.0f ) < GameplayManager.Instance.CrystalDropChanceCurseMultiplier;
-
-        if( seed >= AbilityDropTarget && curse_avoided )
+        if( seed >= AbilityDropTarget )
         {
-            // pick an ability
-            float min_roll = float.MaxValue;
-            int selected_index = 0;
-            for( int x = 0; x < (int)AbilityEnum.NUM_ABILITIES; ++x )
-            {
-                float roll = Random.Range( 0.0f, powerup_drop_biases[x] );
-                if( roll < min_roll )
-                {
-                    min_roll = roll;
-                    selected_index = x;
-                }
-            }
-
-            // apply new bias
-            powerup_drop_biases[selected_index] *= AbilitySelectionExpansionFactor;
-
-            // reduce drop biases
-            if( powerup_drop_biases.TrueForAll( ( float f ) => f < 1.0f ) )
-                for( int x = 0; x < powerup_drop_biases.Count; ++x )
-                    powerup_drop_biases[x] *= 0.5f;
             cur_drop_bias = 0;
 
-            // drop ability
-            AbilityEnum ability = (AbilityEnum)selected_index;
+            // test powerup drop cancel curse
+            bool curse_avoided = Random.Range( 0.0f, 1.0f ) < GameplayManager.Instance.CrystalDropChanceCurseMultiplier;
 
-            AbilityDrop ab = null;
-            switch( ability )
+            if( curse_avoided )
             {
-                case AbilityEnum.Anomaly:
-                    if( PD.Instance.UnlockMap.Get( UnlockFlags.Anomaly ) )
-                        ab = TemporalAnomalyDrop;
-                    break;
-                case AbilityEnum.ChainLightning:
-                    if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightning ) )
-                        ab = ChainLightningDrop;
-                    break;
-                case AbilityEnum.Typhoon:
-                    if( PD.Instance.UnlockMap.Get( UnlockFlags.Typhoon ) )
-                        ab = TyphoonDrop;
-                    break;
-                case AbilityEnum.Sawmageddon:
-                    if( PD.Instance.UnlockMap.Get( UnlockFlags.Sawmageddon ) )
-                        ab = SawmageddonDrop;
-                    break;
-            }
-            if( ab )
-            {
-                Instantiate( ab ).transform.position = pos;
-                return true;
+                // pick an ability
+                float min_roll = float.MaxValue;
+                int selected_index = 0;
+                for( int x = 0; x < (int)AbilityEnum.NUM_ABILITIES; ++x )
+                {
+                    float roll = Random.Range( 0.0f, powerup_drop_biases[x] );
+                    if( roll < min_roll )
+                    {
+                        min_roll = roll;
+                        selected_index = x;
+                    }
+                }
+
+                // apply new bias
+                powerup_drop_biases[selected_index] *= AbilitySelectionExpansionFactor;
+
+                // reduce drop biases
+                if( powerup_drop_biases.TrueForAll( ( float f ) => f < 1.0f ) )
+                    for( int x = 0; x < powerup_drop_biases.Count; ++x )
+                        powerup_drop_biases[x] *= 0.5f;
+
+                // drop ability
+                AbilityEnum ability = (AbilityEnum)selected_index;
+
+                AbilityDrop ab = null;
+                switch( ability )
+                {
+                    case AbilityEnum.Anomaly:
+                        if( PD.Instance.UnlockMap.Get( UnlockFlags.Anomaly ) )
+                            ab = TemporalAnomalyDrop;
+                        break;
+                    case AbilityEnum.ChainLightning:
+                        if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightning ) )
+                            ab = ChainLightningDrop;
+                        break;
+                    case AbilityEnum.Typhoon:
+                        if( PD.Instance.UnlockMap.Get( UnlockFlags.Typhoon ) )
+                            ab = TyphoonDrop;
+                        break;
+                    case AbilityEnum.Sawmageddon:
+                        if( PD.Instance.UnlockMap.Get( UnlockFlags.Sawmageddon ) )
+                            ab = SawmageddonDrop;
+                        break;
+                }
+                if( ab )
+                {
+                    Instantiate( ab ).transform.position = pos;
+                    return true;
+                }
             }
         }
         return false;
