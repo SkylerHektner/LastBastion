@@ -130,13 +130,14 @@ public class SurvivalCardsUI : MonoBehaviour
         selected_curse_card = null;
 
         // wave start was deferred for the menu, let it play now
-        SpawnManager.Instance.StartNextWave();
+        //SpawnManager.Instance.StartNextWave();
     }
 
     public void SetInactive()
     {
         gameObject.SetActive( false );
         ContinueButton.gameObject.SetActive(false);
+        SpawnManager.Instance.StartNextWave();
     }
 
     // returns a list of up to three unlock flags randomly based on current unlock state
