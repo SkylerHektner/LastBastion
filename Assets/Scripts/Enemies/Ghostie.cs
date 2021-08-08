@@ -7,6 +7,7 @@ public class Ghostie : Enemy
     [SerializeField] float VanishCooldown;
     [SerializeField] float VanishDuration;
     [SerializeField] string VanishAnimation;
+    [SerializeField] SpawnGroup GhostFriendCurseSpawnGroup;
 
     float cur_vanish_cooldown = 0.0f;
 
@@ -15,6 +16,7 @@ public class Ghostie : Enemy
         Debug.Assert( VanishCooldown != 0.0f );
         Debug.Assert( VanishDuration != 0.0f );
         Debug.Assert( !string.IsNullOrEmpty( VanishAnimation ) );
+        Debug.Assert( GhostFriendCurseSpawnGroup != null );
 
         base.Start();
 
@@ -31,16 +33,25 @@ public class Ghostie : Enemy
             if( cur_vanish_cooldown < Time.deltaTime )
             {
                 cur_vanish_cooldown += VanishCooldown;
-                StopMoving();
-                anim.SetTrigger( VanishAnimation ); // this animation also disables their collider
-                Invoke( "StopVanish", VanishDuration );
+                Vanish();
             }
         }
+    }
+
+    private void Vanish()
+    {
+        StopMoving();
+        anim.SetTrigger( VanishAnimation ); // this animation also disables their collider
+        Invoke( "StopVanish", VanishDuration );
     }
 
     private void StopVanish()
     {
         StartMoving();
+        if( PD.Instance.UnlockMap.Get( UnlockFlags.GhostUpgradeCurse ) )
+        {
+            SpawnManager.Instance.SpawnSpawnGroup( GhostFriendCurseSpawnGroup, transform.position, false );
+        }
     }
 
 }
