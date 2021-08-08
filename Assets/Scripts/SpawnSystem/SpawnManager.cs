@@ -35,6 +35,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject Shrike2Prefab;
     [SerializeField] GameObject Shaman2Prefab;
     [SerializeField] GameObject BlackSkeletonPrefab;
+    [SerializeField] GameObject WormholeWormPrefab;
 
     [Header( "Misc" )]
     [SerializeField] WaveCounter WaveCounterUI;
@@ -555,6 +556,9 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.BlackSkeleton:
                 ret = Instantiate( BlackSkeletonPrefab );
                 break;
+            case EnemyEnum.WormholeWorm:
+                ret = Instantiate( WormholeWormPrefab );
+                break;
             case 0:
 #if UNITY_EDITOR
                 Debug.LogError( "ERROR: Tried to spawn an enemy " + enemy.ToString() + " that hasn't been added to the InstantiateMonster switch" );
@@ -597,6 +601,7 @@ public enum EnemyEnum
     Shrike2 = 20,
     Shaman2 = 21,
     BlackSkeleton = 22,
+    WormholeWorm = 23,
 }
 
 class SkeletonHashSet
