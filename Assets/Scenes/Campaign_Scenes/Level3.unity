@@ -28159,8 +28159,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417894999}
   m_LocalRotation: {x: -0, y: -0, z: 0.70710576, w: 0.70710784}
-  m_LocalPosition: {x: 0.643, y: -6.53, z: 0}
-  m_LocalScale: {x: 3.999999, y: 11.58041, z: 4}
+  m_LocalPosition: {x: -0.9976, y: -9.2644, z: 0}
+  m_LocalScale: {x: 6.8687987, y: 20.238703, z: 4}
   m_Children: []
   m_Father: {fileID: 297681965}
   m_RootOrder: 0
@@ -28333,12 +28333,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Survival: 0
-  EnemyMoveSpeedCurseMultiplier: 1.2
-  EnemySpawnSpeedCurseMultiplier: 1.3
-  SawRadiusCurseMultiplier: 0.8
-  SawMovementSpeedCurseMultiplier: 0.8
-  CrystalDropChanceCurseMultiplier: 0.7
-  AbilityDurationCurseMultiplier: 0.7
+  enemyMoveSpeedCurseMultiplier: 1.15
+  enemyMoveSpeedCurseMultiplier2: 1.3
+  enemySpawnSpeedCurseMultiplier: 1.2
+  enemySpawnSpeedCurseMultiplier2: 1.4
+  sawRadiusCurseMultiplier: 0.85
+  sawRadiusCurseMultiplier2: 0.75
+  sawMovementSpeedCurseMultiplier: 0.9
+  sawMovementSpeedCurseMultiplier2: 0.8
+  crystalDropChanceCurseMultiplier: 0.75
+  crystalDropChanceCurseMultiplier2: 0.55
+  abilityDurationCurseMultiplier: 0.8
+  abilityDurationCurseMultiplier2: 0.65
   SkeletonUpgradeCurseChance: 0.1
   ActiveEnvironment: {fileID: 694702853}
   TimeScaleChanged:
@@ -28462,8 +28468,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598682759}
   m_LocalRotation: {x: -0, y: -0, z: -0.000000014901161, w: 1}
-  m_LocalPosition: {x: -11.02, y: 5.663, z: 0}
-  m_LocalScale: {x: 5.8854976, y: 10.765939, z: 4}
+  m_LocalPosition: {x: -18.1295, y: 5.663, z: 0}
+  m_LocalScale: {x: 13.344777, y: 10.765939, z: 4}
   m_Children: []
   m_Father: {fileID: 297681965}
   m_RootOrder: 2
@@ -28621,8 +28627,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648365677}
   m_LocalRotation: {x: -0, y: -0, z: 0.70710576, w: 0.70710784}
-  m_LocalPosition: {x: 0.65, y: 17.84, z: 0}
-  m_LocalScale: {x: 4.0115466, y: 11.586612, z: 4}
+  m_LocalPosition: {x: -0.9907, y: 20.1643, z: 0}
+  m_LocalScale: {x: 6.4501657, y: 20.153236, z: 4}
   m_Children: []
   m_Father: {fileID: 297681965}
   m_RootOrder: 1
@@ -31904,8 +31910,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141998418}
   m_LocalRotation: {x: -0, y: -0, z: -0.000000014901161, w: 1}
-  m_LocalPosition: {x: 11.605, y: 3.147, z: 0}
-  m_LocalScale: {x: 6.5106497, y: 9.09278, z: 4}
+  m_LocalPosition: {x: 17.1422, y: 3.147, z: 0}
+  m_LocalScale: {x: 12.320103, y: 9.09278, z: 4}
   m_Children: []
   m_Father: {fileID: 297681965}
   m_RootOrder: 3
@@ -31976,6 +31982,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1436136708}
+    - target: {fileID: 1082437755577272368, guid: 1ddd754752599f54f8d5fa777124dd5f, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1082437755577272369, guid: 1ddd754752599f54f8d5fa777124dd5f, type: 3}
       propertyPath: m_BlockingMask.m_Bits
       value: 0
