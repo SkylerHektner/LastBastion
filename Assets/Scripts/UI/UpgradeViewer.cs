@@ -4,17 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UpgradeViewer : MonoBehaviour
+public class InfoViewr : MonoBehaviour
 {
     public Animator BigScroll;
     public List<Animator> CoinsList;
-    public List<GameObject> UpgradesList;
+    public List<GameObject> InfoCategories;
     bool Open;
     public List<GameObject> PowerupScrolls;
     Color GlowColor;
     public Image ColorL;
     public Image ColorR;
-    public TextMeshProUGUI PlayerWealthText;
     Spectator Spectator;
 
 
@@ -26,12 +25,12 @@ public class UpgradeViewer : MonoBehaviour
         {
             if (CoinsList[i].GetBool("Selected") == true) // if the button is on and glowing
             {
-                UpgradesList[i].SetActive(true);
+                InfoCategories[i].SetActive(true);
                 PowerupScrolls[i].SetActive(true);
             }
             else
             {
-                UpgradesList[i].SetActive(false);
+                InfoCategories[i].SetActive(false);
                 PowerupScrolls[i].SetActive(false);
             }
         }
@@ -41,14 +40,13 @@ public class UpgradeViewer : MonoBehaviour
     {
         for (int i = 0; i < CoinsList.Count; i++)
         {
-            UpgradesList[i].SetActive(false);
+            InfoCategories[i].SetActive(false);
         }
 
     }
     private void OnEnable()
     {
         Spectator = GameObject.FindGameObjectWithTag("Spectator").GetComponent<Spectator>();
-        PlayerWealthText.text = PD.Instance.PlayerWealth.Get().ToString();
     }
 
     public void ToggleOpen(Animator Coin)

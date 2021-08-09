@@ -12,6 +12,7 @@ public class CameraUIMover : MonoBehaviour
     public Transform UpgradesZone;
     public Transform SurvivalZone;
     public Transform SettingsZone;
+    public Transform InfoZone;
 
 
     public float CameraSpeed;   // default is .8f
@@ -95,6 +96,18 @@ public class CameraUIMover : MonoBehaviour
     }
 
     public void ExitSettings()
+    {
+        CurrentDestination = MainZone;
+        CameraSpeed = 1.5f;
+    }
+
+    public void LoadInfo()
+    {
+        CurrentDestination = InfoZone;
+        CameraSpeed = 1.5f;
+    }
+
+    public void ExitInfo()
     {
         CurrentDestination = MainZone;
         CameraSpeed = 1.5f;
