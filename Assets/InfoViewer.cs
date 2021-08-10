@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InfoViewer : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class InfoViewer : MonoBehaviour
     public float DistanceBetweenElements;
     public GameObject ArrowL;
     public GameObject ArrowR;
+
+    private List<InfoItem> InfoItems = new List<InfoItem>();
+    public TextMeshProUGUI ItemName;
+    public TextMeshProUGUI ItemDescription;
+
 
 
     // Start is called before the first frame update
@@ -90,12 +96,20 @@ public class InfoViewer : MonoBehaviour
     }
 
 
-    public void ShowItemDescription()
+    public void ShowItemDescription(int ItemIndex) // displays the name and description of the chosen item in the list
     {
-
+        Debug.Log(ItemIndex);
+        InfoItems.Clear();
+        foreach (Transform Item in LevelBar)
+        {
+            InfoItems.Add(Item.GetComponent<InfoItem>());
+            Debug.Log(Item);
+        }
+        ItemName.text = InfoItems[ItemIndex].GetInfoName();
+        ItemDescription.text = InfoItems[ItemIndex].GetInfoDescription();
     }
 
-    public void JumpToPosition(int index)
+    public void JumpToPosition(int index) // jumps the bar to the next/previous spot in the line
     {
         if (index >= 1)
         {
@@ -119,5 +133,6 @@ public class InfoViewer : MonoBehaviour
             ArrowL.SetActive(true);
             ArrowR.SetActive(true);
         }
+        ShowItemDescription(index);
     }
 }
