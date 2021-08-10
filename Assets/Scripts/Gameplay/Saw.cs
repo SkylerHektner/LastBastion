@@ -187,7 +187,7 @@ public class Saw : MonoBehaviour
                 OnFire ? DamageSource.FlamingSaw : DamageSource.Saw,
                 out died,
                 out dodged,
-                1 + ( OnFire ? on_fire_extra_damage : 0 ) );
+                1 + ( ( OnFire && !en.ImmuneToFlamingSawBonusDamage ) ? on_fire_extra_damage : 0 ) );
 
             if( died )
                 SawKilledEnemyEvent.Invoke( pos );
@@ -362,7 +362,7 @@ public class Saw : MonoBehaviour
         transform.localScale = original_scale * scale_multiplier;
     }
 
-    public void SetShieldBreakMovespeedMultiplier(float multilpier)
+    public void SetShieldBreakMovespeedMultiplier( float multilpier )
     {
         skeleton_shield_break_movespeed_multiplier = multilpier;
         proj.SetProjectileSpeed( AdjustedMoveSpeed );

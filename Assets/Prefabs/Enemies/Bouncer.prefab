@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 2478682672113855449}
   - component: {fileID: 8516871528229507494}
   - component: {fileID: 4354133157833814400}
-  - component: {fileID: 8063784181364163129}
+  - component: {fileID: -2752562735790966187}
   m_Layer: 9
   m_Name: Bouncer
   m_TagString: Enemy
@@ -245,7 +245,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8063784181364163129
+--- !u!114 &-2752562735790966187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,24 +254,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2478682672113855452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 446512daffa941f4cb0d2f3082865b54, type: 3}
+  m_Script: {fileID: 11500000, guid: 28f60ad1ddfae3b49841c6dd8d109987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DeathEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2478682672113855449}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Die
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   MoveSpeed: 0.5
   MaxHealth: 2
   DeathEffect: {fileID: 6827540284969801, guid: 99555b1ae64507f409f624a869c5499b, type: 3}
@@ -285,8 +273,8 @@ MonoBehaviour:
   powerupDropValue: 2
   ImmuneToZapBonusDamage: 0
   ImmuneToTyphoon: 0
+  ImmuneToFlamingSawBonusDamage: 0
   Bouncy: 1
   PlayerBaseBonusDamage: 0
-  MagmaBouncer: 0
   MagmaBouncerAnim: {fileID: 22100000, guid: d6effc97979f38e4baa9523038d5e096, type: 2}
   MagmaSpawnEffect: {fileID: 1824666046701122354, guid: 0ad319416e7eab6489eb3865856e2eac, type: 3}

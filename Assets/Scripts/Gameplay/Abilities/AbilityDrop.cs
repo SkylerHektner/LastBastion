@@ -21,6 +21,12 @@ public class AbilityDrop : MonoBehaviour
         Invoke( "AnimEnd", 1.0f );
     }
 
+    public void Disintegrate()
+    {
+        GetComponent<Animator>().SetTrigger( "Crushed" );
+        Invoke( "AnimEnd", 1.0f );
+    }
+
     private void AnimEnd()
     {
         Destroy( gameObject );

@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected int MaxHealth = 1;
     [SerializeField] GameObject DeathEffect;
     [SerializeField] string DeathAnimation;
-    [SerializeField] GameObject SpawnEffect;
+    [SerializeField] protected GameObject SpawnEffect;
     [SerializeField] string SpawnAnimation;
     [SerializeField] GameObject DamagedEffect;
     [SerializeField] string DamagedAnimation;
@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int powerupDropValue = 1;
     [SerializeField] bool ImmuneToZapBonusDamage;
     public bool ImmuneToTyphoon = false;
+    public bool ImmuneToFlamingSawBonusDamage = false;
     public bool Bouncy = false; // if true, the saw will bounce off the creature upon colliding (bounce angle on circular collider)
     [SerializeField] int PlayerBaseBonusDamage;
 
@@ -57,9 +58,6 @@ public class Enemy : MonoBehaviour
 
     protected Animator anim;
     protected SpriteRenderer s_rend;
-    public bool MagmaBouncer;
-    public AnimatorOverrideController MagmaBouncerAnim; // magama bouncer animation overrides
-    [SerializeField] GameObject MagmaSpawnEffect;
 
     private float zap_duration = -1.0f;
     public bool Zapped { get { return zap_duration != -1.0f; } }
@@ -100,11 +98,6 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (MagmaBouncer)
-        {
-            SpawnEffect = MagmaSpawnEffect;
-            anim.runtimeAnimatorController = MagmaBouncerAnim;
-        }
         if( !string.IsNullOrEmpty( CurrentHealthAnimationParameter ) )
             anim.SetFloat( CurrentHealthAnimationParameter, CurrentHealth );
 
@@ -140,10 +133,6 @@ public class Enemy : MonoBehaviour
 
     public void Spawn()
     {
-        if (MagmaBouncer)
-        {
-            SpawnEffect = MagmaSpawnEffect;
-        }
         if ( SpawnEffect )
         {
             var spawn_effect = Instantiate( SpawnEffect );

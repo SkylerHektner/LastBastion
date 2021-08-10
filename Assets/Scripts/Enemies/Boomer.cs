@@ -13,7 +13,7 @@ public class Boomer : Enemy
     protected override void Start()
     {
         base.Start();
-        layermask = LayerMask.GetMask( "Enemy" );
+        layermask = LayerMask.GetMask( "Enemy", "AbilityDrops" );
     }
 
     public override void Kill()
@@ -32,12 +32,16 @@ public class Boomer : Enemy
         for( int x = 0; x < hit.Length; ++x )
         {
             Enemy hit_en = hit[x].gameObject.GetComponent<Enemy>();
-            if( hit_en.EnemyID != EnemyID )
+            AbilityDrop hit_crystal = hit[x].gameObject.GetComponent<AbilityDrop>();
+            if( hit_en != null && hit_en.EnemyID != EnemyID )
             {
                 hit_en.Hit( ( hit_en.transform.position - transform.position ).normalized, true, DamageSource.BoomerDeathExplosion );
             }
+            else if( hit_crystal != null && PD.Instance.UnlockMap.Get( UnlockFlags.BomberUpgradeCurse ) )
+            {
+                hit_crystal.Disintegrate();
+            }
         }
-
     }
 }
 
