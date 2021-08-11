@@ -23,7 +23,7 @@ public class AbilityDrop : MonoBehaviour
 
     public void Disintegrate()
     {
-        GetComponent<Animator>().SetTrigger( "Crushed" );
+        GetComponent<Animator>().SetTrigger("Atomize");
         Invoke( "AnimEnd", 1.0f );
     }
 
