@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: be5d7ac9f1cfa844c933e93f1a900ad0
+guid: 9d8c1336961786646957bc9b9d20086a
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -12,23 +12,26 @@ TextureImporter:
       213: -5068174601279538732
     second: GhostEnemy_2
   - first:
-      213: 5909271026919429896
-    second: GhostEnemy_4
+      213: -4843087227731912704
+    second: GhostieFriend_0
   - first:
-      213: 6415015367702373445
-    second: GhostEnemy_5
+      213: -940511674459560542
+    second: GhostieFriend_1
   - first:
-      213: -1579295524276821720
-    second: GhostEnemy_6
+      213: -7081140345507023127
+    second: GhostieFriend_2
   - first:
-      213: 1322099605411208022
-    second: GhostEnemy_7
+      213: 7196975300204089171
+    second: GhostieFriend_3
   - first:
-      213: 8720598558635027756
-    second: GhostEnemy_8
+      213: -8769507331778799953
+    second: GhostieFriend_4
   - first:
-      213: -8093723900494627390
-    second: GhostEnemy_9
+      213: -5654512590035349242
+    second: GhostieFriend_5
+  - first:
+      213: -3306398759019954441
+    second: GhostieFriend_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -217,11 +220,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostEnemy_3
+      name: GhostieFriend_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 63
+        x: 4
+        y: 61
         width: 32
         height: 32
       alignment: 0
@@ -231,60 +234,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ea2f11ba27903bd0800000000000000
-      internalID: -2652453970905191705
+      spriteID: 008dece73d5e9ccb0800000000000000
+      internalID: -4843087227731912704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostEnemy_4
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 28
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8075a09b0b2f10250800000000000000
-      internalID: 5909271026919429896
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GhostEnemy_5
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 28
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 544629c1d76b60950800000000000000
-      internalID: 6415015367702373445
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GhostEnemy_6
+      name: GhostieFriend_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 28
+        y: 61
         width: 32
         height: 32
       alignment: 0
@@ -294,71 +255,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 821ad109617351ae0800000000000000
-      internalID: -1579295524276821720
+      spriteID: 2a5eab87d91a2f2f0800000000000000
+      internalID: -940511674459560542
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GhostEnemy_7
+      name: GhostieFriend_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 61
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e6fd5d8f5cbabd90800000000000000
+      internalID: -7081140345507023127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhostieFriend_3
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 29
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35fcce187eac0e360800000000000000
+      internalID: 7196975300204089171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhostieFriend_4
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 29
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa6142a6b837c4680800000000000000
+      internalID: -8769507331778799953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhostieFriend_5
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 29
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60118fc12c22781b0800000000000000
+      internalID: -5654512590035349242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GhostieFriend_6
       rect:
         serializedVersion: 2
         x: 1
         y: 0
-        width: 31
-        height: 28
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65b183a169a095210800000000000000
-      internalID: 1322099605411208022
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GhostEnemy_8
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 63
-        width: 32
+        width: 30
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.42446566, y: 0.49213198}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2d69347f2ac50970800000000000000
-      internalID: 8720598558635027756
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GhostEnemy_9
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 63
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2cdbde0bef05daf80800000000000000
-      internalID: -8093723900494627390
+      spriteID: 7feb2d2c8df4d12d0800000000000000
+      internalID: -3306398759019954441
       vertices: []
       indices: 
       edges: []

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 646756495}
   - component: {fileID: 1742929837}
   m_Layer: 9
-  m_Name: Ghostie
+  m_Name: GhostieFriend
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1688259491
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8479173864815945027, guid: be5d7ac9f1cfa844c933e93f1a900ad0, type: 3}
+  m_Sprite: {fileID: -8479173864815945027, guid: 9d8c1336961786646957bc9b9d20086a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 9130753680679645999}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 32e152a4ddd57a744bfff4f44f618557, type: 2}
+  m_Controller: {fileID: 22100000, guid: a3e9a565b272bfa4bbcfcd8df771c912, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -157,9 +157,9 @@ MonoBehaviour:
   DeathEvent:
     m_PersistentCalls:
       m_Calls: []
-  MoveSpeed: 1
+  MoveSpeed: 1.25
   MaxHealth: 1
-  DeathEffect: {fileID: 2016558233288798309, guid: 01e77db70b0e21c43b28d728a0d181e7, type: 3}
+  DeathEffect: {fileID: 2016558233288798309, guid: 219ab4c7ffc9fc14580e1009c471a19b, type: 3}
   DeathAnimation: GhostieDeath
   SpawnEffect: {fileID: 0}
   SpawnAnimation: 
