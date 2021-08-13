@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.82921255, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9934875, g: 1, b: 0, a: 0.5019608}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -682,7 +682,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1b538b2e7516b614991ef70e3307c44d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d81c2608a3e3e394fb0fac518a99e62e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -760,16 +760,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Fortified Shielding
-  MyInfo: Fortifies your base, allowing it to take more damage
-  MyCost: 50
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 17
-  PrerequisiteUpgradeFlags: 
   PurchasedGlow: {fileID: 3253752461429797009}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: 82e691699de95794a9c0f7bc8ba6755c, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: d81c2608a3e3e394fb0fac518a99e62e, type: 3}
   AvailableGlow: {fileID: 2064382409304604046}
 --- !u!95 &3253752460258350877
 Animator:
@@ -906,7 +903,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fd171370dae61de419c819f33d815e5c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d81c2608a3e3e394fb0fac518a99e62e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -984,16 +981,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Reinforced Walls
-  MyInfo: Greatly increases the damage resistance of your base
-  MyCost: 80
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 18
-  PrerequisiteUpgradeFlags: 11000000
   PurchasedGlow: {fileID: 3253752461831132046}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: 82e691699de95794a9c0f7bc8ba6755c, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: d81c2608a3e3e394fb0fac518a99e62e, type: 3}
   AvailableGlow: {fileID: 8191632533043761642}
 --- !u!95 &3253752460593146241
 Animator:
@@ -1083,7 +1077,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fc40cb5770a071e42b38772ebf23b260, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d81c2608a3e3e394fb0fac518a99e62e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1161,16 +1155,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Overshield
-  MyInfo: Enables a rechargeable overshield to protect your base
-  MyCost: 150
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 16
-  PrerequisiteUpgradeFlags: 13000000
   PurchasedGlow: {fileID: 3253752460865378697}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: 82e691699de95794a9c0f7bc8ba6755c, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: d81c2608a3e3e394fb0fac518a99e62e, type: 3}
   AvailableGlow: {fileID: 517727221619902199}
 --- !u!95 &3253752460612811837
 Animator:
@@ -1365,7 +1356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.82921255, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9934875, g: 1, b: 0, a: 0.5019608}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1531,14 +1522,14 @@ RectTransform:
   m_GameObject: {fileID: 3253752461429797009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1762366, y: 2.1762364, z: 2.1762373}
+  m_LocalScale: {x: 2.1799324, y: 2.179932, z: 2.1799333}
   m_Children: []
   m_Father: {fileID: 3253752461431257042}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.012999741, y: 0.025000751}
+  m_AnchoredPosition: {x: -0.012999741, y: 0.004000008}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3253752461429797015
@@ -1562,7 +1553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.82921255, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9934875, g: 1, b: 0, a: 0.5019608}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1761,7 +1752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.82921255, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9934875, g: 1, b: 0, a: 0.5019608}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1847,7 +1838,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d2ec9f45a944583468531b6605acb52d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d81c2608a3e3e394fb0fac518a99e62e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1925,16 +1916,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Great Bastion
-  MyInfo: Maxes out the durability of your base
-  MyCost: 100
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 19
-  PrerequisiteUpgradeFlags: 12000000
   PurchasedGlow: {fileID: 3253752459776702480}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: 82e691699de95794a9c0f7bc8ba6755c, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: d81c2608a3e3e394fb0fac518a99e62e, type: 3}
   AvailableGlow: {fileID: 4197624837631039974}
 --- !u!95 &3253752461841983802
 Animator:

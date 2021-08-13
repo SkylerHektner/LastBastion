@@ -27,14 +27,14 @@ RectTransform:
   m_GameObject: {fileID: 198380571126797166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1762369, y: 2.1762369, z: 2.1762369}
+  m_LocalScale: {x: 1.8754374, y: 1.8754374, z: 1.8754374}
   m_Children: []
   m_Father: {fileID: 198380571897885833}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.013, y: 0.025}
+  m_AnchoredPosition: {x: -0.013, y: 0.007999986}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &198380571126797164
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.75832415, a: 1}
+  m_Color: {r: 0.8113208, g: 0.14083302, b: 0.6483002, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: daa1663b7091bdc4e829662bf998b9df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd01159c8766f2d4499a106314643d49, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -222,16 +222,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Ricochet Saws
-  MyInfo: Allows anomaly saws to bounce off an additional surface before being destroyed
-  MyCost: 25
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 9
-  PrerequisiteUpgradeFlags: 08000000
   PurchasedGlow: {fileID: 198380572469415027}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: 2674bafb974e4e1409d6b9735de7cbcf, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: fd01159c8766f2d4499a106314643d49, type: 3}
   AvailableGlow: {fileID: 5049283971583558044}
 --- !u!95 &198380571135618202
 Animator:
@@ -368,7 +365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fff98950b005a014c968ce48e6cd5304, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd01159c8766f2d4499a106314643d49, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -446,17 +443,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Stasis Coating
-  MyInfo: Enemies you hit during Temporal Anomaly are locked in Stasis until the
-    Anomaly ends
-  MyCost: 65
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 10
-  PrerequisiteUpgradeFlags: 09000000
   PurchasedGlow: {fileID: 198380572005195094}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: 2674bafb974e4e1409d6b9735de7cbcf, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: fd01159c8766f2d4499a106314643d49, type: 3}
   AvailableGlow: {fileID: 1451937598589610265}
 --- !u!95 &198380571367917011
 Animator:
@@ -538,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.75832415, a: 1}
+  m_Color: {r: 0.8113208, g: 0.14083302, b: 0.6483002, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -897,7 +890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.75832415, a: 1}
+  m_Color: {r: 0.8113208, g: 0.14083302, b: 0.6483002, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -983,7 +976,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e192e2ddf409e14d840db2246436a49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd01159c8766f2d4499a106314643d49, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1061,16 +1054,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Singularity
-  MyInfo: The Anomaly mirrors reality, repeating saw launches in parallel
-  MyCost: 80
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 11
-  PrerequisiteUpgradeFlags: 0a000000
   PurchasedGlow: {fileID: 198380571375861777}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: 2674bafb974e4e1409d6b9735de7cbcf, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: fd01159c8766f2d4499a106314643d49, type: 3}
   AvailableGlow: {fileID: 7067983384256766760}
 --- !u!95 &198380572095620379
 Animator:
@@ -1272,7 +1262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.75832415, a: 1}
+  m_Color: {r: 0.8113208, g: 0.14083302, b: 0.6483002, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1358,7 +1348,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 10ab0f6c36391af479deca2c37affcd3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd01159c8766f2d4499a106314643d49, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1436,17 +1426,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Temporal Anomaly
-  MyInfo: Create a Temporal Anomaly which repeats every saw launch that happened
-    during its duration
-  MyCost: 10
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 8
-  PrerequisiteUpgradeFlags: 
   PurchasedGlow: {fileID: 198380571126797166}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: 2674bafb974e4e1409d6b9735de7cbcf, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: fd01159c8766f2d4499a106314643d49, type: 3}
   AvailableGlow: {fileID: 4450111485803945510}
 --- !u!95 &198380572694385053
 Animator:

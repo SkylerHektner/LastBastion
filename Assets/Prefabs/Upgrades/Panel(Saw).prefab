@@ -224,14 +224,14 @@ RectTransform:
   m_GameObject: {fileID: 185399260337183815}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1762369, y: 2.1762369, z: 2.1762369}
+  m_LocalScale: {x: 1.7444221, y: 1.7444221, z: 1.7444221}
   m_Children: []
   m_Father: {fileID: 185399261265656744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.013, y: 0.025}
+  m_AnchoredPosition: {x: -0.013, y: 0.025000006}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &185399260337183813
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.27508545, a: 1}
+  m_Color: {r: 0.5227191, g: 1, b: 0.50377357, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a8a8421a5e14598418cd1b1833c5af37, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b8f97e57e3865b41aa03a0a9a677492, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -419,16 +419,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Sawmageddon
-  MyInfo: Fires additional saw blades with each launch of the main saw
-  MyCost: 10
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 12
-  PrerequisiteUpgradeFlags: 
   PurchasedGlow: {fileID: 185399260337183815}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: d4ae3a757ef5463448b472c06f0e787e, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: 5b8f97e57e3865b41aa03a0a9a677492, type: 3}
   AvailableGlow: {fileID: 8202179391029278556}
 --- !u!95 &185399260452142366
 Animator:
@@ -509,7 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.27508545, a: 1}
+  m_Color: {r: 0.5227191, g: 1, b: 0.50377357, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -642,7 +639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 731c5da21ca0a624da16c88c929a8dc0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b8f97e57e3865b41aa03a0a9a677492, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -720,16 +717,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Guillotine
-  MyInfo: Increases the number of fired saw blades
-  MyCost: 55
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 14
-  PrerequisiteUpgradeFlags: 0d000000
   PurchasedGlow: {fileID: 185399260584434175}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: d4ae3a757ef5463448b472c06f0e787e, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: 5b8f97e57e3865b41aa03a0a9a677492, type: 3}
   AvailableGlow: {fileID: 284262683892181938}
 --- !u!95 &185399260922765496
 Animator:
@@ -933,7 +927,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 676af94cea68d3d4689874619ea4b68d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b8f97e57e3865b41aa03a0a9a677492, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1011,16 +1005,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Frenzy Blade
-  MyInfo: Increase the duration of your Sawmageddon
-  MyCost: 25
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 13
-  PrerequisiteUpgradeFlags: 0c000000
   PurchasedGlow: {fileID: 185399261303988655}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: d4ae3a757ef5463448b472c06f0e787e, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: 5b8f97e57e3865b41aa03a0a9a677492, type: 3}
   AvailableGlow: {fileID: 8819598138140509886}
 --- !u!95 &185399261202072996
 Animator:
@@ -1147,7 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.27508545, a: 1}
+  m_Color: {r: 0.5227191, g: 1, b: 0.50377357, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1225,7 +1216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.27508545, a: 1}
+  m_Color: {r: 0.5227191, g: 1, b: 0.50377357, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1311,7 +1302,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bf838ec162e66ce4991c66c25d81ddd9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b8f97e57e3865b41aa03a0a9a677492, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1389,17 +1380,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030e45415e6bb83459b98a173e06010f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyName: Mulcher
-  MyInfo: While sawmageddon is active, killing enough enemies restores a small portion
-    of health
-  MyCost: 100
+  UnlockFlagInformation: {fileID: 0}
   InfoBox: {fileID: 0}
   UpgradeFlag: 15
-  PrerequisiteUpgradeFlags: 0e000000
   PurchasedGlow: {fileID: 185399261527068650}
   VeiledImage: {fileID: 21300000, guid: a2a87f299641dc646afd9c4e44e75d1a, type: 3}
-  Lockedimage: {fileID: 21300000, guid: b2857b94c059ca444b3771341bf17523, type: 3}
-  UnlockedImage: {fileID: 21300000, guid: d4ae3a757ef5463448b472c06f0e787e, type: 3}
+  Lockedimage: {fileID: 21300000, guid: 6140dfcc700589b41b536cddcce596a9, type: 3}
+  UnlockedImage: {fileID: 21300000, guid: 5b8f97e57e3865b41aa03a0a9a677492, type: 3}
   AvailableGlow: {fileID: 6723300180593475268}
 --- !u!95 &185399261787694661
 Animator:
