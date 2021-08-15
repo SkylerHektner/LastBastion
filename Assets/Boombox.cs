@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Boombox : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    AudioSource CurrentSoundTrack;
+
+
+    public void SwapTrack(AudioClip NextSong) // changes out the current music track
     {
-        
+        Spectator.GameMusic = gameObject.GetComponent<AudioSource>();
+        Spectator.GameMusic.clip = NextSong;
+        Spectator.GameMusic.Play();
+        Debug.Log("swapping");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Awake() // when loading a level,find the level soundtrack and update the main boombox
     {
-        
+        AudioSource LevelMusicPlayer = gameObject.GetComponent<AudioSource>();
+        SwapTrack(LevelMusicPlayer.clip);
     }
+
 }

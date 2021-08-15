@@ -12,6 +12,10 @@ public class Spectator : MonoBehaviour
     public static int SurvivalIndex;
 
     public static bool WitnessedVictory;
+    public static AudioSource GameMusic;
+
+    public Texture2D CursorTexture;
+    public Texture2D CursorTexture2;
 
     private void Awake()
     {
@@ -25,10 +29,20 @@ public class Spectator : MonoBehaviour
         DontDestroyOnLoad( this.gameObject );
     }
 
+
     private void Update()
     {
         if( GameplayManager.Instance == null )
             PD.Instance.Tick();
+
+        if (Input.GetMouseButton(0))
+        {
+            Cursor.SetCursor(CursorTexture2, Vector2.zero, CursorMode.ForceSoftware);
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            Cursor.SetCursor(CursorTexture, Vector2.zero, CursorMode.ForceSoftware);
+        }
     }
 
     // used for debugging (call this mid game, then stop the editor, then start at the main menu)

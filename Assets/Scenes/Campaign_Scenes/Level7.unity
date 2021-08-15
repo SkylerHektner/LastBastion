@@ -35238,9 +35238,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2012451408}
   - component: {fileID: 2012451407}
+  - component: {fileID: 2012451409}
+  - component: {fileID: 2012451410}
   m_Layer: 0
   m_Name: Level Soundtrack
-  m_TagString: Untagged
+  m_TagString: LevelSoundtrack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35355,6 +35357,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2012451409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012451406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7f99174aa165740838b6b9bdd5c49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2012451410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012451406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ab739f933378c499e68529b7511636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicTrack: 1
 --- !u!1 &2030498903
 GameObject:
   m_ObjectHideFlags: 0
