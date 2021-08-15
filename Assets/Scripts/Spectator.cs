@@ -35,6 +35,8 @@ public class Spectator : MonoBehaviour
         if( GameplayManager.Instance == null )
             PD.Instance.Tick();
 
+
+        // makes the cursor a finger texture
         if (Input.GetMouseButton(0))
         {
             Cursor.SetCursor(CursorTexture2, Vector2.zero, CursorMode.ForceSoftware);

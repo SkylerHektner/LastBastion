@@ -81,6 +81,11 @@ public class PD
     public PlayerDataField<int> StoredLimboLevelIndex = new PlayerDataField<int>();
     public PlayerDataField<int> StoredLimboCurrentWave = new PlayerDataField<int>();
     public PlayerDataField<int> StoredLimboSurvivalIndex = new PlayerDataField<int>();
+    public PlayerDataField<float> StoredMusicVolume = new PlayerDataField<float>();
+    public PlayerDataField<float> StoredSFXVolume = new PlayerDataField<float>();
+    public PlayerDataField<int> GameBegun = new PlayerDataField<int>();
+
+
 
     // a dictionary containing information about the dependencies of each unlock flag
     public readonly Dictionary<UnlockFlags, List<UnlockFlags>> UnlockFlagDependencyMap = new Dictionary<UnlockFlags, List<UnlockFlags>>

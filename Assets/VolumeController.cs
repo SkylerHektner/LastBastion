@@ -19,11 +19,11 @@ public class VolumeController : MonoBehaviour
     {
         if (MusicTrack)
         {
-            SoundSource.volume = PlayerPrefs.GetFloat("MusicVolume");
+            SoundSource.volume = PD.Instance.StoredMusicVolume.Get();
         }
         else
         {
-            SoundSource.volume = PlayerPrefs.GetFloat("SFXVolume"); // set elsewhere
+            SoundSource.volume = PD.Instance.StoredSFXVolume.Get(); // set elsewhere
         }
     }
 
