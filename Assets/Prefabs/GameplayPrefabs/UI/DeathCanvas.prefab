@@ -1172,6 +1172,7 @@ GameObject:
   - component: {fileID: 2797901440614322218}
   - component: {fileID: 4234159759195706998}
   - component: {fileID: 6058068044900671849}
+  - component: {fileID: 7687772071301215282}
   m_Layer: 5
   m_Name: DeathScreen
   m_TagString: Untagged
@@ -1233,6 +1234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7f99174aa165740838b6b9bdd5c49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathMusic: 1
+  VictoryMusic: 0
 --- !u!82 &6058068044900671849
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1247,7 +1250,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1329,6 +1332,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7687772071301215282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797901440614322217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ab739f933378c499e68529b7511636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicTrack: 1
 --- !u!1 &2797901441227265842
 GameObject:
   m_ObjectHideFlags: 0

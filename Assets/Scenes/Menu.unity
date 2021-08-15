@@ -26923,7 +26923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0ab739f933378c499e68529b7511636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicTrack: 0
+  MusicTrack: 1
 --- !u!82 &838727366
 AudioSource:
   m_ObjectHideFlags: 0
@@ -26938,7 +26938,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -60590,7 +60590,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -60698,6 +60698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7f99174aa165740838b6b9bdd5c49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathMusic: 0
+  VictoryMusic: 0
 --- !u!114 &1811472329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68147,7 +68149,7 @@ MonoBehaviour:
         m_MethodName: SwapTrack
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: b044d486e96149e47889dc48f200d94a, type: 3}
+          m_ObjectArgument: {fileID: 8300000, guid: e669cd9ab32d7a64fac8a0aa6ec23b22, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
