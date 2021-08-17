@@ -10,6 +10,8 @@ public class VolumeController : MonoBehaviour
     public AudioClip AlternateSound;
     AudioClip DefaultSound;
 
+    private float default_volume;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -17,16 +19,23 @@ public class VolumeController : MonoBehaviour
         DefaultSound = SoundSource.clip; // save for reference
     }
 
+    private void Start()
+    {
+        SoundSource = gameObject.GetComponent<AudioSource>();
+        default_volume = SoundSource.volume;
+        Debug.Log( default_volume );
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (MusicTrack)
         {
-            SoundSource.volume = PD.Instance.StoredMusicVolume.Get();
+            SoundSource.volume = default_volume * PD.Instance.StoredMusicVolume.Get();
         }
         else
         {
-            SoundSource.volume = PD.Instance.StoredSFXVolume.Get(); // set elsewhere
+            SoundSource.volume = default_volume * PD.Instance.StoredSFXVolume.Get(); // set elsewhere
         }
     }
 
