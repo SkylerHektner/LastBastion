@@ -27,5 +27,17 @@ public class VolumeController : MonoBehaviour
         }
     }
 
+    public void RandomizePitch()
+    {
+        float MaxValue = 1.5f;
+        float MinValue = .8f;
+        SoundSource.pitch = Random.Range(MinValue, MaxValue);
+    }
+
+    public void PlayMySound()
+    {
+        SoundSource.Play();
+    }
+
 
 }
