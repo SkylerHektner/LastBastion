@@ -7,6 +7,7 @@ public class SpectralSaw : Projectile
 {
     public int NumRemainingExtraBounces = 0;
     public UnityEvent<Vector3> SawKilledEnemyEvent = new UnityEvent<Vector3>();
+    public UnityEvent SawReleasedEvent = new UnityEvent();
 
     private HashSet<long> shared_collision_set = null;
 
@@ -59,6 +60,12 @@ public class SpectralSaw : Projectile
     {
         shared_collision_set = collision_set;
         Saw.Instance.SawHitEnemyEvent.AddListener( OnSawHitEnemy );
+    }
+
+    public override void StartMoveInDirection( Vector3 move_direction )
+    {
+        base.StartMoveInDirection( move_direction );
+        SawReleasedEvent.Invoke();
     }
 
     private void OnSawHitEnemy( long id )

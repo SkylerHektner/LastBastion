@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
         MoveSpeed = speed;
     }
 
-    public void StartMoveInDirection( Vector3 move_direction )
+    public virtual void StartMoveInDirection( Vector3 move_direction )
     {
         this.MoveDirection = move_direction.normalized;
     }

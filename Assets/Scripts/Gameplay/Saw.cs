@@ -13,6 +13,7 @@ public class Saw : MonoBehaviour
     public UnityEvent<Vector3> SawKilledEnemyEvent = new UnityEvent<Vector3>();
     public UnityEvent<long> SawHitEnemyEvent = new UnityEvent<long>();
     public UnityEvent SawMuddiedEvent = new UnityEvent();
+    public UnityEvent SawBounceOffWallEvent = new UnityEvent(); // only called when the saw bounces (EG top/bottom) not when it sticks!
     public bool Moving { get { return MoveDirection != Vector3.zero; } }
     public float AdjustedMoveSpeed
     {
@@ -160,6 +161,8 @@ public class Saw : MonoBehaviour
             {
                 TyphoonAbility.ActiveTyphoon.SetSawOnFire( this );
             }
+
+            SawBounceOffWallEvent.Invoke();
         }
         else if( hit_info.wall == ProjectileHitInfo.Wall.Left ||
             hit_info.wall == ProjectileHitInfo.Wall.Right )
