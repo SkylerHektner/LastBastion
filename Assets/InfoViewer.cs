@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class InfoViewer : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class InfoViewer : MonoBehaviour
         EnemyInfo.SetActive(false);
         AchievementInfo.SetActive(false);
         JumpToPosition(Index);
+        ShowArrowButtons();
     }
 
     public void DisplayEnemyInfo()
@@ -59,6 +61,7 @@ public class InfoViewer : MonoBehaviour
         EnemyInfo.SetActive(true);
         AchievementInfo.SetActive(false);
         JumpToPosition(Index);
+        ShowArrowButtons();
 
     }
 
@@ -70,6 +73,7 @@ public class InfoViewer : MonoBehaviour
         EnemyInfo.SetActive(false);
         AchievementInfo.SetActive(true);
         JumpToPosition(Index);
+        ShowArrowButtons();
     }
 
     public void HideAllDisplays()
@@ -95,6 +99,12 @@ public class InfoViewer : MonoBehaviour
         JumpToPosition(Index);
     }
 
+    public void ShowArrowButtons()
+    {
+        ArrowL.SetActive(true);
+        ArrowR.SetActive(true);
+    }
+
 
     public void ShowItemDescription(int ItemIndex) // displays the name and description of the chosen item in the list
     {
@@ -118,20 +128,20 @@ public class InfoViewer : MonoBehaviour
         else if (index == 0)
         {
             LevelBar.transform.localPosition = new Vector2(-(BarStartPos), LevelBar.transform.localPosition.y);
-            ArrowR.SetActive(true);
+            ArrowR.GetComponent<Button>().interactable = true;
         }
         if (index == 0)
         {
-            ArrowL.SetActive(false);
+            ArrowL.GetComponent<Button>().interactable = false;
         }
         else if (index >= InfoTabCategories.Count - 1)
         {
-            ArrowR.SetActive(false);
+            ArrowR.GetComponent<Button>().interactable = false;
         }
         else if (index > 0 && Index < InfoTabCategories.Count - 1)
         {
-            ArrowL.SetActive(true);
-            ArrowR.SetActive(true);
+            ArrowL.GetComponent<Button>().interactable = true;
+            ArrowR.GetComponent<Button>().interactable = true;
         }
         ShowItemDescription(index);
     }
