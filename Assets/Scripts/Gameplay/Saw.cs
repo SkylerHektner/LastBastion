@@ -85,6 +85,7 @@ public class Saw : MonoBehaviour
         proj.ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
         PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUnlockFlagChanged );
         UpdateSawRadius();
+        VolumeController.RecentPitch = 1f; // ignore this <('u'<)
     }
 
     private void Update()
