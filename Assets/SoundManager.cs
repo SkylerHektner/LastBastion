@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour
     public GameObject SFXVolume;
     Slider MusicSlider;
     Slider SFXSlider;
-    float DefaultMusicVolume = .4f;
+    float DefaultMusicVolume = .25f;
     float DefaultSFXVolume = .6f;
 
     public AudioSource SFXClicks;
