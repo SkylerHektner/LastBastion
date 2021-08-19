@@ -6,30 +6,24 @@ using UnityEngine;
 #if UNITY_EDITOR
 public static class CustomEditorUtilities
 {
-    public static void AutoDirtyLabeledInt(ref int original_val, string label, UnityEngine.Object target)
+    public static void AutoDirtyLabeledInt( ref int original_val, string label, UnityEngine.Object target )
     {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField( label );
-        int new_value = EditorGUILayout.IntField( original_val );
-        if(new_value != original_val)
-        {
-            original_val = new_value;
-            EditorUtility.SetDirty( target );
-        }    
-        EditorGUILayout.EndHorizontal();
-    }
-
-    public static void AutoDirtyLabeledFloat( ref float original_val, string label, UnityEngine.Object target )
-    {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField( label );
-        float new_value = EditorGUILayout.FloatField( original_val );
+        int new_value = EditorGUILayout.IntField( label, original_val );
         if( new_value != original_val )
         {
             original_val = new_value;
             EditorUtility.SetDirty( target );
         }
-        EditorGUILayout.EndHorizontal();
+    }
+
+    public static void AutoDirtyLabeledFloat( ref float original_val, string label, UnityEngine.Object target )
+    {
+        float new_value = EditorGUILayout.FloatField( label, original_val );
+        if( new_value != original_val )
+        {
+            original_val = new_value;
+            EditorUtility.SetDirty( target );
+        }
     }
 
     public static void AutoDirtyLabeledString( ref string original_val, string label, bool use_large_entry, UnityEngine.Object target )
@@ -60,24 +54,49 @@ public static class CustomEditorUtilities
         EditorGUILayout.EndFoldoutHeaderGroup();
     }
 
-    public static UnityEngine.Object AutoDirtyUnityObject(UnityEngine.Object original_val, System.Type type, string label, UnityEngine.Object target)
+    public static UnityEngine.Object AutoDirtyUnityObject( UnityEngine.Object original_val, System.Type type, string label, UnityEngine.Object target )
     {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField( label );
-        UnityEngine.Object new_value = EditorGUILayout.ObjectField( original_val, type, false );
+        UnityEngine.Object new_value = EditorGUILayout.ObjectField( label, original_val, type, false );
         if( new_value != original_val )
         {
             EditorUtility.SetDirty( target );
             return new_value;
         }
-        EditorGUILayout.EndHorizontal();
         return original_val;
     }
 
-    public static void ListItemControlButtons<T>(List<T> list, ref int index, ref bool confirm_delete_bool, UnityEngine.Object target)
+    public static void ListItemControlButtonsUnsafe<T>( List<T> list, ref int index, UnityEngine.Object target )
     {
         EditorGUILayout.BeginHorizontal();
-        if(!confirm_delete_bool)
+
+        if( GUILayout.Button( "Delete" ) )
+        {
+            list.RemoveAt( index );
+            index--;
+            EditorUtility.SetDirty( target );
+        }
+        if( list.Count > 1 && index > 0 && GUILayout.Button( "Move Up" ) )
+        {
+            T original = list[index];
+            list[index] = list[index - 1];
+            list[index - 1] = original;
+            EditorUtility.SetDirty( target );
+        }
+        if( list.Count > 1 && index < list.Count - 1 && GUILayout.Button( "Move Down" ) )
+        {
+            T original = list[index];
+            list[index] = list[index + 1];
+            list[index + 1] = original;
+            EditorUtility.SetDirty( target );
+        }
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    public static void ListItemControlButtons<T>( List<T> list, ref int index, ref bool confirm_delete_bool, UnityEngine.Object target )
+    {
+        EditorGUILayout.BeginHorizontal();
+        if( !confirm_delete_bool )
         {
             bool new_confirm_delete_bool = GUILayout.Button( "Delete" );
             if( new_confirm_delete_bool != confirm_delete_bool )
@@ -88,33 +107,33 @@ public static class CustomEditorUtilities
         else
         {
             EditorGUILayout.LabelField( "Are you sure?" );
-            if(GUILayout.Button("Yes"))
+            if( GUILayout.Button( "Yes" ) )
             {
                 list.RemoveAt( index );
                 index--;
                 EditorUtility.SetDirty( target );
             }
-            else if(GUILayout.Button("No"))
+            else if( GUILayout.Button( "No" ) )
             {
                 confirm_delete_bool = false;
             }
         }
 
-        if( list.Count > 1 && index > 0 && GUILayout.Button("Move Up"))
+        if( list.Count > 1 && index > 0 && GUILayout.Button( "Move Up" ) )
         {
             T original = list[index];
             list[index] = list[index - 1];
             list[index - 1] = original;
             EditorUtility.SetDirty( target );
         }
-        if( list.Count > 1 && index < list.Count - 1 && GUILayout.Button("Move Down"))
+        if( list.Count > 1 && index < list.Count - 1 && GUILayout.Button( "Move Down" ) )
         {
             T original = list[index];
             list[index] = list[index + 1];
             list[index + 1] = original;
             EditorUtility.SetDirty( target );
         }
-        
+
         EditorGUILayout.EndHorizontal();
     }
 
