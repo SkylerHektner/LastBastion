@@ -12,7 +12,7 @@ public class Spectator : MonoBehaviour
     public static int SurvivalIndex;
 
     public static bool WitnessedVictory;
-    public static AudioSource GameMusic;
+    public AudioSource GameMusic;
 
     public Texture2D CursorTexture;
     public Texture2D CursorTexture2;

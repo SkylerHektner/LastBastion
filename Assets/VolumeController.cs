@@ -37,7 +37,7 @@ public class VolumeController : MonoBehaviour
     {
         SoundSource = gameObject.GetComponent<AudioSource>();
         default_volume = SoundSource.volume;
-        Debug.Log( default_volume );
+        //Debug.Log( default_volume );
     }
 
     // Update is called once per frame

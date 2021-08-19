@@ -1027,6 +1027,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MusicTrack: 0
+  AlternateSound: {fileID: 0}
+  PitchIncreaseOnAwake: 0
+  NeutralizePitchOnDestroy: 0
 --- !u!114 &7144802141112544865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1236,6 +1239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeathMusic: 1
   VictoryMusic: 0
+  SurvivalTrack: 0
+  MyClip: {fileID: 8300000, guid: 589dd00f138e513499dfc8f4d930bf1d, type: 3}
 --- !u!82 &6058068044900671849
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1345,6 +1350,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MusicTrack: 1
+  AlternateSound: {fileID: 0}
+  PitchIncreaseOnAwake: 0
+  NeutralizePitchOnDestroy: 0
 --- !u!1 &2797901441227265842
 GameObject:
   m_ObjectHideFlags: 0

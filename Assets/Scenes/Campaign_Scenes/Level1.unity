@@ -352,7 +352,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9698356b378589b4782227101564ac5b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -462,6 +462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7f99174aa165740838b6b9bdd5c49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathMusic: 0
+  VictoryMusic: 0
+  SurvivalTrack: 0
+  MyClip: {fileID: 8300000, guid: 9698356b378589b4782227101564ac5b, type: 3}
 --- !u!114 &78208186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,6 +479,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MusicTrack: 1
+  AlternateSound: {fileID: 0}
+  PitchIncreaseOnAwake: 0
+  NeutralizePitchOnDestroy: 0
 --- !u!1 &85337577
 GameObject:
   m_ObjectHideFlags: 0

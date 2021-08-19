@@ -16,10 +16,11 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource SFXClicks;
     public AudioSource MusicClicks;
-
+    public AudioSource SpectatorAudio;
 
     private void Start()
     {
+        SpectatorAudio = GameObject.FindGameObjectWithTag("Spectator").GetComponent<AudioSource>();
         InitializeSound();
     }
 
@@ -43,7 +44,7 @@ public class SoundManager : MonoBehaviour
     public void RevertToDefault() // sets both volumes to default levels
     {
         InitializeSound();
-        Spectator.GameMusic.volume = DefaultMusicVolume;
+        SpectatorAudio.volume = DefaultMusicVolume;
         MusicSlider.value = DefaultMusicVolume;
         //PlayerPrefs.SetFloat("MusicVolume", DefaultMusicVolume); // updates preferences with change
         PD.Instance.StoredMusicVolume.Set(DefaultMusicVolume);
@@ -66,8 +67,8 @@ public class SoundManager : MonoBehaviour
 
     public void EditMusicVolume()
     {
-        Spectator.GameMusic.volume = MusicSlider.value;
-        PD.Instance.StoredMusicVolume.Set(Spectator.GameMusic.volume);
+        SpectatorAudio.volume = MusicSlider.value;
+        PD.Instance.StoredMusicVolume.Set(SpectatorAudio.volume);
         //PlayerPrefs.SetFloat("MusicVolume", Spectator.GameMusic.volume); // updates preferences with change
         if (MusicClicks.gameObject.activeInHierarchy)
         {

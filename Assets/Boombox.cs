@@ -7,24 +7,28 @@ public class Boombox : MonoBehaviour
     AudioSource CurrentSoundTrack;
     public bool DeathMusic;
     public bool VictoryMusic;
+    public bool SurvivalTrack;
+    public AudioClip MyClip;
 
 
     public void SwapTrack(AudioClip NextSong) // changes out the current music track in the spectator object
     {
-        Spectator.GameMusic = gameObject.GetComponent<AudioSource>();
-        Spectator.GameMusic.clip = NextSong;
-        Spectator.GameMusic.Play();
-        Debug.Log("swapping");
+        CurrentSoundTrack = GameObject.FindGameObjectWithTag("Spectator").GetComponent<AudioSource>();
+        CurrentSoundTrack.clip = null;
+        CurrentSoundTrack.clip = NextSong;
+        CurrentSoundTrack.Play();
+        Debug.Log("swapping tracks");
     }
 
-    public void Awake() // when loading a level,find the level soundtrack and update the main boombox
+    public void OnEnable() // when loading a level,find the level soundtrack and update the main boombox on the spectator
     {
+        CurrentSoundTrack = GameObject.FindGameObjectWithTag("Spectator").GetComponent<AudioSource>();
         if (DeathMusic || VictoryMusic)
         {
-            Spectator.GameMusic.clip = null;
+            CurrentSoundTrack.clip = null;
         }
-        AudioSource LevelMusicPlayer = gameObject.GetComponent<AudioSource>();
-        SwapTrack(LevelMusicPlayer.clip);
-    }
+        //AudioSource LevelMusicPlayer = gameObject.GetComponent<AudioSource>();
+        SwapTrack(MyClip);
 
+    }
 }
