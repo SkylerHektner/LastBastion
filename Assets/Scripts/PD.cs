@@ -85,8 +85,6 @@ public class PD
     public PlayerDataField<float> StoredSFXVolume = new PlayerDataField<float>();
     public PlayerDataField<int> GameBegun = new PlayerDataField<int>();
 
-
-
     // a dictionary containing information about the dependencies of each unlock flag
     public readonly Dictionary<UnlockFlags, List<UnlockFlags>> UnlockFlagDependencyMap = new Dictionary<UnlockFlags, List<UnlockFlags>>
     {
@@ -241,13 +239,6 @@ public class PD
     {
         PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + 1000 );
     }
-    [MenuItem( "Debug/DeleteAllPlayerData/NoSeriouslyDeleteItAll" )]
-    public static void DeleteAllPlayerData()
-    {
-        File.Delete( GetPath() );
-        _instance = new PD();
-        _instance.SetDirty();
-    }
     [MenuItem( "Debug/UnlockEverything" )]
     public static void UnlockEverything()
     {
@@ -293,7 +284,6 @@ public class PD
             }
         }
     }
-
     [MenuItem( "Debug/EndTheSuffering" )]
     public static void KillMyself()
     {
@@ -305,6 +295,14 @@ public class PD
         BaseHP.Instance?.ReduceHP( 9001 );
     }
 #endif
+    // this is intentionally compiled into release builds as we use it to reset player progress
+    [MenuItem( "Debug/DeleteAllPlayerData/NoSeriouslyDeleteItAll" )]
+    public static void DeleteAllPlayerData()
+    {
+        File.Delete( GetPath() );
+        _instance = new PD();
+        _instance.SetDirty();
+    }
 
     // NON STATIC
     private bool dirty = false;
