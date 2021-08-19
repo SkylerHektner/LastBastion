@@ -296,7 +296,9 @@ public class PD
     }
 #endif
     // this is intentionally compiled into release builds as we use it to reset player progress
+#if UNITY_EDITOR
     [MenuItem( "Debug/DeleteAllPlayerData/NoSeriouslyDeleteItAll" )]
+#endif
     public static void DeleteAllPlayerData()
     {
         File.Delete( GetPath() );
@@ -306,10 +308,6 @@ public class PD
 
     // NON STATIC
     private bool dirty = false;
-    ~PD()
-    {
-        SaveData();
-    }
 
     // called once per frame in the Spectator
     public void Tick()
