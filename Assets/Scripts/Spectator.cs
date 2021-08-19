@@ -87,4 +87,10 @@ public class Spectator : MonoBehaviour
             }
         }
     }
+
+    public void WipeProgress()
+    {
+        PD.DeleteAllPlayerData();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
