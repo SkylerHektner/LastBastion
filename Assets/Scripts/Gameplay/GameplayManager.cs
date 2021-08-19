@@ -119,31 +119,32 @@ public class GameplayManager : MonoBehaviour
     public Environment ActiveEnvironment;
 
     // WIN LOSS STATE
-    public enum PlayerState
+    public enum GameState
     {
         Active,
         Won,
+        ChoosingUpgrade, // only used in surival mode
         Lost
     }
-    public static PlayerState PlayerWinState
+    public static GameState State
     {
         get
         {
-            return playerWinState;
+            return current_state;
         }
         set
         {
-            playerWinState = value;
+            current_state = value;
 
             // kind of a hack, but we need to make sure that the player doesn't enter limbo
             // if they paused a level but came back and finished it without closing the application completely
-            if( value != PlayerState.Active )
+            if( value != GameState.Active )
             {
                 PD.Instance?.Limbo.Set( false );
             }
         }
     }
-    private static PlayerState playerWinState = PlayerState.Active;
+    private static GameState current_state = GameState.Active;
 
     // TIME SCALE
     public static float TimeScale
@@ -207,6 +208,8 @@ public class GameplayManager : MonoBehaviour
         {
             PD.Instance.Limbo.Set( false );
         }
+
+        SpawnManager.Instance.WaveCompletedEvent.AddListener( OnWaveComplete );
     }
 
     private void Update()
@@ -218,5 +221,10 @@ public class GameplayManager : MonoBehaviour
     private void OnDestroy()
     {
         Challenges?.End();
+    }
+
+    private void OnWaveComplete(int wave)
+    {
+        PD.Instance.LazyTick();
     }
 }

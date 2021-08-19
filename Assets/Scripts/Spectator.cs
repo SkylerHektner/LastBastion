@@ -52,7 +52,7 @@ public class Spectator : MonoBehaviour
     public void TryToggleLimbo()
     {
         if( SceneManager.GetActiveScene().name != "Menu"
-            && GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
+            && GameplayManager.State == GameplayManager.GameState.Active )
         {
             PD.Instance.Limbo.Set( true );
             PD.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
@@ -81,7 +81,7 @@ public class Spectator : MonoBehaviour
 #if !UNITY_EDITOR
         TryToggleLimbo();
 #endif
-            if( GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
+            if( GameplayManager.State == GameplayManager.GameState.Active )
             {
                 PauseManager.Instance?.PauseGame();
             }

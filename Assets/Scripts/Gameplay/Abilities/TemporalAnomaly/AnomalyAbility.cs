@@ -98,6 +98,9 @@ public class AnomalyAbility : Ability
             }
         }
 
+        // record player stats
+        PD.Instance.HighestAnomalySawUnleash.Set( Mathf.Max( PD.Instance.HighestAnomalySawUnleash.Get(), pending_saws.Count ) );
+
         foreach( long id in stasis_coated_enemies )
         {
             Enemy en = SpawnManager.Instance.TryGetEnemyByID( id );

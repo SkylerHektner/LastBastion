@@ -13,6 +13,7 @@ public class SawmageddonAbility : Ability
     private float time_left = 0.0f;
     private int combo_killer_max = -1;
     private int cur_combo_killer_kills = 0;
+    private int num_kills_this_release = 0; // tracks the number of kills per shot. Needed for player stats
 
     private bool listening = false;
 
@@ -23,7 +24,9 @@ public class SawmageddonAbility : Ability
         time_left = ( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonDuration )
             ? AbilityData.ImprovedDuration : AbilityData.Duration )
             * GetAbilityDurationMultiplier();
-        Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
+        Saw.Instance.SawFiredEvent.AddListener( OnSawFired );
+        Saw.Instance.SawAttachToWallEvent.AddListener( OnSawAttachedToWall );
+        SpawnManager.Instance.EnemyDiedEvent.AddListener( OnEnemyDied );
         if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller ) )
         {
             combo_killer_max = AbilityData.ComboKillerHPRegainKillsBase;
@@ -52,11 +55,35 @@ public class SawmageddonAbility : Ability
             if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller ) )
                 spec_saw.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
         }
+
+        num_kills_this_release = 0;
+    }
+
+    private void OnSawAttachedToWall()
+    {
+        // record player stats
+        PD.Instance.HighestEnemyDeathTollFromSawmageddonShot.Set(
+            Mathf.Max(
+                PD.Instance.HighestEnemyDeathTollFromSawmageddonShot.Get(),
+                num_kills_this_release
+                ) );
+
+        num_kills_this_release = 0;
+    }
+
+    private void OnEnemyDied( Enemy en )
+    {
+        if( en.DeathSource == DamageSource.Saw || en.DeathSource == DamageSource.SpectralSaw )
+        {
+            ++num_kills_this_release;
+        }
     }
 
     public override void Finish()
     {
         Saw.Instance?.SawFiredEvent?.RemoveListener( OnSawFired );
+        Saw.Instance.SawAttachToWallEvent.RemoveListener( OnSawAttachedToWall );
+        SpawnManager.Instance.EnemyDiedEvent.RemoveListener( OnEnemyDied );
         if( listening )
         {
             Saw.Instance?.SawKilledEnemyEvent?.RemoveListener( OnSawKilledEnemy );

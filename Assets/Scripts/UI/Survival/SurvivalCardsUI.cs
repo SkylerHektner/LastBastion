@@ -59,6 +59,8 @@ public class SurvivalCardsUI : MonoBehaviour
             PopulateUIMap();
         }
 
+        GameplayManager.State = GameplayManager.GameState.ChoosingUpgrade;
+
         var boon_unlock_flags = GenerateUnlockOptions( false );
         var curse_unlock_flags = GenerateUnlockOptions( true );
         var boon_unlock_flags_iterator = boon_unlock_flags.GetEnumerator();

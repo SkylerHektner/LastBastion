@@ -19,6 +19,9 @@ public class AbilityDrop : MonoBehaviour
         AbilityManager.Instance.UseAbility( ability );
         GetComponent<Animator>().SetTrigger( "Crushed" );
         Invoke( "AnimEnd", 1.0f );
+
+        // record player stats
+        PD.Instance.NumCrystalsUsed.Set( PD.Instance.NumCrystalsUsed.Get() + 1 );
     }
 
     public void Disintegrate()

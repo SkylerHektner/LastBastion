@@ -24,7 +24,7 @@ public class ChallengesTracker
 
     public void Tick( float deltaTime )
     {
-        if( GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
+        if( GameplayManager.State == GameplayManager.GameState.Active )
             TotalLevelTimePassed += deltaTime;
     }
 

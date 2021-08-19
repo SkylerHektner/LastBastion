@@ -47,6 +47,7 @@ public class SpawnManager : MonoBehaviour
 
     public List<Enemy> AllSpawnedEnemies { get { return spawned_enemies.Values.ToList<Enemy>(); } }
     public UnityEvent<Enemy> EnemySpawnedEvent = new UnityEvent<Enemy>();
+    public UnityEvent<Enemy> EnemyDiedEvent = new UnityEvent<Enemy>();
     public UnityEvent<int> WaveCompletedEvent = new UnityEvent<int>(); // pass completed wave number (not 0 based)
 
     private float spawn_timer = -1.0f;
@@ -88,6 +89,11 @@ public class SpawnManager : MonoBehaviour
     // Start the next wave. If no next wave, finish the cadence
     public void StartNextWave()
     {
+        if( GameplayManager.State != GameplayManager.GameState.Lost )
+        {
+            GameplayManager.State = GameplayManager.GameState.Active;
+        }
+
         defer_next_wave_start = false;
         CurrentWaveIndex++;
 
@@ -143,14 +149,14 @@ public class SpawnManager : MonoBehaviour
             CurrentWaveIndex = PD.Instance.StoredLimboCurrentWave.Get() - 1; // subtract one since we immediately start next wave
         }
 
-        GameplayManager.PlayerWinState = GameplayManager.PlayerState.Active;
+        GameplayManager.State = GameplayManager.GameState.Active;
         StartNextWave();
     }
 
     private void Update()
     {
         // EARLY RETURN - SPAWN MANAGER ONLY ACTIVE IF GAMEPLAY STATE IS ACTIVE
-        if( GameplayManager.PlayerWinState != GameplayManager.PlayerState.Active )
+        if( GameplayManager.State != GameplayManager.GameState.Active )
             return;
 
         //manage pending spawns
@@ -160,8 +166,8 @@ public class SpawnManager : MonoBehaviour
             {
                 var next = it.Next;
                 var ps = it.Value;
-                ps.time_left -= Time.deltaTime 
-                    * GameplayManager.TimeScale 
+                ps.time_left -= Time.deltaTime
+                    * GameplayManager.TimeScale
                     * GameplayManager.Instance.EnemySpawnSpeedCurseMultiplier;
 
                 it.Value = ps;
@@ -186,7 +192,7 @@ public class SpawnManager : MonoBehaviour
                 for( int x = 0; x < passive_spawn_trackers.Count; ++x )
                 {
                     passive_spawn_trackers[x] -= Time.deltaTime
-                        * GameplayManager.TimeScale 
+                        * GameplayManager.TimeScale
                         * GameplayManager.Instance.EnemySpawnSpeedCurseMultiplier;
 
                     if( passive_spawn_trackers[x] < 0.0f )
@@ -217,23 +223,32 @@ public class SpawnManager : MonoBehaviour
 
     private void WaveComplete()
     {
-        // if this is the first time completing this wave, mark it as complete and grant the player a reward
-        if( !PD.Instance.LevelCompletionMap.GetWaveCompletion( spawnCadenceProfile.GetLevelIdentifier(), CurrentWaveIndex ) )
+        if( !GameplayManager.Instance.Survival )
         {
-            int reward = CurrentWave.CompletionReward;
-            if( reward > 0 )
+            // if this is the first time completing this wave, mark it as complete and grant the player a reward
+            if( !PD.Instance.LevelCompletionMap.GetWaveCompletion( spawnCadenceProfile.GetLevelIdentifier(), CurrentWaveIndex ) )
             {
-                PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.GetLevelIdentifier(), CurrentWaveIndex, true );
-                PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + reward );
-                total_level_earnings += reward;
-                Spectator.WitnessedVictory = true; // enables a popup on the menu screen for "New level unlocked!" notification
+                int reward = CurrentWave.CompletionReward;
+                if( reward > 0 )
+                {
+                    PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.GetLevelIdentifier(), CurrentWaveIndex, true );
+                    PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + reward );
+                    total_level_earnings += reward;
+                    Spectator.WitnessedVictory = true; // enables a popup on the menu screen for "New level unlocked!" notification
+                }
+            }
+            // if this was the final wave then mark the level complete
+            if( CurrentWaveIndex == spawnCadenceProfile.GetWaveCount() - 1 && !PD.Instance.LevelCompletionMap.GetLevelCompletion( spawnCadenceProfile.GetLevelIdentifier() ) )
+            {
+                PD.Instance.LevelCompletionMap.SetLevelCompletion( spawnCadenceProfile.GetLevelIdentifier(), true );
             }
         }
-        // if this was the final wave then mark the level complete
-        if( CurrentWaveIndex == spawnCadenceProfile.GetWaveCount() - 1 && !PD.Instance.LevelCompletionMap.GetLevelCompletion( spawnCadenceProfile.GetLevelIdentifier() ) )
+        else
         {
-            PD.Instance.LevelCompletionMap.SetLevelCompletion( spawnCadenceProfile.GetLevelIdentifier(), true );
+            // just record the highest wave we've reached in survival
+            PD.Instance.HighestSurvivalWave.Set( Mathf.Max( PD.Instance.HighestSurvivalWave.Get(), CurrentWaveIndex + 1 ) );
         }
+
         spawn_timer = -1.0f; // stop spawning
 
         WaveCompletedEvent.Invoke( CurrentWaveIndex + 1 );
@@ -244,9 +259,9 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnCadenceComplete()
     {
-        if( GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
+        if( GameplayManager.State == GameplayManager.GameState.Active )
         {
-            GameplayManager.PlayerWinState = GameplayManager.PlayerState.Won;
+            GameplayManager.State = GameplayManager.GameState.Won;
 
             bool challenge_success = false;
             bool has_challenge = spawnCadenceProfile.GetChallenge() != null
@@ -476,6 +491,7 @@ public class SpawnManager : MonoBehaviour
 
     private void EnemyDied( Enemy en )
     {
+        EnemyDiedEvent.Invoke( en );
         Debug.Assert( spawned_enemies.ContainsKey( en.EnemyID ) );
         spawned_enemies.Remove( en.EnemyID );
     }
@@ -562,7 +578,7 @@ public class SpawnManager : MonoBehaviour
                 ret = Instantiate( WormholeWormPrefab );
                 break;
             case EnemyEnum.GhostieFriend:
-                ret = Instantiate(GhostieFriendPrefab);
+                ret = Instantiate( GhostieFriendPrefab );
                 break;
             case 0:
 #if UNITY_EDITOR

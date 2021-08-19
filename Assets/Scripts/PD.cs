@@ -81,9 +81,19 @@ public class PD
     public PlayerDataField<int> StoredLimboLevelIndex = new PlayerDataField<int>();
     public PlayerDataField<int> StoredLimboCurrentWave = new PlayerDataField<int>();
     public PlayerDataField<int> StoredLimboSurvivalIndex = new PlayerDataField<int>();
+    // settings data
     public PlayerDataField<float> StoredMusicVolume = new PlayerDataField<float>();
     public PlayerDataField<float> StoredSFXVolume = new PlayerDataField<float>();
     public PlayerDataField<int> GameBegun = new PlayerDataField<int>();
+    // player stats data
+    public LazyPlayerDataField<int> NumKilledEnemies = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> NumCrystalsUsed = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> NumTurretKills = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> NumTimesSawOnFire = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> NumZappedEnemiesKilled = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> HighestAnomalySawUnleash = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> HighestEnemyDeathTollFromSawmageddonShot = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> HighestSurvivalWave = new LazyPlayerDataField<int>();
 
     // a dictionary containing information about the dependencies of each unlock flag
     public readonly Dictionary<UnlockFlags, List<UnlockFlags>> UnlockFlagDependencyMap = new Dictionary<UnlockFlags, List<UnlockFlags>>
@@ -308,11 +318,18 @@ public class PD
 
     // NON STATIC
     private bool dirty = false;
+    private bool lazy_dirty = false; // lazy dirty only saves between waves - used for non critical data like player stats
 
-    // called once per frame in the Spectator
+    // called once per frame in the Spectator and Gameplay Manager
     public void Tick()
     {
         SaveData();
+    }
+
+    // called on wave advancement in the Gameplay Manager
+    public void LazyTick()
+    {
+        LazySaveData();
     }
 
     public void SetDirty()
@@ -320,13 +337,30 @@ public class PD
         dirty = true;
     }
 
+    public void SetLazyDirty()
+    {
+        lazy_dirty = true;
+    }
+
     public void SaveData()
     {
         if( !dirty )
             return;
+        SaveToDisk();
+    }
 
+    public void LazySaveData()
+    {
+        if( !lazy_dirty )
+            return;
+        SaveToDisk();
+    }
+
+    private void SaveToDisk()
+    {
         string data = JsonUtility.ToJson( this, true );
         File.WriteAllText( GetPath(), data );
+        lazy_dirty = false;
         dirty = false;
     }
 
@@ -361,6 +395,21 @@ public class PlayerDataField<T>
     {
         value = _value;
         PD.Instance?.SetDirty();
+    }
+}
+
+[System.Serializable]
+public class LazyPlayerDataField<T>
+{
+    [SerializeField] T value;
+    public T Get()
+    {
+        return value;
+    }
+    public void Set( T _value )
+    {
+        value = _value;
+        PD.Instance?.SetLazyDirty();
     }
 }
 

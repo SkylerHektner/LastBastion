@@ -48,7 +48,7 @@ public class Turret : MonoBehaviour
     {
         ValidateCurrentTarget();
         if( current_target != null 
-            && GameplayManager.PlayerWinState == GameplayManager.PlayerState.Active )
+            && GameplayManager.State == GameplayManager.GameState.Active )
         {
             // enemy sighted, fire!
             bool facing = TryRotateToTarget();

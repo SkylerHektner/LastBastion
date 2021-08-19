@@ -42,7 +42,6 @@ public class Enemy : MonoBehaviour
     public bool ImmuneToFlamingSawBonusDamage = false;
     public bool Bouncy = false; // if true, the saw will bounce off the creature upon colliding (bounce angle on circular collider)
     [SerializeField] int PlayerBaseBonusDamage;
-
     public int PowerupDropValue
     {
         get
@@ -103,7 +102,7 @@ public class Enemy : MonoBehaviour
 
         if( Moving )
         {
-            anim.SetBool("Attacking", Moving);
+            anim.SetBool( "Attacking", Moving );
             float move_delta = GetMoveSpeed()
                 * Time.deltaTime
                 * GameplayManager.TimeScale
@@ -133,7 +132,7 @@ public class Enemy : MonoBehaviour
 
     public void Spawn()
     {
-        if ( SpawnEffect )
+        if( SpawnEffect )
         {
             var spawn_effect = Instantiate( SpawnEffect );
             spawn_effect.transform.position = transform.position;
@@ -252,8 +251,14 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Die()
     {
-        GameplayManager.Instance.TimeScaleChanged.RemoveListener( OnTimeScaleChange );
+        // record some stuff for player stats
+        PD.Instance.NumKilledEnemies.Set( PD.Instance.NumKilledEnemies.Get() + 1 );
+        if( Zapped )
+            PD.Instance.NumZappedEnemiesKilled.Set( PD.Instance.NumZappedEnemiesKilled.Get() + 1 );
+        if( DeathSource == DamageSource.Turret )
+            PD.Instance.NumTurretKills.Set( PD.Instance.NumTurretKills.Get() + 1 );
 
+        GameplayManager.Instance.TimeScaleChanged.RemoveListener( OnTimeScaleChange );
         Destroy( gameObject );
     }
 

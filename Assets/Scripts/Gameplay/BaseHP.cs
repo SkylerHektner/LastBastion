@@ -86,7 +86,7 @@ public class BaseHP : MonoBehaviour
     public void ReduceHP( int Damage )
     {
         // if somehow the player already won let's just ignore that...
-        if( GameplayManager.PlayerWinState == GameplayManager.PlayerState.Won )
+        if( GameplayManager.State == GameplayManager.GameState.Won )
         {
 #if UNITY_EDITOR
             Debug.LogWarning( "Player base took damage despite player already having won" );
@@ -144,7 +144,7 @@ public class BaseHP : MonoBehaviour
                 PauseCanvas.SetActive( false );
                 DeathExplosions.SetActive( true );
                 WoundedGlow.SetActive( false );
-                GameplayManager.PlayerWinState = GameplayManager.PlayerState.Lost;
+                GameplayManager.State = GameplayManager.GameState.Lost;
             }
         }
     }

@@ -10,6 +10,7 @@ public class Saw : MonoBehaviour
 
     // position, direction, speed
     public UnityEvent<Vector3, Vector3, float> SawFiredEvent = new UnityEvent<Vector3, Vector3, float>();
+    public UnityEvent SawAttachToWallEvent = new UnityEvent();
     public UnityEvent<Vector3> SawKilledEnemyEvent = new UnityEvent<Vector3>();
     public UnityEvent<long> SawHitEnemyEvent = new UnityEvent<long>();
     public UnityEvent SawMuddiedEvent = new UnityEvent();
@@ -172,6 +173,7 @@ public class Saw : MonoBehaviour
             if( dragging )
                 DirectionArrow.sprite = DirectionArrowSprite;
             skeleton_shield_break_movespeed_multiplier = 1.0f; // reset when saw attaches to wall
+            SawAttachToWallEvent.Invoke();
         }
     }
 
@@ -337,6 +339,9 @@ public class Saw : MonoBehaviour
             // set new movespeed on proj
             proj.SetProjectileSpeed( AdjustedMoveSpeed );
         }
+
+        // record player stats
+        PD.Instance.NumTimesSawOnFire.Set( PD.Instance.NumTimesSawOnFire.Get() + 1 );
     }
 
     private void EndOnFire()
