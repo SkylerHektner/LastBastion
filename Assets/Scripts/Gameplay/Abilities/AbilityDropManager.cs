@@ -72,7 +72,7 @@ public class AbilityDropManager : MonoBehaviour
                 powerup_drop_biases[selected_index] *= AbilitySelectionExpansionFactor;
 
                 // reduce drop biases
-                if( powerup_drop_biases.TrueForAll( ( float f ) => f < 1.0f ) )
+                if( powerup_drop_biases.TrueForAll( ( float f ) => f > 100.0f ) )
                     for( int x = 0; x < powerup_drop_biases.Count; ++x )
                         powerup_drop_biases[x] *= 0.5f;
 
