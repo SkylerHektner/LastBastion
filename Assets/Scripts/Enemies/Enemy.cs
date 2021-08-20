@@ -236,8 +236,8 @@ public class Enemy : MonoBehaviour
     public virtual void Kill()
     {
         StopMoving();
-        DeathEvent.Invoke( this );
         Dying = true;
+        DeathEvent.Invoke( this );
         if( DeathEffect != null )
             Instantiate( DeathEffect ).transform.position = transform.position;
         if( DeathAnimation != null && DeathAnimation.Length != 0 )

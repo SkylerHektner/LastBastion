@@ -71,7 +71,7 @@ public class TyphoonAbility : Ability
         time_remaining = duration;
         Debug.Assert( ActiveTyphoonDeleteAfterDuration != null );
         if( ActiveTyphoonDeleteAfterDuration != null )
-            ActiveTyphoonDeleteAfterDuration.duration = time_remaining;
+            ActiveTyphoonDeleteAfterDuration.duration = time_remaining + 0.1f;
     }
 
     private void OnSawKilledEnemy( Vector3 enemy_position )
