@@ -44,7 +44,6 @@ public class SurvivalDoor : MonoBehaviour
     {
         Spectator.SurvivalIndex = EndlessScroller.EndlessLevelIndex; // reference index to the button
         Spectator.ReturningFromSurvival = true;
-        PD.Instance.StoredLimboSurvivalIndex.Set(Spectator.SurvivalIndex);
         SceneManager.LoadScene(SceneToLoad);
     }
 

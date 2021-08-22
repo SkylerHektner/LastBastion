@@ -118,8 +118,7 @@ public class MenuManager : MonoBehaviour
     // triggered by the animator on the door
     public void ExitLimbo()
     {
-        PD.Instance.Limbo.Set( false );
-        ////PlayCanvas.SetActive( true );
+
     }
 
     // used in the door animator 

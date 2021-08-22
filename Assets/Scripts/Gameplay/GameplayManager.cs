@@ -19,7 +19,7 @@ public class GameplayManager : MonoBehaviour
     public bool Survival;
 
     // CURSE VARIABLE VALUES
-    [Header("Curse Variables")]
+    [Header( "Curse Variables" )]
     [SerializeField] private float enemyMoveSpeedCurseMultiplier = 1.15f;
     [SerializeField] private float enemyMoveSpeedCurseMultiplier2 = 1.3f;
     [SerializeField] private float enemySpawnSpeedCurseMultiplier = 1.2f;
@@ -126,25 +126,7 @@ public class GameplayManager : MonoBehaviour
         ChoosingUpgrade, // only used in surival mode
         Lost
     }
-    public static GameState State
-    {
-        get
-        {
-            return current_state;
-        }
-        set
-        {
-            current_state = value;
-
-            // kind of a hack, but we need to make sure that the player doesn't enter limbo
-            // if they paused a level but came back and finished it without closing the application completely
-            if( value != GameState.Active )
-            {
-                PD.Instance?.Limbo.Set( false );
-            }
-        }
-    }
-    private static GameState current_state = GameState.Active;
+    public static GameState State = GameState.Active;
 
     // TIME SCALE
     public static float TimeScale
@@ -182,6 +164,19 @@ public class GameplayManager : MonoBehaviour
         TimeScale = target;
     }
 
+    // LIMBO
+    public void ResetLimbo()
+    {
+        if( Survival )
+        {
+            PD.Instance.SurvivalLimboResumeInformation.Clear();
+        }
+        else
+        {
+            PD.Instance.CampaignLimboResumeInformation.Clear();
+        }
+    }
+
     // MONOBEHAVIOR
     private void Start()
     {
@@ -198,17 +193,20 @@ public class GameplayManager : MonoBehaviour
             {
                 PD.Instance.UnlockMap.Set( flag, false, true );
             }
+
+            // add back the saved ones if the player is coming back from limbo
+            if( PD.Instance.SurvivalLimboResumeInformation.Active )
+            {
+                foreach( UnlockFlags flag in PD.Instance.SurvivalLimboResumeInformation.SurvivalUnlocks )
+                {
+                    PD.Instance.UnlockMap.Set( flag, true, true );
+                }
+            }
         }
     }
     private void LateStart()
     {
         Challenges?.Start();
-
-        if( PD.Instance.Limbo.Get() )
-        {
-            PD.Instance.Limbo.Set( false );
-        }
-
         SpawnManager.Instance.WaveCompletedEvent.AddListener( OnWaveComplete );
     }
 
@@ -223,7 +221,7 @@ public class GameplayManager : MonoBehaviour
         Challenges?.End();
     }
 
-    private void OnWaveComplete(int wave)
+    private void OnWaveComplete( int wave )
     {
         PD.Instance.LazyTick();
     }

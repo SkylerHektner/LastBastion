@@ -88,9 +88,6 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         else
         {
-            LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
-            Debug.Log("STORED INDEX" + PD.Instance.StoredLimboLevelIndex.Get());
-
             if (LevelIndex <= 1)
             {
                 LevelIndex = 1;

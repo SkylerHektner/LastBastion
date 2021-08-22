@@ -23,7 +23,6 @@ public class PauseManager : MonoBehaviour
         BonusScreen.SetActive(true);
         PauseButton.SetActive(true);
         WaveCounter.ResetTrigger("Hide");
-
     }
     public void DelayedResume()
     {
@@ -47,7 +46,7 @@ public class PauseManager : MonoBehaviour
     {
         Invoke("LoadMenu", 1f);
         Time.timeScale = 1;
-        PD.Instance?.Limbo.Set( false );
+        GameplayManager.Instance.ResetLimbo();
     }
 
     public void LoadMenu()

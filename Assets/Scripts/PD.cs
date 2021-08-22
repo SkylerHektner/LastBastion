@@ -76,11 +76,8 @@ public class PD
     public PlayerLevelCompletionMap LevelCompletionMap = new PlayerLevelCompletionMap();
     public PDList<string> PlayerChallengeCompletionList = new PDList<string>();
     // limbo data
-    public PlayerDataField<bool> Limbo = new PlayerDataField<bool>();
-    public PlayerDataField<string> ExitedScene = new PlayerDataField<string>();
-    public PlayerDataField<int> StoredLimboLevelIndex = new PlayerDataField<int>();
-    public PlayerDataField<int> StoredLimboCurrentWave = new PlayerDataField<int>();
-    public PlayerDataField<int> StoredLimboSurvivalIndex = new PlayerDataField<int>();
+    public LimboResumeInformation CampaignLimboResumeInformation;
+    public LimboResumeInformation SurvivalLimboResumeInformation;
     // settings data
     public PlayerDataField<float> StoredMusicVolume = new PlayerDataField<float>();
     public PlayerDataField<float> StoredSFXVolume = new PlayerDataField<float>();
@@ -342,14 +339,14 @@ public class PD
         lazy_dirty = true;
     }
 
-    public void SaveData()
+    private void SaveData()
     {
         if( !dirty )
             return;
         SaveToDisk();
     }
 
-    public void LazySaveData()
+    private void LazySaveData()
     {
         if( !lazy_dirty )
             return;
@@ -722,5 +719,42 @@ public class PDList<T> : IList<T>
     {
         PD.Instance?.SetDirty(); // sucks but we don't know if they've modified anything while iterating
         return list.GetEnumerator();
+    }
+}
+
+[System.Serializable]
+public class LimboResumeInformation
+{
+
+    [SerializeField] private bool active = false;
+    [SerializeField] private string scene_name;
+    [SerializeField] private int wave;
+    [SerializeField] private float health;
+    [SerializeField] private List<UnlockFlags> survival_unlocks = new List<UnlockFlags>();
+
+    public bool Active { get { return active; } }
+    public string SceneName { get { return scene_name; } }
+    public int Wave { get { return wave; } }
+    public float Health { get { return health; } }
+    public IReadOnlyList<UnlockFlags> SurvivalUnlocks { get { return survival_unlocks; } }
+
+    public void SetInfo(bool active, string level_name = "", int wave = 0, float health = 0, List<UnlockFlags> survival_unlocks = null)
+    {
+        this.active = active;
+        this.scene_name = level_name;
+        this.wave = wave;
+        this.health = health;
+        this.survival_unlocks = survival_unlocks;
+        PD.Instance.SetDirty();
+    }
+
+    public void Clear()
+    {
+        active = false;
+        scene_name = "";
+        wave = 0;
+        health = 0.0f;
+        survival_unlocks = null;
+        PD.Instance.SetDirty();
     }
 }

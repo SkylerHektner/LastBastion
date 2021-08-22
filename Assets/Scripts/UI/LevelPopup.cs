@@ -48,10 +48,6 @@ public class LevelPopup : MonoBehaviour
         Invoke("SceneChange", 1f);
         Spectator.LevelIndex = LevelScroller.LevelIndex; // reference index to the button
         Spectator.ReturningFromLevel = true;
-        PD.Instance.StoredLimboLevelIndex.Set(Spectator.LevelIndex);
-#if UNITY_EDITOR
-        Debug.Log(Spectator.LevelIndex);
-#endif
         gameObject.GetComponent<Animator>().SetBool("Open", false);
     }
 

@@ -29,7 +29,6 @@ public class Spectator : MonoBehaviour
         DontDestroyOnLoad( this.gameObject );
     }
 
-
     private void Update()
     {
         if( GameplayManager.Instance == null )
@@ -37,13 +36,13 @@ public class Spectator : MonoBehaviour
 
 
         // makes the cursor a finger texture
-        if (Input.GetMouseButton(0))
+        if( Input.GetMouseButton( 0 ) )
         {
-            Cursor.SetCursor(CursorTexture2, Vector2.zero, CursorMode.ForceSoftware);
+            Cursor.SetCursor( CursorTexture2, Vector2.zero, CursorMode.ForceSoftware );
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if( Input.GetMouseButtonUp( 0 ) )
         {
-            Cursor.SetCursor(CursorTexture, Vector2.zero, CursorMode.ForceSoftware);
+            Cursor.SetCursor( CursorTexture, Vector2.zero, CursorMode.ForceSoftware );
         }
     }
 
@@ -52,17 +51,36 @@ public class Spectator : MonoBehaviour
     public void TryToggleLimbo()
     {
         if( SceneManager.GetActiveScene().name != "Menu"
-            && GameplayManager.State == GameplayManager.GameState.Active )
+            && ( GameplayManager.State == GameplayManager.GameState.Active
+            || GameplayManager.State == GameplayManager.GameState.ChoosingUpgrade))
         {
-            PD.Instance.Limbo.Set( true );
-            PD.Instance.ExitedScene.Set( SceneManager.GetActiveScene().name );
-            PD.Instance.StoredLimboLevelIndex.Set(Spectator.LevelIndex);
-            PD.Instance.StoredLimboSurvivalIndex.Set(Spectator.SurvivalIndex);
-            PD.Instance.StoredLimboCurrentWave.Set( SpawnManager.Instance.CurrentWaveIndex );
+            if( GameplayManager.Instance.Survival )
+            {
+                List<UnlockFlags> survival_unlock_flags = new List<UnlockFlags>();
+                foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
+                {
+                    if( PD.Instance.UnlockMap.Get( flag ) )
+                    {
+                        survival_unlock_flags.Add( flag );
+                    }
+                }
+                PD.Instance.SurvivalLimboResumeInformation.SetInfo(
+                true,
+                SceneManager.GetActiveScene().name,
+                SpawnManager.Instance.CurrentWaveIndex,
+                BaseHP.Instance.CurrentHP,
+                survival_unlock_flags );
+            }
+            else
+            {
+                PD.Instance.CampaignLimboResumeInformation.SetInfo(
+                true,
+                SceneManager.GetActiveScene().name,
+                SpawnManager.Instance.CurrentWaveIndex,
+                BaseHP.Instance.CurrentHP,
+                null );
+            }
         }
-#if UNITY_EDITOR
-        Debug.Log( "Limbo Activated - Storing index: " + PD.Instance.StoredLimboLevelIndex.Get() );
-#endif
     }
 
     // game is quit mid-game, save my current progress and put me in limbo
@@ -91,6 +109,6 @@ public class Spectator : MonoBehaviour
     public void WipeProgress()
     {
         PD.DeleteAllPlayerData();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene( SceneManager.GetActiveScene().name );
     }
 }

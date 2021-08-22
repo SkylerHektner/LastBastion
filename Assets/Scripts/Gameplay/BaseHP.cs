@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class BaseHP : MonoBehaviour
 {
@@ -47,6 +48,18 @@ public class BaseHP : MonoBehaviour
         CurrentHP = CurrentMaxHP;
         CurrentOvershield = MaxOvershield;
         Instance = this;
+
+        if( GameplayManager.Instance.Survival
+            && PD.Instance.SurvivalLimboResumeInformation.Active )
+        {
+            CurrentHP = PD.Instance.SurvivalLimboResumeInformation.Health;
+        }
+        else if( !GameplayManager.Instance.Survival
+            && PD.Instance.CampaignLimboResumeInformation.Active
+            && PD.Instance.CampaignLimboResumeInformation.SceneName == SceneManager.GetActiveScene().name )
+        {
+            CurrentHP = PD.Instance.CampaignLimboResumeInformation.Health;
+        }
     }
 
     private void OnDestroy()
@@ -120,7 +133,7 @@ public class BaseHP : MonoBehaviour
         {
             ShieldRecoveryDelay = 8;
             CurrentHP -= Damage;
-            if (CurrentHP <= 0)
+            if( CurrentHP <= 0 )
             {
                 CurrentHP = 0;
             }
@@ -134,9 +147,9 @@ public class BaseHP : MonoBehaviour
             if( CurrentHP <= 0 )
             {
                 DeathCanvas.DisplayDeathScreen();
-                CurrentHpBar.gameObject.SetActive(false);
-                DamageHpBar.gameObject.SetActive(false);
-                OvershieldBar.gameObject.SetActive(false);
+                CurrentHpBar.gameObject.SetActive( false );
+                DamageHpBar.gameObject.SetActive( false );
+                OvershieldBar.gameObject.SetActive( false );
                 BrokenHpBar.SetActive( true );
                 ForceField.SetActive( false );
                 AbiltyManager.SetActive( false );
@@ -145,11 +158,12 @@ public class BaseHP : MonoBehaviour
                 DeathExplosions.SetActive( true );
                 WoundedGlow.SetActive( false );
                 GameplayManager.State = GameplayManager.GameState.Lost;
+                GameplayManager.Instance.ResetLimbo();
             }
         }
     }
 
-    public void Heal(int Amount)
+    public void Heal( int Amount )
     {
         CurrentHP = Mathf.Min( CurrentHP + Amount, CurrentMaxHP );
         UpdateHPBar();

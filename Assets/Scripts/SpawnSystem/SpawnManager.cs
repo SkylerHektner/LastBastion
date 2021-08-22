@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -144,9 +145,16 @@ public class SpawnManager : MonoBehaviour
         CurrentWaveIndex = DebugStartWave - 2;
 #endif
 
-        if( PD.Instance.Limbo.Get() )
+        if(GameplayManager.Instance.Survival 
+            && PD.Instance.SurvivalLimboResumeInformation.Active)
         {
-            CurrentWaveIndex = PD.Instance.StoredLimboCurrentWave.Get() - 1; // subtract one since we immediately start next wave
+            CurrentWaveIndex = PD.Instance.SurvivalLimboResumeInformation.Wave - 1; // subtract one since we immediately start next wave
+        }
+        else if(!GameplayManager.Instance.Survival 
+            && PD.Instance.CampaignLimboResumeInformation.Active 
+            && PD.Instance.CampaignLimboResumeInformation.SceneName == SceneManager.GetActiveScene().name)
+        {
+            CurrentWaveIndex = PD.Instance.CampaignLimboResumeInformation.Wave - 1; // subtract one since we immediately start next wave
         }
 
         GameplayManager.State = GameplayManager.GameState.Active;
@@ -284,6 +292,8 @@ public class SpawnManager : MonoBehaviour
                 has_challenge,
                 challenge_success,
                 spawnCadenceProfile.GetChallenge()?.ChallengeDescription );
+
+            GameplayManager.Instance.ResetLimbo();
         }
     }
 

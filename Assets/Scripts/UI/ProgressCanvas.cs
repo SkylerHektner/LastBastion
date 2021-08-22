@@ -17,22 +17,6 @@ public class ProgressCanvas : MonoBehaviour
         Skull.SetBool( "Speaking", true );
     }
 
-    public void LoadMenuFromLimboResumeAnimation()
-    {
-        ProgressContent.SetActive( false );
-#if UNITY_EDITOR
-        Debug.Log( "Loading Menu" );
-#endif
-        PD.Instance.Limbo.Set( false );
-        Spectator.LevelIndex = 1;
-    }
-    public void LoadSceneFromLimboResumeAnimation() // need to make a separate case here for survival
-    {
-        Spectator.LevelIndex = PD.Instance.StoredLimboLevelIndex.Get();
-        Spectator.ReturningFromLevel = true;
-        SceneManager.LoadScene( PD.Instance.ExitedScene.Get() );
-    }
-
     public void ContinueSave()
     {
 

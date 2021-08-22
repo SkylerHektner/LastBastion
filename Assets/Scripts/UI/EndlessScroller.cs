@@ -96,7 +96,6 @@ public class EndlessScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         else
         {
             JumpToDesiredLevel(EndlessLevelIndex);
-            EndlessLevelIndex = PD.Instance.StoredLimboSurvivalIndex.Get();
             if (EndlessLevelIndex <= 1)
             {
                 EndlessLevelIndex = 1;
