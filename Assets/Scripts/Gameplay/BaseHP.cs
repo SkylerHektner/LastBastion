@@ -193,6 +193,7 @@ public class BaseHP : MonoBehaviour
             if( ShieldRecoveryDelay <= 0 )
             {
                 OvershieldAnim.SetBool( "Recovering", false );
+                OvershieldAnim.GetComponent<VolumeController>().PlayMySound();
             }
         }
         else if( CurrentOvershield < MaxOvershield && ShieldRecoveryDelay <= 0 )
@@ -200,7 +201,8 @@ public class BaseHP : MonoBehaviour
             CurrentOvershield += ShieldRechargeRate * GameplayManager.TimeScale;
             BrokenGlass.SetActive( false );
             OvershieldBar.SetSize( CurrentOvershield / MaxOvershield );
-            OvershieldAnim.SetBool( "Broken", false );
+            OvershieldAnim.SetBool("Broken", false);
+            //OvershieldAnim.GetComponent<VolumeController>().PlayMySound(); // called when the overshield fully recharges
         }
         if( CurrentOvershield > MaxOvershield )
         {
