@@ -744,6 +744,8 @@ GameObject:
   - component: {fileID: 6513400768096738288}
   - component: {fileID: 7580968802369528032}
   - component: {fileID: 6701871736744147934}
+  - component: {fileID: 179830222067375615}
+  - component: {fileID: 6531578470687939689}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -1016,6 +1018,61 @@ MonoBehaviour:
   AlternateSound: {fileID: 0}
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
+--- !u!114 &179830222067375615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513400768096738254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6531578470687939689}
+          m_TargetAssemblyTypeName: UISound, Assembly-CSharp
+          m_MethodName: PlayHighlightNoise
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6701871736744147934}
+          m_TargetAssemblyTypeName: VolumeController, Assembly-CSharp
+          m_MethodName: RandomizePitch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &6531578470687939689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513400768096738254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8300999b88814458abe18fd0b5b3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Highlighted: {fileID: 8300000, guid: a65246b64f006214fb6cf8a83cdc9c9f, type: 3}
+  Clicked: {fileID: 0}
 --- !u!1 &6513400768275630675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1286,8 @@ GameObject:
   - component: {fileID: 6513400768519399927}
   - component: {fileID: 1217653898507114408}
   - component: {fileID: 2724352479711169819}
+  - component: {fileID: 404842411273843334}
+  - component: {fileID: 5785893755038403769}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -1501,6 +1560,61 @@ MonoBehaviour:
   AlternateSound: {fileID: 0}
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
+--- !u!114 &404842411273843334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513400768519399885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5785893755038403769}
+          m_TargetAssemblyTypeName: UISound, Assembly-CSharp
+          m_MethodName: PlayHighlightNoise
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2724352479711169819}
+          m_TargetAssemblyTypeName: VolumeController, Assembly-CSharp
+          m_MethodName: RandomizePitch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &5785893755038403769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513400768519399885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8300999b88814458abe18fd0b5b3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Highlighted: {fileID: 8300000, guid: a65246b64f006214fb6cf8a83cdc9c9f, type: 3}
+  Clicked: {fileID: 0}
 --- !u!1 &6513400768615024211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1631,8 @@ GameObject:
   - component: {fileID: 6513400768615024213}
   - component: {fileID: 6608877980944015563}
   - component: {fileID: 8164282150346967867}
+  - component: {fileID: 7930473812334577135}
+  - component: {fileID: 4073245176048685957}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -1789,6 +1905,61 @@ MonoBehaviour:
   AlternateSound: {fileID: 0}
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
+--- !u!114 &7930473812334577135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513400768615024211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4073245176048685957}
+          m_TargetAssemblyTypeName: UISound, Assembly-CSharp
+          m_MethodName: PlayHighlightNoise
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8164282150346967867}
+          m_TargetAssemblyTypeName: VolumeController, Assembly-CSharp
+          m_MethodName: RandomizePitch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &4073245176048685957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513400768615024211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8300999b88814458abe18fd0b5b3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Highlighted: {fileID: 8300000, guid: a65246b64f006214fb6cf8a83cdc9c9f, type: 3}
+  Clicked: {fileID: 0}
 --- !u!1 &6513400768752072696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,6 +2277,8 @@ GameObject:
   - component: {fileID: 6513400769204628467}
   - component: {fileID: 7439655601692311997}
   - component: {fileID: 2119308440553115700}
+  - component: {fileID: 1364319966392399104}
+  - component: {fileID: 1167101180150260973}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -2378,6 +2551,61 @@ MonoBehaviour:
   AlternateSound: {fileID: 0}
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
+--- !u!114 &1364319966392399104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513400769204628425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1167101180150260973}
+          m_TargetAssemblyTypeName: UISound, Assembly-CSharp
+          m_MethodName: PlayHighlightNoise
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2119308440553115700}
+          m_TargetAssemblyTypeName: VolumeController, Assembly-CSharp
+          m_MethodName: RandomizePitch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1167101180150260973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513400769204628425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8300999b88814458abe18fd0b5b3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Highlighted: {fileID: 8300000, guid: a65246b64f006214fb6cf8a83cdc9c9f, type: 3}
+  Clicked: {fileID: 0}
 --- !u!1 &6513400769314194405
 GameObject:
   m_ObjectHideFlags: 0
