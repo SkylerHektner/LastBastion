@@ -134,11 +134,11 @@ public class InfoViewer : MonoBehaviour
         {
             ArrowL.GetComponent<Button>().interactable = false;
         }
-        else if (index >= InfoTabCategories.Count - 1)
+        else if (index >= InfoItems.Count - 1)
         {
             ArrowR.GetComponent<Button>().interactable = false;
         }
-        else if (index > 0 && Index < InfoTabCategories.Count - 1)
+        else if (index > 0 && Index < InfoItems.Count - 1)
         {
             ArrowL.GetComponent<Button>().interactable = true;
             ArrowR.GetComponent<Button>().interactable = true;

@@ -4,26 +4,46 @@ using UnityEngine;
 
 public class InfoItem : MonoBehaviour
 {
-    public UnlockFlagUIInformation UnlockFlagInformation;
-
-    // Start is called before the first frame update
-    void Start()
+    public Achievement AchievementInformation;
+    public GameObject LockedSymbol;
+    public bool AchievementLocked
     {
-        
-    }
+        get
+        {
+            return locked;
+        }
+        set
+        {
+            locked = value;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            if (locked)
+            {
+                LockedSymbol.SetActive(true);
+            }
+            else
+            {
+                LockedSymbol.SetActive(false);
+            }
+       }
     }
+    private bool locked;
+
 
     public string GetInfoName()
     {
-        return UnlockFlagInformation.UnlockName;
+        return AchievementInformation.Name;
     }
     public string GetInfoDescription()
     {
-        return UnlockFlagInformation.Description;
+        return AchievementInformation.Description;
     }
+
+
+    [ContextMenu("ToggleLocked")]
+    private void ToggleLocked()
+    {
+        AchievementLocked = !AchievementLocked;
+    }
+
+
 }
