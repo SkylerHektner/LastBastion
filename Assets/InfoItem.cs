@@ -45,5 +45,20 @@ public class InfoItem : MonoBehaviour
         AchievementLocked = !AchievementLocked;
     }
 
+    public string GetProgressAmount()
+    {
+        float Progress = AchievementInformation.GetProgress();
+        Progress = Progress * 100; // fix decimal
+        if (Progress.ToString("F0") == "100") // complete?
+        {
+            AchievementLocked = false; // give me my trophy!
+        }
+        else
+        {
+            AchievementLocked = true; // hide the trophy
+        }
+        return Progress.ToString("F0") + "% Complete";
+
+    }
 
 }

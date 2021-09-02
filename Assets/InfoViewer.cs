@@ -122,6 +122,7 @@ public class InfoViewer : MonoBehaviour
         }
         ItemName.text = InfoItems[ItemIndex].GetInfoName();
         ItemDescription.text = InfoItems[ItemIndex].GetInfoDescription();
+        PercentageText.GetComponent<TextMeshProUGUI>().text = InfoItems[ItemIndex].GetProgressAmount();
     }
 
     public void JumpToPosition(int index) // jumps the bar to the next/previous spot in the line
