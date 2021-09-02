@@ -14,6 +14,7 @@ public class InfoViewer : MonoBehaviour
     public RectTransform PlayerInfoContainer;
     public RectTransform EnemyInfoContainer;
     public RectTransform AchievementInfoContainer;
+    public GameObject PercentageText;
 
 
 
@@ -51,6 +52,7 @@ public class InfoViewer : MonoBehaviour
         AchievementInfo.SetActive(false);
         JumpToPosition(Index);
         ShowArrowButtons();
+        PercentageText.SetActive(false);
     }
 
     public void DisplayEnemyInfo()
@@ -62,6 +64,7 @@ public class InfoViewer : MonoBehaviour
         AchievementInfo.SetActive(false);
         JumpToPosition(Index);
         ShowArrowButtons();
+        PercentageText.SetActive(false);
 
     }
 
@@ -74,6 +77,7 @@ public class InfoViewer : MonoBehaviour
         AchievementInfo.SetActive(true);
         JumpToPosition(Index);
         ShowArrowButtons();
+        PercentageText.SetActive(true);
     }
 
     public void HideAllDisplays()
@@ -85,6 +89,7 @@ public class InfoViewer : MonoBehaviour
         AchievementInfo.SetActive(false);
         ArrowL.SetActive(false);
         ArrowR.SetActive(false);
+        PercentageText.SetActive(false);
     }
 
     public void ShiftConentRight()
