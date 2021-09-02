@@ -254,7 +254,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6b85dcb7acbd2e74981d14c371efa6c4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1.2
   Loop: 0
   Mute: 0
@@ -1031,6 +1031,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  SawAttachToWallEvent:
+    m_PersistentCalls:
+      m_Calls: []
   SawKilledEnemyEvent:
     m_PersistentCalls:
       m_Calls: []
