@@ -61,28 +61,28 @@ public class Achievement : ScriptableObject
                 result = (float)desired_strings.Count( s => PD.Instance.PlayerChallengeCompletionList.Contains( s ) ) / (float)desired_strings.Count;
                 break;
             case AchievementType.KillEnemies:
-                result = (float)desired_value / (float)PD.Instance.NumKilledEnemies.Get();
+                result = (float)PD.Instance.NumKilledEnemies.Get() / (float)desired_value;
                 break;
             case AchievementType.UseCrystals:
-                result = (float)desired_value / (float)PD.Instance.NumCrystalsUsed.Get();
+                result = (float)PD.Instance.NumCrystalsUsed.Get() / (float)desired_value;
                 break;
             case AchievementType.KillEnemiesWithTurrets:
-                result = (float)desired_value / (float)PD.Instance.NumTurretKills.Get();
+                result = (float)PD.Instance.NumTurretKills.Get() / (float)desired_value;
                 break;
             case AchievementType.KillZappedEnemies:
-                result = (float)desired_value / (float)PD.Instance.NumZappedEnemiesKilled.Get();
+                result = (float)PD.Instance.NumZappedEnemiesKilled.Get() / (float)desired_value;
                 break;
             case AchievementType.UnleashAtLeastXSawsDuringAnomaly:
-                result = (float)desired_value / (float)PD.Instance.HighestAnomalySawUnleash.Get();
+                result = (float)PD.Instance.HighestAnomalySawUnleash.Get() / (float)desired_value;
                 break;
             case AchievementType.KillAtLeastXEnemiesWithSawmageddonShot:
-                result = (float)desired_value / (float)PD.Instance.HighestEnemyDeathTollFromSawmageddonShot.Get();
+                result = (float)PD.Instance.HighestEnemyDeathTollFromSawmageddonShot.Get() / (float)desired_value;
                 break;
             case AchievementType.BeatWaveInSurvival:
-                result = (float)desired_value / (float)PD.Instance.HighestSurvivalWave.Get();
+                result = (float)PD.Instance.HighestSurvivalWave.Get() / (float)desired_value;
                 break;
             case AchievementType.SetSawOnFire:
-                result = (float)desired_value / (float)PD.Instance.NumTimesSawOnFire.Get();
+                result = (float)PD.Instance.NumTimesSawOnFire.Get() / (float)desired_value;
                 break;
         }
         return Mathf.Min( result, 1.0f );
