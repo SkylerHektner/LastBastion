@@ -75,4 +75,13 @@ public class SoundManager : MonoBehaviour
             MusicClicks.Play();
         }
     }
+
+    public void DeleteAllData() 
+    {
+        SpectatorAudio.GetComponent<Spectator>().WipeProgress();
+    }
+    public void DelayedDelete() // called by button
+    {
+        Invoke("DeleteAllData", 2f);
+    }
 }
