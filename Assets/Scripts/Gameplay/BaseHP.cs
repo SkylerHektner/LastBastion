@@ -159,6 +159,7 @@ public class BaseHP : MonoBehaviour
                 WoundedGlow.SetActive( false );
                 GameplayManager.State = GameplayManager.GameState.Lost;
                 GameplayManager.Instance.ResetLimbo();
+                PD.Instance.TotalFailures.Set( PD.Instance.TotalFailures.Get() + 1 );
             }
         }
     }

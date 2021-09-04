@@ -89,8 +89,12 @@ public class PD
     public LazyPlayerDataField<int> NumTimesSawOnFire = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> NumZappedEnemiesKilled = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> HighestAnomalySawUnleash = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> TotalNumberOfAnomalySawUnleash = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> HighestEnemyDeathTollFromSawmageddonShot = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> HighestSurvivalWave = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> TotalWavesCompleted = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> TotalWealthEarned = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> TotalFailures = new LazyPlayerDataField<int>();
     // encountered enemies
     public PDList<EnemyEnum> EncounteredEnemyList = new PDList<EnemyEnum>();
 
@@ -247,6 +251,7 @@ public class PD
     public static void AddMoney()
     {
         PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + 1000 );
+        PD.Instance.TotalWealthEarned.Set( PD.Instance.TotalWealthEarned.Get() + 1000 );
     }
     [MenuItem( "Debug/UnlockEverything" )]
     public static void UnlockEverything()

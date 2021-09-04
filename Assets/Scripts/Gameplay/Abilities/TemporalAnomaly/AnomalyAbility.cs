@@ -100,6 +100,7 @@ public class AnomalyAbility : Ability
 
         // record player stats
         PD.Instance.HighestAnomalySawUnleash.Set( Mathf.Max( PD.Instance.HighestAnomalySawUnleash.Get(), pending_saws.Count ) );
+        PD.Instance.TotalNumberOfAnomalySawUnleash.Set( PD.Instance.TotalNumberOfAnomalySawUnleash.Get() + pending_saws.Count );
 
         foreach( long id in stasis_coated_enemies )
         {

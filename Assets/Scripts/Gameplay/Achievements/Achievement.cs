@@ -21,13 +21,14 @@ public class Achievement : ScriptableObject
         KillAtLeastXEnemiesWithSawmageddonShot,
         BeatWaveInSurvival,
         SetSawOnFire,
+        BeatEnemy,
     }
 
     public string Name;
     public string Description;
-    public Sprite Icon;
     public AchievementType Type;
     public int desired_value;
+    public EnemyEnum desired_enemy;
     public List<string> desired_strings;
 
     // checks the progress of this acheivement. 0.0f means no progress, 1.0f means complete. Any number between is the percentage of completion
@@ -84,6 +85,9 @@ public class Achievement : ScriptableObject
             case AchievementType.SetSawOnFire:
                 result = (float)PD.Instance.NumTimesSawOnFire.Get() / (float)desired_value;
                 break;
+            case AchievementType.BeatEnemy:
+                result = PD.Instance.EncounteredEnemyList.Contains( desired_enemy ) ? 1.0f : 0.0f;
+                break;
         }
         return Mathf.Min( result, 1.0f );
     }
@@ -106,7 +110,6 @@ public class AchievementEditor : Editor
             "Description",
             true,
             target );
-        achievement.Icon = (Sprite)CustomEditorUtilities.AutoDirtyUnityObject( achievement.Icon, typeof( Sprite ), "Icon", target );
 
         Achievement.AchievementType type = (Achievement.AchievementType)EditorGUILayout.EnumPopup( "Type: ", achievement.Type );
         if( type != achievement.Type )
@@ -156,6 +159,18 @@ public class AchievementEditor : Editor
 
                     CustomEditorUtilities.ListItemControlButtonsUnsafe<string>( achievement.desired_strings, ref x, target );
                     EditorGUILayout.EndHorizontal();
+                }
+            }
+            break;
+
+            // enter enemy type
+            case Achievement.AchievementType.BeatEnemy:
+            {
+                EnemyEnum new_enemy = (EnemyEnum)EditorGUILayout.EnumPopup( "Desired Enemy", achievement.desired_enemy );
+                if(new_enemy != achievement.desired_enemy)
+                {
+                    achievement.desired_enemy = new_enemy;
+                    EditorUtility.SetDirty( target );
                 }
             }
             break;

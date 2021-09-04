@@ -28,12 +28,16 @@ public class InfoItem : MonoBehaviour
     }
     private bool locked;
 
+    public virtual void Start()
+    {
 
-    public string GetInfoName()
+    }
+
+    public virtual string GetInfoName()
     {
         return AchievementInformation.Name;
     }
-    public string GetInfoDescription()
+    public virtual string GetInfoDescription()
     {
         return AchievementInformation.Description;
     }
@@ -45,7 +49,7 @@ public class InfoItem : MonoBehaviour
         AchievementLocked = !AchievementLocked;
     }
 
-    public string GetProgressAmount()
+    public virtual string GetProgressAmount()
     {
         float Progress = AchievementInformation.GetProgress();
         Progress = Progress * 100; // fix decimal

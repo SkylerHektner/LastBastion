@@ -29652,6 +29652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 775894566}
   - component: {fileID: 775894567}
+  - component: {fileID: 775894568}
   m_Layer: 5
   m_Name: Record3
   m_TagString: Untagged
@@ -29693,8 +29694,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06453cc71fe4fe04fa537d3f1d54cec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AchievementInformation: {fileID: 11400000, guid: 758698369100a0643abf404c99fe4b26, type: 2}
+  AchievementInformation: {fileID: 0}
   LockedSymbol: {fileID: 1589241784}
+--- !u!114 &775894568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775894565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926862711b52fb14584627741fc36d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AchievementInformation: {fileID: 0}
+  LockedSymbol: {fileID: 1589241784}
+  Name: Total Waves Cleared
+  Description: 
+  stat: 2
 --- !u!1 &778504693
 GameObject:
   m_ObjectHideFlags: 0
@@ -49779,6 +49797,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1254541210}
   - component: {fileID: 1254541211}
+  - component: {fileID: 1254541212}
   m_Layer: 5
   m_Name: Record1
   m_TagString: Untagged
@@ -49820,8 +49839,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06453cc71fe4fe04fa537d3f1d54cec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AchievementInformation: {fileID: 11400000, guid: b59cd0f07cf40774693dbd65c02a6bd8, type: 2}
+  AchievementInformation: {fileID: 0}
   LockedSymbol: {fileID: 1113993080}
+--- !u!114 &1254541212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254541209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926862711b52fb14584627741fc36d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AchievementInformation: {fileID: 0}
+  LockedSymbol: {fileID: 1113993080}
+  Name: Enemies Killed
+  Description: 
+  stat: 0
 --- !u!1 &1258233164
 GameObject:
   m_ObjectHideFlags: 0
@@ -51994,6 +52030,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1300184603}
   - component: {fileID: 1300184604}
+  - component: {fileID: 1300184605}
   m_Layer: 5
   m_Name: Record2
   m_TagString: Untagged
@@ -52035,8 +52072,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06453cc71fe4fe04fa537d3f1d54cec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AchievementInformation: {fileID: 11400000, guid: bca18512da0ffc247bdc42f9385c7c3b, type: 2}
+  AchievementInformation: {fileID: 0}
   LockedSymbol: {fileID: 729109238}
+--- !u!114 &1300184605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300184602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926862711b52fb14584627741fc36d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AchievementInformation: {fileID: 0}
+  LockedSymbol: {fileID: 729109238}
+  Name: Crystals Shattered
+  Description: 
+  stat: 1
 --- !u!1 &1300387171
 GameObject:
   m_ObjectHideFlags: 0
