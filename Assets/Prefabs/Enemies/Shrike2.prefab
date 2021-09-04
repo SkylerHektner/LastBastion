@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9a3b29c0407d045bd3b8c9cd4cdb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyType: 20
   DeathEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -171,11 +172,9 @@ MonoBehaviour:
   powerupDropValue: 2
   ImmuneToZapBonusDamage: 0
   ImmuneToTyphoon: 0
+  ImmuneToFlamingSawBonusDamage: 0
   Bouncy: 0
   PlayerBaseBonusDamage: 0
-  MagmaBouncer: 0
-  MagmaBouncerAnim: {fileID: 0}
-  MagmaSpawnEffect: {fileID: 0}
   TeleportDuration: 0.6
   TeleportCooldown: 1
   TeleportDistance: 2

@@ -117,7 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591b96461a243674d85a06b410b79e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeath:
+  EnemyType: 5
+  DeathEvent:
     m_PersistentCalls:
       m_Calls: []
   MoveSpeed: 1
@@ -128,7 +129,14 @@ MonoBehaviour:
   SpawnAnimation: 
   DamagedEffect: {fileID: 0}
   DamagedAnimation: 
+  CurrentHealthAnimationParameter: 
   attacks: 1
+  powerupDropValue: 1
+  ImmuneToZapBonusDamage: 0
+  ImmuneToTyphoon: 0
+  ImmuneToFlamingSawBonusDamage: 0
+  Bouncy: 0
+  PlayerBaseBonusDamage: 0
   MudThrowFrequency: 3
   MudThrowProjectile: {fileID: -287067951668848230, guid: 723f37ef81b7c2246a073fcc8f4d4e7a, type: 3}
   MudThrowAnimation: Attack

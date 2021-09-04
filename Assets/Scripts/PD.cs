@@ -91,6 +91,8 @@ public class PD
     public LazyPlayerDataField<int> HighestAnomalySawUnleash = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> HighestEnemyDeathTollFromSawmageddonShot = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> HighestSurvivalWave = new LazyPlayerDataField<int>();
+    // encountered enemies
+    public PDList<EnemyEnum> EncounteredEnemyList = new PDList<EnemyEnum>();
 
     // a dictionary containing information about the dependencies of each unlock flag
     public readonly Dictionary<UnlockFlags, List<UnlockFlags>> UnlockFlagDependencyMap = new Dictionary<UnlockFlags, List<UnlockFlags>>

@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7f49a2e24e66640a3bddae56870b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyType: 8
   DeathEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -133,11 +134,9 @@ MonoBehaviour:
   powerupDropValue: 2
   ImmuneToZapBonusDamage: 0
   ImmuneToTyphoon: 0
+  ImmuneToFlamingSawBonusDamage: 0
   Bouncy: 0
   PlayerBaseBonusDamage: 0
-  MagmaBouncer: 0
-  MagmaBouncerAnim: {fileID: 0}
-  MagmaSpawnEffect: {fileID: 0}
   OnDeathSpawnGroup: {fileID: 11400000, guid: b9e5f8bd4b3e8524981761f127d6199d, type: 2}
   CurseOnDeathSpawnGroup: {fileID: 11400000, guid: 9d7bdd4c8d38f674bbdf1fa5b4d79187, type: 2}
 --- !u!58 &2044003591208679622

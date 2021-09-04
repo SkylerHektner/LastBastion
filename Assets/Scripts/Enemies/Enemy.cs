@@ -8,6 +8,7 @@ using UnityEngine.Events;
 [RequireComponent( typeof( SpriteRenderer ) )]
 public class Enemy : MonoBehaviour
 {
+    public EnemyEnum EnemyType;
     public UnityEvent<Enemy> DeathEvent = new UnityEvent<Enemy>();
     public static long NextEnemyID = 1;
     public long EnemyID
@@ -257,6 +258,8 @@ public class Enemy : MonoBehaviour
             PD.Instance.NumZappedEnemiesKilled.Set( PD.Instance.NumZappedEnemiesKilled.Get() + 1 );
         if( DeathSource == DamageSource.Turret )
             PD.Instance.NumTurretKills.Set( PD.Instance.NumTurretKills.Get() + 1 );
+        if( !PD.Instance.EncounteredEnemyList.Contains( EnemyType ) )
+            PD.Instance.EncounteredEnemyList.Add( EnemyType );
 
         GameplayManager.Instance.TimeScaleChanged.RemoveListener( OnTimeScaleChange );
         Destroy( gameObject );
