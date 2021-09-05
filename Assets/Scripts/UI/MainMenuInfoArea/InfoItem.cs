@@ -5,6 +5,8 @@ using UnityEngine;
 public class InfoItem : MonoBehaviour
 {
     public Achievement AchievementInformation;
+    public bool EnemyInfo;
+    public bool HiddenAchievement;
     public GameObject LockedSymbol;
     public bool AchievementLocked
     {
@@ -30,18 +32,47 @@ public class InfoItem : MonoBehaviour
 
     public virtual void Start()
     {
-
+        
     }
 
     public virtual string GetInfoName()
     {
-        return AchievementInformation.Name;
+        GetProgressAmount();
+        if (EnemyInfo || HiddenAchievement) // case for enemy info 
+        {
+            if (AchievementLocked) // this will unlock once you discover the enemy
+            {
+                return "???";
+            }
+            else
+            {
+                return AchievementInformation.Name;
+            }
+        }
+        else
+        {
+            return AchievementInformation.Name;
+        }
     }
     public virtual string GetInfoDescription()
     {
-        return AchievementInformation.Description;
+        GetProgressAmount();
+        if (EnemyInfo || HiddenAchievement) // case for enemy info 
+        {
+            if (AchievementLocked) // this will unlock once you discover the enemy or complete achievement
+            {
+                return "?????????";
+            }
+            else
+            {
+                return AchievementInformation.Description;
+            }
+        }
+        else
+        {
+            return AchievementInformation.Description;
+        }
     }
-
 
     [ContextMenu("ToggleLocked")]
     private void ToggleLocked()
