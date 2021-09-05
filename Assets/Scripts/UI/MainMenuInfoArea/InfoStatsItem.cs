@@ -31,12 +31,12 @@ public class InfoStatsItem : InfoItem
 
     public override string GetInfoName()
     {
-        return Name;
+        return GetProgressAmount(); // I swapped these
     }
 
     public override string GetInfoDescription()
     {
-        return GetProgressAmount();
+        return Name; // I swapped these
     }
     public override string GetProgressAmount()
     {
