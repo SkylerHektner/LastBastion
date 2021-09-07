@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ProgressCanvas : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class ProgressCanvas : MonoBehaviour
 
     public Animator Skull;
     public GameObject ProgressContent;
+    public TextMeshProUGUI ModeText;
+    public TextMeshProUGUI WaveText;
+    string Scene2Load;
 
     private void Start()
     {
@@ -22,10 +26,31 @@ public class ProgressCanvas : MonoBehaviour
 
     }
 
+    public void Awake()
+    {
+        if (PD.Instance.SurvivalLimboResumeInformation.Active && PD.Instance.CampaignLimboResumeInformation.Active == false) // player came from survival
+        {
+            ModeText.text = "Survival";
+            WaveText.text = "Wave " + (PD.Instance.SurvivalLimboResumeInformation.Wave + 1); // it was showing up as 1 less than normal so I added the 1 back
+            Scene2Load = PD.Instance.SurvivalLimboResumeInformation.SceneName;
+            Debug.Log("Coming from survival");
+        }
+        else if (PD.Instance.CampaignLimboResumeInformation.Active && PD.Instance.SurvivalLimboResumeInformation.Active == false) // player came from campaign
+        {
+            ModeText.text = "Campaign";
+            WaveText.text = "Zone " + Spectator.LevelIndex + 1 + " - Wave " + (PD.Instance.CampaignLimboResumeInformation.Wave + 1);
+            Scene2Load = PD.Instance.CampaignLimboResumeInformation.SceneName;
+            Debug.Log("Coming from campaign");
+
+        }
+    }
+
     public void DeclineSave()
     {
         Skull.SetBool( "Speaking", false );
         // play animation (call load menu at the end)
+        PD.Instance.CampaignLimboResumeInformation.Clear();
+        PD.Instance.SurvivalLimboResumeInformation.Clear();
     }
 
     public void TriggerBlackFadeFX()
@@ -37,6 +62,15 @@ public class ProgressCanvas : MonoBehaviour
     {
         StarClustersA.SetTrigger("Fade");
         StarClustersB.SetTrigger("Fade");
+    }
 
+    public void LoadSceneFromLimboResumeAnimation()
+    {
+        SceneManager.LoadScene(Scene2Load);
+    }
+
+    public void LoadMenuFromLimboResumeAnimation()
+    {
+        ProgressContent.SetActive(false);
     }
 }

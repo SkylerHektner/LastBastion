@@ -41,7 +41,10 @@ public class MenuManager : MonoBehaviour
             CameraMover.LoadSurvivalShortcut();
             MenuOptions.SetTrigger("Skip");
         }
-
+        if (PD.Instance.CampaignLimboResumeInformation.Active || PD.Instance.SurvivalLimboResumeInformation.Active)
+        {
+            ShowProgressCanvas();
+        }
     }
 
     public void ShowLevels()

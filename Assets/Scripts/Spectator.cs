@@ -70,6 +70,9 @@ public class Spectator : MonoBehaviour
                 SpawnManager.Instance.CurrentWaveIndex,
                 BaseHP.Instance.CurrentHP,
                 survival_unlock_flags );
+
+                // get rid of campaign stats for limbo purposes
+                PD.Instance.CampaignLimboResumeInformation.Clear();
             }
             else
             {
@@ -79,6 +82,9 @@ public class Spectator : MonoBehaviour
                 SpawnManager.Instance.CurrentWaveIndex,
                 BaseHP.Instance.CurrentHP,
                 null );
+
+                //get rid of survival stats for limbo purposes
+                PD.Instance.SurvivalLimboResumeInformation.Clear();
             }
         }
     }

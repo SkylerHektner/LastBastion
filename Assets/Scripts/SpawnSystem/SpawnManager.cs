@@ -144,21 +144,24 @@ public class SpawnManager : MonoBehaviour
 #if UNITY_EDITOR
         CurrentWaveIndex = DebugStartWave - 2;
 #endif
-
-        if(GameplayManager.Instance.Survival 
+#if UNITY_EDITOR
+        if (GameplayManager.Instance.Survival 
             && PD.Instance.SurvivalLimboResumeInformation.Active)
         {
             CurrentWaveIndex = PD.Instance.SurvivalLimboResumeInformation.Wave - 1; // subtract one since we immediately start next wave
+            PD.Instance.SurvivalLimboResumeInformation.Clear(); // when coming from limbo, clear my limbo status - alex
         }
         else if(!GameplayManager.Instance.Survival 
             && PD.Instance.CampaignLimboResumeInformation.Active 
             && PD.Instance.CampaignLimboResumeInformation.SceneName == SceneManager.GetActiveScene().name)
         {
             CurrentWaveIndex = PD.Instance.CampaignLimboResumeInformation.Wave - 1; // subtract one since we immediately start next wave
+            PD.Instance.CampaignLimboResumeInformation.Clear(); // when coming from limbo, clear my limbo status - alex
         }
 
         GameplayManager.State = GameplayManager.GameState.Active;
         StartNextWave();
+#endif
     }
 
     private void Update()
