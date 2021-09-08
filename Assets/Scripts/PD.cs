@@ -76,8 +76,8 @@ public class PD
     public PlayerLevelCompletionMap LevelCompletionMap = new PlayerLevelCompletionMap();
     public PDList<string> PlayerChallengeCompletionList = new PDList<string>();
     // limbo data
-    public LimboResumeInformation CampaignLimboResumeInformation;
-    public LimboResumeInformation SurvivalLimboResumeInformation;
+    public LimboResumeInformation CampaignLimboResumeInformation = new LimboResumeInformation();
+    public LimboResumeInformation SurvivalLimboResumeInformation = new LimboResumeInformation();
     // settings data
     public PlayerDataField<float> StoredMusicVolume = new PlayerDataField<float>();
     public PlayerDataField<float> StoredSFXVolume = new PlayerDataField<float>();
