@@ -15,6 +15,7 @@ public class ProgressCanvas : MonoBehaviour
     public TextMeshProUGUI ModeText;
     public TextMeshProUGUI WaveText;
     string Scene2Load;
+    public Boombox MenuTrack;
 
     private void Start()
     {
@@ -28,21 +29,25 @@ public class ProgressCanvas : MonoBehaviour
 
     public void Awake()
     {
-        if (PD.Instance.SurvivalLimboResumeInformation.Active && PD.Instance.CampaignLimboResumeInformation.Active == false) // player came from survival
+        if (PD.Instance.CampaignLimboResumeInformation != null && PD.Instance.SurvivalLimboResumeInformation != null)
         {
-            ModeText.text = "Survival";
-            WaveText.text = "Wave " + (PD.Instance.SurvivalLimboResumeInformation.Wave + 1); // it was showing up as 1 less than normal so I added the 1 back
-            Scene2Load = PD.Instance.SurvivalLimboResumeInformation.SceneName;
-            Debug.Log("Coming from survival");
-        }
-        else if (PD.Instance.CampaignLimboResumeInformation.Active && PD.Instance.SurvivalLimboResumeInformation.Active == false) // player came from campaign
-        {
-            ModeText.text = "Campaign";
-            WaveText.text = "Zone " + Spectator.LevelIndex + 1 + " - Wave " + (PD.Instance.CampaignLimboResumeInformation.Wave + 1);
-            Scene2Load = PD.Instance.CampaignLimboResumeInformation.SceneName;
-            Debug.Log("Coming from campaign");
+            if (PD.Instance.SurvivalLimboResumeInformation.Active && PD.Instance.CampaignLimboResumeInformation.Active == false) // player came from survival
+            {
+                ModeText.text = "Survival";
+                WaveText.text = "Wave " + (PD.Instance.SurvivalLimboResumeInformation.Wave + 1); // it was showing up as 1 less than normal so I added the 1 back
+                Scene2Load = PD.Instance.SurvivalLimboResumeInformation.SceneName;
+                Debug.Log("Coming from survival");
+            }
+            else if (PD.Instance.CampaignLimboResumeInformation.Active && PD.Instance.SurvivalLimboResumeInformation.Active == false) // player came from campaign
+            {
+                ModeText.text = "Campaign";
+                WaveText.text = "Zone " + Spectator.LevelIndex + 1 + " - Wave " + (PD.Instance.CampaignLimboResumeInformation.Wave + 1);
+                Scene2Load = PD.Instance.CampaignLimboResumeInformation.SceneName;
+                Debug.Log("Coming from campaign");
 
+            }
         }
+
     }
 
     public void DeclineSave()
@@ -72,5 +77,7 @@ public class ProgressCanvas : MonoBehaviour
     public void LoadMenuFromLimboResumeAnimation()
     {
         ProgressContent.SetActive(false);
+        MenuTrack.gameObject.SetActive(true); // toggle music soundtrack when transitioned
+        MenuTrack.SwapTrack(MenuTrack.MyClip);
     }
 }

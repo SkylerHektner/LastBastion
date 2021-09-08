@@ -17,7 +17,7 @@ public class Boombox : MonoBehaviour
         CurrentSoundTrack.clip = null;
         CurrentSoundTrack.clip = NextSong;
         CurrentSoundTrack.Play();
-        Debug.Log("swapping tracks");
+        Debug.Log("swapping tracks to " + NextSong.ToString());
     }
 
     public void OnEnable() // when loading a level,find the level soundtrack and update the main boombox on the spectator

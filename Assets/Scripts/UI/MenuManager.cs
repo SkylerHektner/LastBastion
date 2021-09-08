@@ -21,6 +21,9 @@ public class MenuManager : MonoBehaviour
     public InfoPanel UpgradePanel;
     public Button RightUpgradeScroll;
     public Button LeftUpgradeScroll;
+    public Boombox LimboTrack;
+    public Boombox MenuTrack;
+    
 
 
     private void Awake()
@@ -41,10 +44,20 @@ public class MenuManager : MonoBehaviour
             CameraMover.LoadSurvivalShortcut();
             MenuOptions.SetTrigger("Skip");
         }
-        if (PD.Instance.CampaignLimboResumeInformation.Active || PD.Instance.SurvivalLimboResumeInformation.Active)
+        if (PD.Instance.CampaignLimboResumeInformation != null && PD.Instance.SurvivalLimboResumeInformation != null)
         {
-            ShowProgressCanvas();
+            if ((PD.Instance.CampaignLimboResumeInformation.Active) || PD.Instance.SurvivalLimboResumeInformation.Active) // limbo
+            {
+                MenuTrack.gameObject.SetActive(false);
+                ShowProgressCanvas();
+            }
+            else if (!PD.Instance.CampaignLimboResumeInformation.Active && !PD.Instance.SurvivalLimboResumeInformation.Active) // no limbo
+            {
+                MenuTrack.gameObject.SetActive(true);
+                MenuTrack.SwapTrack(MenuTrack.MyClip);
+            }
         }
+
     }
 
     public void ShowLevels()
@@ -128,11 +141,13 @@ public class MenuManager : MonoBehaviour
     public void HideProgressCanvas()
     {
         ProgressContent.SetActive( false );
+        MenuTrack.gameObject.SetActive(true);
     }
 
     public void ShowProgressCanvas()
     {
         ProgressContent.SetActive( true );
+        LimboTrack.SwapTrack(LimboTrack.MyClip); // play limbo track
     }
 
 }
