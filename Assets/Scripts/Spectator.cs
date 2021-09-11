@@ -16,6 +16,7 @@ public class Spectator : MonoBehaviour
 
     public Texture2D CursorTexture;
     public Texture2D CursorTexture2;
+    public RewardCanvas AchievementPopup;
 
     private void Awake()
     {

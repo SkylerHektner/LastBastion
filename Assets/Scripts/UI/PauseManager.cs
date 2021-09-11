@@ -10,7 +10,7 @@ public class PauseManager : MonoBehaviour
 
     public Animator WaveCounter;
     public GameObject PauseScreen;
-    public GameObject BonusScreen;
+    //public GameObject BonusScreen;
     public GameObject PauseButton;
     public TextMeshProUGUI CurrentWaveText;
     public Animator ConfirmationMenu;
@@ -20,7 +20,7 @@ public class PauseManager : MonoBehaviour
         //WaveCounter.SetBool("Visible", false);
         Time.timeScale = 1;
         PauseScreen.SetActive(false);
-        BonusScreen.SetActive(true);
+        //BonusScreen.SetActive(true);
         PauseButton.SetActive(true);
         WaveCounter.ResetTrigger("Hide");
     }
@@ -38,7 +38,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0;
         WaveCounter.SetTrigger("Hide");
         CurrentWaveText.text = ("Wave  " + WaveCounter.GetComponent<WaveCounter>().CurrentWave);
-        BonusScreen.SetActive(false);
+        //BonusScreen.SetActive(false);
         PauseButton.SetActive(false);
     }
 
