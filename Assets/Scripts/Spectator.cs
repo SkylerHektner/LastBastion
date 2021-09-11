@@ -13,10 +13,13 @@ public class Spectator : MonoBehaviour
 
     public static bool WitnessedVictory;
     public AudioSource GameMusic;
-
     public Texture2D CursorTexture;
     public Texture2D CursorTexture2;
     public RewardCanvas AchievementPopup;
+    public float AchievementCheckRate = 1.0f;
+    public List<Achievement> Achievements;
+
+    private float achievementCheckCooldown;
 
     private void Awake()
     {
@@ -27,6 +30,8 @@ public class Spectator : MonoBehaviour
             Destroy( this.gameObject );
         }
 
+        achievementCheckCooldown = AchievementCheckRate;
+
         DontDestroyOnLoad( this.gameObject );
     }
 
@@ -34,7 +39,6 @@ public class Spectator : MonoBehaviour
     {
         if( GameplayManager.Instance == null )
             PD.Instance.Tick();
-
 
         // makes the cursor a finger texture
         if( Input.GetMouseButton( 0 ) )
@@ -45,6 +49,30 @@ public class Spectator : MonoBehaviour
         {
             Cursor.SetCursor( CursorTexture, Vector2.zero, CursorMode.ForceSoftware );
         }
+
+        // show the achievement popup if the players gets an achievement
+        achievementCheckCooldown -= Time.deltaTime;
+        if( achievementCheckCooldown < 0.0f )
+        {
+            achievementCheckCooldown = AchievementCheckRate;
+            CheckAchievementCompletion();
+        }
+    }
+
+    private void CheckAchievementCompletion()
+    {
+        foreach( var achievement in Achievements )
+        {
+            if( !PD.Instance.EarnedAchievementList.Contains( achievement.UniqueID )
+                && achievement.GetProgress() == 1.0f )
+            {
+                AchievementPopup.DisplayReward();
+                AchievementPopup.SetText( achievement.Name );
+                PD.Instance.EarnedAchievementList.Add( achievement.UniqueID );
+                achievementCheckCooldown *= 3; // make sure the animation has enought time to finish before we check again incase we got two achievements at once
+                break;
+            }
+        }
     }
 
     // used for debugging (call this mid game, then stop the editor, then start at the main menu)
@@ -53,7 +81,7 @@ public class Spectator : MonoBehaviour
     {
         if( SceneManager.GetActiveScene().name != "Menu"
             && ( GameplayManager.State == GameplayManager.GameState.Active
-            || GameplayManager.State == GameplayManager.GameState.ChoosingUpgrade))
+            || GameplayManager.State == GameplayManager.GameState.ChoosingUpgrade ) )
         {
             if( GameplayManager.Instance.Survival )
             {

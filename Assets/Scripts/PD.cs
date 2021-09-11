@@ -95,6 +95,8 @@ public class PD
     public LazyPlayerDataField<int> TotalWavesCompleted = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> TotalWealthEarned = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> TotalFailures = new LazyPlayerDataField<int>();
+    // achievements
+    public PDList<string> EarnedAchievementList = new PDList<string>(); 
     // encountered enemies
     public PDList<EnemyEnum> EncounteredEnemyList = new PDList<EnemyEnum>();
 

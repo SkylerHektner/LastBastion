@@ -24,6 +24,7 @@ public class Achievement : ScriptableObject
         BeatEnemy,
     }
 
+    public string UniqueID;
     public string Name;
     public string Description;
     public AchievementType Type;
@@ -100,6 +101,11 @@ public class AchievementEditor : Editor
     public override void OnInspectorGUI()
     {
         Achievement achievement = (Achievement)target;
+        CustomEditorUtilities.AutoDirtyLabeledString(
+            ref achievement.UniqueID,
+            "UniqueID",
+            false,
+            target );
         CustomEditorUtilities.AutoDirtyLabeledString(
             ref achievement.Name,
             "Name",
