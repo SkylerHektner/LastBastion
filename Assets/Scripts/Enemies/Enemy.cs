@@ -218,6 +218,8 @@ public class Enemy : MonoBehaviour
         if( !string.IsNullOrEmpty( CurrentHealthAnimationParameter ) )
             anim.SetFloat( CurrentHealthAnimationParameter, CurrentHealth );
 
+        SFXManager.Instance.PlayEnemyHitSFX();
+
         if( CurrentHealth <= 0 )
         {
             died = true;
