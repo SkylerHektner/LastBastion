@@ -10,7 +10,7 @@ public class DeathCanvas : MonoBehaviour
 
     public Animator WaveCounter;
     public GameObject DeathScreen;
-    public GameObject RewardScreen;
+    //public GameObject RewardScreen;
     public GameObject SendSawCanvas;
     public TextMeshProUGUI WaveText;
 
@@ -20,7 +20,7 @@ public class DeathCanvas : MonoBehaviour
         DeathScreen.SetActive(true);
         WaveText.text = ("Wave  " + WaveCounter.GetComponent<WaveCounter>().CurrentWave);
         //WaveCounter.SetBool("Visible", true);
-        RewardScreen.SetActive(false);
+        //RewardScreen.SetActive(false);
         SendSawCanvas.SetActive(false);
     }
 
