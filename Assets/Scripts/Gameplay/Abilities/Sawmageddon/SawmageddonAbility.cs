@@ -33,6 +33,7 @@ public class SawmageddonAbility : Ability
             Saw.Instance?.SawKilledEnemyEvent?.AddListener( OnSawKilledEnemy );
             listening = true;
             ComboKillerDisplay.Instance?.gameObject.SetActive( true );
+            ComboKillerDisplay.Instance?.SetChargeAmount( cur_combo_killer_kills, combo_killer_max );
             Debug.Assert( ComboKillerDisplay.Instance != null );
         }
     }
