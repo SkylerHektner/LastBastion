@@ -218,7 +218,7 @@ public class Enemy : MonoBehaviour
         if( !string.IsNullOrEmpty( CurrentHealthAnimationParameter ) )
             anim.SetFloat( CurrentHealthAnimationParameter, CurrentHealth );
 
-        SFXManager.Instance.PlayEnemyHitSFX();
+        SFXManager.Instance.PlaySFX( SFXEnum.EnemyHit );
 
         if( CurrentHealth <= 0 )
         {

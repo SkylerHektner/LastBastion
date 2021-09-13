@@ -45,7 +45,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.173
+  m_Volume: 0.214
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e83d7c7cc3f90c2429feb762622415d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHitSFX: {fileID: 8300000, guid: 649ef576bd012b24d8cd153a9124c9ee, type: 3}
-  EnemyHitSFXCooldown: 0.1
-  EnemyHitCooldownOverrideCount: 2
+  AudioClipMappings:
+    keys: 00000000
+    values:
+    - {fileID: 8300000, guid: 649ef576bd012b24d8cd153a9124c9ee, type: 3}
