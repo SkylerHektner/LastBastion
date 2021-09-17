@@ -14,7 +14,10 @@ public class CameraUIMover : MonoBehaviour
     public Transform SettingsZone;
     public Transform HelpZone;
     public Transform InfoZone;
-
+    public Transform StoreZone;
+    public Transform TradeZone;
+    public Transform OfferZone;
+    public Transform CustomizeZone;
 
     public float CameraSpeed;   // default is .8f
 
@@ -121,6 +124,50 @@ public class CameraUIMover : MonoBehaviour
     public void ExitInfo()
     {
         CurrentDestination = MainZone;
+        CameraSpeed = 1.5f;
+    }
+
+
+    /// These are used in the store page
+    public void LoadStore()
+    {
+        CurrentDestination = StoreZone;
+        CameraSpeed = .1f;
+    }
+
+    public void ExitStore()
+    {
+        CurrentDestination = MainZone;
+        CameraSpeed = .1f;
+    }
+    public void LoadTrades()
+    {
+        CurrentDestination = TradeZone;
+        CameraSpeed = 1.5f;
+    }
+    public void ExitTrade()
+    {
+        CurrentDestination = StoreZone;
+        CameraSpeed = 1.5f;
+    }
+    public void LoadOffers()
+    {
+        CurrentDestination = OfferZone;
+        CameraSpeed = 1.5f;
+    }
+    public void ExitOffers()
+    {
+        CurrentDestination = StoreZone;
+        CameraSpeed = 1.5f;
+    }
+    public void LoadCustomization()
+    {
+        CurrentDestination = CustomizeZone;
+        CameraSpeed = 1.5f;
+    }
+    public void ExitCustomization()
+    {
+        CurrentDestination = StoreZone;
         CameraSpeed = 1.5f;
     }
 }
