@@ -22,6 +22,14 @@ public class Achievement : ScriptableObject
         BeatWaveInSurvival,
         SetSawOnFire,
         BeatEnemy,
+        DefeatAllEnemies, // do
+        ZapAtLeastXEnemiesWithSingleChainLightning,
+        KillXEnemiesWithTyphoon,
+        KillXEnemiesWithBombers,
+        BounceSawOffWallXTimes,
+        CoverSawInMudXTimes,
+        RemoveMudWithFireXTimes,
+        RecoverXTotalHealthFromSawmageddon
     }
 
     public string UniqueID;
@@ -89,6 +97,42 @@ public class Achievement : ScriptableObject
             case AchievementType.BeatEnemy:
                 result = PD.Instance.EncounteredEnemyList.Contains( desired_enemy ) ? 1.0f : 0.0f;
                 break;
+            case AchievementType.DefeatAllEnemies:
+            {
+                int num_enemies_defeated = 0;
+                int total_enemies = 0;
+                foreach(EnemyEnum enemy in Enum.GetValues(typeof(EnemyEnum)))
+                {
+                    if(PD.Instance.EncounteredEnemyList.Contains(enemy))
+                    {
+                        ++num_enemies_defeated;
+                    }
+                    ++total_enemies;
+                }
+                result = (float)num_enemies_defeated / (float)total_enemies;
+            }
+            break;
+            case AchievementType.ZapAtLeastXEnemiesWithSingleChainLightning:
+                result = (float)PD.Instance.HighestZappedEnemiesWithSingleChainLightning.Get() / (float)desired_value;
+                break;
+            case AchievementType.KillXEnemiesWithTyphoon:
+                result = (float)PD.Instance.NumEnemiesKilledByTyphoon.Get() / (float)desired_value;
+                break;
+            case AchievementType.KillXEnemiesWithBombers:
+                result = (float)PD.Instance.NumEnemiesKilledByBoomerExplosions.Get() / (float)desired_value;
+                break;
+            case AchievementType.BounceSawOffWallXTimes:
+                result = (float)PD.Instance.NumTimesSawBouncedOffWall.Get() / (float)desired_value;
+                break;
+            case AchievementType.CoverSawInMudXTimes:
+                result = (float)PD.Instance.NumTimesCoveredInMud.Get() / (float)desired_value;
+                break;
+            case AchievementType.RemoveMudWithFireXTimes:
+                result = (float)PD.Instance.NumTimesMudRemovedWithFire.Get() / (float)desired_value;
+                break;
+            case AchievementType.RecoverXTotalHealthFromSawmageddon:
+                result = (float)PD.Instance.TotalHealthRecoveredFromSawmageddon.Get() / (float)desired_value;
+                break;
         }
         return Mathf.Min( result, 1.0f );
     }
@@ -135,6 +179,13 @@ public class AchievementEditor : Editor
             case Achievement.AchievementType.KillAtLeastXEnemiesWithSawmageddonShot:
             case Achievement.AchievementType.BeatWaveInSurvival:
             case Achievement.AchievementType.SetSawOnFire:
+            case Achievement.AchievementType.ZapAtLeastXEnemiesWithSingleChainLightning:
+            case Achievement.AchievementType.KillXEnemiesWithTyphoon:
+            case Achievement.AchievementType.KillXEnemiesWithBombers:
+            case Achievement.AchievementType.BounceSawOffWallXTimes:
+            case Achievement.AchievementType.CoverSawInMudXTimes:
+            case Achievement.AchievementType.RemoveMudWithFireXTimes:
+            case Achievement.AchievementType.RecoverXTotalHealthFromSawmageddon:
             {
                 CustomEditorUtilities.AutoDirtyLabeledInt(
                     ref achievement.desired_value,
@@ -183,7 +234,8 @@ public class AchievementEditor : Editor
 
             // do nothing
             case Achievement.AchievementType.UnlockEverythingInCampaign:
-            break;
+            case Achievement.AchievementType.DefeatAllEnemies:
+                break;
         }
     }
 }

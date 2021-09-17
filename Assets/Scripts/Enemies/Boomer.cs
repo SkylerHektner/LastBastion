@@ -35,7 +35,13 @@ public class Boomer : Enemy
             AbilityDrop hit_crystal = hit[x].gameObject.GetComponent<AbilityDrop>();
             if( hit_en != null && hit_en.EnemyID != EnemyID )
             {
-                hit_en.Hit( ( hit_en.transform.position - transform.position ).normalized, true, DamageSource.BoomerDeathExplosion );
+                bool died = false;
+                bool dodged = false;
+                hit_en.Hit( ( hit_en.transform.position - transform.position ).normalized, true, DamageSource.BoomerDeathExplosion, out died, out dodged );
+
+                // player stats
+                if( died )
+                    PD.Instance.NumEnemiesKilledByBoomerExplosions.Set( PD.Instance.NumEnemiesKilledByBoomerExplosions.Get() + 1 );
             }
             else if( hit_crystal != null && PD.Instance.UnlockMap.Get( UnlockFlags.BomberUpgradeCurse ) )
             {

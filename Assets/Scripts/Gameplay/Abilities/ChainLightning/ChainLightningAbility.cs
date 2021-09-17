@@ -79,6 +79,12 @@ public class ChainLightningAbility : Ability
             static_overload_layermask = LayerMask.GetMask( "Enemy" );
             zapped_enemy_tracking_time = pending_zaps.Last().time + GetZapDuration() + 1.0f; // once second extra, just to be safe
         }
+
+        // player stats
+        if( PD.Instance.HighestZappedEnemiesWithSingleChainLightning.Get() < pending_zaps.Count )
+        {
+            PD.Instance.HighestZappedEnemiesWithSingleChainLightning.Set( pending_zaps.Count );
+        }
     }
 
     public override void Update( float delta_time )
@@ -162,7 +168,7 @@ public class ChainLightningAbility : Ability
     private float GetZapDuration()
     {
         return ( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStunDuration )
-                ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration ) 
+                ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration )
                 * GetAbilityDurationMultiplier();
     }
 }

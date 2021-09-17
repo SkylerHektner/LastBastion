@@ -122,6 +122,8 @@ public class SawmageddonAbility : Ability
             cur_combo_killer_kills = 0;
             combo_killer_max = Mathf.RoundToInt( combo_killer_max * AbilityData.ComboKillerHPRegainScaleFactor );
             BaseHP.Instance?.Heal( 3 );
+            //player stats
+            PD.Instance.TotalHealthRecoveredFromSawmageddon.Set( PD.Instance.TotalHealthRecoveredFromSawmageddon.Get() + 3 );
         }
         Debug.Assert( ComboKillerDisplay.Instance != null );
         ComboKillerDisplay.Instance?.SetChargeAmount( cur_combo_killer_kills, combo_killer_max );

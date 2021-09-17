@@ -10,10 +10,15 @@ public class Typhoon : MonoBehaviour
         {
 
             Enemy en = col.gameObject.GetComponent<Enemy>();
+            bool died = false;
+            bool dodged = false;
 
             // hit em till they dead
-            while( en != null && !en.Dying && !en.ImmuneToTyphoon)
-                en.Hit( Vector3.up, false, DamageSource.Typhoon );
+            while( en != null && !en.Dying && !en.ImmuneToTyphoon )
+                en.Hit( Vector3.up, false, DamageSource.Typhoon, out died, out dodged );
+
+            if( died )
+                PD.Instance.NumEnemiesKilledByTyphoon.Set( PD.Instance.NumEnemiesKilledByTyphoon.Get() + 1 );
         }
     }
 }

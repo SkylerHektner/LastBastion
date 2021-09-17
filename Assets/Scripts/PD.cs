@@ -97,7 +97,9 @@ public class PD
     public LazyPlayerDataField<int> NumCrystalsUsed = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> NumTurretKills = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> NumTimesSawOnFire = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> NumEnemiesKilledByTyphoon = new LazyPlayerDataField<int>(); // test
     public LazyPlayerDataField<int> NumZappedEnemiesKilled = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> HighestZappedEnemiesWithSingleChainLightning = new LazyPlayerDataField<int>(); // test
     public LazyPlayerDataField<int> HighestAnomalySawUnleash = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> TotalNumberOfAnomalySawUnleash = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> HighestEnemyDeathTollFromSawmageddonShot = new LazyPlayerDataField<int>();
@@ -105,6 +107,11 @@ public class PD
     public LazyPlayerDataField<int> TotalWavesCompleted = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> TotalWealthEarned = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> TotalFailures = new LazyPlayerDataField<int>();
+    public LazyPlayerDataField<int> NumEnemiesKilledByBoomerExplosions = new LazyPlayerDataField<int>(); // test
+    public LazyPlayerDataField<int> NumTimesSawBouncedOffWall = new LazyPlayerDataField<int>(); // test
+    public LazyPlayerDataField<int> NumTimesCoveredInMud = new LazyPlayerDataField<int>(); // test
+    public LazyPlayerDataField<int> NumTimesMudRemovedWithFire = new LazyPlayerDataField<int>(); // test
+    public LazyPlayerDataField<int> TotalHealthRecoveredFromSawmageddon = new LazyPlayerDataField<int>(); // test
     // achievements
     public PDList<string> EarnedAchievementList = new PDList<string>(); 
     // encountered enemies

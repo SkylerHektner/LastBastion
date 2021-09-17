@@ -164,6 +164,9 @@ public class Saw : MonoBehaviour
                 TyphoonAbility.ActiveTyphoon.SetSawOnFire( this );
             }
 
+            // player stats
+            PD.Instance.NumTimesSawBouncedOffWall.Set( PD.Instance.NumTimesSawBouncedOffWall.Get() + 1 );
+
             SawBounceOffWallEvent.Invoke();
         }
         else if( hit_info.wall == ProjectileHitInfo.Wall.Left ||
@@ -314,6 +317,9 @@ public class Saw : MonoBehaviour
         animator.SetBool( "Muddy", true );
         covered_in_mud_movespeed_multiplier = move_speed_mult;
         proj.SetProjectileSpeed( AdjustedMoveSpeed );
+
+        // player stats
+        PD.Instance.NumTimesCoveredInMud.Set( PD.Instance.NumTimesCoveredInMud.Get() + 1 );
     }
 
     private void EndCoverInMud()
@@ -327,7 +333,11 @@ public class Saw : MonoBehaviour
     public void SetOnFire( float duration, int extra_damage, float move_speed_multiplier )
     {
         if( cover_in_mud_duration > 0.0f )
+        {
             EndCoverInMud(); // clear cover in mud status effect if we have it
+            // player stats
+            PD.Instance.NumTimesMudRemovedWithFire.Set( PD.Instance.NumTimesMudRemovedWithFire.Get() + 1 );
+        }
 
         // if already on fire keep effect with longest duration
         if( on_fire_duration < duration )
