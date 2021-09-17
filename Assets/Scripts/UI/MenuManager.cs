@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     public CameraUIMover CameraMover;
     public Animator CampaignPortal;
     public Animator MenuOptions;
+    public Animator TheShop;
 
     public GameObject UpgradeNavigator;
     public int UpgradeIndex;
@@ -23,7 +24,11 @@ public class MenuManager : MonoBehaviour
     public Button LeftUpgradeScroll;
     public Boombox LimboTrack;
     public Boombox MenuTrack;
-    
+
+    public GameObject TradeCanvas;
+    public GameObject OfferCanvas;
+    public GameObject CustomizationCanvas;
+
 
 
     private void Awake()
@@ -129,6 +134,23 @@ public class MenuManager : MonoBehaviour
             }
 
         }
+    }
+
+    public void LoadStore()
+    {
+        MenuOptions.SetTrigger("Shopping");
+        TheShop.SetTrigger("OpenShop");
+        TradeCanvas.SetActive(true);
+        OfferCanvas.SetActive(true);
+        CustomizationCanvas.SetActive(true);
+    }
+    public void LeaveStore()
+    {
+        TheShop.SetTrigger("CloseShop");
+        MenuOptions.SetTrigger("DoneShopping");
+        TradeCanvas.SetActive(false);
+        OfferCanvas.SetActive(false);
+        CustomizationCanvas.SetActive(false);
     }
 
     // triggered by the animator on the door
