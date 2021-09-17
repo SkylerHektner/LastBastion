@@ -12,7 +12,7 @@ using UnityEngine.Events;
 // UNLOCK FLAGS
 //      When adding new Unlock Flags remember to 
 //          1) Update the UnlockFlagDependencyMap
-//          2) Update the UnlockFlagCurseMap
+//          2) Update the UnlockFlagCategoryMap
 public enum UnlockFlags
 {
     ChainLightning = 0,
@@ -65,6 +65,16 @@ public enum UnlockFlags
     BlackholeUpgradeCurse = 45,
     BouncerUpgradeCurse = 46,
     BomberUpgradeCurse = 47,
+
+    // COSMETIC FLAGS
+
+}
+
+public enum UnlockFlagCategory
+{
+    Upgrade,
+    Curse,
+    Cosmetic,
 }
 
 // PLAYER DATA
@@ -158,60 +168,60 @@ public class PD
     };
 
     // a dictionary containing information about whether an unlock flag is a curse
-    public readonly Dictionary<UnlockFlags, bool> UnlockFlagCurseMap = new Dictionary<UnlockFlags, bool>
+    public readonly Dictionary<UnlockFlags, UnlockFlagCategory> UnlockFlagCategoryMap = new Dictionary<UnlockFlags, UnlockFlagCategory>
     {
         // boon
-        { UnlockFlags.ChainLightning, false },
-        { UnlockFlags.ChainLightningStunDuration, false },
-        { UnlockFlags.ChainLightningLightningRod, false },
-        { UnlockFlags.ChainLightningStaticOverload, false },
-        { UnlockFlags.Typhoon, false },
-        { UnlockFlags.TyphoonFlameSaw, false },
-        { UnlockFlags.TyphoonRoaringFlames, false },
-        { UnlockFlags.TyphoonExtendedBBQ, false },
-        { UnlockFlags.Anomaly, false },
-        { UnlockFlags.AnomalyRicochetSaws, false },
-        { UnlockFlags.AnomalyStasisCoating, false },
-        { UnlockFlags.AnomalySingularity, false },
-        { UnlockFlags.Sawmageddon, false },
-        { UnlockFlags.SawmageddonDuration, false },
-        { UnlockFlags.SawmageddonProjectiles, false },
-        { UnlockFlags.SawmageddonComboKiller, false },
-        { UnlockFlags.BaseHP1, false },
-        { UnlockFlags.BaseHP2, false },
-        { UnlockFlags.BaseHP3, false },
-        { UnlockFlags.BaseOvershield, false },
-        { UnlockFlags.Turrets, false },
-        { UnlockFlags.TurretsPowerSurge, false },
-        { UnlockFlags.TurretsCollateralDamage, false },
-        { UnlockFlags.TurretsTimedPaylod, false },
+        { UnlockFlags.ChainLightning, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.ChainLightningStunDuration, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.ChainLightningLightningRod, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.ChainLightningStaticOverload, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.Typhoon, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.TyphoonFlameSaw, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.TyphoonRoaringFlames, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.TyphoonExtendedBBQ, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.Anomaly, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.AnomalyRicochetSaws, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.AnomalyStasisCoating, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.AnomalySingularity, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.Sawmageddon, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.SawmageddonDuration, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.SawmageddonProjectiles, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.SawmageddonComboKiller, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.BaseHP1, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.BaseHP2, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.BaseHP3, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.BaseOvershield, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.Turrets, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.TurretsPowerSurge, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.TurretsCollateralDamage, UnlockFlagCategory.Upgrade },
+        { UnlockFlags.TurretsTimedPaylod, UnlockFlagCategory.Upgrade },
 
         // curse
-        { UnlockFlags.EnemyMovementSpeedCurse, true },
-        { UnlockFlags.EnemySpawnSpeedCurse, true },
-        { UnlockFlags.SawRadiusCurse, true },
-        { UnlockFlags.SawMovementSpeedCurse, true },
-        { UnlockFlags.CrystalDropChanceCurse, true },
-        { UnlockFlags.AbilityDurationCurse, true },
-        { UnlockFlags.EnemyMovementSpeedCurse2, true },
-        { UnlockFlags.EnemySpawnSpeedCurse2, true },
-        { UnlockFlags.SawRadiusCurse2, true },
-        { UnlockFlags.SawMovementSpeedCurse2, true },
-        { UnlockFlags.CrystalDropChanceCurse2, true },
-        { UnlockFlags.AbilityDurationCurse2, true },
+        { UnlockFlags.EnemyMovementSpeedCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.EnemySpawnSpeedCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.SawRadiusCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.SawMovementSpeedCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.CrystalDropChanceCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.AbilityDurationCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.EnemyMovementSpeedCurse2, UnlockFlagCategory.Curse },
+        { UnlockFlags.EnemySpawnSpeedCurse2, UnlockFlagCategory.Curse },
+        { UnlockFlags.SawRadiusCurse2, UnlockFlagCategory.Curse },
+        { UnlockFlags.SawMovementSpeedCurse2, UnlockFlagCategory.Curse },
+        { UnlockFlags.CrystalDropChanceCurse2, UnlockFlagCategory.Curse },
+        { UnlockFlags.AbilityDurationCurse2, UnlockFlagCategory.Curse },
 
-        { UnlockFlags.SkeletonUpgradeCurse, true },
-        { UnlockFlags.BolterUpgradeCurse, true },
-        { UnlockFlags.ShieldSkeletonUpgradeCurse, true },
-        { UnlockFlags.PumpkinUpgradeCurse, true },
-        { UnlockFlags.CarrierUpgradeCurse, true },
-        { UnlockFlags.MudSlingerUpgradeCurse, true },
-        { UnlockFlags.ShrikeUpgradeCurse, true },
-        { UnlockFlags.SummonerUpgradeCurse, true },
-        { UnlockFlags.GhostUpgradeCurse, true },
-        { UnlockFlags.BlackholeUpgradeCurse, true },
-        { UnlockFlags.BouncerUpgradeCurse, true },
-        { UnlockFlags.BomberUpgradeCurse, true },
+        { UnlockFlags.SkeletonUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.BolterUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.ShieldSkeletonUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.PumpkinUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.CarrierUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.MudSlingerUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.ShrikeUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.SummonerUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.GhostUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.BlackholeUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.BouncerUpgradeCurse, UnlockFlagCategory.Curse },
+        { UnlockFlags.BomberUpgradeCurse, UnlockFlagCategory.Curse },
     };
 
     // EVENTS
@@ -260,7 +270,7 @@ public class PD
     {
         foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
-            if( !PD.Instance.UnlockFlagCurseMap[flag] )
+            if( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Upgrade )
             {
                 _instance.UnlockMap.Set( flag, true, false );
                 _instance.UnlockMap.Set( flag, true, true );
@@ -281,7 +291,7 @@ public class PD
     {
         foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
-            if( PD.Instance.UnlockFlagCurseMap[flag] )
+            if( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Curse )
             {
                 _instance.UnlockMap.Set( flag, true, false );
                 _instance.UnlockMap.Set( flag, true, true );
@@ -293,10 +303,22 @@ public class PD
     {
         foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
         {
-            if( PD.Instance.UnlockFlagCurseMap[flag] )
+            if( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Curse )
             {
                 _instance.UnlockMap.Set( flag, false, false );
                 _instance.UnlockMap.Set( flag, false, true );
+            }
+        }
+    }
+    [MenuItem( "Debug/UnlockAllCosmetics" )]
+    public static void UnlockAllCosmetics()
+    {
+        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
+        {
+            if( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Cosmetic )
+            {
+                _instance.UnlockMap.Set( flag, true, false );
+                _instance.UnlockMap.Set( flag, true, true );
             }
         }
     }
@@ -380,7 +402,7 @@ public class PD
             {
                 UnityEngine.Debug.LogError( $"UnlockFlagDependencyMap missing entry for Unlock Flag {flag}" );
             }
-            if( !UnlockFlagCurseMap.ContainsKey( flag ) )
+            if( !UnlockFlagCategoryMap.ContainsKey( flag ) )
             {
                 UnityEngine.Debug.LogError( $"UnlockFlagCurseMap missing entry for Unlock Flag {flag}" );
             }

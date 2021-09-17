@@ -160,7 +160,7 @@ public class SurvivalCardsUI : MonoBehaviour
         {
             if( !PD.Instance.UnlockMap.Get( flag, GameplayManager.Instance.Survival )
                 && PD.Instance.UnlockFlagDependencyMap[flag].All( f => PD.Instance.UnlockMap.Get( f, true ) )
-                && ( curse_unlocks ? PD.Instance.UnlockFlagCurseMap[flag] : !PD.Instance.UnlockFlagCurseMap[flag] ) )
+                && ( curse_unlocks ? ( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Curse ) : ( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Upgrade ) ) )
             {
                 options.Add( flag );
             }

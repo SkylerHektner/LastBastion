@@ -47,7 +47,7 @@ public class Achievement : ScriptableObject
                 int num_earned_in_campaign = 0;
                 foreach( UnlockFlags unlock in Enum.GetValues( typeof( UnlockFlags ) ) )
                 {
-                    if( !PD.Instance.UnlockFlagCurseMap[unlock] )
+                    if( PD.Instance.UnlockFlagCategoryMap[unlock] == UnlockFlagCategory.Upgrade )
                     {
                         ++num_boons;
                         if( PD.Instance.UnlockMap.Get( unlock, false ) )
