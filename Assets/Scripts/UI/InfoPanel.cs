@@ -17,8 +17,7 @@ public class InfoPanel : MonoBehaviour
     public UpgradeButton DesiredUpgrade;
     public int UpgradeCost;
 
-    public Animator GoodBubble;
-    public Animator BadBubble;
+    //public Animator PumpkinBucket;
     //public Animator Skull;
 
     Spectator Spectator;
@@ -37,14 +36,14 @@ public class InfoPanel : MonoBehaviour
             DenyButton.enabled = false;
             PurchaseButton.enabled = false;
             UpdatePlayerWealth();
-            GoodBubble.SetTrigger("Grow");
+            //PumpkinBucket.SetTrigger("Thanks");
             //Skull.SetTrigger("Speak");
             PlayerWealthText.GetComponent<Animator>().SetTrigger("Buy");
             gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
         }
         else // player is too poor
         {
-            BadBubble.SetTrigger("Grow");
+            //PumpkinBucket.SetTrigger("Hide");
             //Skull.SetTrigger("Speak");
             PlayerWealthText.GetComponent<Animator>().SetTrigger("Yell");
 

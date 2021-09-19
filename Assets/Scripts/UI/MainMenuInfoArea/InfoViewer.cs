@@ -14,6 +14,8 @@ public class InfoViewer : MonoBehaviour
     public RectTransform PlayerInfoContainer;
     public RectTransform EnemyInfoContainer;
     public RectTransform AchievementInfoContainer;
+    public RectTransform PremiumContentContainer;
+
     public GameObject PercentageText;
 
 
@@ -80,7 +82,15 @@ public class InfoViewer : MonoBehaviour
         PercentageText.SetActive(true);
     }
 
-    public void HideAllDisplays()
+    public void DisplayPremiumContent()
+    {
+        Index = 0;
+        LevelBar = PremiumContentContainer;
+        JumpToPosition(Index);
+        ShowArrowButtons();
+    }
+
+    public void HideAllDisplays() // sets the enemy, player, and achievement info inactive and hides buttons (exit to main menu)
     {
         Index = 0;
         LevelBar = null;
