@@ -15,6 +15,7 @@ public class InfoViewer : MonoBehaviour
     public RectTransform EnemyInfoContainer;
     public RectTransform AchievementInfoContainer;
     public RectTransform PremiumContentContainer;
+    public RectTransform BonusContentContainer;
 
     public GameObject PercentageText;
 
@@ -86,6 +87,13 @@ public class InfoViewer : MonoBehaviour
     {
         Index = 0;
         LevelBar = PremiumContentContainer;
+        JumpToPosition(Index);
+        ShowArrowButtons();
+    }
+    public void DisplayBonusContent()
+    {
+        Index = 0;
+        LevelBar = BonusContentContainer;
         JumpToPosition(Index);
         ShowArrowButtons();
     }
