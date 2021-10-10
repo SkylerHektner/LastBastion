@@ -16,6 +16,16 @@ public static class CustomEditorUtilities
         }
     }
 
+    public static void AutoDirtyLabeledBool( ref bool original_val, string label, UnityEngine.Object target )
+    {
+        bool new_value = EditorGUILayout.Toggle( label, original_val );
+        if( new_value != original_val )
+        {
+            original_val = new_value;
+            EditorUtility.SetDirty( target );
+        }
+    }
+
     public static void AutoDirtyLabeledFloat( ref float original_val, string label, UnityEngine.Object target )
     {
         float new_value = EditorGUILayout.FloatField( label, original_val );

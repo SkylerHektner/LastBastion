@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Spectator : MonoBehaviour
 {
+    public GlobalData GD;
+
     public static bool ReturningFromLevel;
     public static bool ReturningFromSurvival;
     public static int LevelIndex;
@@ -17,7 +19,6 @@ public class Spectator : MonoBehaviour
     public Texture2D CursorTexture2;
     public RewardCanvas AchievementPopup;
     public float AchievementCheckRate = 1.0f;
-    public List<Achievement> Achievements;
 
     private float achievementCheckCooldown;
 
@@ -33,6 +34,8 @@ public class Spectator : MonoBehaviour
         achievementCheckCooldown = AchievementCheckRate;
 
         DontDestroyOnLoad( this.gameObject );
+
+        Debug.Assert( GD != null, "ERROR: Global Data is null in Spectator. This will break a LOT of stuff" );
     }
 
     private void Update()
@@ -61,9 +64,10 @@ public class Spectator : MonoBehaviour
 
     private void CheckAchievementCompletion()
     {
-        foreach( var achievement in Achievements )
+        foreach( var achievement in GD.achievements )
         {
-            if( !PD.Instance.EarnedAchievementList.Contains( achievement.UniqueID )
+            if( achievement.ShowPopup &&
+                !PD.Instance.EarnedAchievementList.Contains( achievement.UniqueID )
                 && achievement.GetProgress() == 1.0f )
             {
                 AchievementPopup.DisplayReward();

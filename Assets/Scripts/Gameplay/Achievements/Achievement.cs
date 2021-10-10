@@ -35,12 +35,13 @@ public class Achievement : ScriptableObject
     public string UniqueID;
     public string Name;
     public string Description;
+    public bool ShowPopup;
     public AchievementType Type;
     public int desired_value;
     public EnemyEnum desired_enemy;
     public List<string> desired_strings;
 
-    // checks the progress of this acheivement. 0.0f means no progress, 1.0f means complete. Any number between is the percentage of completion
+    // checks the progress of this achievement. 0.0f means no progress, 1.0f means complete. Any number between is the percentage of completion
     public float GetProgress()
     {
         float result = 0.0f;
@@ -144,6 +145,8 @@ public class AchievementEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        EditorGUILayout.LabelField( "Reminder: Add all achievements to Global Data after making" );
+
         Achievement achievement = (Achievement)target;
         CustomEditorUtilities.AutoDirtyLabeledString(
             ref achievement.UniqueID,
@@ -159,6 +162,10 @@ public class AchievementEditor : Editor
             ref achievement.Description,
             "Description",
             true,
+            target );
+        CustomEditorUtilities.AutoDirtyLabeledBool(
+            ref achievement.ShowPopup,
+            "Show Popup",
             target );
 
         Achievement.AchievementType type = (Achievement.AchievementType)EditorGUILayout.EnumPopup( "Type: ", achievement.Type );
