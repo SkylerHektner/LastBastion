@@ -20,7 +20,7 @@ public class AnomalyAbility : Ability
         Saw.Instance?.SawFiredEvent?.AddListener( OnSawFired );
         time_remaining = AbilityData.Duration * GetAbilityDurationMultiplier();
 
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyStasisCoating ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag.AnomalyStasisCoating ) )
         {
             Saw.Instance?.SawHitEnemyEvent?.AddListener( OnSawHitEnemy );
         }
@@ -30,11 +30,11 @@ public class AnomalyAbility : Ability
     {
         SpectralSaw saw = GameObject.Instantiate( AbilityData.SpectralSawPrefab );
         saw.transform.position = pos;
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyRicochetSaws ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag.AnomalyRicochetSaws ) )
             saw.NumRemainingExtraBounces = AbilityData.RichochetSawExtraBounces;
         pending_saws.Add( new Tuple<SpectralSaw, Vector3, float>( saw, direction, speed ) );
 
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalySingularity ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag.AnomalySingularity ) )
         {
             SpectralSaw mirror_saw = GameObject.Instantiate( AbilityData.SpectralSawPrefab );
 
@@ -43,7 +43,7 @@ public class AnomalyAbility : Ability
             direction.x = -direction.x;
 
             mirror_saw.transform.position = pos;
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyRicochetSaws ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.AnomalyRicochetSaws ) )
                 mirror_saw.NumRemainingExtraBounces = AbilityData.RichochetSawExtraBounces;
             pending_saws.Add( new Tuple<SpectralSaw, Vector3, float>( mirror_saw, direction, speed ) );
         }
@@ -51,7 +51,7 @@ public class AnomalyAbility : Ability
 
     private void OnSawHitEnemy( long id )
     {
-        Debug.Assert( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyStasisCoating ) );
+        Debug.Assert( PD.Instance.UnlockMap.Get( UnlockFlag.AnomalyStasisCoating ) );
         Enemy en = SpawnManager.Instance.TryGetEnemyByID( id );
         if( en != null )
         {

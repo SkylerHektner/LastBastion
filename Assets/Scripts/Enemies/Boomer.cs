@@ -43,7 +43,7 @@ public class Boomer : Enemy
                 if( died )
                     PD.Instance.NumEnemiesKilledByBoomerExplosions.Set( PD.Instance.NumEnemiesKilledByBoomerExplosions.Get() + 1 );
             }
-            else if( hit_crystal != null && PD.Instance.UnlockMap.Get( UnlockFlags.BomberUpgradeCurse ) )
+            else if( hit_crystal != null && PD.Instance.UnlockMap.Get( UnlockFlag.BomberUpgradeCurse ) )
             {
                 hit_crystal.Disintegrate();
             }

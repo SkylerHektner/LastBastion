@@ -13,7 +13,7 @@ public class Skeleton : Enemy
             !died &&
             source == DamageSource.Saw &&
             Saw.Instance.Moving &&
-            PD.Instance.UnlockMap.Get( UnlockFlags.ShieldSkeletonUpgradeCurse ) )
+            PD.Instance.UnlockMap.Get( UnlockFlag.ShieldSkeletonUpgradeCurse ) )
         {
             Saw.Instance.SetShieldBreakMovespeedMultiplier( ShieldSkeletonUpgradeCurseMovespeedMultiplier );
         }

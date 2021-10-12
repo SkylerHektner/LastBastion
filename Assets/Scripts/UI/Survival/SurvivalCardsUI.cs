@@ -18,14 +18,14 @@ public class SurvivalCardsUI : MonoBehaviour
     private SurvivalCardsUICard selected_curse_card;
     private SurvivalCardsUICard selected_boon_card;
 
-    private Dictionary<UnlockFlags, UnlockFlagUIInformation> ui_info_map = new Dictionary<UnlockFlags, UnlockFlagUIInformation>();
+    private Dictionary<UnlockFlag, UnlockFlagUIInformation> ui_info_map = new Dictionary<UnlockFlag, UnlockFlagUIInformation>();
     private int num_curse_cards;
     private int num_boon_cards;
 
     private void Start()
     {
 #if UNITY_EDITOR
-        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
+        foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
         {
             Debug.Assert( unlockFlagUIInformation.Count( ui_info => ui_info.UnlockFlag == flag ) == 1,
                 $"ERROR: Survival Cards UI missing unlock flag ui information for unlock flag {flag}" );
@@ -150,13 +150,13 @@ public class SurvivalCardsUI : MonoBehaviour
     }
 
     // returns a list of up to three unlock flags randomly based on current unlock state
-    private List<UnlockFlags> GenerateUnlockOptions( bool curse_unlocks )
+    private List<UnlockFlag> GenerateUnlockOptions( bool curse_unlocks )
     {
-        List<UnlockFlags> ret = new List<UnlockFlags>();
+        List<UnlockFlag> ret = new List<UnlockFlag>();
 
-        List<UnlockFlags> options = new List<UnlockFlags>();
+        List<UnlockFlag> options = new List<UnlockFlag>();
 
-        foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
+        foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
         {
             if( !PD.Instance.UnlockMap.Get( flag, GameplayManager.Instance.Survival )
                 && PD.Instance.UnlockFlagDependencyMap[flag].All( f => PD.Instance.UnlockMap.Get( f, true ) )

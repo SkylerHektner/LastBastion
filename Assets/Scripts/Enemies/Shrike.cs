@@ -58,7 +58,7 @@ public class Shrike : Enemy
         {
             Vector3 perp_clockwise = MathUtility.PerpendicularClockwise( hit_direction );
             Vector3 perp_counter_clockwise = MathUtility.PerpendicularCounterClockwise( hit_direction );
-            float desired_sign = PD.Instance.UnlockMap.Get( UnlockFlags.ShrikeUpgradeCurse ) ? -1.0f : 1.0f;
+            float desired_sign = PD.Instance.UnlockMap.Get( UnlockFlag.ShrikeUpgradeCurse ) ? -1.0f : 1.0f;
             teleport_direction = ( Mathf.Sign( perp_clockwise.y ) == Mathf.Sign( desired_sign )
                 ? perp_clockwise : perp_counter_clockwise ).normalized;
         }

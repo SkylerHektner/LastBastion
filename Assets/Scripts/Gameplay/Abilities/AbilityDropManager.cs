@@ -83,19 +83,19 @@ public class AbilityDropManager : MonoBehaviour
                 switch( ability )
                 {
                     case AbilityEnum.Anomaly:
-                        if( PD.Instance.UnlockMap.Get( UnlockFlags.Anomaly ) )
+                        if( PD.Instance.UnlockMap.Get( UnlockFlag.Anomaly ) )
                             ab = TemporalAnomalyDrop;
                         break;
                     case AbilityEnum.ChainLightning:
-                        if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightning ) )
+                        if( PD.Instance.UnlockMap.Get( UnlockFlag.ChainLightning ) )
                             ab = ChainLightningDrop;
                         break;
                     case AbilityEnum.Typhoon:
-                        if( PD.Instance.UnlockMap.Get( UnlockFlags.Typhoon ) )
+                        if( PD.Instance.UnlockMap.Get( UnlockFlag.Typhoon ) )
                             ab = TyphoonDrop;
                         break;
                     case AbilityEnum.Sawmageddon:
-                        if( PD.Instance.UnlockMap.Get( UnlockFlags.Sawmageddon ) )
+                        if( PD.Instance.UnlockMap.Get( UnlockFlag.Sawmageddon ) )
                             ab = SawmageddonDrop;
                         break;
                 }

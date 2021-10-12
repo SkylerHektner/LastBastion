@@ -67,11 +67,11 @@ public class BaseHP : MonoBehaviour
         PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
     }
 
-    private void OnUpgradeUnlockFlagChanged( UnlockFlags flag, bool value )
+    private void OnUpgradeUnlockFlagChanged( UnlockFlag flag, bool value )
     {
-        if( flag == UnlockFlags.BaseHP1
-            || flag == UnlockFlags.BaseHP2
-            || flag == UnlockFlags.BaseHP3 )
+        if( flag == UnlockFlag.BaseHP1
+            || flag == UnlockFlag.BaseHP2
+            || flag == UnlockFlag.BaseHP3 )
         {
             UpdateMaxHP();
             UpdateHPBar();
@@ -83,9 +83,9 @@ public class BaseHP : MonoBehaviour
         float delta = CurrentMaxHP - CurrentHP;
 
         CurrentMaxHP = BaseMaxHP;
-        CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP1 ) ? MaxHPUpgrade1 : 0;
-        CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP2 ) ? MaxHPUpgrade2 : 0;
-        CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlags.BaseHP3 ) ? MaxHPUpgrade3 : 0;
+        CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlag.BaseHP1 ) ? MaxHPUpgrade1 : 0;
+        CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlag.BaseHP2 ) ? MaxHPUpgrade2 : 0;
+        CurrentMaxHP += PD.Instance.UnlockMap.Get( UnlockFlag.BaseHP3 ) ? MaxHPUpgrade3 : 0;
 
         CurrentHP = CurrentMaxHP - delta;
     }
@@ -110,7 +110,7 @@ public class BaseHP : MonoBehaviour
         DamageTakenEvent.Invoke( Damage );
 
         // if I have overshield, damage that instead
-        if( CurrentOvershield > 0 && PD.Instance.UnlockMap.Get( UnlockFlags.BaseOvershield ) )
+        if( CurrentOvershield > 0 && PD.Instance.UnlockMap.Get( UnlockFlag.BaseOvershield ) )
         {
             CurrentOvershield -= Damage;
             OvershieldAnim.SetBool( "Recovering", true );

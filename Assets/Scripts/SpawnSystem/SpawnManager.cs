@@ -488,7 +488,7 @@ public class SpawnManager : MonoBehaviour
     // used by SkeletonUpgradeCurse
     private EnemyEnum CheckForSkeletonUpgrade( EnemyEnum e )
     {
-        if( !PD.Instance.UnlockMap.Get( UnlockFlags.SkeletonUpgradeCurse ) )
+        if( !PD.Instance.UnlockMap.Get( UnlockFlag.SkeletonUpgradeCurse ) )
             return e;
 
         if( GameplayManager.Instance.SkeletonUpgradeCurseChance > UnityEngine.Random.Range( 0.0f, 1.0f ) &&

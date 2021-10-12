@@ -40,9 +40,9 @@ public class GameplayManager : MonoBehaviour
     {
         get
         {
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.EnemyMovementSpeedCurse2 ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.EnemyMovementSpeedCurse2 ) )
                 return enemyMoveSpeedCurseMultiplier2;
-            else if( PD.Instance.UnlockMap.Get( UnlockFlags.EnemyMovementSpeedCurse ) )
+            else if( PD.Instance.UnlockMap.Get( UnlockFlag.EnemyMovementSpeedCurse ) )
                 return enemyMoveSpeedCurseMultiplier;
             else
                 return 1.0f;
@@ -53,9 +53,9 @@ public class GameplayManager : MonoBehaviour
     {
         get
         {
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.EnemySpawnSpeedCurse2 ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.EnemySpawnSpeedCurse2 ) )
                 return enemySpawnSpeedCurseMultiplier2;
-            else if( PD.Instance.UnlockMap.Get( UnlockFlags.EnemySpawnSpeedCurse ) )
+            else if( PD.Instance.UnlockMap.Get( UnlockFlag.EnemySpawnSpeedCurse ) )
                 return enemySpawnSpeedCurseMultiplier;
             else
                 return 1.0f;
@@ -66,9 +66,9 @@ public class GameplayManager : MonoBehaviour
     {
         get
         {
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawRadiusCurse2 ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.SawRadiusCurse2 ) )
                 return sawRadiusCurseMultiplier2;
-            else if( PD.Instance.UnlockMap.Get( UnlockFlags.SawRadiusCurse ) )
+            else if( PD.Instance.UnlockMap.Get( UnlockFlag.SawRadiusCurse ) )
                 return sawRadiusCurseMultiplier;
             else
                 return 1.0f;
@@ -79,9 +79,9 @@ public class GameplayManager : MonoBehaviour
     {
         get
         {
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse2 ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.SawMovementSpeedCurse2 ) )
                 return sawMovementSpeedCurseMultiplier2;
-            else if( PD.Instance.UnlockMap.Get( UnlockFlags.SawMovementSpeedCurse ) )
+            else if( PD.Instance.UnlockMap.Get( UnlockFlag.SawMovementSpeedCurse ) )
                 return sawMovementSpeedCurseMultiplier;
             else
                 return 1.0f;
@@ -92,9 +92,9 @@ public class GameplayManager : MonoBehaviour
     {
         get
         {
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.CrystalDropChanceCurse2 ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.CrystalDropChanceCurse2 ) )
                 return crystalDropChanceCurseMultiplier2;
-            else if( PD.Instance.UnlockMap.Get( UnlockFlags.CrystalDropChanceCurse ) )
+            else if( PD.Instance.UnlockMap.Get( UnlockFlag.CrystalDropChanceCurse ) )
                 return crystalDropChanceCurseMultiplier;
             else
                 return 1.1f;
@@ -105,9 +105,9 @@ public class GameplayManager : MonoBehaviour
     {
         get
         {
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.AbilityDurationCurse2 ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.AbilityDurationCurse2 ) )
                 return abilityDurationCurseMultiplier2;
-            else if( PD.Instance.UnlockMap.Get( UnlockFlags.AbilityDurationCurse ) )
+            else if( PD.Instance.UnlockMap.Get( UnlockFlag.AbilityDurationCurse ) )
                 return abilityDurationCurseMultiplier;
             else
                 return 1.0f;
@@ -189,7 +189,7 @@ public class GameplayManager : MonoBehaviour
         // clear out all survival unlock flags every time we start
         if( Survival )
         {
-            foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
+            foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
             {
                 PD.Instance.UnlockMap.Set( flag, false, true );
             }
@@ -197,7 +197,7 @@ public class GameplayManager : MonoBehaviour
             // add back the saved ones if the player is coming back from limbo
             if( PD.Instance.SurvivalLimboResumeInformation.Active )
             {
-                foreach( UnlockFlags flag in PD.Instance.SurvivalLimboResumeInformation.SurvivalUnlocks )
+                foreach( UnlockFlag flag in PD.Instance.SurvivalLimboResumeInformation.SurvivalUnlocks )
                 {
                     PD.Instance.UnlockMap.Set( flag, true, true );
                 }

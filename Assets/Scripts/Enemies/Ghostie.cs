@@ -48,7 +48,7 @@ public class Ghostie : Enemy
     private void StopVanish()
     {
         StartMoving();
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.GhostUpgradeCurse ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag.GhostUpgradeCurse ) )
         {
             SpawnManager.Instance.SpawnSpawnGroup( GhostFriendCurseSpawnGroup, transform.position, false );
         }

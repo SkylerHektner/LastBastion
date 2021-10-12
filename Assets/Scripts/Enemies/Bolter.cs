@@ -12,7 +12,7 @@ public class Bolter : Enemy
     protected override float GetMoveSpeed()
     {
         return base.GetMoveSpeed() +
-            ( PD.Instance.UnlockMap.Get( UnlockFlags.BolterUpgradeCurse ) ? CurseAdditionalMovespeed : 0.0f );
+            ( PD.Instance.UnlockMap.Get( UnlockFlag.BolterUpgradeCurse ) ? CurseAdditionalMovespeed : 0.0f );
     }
 
     protected override void Start()
@@ -25,7 +25,7 @@ public class Bolter : Enemy
     {
         base.Update();
 
-        if( Moving && PD.Instance.UnlockMap.Get( UnlockFlags.BolterUpgradeCurse ) )
+        if( Moving && PD.Instance.UnlockMap.Get( UnlockFlag.BolterUpgradeCurse ) )
         {
             // zig to the zag
             Vector3 zag_direction = zagging_left ? Vector3.left : Vector3.right;

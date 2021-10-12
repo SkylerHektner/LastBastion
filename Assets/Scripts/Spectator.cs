@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Spectator : MonoBehaviour
 {
+    public static Spectator Instance;
+
     public GlobalData GD;
 
     public static bool ReturningFromLevel;
@@ -25,15 +27,15 @@ public class Spectator : MonoBehaviour
     private void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag( "Spectator" );
-
-        if( objs.Length > 1 ) // no duplicate spectators
+        if( objs.Length > 1 ) // no duplicate spectators (unfortunately this works but I really don't like it)
         {
             Destroy( this.gameObject );
+            return;
         }
 
         achievementCheckCooldown = AchievementCheckRate;
-
         DontDestroyOnLoad( this.gameObject );
+        Instance = this;
 
         Debug.Assert( GD != null, "ERROR: Global Data is null in Spectator. This will break a LOT of stuff" );
     }
@@ -64,7 +66,7 @@ public class Spectator : MonoBehaviour
 
     private void CheckAchievementCompletion()
     {
-        foreach( var achievement in GD.achievements )
+        foreach( var achievement in GD.Achievements )
         {
             if( achievement.ShowPopup &&
                 !PD.Instance.EarnedAchievementList.Contains( achievement.UniqueID )
@@ -89,8 +91,8 @@ public class Spectator : MonoBehaviour
         {
             if( GameplayManager.Instance.Survival )
             {
-                List<UnlockFlags> survival_unlock_flags = new List<UnlockFlags>();
-                foreach( UnlockFlags flag in Enum.GetValues( typeof( UnlockFlags ) ) )
+                List<UnlockFlag> survival_unlock_flags = new List<UnlockFlag>();
+                foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
                 {
                     if( PD.Instance.UnlockMap.Get( flag ) )
                     {

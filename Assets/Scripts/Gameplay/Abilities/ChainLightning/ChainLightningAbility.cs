@@ -74,7 +74,7 @@ public class ChainLightningAbility : Ability
             ++t;
         }
 
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStaticOverload ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag.ChainLightningStaticOverload ) )
         {
             static_overload_layermask = LayerMask.GetMask( "Enemy" );
             zapped_enemy_tracking_time = pending_zaps.Last().time + GetZapDuration() + 1.0f; // once second extra, just to be safe
@@ -137,7 +137,7 @@ public class ChainLightningAbility : Ability
             zap_effect.transform.parent = en.transform;
             en.DeathEvent.AddListener( zap_effect.DestroyOnDeathHook );
 
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStaticOverload ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.ChainLightningStaticOverload ) )
             {
                 en.DeathEvent.AddListener( OnEnemyDeath );
             }
@@ -146,7 +146,7 @@ public class ChainLightningAbility : Ability
 
     private void OnEnemyDeath( Enemy en )
     {
-        Debug.Assert( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStaticOverload ) ); // shouldn't be listening unless this was true
+        Debug.Assert( PD.Instance.UnlockMap.Get( UnlockFlag.ChainLightningStaticOverload ) ); // shouldn't be listening unless this was true
         en.DeathEvent.RemoveListener( OnEnemyDeath ); // fun fact - if you remove this you get a sick stack overflow!
 
         if( en.Zapped && en.DeathSource != DamageSource.StaticOverloadExplosion )
@@ -167,7 +167,7 @@ public class ChainLightningAbility : Ability
 
     private float GetZapDuration()
     {
-        return ( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStunDuration )
+        return ( PD.Instance.UnlockMap.Get( UnlockFlag.ChainLightningStunDuration )
                 ? AbilityData.ImprovedZapDuration : AbilityData.ZapDuration )
                 * GetAbilityDurationMultiplier();
     }

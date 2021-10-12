@@ -17,10 +17,10 @@ public class ExtendedEditor<T> : Editor where T : UnityEngine.Object
         where V : UnityEngine.Object
     {
         UnityEngine.Object new_value;
-        if( label != null )
-            new_value = EditorGUILayout.ObjectField( value, typeof( T ), allowSceneObjects );
+        if( label == null )
+            new_value = EditorGUILayout.ObjectField( value, typeof( V ), allowSceneObjects );
         else
-            new_value = EditorGUILayout.ObjectField( label, value, typeof( T ), allowSceneObjects );
+            new_value = EditorGUILayout.ObjectField( label, value, typeof( V ), allowSceneObjects );
         if( new_value != value )
         {
             value = (V)new_value;
@@ -564,6 +564,11 @@ public class ExtendedEditor<T> : Editor where T : UnityEngine.Object
         }
         ElementStateTrackers[UniqueID] = show;
         EditorGUILayout.EndToggleGroup();
+    }
+
+    protected void LabelField(string label)
+    {
+        EditorGUILayout.LabelField( label );
     }
 
     // private stuff

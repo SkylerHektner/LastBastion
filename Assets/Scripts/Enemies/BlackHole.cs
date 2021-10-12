@@ -32,7 +32,7 @@ public class BlackHole : Enemy
                 Saw.Instance.AdjustedMoveSpeed + Mathf.Min( ( 1.0f / pull_direction.sqrMagnitude ) * PullStrength, 10.0f ) );
         }
 
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.BlackholeUpgradeCurse ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag.BlackholeUpgradeCurse ) )
         {
             cur_spawn_cooldown -= Time.deltaTime * GameplayManager.TimeScale;
             if( cur_spawn_cooldown <= 0.0f )

@@ -39,6 +39,7 @@ public class Saw : MonoBehaviour
     [SerializeField] float MinimumAngleDegrees = 15;
     [SerializeField] private Animator animator;
     [SerializeField] float SawCorrectionTime = 3.0f; // if saw hasn't hit a wall in this time a correction mechanism resets its position
+    [SerializeField] ParticleSystemRenderer psr;
 
     private bool on_left_side { get { return transform.position.x < 0.0f; } }
     private bool dragging = false;
@@ -87,6 +88,9 @@ public class Saw : MonoBehaviour
         PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUnlockFlagChanged );
         UpdateSawRadius();
         VolumeController.RecentPitch = 1f; // ignore this <('u'<)
+
+        // Apply Cosmetics
+        UpdateCosmetics();
     }
 
     private void Update()
@@ -159,7 +163,7 @@ public class Saw : MonoBehaviour
             // light saw on fire if flame saw upgrade and typhoon active
             if( hit_info.wall == ProjectileHitInfo.Wall.Bottom
                 && TyphoonAbility.ActiveTyphoon != null
-                && PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonFlameSaw ) )
+                && PD.Instance.UnlockMap.Get( UnlockFlag.TyphoonFlameSaw ) )
             {
                 TyphoonAbility.ActiveTyphoon.SetSawOnFire( this );
             }
@@ -361,11 +365,11 @@ public class Saw : MonoBehaviour
         on_fire_movespeed_multiplier = 1.0f;
     }
 
-    private void OnUnlockFlagChanged( UnlockFlags flag, bool value )
+    private void OnUnlockFlagChanged( UnlockFlag flag, bool value )
     {
-        if( flag == UnlockFlags.SawRadiusCurse )
+        if( flag == UnlockFlag.SawRadiusCurse )
             UpdateSawRadius();
-        else if( flag == UnlockFlags.SawMovementSpeedCurse )
+        else if( flag == UnlockFlag.SawMovementSpeedCurse )
             proj.SetProjectileSpeed( AdjustedMoveSpeed );
     }
 
@@ -385,5 +389,24 @@ public class Saw : MonoBehaviour
     {
         skeleton_shield_break_movespeed_multiplier = multilpier;
         proj.SetProjectileSpeed( AdjustedMoveSpeed );
+    }
+
+    private void UpdateCosmetics()
+    {
+        if( PD.Instance.EquippedSawSkin != UnlockFlag.DefaultSawSkin )
+        {
+            Cosmetic saw_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedSawSkin );
+            animator.runtimeAnimatorController = saw_cosmetic.override_controller;
+        }
+        if( PD.Instance.EquippedLaunchArrow != UnlockFlag.DefaultLaunchArrow )
+        {
+            Cosmetic launch_arrow_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedLaunchArrow );
+            DirectionArrowSprite = launch_arrow_cosmetic.sprite;
+        }
+        if( PD.Instance.EquippedSawTrail != UnlockFlag.DefaultSawTrail )
+        {
+            Cosmetic saw_trail_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedSawTrail );
+            psr.material = saw_trail_cosmetic.material;
+        }
     }
 }

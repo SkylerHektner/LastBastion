@@ -25,7 +25,7 @@ public class InfoScroll : MonoBehaviour
         if( Lightning )
         {
             //// Lightning Rod
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningLightningRod ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.ChainLightningLightningRod ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -33,7 +33,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Lightning Stun Duration
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStunDuration ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.ChainLightningStunDuration ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -41,7 +41,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon2.SetActive( true ); }
 
             //// Static Overload
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.ChainLightningStaticOverload ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.ChainLightningStaticOverload ) )
             {
                 LockedIcon3.SetActive( false );
             }
@@ -51,7 +51,7 @@ public class InfoScroll : MonoBehaviour
         if( Sawmageddon )
         {
             //// Sawmageddon Duration
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonDuration ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.SawmageddonDuration ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -59,7 +59,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Sawmageddon Projectiles
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonProjectiles ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.SawmageddonProjectiles ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -67,7 +67,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon2.SetActive( true ); }
 
             //// Sawmageddon HP Steal
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.SawmageddonComboKiller ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.SawmageddonComboKiller ) )
             {
                 LockedIcon3.SetActive( false );
             }
@@ -77,7 +77,7 @@ public class InfoScroll : MonoBehaviour
         if( Anomaly )
         {
             //// Anomaly Ricochet
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyRicochetSaws ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.AnomalyRicochetSaws ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -85,7 +85,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Anomaly Mirror Saw
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalySingularity ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.AnomalySingularity ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -93,7 +93,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon2.SetActive( true ); }
 
             //// Anomaly Stasis
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.AnomalyStasisCoating ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.AnomalyStasisCoating ) )
             {
                 LockedIcon3.SetActive( false );
             }
@@ -103,7 +103,7 @@ public class InfoScroll : MonoBehaviour
         if( Typhoon )
         {
             //// Extended BBQ
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonExtendedBBQ ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.TyphoonExtendedBBQ ) )
             {
                 LockedIcon1.SetActive( false );
             }
@@ -111,7 +111,7 @@ public class InfoScroll : MonoBehaviour
             { LockedIcon1.SetActive( true ); }
 
             //// Flame Saw
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonFlameSaw ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.TyphoonFlameSaw ) )
             {
                 LockedIcon2.SetActive( false );
             }
@@ -122,7 +122,7 @@ public class InfoScroll : MonoBehaviour
             }
 
             //// Roaring Flames
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonRoaringFlames ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.TyphoonRoaringFlames ) )
             {
                 LockedIcon3.SetActive( false );
             }

@@ -21,8 +21,8 @@ public class TyphoonAbility : Ability
         SetDuration( AbilityData.Duration * GetAbilityDurationMultiplier() );
         roaring_flames_duration_carryover = AbilityData.Duration * 0.5f * GetAbilityDurationMultiplier();
         ActiveTyphoon = this;
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonRoaringFlames )
-            || PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonExtendedBBQ ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag.TyphoonRoaringFlames )
+            || PD.Instance.UnlockMap.Get( UnlockFlag.TyphoonExtendedBBQ ) )
         {
             Saw.Instance.SawKilledEnemyEvent.AddListener( OnSawKilledEnemy );
             listening = true;
@@ -40,7 +40,7 @@ public class TyphoonAbility : Ability
 
     public void SetSawOnFire( Saw saw )
     {
-        if( !PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonFlameSaw )
+        if( !PD.Instance.UnlockMap.Get( UnlockFlag.TyphoonFlameSaw )
             || time_remaining <= 0.0f )
             return;
         saw.SetOnFire( AbilityData.FlameSawDuration, AbilityData.FlameSawExtraDamage, AbilityData.FlameSawMovementSpeedMultiplier );
@@ -78,12 +78,12 @@ public class TyphoonAbility : Ability
     {
         if( Saw.Instance.OnFire )
         {
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonRoaringFlames ) && time_remaining >= 0.0f )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.TyphoonRoaringFlames ) && time_remaining >= 0.0f )
             {
                 SetDuration( time_remaining + roaring_flames_duration_carryover );
                 roaring_flames_duration_carryover *= 0.5f; // infinitely decreasing geometric series
             }
-            if( PD.Instance.UnlockMap.Get( UnlockFlags.TyphoonExtendedBBQ ) )
+            if( PD.Instance.UnlockMap.Get( UnlockFlag.TyphoonExtendedBBQ ) )
             {
                 if( Random.Range( 0.0f, 1.0f ) < AbilityData.ExtendedBBQCorpseChance )
                 {

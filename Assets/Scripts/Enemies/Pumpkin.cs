@@ -6,7 +6,7 @@ public class Pumpkin : Enemy
 {
     protected override void Start()
     {
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.PumpkinUpgradeCurse ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag.PumpkinUpgradeCurse ) )
         {
             MaxHealth += 1;
         }

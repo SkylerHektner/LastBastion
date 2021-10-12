@@ -52,7 +52,7 @@ public class Shaman : Enemy
     private void Summon()
     {
         anim.SetTrigger( SummonAnimation );
-        SpawnGroup group = PD.Instance.UnlockMap.Get( UnlockFlags.SummonerUpgradeCurse ) ? CurseSummonSpawnGroup : SummonSpawnGroup;
+        SpawnGroup group = PD.Instance.UnlockMap.Get( UnlockFlag.SummonerUpgradeCurse ) ? CurseSummonSpawnGroup : SummonSpawnGroup;
         List<Vector3> spawn_points = SpawnManager.Instance.SpawnSpawnGroup( group, transform.position, false );
         foreach( var p in spawn_points )
             Instantiate( SummonEffect ).transform.position = p;

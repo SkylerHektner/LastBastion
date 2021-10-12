@@ -8,7 +8,7 @@ public class MudSlingerProjectile : Projectile
     [HideInInspector] public float SawMoveSpeedMultiplier;
     public void HitSaw( Saw saw )
     {
-        if( !saw.Moving || PD.Instance.UnlockMap.Get( UnlockFlags.MudSlingerUpgradeCurse ) )
+        if( !saw.Moving || PD.Instance.UnlockMap.Get( UnlockFlag.MudSlingerUpgradeCurse ) )
         {
             saw.TryCoverInMud( SawSlowDuration, SawMoveSpeedMultiplier );
             DestroyProjectile();

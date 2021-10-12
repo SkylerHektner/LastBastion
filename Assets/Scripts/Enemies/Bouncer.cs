@@ -9,7 +9,7 @@ public class Bouncer : Enemy
 
     protected override void Start()
     {
-        if( PD.Instance.UnlockMap.Get( UnlockFlags.BouncerUpgradeCurse ) )
+        if( PD.Instance.UnlockMap.Get( UnlockFlag.BouncerUpgradeCurse ) )
         {
             anim = GetComponent<Animator>();
             anim.runtimeAnimatorController = MagmaBouncerAnim;

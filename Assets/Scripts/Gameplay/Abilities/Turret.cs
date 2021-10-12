@@ -149,17 +149,17 @@ public class Turret : MonoBehaviour
     private void OnAbilityUsed( AbilityEnum ability )
     {
         if( ability == AbilityEnum.ChainLightning &&
-            PD.Instance.UnlockMap.Get( UnlockFlags.TurretsPowerSurge ) )
+            PD.Instance.UnlockMap.Get( UnlockFlag.TurretsPowerSurge ) )
         {
             StartPowerSurge();
         }
         else if( ability == AbilityEnum.Sawmageddon &&
-            PD.Instance.UnlockMap.Get( UnlockFlags.TurretsCollateralDamage ) )
+            PD.Instance.UnlockMap.Get( UnlockFlag.TurretsCollateralDamage ) )
         {
             StartCollateralDamage();
         }
         else if( ability == AbilityEnum.Anomaly &&
-            PD.Instance.UnlockMap.Get( UnlockFlags.TurretsTimedPaylod ) )
+            PD.Instance.UnlockMap.Get( UnlockFlag.TurretsTimedPaylod ) )
         {
             StartTimedPayload();
         }
