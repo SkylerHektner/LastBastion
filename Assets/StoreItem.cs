@@ -5,6 +5,7 @@ using UnityEngine;
 public class StoreItem : MonoBehaviour
 {
     public CosmeticDisplayInterface CosmeticInformation;
+    public bool PremiumItem;
     public GameObject PurchasedSymbol;
     public bool ItemPurchased
     {
@@ -30,7 +31,14 @@ public class StoreItem : MonoBehaviour
 
     public string GetInfoPrice()
     {
-        return ("$" + CosmeticInformation.GetPrice().ToString());
+        if (PremiumItem)
+        {
+            return ("$" + CosmeticInformation.GetPrice().ToString());
+        }
+        else
+        {
+            return (CosmeticInformation.GetPrice().ToString());
+        }
     }
     public string GetInfoDescription()
     {
