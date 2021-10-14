@@ -12,7 +12,7 @@ public class CustomizationItem : MonoBehaviour
     public GameObject MyButton;
     public Image ColoredBG;
     public TextMeshProUGUI DescriptorText;
-    public Achievement AchievementInformation; // get rid of this later
+    public Cosmetic CosmeticInfo; // get rid of this later
     public bool Purchased // toggles chains on/off if purchased or not
     {
         get
@@ -89,7 +89,7 @@ public class CustomizationItem : MonoBehaviour
 
     public void UpdateDescriptorText()
     {
-        DescriptorText.text = AchievementInformation.Description;
+        DescriptorText.text = CosmeticInfo.Description;
     }
 
     public void WipeDescriptorText()

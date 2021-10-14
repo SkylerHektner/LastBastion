@@ -9,9 +9,10 @@ using System;
 public class Cosmetic : ScriptableObject
 {
     public string Name;
+    public string Description;
     public UnlockFlag unlock_flag;
     public CosmeticCategory category;
-    public int thing;
+    public float Price;
 
     public AnimatorOverrideController override_controller;
     public Sprite sprite;
@@ -31,6 +32,8 @@ public class CosmeticEditor : ExtendedEditor<Cosmetic>
         LabelField( "Reminder: Cosmetics must be added to Global Data" );
         
         StringField( ref target.Name, "Name" );
+        StringField(ref target.Description, "Description");
+        FloatField(ref target.Price, "Price");
         EnumField( ref target.unlock_flag, "Unlock Flag" );
         EnumField( ref target.category, "Category" );
 

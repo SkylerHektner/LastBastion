@@ -70,9 +70,12 @@ public enum UnlockFlag
     DefaultLaunchArrow = 48,
     DefaultSawTrail = 49,
     DefaultSawSkin = 50,
-    FingerLaunchArrow = 51,
-    BubbleSawTrail = 52,
-    AmoebaSawSkin = 53,
+    NeonLuna_SawSkin = 51,
+    NeonSol_SawSkin = 52,
+    Compact_SawSkin = 53,
+    SerenityPremiumBundle = 54,
+    SweetToothBundle = 55,
+
 }
 
 public enum UnlockFlagCategory
@@ -243,9 +246,13 @@ public class PD
         { UnlockFlag.DefaultLaunchArrow, UnlockFlagCategory.Cosmetic },
         { UnlockFlag.DefaultSawTrail, UnlockFlagCategory.Cosmetic },
         { UnlockFlag.DefaultSawSkin, UnlockFlagCategory.Cosmetic },
-        { UnlockFlag.FingerLaunchArrow, UnlockFlagCategory.Cosmetic },
-        { UnlockFlag.BubbleSawTrail, UnlockFlagCategory.Cosmetic },
-        { UnlockFlag.AmoebaSawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.NeonLuna_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.NeonSol_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Compact_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.SerenityPremiumBundle, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.SweetToothBundle, UnlockFlagCategory.Cosmetic },
+
+
     };
 
     // EVENTS

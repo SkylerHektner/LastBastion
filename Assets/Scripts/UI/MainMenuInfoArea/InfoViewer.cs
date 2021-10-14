@@ -34,8 +34,10 @@ public class InfoViewer : MonoBehaviour
     public GameObject ArrowR;
 
     private List<InfoItem> InfoItems = new List<InfoItem>();
+    private List<StoreItem> StoreItems = new List<StoreItem>();
     public TextMeshProUGUI ItemName;
     public TextMeshProUGUI ItemDescription;
+    public bool WindowShopping;
 
 
 
@@ -141,14 +143,30 @@ public class InfoViewer : MonoBehaviour
     {
         Debug.Log(ItemIndex);
         InfoItems.Clear();
-        foreach (Transform Item in LevelBar)
+        StoreItems.Clear();
+        if (WindowShopping)
         {
-            InfoItems.Add(Item.GetComponent<InfoItem>());
-            Debug.Log(Item);
+            foreach (Transform Item in LevelBar)
+            {
+                StoreItems.Add(Item.GetComponent<StoreItem>());
+                Debug.Log(Item);
+            }
+            ItemName.text = StoreItems[ItemIndex].GetInfoPrice();
+            ItemDescription.text = StoreItems[ItemIndex].GetInfoDescription();
+
         }
-        ItemName.text = InfoItems[ItemIndex].GetInfoName();
-        ItemDescription.text = InfoItems[ItemIndex].GetInfoDescription();
-        PercentageText.GetComponent<TextMeshProUGUI>().text = InfoItems[ItemIndex].GetProgressAmount();
+        else
+        {
+            foreach (Transform Item in LevelBar)
+            {
+                InfoItems.Add(Item.GetComponent<InfoItem>());
+                Debug.Log(Item);
+            }
+            ItemName.text = InfoItems[ItemIndex].GetInfoName();
+            ItemDescription.text = InfoItems[ItemIndex].GetInfoDescription();
+            PercentageText.GetComponent<TextMeshProUGUI>().text = InfoItems[ItemIndex].GetProgressAmount();
+        }
+
     }
 
     public void JumpToPosition(int index) // jumps the bar to the next/previous spot in the line
@@ -166,11 +184,11 @@ public class InfoViewer : MonoBehaviour
         {
             ArrowL.GetComponent<Button>().interactable = false;
         }
-        else if (index >= InfoItems.Count - 1)
+        else if ((index >= InfoItems.Count - 1 && !WindowShopping) || (index >= StoreItems.Count - 1 && WindowShopping))
         {
             ArrowR.GetComponent<Button>().interactable = false;
         }
-        else if (index > 0 && Index < InfoItems.Count - 1)
+        else if ((index > 0 && Index < InfoItems.Count - 1 && !WindowShopping) || (index > 0 && Index < StoreItems.Count - 1 && WindowShopping))
         {
             ArrowL.GetComponent<Button>().interactable = true;
             ArrowR.GetComponent<Button>().interactable = true;
