@@ -43,7 +43,7 @@ public class BaseHP : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
+        PD.Instance.UnlockFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
         UpdateMaxHP();
         CurrentHP = CurrentMaxHP;
         CurrentOvershield = MaxOvershield;
@@ -64,7 +64,7 @@ public class BaseHP : MonoBehaviour
 
     private void OnDestroy()
     {
-        PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
+        PD.Instance.UnlockFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
     }
 
     private void OnUpgradeUnlockFlagChanged( UnlockFlag flag, bool value )

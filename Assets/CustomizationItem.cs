@@ -3,93 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class CustomizationItem : MonoBehaviour
 {
+    public static UnityEvent EquipChanged = new UnityEvent();
 
     public GameObject MyChains;
-    public string TypeID;
     public GameObject MyButton;
     public Image ColoredBG;
     public TextMeshProUGUI DescriptorText;
-    public Cosmetic CosmeticInfo; // get rid of this later
-    public bool Purchased // toggles chains on/off if purchased or not
+    public Cosmetic MyCosmetic;
+
+    public void Start()
     {
-        get
-        {
-            return ItemPurchased;
-        }
-        set
-        {
-            ItemPurchased = value;
-
-            if (ItemPurchased)
-            {
-                MyChains.SetActive(false);
-                MyButton.SetActive(true);
-                ColoredBG.color = Color.black;
-            }
-            else // not bought yet
-            {
-                MyChains.SetActive(true);
-                //MyButton.SetActive(false);
-                ColoredBG.color = Color.grey;
-            }
-        }
-    }
-    private bool ItemPurchased;
-    public bool CurrentlyEquipped
-    {
-        get
-        {
-            return Equipped;
-        }
-        set
-        {
-            Equipped = value;
-
-            if (Equipped)
-            {
-                ColoredBG.color = Color.green;
-            }
-            else
-            {
-                ColoredBG.color = Color.black;
-            }
-        }
-    }
-    private bool Equipped;
-
-
-
-
-    public void RattleChains() // toggles purchased status of item
-    {
-        if (Purchased == false)
-        {
-            MyChains.GetComponent<Animator>().SetTrigger("Rattle");
-        }
-        Debug.Log("Purchased: " + Purchased);
-    }
-    [ContextMenu("ToggleActive")]
-    public void ToggleActive() // toggles current active item
-    {
-        if (Purchased)
-        {
-            CurrentlyEquipped = !CurrentlyEquipped;
-        }
-        Debug.Log("Currently Active?: " + CurrentlyEquipped);
+        PD.Instance.UnlockFlagChangedEvent.AddListener( OnUnlockFlagChanged );
+        EquipChanged.AddListener( OnEquipChanged );
     }
 
-    [ContextMenu("DebugPurchaseMe")]
-    public void DebugPurchaseMe()
+    public void OnDestroy()
     {
-        Purchased = true;
+        PD.Instance.UnlockFlagChangedEvent.RemoveListener( OnUnlockFlagChanged );
+        EquipChanged.RemoveListener( OnEquipChanged );
+    }
+
+    public void Awake()
+    {
+        UpdatePurchasedGraphics();
+        UpdateEquippedGraphics();
+    }
+
+    public void RattleChains()
+    {
+        if( !MyCosmetic.IsUnlocked() )
+        {
+            MyChains.GetComponent<Animator>().SetTrigger( "Rattle" );
+        }
+    }
+
+    public void ToggleActive()
+    {
+        if( MyCosmetic.IsUnlocked() && !MyCosmetic.IsEquipped() )
+        {
+            MyCosmetic.Equip();
+            EquipChanged.Invoke();
+        }
     }
 
     public void UpdateDescriptorText()
     {
-        DescriptorText.text = CosmeticInfo.Description;
+        DescriptorText.text = MyCosmetic.Description;
     }
 
     public void WipeDescriptorText()
@@ -97,4 +60,51 @@ public class CustomizationItem : MonoBehaviour
         DescriptorText.text = "";
     }
 
+    private void UpdatePurchasedGraphics()
+    {
+        if( MyCosmetic.IsUnlocked() )
+        {
+            MyChains.SetActive( false );
+            MyButton.SetActive( true );
+            ColoredBG.color = Color.black;
+        }
+        else
+        {
+            MyChains.SetActive( true );
+            ColoredBG.color = Color.grey;
+        }
+    }
+
+    private void UpdateEquippedGraphics()
+    {
+        if( MyCosmetic.IsEquipped() )
+        {
+            ColoredBG.color = Color.green;
+        }
+        else
+        {
+            ColoredBG.color = Color.black;
+        }
+    }
+
+    private void OnUnlockFlagChanged( UnlockFlag flag, bool new_value )
+    {
+        if( MyCosmetic.unlock_flag == flag )
+        {
+            if( !new_value && MyCosmetic.IsEquipped() )
+            {
+                MyCosmetic.UnEquip();
+                UpdateEquippedGraphics();
+            }
+            else
+            {
+                UpdatePurchasedGraphics();
+            }
+        }
+    }
+
+    private void OnEquipChanged()
+    {
+        UpdateEquippedGraphics();
+    }
 }

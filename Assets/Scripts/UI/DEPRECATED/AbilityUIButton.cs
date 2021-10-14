@@ -21,12 +21,12 @@ public class AbilityUIButton : MonoBehaviour
 
     private void Start()
     {
-        PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
+        PD.Instance.UnlockFlagChangedEvent.AddListener( OnUpgradeUnlockFlagChanged );
     }
 
     private void OnDestroy()
     {
-        PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
+        PD.Instance.UnlockFlagChangedEvent.RemoveListener( OnUpgradeUnlockFlagChanged );
     }
 
     private void OnEnable()

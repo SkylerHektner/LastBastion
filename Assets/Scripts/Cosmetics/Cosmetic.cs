@@ -28,6 +28,7 @@ public class Cosmetic : CosmeticDisplayInterface
 
     public override void ApplyUnlocks()
     {
+        // set for both survival and campaign just to be safe
         PD.Instance.UnlockMap.Set( unlock_flag, true, false );
         PD.Instance.UnlockMap.Set( unlock_flag, true, true );
     }
@@ -45,6 +46,62 @@ public class Cosmetic : CosmeticDisplayInterface
     public override float GetPrice()
     {
         return Price;
+    }
+
+    public void Equip()
+    {
+        switch( category )
+        {
+            case CosmeticCategory.LaunchArrow:
+                PD.Instance.EquippedLaunchArrow.Set( unlock_flag );
+                break;
+            case CosmeticCategory.SawTrail:
+                PD.Instance.EquippedSawTrail.Set( unlock_flag );
+                break;
+            case CosmeticCategory.SawSkin:
+                PD.Instance.EquippedSawSkin.Set( unlock_flag );
+                break;
+        }
+    }
+
+    // equips the corresponding slot with the default
+    public void UnEquip()
+    {
+        switch( category )
+        {
+            case CosmeticCategory.LaunchArrow:
+                PD.Instance.EquippedLaunchArrow.Set( UnlockFlag.Default_LaunchArrow );
+                break;
+            case CosmeticCategory.SawTrail:
+                PD.Instance.EquippedSawTrail.Set( UnlockFlag.Default_SawTrail );
+                break;
+            case CosmeticCategory.SawSkin:
+                PD.Instance.EquippedSawSkin.Set( UnlockFlag.Default_SawSkin );
+                break;
+        }
+    }
+
+    public bool IsEquipped()
+    {
+        bool result = false;
+        switch( category )
+        {
+            case CosmeticCategory.LaunchArrow:
+                result = PD.Instance.EquippedLaunchArrow.Get() == unlock_flag;
+                break;
+            case CosmeticCategory.SawTrail:
+                result = PD.Instance.EquippedSawTrail.Get() == unlock_flag;
+                break;
+            case CosmeticCategory.SawSkin:
+                result = PD.Instance.EquippedSawSkin.Get() == unlock_flag;
+                break;
+        }
+        return result;
+    }
+
+    public bool IsUnlocked()
+    {
+        return PD.Instance.UnlockMap.Get( unlock_flag, false );
     }
 }
 

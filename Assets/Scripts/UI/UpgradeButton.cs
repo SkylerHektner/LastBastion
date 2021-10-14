@@ -46,12 +46,12 @@ public class UpgradeButton : MonoBehaviour
 
     private void Start()
     {
-        PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUpgradeFlagChanged );
+        PD.Instance.UnlockFlagChangedEvent.AddListener( OnUpgradeFlagChanged );
     }
 
     private void OnDestroy()
     {
-        PD.Instance.UpgradeFlagChangedEvent.RemoveListener( OnUpgradeFlagChanged );
+        PD.Instance.UnlockFlagChangedEvent.RemoveListener( OnUpgradeFlagChanged );
     }
 
     private void OnUpgradeFlagChanged( UnlockFlag flag, bool new_value )
