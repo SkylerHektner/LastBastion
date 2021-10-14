@@ -18,10 +18,16 @@ public class GlobalData : ScriptableObject
         foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
         {
             if( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Cosmetic )
-                continue;
+            {
+                Debug.Assert( Cosmetics.Count( cosmetic => cosmetic.unlock_flag == flag ) == 1,
+                                $"ERROR: GlobalData Missing Entry for Cosmetic {flag}" );
+            }
+            else
+            {
+                Debug.Assert( UnlockFlagUIInfo.Count( ui_info => ui_info.UnlockFlag == flag ) == 1,
+                                $"ERROR: GlobalData Missing Entry for unlock flag UI data for unlock flag {flag}" );
+            }
 
-            Debug.Assert( UnlockFlagUIInfo.Count( ui_info => ui_info.UnlockFlag == flag ) == 1,
-                $"ERROR: Survival Cards UI missing unlock flag ui information for unlock flag {flag}" );
         }
 #endif
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StoreItem : MonoBehaviour
 {
-    public Cosmetic CosmeticInformation;
+    public CosmeticDisplayInterface CosmeticInformation;
     public GameObject PurchasedSymbol;
     public bool ItemPurchased
     {
@@ -28,13 +28,17 @@ public class StoreItem : MonoBehaviour
     }
     private bool purchased;
 
-    public virtual string GetInfoPrice()
+    public string GetInfoPrice()
     {
-        return ("$" + CosmeticInformation.Price.ToString());
+        return ("$" + CosmeticInformation.GetPrice().ToString());
     }
-    public virtual string GetInfoDescription()
+    public string GetInfoDescription()
     {
-        return CosmeticInformation.Description;
+        return CosmeticInformation.GetDescription();
+    }
+    public string GetInfoName()
+    {
+        return CosmeticInformation.GetName();
     }
 
     [ContextMenu("TogglePurchase")]
