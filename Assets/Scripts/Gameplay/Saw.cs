@@ -393,17 +393,17 @@ public class Saw : MonoBehaviour
 
     private void UpdateCosmetics()
     {
-        if( PD.Instance.EquippedSawSkin != UnlockFlag.DefaultSawSkin )
+        if( PD.Instance.EquippedSawSkin != UnlockFlag.Default_SawSkin )
         {
             Cosmetic saw_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedSawSkin );
             animator.runtimeAnimatorController = saw_cosmetic.override_controller;
         }
-        if( PD.Instance.EquippedLaunchArrow != UnlockFlag.DefaultLaunchArrow )
+        if( PD.Instance.EquippedLaunchArrow != UnlockFlag.Default_LaunchArrow )
         {
             Cosmetic launch_arrow_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedLaunchArrow );
             DirectionArrowSprite = launch_arrow_cosmetic.sprite;
         }
-        if( PD.Instance.EquippedSawTrail != UnlockFlag.DefaultSawTrail )
+        if( PD.Instance.EquippedSawTrail != UnlockFlag.Default_SawTrail )
         {
             Cosmetic saw_trail_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedSawTrail );
             psr.material = saw_trail_cosmetic.material;

@@ -38,6 +38,7 @@ public class Spectator : MonoBehaviour
         Instance = this;
 
         Debug.Assert( GD != null, "ERROR: Global Data is null in Spectator. This will break a LOT of stuff" );
+        GD?.Verify();
     }
 
     private void Update()
@@ -94,6 +95,9 @@ public class Spectator : MonoBehaviour
                 List<UnlockFlag> survival_unlock_flags = new List<UnlockFlag>();
                 foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
                 {
+                    if( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Cosmetic )
+                        continue;
+
                     if( PD.Instance.UnlockMap.Get( flag ) )
                     {
                         survival_unlock_flags.Add( flag );

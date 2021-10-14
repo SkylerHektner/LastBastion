@@ -67,15 +67,47 @@ public enum UnlockFlag
     BomberUpgradeCurse = 47,
 
     // COSMETIC FLAGS
-    DefaultLaunchArrow = 48,
-    DefaultSawTrail = 49,
-    DefaultSawSkin = 50,
+    Default_LaunchArrow = 48,
+    Default_SawTrail = 49,
+    Default_SawSkin = 50,
+    // premium
     NeonLuna_SawSkin = 51,
     NeonSol_SawSkin = 52,
     Compact_SawSkin = 53,
-    SerenityPremiumBundle = 54,
-    SweetToothBundle = 55,
-
+    Origami_SawSkin = 54,
+    SweetToothSlicer_SawSkin = 55,
+    Shuriken_SawSkin = 56,
+    Hearts_SawTrail = 57,
+    Candies_SawTrail = 58,
+    Feathers_SawTrail = 59,
+    Pumpkins_SawTrail = 60,
+    Eyeballs_SawTrail = 61,
+    PaperPlane_LaunchArrow = 62,
+    CandyCorn_LaunchArrow = 63,
+    ThrowingKnife_LaunchArrow = 64,
+    PointFinger_LaunchArrow = 65,
+    Sword_LaunchArrow = 66,
+    // bonus
+    Amoeba_SawSkin = 67,
+    Cookie_SawSkin = 68,
+    FrostedSprinkle_SawSkin = 69,
+    Ghostly_SawSkin = 70,
+    Glacier_SawSkin = 71,
+    Magma_SawSkin = 72,
+    Golden_SawSkin = 73,
+    Pineapple_SawSkin = 74,
+    RainbowPinwheeel_SawSkin = 75,
+    Slime_SawSkin = 76,
+    SpiderWeb_SawTrail = 77,
+    BubbleBlue_SawTrail = 78,
+    BubbleOrange_SawTrail = 79,
+    BubbleGreen_SawTrail = 80,
+    BubblePurple_SawTrail = 81,
+    Wooden_LaunchArrow = 82,
+    Rainbow_LaunchArrow = 83,
+    Ghostly_LaunchArrow = 84,
+    Simple_LaunchArrow = 85,
+    Golden_LaunchArrow = 86,
 }
 
 public enum UnlockFlagCategory
@@ -125,9 +157,9 @@ public class PD
     // encountered enemies
     public PDList<EnemyEnum> EncounteredEnemyList = new PDList<EnemyEnum>();
     // cosmetics
-    public UnlockFlag EquippedLaunchArrow = UnlockFlag.DefaultLaunchArrow;
-    public UnlockFlag EquippedSawTrail = UnlockFlag.DefaultSawTrail;
-    public UnlockFlag EquippedSawSkin = UnlockFlag.DefaultSawSkin;
+    public UnlockFlag EquippedLaunchArrow = UnlockFlag.Default_LaunchArrow;
+    public UnlockFlag EquippedSawTrail = UnlockFlag.Default_SawTrail;
+    public UnlockFlag EquippedSawSkin = UnlockFlag.Default_SawSkin;
 
     // a dictionary containing information about the dependencies of each unlock flag
     public readonly Dictionary<UnlockFlag, List<UnlockFlag>> UnlockFlagDependencyMap = new Dictionary<UnlockFlag, List<UnlockFlag>>
@@ -243,16 +275,45 @@ public class PD
         { UnlockFlag.BomberUpgradeCurse, UnlockFlagCategory.Curse },
 
         // cosmetic
-        { UnlockFlag.DefaultLaunchArrow, UnlockFlagCategory.Cosmetic },
-        { UnlockFlag.DefaultSawTrail, UnlockFlagCategory.Cosmetic },
-        { UnlockFlag.DefaultSawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Default_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Default_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Default_SawSkin, UnlockFlagCategory.Cosmetic },
         { UnlockFlag.NeonLuna_SawSkin, UnlockFlagCategory.Cosmetic },
         { UnlockFlag.NeonSol_SawSkin, UnlockFlagCategory.Cosmetic },
         { UnlockFlag.Compact_SawSkin, UnlockFlagCategory.Cosmetic },
-        { UnlockFlag.SerenityPremiumBundle, UnlockFlagCategory.Cosmetic },
-        { UnlockFlag.SweetToothBundle, UnlockFlagCategory.Cosmetic },
-
-
+        { UnlockFlag.Origami_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.SweetToothSlicer_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Shuriken_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Hearts_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Candies_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Feathers_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Pumpkins_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Eyeballs_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.PaperPlane_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.CandyCorn_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.ThrowingKnife_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.PointFinger_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Sword_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Amoeba_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Cookie_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.FrostedSprinkle_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Ghostly_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Glacier_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Magma_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Golden_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Pineapple_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.RainbowPinwheeel_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Slime_SawSkin, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.SpiderWeb_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.BubbleBlue_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.BubbleOrange_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.BubbleGreen_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.BubblePurple_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Wooden_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Rainbow_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Ghostly_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Simple_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Golden_LaunchArrow, UnlockFlagCategory.Cosmetic },
     };
 
     // EVENTS

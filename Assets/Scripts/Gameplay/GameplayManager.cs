@@ -191,6 +191,9 @@ public class GameplayManager : MonoBehaviour
         {
             foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
             {
+                if( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Cosmetic )
+                    continue;
+
                 PD.Instance.UnlockMap.Set( flag, false, true );
             }
 

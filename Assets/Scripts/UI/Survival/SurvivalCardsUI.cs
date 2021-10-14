@@ -7,7 +7,6 @@ using System.Linq;
 
 public class SurvivalCardsUI : MonoBehaviour
 {
-    [SerializeField] List<UnlockFlagUIInformation> unlockFlagUIInformation;
     [SerializeField] List<SurvivalCardsUICard> Cards;
     [SerializeField] SurvivalCardsUIDescriptionBox DescriptionBox;
     [SerializeField] GameObject PositiveBackgroundEffects;
@@ -24,14 +23,6 @@ public class SurvivalCardsUI : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_EDITOR
-        foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
-        {
-            Debug.Assert( unlockFlagUIInformation.Count( ui_info => ui_info.UnlockFlag == flag ) == 1,
-                $"ERROR: Survival Cards UI missing unlock flag ui information for unlock flag {flag}" );
-        }
-#endif
-
         Debug.Assert( Cards.Count != 0 );
         Debug.Assert( DescriptionBox != null );
         Debug.Assert( PositiveBackgroundEffects != null );
@@ -42,7 +33,7 @@ public class SurvivalCardsUI : MonoBehaviour
 
     private void PopulateUIMap()
     {
-        foreach( UnlockFlagUIInformation ui_info in unlockFlagUIInformation )
+        foreach( UnlockFlagUIInformation ui_info in Spectator.Instance.GD.UnlockFlagUIInfo )
         {
             ui_info_map.Add( ui_info.UnlockFlag, ui_info );
         }
@@ -158,6 +149,9 @@ public class SurvivalCardsUI : MonoBehaviour
 
         foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
         {
+            if( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Cosmetic )
+                continue;
+
             if( !PD.Instance.UnlockMap.Get( flag, GameplayManager.Instance.Survival )
                 && PD.Instance.UnlockFlagDependencyMap[flag].All( f => PD.Instance.UnlockMap.Get( f, true ) )
                 && ( curse_unlocks ? ( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Curse ) : ( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Upgrade ) ) )
