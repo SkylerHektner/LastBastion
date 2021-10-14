@@ -121,7 +121,7 @@ public enum UnlockFlagCategory
 public class PD
 {
     // DATA
-    public PlayerDataField<int> PlayerWealth = new PlayerDataField<int>();
+    public PlayerDataField<int> PlayerWealth = new PlayerDataField<int>( 0 );
     public PlayerUpgradeUnlockMap UnlockMap = new PlayerUpgradeUnlockMap();
     public PlayerLevelCompletionMap LevelCompletionMap = new PlayerLevelCompletionMap();
     public PDList<string> PlayerChallengeCompletionList = new PDList<string>();
@@ -129,9 +129,9 @@ public class PD
     public LimboResumeInformation CampaignLimboResumeInformation = new LimboResumeInformation();
     public LimboResumeInformation SurvivalLimboResumeInformation = new LimboResumeInformation();
     // settings data
-    public PlayerDataField<float> StoredMusicVolume = new PlayerDataField<float>();
-    public PlayerDataField<float> StoredSFXVolume = new PlayerDataField<float>();
-    public PlayerDataField<int> GameBegun = new PlayerDataField<int>();
+    public PlayerDataField<float> StoredMusicVolume = new PlayerDataField<float>( 0.0f );
+    public PlayerDataField<float> StoredSFXVolume = new PlayerDataField<float>( 0.0f );
+    public PlayerDataField<int> GameBegun = new PlayerDataField<int>( 0 );
     // player stats data
     public LazyPlayerDataField<int> NumKilledEnemies = new LazyPlayerDataField<int>();
     public LazyPlayerDataField<int> NumCrystalsUsed = new LazyPlayerDataField<int>();
@@ -157,9 +157,9 @@ public class PD
     // encountered enemies
     public PDList<EnemyEnum> EncounteredEnemyList = new PDList<EnemyEnum>();
     // cosmetics
-    public UnlockFlag EquippedLaunchArrow = UnlockFlag.Default_LaunchArrow;
-    public UnlockFlag EquippedSawTrail = UnlockFlag.Default_SawTrail;
-    public UnlockFlag EquippedSawSkin = UnlockFlag.Default_SawSkin;
+    public PlayerDataField<UnlockFlag> EquippedLaunchArrow = new PlayerDataField<UnlockFlag>( UnlockFlag.Default_LaunchArrow );
+    public PlayerDataField<UnlockFlag> EquippedSawTrail = new PlayerDataField<UnlockFlag>( UnlockFlag.Default_SawTrail );
+    public PlayerDataField<UnlockFlag> EquippedSawSkin = new PlayerDataField<UnlockFlag>( UnlockFlag.Default_SawSkin );
 
     // a dictionary containing information about the dependencies of each unlock flag
     public readonly Dictionary<UnlockFlag, List<UnlockFlag>> UnlockFlagDependencyMap = new Dictionary<UnlockFlag, List<UnlockFlag>>
@@ -317,7 +317,7 @@ public class PD
     };
 
     // EVENTS
-    [NonSerialized] public UnityEvent<UnlockFlag, bool> UpgradeFlagChangedEvent = new UnityEvent<UnlockFlag, bool>();
+    [NonSerialized] public UnityEvent<UnlockFlag, bool> UnlockFlagChangedEvent = new UnityEvent<UnlockFlag, bool>();
 
     // STATICS
     public static PD Instance
@@ -516,6 +516,11 @@ public class PlayerDataField<T>
         value = _value;
         PD.Instance?.SetDirty();
     }
+
+    public PlayerDataField( T initial_value )
+    {
+        value = initial_value;
+    }
 }
 
 [System.Serializable]
@@ -567,7 +572,7 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
         }
 
         PD.Instance?.SetDirty();
-        PD.Instance?.UpgradeFlagChangedEvent.Invoke( flag, value );
+        PD.Instance?.UnlockFlagChangedEvent.Invoke( flag, value );
     }
 
     public PlayerUpgradeUnlockMap()

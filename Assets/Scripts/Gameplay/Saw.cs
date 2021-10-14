@@ -85,7 +85,7 @@ public class Saw : MonoBehaviour
         DirectionArrow.gameObject.SetActive( false );
         proj = GetComponent<Projectile>();
         proj.ProjectileHitWallEvent.AddListener( OnProjectileHitWall );
-        PD.Instance.UpgradeFlagChangedEvent.AddListener( OnUnlockFlagChanged );
+        PD.Instance.UnlockFlagChangedEvent.AddListener( OnUnlockFlagChanged );
         UpdateSawRadius();
         VolumeController.RecentPitch = 1f; // ignore this <('u'<)
 
@@ -393,19 +393,19 @@ public class Saw : MonoBehaviour
 
     private void UpdateCosmetics()
     {
-        if( PD.Instance.EquippedSawSkin != UnlockFlag.Default_SawSkin )
+        if( PD.Instance.EquippedSawSkin.Get() != UnlockFlag.Default_SawSkin )
         {
-            Cosmetic saw_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedSawSkin );
+            Cosmetic saw_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedSawSkin.Get() );
             animator.runtimeAnimatorController = saw_cosmetic.override_controller;
         }
-        if( PD.Instance.EquippedLaunchArrow != UnlockFlag.Default_LaunchArrow )
+        if( PD.Instance.EquippedLaunchArrow.Get() != UnlockFlag.Default_LaunchArrow )
         {
-            Cosmetic launch_arrow_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedLaunchArrow );
+            Cosmetic launch_arrow_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedLaunchArrow.Get() );
             DirectionArrowSprite = launch_arrow_cosmetic.sprite;
         }
-        if( PD.Instance.EquippedSawTrail != UnlockFlag.Default_SawTrail )
+        if( PD.Instance.EquippedSawTrail.Get() != UnlockFlag.Default_SawTrail )
         {
-            Cosmetic saw_trail_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedSawTrail );
+            Cosmetic saw_trail_cosmetic = Spectator.Instance.GD.GetCosmeticFromUnlockFlag( PD.Instance.EquippedSawTrail.Get() );
             psr.material = saw_trail_cosmetic.material;
         }
     }
