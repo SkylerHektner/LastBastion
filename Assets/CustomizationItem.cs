@@ -52,7 +52,7 @@ public class CustomizationItem : MonoBehaviour
 
     public void UpdateDescriptorText()
     {
-        DescriptorText.text = MyCosmetic.Description;
+        DescriptorText.text = MyCosmetic.Name;
     }
 
     public void WipeDescriptorText()
