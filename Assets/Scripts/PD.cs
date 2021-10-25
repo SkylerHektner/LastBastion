@@ -108,6 +108,8 @@ public enum UnlockFlag
     Ghostly_LaunchArrow = 84,
     Simple_LaunchArrow = 85,
     Golden_LaunchArrow = 86,
+    Stars_SawTrail = 87,
+
 }
 
 public enum UnlockFlagCategory
@@ -314,6 +316,8 @@ public class PD
         { UnlockFlag.Ghostly_LaunchArrow, UnlockFlagCategory.Cosmetic },
         { UnlockFlag.Simple_LaunchArrow, UnlockFlagCategory.Cosmetic },
         { UnlockFlag.Golden_LaunchArrow, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Stars_SawTrail, UnlockFlagCategory.Cosmetic },
+
     };
 
     // EVENTS
