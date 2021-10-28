@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InfoItem : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class InfoItem : MonoBehaviour
     public bool EnemyInfo;
     public bool HiddenAchievement;
     public GameObject LockedSymbol;
+    public int Payout;
+    public TextMeshProUGUI PayoutText;
+    public Animator Strikeout;
+
     public bool AchievementLocked
     {
         get
@@ -87,10 +92,15 @@ public class InfoItem : MonoBehaviour
         if (Progress.ToString("F0") == "100") // complete?
         {
             AchievementLocked = false; // give me my trophy!
+            Strikeout.SetTrigger("Strikeout");
+            Strikeout.ResetTrigger("Hide");
         }
         else
         {
             AchievementLocked = true; // hide the trophy
+            PayoutText.text = Payout.ToString();
+            Strikeout.SetTrigger("Hide");
+            Strikeout.ResetTrigger("Strikeout");
         }
         return Progress.ToString("F0") + "% Complete";
 
