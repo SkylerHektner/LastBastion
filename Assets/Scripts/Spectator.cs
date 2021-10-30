@@ -153,7 +153,27 @@ public class Spectator : MonoBehaviour
 
     public void WipeProgress()
     {
+        // VERY IMPORT - this function must cache then restore premium cosmetics
+        List<UnlockFlag> unlocked_premium_cosmetics = new List<UnlockFlag>();
+        foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
+        {
+            if( PD.Instance.UnlockFlagCategoryMap[flag] == UnlockFlagCategory.Cosmetic &&
+                GD.GetCosmeticFromUnlockFlag( flag ).Premium &&
+                ( PD.Instance.UnlockMap.Get( flag, false ) ||
+                 PD.Instance.UnlockMap.Get( flag, true ) ) )
+            {
+                unlocked_premium_cosmetics.Add( flag );
+            }
+        }
+
         PD.DeleteAllPlayerData();
+
+        foreach( UnlockFlag flag in unlocked_premium_cosmetics )
+        {
+            PD.Instance.UnlockMap.Set( flag, true, false );
+            PD.Instance.UnlockMap.Set( flag, true, true );
+        }
+
         SceneManager.LoadScene( SceneManager.GetActiveScene().name );
     }
 }

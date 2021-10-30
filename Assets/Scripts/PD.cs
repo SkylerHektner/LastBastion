@@ -586,6 +586,14 @@ public class PlayerUpgradeUnlockMap : ISerializationCallbackReceiver
             campaign_unlock_map.Add( flag, false );
             survival_unlock_map.Add( flag, false );
         }
+
+        // default cosmetics are always unlocked
+        campaign_unlock_map[UnlockFlag.Default_LaunchArrow] = true;
+        campaign_unlock_map[UnlockFlag.Default_SawSkin] = true;
+        campaign_unlock_map[UnlockFlag.Default_SawTrail] = true;
+        survival_unlock_map[UnlockFlag.Default_LaunchArrow] = true;
+        survival_unlock_map[UnlockFlag.Default_SawSkin] = true;
+        survival_unlock_map[UnlockFlag.Default_SawTrail] = true;
     }
 
     public void OnBeforeSerialize()

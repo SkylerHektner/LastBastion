@@ -21,6 +21,7 @@ public class Cosmetic : CosmeticDisplayInterface
     public UnlockFlag unlock_flag;
     public CosmeticCategory category;
     public float Price;
+    public bool Premium;
 
     public AnimatorOverrideController override_controller;
     public Sprite sprite;
@@ -122,6 +123,7 @@ public class CosmeticEditor : ExtendedEditor<Cosmetic>
         FloatField( ref target.Price, "Price" );
         EnumField( ref target.unlock_flag, "Unlock Flag" );
         EnumField( ref target.category, "Category" );
+        ToggleField( ref target.Premium, "Premium" );
 
         switch( target.category )
         {
