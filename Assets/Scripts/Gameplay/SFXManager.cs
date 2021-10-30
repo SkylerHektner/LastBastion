@@ -14,6 +14,7 @@ public enum SFXEnum
 public class SFXManager : MonoBehaviour
 {
     public static SFXManager Instance;
+    private static float[] LogCache = new float[101];
 
     [HideInInspector]
     public SerializableDictionary<SFXEnum, AudioClip> AudioClipMappings = new SerializableDictionary<SFXEnum, AudioClip>();
@@ -22,6 +23,12 @@ public class SFXManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        // compute an array of cached log values for buffers to use in attenuation
+        for(int x = 0; x <= 100; ++x )
+        {
+            LogCache[x] = Mathf.Log( x );
+        }
+        // spawn a buffer for each SFX
         foreach( SFXEnum sfx in Enum.GetValues( typeof( SFXEnum ) ) )
         {
             var buffer = new SFXRingBuffer();
@@ -57,12 +64,17 @@ public class SFXManager : MonoBehaviour
             SFXBuffers[sfx].WriteSFXToBuffer();
         }
     }
+
+    public static float CachedLog(int value)
+    {
+        return LogCache[Mathf.Clamp( value, 0, 100 )];
+    }
 }
 
 class SFXRingBuffer
 {
-    private float[] buffer = new float[100000];
-    private float[] clip_counter_buffer = new float[100000]; // parallel with buffer - maintains how many clips are stored at each index for attenuation
+    private float[] buffer = new float[50000];
+    private int[] clip_counter_buffer = new int[50000]; // parallel with buffer - maintains how many clips are stored at each index for attenuation
     private int buffer_index;
     private AudioClip audio_clip;
     private float[] audio_clip_samples;
@@ -76,7 +88,7 @@ class SFXRingBuffer
             if( clip_counter_buffer[buffer_index] > 0 )
                 out_array[x] += buffer[buffer_index] 
                     * ( 1.0f / clip_counter_buffer[buffer_index] ) // attenuate down based on number of samples playing
-                    * ( 1.0f + Mathf.Log( clip_counter_buffer[buffer_index] ) ); // increase volume slightly so attenuation isn't linear decrease
+                    * ( 1.0f + SFXManager.CachedLog( clip_counter_buffer[buffer_index] ) ); // increase volume slightly so attenuation isn't linear decrease
 
             if( x % channels == ( channels - 1 ) )
             {
