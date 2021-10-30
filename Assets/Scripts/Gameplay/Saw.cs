@@ -34,7 +34,8 @@ public class Saw : MonoBehaviour
     [SerializeField] float MaxDragDistance = 5.0f; // this is just the max for graphical purposes
     [SerializeField] SpriteRenderer DirectionArrow;
     [SerializeField] Sprite DirectionArrowSprite;
-    [SerializeField] Sprite DirectionArrowGreyedSprite;
+    [SerializeField] Material EnabledDirectionArrowMaterial;
+    [SerializeField] Material DisabledDirectionArrowMaterial;
     [SerializeField] GameObject DirectionArrowPivot;
     [SerializeField] float MinimumAngleDegrees = 15;
     [SerializeField] private Animator animator;
@@ -178,7 +179,10 @@ public class Saw : MonoBehaviour
         {
             proj.SetWallHitBehavior( Projectile.WallHitBehavior.Attach );
             if( dragging )
+            {
                 DirectionArrow.sprite = DirectionArrowSprite;
+                DirectionArrow.material = EnabledDirectionArrowMaterial;
+            }
             skeleton_shield_break_movespeed_multiplier = 1.0f; // reset when saw attaches to wall
             SawAttachToWallEvent.Invoke();
         }
@@ -302,7 +306,8 @@ public class Saw : MonoBehaviour
         dragging = true;
 
         DirectionArrow.gameObject.SetActive( true );
-        DirectionArrow.sprite = Moving ? DirectionArrowGreyedSprite : DirectionArrowSprite;
+        DirectionArrow.sprite = DirectionArrowSprite;
+        DirectionArrow.material = Moving ? DisabledDirectionArrowMaterial : EnabledDirectionArrowMaterial;
         drag_arrow_color.a = 0.0f;
         DirectionArrow.GetComponent<Renderer>().material.SetColor( "_Color", drag_arrow_color );
     }
