@@ -34,6 +34,16 @@ public class CosmeticBundle : CosmeticDisplayInterface
     {
         return Price;
     }
+
+    public override bool IsUnlocked()
+    {
+        bool unlocked = true;
+        foreach(Cosmetic cosmetic in Cosmetics)
+        {
+            unlocked = unlocked && PD.Instance.UnlockMap.Get( cosmetic.unlock_flag, false );
+        }
+        return unlocked;
+    }
 }
 
 #if UNITY_EDITOR

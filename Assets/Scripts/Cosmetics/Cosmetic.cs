@@ -11,6 +11,7 @@ public class CosmeticDisplayInterface : ScriptableObject
     public virtual string GetDescription() { return null; }
     public virtual float GetPrice() { return 0.0f; }
     public virtual void ApplyUnlocks() { }
+    public virtual bool IsUnlocked() { return false; }
 }
 
 [CreateAssetMenu( fileName = "Cosmetic", menuName = "ScriptableObjects/Cosmetic", order = 0 )]
@@ -100,7 +101,7 @@ public class Cosmetic : CosmeticDisplayInterface
         return result;
     }
 
-    public bool IsUnlocked()
+    public override bool IsUnlocked()
     {
         return PD.Instance.UnlockMap.Get( unlock_flag, false );
     }

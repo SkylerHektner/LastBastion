@@ -76,7 +76,8 @@ public class Spectator : MonoBehaviour
                 AchievementPopup.DisplayReward();
                 AchievementPopup.SetText( achievement.Name );
                 PD.Instance.EarnedAchievementList.Add( achievement.UniqueID );
-                achievementCheckCooldown *= 3; // make sure the animation has enought time to finish before we check again incase we got two achievements at once
+                PD.Instance.AchievementPoints.Set( PD.Instance.AchievementPoints.Get() + achievement.Payout );
+                achievementCheckCooldown *= 3; // make sure the animation has enough time to finish before we check again incase we got two achievements at once
                 break;
             }
         }

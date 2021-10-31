@@ -20,10 +20,8 @@ public class InfoViewer : MonoBehaviour
 
     public GameObject PercentageText;
 
-
-
     public List<GameObject> InfoTabCategories;
-    int Index;
+    [ReadOnly] public int Index;
     public RectTransform LevelBar;
     float BarStartPos = 140;
     public float BarXPos;
@@ -33,44 +31,40 @@ public class InfoViewer : MonoBehaviour
     public GameObject ArrowL;
     public GameObject ArrowR;
 
-    private List<InfoItem> InfoItems = new List<InfoItem>();
-    private List<StoreItem> StoreItems = new List<StoreItem>();
     public TextMeshProUGUI ItemName;
     public TextMeshProUGUI ItemDescription;
     public bool WindowShopping;
-
-
 
     // Start is called before the first frame update
     void Awake()
     {
         Index = 0;
-        ArrowL.SetActive(false);
-        ArrowR.SetActive(false);
+        ArrowL.SetActive( false );
+        ArrowR.SetActive( false );
     }
 
     public void DisplayPlayerInfo()
     {
         Index = 0;
         LevelBar = PlayerInfoContainer;
-        PlayerInfo.SetActive(true);
-        EnemyInfo.SetActive(false);
-        AchievementInfo.SetActive(false);
-        JumpToPosition(Index);
+        PlayerInfo.SetActive( true );
+        EnemyInfo.SetActive( false );
+        AchievementInfo.SetActive( false );
+        JumpToPosition( Index );
         ShowArrowButtons();
-        PercentageText.SetActive(false);
+        PercentageText.SetActive( false );
     }
 
     public void DisplayEnemyInfo()
     {
         Index = 0;
         LevelBar = EnemyInfoContainer;
-        PlayerInfo.SetActive(false);
-        EnemyInfo.SetActive(true);
-        AchievementInfo.SetActive(false);
-        JumpToPosition(Index);
+        PlayerInfo.SetActive( false );
+        EnemyInfo.SetActive( true );
+        AchievementInfo.SetActive( false );
+        JumpToPosition( Index );
         ShowArrowButtons();
-        PercentageText.SetActive(false);
+        PercentageText.SetActive( false );
 
     }
 
@@ -78,33 +72,33 @@ public class InfoViewer : MonoBehaviour
     {
         Index = 0;
         LevelBar = AchievementInfoContainer;
-        PlayerInfo.SetActive(false);
-        EnemyInfo.SetActive(false);
-        AchievementInfo.SetActive(true);
-        JumpToPosition(Index);
+        PlayerInfo.SetActive( false );
+        EnemyInfo.SetActive( false );
+        AchievementInfo.SetActive( true );
+        JumpToPosition( Index );
         ShowArrowButtons();
-        PercentageText.SetActive(true);
+        PercentageText.SetActive( true );
     }
 
     public void DisplayPremiumContent()
     {
         Index = 0;
         LevelBar = PremiumContentContainer;
-        JumpToPosition(Index);
+        JumpToPosition( Index );
         ShowArrowButtons();
     }
     public void DisplayBonusContent()
     {
         Index = 0;
         LevelBar = BonusContentContainer;
-        JumpToPosition(Index);
+        JumpToPosition( Index );
         ShowArrowButtons();
     }
     public void DisplayItemContent()
     {
         Index = 0;
         LevelBar = ItemsContainer;
-        JumpToPosition(Index);
+        JumpToPosition( Index );
         ShowArrowButtons();
     }
 
@@ -112,87 +106,94 @@ public class InfoViewer : MonoBehaviour
     {
         Index = 0;
         LevelBar = null;
-        PlayerInfo.SetActive(false);
-        EnemyInfo.SetActive(false);
-        AchievementInfo.SetActive(false);
-        ArrowL.SetActive(false);
-        ArrowR.SetActive(false);
-        PercentageText.SetActive(false);
+        PlayerInfo.SetActive( false );
+        EnemyInfo.SetActive( false );
+        AchievementInfo.SetActive( false );
+        ArrowL.SetActive( false );
+        ArrowR.SetActive( false );
+        PercentageText.SetActive( false );
     }
 
     public void ShiftConentRight()
     {
         Index += 1;
-        JumpToPosition(Index);
+        JumpToPosition( Index );
     }
 
     public void ShiftContentLeft()
     {
         Index -= 1;
-        JumpToPosition(Index);
+        JumpToPosition( Index );
     }
 
     public void ShowArrowButtons()
     {
-        ArrowL.SetActive(true);
-        ArrowR.SetActive(true);
+        ArrowL.SetActive( true );
+        ArrowR.SetActive( true );
     }
 
 
-    public void ShowItemDescription(int ItemIndex) // displays the name and description of the chosen item in the list
+    public void ShowItemDescription( int ItemIndex ) // displays the name and description of the chosen item in the list
     {
-        Debug.Log(ItemIndex);
-        InfoItems.Clear();
-        StoreItems.Clear();
-        if (WindowShopping)
+        Debug.Log( ItemIndex );
+        if( WindowShopping )
         {
-            foreach (Transform Item in LevelBar)
+            StoreItem store_item = LevelBar.GetChild( ItemIndex )?.GetComponent<StoreItem>();
+            if( store_item != null )
             {
-                StoreItems.Add(Item.GetComponent<StoreItem>());
-                Debug.Log(Item);
+                ItemName.text = store_item.GetInfoPrice();
+                ItemDescription.text = store_item.GetInfoDescription();
             }
-            ItemName.text = StoreItems[ItemIndex].GetInfoPrice();
-            ItemDescription.text = StoreItems[ItemIndex].GetInfoDescription();
-
+            else
+            {
+                Debug.LogError( "ERROR: Invalid Index or missing component in InfoViewer.ShowItemDescription", this );
+            }
         }
         else
         {
-            foreach (Transform Item in LevelBar)
+            InfoItem info_item = LevelBar.GetChild( ItemIndex )?.GetComponent<InfoItem>();
+            if( info_item != null )
             {
-                InfoItems.Add(Item.GetComponent<InfoItem>());
-                Debug.Log(Item);
+                ItemName.text = info_item.GetInfoName();
+                ItemDescription.text = info_item.GetInfoDescription();
+                PercentageText.GetComponent<TextMeshProUGUI>().text = info_item.GetProgressAmount();
             }
-            ItemName.text = InfoItems[ItemIndex].GetInfoName();
-            ItemDescription.text = InfoItems[ItemIndex].GetInfoDescription();
-            PercentageText.GetComponent<TextMeshProUGUI>().text = InfoItems[ItemIndex].GetProgressAmount();
+            else
+            {
+                Debug.LogError( "ERROR: Invalid Index or missing component in InfoViewer.ShowItemDescription", this );
+            }
         }
-
     }
 
-    public void JumpToPosition(int index) // jumps the bar to the next/previous spot in the line
+    public void JumpToPosition( int index ) // jumps the bar to the next/previous spot in the line
     {
-        if (index >= 1)
+        if( index >= 1 )
         {
-            LevelBar.transform.localPosition = new Vector2(-(BarStartPos + DistanceBetweenElements * (index)), LevelBar.transform.localPosition.y);
+            LevelBar.transform.localPosition = new Vector2( -( BarStartPos + DistanceBetweenElements * ( index ) ), LevelBar.transform.localPosition.y );
         }
-        else if (index == 0)
+        else if( index == 0 )
         {
-            LevelBar.transform.localPosition = new Vector2(-(BarStartPos), LevelBar.transform.localPosition.y);
+            LevelBar.transform.localPosition = new Vector2( -( BarStartPos ), LevelBar.transform.localPosition.y );
             ArrowR.GetComponent<Button>().interactable = true;
         }
-        if (index == 0)
+        if( index == 0 )
         {
             ArrowL.GetComponent<Button>().interactable = false;
         }
-        else if ((index >= InfoItems.Count - 1 && !WindowShopping) || (index >= StoreItems.Count - 1 && WindowShopping))
+        else if( index >= LevelBar.childCount - 1 )
         {
             ArrowR.GetComponent<Button>().interactable = false;
         }
-        else if ((index > 0 && Index < InfoItems.Count - 1 && !WindowShopping) || (index > 0 && Index < StoreItems.Count - 1 && WindowShopping))
+        else if( index > 0 && index < LevelBar.childCount - 1 )
         {
             ArrowL.GetComponent<Button>().interactable = true;
             ArrowR.GetComponent<Button>().interactable = true;
         }
-        ShowItemDescription(index);
+        ShowItemDescription( index );
+    }
+
+    public GameObject GetItemAtCurrentIndex()
+    {
+        return LevelBar.GetChild( Index ).gameObject;
     }
 }

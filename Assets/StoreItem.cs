@@ -54,4 +54,29 @@ public class StoreItem : MonoBehaviour
     {
         ItemPurchased = !ItemPurchased;
     }
+
+    public void Start()
+    {
+        PD.Instance.UnlockFlagChangedEvent.AddListener( OnUnlockFlagChanged );
+    }
+
+    public void OnDestroy()
+    {
+        PD.Instance.UnlockFlagChangedEvent.RemoveListener( OnUnlockFlagChanged );
+    }
+
+    public void Awake()
+    {
+        UpdatePurchased();
+    }
+
+    public void OnUnlockFlagChanged(UnlockFlag flag, bool new_value)
+    {
+        UpdatePurchased();
+    }
+
+    private void UpdatePurchased()
+    {
+        ItemPurchased = CosmeticInformation.IsUnlocked();
+    }
 }

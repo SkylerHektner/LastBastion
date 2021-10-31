@@ -9,7 +9,6 @@ public class InfoItem : MonoBehaviour
     public bool EnemyInfo;
     public bool HiddenAchievement;
     public GameObject LockedSymbol;
-    public int Payout;
     public TextMeshProUGUI PayoutText;
     public Animator Strikeout;
 
@@ -98,7 +97,7 @@ public class InfoItem : MonoBehaviour
         else
         {
             AchievementLocked = true; // hide the trophy
-            PayoutText.text = Payout.ToString();
+            PayoutText.text = AchievementInformation.Payout.ToString();
             Strikeout.SetTrigger("Hide");
             Strikeout.ResetTrigger("Strikeout");
         }

@@ -156,6 +156,7 @@ public class PD
     public LazyPlayerDataField<int> TotalHealthRecoveredFromSawmageddon = new LazyPlayerDataField<int>(); // test
     // achievements
     public PDList<string> EarnedAchievementList = new PDList<string>();
+    public PlayerDataField<int> AchievementPoints = new PlayerDataField<int>( 0 );
     // encountered enemies
     public PDList<EnemyEnum> EncounteredEnemyList = new PDList<EnemyEnum>();
     // cosmetics
@@ -427,6 +428,18 @@ public class PD
         BaseHP.Instance?.ReduceHP( 9001 );
         BaseHP.Instance?.ReduceHP( 9001 );
         BaseHP.Instance?.ReduceHP( 9001 );
+    }
+
+    [MenuItem( "Debug/Achievements/Add100AP" )]
+    private static void Add1000AP()
+    {
+        PD.Instance.AchievementPoints.Set( PD.Instance.AchievementPoints.Get() + 1000 );
+    }
+
+    [MenuItem( "Debug/Achievements/Remove100AP" )]
+    private static void Remove1000AP()
+    {
+        PD.Instance.AchievementPoints.Set( PD.Instance.AchievementPoints.Get() - 1000 );
     }
 #endif
     // this is intentionally compiled into release builds as we use it to reset player progress

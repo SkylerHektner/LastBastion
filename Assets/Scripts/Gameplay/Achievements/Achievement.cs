@@ -22,7 +22,7 @@ public class Achievement : ScriptableObject
         BeatWaveInSurvival,
         SetSawOnFire,
         BeatEnemy,
-        DefeatAllEnemies, // do
+        DefeatAllEnemies,
         ZapAtLeastXEnemiesWithSingleChainLightning,
         KillXEnemiesWithTyphoon,
         KillXEnemiesWithBombers,
@@ -37,6 +37,7 @@ public class Achievement : ScriptableObject
     public string Description;
     public bool ShowPopup;
     public AchievementType Type;
+    public int Payout;
     public int desired_value;
     public EnemyEnum desired_enemy;
     public List<string> desired_strings;
@@ -166,6 +167,10 @@ public class AchievementEditor : Editor
         CustomEditorUtilities.AutoDirtyLabeledBool(
             ref achievement.ShowPopup,
             "Show Popup",
+            target );
+        CustomEditorUtilities.AutoDirtyLabeledInt(
+            ref achievement.Payout,
+            "Payout Value",
             target );
 
         Achievement.AchievementType type = (Achievement.AchievementType)EditorGUILayout.EnumPopup( "Type: ", achievement.Type );
