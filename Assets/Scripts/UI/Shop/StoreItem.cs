@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StoreItem : MonoBehaviour
 {
     public CosmeticDisplayInterface CosmeticInformation;
     public bool PremiumItem;
-    public GameObject PurchasedSymbol;
+    //public GameObject PurchasedSymbol;
+    //public Button PurchaseButton;
     public bool ItemPurchased
     {
         get
@@ -19,11 +21,13 @@ public class StoreItem : MonoBehaviour
 
             if (purchased)
             {
-                PurchasedSymbol.SetActive(true);
+                //PurchasedSymbol.SetActive(true);
+                //PurchaseButton.enabled = false;
             }
             else
             {
-                PurchasedSymbol.SetActive(false);
+                //PurchasedSymbol.SetActive(false);
+                //PurchaseButton.enabled = true;
             }
         }
     }

@@ -34,6 +34,9 @@ public class InfoViewer : MonoBehaviour
     public TextMeshProUGUI ItemName;
     public TextMeshProUGUI ItemDescription;
     public bool WindowShopping;
+    public Animator SoldOutIcon;
+    public Button ClaimButton;
+    public GameObject PriceDisplay;
 
     // Start is called before the first frame update
     void Awake()
@@ -143,6 +146,18 @@ public class InfoViewer : MonoBehaviour
             {
                 ItemName.text = store_item.GetInfoPrice();
                 ItemDescription.text = store_item.GetInfoDescription();
+                if (store_item.ItemPurchased) // display the universal puchased symbol
+                {
+                    SoldOutIcon.SetBool("Sold", true);
+                    ClaimButton.interactable = false;
+                    PriceDisplay.SetActive(false);
+                }
+                else// hide the universal puchased symbol
+                {
+                    SoldOutIcon.SetBool("Sold", false);
+                    ClaimButton.interactable = true;
+                    PriceDisplay.SetActive(true);
+                }
             }
             else
             {
@@ -195,5 +210,13 @@ public class InfoViewer : MonoBehaviour
     public GameObject GetItemAtCurrentIndex()
     {
         return LevelBar.GetChild( Index ).gameObject;
+    }
+
+    public void RefreshStoreItem()
+    {
+        if (WindowShopping)
+        {
+            ShowItemDescription(Index);
+        }
     }
 }
