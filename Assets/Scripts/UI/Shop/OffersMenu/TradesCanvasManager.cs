@@ -23,7 +23,7 @@ public class TradesCanvasManager : MonoBehaviour
 
     public bool TryPurchaseOffer(CosmeticDisplayInterface trade_cosmetic)
     {
-        if (PD.Instance.AchievementPoints.Get() >= trade_cosmetic.GetPrice())
+        if (PD.Instance.AchievementPoints.Get() >= trade_cosmetic.GetPrice()) // this needs to be changed later on
         {
             trade_cosmetic.ApplyUnlocks();
             PD.Instance.AchievementPoints.Set(PD.Instance.AchievementPoints.Get() - (int)trade_cosmetic.GetPrice());
