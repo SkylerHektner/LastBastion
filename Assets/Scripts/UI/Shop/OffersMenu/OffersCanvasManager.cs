@@ -55,6 +55,7 @@ public class OffersCanvasManager : MonoBehaviour
         {
             offer_cosmetic.ApplyUnlocks();
             PD.Instance.AchievementPoints.Set( PD.Instance.AchievementPoints.Get() - (int)offer_cosmetic.GetPrice() );
+            WealthPlate.GetComponent<VolumeController>().PlayMySound();
             return true;
         }
 
@@ -75,6 +76,7 @@ public class OffersCanvasManager : MonoBehaviour
         else if (PD.Instance.AchievementPoints.Get() < current_store_item.CosmeticInformation.GetPrice()) // player is too poor, sad
         {
             WealthPlate.SetTrigger("Invalid");
+            WealthPlate.GetComponent<VolumeController>().PlayMyAlternateSound();
         }
     }
 }

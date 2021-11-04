@@ -38,6 +38,8 @@ public class CustomizationItem : MonoBehaviour
         if( !MyCosmetic.IsUnlocked() )
         {
             MyChains.GetComponent<Animator>().SetTrigger( "Rattle" );
+            //MyChains.GetComponent<VolumeController>().RandomizePitch();
+            //MyChains.GetComponent<VolumeController>().PlayMySound();
         }
     }
 
