@@ -14,6 +14,9 @@ public class CustomizationItem : MonoBehaviour
     public Image ColoredBG;
     public TextMeshProUGUI DescriptorText;
     public Cosmetic MyCosmetic;
+    float ChainsSFXCooldown;
+    bool ChainsCanRattle;
+    public GameObject ActivatedFX;
 
     public void Start()
     {
@@ -32,14 +35,26 @@ public class CustomizationItem : MonoBehaviour
         UpdatePurchasedGraphics();
         UpdateEquippedGraphics();
     }
+    public void FixedUpdate()
+    {
+        if (ChainsCanRattle == false) // delays the chains from being spammed
+        {
+            ChainsSFXCooldown -= Time.smoothDeltaTime;
+            if (ChainsSFXCooldown <= 0)
+            {
+                ChainsSFXCooldown = 0; // no negatives pls
+                ChainsCanRattle = true;
+            }
+        }
+    }
 
     public void RattleChains()
     {
-        if( !MyCosmetic.IsUnlocked() )
+        if( !MyCosmetic.IsUnlocked() && ChainsCanRattle)
         {
             MyChains.GetComponent<Animator>().SetTrigger( "Rattle" );
-            //MyChains.GetComponent<VolumeController>().RandomizePitch();
-            //MyChains.GetComponent<VolumeController>().PlayMySound();
+            ChainsCanRattle = false;
+            ChainsSFXCooldown = 1f;
         }
     }
 
@@ -82,10 +97,14 @@ public class CustomizationItem : MonoBehaviour
         if( MyCosmetic.IsEquipped() )
         {
             ColoredBG.color = Color.green;
+            ActivatedFX.SetActive(true);
+            gameObject.GetComponent<AudioSource>().Play();
+
         }
         else
         {
             ColoredBG.color = Color.black;
+            ActivatedFX.SetActive(false);
         }
     }
 

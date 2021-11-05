@@ -18,6 +18,7 @@ public class OffersCanvasManager : MonoBehaviour
     public GameObject LeftArrow;
     public Button HomeButton;
     public Animator WealthPlate;
+    public GameObject NewPurchaseFX;
 
     private void Awake()
     {
@@ -49,20 +50,21 @@ public class OffersCanvasManager : MonoBehaviour
         }
     }
 
-    public bool TryPurchaseOffer( CosmeticDisplayInterface offer_cosmetic )
+    public bool TryPurchaseOffer( CosmeticDisplayInterface offer_cosmetic ) // where the actual transaction occurs
     {
         if( PD.Instance.AchievementPoints.Get() >= offer_cosmetic.GetPrice() )
         {
             offer_cosmetic.ApplyUnlocks();
             PD.Instance.AchievementPoints.Set( PD.Instance.AchievementPoints.Get() - (int)offer_cosmetic.GetPrice() );
-            WealthPlate.GetComponent<VolumeController>().PlayMySound();
+            WealthPlate.GetComponent<VolumeController>().PlayMySound(); // candy buy sfx
+            NewPurchaseFX.SetActive(true);
             return true;
         }
 
         return false;
     }
 
-    public void EvaluateCurrency() // brings up the confirmation menu if the player has enough currency to even purchase the item. If not, play feedback anim
+    public void EvaluateCurrency() // brings up the confirmation menu if the player has enough currency to even purchase the item. If not, play decline anim
     {
         StoreItem current_store_item = OfferInfoViewer.GetItemAtCurrentIndex()?.GetComponent<StoreItem>(); // get current item in question, then compare prices
         if (PD.Instance.AchievementPoints.Get() >= current_store_item.CosmeticInformation.GetPrice()) // player is wealthy enough
