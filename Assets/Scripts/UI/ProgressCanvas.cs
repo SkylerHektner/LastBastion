@@ -19,7 +19,10 @@ public class ProgressCanvas : MonoBehaviour
 
     private void Start()
     {
-        Skull.SetBool( "Speaking", true );
+        if (Skull.isActiveAndEnabled)
+        {
+            Skull.SetBool("Speaking", true);
+        }
     }
 
     public void ContinueSave()
