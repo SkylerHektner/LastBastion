@@ -7,7 +7,9 @@ using System;
 // any entry added to this enum must be assigned a sound effect in the editor
 public enum SFXEnum
 {
-    EnemyHit
+    NONE = 0,
+    EnemyHit,
+    SkeletonDie,
 }
 
 [RequireComponent( typeof( AudioSource ) )]
@@ -24,18 +26,22 @@ public class SFXManager : MonoBehaviour
     {
         Instance = this;
         // compute an array of cached log values for buffers to use in attenuation
-        for(int x = 0; x <= 100; ++x )
+        for( int x = 0; x <= 100; ++x )
         {
             LogCache[x] = Mathf.Log( x );
         }
         // spawn a buffer for each SFX
         foreach( SFXEnum sfx in Enum.GetValues( typeof( SFXEnum ) ) )
         {
+            if( sfx == SFXEnum.NONE )
+                continue;
+
             var buffer = new SFXRingBuffer();
             SFXBuffers[sfx] = buffer;
 
-            AudioClip clip;
-            if( AudioClipMappings.TryGetValue( sfx, out clip ) )
+            AudioClip clip = null;
+            AudioClipMappings.TryGetValue( sfx, out clip );
+            if( clip != null )
             {
                 buffer.InitalizeWithAudioClip( clip );
             }
@@ -59,13 +65,16 @@ public class SFXManager : MonoBehaviour
 
     public void PlaySFX( SFXEnum sfx )
     {
+        if( sfx == SFXEnum.NONE )
+            return;
+
         lock( SFXBuffers )
         {
             SFXBuffers[sfx].WriteSFXToBuffer();
         }
     }
 
-    public static float CachedLog(int value)
+    public static float CachedLog( int value )
     {
         return LogCache[Mathf.Clamp( value, 0, 100 )];
     }
@@ -86,7 +95,7 @@ class SFXRingBuffer
         for( int x = 0; x < out_array.Length; ++x )
         {
             if( clip_counter_buffer[buffer_index] > 0 )
-                out_array[x] += buffer[buffer_index] 
+                out_array[x] += buffer[buffer_index]
                     * ( 1.0f / clip_counter_buffer[buffer_index] ) // attenuate down based on number of samples playing
                     * ( 1.0f + SFXManager.CachedLog( clip_counter_buffer[buffer_index] ) ); // increase volume slightly so attenuation isn't linear decrease
 
@@ -158,6 +167,9 @@ class SFXManagerEditor : ExtendedEditor<SFXManager>
 
         foreach( SFXEnum sfx in Enum.GetValues( typeof( SFXEnum ) ) )
         {
+            if( sfx == SFXEnum.NONE )
+                continue;
+
             if( !target.AudioClipMappings.ContainsKey( sfx ) )
                 target.AudioClipMappings.Add( sfx, null );
         }
@@ -166,6 +178,9 @@ class SFXManagerEditor : ExtendedEditor<SFXManager>
 
         foreach( SFXEnum sfx in Enum.GetValues( typeof( SFXEnum ) ) )
         {
+            if( sfx == SFXEnum.NONE )
+                continue;
+
             AudioClip clip = target.AudioClipMappings[sfx];
             AudioClipField( ref clip, sfx.ToString() );
             target.AudioClipMappings[sfx] = clip;

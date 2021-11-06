@@ -6,6 +6,8 @@ public class MudSlingerProjectile : Projectile
 {
     [HideInInspector] public float SawSlowDuration;
     [HideInInspector] public float SawMoveSpeedMultiplier;
+    [SerializeField] SFXEnum HitWallSFX;
+
     public void HitSaw( Saw saw )
     {
         if( !saw.Moving || PD.Instance.UnlockMap.Get( UnlockFlag.MudSlingerUpgradeCurse ) )
@@ -26,6 +28,7 @@ public class MudSlingerProjectile : Projectile
         if( hit_info.wall == ProjectileHitInfo.Wall.Left ||
             hit_info.wall == ProjectileHitInfo.Wall.Right )
         {
+            SFXManager.Instance.PlaySFX( HitWallSFX );
             SetWallHitBehavior( WallHitBehavior.Destroy );
         }
         else if( hit_info.wall == ProjectileHitInfo.Wall.Bottom ||

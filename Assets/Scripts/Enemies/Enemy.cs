@@ -43,6 +43,10 @@ public class Enemy : MonoBehaviour
     public bool ImmuneToFlamingSawBonusDamage = false;
     public bool Bouncy = false; // if true, the saw will bounce off the creature upon colliding (bounce angle on circular collider)
     [SerializeField] int PlayerBaseBonusDamage;
+    [SerializeField] SFXEnum DeathSFX;
+    [SerializeField] SFXEnum HitSFX = SFXEnum.EnemyHit;
+    [SerializeField] SFXEnum SpawnAnimationSFX; // plays when the spawn animation starts (ignored if no spawn anim)
+    [SerializeField] SFXEnum SpawnEffectSFX; // plays when the spawn effect starts (ignored if no spawn effect)
     public int PowerupDropValue
     {
         get
@@ -135,6 +139,7 @@ public class Enemy : MonoBehaviour
     {
         if( SpawnEffect )
         {
+            SFXManager.Instance.PlaySFX( SpawnEffectSFX );
             var spawn_effect = Instantiate( SpawnEffect );
             spawn_effect.transform.position = transform.position;
             spawn_effect.GetComponent<DeleteAfterDuration>()?.DeleteDurationReached.AddListener( SpawnEffectDone );
@@ -142,6 +147,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            SFXManager.Instance.PlaySFX( SpawnAnimationSFX );
             anim.SetTrigger( "Spawn" );
             Invoke( "SpawnAnimationDone", anim.GetCurrentAnimatorStateInfo( 0 ).length );
         }
@@ -161,6 +167,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            SFXManager.Instance.PlaySFX( SpawnAnimationSFX );
             anim.SetTrigger( "Spawn" );
             Invoke( "SpawnAnimationDone", 1.0f );
         }
@@ -218,7 +225,7 @@ public class Enemy : MonoBehaviour
         if( !string.IsNullOrEmpty( CurrentHealthAnimationParameter ) )
             anim.SetFloat( CurrentHealthAnimationParameter, CurrentHealth );
 
-        SFXManager.Instance.PlaySFX( SFXEnum.EnemyHit );
+        SFXManager.Instance.PlaySFX( HitSFX );
 
         if( CurrentHealth <= 0 )
         {
@@ -250,6 +257,8 @@ public class Enemy : MonoBehaviour
         }
         else
             Die();
+
+        SFXManager.Instance.PlaySFX( DeathSFX );
     }
 
     protected virtual void Die()

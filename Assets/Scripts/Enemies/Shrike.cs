@@ -14,6 +14,7 @@ public class Shrike : Enemy
 
     private Vector3 last_saw_hit_direction;
     public GameObject TeleportFX;
+    public SFXEnum TeleportSound;
 
     protected override void Update()
     {
@@ -72,6 +73,8 @@ public class Shrike : Enemy
         anim.SetTrigger( "Teleport" );
         Invoke( "TeleportFinished", TeleportDuration );
         Invoke( "ChangePosition", TeleportDuration * 0.5f );
+
+        SFXManager.Instance.PlaySFX( TeleportSound );
     }
 
     private void ChangePosition()
