@@ -31,6 +31,11 @@ public enum SFXEnum
     CarrierMediumHit,
     CarrierSmallDie,
     BlackHoleHit,
+    BomberSpawn,
+    MudCarrierSpawn,
+    SkeleSpawn1,
+    SkeleSpawn2,
+    ShamanSummon,
 
 }
 
