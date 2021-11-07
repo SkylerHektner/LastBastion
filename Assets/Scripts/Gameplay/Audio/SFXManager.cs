@@ -42,6 +42,7 @@ public class SFXManager : MonoBehaviour
 
     [HideInInspector]
     public SerializableDictionary<SFXEnum, AudioClip> AudioClipMappings = new SerializableDictionary<SFXEnum, AudioClip>();
+    public SerializableDictionary<SFXEnum, float> AudioClipVolumeMultipliers = new SerializableDictionary<SFXEnum, float>();
     private Dictionary<SFXEnum, SFXRingBuffer> SFXBuffers = new Dictionary<SFXEnum, SFXRingBuffer>();
 
     private void Start()
@@ -63,9 +64,11 @@ public class SFXManager : MonoBehaviour
 
             AudioClip clip = null;
             AudioClipMappings.TryGetValue( sfx, out clip );
+            float volume_mulitplier = 1.0f;
+            AudioClipVolumeMultipliers.TryGetValue( sfx, out volume_mulitplier );
             if( clip != null )
             {
-                buffer.InitalizeWithAudioClip( clip );
+                buffer.InitalizeWithAudioClip( clip, volume_mulitplier );
             }
             else
             {
@@ -108,6 +111,7 @@ class SFXRingBuffer
     private int[] clip_counter_buffer = new int[50000]; // parallel with buffer - maintains how many clips are stored at each index for attenuation
     private int buffer_index;
     private AudioClip audio_clip;
+    private float audio_clip_volume_multiplier;
     private float[] audio_clip_samples;
 
     // read from the buffer into an output array
@@ -119,7 +123,8 @@ class SFXRingBuffer
             if( clip_counter_buffer[buffer_index] > 0 )
                 out_array[x] += buffer[buffer_index]
                     * ( 1.0f / clip_counter_buffer[buffer_index] ) // attenuate down based on number of samples playing
-                    * ( 1.0f + SFXManager.CachedLog( clip_counter_buffer[buffer_index] ) ); // increase volume slightly so attenuation isn't linear decrease
+                    * ( 1.0f + SFXManager.CachedLog( clip_counter_buffer[buffer_index] ) ) // increase volume slightly so attenuation isn't linear decrease
+                    * audio_clip_volume_multiplier; // factor in clip specific volume multiplier
 
             if( x % channels == ( channels - 1 ) )
             {
@@ -151,10 +156,11 @@ class SFXRingBuffer
         }
     }
 
-    public void InitalizeWithAudioClip( AudioClip clip )
+    public void InitalizeWithAudioClip( AudioClip clip, float volume_multiplier )
     {
         // store clip
         audio_clip = clip;
+        audio_clip_volume_multiplier = volume_multiplier;
 
         // read out samples
         float[] temp_clip_samples = new float[clip.samples];
@@ -194,6 +200,8 @@ class SFXManagerEditor : ExtendedEditor<SFXManager>
 
             if( !target.AudioClipMappings.ContainsKey( sfx ) )
                 target.AudioClipMappings.Add( sfx, null );
+            if( !target.AudioClipVolumeMultipliers.ContainsKey( sfx ) )
+                target.AudioClipVolumeMultipliers.Add( sfx, 1.0f );
         }
 
         SectionHeader( "Sound Effect Mappings" );
@@ -206,6 +214,12 @@ class SFXManagerEditor : ExtendedEditor<SFXManager>
             AudioClip clip = target.AudioClipMappings[sfx];
             AudioClipField( ref clip, sfx.ToString() );
             target.AudioClipMappings[sfx] = clip;
+
+            float volume_multiplier = target.AudioClipVolumeMultipliers[sfx];
+            FloatSliderField( ref volume_multiplier, 0.0f, 2.0f, $"{sfx} Volume Multiplier" );
+            target.AudioClipVolumeMultipliers[sfx] = volume_multiplier;
+
+            Seperator();
         }
     }
 }
