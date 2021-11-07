@@ -11,6 +11,9 @@ public class Shaman : Enemy
     [SerializeField] float SummonDuration = 0.5f;
     [SerializeField] float SummonCooldown = 1.0f;
     [SerializeField] SpawnGroup OnDeathSpawnGroup;
+    [SerializeField] bool UseSummonParticles;
+    [SerializeField] ParticleSystem SummonParticles;
+    [SerializeField] SFXEnum SummonSFX;
 
     private float cur_summon_cooldown = 0.0f;
 
@@ -51,6 +54,11 @@ public class Shaman : Enemy
 
     private void Summon()
     {
+        if (UseSummonParticles)
+        {
+            SummonParticles.Play();
+            SFXManager.Instance.PlaySFX(SummonSFX);
+        }
         anim.SetTrigger( SummonAnimation );
         SpawnGroup group = PD.Instance.UnlockMap.Get( UnlockFlag.SummonerUpgradeCurse ) ? CurseSummonSpawnGroup : SummonSpawnGroup;
         List<Vector3> spawn_points = SpawnManager.Instance.SpawnSpawnGroup( group, transform.position, false );

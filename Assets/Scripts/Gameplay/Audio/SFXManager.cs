@@ -36,6 +36,22 @@ public enum SFXEnum
     SkeleSpawn1,
     SkeleSpawn2,
     ShamanSummon,
+    ShamanDie,
+    EnemyHit2,
+    ShrikeEnter,
+    ShrikeExit,
+    Shrike2Enter,
+    Shrike2Exit,
+    BouncerDie,
+    BouncerSpawn,
+    MudCarrierSummon,
+    Shaman2Die,
+    Shaman2Summon,
+    Shaman2Spawn,
+    ShamanSpawn,
+    GhostieDie,
+    Ghostie2Die,
+
 
 }
 
