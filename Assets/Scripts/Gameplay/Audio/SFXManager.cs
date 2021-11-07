@@ -10,6 +10,28 @@ public enum SFXEnum
     NONE = 0,
     EnemyHit,
     SkeletonDie,
+    PumpkinHit,
+    BlackHoleDie,
+    BolterDie,
+    BomberExplode,
+    MudCarrierDie,
+    MudCarrierHit,
+    MudlingDie,
+    ShrikeDie,
+    Shrike2Die,
+    SpaceWormDie,
+    SpaceWormSpawn,
+    BomberHit,
+    PumpkinDie,
+    MudslingerHit,
+    MudlingSpawn,
+    CarrierLargeDie,
+    CarrierLargeHit,
+    CarrierMediumDie,
+    CarrierMediumHit,
+    CarrierSmallDie,
+    BlackHoleHit,
+
 }
 
 [RequireComponent( typeof( AudioSource ) )]
