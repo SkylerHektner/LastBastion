@@ -9,7 +9,7 @@ public class TyphoonAbility : Ability
 
     public TyphoonAbilityData AbilityData;
     private float time_remaining = 0.0f;
-    private DeleteAfterDuration ActiveTyphoonDeleteAfterDuration;
+    private GameObject Typhoon;
 
     private float roaring_flames_duration_carryover = 1.0f;
     bool listening = false;
@@ -17,7 +17,7 @@ public class TyphoonAbility : Ability
     public override void Start()
     {
         base.Start();
-        ActiveTyphoonDeleteAfterDuration = GameObject.Instantiate( AbilityData.Effect ).GetComponent<DeleteAfterDuration>();
+        Typhoon = GameObject.Instantiate( AbilityData.Effect );
         SetDuration( AbilityData.Duration * GetAbilityDurationMultiplier() );
         roaring_flames_duration_carryover = AbilityData.Duration * 0.5f * GetAbilityDurationMultiplier();
         ActiveTyphoon = this;
@@ -34,8 +34,16 @@ public class TyphoonAbility : Ability
         base.Update( delta_time );
         time_remaining -= delta_time * GameplayManager.TimeScale;
         AnimatorDuration = time_remaining;
-        if( time_remaining <= 0.0f && !Saw.Instance.OnFire )
-            Finish();
+        if( time_remaining <= 0.0f )
+        {
+            GameObject.Destroy( Typhoon );
+            Typhoon = null;
+            if( !Saw.Instance.OnFire )
+            {
+                Finish();
+            }
+        }
+
     }
 
     public void SetSawOnFire( Saw saw )
@@ -54,6 +62,12 @@ public class TyphoonAbility : Ability
             Saw.Instance.SawKilledEnemyEvent.RemoveListener( OnSawKilledEnemy );
             listening = false;
         }
+        if( Typhoon != null )
+        {
+            GameObject.Destroy( Typhoon );
+            Typhoon = null;
+        }
+
         base.Finish();
     }
 
@@ -69,9 +83,6 @@ public class TyphoonAbility : Ability
     private void SetDuration( float duration )
     {
         time_remaining = duration;
-        Debug.Assert( ActiveTyphoonDeleteAfterDuration != null );
-        if( ActiveTyphoonDeleteAfterDuration != null )
-            ActiveTyphoonDeleteAfterDuration.duration = time_remaining + 0.1f;
     }
 
     private void OnSawKilledEnemy( Vector3 enemy_position )
