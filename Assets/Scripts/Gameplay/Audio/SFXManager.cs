@@ -51,6 +51,7 @@ public enum SFXEnum
     ShamanSpawn,
     GhostieDie,
     Ghostie2Die,
+    CarrierSpawn,
 
 
 }
