@@ -38,6 +38,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject BlackSkeletonPrefab;
     [SerializeField] GameObject WormholeWormPrefab;
     [SerializeField] GameObject GhostieFriendPrefab;
+    [SerializeField] GameObject PumpQUEENPrefab;
+    [SerializeField] GameObject GoldSkeletonPrefab;
+
 
 
     [Header( "Misc" )]
@@ -598,6 +601,13 @@ public class SpawnManager : MonoBehaviour
             case EnemyEnum.GhostieFriend:
                 ret = Instantiate( GhostieFriendPrefab );
                 break;
+            case EnemyEnum.PumpQUEEN:
+                ret = Instantiate(PumpQUEENPrefab);
+                break;
+            case EnemyEnum.GoldSkeleton:
+                ret = Instantiate(GoldSkeletonPrefab);
+                break;
+
             case 0:
 #if UNITY_EDITOR
                 Debug.LogError( "ERROR: Tried to spawn an enemy " + enemy.ToString() + " that hasn't been added to the InstantiateMonster switch" );
@@ -642,6 +652,8 @@ public enum EnemyEnum
     BlackSkeleton = 22,
     WormholeWorm = 23,
     GhostieFriend = 24,
+    PumpQUEEN = 25,
+    GoldSkeleton = 26,
 }
 
 class SkeletonHashSet

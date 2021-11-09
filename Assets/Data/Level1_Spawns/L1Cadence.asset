@@ -18,17 +18,21 @@ MonoBehaviour:
   - CompletionReward: 0
     PassiveEnemies: 
     PassiveEnemySpawnCadence: []
-    SpawnGroups: []
-    SpawnGroupSpawnTimes: []
+    SpawnGroups:
+    - {fileID: 11400000, guid: fa41591e7469cd64ebea71d1513e05b5, type: 2}
+    - {fileID: 11400000, guid: fa41591e7469cd64ebea71d1513e05b5, type: 2}
+    SpawnGroupSpawnTimes:
+    - 3
+    - 7
     collapsed: 1
     AnimationTrigger: 
   - CompletionReward: 0
     PassiveEnemies: 
     PassiveEnemySpawnCadence: []
     SpawnGroups:
-    - {fileID: 11400000, guid: 9bb5fb586ea087046b5b14c30771920e, type: 2}
+    - {fileID: 11400000, guid: fa41591e7469cd64ebea71d1513e05b5, type: 2}
     - {fileID: 11400000, guid: 0325f6f2c242eb140a6bc7428ed945c7, type: 2}
-    - {fileID: 11400000, guid: 9bb5fb586ea087046b5b14c30771920e, type: 2}
+    - {fileID: 11400000, guid: fa41591e7469cd64ebea71d1513e05b5, type: 2}
     SpawnGroupSpawnTimes:
     - 3
     - 8
@@ -78,5 +82,5 @@ MonoBehaviour:
     - 10
     - 10
     - 12
-    collapsed: 0
+    collapsed: 1
     AnimationTrigger: 

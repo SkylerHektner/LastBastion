@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 {
     public EnemyEnum EnemyType;
     public UnityEvent<Enemy> DeathEvent = new UnityEvent<Enemy>();
+
     public static long NextEnemyID = 1;
     public long EnemyID
     {
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool attacks = true;
     [SerializeField] private int powerupDropValue = 1;
     [SerializeField] bool ImmuneToZapBonusDamage;
+
     public bool ImmuneToTyphoon = false;
     public bool ImmuneToFlamingSawBonusDamage = false;
     public bool Bouncy = false; // if true, the saw will bounce off the creature upon colliding (bounce angle on circular collider)
@@ -249,7 +251,7 @@ public class Enemy : MonoBehaviour
         Dying = true;
         DeathEvent.Invoke( this );
         if( DeathEffect != null )
-            Instantiate( DeathEffect ).transform.position = transform.position;
+            Instantiate( DeathEffect ).transform.position = transform.position; // this is where they die
         if( DeathAnimation != null && DeathAnimation.Length != 0 )
         {
             anim.SetTrigger( DeathAnimation );
