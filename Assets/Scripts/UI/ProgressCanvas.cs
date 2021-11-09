@@ -44,7 +44,7 @@ public class ProgressCanvas : MonoBehaviour
             else if (PD.Instance.CampaignLimboResumeInformation.Active && PD.Instance.SurvivalLimboResumeInformation.Active == false) // player came from campaign
             {
                 ModeText.text = "Campaign";
-                WaveText.text = "Zone " + Spectator.LevelIndex + 1 + " - Wave " + (PD.Instance.CampaignLimboResumeInformation.Wave + 1);
+                WaveText.text = "Zone " + PD.Instance.CampaignLimboResumeInformation.LevelIndex + " - Wave " + (PD.Instance.CampaignLimboResumeInformation.Wave + 1);
                 Scene2Load = PD.Instance.CampaignLimboResumeInformation.SceneName;
                 Debug.Log("Coming from campaign");
 
@@ -74,13 +74,16 @@ public class ProgressCanvas : MonoBehaviour
 
     public void LoadSceneFromLimboResumeAnimation()
     {
+        Spectator.LevelIndex = PD.Instance.CampaignLimboResumeInformation.LevelIndex;
+        Spectator.ReturningFromLevel = true;
         SceneManager.LoadScene(Scene2Load);
     }
 
     public void LoadMenuFromLimboResumeAnimation()
     {
         ProgressContent.SetActive(false);
+        Spectator.ReturningFromLevel = true;
         MenuTrack.gameObject.SetActive(true); // toggle music soundtrack when transitioned
-        MenuTrack.SwapTrack(MenuTrack.MyClip);
+        //MenuTrack.SwapTrack(MenuTrack.MyClip);
     }
 }

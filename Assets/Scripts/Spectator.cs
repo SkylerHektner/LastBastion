@@ -39,6 +39,7 @@ public class Spectator : MonoBehaviour
 
         Debug.Assert( GD != null, "ERROR: Global Data is null in Spectator. This will break a LOT of stuff" );
         GD?.Verify();
+        LevelIndex = PD.Instance.CampaignLimboResumeInformation.LevelIndex;
     }
 
     private void Update()
@@ -107,6 +108,7 @@ public class Spectator : MonoBehaviour
                 PD.Instance.SurvivalLimboResumeInformation.SetInfo(
                 true,
                 SceneManager.GetActiveScene().name,
+                SurvivalIndex,
                 SpawnManager.Instance.CurrentWaveIndex,
                 BaseHP.Instance.CurrentHP,
                 survival_unlock_flags );
@@ -119,6 +121,7 @@ public class Spectator : MonoBehaviour
                 PD.Instance.CampaignLimboResumeInformation.SetInfo(
                 true,
                 SceneManager.GetActiveScene().name,
+                LevelIndex,
                 SpawnManager.Instance.CurrentWaveIndex,
                 BaseHP.Instance.CurrentHP,
                 null );
@@ -128,7 +131,6 @@ public class Spectator : MonoBehaviour
             }
         }
     }
-
     // game is quit mid-game, save my current progress and put me in limbo
     private void OnApplicationQuit()
     {

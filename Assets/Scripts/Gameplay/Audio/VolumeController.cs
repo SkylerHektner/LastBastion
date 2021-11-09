@@ -8,10 +8,12 @@ public class VolumeController : MonoBehaviour
     AudioSource SoundSource;
     public bool MusicTrack;
     public AudioClip AlternateSound;
+    public AudioClip ThirdSound;
     AudioClip DefaultSound;
     public bool PitchIncreaseOnAwake;
     public bool NeutralizePitchOnDestroy;
     public static float RecentPitch = 1f;
+    public List<AudioClip> RandomlyPayedEffects;
 
     private float default_volume;
 
@@ -77,6 +79,11 @@ public class VolumeController : MonoBehaviour
         SoundSource.clip = AlternateSound;
         SoundSource.Play();
     }
+    public void PlayMyThirdSound()
+    {
+        SoundSource.clip = ThirdSound;
+        SoundSource.Play();
+    }
     public void NeutralizePitch() // called when Anonaly gets turned on for the first time from neutral state
     {
         RecentPitch = 1f;
@@ -87,6 +94,13 @@ public class VolumeController : MonoBehaviour
         {
             SoundSource.pitch = RecentPitch;
         }
+    }
+    [ContextMenu("PlayFromRandomPool")]
+    public void PlayFromRandomPool()
+    {
+        int randInt = Random.Range(0, RandomlyPayedEffects.Count); // picks a random number from 0 to the count of the list
+        SoundSource.clip = RandomlyPayedEffects[randInt];
+        SoundSource.Play();
     }
 
 }

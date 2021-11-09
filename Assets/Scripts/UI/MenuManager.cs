@@ -28,7 +28,9 @@ public class MenuManager : MonoBehaviour
     public GameObject TradeCanvas;
     public GameObject OfferCanvas;
     public GameObject CustomizationCanvas;
-
+    public Boombox SurvivalBoombox;
+    public Boombox MenuUIBoombox;
+    public AudioSource IntroWooshSFX;
 
 
     private void Awake()
@@ -42,18 +44,31 @@ public class MenuManager : MonoBehaviour
             CameraMover.LoadLevelShortcut();
             CampaignPortal.SetTrigger("Shrink");
             MenuOptions.SetTrigger("Skip");
+            MenuUIBoombox.SwapTrack(MenuUIBoombox.MyClip);
+            //IntroWooshSFX.playOnAwake = false;
         }
         else if (Spectator.ReturningFromSurvival)
         {
             Debug.Log("Returning from survival");
             CameraMover.LoadSurvivalShortcut();
             MenuOptions.SetTrigger("Skip");
+            SurvivalBoombox.SwapTrack(SurvivalBoombox.MyClip);
+            //IntroWooshSFX.playOnAwake = false;
         }
+        else if ((!Spectator.ReturningFromLevel && !Spectator.ReturningFromSurvival) && (!PD.Instance.CampaignLimboResumeInformation.Active && !PD.Instance.SurvivalLimboResumeInformation.Active))
+        {
+            // playing when starting game up
+            Debug.Log("Starting up menu");
+            IntroWooshSFX.playOnAwake = true;
+            IntroWooshSFX.Play();
+        }
+
         if (PD.Instance.CampaignLimboResumeInformation != null && PD.Instance.SurvivalLimboResumeInformation != null)
         {
             if ((PD.Instance.CampaignLimboResumeInformation.Active) || PD.Instance.SurvivalLimboResumeInformation.Active) // limbo
             {
                 MenuTrack.gameObject.SetActive(false);
+                MenuOptions.SetTrigger("Skip");
                 ShowProgressCanvas();
             }
             else if (!PD.Instance.CampaignLimboResumeInformation.Active && !PD.Instance.SurvivalLimboResumeInformation.Active) // no limbo

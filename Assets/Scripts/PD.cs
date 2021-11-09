@@ -881,20 +881,23 @@ public class LimboResumeInformation
 
     [SerializeField] private bool active = false;
     [SerializeField] private string scene_name;
+    [SerializeField] private int level_index;
     [SerializeField] private int wave;
     [SerializeField] private float health;
     [SerializeField] private List<UnlockFlag> survival_unlocks = new List<UnlockFlag>();
 
     public bool Active { get { return active; } }
     public string SceneName { get { return scene_name; } }
+    public int LevelIndex { get { return level_index; } }
     public int Wave { get { return wave; } }
     public float Health { get { return health; } }
     public IReadOnlyList<UnlockFlag> SurvivalUnlocks { get { return survival_unlocks; } }
 
-    public void SetInfo( bool active, string level_name = "", int wave = 0, float health = 0, List<UnlockFlag> survival_unlocks = null )
+    public void SetInfo( bool active, string level_name = "", int levelIndex = 0, int wave = 0, float health = 0, List<UnlockFlag> survival_unlocks = null )
     {
         this.active = active;
         this.scene_name = level_name;
+        this.level_index = levelIndex;
         this.wave = wave;
         this.health = health;
         this.survival_unlocks = survival_unlocks;
@@ -905,6 +908,7 @@ public class LimboResumeInformation
     {
         active = false;
         scene_name = "";
+        level_index = 0;
         wave = 0;
         health = 0.0f;
         survival_unlocks = null;
