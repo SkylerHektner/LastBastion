@@ -147,7 +147,6 @@ public class SpawnManager : MonoBehaviour
 #if UNITY_EDITOR
         CurrentWaveIndex = DebugStartWave - 2;
 #endif
-#if UNITY_EDITOR
         if (GameplayManager.Instance.Survival 
             && PD.Instance.SurvivalLimboResumeInformation.Active)
         {
@@ -164,7 +163,6 @@ public class SpawnManager : MonoBehaviour
 
         GameplayManager.State = GameplayManager.GameState.Active;
         StartNextWave();
-#endif
     }
 
     private void Update()
