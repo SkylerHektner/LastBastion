@@ -122,10 +122,30 @@ public class BaseHP : MonoBehaviour
             }
             if( CurrentOvershield <= 0 )
             {
+                CurrentHP = CurrentHP - Mathf.Abs(CurrentOvershield); // if you took enough damage to the shield to go into the negatives, subtract that from the base HP
                 CurrentOvershield = 0;
                 OvershieldAnim.SetBool( "Broken", true );
                 OvershieldAnim.SetBool( "Recovering", false );
+                DamageDelay = 1f;
                 BrokenGlass.SetActive( true );
+                if (CurrentHP <= 0)
+                {
+                    DeathCanvas.DisplayDeathScreen();
+                    CurrentHpBar.gameObject.SetActive(false);
+                    DamageHpBar.gameObject.SetActive(false);
+                    OvershieldBar.gameObject.SetActive(false);
+                    BrokenHpBar.SetActive(true);
+                    ForceField.SetActive(false);
+                    AbiltyManager.SetActive(false);
+                    SawCanvas.SetActive(false);
+                    PauseCanvas.SetActive(false);
+                    DeathExplosions.SetActive(true);
+                    WoundedGlow.SetActive(false);
+                    GameplayManager.State = GameplayManager.GameState.Lost;
+                    GameplayManager.Instance.ResetLimbo();
+                    PD.Instance.TotalFailures.Set(PD.Instance.TotalFailures.Get() + 1);
+                }
+                UpdateHPBar();
             }
             OvershieldBar.SetSize( CurrentOvershield / MaxOvershield );
         }
@@ -197,7 +217,7 @@ public class BaseHP : MonoBehaviour
                 OvershieldAnim.GetComponent<VolumeController>().PlayMySound();
             }
         }
-        else if( CurrentOvershield < MaxOvershield && ShieldRecoveryDelay <= 0 )
+        else if( CurrentOvershield < MaxOvershield && ShieldRecoveryDelay <= 0 && CurrentHP > 0) // don't recharge if dead
         {
             CurrentOvershield += ShieldRechargeRate * GameplayManager.TimeScale;
             BrokenGlass.SetActive( false );
