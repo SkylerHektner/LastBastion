@@ -12660,7 +12660,7 @@ Transform:
   - {fileID: 349338768}
   - {fileID: 419348951}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &901737720 stripped
 RectTransform:
@@ -32108,7 +32108,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1152446455
 MonoBehaviour:
@@ -32140,8 +32140,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicTrack: 1
   AlternateSound: {fileID: 0}
+  ThirdSound: {fileID: 0}
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
+  RandomlyPayedEffects: []
 --- !u!1 &1166987924
 GameObject:
   m_ObjectHideFlags: 0
@@ -32748,7 +32750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 752978209039593157, guid: 00ced951fab60d748b080622926a5d48, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 752978209039593157, guid: 00ced951fab60d748b080622926a5d48, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33162,7 +33164,7 @@ Transform:
   - {fileID: 303462746}
   - {fileID: 859184148}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1460813932
 MonoBehaviour:
