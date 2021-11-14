@@ -24,6 +24,13 @@ public class Spectator : MonoBehaviour
 
     private float achievementCheckCooldown;
 
+    public UnityIAPListener UnityIAP;
+
+    private void Start()
+    {
+        UnityIAP = new UnityIAPListener();
+    }
+
     private void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag( "Spectator" );
