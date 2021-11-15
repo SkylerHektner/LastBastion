@@ -52,6 +52,9 @@ public enum SFXEnum
     GhostieDie,
     Ghostie2Die,
     CarrierSpawn,
+    GoldTotemSpawn,
+    GoldTotemHit,
+    GoldTotemDie,
 
 
 }
