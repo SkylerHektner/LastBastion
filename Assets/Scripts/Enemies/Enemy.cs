@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 {
     public EnemyEnum EnemyType;
     public UnityEvent<Enemy> DeathEvent = new UnityEvent<Enemy>();
+    public UnityEvent<Enemy> HitEvent = new UnityEvent<Enemy>();
 
     public static long NextEnemyID = 1;
     public long EnemyID
@@ -242,6 +243,7 @@ public class Enemy : MonoBehaviour
                 Instantiate( DamagedEffect ).transform.position = transform.position;
             if( !string.IsNullOrEmpty( DamagedAnimation ) )
                 anim.SetTrigger( DamagedAnimation );
+            HitEvent.Invoke(this);
         }
     }
 
