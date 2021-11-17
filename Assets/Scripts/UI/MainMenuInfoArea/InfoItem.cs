@@ -11,6 +11,7 @@ public class InfoItem : MonoBehaviour
     public GameObject LockedSymbol;
     public TextMeshProUGUI PayoutText;
     public Animator Strikeout;
+    public GameObject CandyBar;
 
     public bool AchievementLocked
     {
@@ -36,7 +37,11 @@ public class InfoItem : MonoBehaviour
 
     public virtual void Start()
     {
-        
+    }
+
+    public void Awake()
+    {
+        GetProgressAmount();
     }
 
     public virtual string GetInfoName()
@@ -91,8 +96,19 @@ public class InfoItem : MonoBehaviour
         if (Progress.ToString("F0") == "100") // complete?
         {
             AchievementLocked = false; // give me my trophy!
-            Strikeout.SetTrigger("Strikeout");
-            Strikeout.ResetTrigger("Hide");
+            if (!EnemyInfo) // achievements only 
+            {
+                Strikeout.SetTrigger("Strikeout");
+                Strikeout.ResetTrigger("Hide");
+                CandyBar.SetActive(true);
+            }
+            else
+            {
+                Strikeout.SetTrigger("Hide");
+                Strikeout.ResetTrigger("Strikeout");
+                CandyBar.SetActive(false);
+            }
+
         }
         else
         {
@@ -100,6 +116,14 @@ public class InfoItem : MonoBehaviour
             PayoutText.text = AchievementInformation.Payout.ToString();
             Strikeout.SetTrigger("Hide");
             Strikeout.ResetTrigger("Strikeout");
+            if (!EnemyInfo)
+            {
+                CandyBar.SetActive(true);
+            }
+            else
+            {
+                CandyBar.SetActive(false);
+            }
         }
         return Progress.ToString("F0") + "% Complete";
 
