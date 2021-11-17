@@ -8,6 +8,7 @@ public class InfoItem : MonoBehaviour
     public Achievement AchievementInformation;
     public bool EnemyInfo;
     public bool HiddenAchievement;
+    public bool IsAchievement;
     public GameObject LockedSymbol;
     public TextMeshProUGUI PayoutText;
     public Animator Strikeout;
@@ -96,7 +97,7 @@ public class InfoItem : MonoBehaviour
         if (Progress.ToString("F0") == "100") // complete?
         {
             AchievementLocked = false; // give me my trophy!
-            if (!EnemyInfo) // achievements only 
+            if (IsAchievement) // achievements only 
             {
                 Strikeout.SetTrigger("Strikeout");
                 Strikeout.ResetTrigger("Hide");
@@ -116,7 +117,7 @@ public class InfoItem : MonoBehaviour
             PayoutText.text = AchievementInformation.Payout.ToString();
             Strikeout.SetTrigger("Hide");
             Strikeout.ResetTrigger("Strikeout");
-            if (!EnemyInfo)
+            if (IsAchievement)
             {
                 CandyBar.SetActive(true);
             }
