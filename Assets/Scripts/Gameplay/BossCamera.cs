@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossCamera : MonoBehaviour
 {
@@ -35,5 +36,6 @@ public class BossCamera : MonoBehaviour
     public void HideHourGlass()
     {
         Hourglass.SetActive(false);
+        Hourglass.GetComponent<Button>().interactable = false;
     }
 }
