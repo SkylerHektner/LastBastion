@@ -6,6 +6,7 @@ public class BossCamera : MonoBehaviour
 {
     public GameObject VoidLevel;
     public GameObject OverworldLevel;
+    public GameObject VaultLevel;
     public GameObject Hourglass;
 
 
@@ -18,6 +19,12 @@ public class BossCamera : MonoBehaviour
     public void LoadOverworld()
     {
         OverworldLevel.SetActive(true);
+        VoidLevel.SetActive(false);
+    }
+
+    public void LoadCandyVault()
+    {
+        VaultLevel.SetActive(true);
         VoidLevel.SetActive(false);
     }
 

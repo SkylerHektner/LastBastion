@@ -109,6 +109,8 @@ public enum UnlockFlag
     Simple_LaunchArrow = 85,
     Golden_LaunchArrow = 86,
     Stars_SawTrail = 87,
+    Cleaver_SawSkin = 88,
+
 
 }
 
@@ -318,6 +320,7 @@ public class PD
         { UnlockFlag.Simple_LaunchArrow, UnlockFlagCategory.Cosmetic },
         { UnlockFlag.Golden_LaunchArrow, UnlockFlagCategory.Cosmetic },
         { UnlockFlag.Stars_SawTrail, UnlockFlagCategory.Cosmetic },
+        { UnlockFlag.Cleaver_SawSkin, UnlockFlagCategory.Cosmetic },
 
     };
 

@@ -18,17 +18,18 @@ public class Skully : MonoBehaviour
     void FixedUpdate()
     {
         SkullyBossHP = gameObject.GetComponent<Shaman>().CurrentHealth;
+        gameObject.GetComponent<Animator>().SetFloat("CurrentHP", SkullyBossHP);
 
-        if (SkullyBossHP > 75)
+        if (SkullyBossHP > 175)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = Healthy;
         }
-        else if (SkullyBossHP <= 75 && SkullyBossHP > 50)
+        else if (SkullyBossHP <= 175 && SkullyBossHP > 150)
         {
             LaughSFX.SetActive(true);
             gameObject.GetComponent<SpriteRenderer>().sprite = Wounded;
         }
-        else if (SkullyBossHP <= 50 && SkullyBossHP > 25)
+        else if (SkullyBossHP <= 100 && SkullyBossHP > 25)
         {
             HalfwaySFX.SetActive(true);
             InnerGlow.SetBool("Half", true);
@@ -41,6 +42,30 @@ public class Skully : MonoBehaviour
             InnerGlow.SetBool("Critical", true);
             gameObject.GetComponent<SpriteRenderer>().sprite = Critical;
         }
+    }
+
+    public void TriggerVaultTransition() // boss phase part 2
+    {
+        Animator MainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
+        MainCamera.SetTrigger("ToggleVault");
+
+        Animator VaultDoor = GameObject.FindGameObjectWithTag("VaultDoor").GetComponent<Animator>();
+        VaultDoor.SetTrigger("VaultDoor");
+
+        gameObject.GetComponent<Shaman>().DecreaseSpawnRate();
+    }
+
+    public void NeutralSpawnRate()
+    {
+        gameObject.GetComponent<Shaman>().IncreaseSpawnRate();
+    }
+    public void MaxspawnRate()
+    {
+        gameObject.GetComponent<Shaman>().MaximizeSpawnRate();
+    }
+    public void ExtremeSlowSpawnRate()
+    {
+        gameObject.GetComponent<Shaman>().ExtremeSlowSpawnRate();
     }
 
 
