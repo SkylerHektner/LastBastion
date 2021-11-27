@@ -19,7 +19,7 @@ public class Carrier : Enemy
         SpawnGroup group = PD.Instance.UnlockMap.Get( UnlockFlag.CarrierUpgradeCurse ) ?
             CurseOnDeathSpawnGroup : OnDeathSpawnGroup;
         if( group )
-            SpawnManager.Instance.SpawnSpawnGroup( group, transform.position, false );
+            SpawnManager.Instance.SpawnSpawnGroup( group, transform.position );
         base.Kill();
     }
 }

@@ -39,7 +39,7 @@ public class Shrike : Enemy
             dodged = true;
             return;
         }
-        if( Moving && current_teleport_cooldown <= 0.0f && can_dodge && !Zapped && !StasisCoated )
+        if( Moving && current_teleport_cooldown <= 0.0f && can_dodge && !Zapped && !StasisCoated && !Dying )
         {
             last_saw_hit_direction = hit_direction;
             StopMoving();

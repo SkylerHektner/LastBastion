@@ -50,7 +50,7 @@ public class Ghostie : Enemy
         StartMoving();
         if( PD.Instance.UnlockMap.Get( UnlockFlag.GhostUpgradeCurse ) )
         {
-            SpawnManager.Instance.SpawnSpawnGroup( GhostFriendCurseSpawnGroup, transform.position, false );
+            SpawnManager.Instance.SpawnSpawnGroup( GhostFriendCurseSpawnGroup, transform.position );
         }
     }
 

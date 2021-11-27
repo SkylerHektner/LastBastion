@@ -30,6 +30,7 @@ public class SpawnGroup : ScriptableObject
         Door,
         Boss,
         Custom,
+        PointCluster,
     }
 }
 
@@ -112,7 +113,7 @@ public class SpawnGroupEdtior : Editor
             EditorUtility.SetDirty( target );
         }
 
-        if( layout == SpawnGroup.Layout.Cluster )
+        if( layout == SpawnGroup.Layout.Cluster || layout == SpawnGroup.Layout.PointCluster )
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField( "Monster Per Meter^2" );

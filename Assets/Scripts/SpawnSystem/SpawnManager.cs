@@ -68,11 +68,13 @@ public class SpawnManager : MonoBehaviour
         public float time_left;
         public EnemyEnum enemy;
         public Vector3 position;
-        public PendingSpawn( float _time_left, EnemyEnum _enemy, Vector3 _position )
+        public GameObject optional_spawn_effect;
+        public PendingSpawn( float _time_left, EnemyEnum _enemy, Vector3 _position, GameObject _optional_spawn_effect )
         {
             time_left = _time_left;
             enemy = _enemy;
             position = _position;
+            optional_spawn_effect = _optional_spawn_effect;
         }
     }
 
@@ -147,15 +149,15 @@ public class SpawnManager : MonoBehaviour
 #if UNITY_EDITOR
         CurrentWaveIndex = DebugStartWave - 2;
 #endif
-        if (GameplayManager.Instance.Survival 
-            && PD.Instance.SurvivalLimboResumeInformation.Active)
+        if( GameplayManager.Instance.Survival
+            && PD.Instance.SurvivalLimboResumeInformation.Active )
         {
             CurrentWaveIndex = PD.Instance.SurvivalLimboResumeInformation.Wave - 1; // subtract one since we immediately start next wave
             PD.Instance.SurvivalLimboResumeInformation.Clear(); // when coming from limbo, clear my limbo status - alex
         }
-        else if(!GameplayManager.Instance.Survival 
-            && PD.Instance.CampaignLimboResumeInformation.Active 
-            && PD.Instance.CampaignLimboResumeInformation.SceneName == SceneManager.GetActiveScene().name)
+        else if( !GameplayManager.Instance.Survival
+            && PD.Instance.CampaignLimboResumeInformation.Active
+            && PD.Instance.CampaignLimboResumeInformation.SceneName == SceneManager.GetActiveScene().name )
         {
             CurrentWaveIndex = PD.Instance.CampaignLimboResumeInformation.Wave - 1; // subtract one since we immediately start next wave
             PD.Instance.CampaignLimboResumeInformation.Clear(); // when coming from limbo, clear my limbo status - alex
@@ -185,7 +187,7 @@ public class SpawnManager : MonoBehaviour
                 it.Value = ps;
                 if( ps.time_left < 0.0f )
                 {
-                    SpawnMonster( ps.enemy, ps.position );
+                    SpawnMonster( ps.enemy, ps.position, 0.0f, ps.optional_spawn_effect );
                     pending_spawns.Remove( ps );
                 }
                 it = next;
@@ -313,141 +315,161 @@ public class SpawnManager : MonoBehaviour
         return new Vector3( UnityEngine.Random.Range( SpawnableAreaBottomLeft.x, SpawnableAreaTopRight.x ), UnityEngine.Random.Range( SpawnableAreaBottomLeft.y, SpawnableAreaTopRight.y ), 0 );
     }
 
-    private void SpawnSpawnGroup( SpawnGroup sg )
+    public void SpawnSpawnGroup( SpawnGroup sg, Nullable<Vector3> spawn_center = null, GameObject optional_spawn_effect = null )
     {
-        if( sg.layout == SpawnGroup.Layout.Cluster )
+        switch( sg.layout )
         {
-            // determine radius of spawning circle
-            float num_spawns = sg.SpawnMap.Aggregate( 0, ( current, next ) => next.Value + current );
-            float desired_area = num_spawns / sg.ClusterDensity;
-            float radius = Mathf.Sqrt( desired_area / Mathf.PI );
-            Vector3 SpawnableAreaBottomLeft = GameplayManager.Instance.ActiveEnvironment.SpawnableAreaBottomLeft;
-            Vector3 SpawnableAreaTopRight = GameplayManager.Instance.ActiveEnvironment.SpawnableAreaTopRight;
-            if( radius > Mathf.Min( SpawnableAreaTopRight.x - SpawnableAreaBottomLeft.x, SpawnableAreaTopRight.y - SpawnableAreaBottomLeft.y ) / 2.0f )
+            case SpawnGroup.Layout.Cluster:
             {
+                float num_spawns = sg.SpawnMap.Aggregate( 0, ( current, next ) => next.Value + current );
+                float desired_area = num_spawns / sg.ClusterDensity;
+                float radius = Mathf.Sqrt( desired_area / Mathf.PI );
+                Vector3 SpawnableAreaBottomLeft = GameplayManager.Instance.ActiveEnvironment.SpawnableAreaBottomLeft;
+                Vector3 SpawnableAreaTopRight = GameplayManager.Instance.ActiveEnvironment.SpawnableAreaTopRight;
+                if( radius > Mathf.Min( SpawnableAreaTopRight.x - SpawnableAreaBottomLeft.x, SpawnableAreaTopRight.y - SpawnableAreaBottomLeft.y ) / 2.0f )
+                {
 #if UNITY_EDITOR
-                Debug.LogError( "ERROR: Spawning Density not high enough in spawn group (" + sg.name + ")to fit all desired spawns in cluster inside play space - falling back to random distribution" );
+                    Debug.LogError( "ERROR: Spawning Density not high enough in spawn group (" + sg.name + ")to fit all desired spawns in cluster inside play space - falling back to random distribution" );
 #endif
-                SpawnGroupRandomPlacement( sg );
+                    goto case SpawnGroup.Layout.Spread;
+                }
+                else
+                {
+                    Vector3 new_top_right = new Vector3( SpawnableAreaTopRight.x - radius, SpawnableAreaTopRight.y - radius );
+                    Vector3 new_bottom_left = new Vector3( SpawnableAreaBottomLeft.x + radius, SpawnableAreaBottomLeft.y + radius );
+                    Vector3 circle_center = new Vector3( UnityEngine.Random.Range( new_bottom_left.x, new_top_right.x ), UnityEngine.Random.Range( new_bottom_left.y, new_top_right.y ), 0 );
+
+                    float stagger = 0.0f;
+                    foreach( var e in sg.SpawnMap )
+                    {
+                        for( int x = 0; x < e.Value; ++x )
+                        {
+                            float random_radius = UnityEngine.Random.Range( 0.0f, radius );
+                            float random_theta = UnityEngine.Random.Range( 0.0f, Mathf.PI * 2 );
+                            Vector3 final_point = new Vector3( Mathf.Cos( random_theta ) * random_radius + circle_center.x, Mathf.Sin( random_theta ) * random_radius + circle_center.y );
+                            SpawnMonster( e.Key, final_point, stagger, optional_spawn_effect );
+                            stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                        }
+                    }
+                }
             }
-            else
+            break;
+            case SpawnGroup.Layout.Spread:
             {
-                Vector3 new_top_right = new Vector3( SpawnableAreaTopRight.x - radius, SpawnableAreaTopRight.y - radius );
-                Vector3 new_bottom_left = new Vector3( SpawnableAreaBottomLeft.x + radius, SpawnableAreaBottomLeft.y + radius );
-                Vector3 circle_center = new Vector3( UnityEngine.Random.Range( new_bottom_left.x, new_top_right.x ), UnityEngine.Random.Range( new_bottom_left.y, new_top_right.y ), 0 );
+                float stagger = 0.0f;
+                foreach( var e in sg.SpawnMap )
+                {
+                    for( int x = 0; x < e.Value; ++x )
+                    {
+                        SpawnMonster( e.Key, GetRandomSpawnPoint(), stagger, optional_spawn_effect );
+                        stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                    }
+                }
+            }
+            break;
+            case SpawnGroup.Layout.Door:
+            {
+                Debug.Assert( GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count > 0,
+                "ERROR: Trying to spawn monster from door in an environment with no configured door spawn points" );
+
+                int door_index = UnityEngine.Random.Range( 0, GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count );
+                float stagger = 0.0f;
+                foreach( var e in sg.SpawnMap )
+                {
+                    for( int x = 0; x < e.Value; ++x )
+                    {
+                        SpawnMonster( e.Key, GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints[door_index], stagger, optional_spawn_effect );
+                        stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                        door_index = ( door_index + 1 ) % GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count;
+                    }
+                }
+            }
+            break;
+            case SpawnGroup.Layout.Boss:
+            {
+                float stagger = 0.0f;
+                foreach( var e in sg.SpawnMap )
+                {
+                    for( int x = 0; x < e.Value; ++x )
+                    {
+                        SpawnMonster( e.Key, GameplayManager.Instance.ActiveEnvironment.BossSpawnPoint, stagger, optional_spawn_effect );
+                        stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                    }
+                }
+            }
+            break;
+            case SpawnGroup.Layout.Custom:
+            {
+                float stagger = 0.0f;
+                int index = 0;
+                foreach( var e in sg.SpawnMap )
+                {
+                    for( int x = 0; x < e.Value; ++x )
+                    {
+                        Debug.Assert( index < sg.custom_layout_positions.Count );
+
+                        // relative coordinates are considering top-left as (0,0)
+                        Vector2 top_left = new Vector2(
+                            GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.x,
+                            GameplayManager.Instance.ActiveEnvironment.PlayableAreaTopRight.y );
+                        Vector2 deltas = new Vector2(
+                            GameplayManager.Instance.ActiveEnvironment.PlayableAreaTopRight.x - top_left.x,
+                            GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.y - top_left.y );
+                        Vector3 spawn_point = new Vector3(
+                            top_left.x + deltas.x * sg.custom_layout_positions[index].x,
+                            top_left.y + deltas.y * sg.custom_layout_positions[index].y );
+                        SpawnMonster( e.Key, spawn_point, stagger, optional_spawn_effect );
+                        stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                        index++;
+                    }
+                }
+            }
+            break;
+            case SpawnGroup.Layout.PointCluster:
+            {
+                Debug.Assert( spawn_center != null, "ERROR: shaman cluster spawning without valid spawn center. Falling back to default cluster distribution" );
+                if(spawn_center == null)
+                {
+                    goto case SpawnGroup.Layout.Cluster;
+                }
+
+                Vector3 circle_center = spawn_center.Value;
+
+                float num_spawns = sg.SpawnMap.Aggregate( 0, ( current, next ) => next.Value + current );
+                float desired_area = num_spawns / sg.ClusterDensity;
+                float radius = Mathf.Sqrt( desired_area / Mathf.PI );
 
                 float stagger = 0.0f;
                 foreach( var e in sg.SpawnMap )
                 {
                     for( int x = 0; x < e.Value; ++x )
                     {
-                        float random_radius = UnityEngine.Random.Range( 0.0f, radius );
-                        float random_theta = UnityEngine.Random.Range( 0.0f, Mathf.PI * 2 );
-                        Vector3 final_point = new Vector3( Mathf.Cos( random_theta ) * random_radius + circle_center.x, Mathf.Sin( random_theta ) * random_radius + circle_center.y );
-                        SpawnMonster( e.Key, final_point, stagger );
-                        stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
+                        Vector3 final_point;
+                        int loop_depth = 0;
+                        do
+                        {
+                            float random_radius = UnityEngine.Random.Range( 0.0f, radius );
+                            float random_theta = UnityEngine.Random.Range( 0.0f, Mathf.PI * 2 );
+                            final_point = new Vector3( ( Mathf.Cos( random_theta ) * random_radius ) + circle_center.x, 
+                                Mathf.Sin( random_theta ) * random_radius + circle_center.y );
+                            ++loop_depth;
+                        } while( !PointInsidePlayableArea( final_point ) && loop_depth < 100 );
+                        if( loop_depth < 100 )
+                        {
+                            SpawnMonster( e.Key, final_point, stagger, optional_spawn_effect );
+                            stagger += ( UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime ) );
+                        }
+#if UNITY_EDITOR
+                        else
+                        {
+                            Debug.LogError( "ERROR: Could not find spawn point inside playable area. Spawn Aborted" );
+                        }
+#endif
                     }
                 }
             }
+            break;
         }
-        else if( sg.layout == SpawnGroup.Layout.Door )
-        {
-            Debug.Assert( GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count > 0,
-                "ERROR: Trying to spawn monster from door in an environment with no configured door spawn points" );
-
-            int door_index = UnityEngine.Random.Range( 0, GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count );
-            float stagger = 0.0f;
-            foreach( var e in sg.SpawnMap )
-            {
-                for( int x = 0; x < e.Value; ++x )
-                {
-                    SpawnMonster( e.Key, GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints[door_index], stagger );
-                    stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
-                    door_index = ( door_index + 1 ) % GameplayManager.Instance.ActiveEnvironment.DoorSpawnPoints.Count;
-                }
-            }
-        }
-        else if( sg.layout == SpawnGroup.Layout.Boss )
-        {
-            float stagger = 0.0f;
-            foreach( var e in sg.SpawnMap )
-            {
-                for( int x = 0; x < e.Value; ++x )
-                {
-                    SpawnMonster( e.Key, GameplayManager.Instance.ActiveEnvironment.BossSpawnPoint, stagger );
-                    stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
-                }
-            }
-        }
-        else if( sg.layout == SpawnGroup.Layout.Custom )
-        {
-            float stagger = 0.0f;
-            int index = 0;
-            foreach( var e in sg.SpawnMap )
-            {
-                for( int x = 0; x < e.Value; ++x )
-                {
-                    Debug.Assert( index < sg.custom_layout_positions.Count );
-
-                    // relative coordinates are considering top-left as (0,0)
-                    Vector2 top_left = new Vector2(
-                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.x,
-                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaTopRight.y );
-                    Vector2 deltas = new Vector2(
-                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaTopRight.x - top_left.x,
-                        GameplayManager.Instance.ActiveEnvironment.PlayableAreaBottomLeft.y - top_left.y );
-                    Vector3 spawn_point = new Vector3(
-                        top_left.x + deltas.x * sg.custom_layout_positions[index].x,
-                        top_left.y + deltas.y * sg.custom_layout_positions[index].y );
-                    SpawnMonster( e.Key, spawn_point, stagger );
-                    stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
-                    index++;
-                }
-            }
-        }
-        else
-        {
-            SpawnGroupRandomPlacement( sg );
-        }
-    }
-
-    public List<Vector3> SpawnSpawnGroup( SpawnGroup sg, Vector3 circle_center, bool should_stagger )
-    {
-        List<Vector3> ret = new List<Vector3>();
-        float num_spawns = sg.SpawnMap.Aggregate( 0, ( current, next ) => next.Value + current );
-        float desired_area = num_spawns / sg.ClusterDensity;
-        float radius = Mathf.Sqrt( desired_area / Mathf.PI );
-
-        float stagger = 0.0f;
-        foreach( var e in sg.SpawnMap )
-        {
-            for( int x = 0; x < e.Value; ++x )
-            {
-                Vector3 final_point;
-                int loop_depth = 0;
-                do
-                {
-                    float random_radius = UnityEngine.Random.Range( 0.0f, radius );
-                    float random_theta = UnityEngine.Random.Range( 0.0f, Mathf.PI * 2 );
-                    final_point = new Vector3( Mathf.Cos( random_theta ) * random_radius + circle_center.x, Mathf.Sin( random_theta ) * random_radius + circle_center.y );
-                    ++loop_depth;
-                } while( !PointInsidePlayableArea( final_point ) && loop_depth < 100 );
-                if( loop_depth < 100 )
-                {
-                    SpawnMonster( e.Key, final_point, stagger );
-                    stagger += ( should_stagger ? UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime ) : 0.0f );
-                    ret.Add( final_point );
-                }
-#if UNITY_EDITOR
-                else
-                {
-                    Debug.LogError( "ERROR: Could not find spawn point inside playable area. Spawn Aborted" );
-                }
-#endif
-            }
-        }
-
-        return ret;
     }
 
     public bool PointInsidePlayableArea( Vector3 point )
@@ -459,20 +481,7 @@ public class SpawnManager : MonoBehaviour
             && point.y < PlayableAreaTopRight.y && point.y > PlayableAreaBottomLeft.y );
     }
 
-    private void SpawnGroupRandomPlacement( SpawnGroup sg )
-    {
-        float stagger = 0.0f;
-        foreach( var e in sg.SpawnMap )
-        {
-            for( int x = 0; x < e.Value; ++x )
-            {
-                SpawnMonster( e.Key, GetRandomSpawnPoint(), stagger );
-                stagger += UnityEngine.Random.Range( sg.SpawnStaggerMinTime, sg.SpawnStaggerMaxTime );
-            }
-        }
-    }
-
-    private void SpawnMonster( EnemyEnum enemy, Vector3 position, float delay = 0.0f )
+    private void SpawnMonster( EnemyEnum enemy, Vector3 position, float delay = 0.0f, GameObject optional_spawn_effect = null )
     {
         if( delay == 0.0f )
         {
@@ -481,9 +490,11 @@ public class SpawnManager : MonoBehaviour
             if( e != null )
                 EnemySpawnedEvent.Invoke( e );
             RegisterEnemy( e );
+            if( optional_spawn_effect != null )
+                GameObject.Instantiate( optional_spawn_effect, position, Quaternion.identity );
         }
         else
-            pending_spawns.AddLast( new PendingSpawn( delay, enemy, position ) );
+            pending_spawns.AddLast( new PendingSpawn( delay, enemy, position, optional_spawn_effect ) );
     }
 
     // used by SkeletonUpgradeCurse
@@ -600,10 +611,10 @@ public class SpawnManager : MonoBehaviour
                 ret = Instantiate( GhostieFriendPrefab );
                 break;
             case EnemyEnum.PumpQUEEN:
-                ret = Instantiate(PumpQUEENPrefab);
+                ret = Instantiate( PumpQUEENPrefab );
                 break;
             case EnemyEnum.GoldSkeleton:
-                ret = Instantiate(GoldSkeletonPrefab);
+                ret = Instantiate( GoldSkeletonPrefab );
                 break;
 
             case 0:

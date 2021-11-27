@@ -38,7 +38,7 @@ public class BlackHole : Enemy
             if( cur_spawn_cooldown <= 0.0f )
             {
                 cur_spawn_cooldown = CurseSpawnCooldown;
-                SpawnManager.Instance.SpawnSpawnGroup( CurseSpawnGroup, transform.position, true );
+                SpawnManager.Instance.SpawnSpawnGroup( CurseSpawnGroup, transform.position );
             }
         }
     }

@@ -47,7 +47,7 @@ public class Shaman : Enemy
     public override void Kill()
     {
         if( OnDeathSpawnGroup )
-            SpawnManager.Instance.SpawnSpawnGroup( OnDeathSpawnGroup, transform.position, false );
+            SpawnManager.Instance.SpawnSpawnGroup( OnDeathSpawnGroup, transform.position, SummonEffect );
         base.Kill();
     }
 
@@ -66,9 +66,7 @@ public class Shaman : Enemy
         }
         anim.SetTrigger( SummonAnimation );
         SpawnGroup group = PD.Instance.UnlockMap.Get( UnlockFlag.SummonerUpgradeCurse ) ? CurseSummonSpawnGroup : active_spawn_group;
-        List<Vector3> spawn_points = SpawnManager.Instance.SpawnSpawnGroup( group, transform.position, false );
-        foreach( var p in spawn_points )
-            Instantiate( SummonEffect ).transform.position = p;
+        SpawnManager.Instance.SpawnSpawnGroup( group, transform.position, SummonEffect );
         Invoke( "FinishSummon", SummonDuration );
     }
 
