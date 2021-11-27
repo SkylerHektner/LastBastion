@@ -19,12 +19,14 @@ public class Shaman : Enemy
     [SerializeField] SFXEnum SummonSFX;
 
     private float cur_summon_cooldown = 0.0f;
+    private SpawnGroup active_spawn_group;
 
     protected override void Start()
     {
         base.Start();
         Debug.Assert( SummonSpawnGroup );
         Debug.Assert( CurseSummonSpawnGroup );
+        active_spawn_group = SummonSpawnGroup;
     }
 
     protected override void Update()
@@ -63,7 +65,7 @@ public class Shaman : Enemy
             SFXManager.Instance.PlaySFX(SummonSFX);
         }
         anim.SetTrigger( SummonAnimation );
-        SpawnGroup group = PD.Instance.UnlockMap.Get( UnlockFlag.SummonerUpgradeCurse ) ? CurseSummonSpawnGroup : SummonSpawnGroup;
+        SpawnGroup group = PD.Instance.UnlockMap.Get( UnlockFlag.SummonerUpgradeCurse ) ? CurseSummonSpawnGroup : active_spawn_group;
         List<Vector3> spawn_points = SpawnManager.Instance.SpawnSpawnGroup( group, transform.position, false );
         foreach( var p in spawn_points )
             Instantiate( SummonEffect ).transform.position = p;
@@ -75,23 +77,25 @@ public class Shaman : Enemy
         StartMoving();
     }
 
-    public void DecreaseSpawnRate()
+    public void SetSummonCooldown(float cooldown)
     {
-        SummonCooldown = 5f;
+        cur_summon_cooldown = cooldown;
+        SummonCooldown = cooldown;
     }
-    public void ExtremeSlowSpawnRate()
-    {
-        SummonCooldown = 10f;
-    }
-    public void IncreaseSpawnRate()
-    {
-        SummonCooldown = .5f;
-        SummonSpawnGroup = TertiarySummonSpawnGroup;
-    }
-    public void MaximizeSpawnRate() // only used with Skully
-    {
-        SummonCooldown = .2f;
-        SummonSpawnGroup = SecondarySummonSpawnGroup;
 
+    public void SetSummonGroup(int group_number)
+    {
+        switch( group_number )
+        {
+            case 1:
+                active_spawn_group = SummonSpawnGroup;
+                break;
+            case 2:
+                active_spawn_group = SecondarySummonSpawnGroup;
+                break;
+            case 3:
+                active_spawn_group = TertiarySummonSpawnGroup;
+                break;
+        }
     }
 }

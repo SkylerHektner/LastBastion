@@ -52,20 +52,22 @@ public class Skully : MonoBehaviour
         Animator VaultDoor = GameObject.FindGameObjectWithTag("VaultDoor").GetComponent<Animator>();
         VaultDoor.SetTrigger("VaultDoor");
 
-        gameObject.GetComponent<Shaman>().DecreaseSpawnRate();
+        gameObject.GetComponent<Shaman>().SetSummonCooldown( 5f );
     }
 
     public void NeutralSpawnRate()
     {
-        gameObject.GetComponent<Shaman>().IncreaseSpawnRate();
+        gameObject.GetComponent<Shaman>().SetSummonCooldown( .5f );
+        gameObject.GetComponent<Shaman>().SetSummonGroup( 2 );
     }
     public void MaxspawnRate()
     {
-        gameObject.GetComponent<Shaman>().MaximizeSpawnRate();
+        gameObject.GetComponent<Shaman>().SetSummonCooldown( 0.2f );
+        gameObject.GetComponent<Shaman>().SetSummonGroup( 3 );
     }
     public void ExtremeSlowSpawnRate()
     {
-        gameObject.GetComponent<Shaman>().ExtremeSlowSpawnRate();
+        gameObject.GetComponent<Shaman>().SetSummonCooldown( 10f );
     }
 
 
