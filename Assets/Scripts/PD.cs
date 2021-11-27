@@ -449,7 +449,13 @@ public class PD
     public static void DeleteAllPlayerData()
     {
         File.Delete( GetPath() );
+        var UnlockFlagChangedEvent = _instance.UnlockFlagChangedEvent;
         _instance = new PD();
+        _instance.UnlockFlagChangedEvent = UnlockFlagChangedEvent;
+        foreach( UnlockFlag flag in Enum.GetValues( typeof( UnlockFlag ) ) )
+        {
+            _instance.UnlockFlagChangedEvent.Invoke( flag, false );
+        }
         _instance.SetDirty();
     }
 

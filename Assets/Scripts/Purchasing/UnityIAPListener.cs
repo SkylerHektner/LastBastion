@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using System;
 
 public class UnityIAPListener : IStoreListener
 {
@@ -12,7 +13,24 @@ public class UnityIAPListener : IStoreListener
     public UnityIAPListener()
     {
         var builder = ConfigurationBuilder.Instance( StandardPurchasingModule.Instance() );
-        builder.AddProduct( "consumable", ProductType.Consumable );
+
+        foreach( Cosmetic cosmetic in Spectator.Instance.GD.Cosmetics )
+        {
+            if( !cosmetic.BelongsToBundle && cosmetic.Premium )
+            {
+                Debug.Assert( !String.IsNullOrEmpty( cosmetic.ProductID ), $"ERROR! Cosmetic {cosmetic.name} is premium but has no product ID!" );
+                builder.AddProduct( cosmetic.ProductID, ProductType.NonConsumable );
+            }
+        }
+        foreach( CosmeticBundle bundle in Spectator.Instance.GD.CosmeticBundles )
+        {
+            if( bundle.Premium )
+            {
+                Debug.Assert( !String.IsNullOrEmpty( bundle.ProductID ), $"ERROR! Cosmetic Bundle {bundle.name} is premium but has no product ID!" );
+                builder.AddProduct( bundle.ProductID, ProductType.NonConsumable );
+
+            }
+        }
 
         UnityPurchasing.Initialize( this, builder );
     }
@@ -38,7 +56,7 @@ public class UnityIAPListener : IStoreListener
         Debug.LogWarning( $"UnityIAPListener: Initialized FAILED {error}" );
     }
 
-    
+
     /// /// <summary>
     /// Called when a purchase fails.
     /// </summary>
@@ -55,45 +73,44 @@ public class UnityIAPListener : IStoreListener
     {
         Debug.Log( $"UnityIAPListener: Purchase Processing {purchaseEvent}" );
 
-        // TODO: Scan for the purchased product
-        return PurchaseProcessingResult.Complete;
-
-        //if( String.Equals( args.purchasedProduct.definition.id, kProductIDConsumable, StringComparison.Ordinal ) )
-        //{
-
-        //}
-    }
-
-    void BuyProductID( string productId )
-    {
-        // If Purchasing has been initialized ...
-        if( Initialized )
+        foreach( Cosmetic cosmetic in Spectator.Instance.GD.Cosmetics )
         {
-            // ... look up the Product reference with the general product identifier and the Purchasing 
-            // system's products collection.
-            Product product = controller.products.WithID( productId );
-
-            // If the look up found a product for this device's store and that product is ready to be sold ... 
-            if( product != null && product.availableToPurchase )
+            if( cosmetic.Premium && String.Equals( purchaseEvent.purchasedProduct.definition.id, cosmetic.ProductID, StringComparison.Ordinal ) )
             {
-                Debug.Log( string.Format( "Purchasing product asychronously: '{0}'", product.definition.id ) );
-                // ... buy the product. Expect a response either through ProcessPurchase or OnPurchaseFailed 
-                // asynchronously.
-                controller.InitiatePurchase( product );
-            }
-            // Otherwise ...
-            else
-            {
-                // ... report the product look-up failure situation  
-                Debug.Log( "BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase" );
+                cosmetic.ApplyUnlocks();
             }
         }
-        // Otherwise ...
+        foreach( CosmeticBundle bundle in Spectator.Instance.GD.CosmeticBundles )
+        {
+            if( bundle.Premium && String.Equals( purchaseEvent.purchasedProduct.definition.id, bundle.ProductID, StringComparison.Ordinal ) )
+            {
+                bundle.ApplyUnlocks();
+            }
+        }
+
+        return PurchaseProcessingResult.Complete;
+    }
+
+    public void BuyProductID( string productId )
+    {
+        if( Initialized )
+        {
+            Product product = controller.products.WithID( productId );
+
+            if( product != null && product.availableToPurchase )
+            {
+                Debug.Log( $"Purchasing product asychronously: {product.definition.id}" );
+                // Expect a response either through ProcessPurchase or OnPurchaseFailed async
+                controller.InitiatePurchase( product );
+            }
+            else
+            {
+                Debug.LogError( $"BuyProductID {productId} FAILED. either is not found or is not available for purchase" );
+            }
+        }
         else
         {
-            // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
-            // retrying initiailization.
-            Debug.Log( "BuyProductID FAIL. Not initialized." );
+            Debug.LogError( $"BuyProductID {productId} FAILED. Not initialized." );
         }
     }
 }

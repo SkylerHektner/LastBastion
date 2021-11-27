@@ -7,31 +7,7 @@ public class StoreItem : MonoBehaviour
 {
     public CosmeticDisplayInterface CosmeticInformation;
     public bool PremiumItem;
-    //public GameObject PurchasedSymbol;
-    //public Button PurchaseButton;
-    public bool ItemPurchased
-    {
-        get
-        {
-            return purchased;
-        }
-        set
-        {
-            purchased = value;
-
-            if (purchased)
-            {
-                //PurchasedSymbol.SetActive(true);
-                //PurchaseButton.enabled = false;
-            }
-            else
-            {
-                //PurchasedSymbol.SetActive(false);
-                //PurchaseButton.enabled = true;
-            }
-        }
-    }
-    private bool purchased;
+    public bool ItemPurchased { get; private set; }
 
     public string GetInfoPrice()
     {
@@ -53,11 +29,13 @@ public class StoreItem : MonoBehaviour
         return CosmeticInformation.GetName();
     }
 
+#if UNITY_EDITOR
     [ContextMenu("TogglePurchase")]
     private void TogglePurchase()
     {
         ItemPurchased = !ItemPurchased;
     }
+#endif
 
     public void Start()
     {

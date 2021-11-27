@@ -10,6 +10,8 @@ public class CosmeticBundle : CosmeticDisplayInterface
     public string Description;
     public float Price;
     public List<Cosmetic> Cosmetics = new List<Cosmetic>();
+    public bool Premium;
+    public string ProductID;
 
     public override void ApplyUnlocks()
     {
@@ -35,6 +37,16 @@ public class CosmeticBundle : CosmeticDisplayInterface
         return Price;
     }
 
+    public override bool GetIsPremium()
+    {
+        return Premium;
+    }
+
+    public override string GetProductID()
+    {
+        return ProductID;
+    }
+
     public override bool IsUnlocked()
     {
         bool unlocked = true;
@@ -56,9 +68,16 @@ public class CosmeticBundleEditor : ExtendedEditor<CosmeticBundle>
 
         var target = GetTarget();
 
+        LabelField( "Reminder: Cosmetic Bundles must be added to Global Data" );
+
         StringField( ref target.Name, "Name" );
         StringField( ref target.Description, "Description" );
         FloatField( ref target.Price, "Price" );
+        ToggleField( ref target.Premium, "Premium" );
+        if( target.Premium )
+        {
+            StringField( ref target.ProductID, "Product ID" );
+        }
 
         ListField( target.Cosmetics, "Cosmetics", "Cosmetics", ( int index ) =>
         {

@@ -10,6 +10,7 @@ public class GlobalData : ScriptableObject
 {
     public List<Achievement> Achievements;
     public List<Cosmetic> Cosmetics;
+    public List<CosmeticBundle> CosmeticBundles;
     public List<UnlockFlagUIInformation> UnlockFlagUIInfo;
 
     public void Verify()
@@ -27,7 +28,34 @@ public class GlobalData : ScriptableObject
                 Debug.Assert( UnlockFlagUIInfo.Count( ui_info => ui_info.UnlockFlag == flag ) == 1,
                                 $"ERROR: GlobalData Missing Entry for unlock flag UI data for unlock flag {flag}" );
             }
+        }
+        foreach( Cosmetic cosmetic in Cosmetics )
+        {
+            if( cosmetic.Premium && !cosmetic.BelongsToBundle )
+            {
+                Debug.Assert( !String.IsNullOrEmpty( cosmetic.ProductID ),
+                    $"ERROR: Cosmetic {cosmetic.name} is premium but does not have a valid product ID or belong to a bundle" );
 
+                Debug.Assert( cosmetic.Price != 0.0f,
+                    $"ERROR: Cosmetic {cosmetic.name} is premium but does not have a valid price or belong to a bundle" );
+            }
+            else if( cosmetic.BelongsToBundle )
+            {
+                var bundle = CosmeticBundles.Where( b => b.Cosmetics.Contains( cosmetic ) )?.Single();
+                Debug.Assert( bundle != null,
+                    $"ERROR: Cosmetic {cosmetic.name} does not belong to a valid bundle" );
+            }
+        }
+        foreach( CosmeticBundle bundle in CosmeticBundles )
+        {
+            if( bundle.Premium )
+            {
+                Debug.Assert( !String.IsNullOrEmpty( bundle.ProductID ),
+                    $"ERROR: Cosmetic Bundle {bundle.name} is premium but does not have a valid product ID or belong to a bundle with a valid product ID" );
+
+                Debug.Assert( bundle.Price != 0.0f,
+                    $"ERROR: Cosmetic Bundle {bundle.name} is premium but does not have a valid price or belong to a bundle with a valid price" );
+            }
         }
 #endif
     }

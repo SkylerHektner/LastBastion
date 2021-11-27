@@ -135,7 +135,6 @@ public class InfoViewer : MonoBehaviour
         ArrowR.SetActive( true );
     }
 
-
     public void ShowItemDescription( int ItemIndex ) // displays the name and description of the chosen item in the list
     {
         Debug.Log( ItemIndex );

@@ -21,15 +21,15 @@ public class TradesCanvasManager : MonoBehaviour
         }
     }
 
-    public bool TryPurchaseOffer(CosmeticDisplayInterface trade_cosmetic)
+    public void TryPurchaseOffer(CosmeticDisplayInterface trade_cosmetic)
     {
-        if (PD.Instance.AchievementPoints.Get() >= trade_cosmetic.GetPrice()) // this needs to be changed later on
+        if( trade_cosmetic.GetIsPremium() )
         {
-            trade_cosmetic.ApplyUnlocks();
-            PD.Instance.AchievementPoints.Set(PD.Instance.AchievementPoints.Get() - (int)trade_cosmetic.GetPrice());
-            return true;
+            Spectator.Instance.UnityIAP.BuyProductID( trade_cosmetic.GetProductID() );
         }
-
-        return false;
+        else
+        {
+            Debug.LogError( $"ERROR: Trying to purchase cosmetic {trade_cosmetic.GetName()} as an offer that is not premium!" );
+        }
     }
 }
