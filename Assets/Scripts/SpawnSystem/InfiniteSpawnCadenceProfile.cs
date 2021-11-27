@@ -24,6 +24,7 @@ public class InfiniteSpawnCadenceProfile : BaseSpawnCadenceProfile
     public int NumAdditionalSpawnsPerWave;
     public float BaseWaveDuration;
     public float AdditionalWaveDurationPerSpawn;
+    public float WaveDurationCap = float.MaxValue;
     public List<InfiniteSpawnGroup> SpawnGroupData = new List<InfiniteSpawnGroup>();
 
     private Dictionary<int, SpawnWave> SpawnWaveCache = new Dictionary<int, SpawnWave>();
@@ -35,7 +36,7 @@ public class InfiniteSpawnCadenceProfile : BaseSpawnCadenceProfile
             SpawnWave wave = new SpawnWave();
 
             int num_spawn_groups = NumStartSpawns + NumAdditionalSpawnsPerWave * wave_number;
-            float wave_duration = BaseWaveDuration + AdditionalWaveDurationPerSpawn * num_spawn_groups;
+            float wave_duration = Mathf.Min( BaseWaveDuration + AdditionalWaveDurationPerSpawn * num_spawn_groups, WaveDurationCap );
             float delay_between_spawns = wave_duration / num_spawn_groups;
 
             SpawnGroup last_selected_group = null;
@@ -104,6 +105,7 @@ public class InfiniteSpawnCadenceProfileEditor : Editor
         CustomEditorUtilities.AutoDirtyLabeledInt( ref InfiniteSpawnCadence.NumAdditionalSpawnsPerWave, "Additional Spawns Per Wave", target );
         CustomEditorUtilities.AutoDirtyLabeledFloat( ref InfiniteSpawnCadence.BaseWaveDuration, "Base Wave Duration", target );
         CustomEditorUtilities.AutoDirtyLabeledFloat( ref InfiniteSpawnCadence.AdditionalWaveDurationPerSpawn, "Additional Wave Duration Per Spawn", target );
+        CustomEditorUtilities.AutoDirtyLabeledFloat( ref InfiniteSpawnCadence.WaveDurationCap, "Wave Duration Cap", target );
 
         EditorGUILayout.LabelField( "------ SPAWN GROUP DATA ------" );
         if( GUILayout.Button( "Add New" ) )
