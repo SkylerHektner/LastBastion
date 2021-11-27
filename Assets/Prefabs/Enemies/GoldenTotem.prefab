@@ -14,8 +14,10 @@ GameObject:
   - component: {fileID: 4324015993595593424}
   - component: {fileID: -6377693938440733747}
   - component: {fileID: 5358252807533519435}
+  - component: {fileID: 5454880262474401211}
+  - component: {fileID: 3220825868382784538}
   m_Layer: 9
-  m_Name: GoldenSkeleton
+  m_Name: GoldenTotem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,9 +174,9 @@ MonoBehaviour:
         m_CallState: 2
   MoveSpeed: 1.1
   MaxHealth: 10
-  DeathEffect: {fileID: 2016558233288798309, guid: bd5b043a6d3857d4eb7245d13c7ad9ab, type: 3}
+  DeathEffect: {fileID: 2016558233288798309, guid: 132b426d1dfdd744b9be70acfb1f0700, type: 3}
   DeathAnimation: 
-  SpawnEffect: {fileID: 1824666046701122354, guid: 2e51fe9a16c598b458adb27d14f789a2, type: 3}
+  SpawnEffect: {fileID: 1824666046701122354, guid: 4f98c87d838a5fe489783813c14b081f, type: 3}
   SpawnAnimation: 
   DamagedEffect: {fileID: 2491468217934139110, guid: 55d7506f9e288de4c922641c47626687, type: 3}
   DamagedAnimation: Damaged
@@ -186,12 +188,126 @@ MonoBehaviour:
   ImmuneToFlamingSawBonusDamage: 1
   Bouncy: 1
   PlayerBaseBonusDamage: 0
-  DeathSFX: 2
-  HitSFX: 0
+  DeathSFX: 0
+  HitSFX: 14
   SpawnAnimationSFX: 0
-  SpawnEffectSFX: 0
+  SpawnEffectSFX: 46
   ShieldSkeletonUpgradeCurseMovespeedMultiplier: 0.7
   BlueCrystal: {fileID: 8734898698075878155, guid: 602e4493b30d61e47bf1ea1c40d262c5, type: 3}
   RedCrystal: {fileID: 6416229858418380068, guid: f8e44e21781ef7d44a35da19235f7b08, type: 3}
   GreenCrystal: {fileID: 318133970450270152, guid: b54542da6970424478cab4498123bd8d, type: 3}
   PurpleCrystal: {fileID: 5376313858648278354, guid: ea61ca812ea7e34439554729454fb38a, type: 3}
+--- !u!82 &5454880262474401211
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993805466842966640}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 70661a731b79283498c1b75af606db2d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3220825868382784538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993805466842966640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ab739f933378c499e68529b7511636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicTrack: 0
+  AlternateSound: {fileID: 0}
+  ThirdSound: {fileID: 0}
+  PitchIncreaseOnAwake: 0
+  NeutralizePitchOnDestroy: 0
+  RandomlyPayedEffects: []

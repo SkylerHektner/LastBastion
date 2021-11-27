@@ -6,6 +6,9 @@ public class Shaman : Enemy
 {
     [SerializeField] GameObject SummonEffect;
     [SerializeField] SpawnGroup SummonSpawnGroup;
+    [SerializeField] SpawnGroup SecondarySummonSpawnGroup;
+    [SerializeField] SpawnGroup TertiarySummonSpawnGroup;
+
     [SerializeField] SpawnGroup CurseSummonSpawnGroup; // the spawn group to use if our curse flag is active
     [SerializeField] string SummonAnimation;
     [SerializeField] float SummonDuration = 0.5f;
@@ -70,5 +73,25 @@ public class Shaman : Enemy
     private void FinishSummon()
     {
         StartMoving();
+    }
+
+    public void DecreaseSpawnRate()
+    {
+        SummonCooldown = 5f;
+    }
+    public void ExtremeSlowSpawnRate()
+    {
+        SummonCooldown = 10f;
+    }
+    public void IncreaseSpawnRate()
+    {
+        SummonCooldown = .5f;
+        SummonSpawnGroup = TertiarySummonSpawnGroup;
+    }
+    public void MaximizeSpawnRate() // only used with Skully
+    {
+        SummonCooldown = .2f;
+        SummonSpawnGroup = SecondarySummonSpawnGroup;
+
     }
 }

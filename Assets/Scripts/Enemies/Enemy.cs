@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
 {
     public EnemyEnum EnemyType;
     public UnityEvent<Enemy> DeathEvent = new UnityEvent<Enemy>();
+    public UnityEvent<Enemy> HitEvent = new UnityEvent<Enemy>();
+    public bool FinalBoss;
 
     public static long NextEnemyID = 1;
     public long EnemyID
@@ -242,6 +244,7 @@ public class Enemy : MonoBehaviour
                 Instantiate( DamagedEffect ).transform.position = transform.position;
             if( !string.IsNullOrEmpty( DamagedAnimation ) )
                 anim.SetTrigger( DamagedAnimation );
+            HitEvent.Invoke(this);
         }
     }
 
@@ -255,7 +258,14 @@ public class Enemy : MonoBehaviour
         if( DeathAnimation != null && DeathAnimation.Length != 0 )
         {
             anim.SetTrigger( DeathAnimation );
-            Invoke( "Die", 1.0f );
+            if (FinalBoss)
+            {
+                Invoke("Die", 5.0f);
+            }
+            else
+            {
+                Invoke("Die", 1.0f);
+            }
         }
         else
             Die();
