@@ -54,4 +54,13 @@ public class VictoryScreen : MonoBehaviour
         SceneManager.LoadScene( "Menu" );
     }
 
+    public void LoadCandyVault() // called after beating the final boss
+    {
+        Invoke("LoadCredits", 6f);
+    }
+
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
 }
