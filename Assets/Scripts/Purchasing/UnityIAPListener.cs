@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using UnityEngine.Events;
 using System;
 
 public class UnityIAPListener : IStoreListener
@@ -9,6 +10,8 @@ public class UnityIAPListener : IStoreListener
     public bool Initialized => controller != null && extensions != null;
     private IStoreController controller;
     private IExtensionProvider extensions;
+    public UnityEvent PurchaseCompletedEvent = new UnityEvent();
+    public UnityEvent PurchaseFailedEvent = new UnityEvent();
 
     public UnityIAPListener()
     {
@@ -63,6 +66,7 @@ public class UnityIAPListener : IStoreListener
     public void OnPurchaseFailed( Product product, PurchaseFailureReason failureReason )
     {
         Debug.Log( $"UnityIAPListener: Purchase Failed {product} for {failureReason}" );
+        PurchaseFailedEvent.Invoke();
     }
 
     /// <summary>
@@ -88,6 +92,7 @@ public class UnityIAPListener : IStoreListener
             }
         }
 
+        PurchaseCompletedEvent.Invoke();
         return PurchaseProcessingResult.Complete;
     }
 

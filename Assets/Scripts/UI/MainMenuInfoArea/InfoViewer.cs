@@ -145,13 +145,13 @@ public class InfoViewer : MonoBehaviour
             {
                 ItemName.text = store_item.GetInfoPrice();
                 ItemDescription.text = store_item.GetInfoDescription();
-                if (store_item.ItemPurchased) // display the universal puchased symbol
+                if (store_item.ItemPurchased) // display the universal purchased symbol
                 {
                     SoldOutIcon.SetBool("Sold", true);
                     ClaimButton.interactable = false;
                     PriceDisplay.SetActive(false);
                 }
-                else// hide the universal puchased symbol
+                else// hide the universal purchased symbol
                 {
                     SoldOutIcon.SetBool("Sold", false);
                     ClaimButton.interactable = true;

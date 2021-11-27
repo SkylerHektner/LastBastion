@@ -8,6 +8,18 @@ public class TradesCanvasManager : MonoBehaviour
 {
     [SerializeField] InfoViewer TradesInfoViewer;
 
+    public void Start()
+    {
+        Spectator.Instance.UnityIAP.PurchaseFailedEvent.AddListener( OnPurchaseFailed );
+        Spectator.Instance.UnityIAP.PurchaseCompletedEvent.AddListener( OnPurchaseCompleted );
+    }
+
+    public void OnDestroy()
+    {
+        Spectator.Instance.UnityIAP.PurchaseFailedEvent.RemoveListener( OnPurchaseFailed );
+        Spectator.Instance.UnityIAP.PurchaseCompletedEvent.RemoveListener( OnPurchaseCompleted );
+    }
+
     public void OnConfirmPurchase()
     {
         StoreItem current_store_item = TradesInfoViewer.GetItemAtCurrentIndex()?.GetComponent<StoreItem>();
@@ -31,5 +43,16 @@ public class TradesCanvasManager : MonoBehaviour
         {
             Debug.LogError( $"ERROR: Trying to purchase cosmetic {trade_cosmetic.GetName()} as an offer that is not premium!" );
         }
+    }
+
+    [ContextMenu( "OnPurchaseFailed" )]
+    private void OnPurchaseFailed()
+    {
+    }
+
+    [ContextMenu( "OnPurchaseCompleted" )]
+    private void OnPurchaseCompleted()
+    {
+        TradesInfoViewer.RefreshStoreItem();
     }
 }
