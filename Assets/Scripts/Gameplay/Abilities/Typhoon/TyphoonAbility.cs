@@ -73,6 +73,10 @@ public class TyphoonAbility : Ability
 
     public override bool OnAbilityUsedWhileAlreadyActive()
     {
+        if( Typhoon == null )
+        {
+            Typhoon = GameObject.Instantiate( AbilityData.Effect );
+        }
         SetDuration( time_remaining + AbilityData.Duration * GetAbilityDurationMultiplier() );
         roaring_flames_duration_carryover = AbilityData.Duration * 0.5f;
 
