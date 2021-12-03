@@ -18,11 +18,14 @@ public class CameraUIMover : MonoBehaviour
     public Transform TradeZone;
     public Transform OfferZone;
     public Transform CustomizeZone;
+    public Transform CreditsZone;
+    public Transform CreditsZone2;
 
     public float CameraSpeed;   // default is .8f
 
     public float MoveDelay;
     public bool Delayed;
+    public bool Credits;
 
 
     private void FixedUpdate()
@@ -41,6 +44,16 @@ public class CameraUIMover : MonoBehaviour
         }
 
     }
+
+    private void Awake()
+    {
+        if (Credits)
+        {
+            ScrollCredits();
+        }
+    }
+
+
 
 
     // updates the taret position for the camera to move towards
@@ -170,4 +183,17 @@ public class CameraUIMover : MonoBehaviour
         CurrentDestination = StoreZone;
         CameraSpeed = 1.5f;
     }
+    [ContextMenu("ScrollCredits")]
+    public void ScrollCredits()
+    {
+        CurrentDestination = CreditsZone;
+        CameraSpeed = .5f;
+        //Invoke("ScrollCredits2", 10f);
+
+    }
+    //public void ScrollCredits2()
+    //{
+    //    CurrentDestination = CreditsZone2;
+    //    CameraSpeed = .5f;
+    //}
 }
