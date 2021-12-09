@@ -14,6 +14,8 @@ public class VolumeController : MonoBehaviour
     public bool NeutralizePitchOnDestroy;
     public static float RecentPitch = 1f;
     public List<AudioClip> RandomlyPayedEffects;
+    bool Toggled = false;
+    float PitchWait;
 
     private float default_volume;
 
@@ -52,6 +54,17 @@ public class VolumeController : MonoBehaviour
         else
         {
             SoundSource.volume = default_volume * PD.Instance.StoredSFXVolume.Get(); // set elsewhere
+        }
+    }
+    private void FixedUpdate()
+    {
+        if (PitchWait > 0)
+        {
+            PitchWait -= Time.smoothDeltaTime;
+        }
+        else
+        {
+            PitchWait = 0f;
         }
     }
 
@@ -101,6 +114,29 @@ public class VolumeController : MonoBehaviour
         int randInt = Random.Range(0, RandomlyPayedEffects.Count); // picks a random number from 0 to the count of the list
         SoundSource.clip = RandomlyPayedEffects[randInt];
         SoundSource.Play();
+    }
+
+    public void ToggleBetweenPitch()
+    {
+        if (Toggled) // quick fire
+        {
+            if (PitchWait > 0)
+            {
+                SoundSource.pitch = .9f;
+            }
+            else 
+            {
+                SoundSource.pitch = 1.1f;
+                PitchWait = .9f;
+            }
+        }
+        else  // wait a second before firing, so don't repeat the sound
+        {
+            SoundSource.pitch = 1.1f;
+            PitchWait = .9f;
+        }
+        Toggled = !Toggled;
+
     }
 
 }

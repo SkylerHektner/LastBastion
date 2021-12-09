@@ -171,6 +171,7 @@ public class Turret : MonoBehaviour
         GetComponent<Animator>().SetFloat( "FireRate", PowerSurgeFireRate ); // animation speed for firing anim
         PowerSurgeGlowL.SetActive(true);
         PowerSurgeGlowR.SetActive(true);
+        gameObject.GetComponent<AudioSource>().pitch = 1.5f;
 
     }
 
@@ -180,6 +181,7 @@ public class Turret : MonoBehaviour
         GetComponent<Animator>().SetFloat( "FireRate", FireRate ); // animation speed for firing anim
         PowerSurgeGlowL.SetActive(false);
         PowerSurgeGlowR.SetActive(false);
+        gameObject.GetComponent<AudioSource>().pitch = 1f;
     }
 
     private void StartCollateralDamage()
