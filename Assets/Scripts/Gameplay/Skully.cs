@@ -10,8 +10,10 @@ public class Skully : MonoBehaviour
     public Sprite Critical;
     int SkullyBossHP;
     public GameObject LaughSFX;
-    public GameObject HalfwaySFX;
-    public GameObject WoundedSFX;
+    public GameObject HalfwaySFX; // second animation
+    public GameObject CriticalSFX; // third animation
+    public GameObject HurtSFX; // first animation
+    public GameObject DeathSFX; // death anim
     public Animator InnerGlow;
 
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class Skully : MonoBehaviour
         }
         else if (SkullyBossHP <= 175 && SkullyBossHP > 150)
         {
-            LaughSFX.SetActive(true);
+            HurtSFX.SetActive(true);
             gameObject.GetComponent<SpriteRenderer>().sprite = Wounded;
         }
         else if (SkullyBossHP <= 100 && SkullyBossHP > 25)
@@ -37,10 +39,14 @@ public class Skully : MonoBehaviour
         }
         else if (SkullyBossHP <= 25 && SkullyBossHP >= 0)
         {
-            WoundedSFX.SetActive(true);
+            CriticalSFX.SetActive(true);
             InnerGlow.SetBool("Half", false);
             InnerGlow.SetBool("Critical", true);
             gameObject.GetComponent<SpriteRenderer>().sprite = Critical;
+        }
+        else if (SkullyBossHP <= 0)
+        {
+            DeathSFX.SetActive(true);
         }
     }
 
