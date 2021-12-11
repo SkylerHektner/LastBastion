@@ -90,7 +90,14 @@ public class Shrike : Enemy
 
     private void TeleportFinished()
     {
-        StartMoving();
+        if( !Zapped )
+        {
+            StartMoving();
+        }
+        else
+        {
+            StopMoving();
+        }
         current_teleport_cooldown = TeleportCooldown;
     }
 }
