@@ -263,9 +263,13 @@ public class Saw : MonoBehaviour
         DirectionArrow.gameObject.SetActive( false );
         if( !Moving )
         {
-            SetMoveDirection( ( drag_last_position - drag_start_position ).normalized, AdjustedMoveSpeed );
-            SawFiredEvent.Invoke( transform.position, MoveDirection, MoveSpeed );
-            correction_timer = 0.0f;
+            Vector3 drag_direction = drag_last_position - drag_start_position;
+            if( drag_direction != Vector3.zero )
+            {
+                SetMoveDirection( ( drag_last_position - drag_start_position ).normalized, AdjustedMoveSpeed );
+                SawFiredEvent.Invoke( transform.position, MoveDirection, MoveSpeed );
+                correction_timer = 0.0f;
+            }
         }
     }
 
