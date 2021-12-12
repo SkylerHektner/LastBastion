@@ -33,7 +33,7 @@ public class Shaman : Enemy
     {
         base.Update();
 
-        if( Moving && !string.IsNullOrEmpty( SummonAnimation ) )
+        if( !Dying && Moving && !string.IsNullOrEmpty( SummonAnimation ) )
         {
             cur_summon_cooldown -= Time.deltaTime * GameplayManager.TimeScale;
             if( cur_summon_cooldown <= 0.0f )
