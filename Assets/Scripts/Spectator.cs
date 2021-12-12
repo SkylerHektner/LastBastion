@@ -118,7 +118,8 @@ public class Spectator : MonoBehaviour
                 SurvivalIndex,
                 SpawnManager.Instance.CurrentWaveIndex,
                 BaseHP.Instance.CurrentHP,
-                survival_unlock_flags );
+                survival_unlock_flags,
+                InfiniteSpawnCadenceManager.Instance.GetCurrentSpawnCadenceIndex() );
 
                 // get rid of campaign stats for limbo purposes
                 PD.Instance.CampaignLimboResumeInformation.Clear();

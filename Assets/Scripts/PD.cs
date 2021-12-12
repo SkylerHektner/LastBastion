@@ -894,6 +894,7 @@ public class LimboResumeInformation
     [SerializeField] private int wave;
     [SerializeField] private float health;
     [SerializeField] private List<UnlockFlag> survival_unlocks = new List<UnlockFlag>();
+    [SerializeField] private int survival_spawn_cadence_index = 0;
 
     public bool Active { get { return active; } }
     public string SceneName { get { return scene_name; } }
@@ -901,8 +902,9 @@ public class LimboResumeInformation
     public int Wave { get { return wave; } }
     public float Health { get { return health; } }
     public IReadOnlyList<UnlockFlag> SurvivalUnlocks { get { return survival_unlocks; } }
+    public int SurvivalSpawnCadenceIndex { get { return survival_spawn_cadence_index; } }
 
-    public void SetInfo( bool active, string level_name = "", int levelIndex = 0, int wave = 0, float health = 0, List<UnlockFlag> survival_unlocks = null )
+    public void SetInfo( bool active, string level_name = "", int levelIndex = 0, int wave = 0, float health = 0, List<UnlockFlag> survival_unlocks = null, int survival_spawn_cadence_index = 0 )
     {
         this.active = active;
         this.scene_name = level_name;
@@ -910,6 +912,7 @@ public class LimboResumeInformation
         this.wave = wave;
         this.health = health;
         this.survival_unlocks = survival_unlocks;
+        this.survival_spawn_cadence_index = survival_spawn_cadence_index;
         PD.Instance.SetDirty();
     }
 
@@ -921,6 +924,7 @@ public class LimboResumeInformation
         wave = 0;
         health = 0.0f;
         survival_unlocks = null;
+        survival_spawn_cadence_index = 0;
         PD.Instance.SetDirty();
     }
 }

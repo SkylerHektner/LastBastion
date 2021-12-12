@@ -30,7 +30,14 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
 
         spawnManager.WaveCompletedEvent.AddListener( OnWaveCompleted );
 
-        PickNewSpawnCadenceProfile();
+        if( PD.Instance.SurvivalLimboResumeInformation.Active )
+        {
+            SetCurrentSpawnCadenceByIndex( PD.Instance.SurvivalLimboResumeInformation.SurvivalSpawnCadenceIndex );
+        }
+        else
+        {
+            PickNewSpawnCadenceProfile();
+        }
     }
 
     private void OnDestroy()
@@ -39,13 +46,53 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
         spawnManager?.WaveCompletedEvent.RemoveListener( OnWaveCompleted );
     }
 
-    public void OnWaveCompleted(int wave_number)
+    public void OnWaveCompleted( int wave_number )
     {
         if( wave_number % NumWavesPerEnvironmentSwap == 0 )
         {
             SpawnManager.Instance.DeferNextWaveStart();
             survivalCardsUI.ShowUpgrades();
         }
+    }
+
+    public int GetCurrentSpawnCadenceIndex()
+    {
+        int ret = 0;
+        for( int x = 0; x < SpawnCadences.Count; ++x )
+        {
+            if( SpawnCadences[x] == cur_spawn_cadence )
+            {
+                ret = x;
+                break;
+            }
+        }
+        return ret;
+    }
+
+    public void SetCurrentSpawnCadenceByIndex( int index )
+    {
+        if( index > SpawnCadences.Count )
+        {
+            Debug.LogError( $"ERROR: Given index {index} is greater then number of spawn cadences {SpawnCadences.Count}" );
+            PickNewSpawnCadenceProfile();
+        }
+        else
+        {
+            cur_spawn_cadence = SpawnCadences[index];
+            InitializeCurrentSpawnCadenceProfile();
+        }
+    }
+
+    private void InitializeCurrentSpawnCadenceProfile()
+    {
+        if( cur_environment != null )
+        {
+            Destroy( cur_environment.gameObject );
+        }
+
+        cur_environment = Instantiate( cur_spawn_cadence.CadenceEnvironment );
+        GameplayManager.Instance.ActiveEnvironment = cur_environment;
+        spawnManager.SetNewSpawnCadence( cur_spawn_cadence );
     }
 
     public void PickNewSpawnCadenceProfile()
@@ -55,7 +102,7 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
         {
             if( profile != cur_spawn_cadence )
             {
-                profile_selector.AddItem( profile, (int)( ( 1.0f / (float)picked_tracker[profile] ) * 100.0f ) );
+                profile_selector.AddItem( profile, (int)( ( 1.0f / (float)picked_tracker[profile] ) * 100000.0f ) );
             }
         }
         Debug.Assert( profile_selector.HasItem() );
@@ -65,13 +112,6 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
 
         cur_spawn_cadence = picked_profile;
 
-        if( cur_environment != null )
-        {
-            Destroy( cur_environment.gameObject );
-        }
-
-        cur_environment = Instantiate( cur_spawn_cadence.CadenceEnvironment );
-        GameplayManager.Instance.ActiveEnvironment = cur_environment;
-        spawnManager.SetNewSpawnCadence( cur_spawn_cadence );
+        InitializeCurrentSpawnCadenceProfile();
     }
 }

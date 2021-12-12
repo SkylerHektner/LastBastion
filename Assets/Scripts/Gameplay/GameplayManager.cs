@@ -181,7 +181,7 @@ public class GameplayManager : MonoBehaviour
     private void Start()
     {
         PD.Instance.Start();
-        Invoke( "LateStart", 0.1f ); // we have to delay this otherwise we run into script execution order problems
+        Invoke( "LateStart", 0.1f ); // we have to delay this otherwise we run into script execution order problems. I know, I feel gross too.
         Debug.Assert( Instance == null );
         Instance = this;
         TimeScale = 1.0f;
@@ -211,6 +211,10 @@ public class GameplayManager : MonoBehaviour
     {
         Challenges?.Start();
         SpawnManager.Instance.WaveCompletedEvent.AddListener( OnWaveComplete );
+
+        // clear out any resume information
+        PD.Instance.CampaignLimboResumeInformation.Clear();
+        PD.Instance.SurvivalLimboResumeInformation.Clear();
     }
 
     private void Update()
