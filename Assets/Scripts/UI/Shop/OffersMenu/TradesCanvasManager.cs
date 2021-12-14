@@ -7,6 +7,10 @@ using UnityEditor;
 public class TradesCanvasManager : MonoBehaviour
 {
     [SerializeField] InfoViewer TradesInfoViewer;
+    public Animator CandyBucketAnimator;
+    public bool FailPurchase;
+    public Animator DeniedAnimator;
+    public VolumeController ConfirmationPopup;
 
     public void Start()
     {
@@ -25,7 +29,14 @@ public class TradesCanvasManager : MonoBehaviour
         StoreItem current_store_item = TradesInfoViewer.GetItemAtCurrentIndex()?.GetComponent<StoreItem>();
         if (current_store_item != null)
         {
-            TryPurchaseOffer(current_store_item.CosmeticInformation);
+            if (FailPurchase)
+            {
+                OnPurchaseFailed();
+            }
+            else
+            {
+                TryPurchaseOffer(current_store_item.CosmeticInformation);
+            }
         }
         else
         {
@@ -48,11 +59,18 @@ public class TradesCanvasManager : MonoBehaviour
     [ContextMenu( "OnPurchaseFailed" )]
     private void OnPurchaseFailed()
     {
+        Debug.Log("Failed to purchase item! Go get your moms credit card");
+        CandyBucketAnimator.SetTrigger("Denied");
+        DeniedAnimator.SetTrigger("Invalid");
+        DeniedAnimator.GetComponent<VolumeController>().PlayMyAlternateSound();
     }
 
     [ContextMenu( "OnPurchaseCompleted" )]
     private void OnPurchaseCompleted()
     {
         TradesInfoViewer.RefreshStoreItem();
+        CandyBucketAnimator.SetTrigger("Thanks");
+        DeniedAnimator.SetTrigger("Success");
+        ConfirmationPopup.PlayMySound();
     }
 }

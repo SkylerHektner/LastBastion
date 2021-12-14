@@ -74,6 +74,8 @@ public class OffersCanvasManager : MonoBehaviour
             RightArrow.SetActive(false);
             LeftArrow.SetActive(false);
             HomeButton.interactable = false;
+            //WealthPlate.SetTrigger("Success");
+
         }
         else if (PD.Instance.AchievementPoints.Get() < current_store_item.CosmeticInformation.GetPrice()) // player is too poor, sad
         {
