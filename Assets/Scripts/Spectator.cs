@@ -95,7 +95,7 @@ public class Spectator : MonoBehaviour
     [ContextMenu( "ToggleLimbo" )]
     public void TryToggleLimbo()
     {
-        if( SceneManager.GetActiveScene().name != "Menu"
+        if( SceneManager.GetActiveScene().name != "Menu" && SceneManager.GetActiveScene().name != "Credits"
             && ( GameplayManager.State == GameplayManager.GameState.Active
             || GameplayManager.State == GameplayManager.GameState.ChoosingUpgrade ) )
         {
