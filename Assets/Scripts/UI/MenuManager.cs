@@ -32,6 +32,11 @@ public class MenuManager : MonoBehaviour
     public Boombox MenuUIBoombox;
     public AudioSource IntroWooshSFX;
 
+    public GameObject BonusBandaid;
+    public Image SkullMan;
+    public Sprite SkullManAlt;
+    public Sprite DefaulySkullSprite;
+
 
     private void Awake()
     {
@@ -76,6 +81,17 @@ public class MenuManager : MonoBehaviour
                 MenuTrack.gameObject.SetActive(true);
                 MenuTrack.SwapTrack(MenuTrack.MyClip);
             }
+        }
+
+        if (PD.Instance.LevelCompletionMap.GetLevelCompletion("Level9") == true) // if player has beaten campaign, show bandaid extra
+        {
+            BonusBandaid.SetActive(true);
+            SkullMan.sprite = SkullManAlt;
+        }
+        else
+        {
+            BonusBandaid.SetActive(false);
+            SkullMan.sprite = DefaulySkullSprite;
         }
 
     }
