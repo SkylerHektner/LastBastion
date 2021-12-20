@@ -56,6 +56,7 @@ public class LoadLevel : MonoBehaviour
 
 
     public LevelPopup ContractPopup;
+    public bool FinalLevel;
 
 
 
@@ -86,7 +87,14 @@ public class LoadLevel : MonoBehaviour
         ContractPopup.Description.text = MyDescription;
 
         Debug.Assert( SpawnCadence != null );
-        ContractPopup.CompletionPayout.text = SpawnCadence.Waves.Select( w => w.CompletionReward ).Sum().ToString();
+        if (FinalLevel) // special case for final level
+        {
+            ContractPopup.CompletionPayout.text = "???";
+        }
+        else
+        {
+            ContractPopup.CompletionPayout.text = SpawnCadence.Waves.Select(w => w.CompletionReward).Sum().ToString();
+        }
 
         Challenge challenge = SpawnCadence.LevelChallenge;
         if( challenge != null )
