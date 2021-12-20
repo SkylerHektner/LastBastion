@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Home of the lost, the scared. Those with nowhere else to go
@@ -209,12 +210,16 @@ public class GameplayManager : MonoBehaviour
     }
     private void LateStart()
     {
-        Challenges?.Start();
-        SpawnManager.Instance.WaveCompletedEvent.AddListener( OnWaveComplete );
+        if (SceneManager.GetActiveScene().name != "Credits")
+        {
+            Challenges?.Start();
+            SpawnManager.Instance.WaveCompletedEvent.AddListener(OnWaveComplete);
 
-        // clear out any resume information
-        PD.Instance.CampaignLimboResumeInformation.Clear();
-        PD.Instance.SurvivalLimboResumeInformation.Clear();
+            // clear out any resume information
+            PD.Instance.CampaignLimboResumeInformation.Clear();
+            PD.Instance.SurvivalLimboResumeInformation.Clear();
+        }
+
     }
 
     private void Update()

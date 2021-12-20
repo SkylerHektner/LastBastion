@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // gameplay manager responsible or maintaining one of these
 public class ChallengesTracker
@@ -16,10 +17,14 @@ public class ChallengesTracker
 
     public void Start()
     {
-        BaseHP.Instance.DamageTakenEvent.AddListener( OnDamageTaken );
-        AbilityManager.Instance.AbilityUsedEvent.AddListener( OnCrystalUsed );
-        Saw.Instance.SawMuddiedEvent.AddListener( OnSawMuddied );
-        SpawnManager.Instance.EnemySpawnedEvent.AddListener( OnEnemySpawned );
+        if (SceneManager.GetActiveScene().name != "Credits")
+        {
+            BaseHP.Instance.DamageTakenEvent.AddListener(OnDamageTaken);
+            AbilityManager.Instance.AbilityUsedEvent.AddListener(OnCrystalUsed);
+            Saw.Instance.SawMuddiedEvent.AddListener(OnSawMuddied);
+            SpawnManager.Instance.EnemySpawnedEvent.AddListener(OnEnemySpawned);
+        }
+
     }
 
     public void Tick( float deltaTime )

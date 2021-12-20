@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Credits : MonoBehaviour
 {
     Animator CreditsAnimator;
+    //public Boombox CreditsTrack;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class Credits : MonoBehaviour
     public void LoadMenuScene()
     {
         SceneManager.LoadScene("Menu");
+        //CreditsTrack.EmptyTrack();
     }
 
     public void TriggerOutroTransition()
