@@ -12,6 +12,7 @@ public class CameraUIMover : MonoBehaviour
     public Transform UpgradesZone;
     public Transform SurvivalZone;
     public Transform SettingsZone;
+    public Transform ExtrasZone;
     public Transform HelpZone;
     public Transform InfoZone;
     public Transform StoreZone;
@@ -117,6 +118,18 @@ public class CameraUIMover : MonoBehaviour
         CurrentDestination = MainZone;
         CameraSpeed = 1.5f;
     }
+    public void LoadExtras()
+    {
+        CurrentDestination = ExtrasZone;
+        CameraSpeed = 1.5f;
+    }
+
+    public void ExitExtras()
+    {
+        CurrentDestination = SettingsZone;
+        CameraSpeed = 1.5f;
+    }
+
 
     public void LoadHelpMenu()
     {

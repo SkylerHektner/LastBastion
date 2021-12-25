@@ -11,6 +11,11 @@ public class Boombox : MonoBehaviour
     public bool SurvivalTrack;
     public AudioClip MyClip;
 
+    public AudioClip GetCurrentTrack()
+    {
+        CurrentSoundTrack = GameObject.FindGameObjectWithTag("Spectator").GetComponent<AudioSource>();
+        return CurrentSoundTrack.clip;
+    }
 
     public void SwapTrack(AudioClip NextSong) // changes out the current music track in the spectator object
     {
@@ -61,4 +66,6 @@ public class Boombox : MonoBehaviour
 
 
     }
+
+
 }

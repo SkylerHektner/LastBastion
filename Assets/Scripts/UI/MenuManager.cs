@@ -187,7 +187,7 @@ public class MenuManager : MonoBehaviour
     // triggered by the animator on the door
     public void ExitLimbo()
     {
-
+        // dang, haven't used this since the prototype. Gonna remove this after I'm done crying about how far we've come
     }
 
     // used in the door animator 
