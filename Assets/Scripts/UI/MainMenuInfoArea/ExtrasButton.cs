@@ -31,7 +31,7 @@ public class ExtrasButton : MonoBehaviour
 
     public void FixedUpdate()
     {
-        ExtrasUnlocked = PD.Instance.LevelCompletionMap.GetLevelCompletion("Level1");
+        ExtrasUnlocked = PD.Instance.LevelCompletionMap.GetLevelCompletion("Level 1");
         if (ExtrasUnlocked)
         {
             foreach (Animator Chain in ChainList)

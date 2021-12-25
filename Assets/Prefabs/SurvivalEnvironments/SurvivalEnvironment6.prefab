@@ -159,8 +159,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicTrack: 1
   AlternateSound: {fileID: 0}
+  ThirdSound: {fileID: 0}
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
+  RandomlyPayedEffects: []
 --- !u!1 &1987498508521964343
 GameObject:
   m_ObjectHideFlags: 0
@@ -16900,6 +16902,7 @@ MonoBehaviour:
   - {x: -1.08, y: 12.9, z: 0}
   - {x: 1.08, y: 12.9, z: 0}
   BossSpawnPoint: {x: 0, y: 10.92, z: 0}
+  EnvironmentID: Farmland
   AnimationTriggerListeners:
   - {fileID: 0}
   - {fileID: 0}

@@ -12,6 +12,7 @@ public class Environment : MonoBehaviour
     public Vector3 PlayableAreaBottomLeft;
     public List<Vector3> DoorSpawnPoints = new List<Vector3>();
     public Vector3 BossSpawnPoint = Vector3.zero;
+    public string EnvironmentID;
 
     [Header( "---Animation Trigger System---" )]
     public List<Animator> AnimationTriggerListeners = new List<Animator>();

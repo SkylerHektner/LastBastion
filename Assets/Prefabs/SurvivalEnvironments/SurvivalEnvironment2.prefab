@@ -159,8 +159,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicTrack: 1
   AlternateSound: {fileID: 0}
+  ThirdSound: {fileID: 0}
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
+  RandomlyPayedEffects: []
 --- !u!1 &1806665554850633678
 GameObject:
   m_ObjectHideFlags: 0
@@ -13190,6 +13192,7 @@ MonoBehaviour:
   PlayableAreaBottomLeft: {x: -4.5, y: 0, z: 0}
   DoorSpawnPoints: []
   BossSpawnPoint: {x: 0.1, y: 12.5, z: 0}
+  EnvironmentID: Lava
   AnimationTriggerListeners:
   - {fileID: 1806665556408224841}
   - {fileID: 1806665555744875956}

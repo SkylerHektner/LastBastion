@@ -108,6 +108,7 @@ public class InfiniteSpawnCadenceManager : MonoBehaviour
         Debug.Assert( profile_selector.HasItem() );
 
         InfiniteSpawnCadenceProfile picked_profile = profile_selector.GetItem();
+        PD.Instance.LevelCompletionMap.SetLevelCompletion(picked_profile.CadenceEnvironment.EnvironmentID, true); // if you encounter a survival environment, track it
         picked_tracker[picked_profile] += 1;
 
         cur_spawn_cadence = picked_profile;

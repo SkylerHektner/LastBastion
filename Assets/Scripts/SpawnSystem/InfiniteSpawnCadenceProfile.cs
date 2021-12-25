@@ -18,7 +18,6 @@ public class InfiniteSpawnCadenceProfile : BaseSpawnCadenceProfile
         [System.NonSerialized] public bool collapsed = false;
         [System.NonSerialized] public bool deleting = false;
     }
-
     public Environment CadenceEnvironment;
     public int NumStartSpawns;
     public int NumAdditionalSpawnsPerWave;

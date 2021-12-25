@@ -6,7 +6,7 @@ using TMPro;
 public class BonusMusic : MonoBehaviour
 {
     public string MyTrackName;
-    public bool Discovered;
+    bool Discovered;
     public Boombox TheBoombox;
     public AudioClip MyTunes;
     public AudioClip DefaultMenuTrack;
@@ -55,6 +55,14 @@ public class BonusMusic : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (PD.Instance.LevelCompletionMap.GetLevelCompletion(MyTrackName))
+        {
+            Discovered = true;
+        }
+        else
+        {
+            Discovered = false;
+        }
         if (Discovered)
         {
             MyChains.gameObject.SetActive(false);
@@ -62,7 +70,7 @@ public class BonusMusic : MonoBehaviour
             {
                 MyActiveFX.SetActive(true);
             }
-            else
+            else if (DisplayedTrackName.text != MyTrackName && DisplayedTrackName.text != "Undiscovered")
             {
                 MyActiveFX.SetActive(false);
             }
