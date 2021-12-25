@@ -83,7 +83,7 @@ public class MenuManager : MonoBehaviour
             }
         }
 
-        if (PD.Instance.LevelCompletionMap.GetLevelCompletion("Level9") == true) // if player has beaten campaign, show bandaid extra
+        if (PD.Instance.LevelCompletionMap.GetLevelCompletion("Level 9") == true) // if player has beaten campaign, show bandaid extra
         {
             BonusBandaid.SetActive(true);
             SkullMan.sprite = SkullManAlt;
