@@ -37,6 +37,8 @@ public class MenuManager : MonoBehaviour
     public Sprite SkullManAlt;
     public Sprite DefaulySkullSprite;
 
+    public string RateURL;
+
 
     private void Awake()
     {
@@ -201,6 +203,12 @@ public class MenuManager : MonoBehaviour
     {
         ProgressContent.SetActive( true );
         LimboTrack.SwapTrack(LimboTrack.MyClip); // play limbo track
+    }
+
+    // rate game button in settings
+    public void OpenRateURL()
+    {
+        Application.OpenURL(RateURL);
     }
 
 }
