@@ -56,7 +56,7 @@ public class Skully : MonoBehaviour
         MainCamera.SetTrigger("ToggleVault");
 
         Animator VaultDoor = GameObject.FindGameObjectWithTag("VaultDoor").GetComponent<Animator>();
-        VaultDoor.SetTrigger("VaultDoor");
+        VaultDoor.SetTrigger("Door");
 
         gameObject.GetComponent<Shaman>().SetSummonCooldown( 5f );
     }
