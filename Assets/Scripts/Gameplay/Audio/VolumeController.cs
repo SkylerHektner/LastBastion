@@ -17,6 +17,8 @@ public class VolumeController : MonoBehaviour
     bool Toggled = false;
     float PitchWait;
 
+    float last_frame_volume = -1.0f;
+
     private float default_volume;
 
     // Start is called before the first frame update
@@ -41,19 +43,22 @@ public class VolumeController : MonoBehaviour
     {
         SoundSource = gameObject.GetComponent<AudioSource>();
         default_volume = SoundSource.volume;
-        //Debug.Log( default_volume );
+
+        float volume = default_volume * ( MusicTrack ? PD.Instance.StoredMusicVolume.Get() : PD.Instance.StoredSFXVolume.Get() );
+        SoundSource.mute = volume == 0.0f;
+        SoundSource.volume = volume;
+        last_frame_volume = volume;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (MusicTrack)
+        float volume = default_volume *  ( MusicTrack ? PD.Instance.StoredMusicVolume.Get() : PD.Instance.StoredSFXVolume.Get() );
+        if(volume != last_frame_volume)
         {
-            SoundSource.volume = default_volume * PD.Instance.StoredMusicVolume.Get();
-        }
-        else
-        {
-            SoundSource.volume = default_volume * PD.Instance.StoredSFXVolume.Get(); // set elsewhere
+            SoundSource.mute = volume == 0.0f;
+            SoundSource.volume = volume;
+            last_frame_volume = volume;
         }
     }
     private void FixedUpdate()
