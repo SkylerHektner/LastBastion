@@ -9,7 +9,7 @@ public class ExtrasButton : MonoBehaviour
     float ChainsSFXCooldown;
     bool ChainsCanRattle;
     public CameraUIMover MenuManager;
-    bool ExtrasUnlocked;
+    bool ExtrasUnlocked = false;
     public Boombox GameMusic;
     public Sprite ExtrasUnlockedImage;
 
@@ -31,7 +31,7 @@ public class ExtrasButton : MonoBehaviour
 
     public void FixedUpdate()
     {
-        ExtrasUnlocked = PD.Instance.LevelCompletionMap.GetLevelCompletion("Level 1");
+        //ExtrasUnlocked = PD.Instance.LevelCompletionMap.GetLevelCompletion("Level 1");
         if (ExtrasUnlocked)
         {
             foreach (Animator Chain in ChainList)
