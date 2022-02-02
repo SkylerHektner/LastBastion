@@ -706,6 +706,10 @@ MonoBehaviour:
   DeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  HitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  FinalBoss: 0
   MoveSpeed: 0.5
   MaxHealth: 2
   DeathEffect: {fileID: 2491468217934139110, guid: bf2f63eb2895b574da390c1ec9a8e5ff, type: 3}
@@ -717,7 +721,7 @@ MonoBehaviour:
   CurrentHealthAnimationParameter: 
   attacks: 0
   powerupDropValue: 3
-  ImmuneToZapBonusDamage: 0
+  ImmuneToZapBonusDamage: 1
   ImmuneToTyphoon: 0
   ImmuneToFlamingSawBonusDamage: 0
   Bouncy: 0
@@ -839,8 +843,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicTrack: 0
   AlternateSound: {fileID: 0}
+  ThirdSound: {fileID: 0}
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
+  RandomlyPayedEffects: []
 --- !u!1 &6168954131896420568
 GameObject:
   m_ObjectHideFlags: 0
