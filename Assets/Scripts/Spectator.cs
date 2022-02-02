@@ -71,6 +71,22 @@ public class Spectator : MonoBehaviour
             achievementCheckCooldown = AchievementCheckRate;
             CheckAchievementCompletion();
         }
+
+        // Gross hack to fix a content problem where players are missing 5 candies needed to buy all upgrades
+        if( !PD.Instance.OneTimeCandyBonusClaimed.Get() &&
+            PD.Instance.LevelCompletionMap.GetLevelCompletion( "Level 1" ) &&
+            PD.Instance.LevelCompletionMap.GetLevelCompletion( "Level 2" ) &&
+            PD.Instance.LevelCompletionMap.GetLevelCompletion( "Level 3" ) &&
+            PD.Instance.LevelCompletionMap.GetLevelCompletion( "Level 4" ) &&
+            PD.Instance.LevelCompletionMap.GetLevelCompletion( "Level 5" ) &&
+            PD.Instance.LevelCompletionMap.GetLevelCompletion( "Level 6" ) &&
+            PD.Instance.LevelCompletionMap.GetLevelCompletion( "Level 7" ) &&
+            PD.Instance.LevelCompletionMap.GetLevelCompletion( "Level 8" ) &&
+            PD.Instance.EarnedAchievementList.Contains( "BeatChallenges" ) )
+        {
+            PD.Instance.OneTimeCandyBonusClaimed.Set( true );
+            PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + 5 );
+        }
     }
 
     private void CheckAchievementCompletion()

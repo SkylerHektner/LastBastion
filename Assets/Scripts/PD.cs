@@ -165,6 +165,8 @@ public class PD
     public PlayerDataField<UnlockFlag> EquippedLaunchArrow = new PlayerDataField<UnlockFlag>( UnlockFlag.Default_LaunchArrow );
     public PlayerDataField<UnlockFlag> EquippedSawTrail = new PlayerDataField<UnlockFlag>( UnlockFlag.Default_SawTrail );
     public PlayerDataField<UnlockFlag> EquippedSawSkin = new PlayerDataField<UnlockFlag>( UnlockFlag.Default_SawSkin );
+    // gross hack to fix content issue where players don't have 5 points needed to unlock all powerups
+    public PlayerDataField<bool> OneTimeCandyBonusClaimed = new PlayerDataField<bool>( false );
 
     // a dictionary containing information about the dependencies of each unlock flag
     public readonly Dictionary<UnlockFlag, List<UnlockFlag>> UnlockFlagDependencyMap = new Dictionary<UnlockFlag, List<UnlockFlag>>
