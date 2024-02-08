@@ -480,7 +480,7 @@ TextureImporter:
       213: 2539075527433357425
     second: Buttons2_67
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -497,10 +497,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -510,8 +512,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -539,6 +541,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -550,6 +554,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -562,6 +567,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -574,6 +580,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -586,6 +593,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -598,6 +606,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -2041,9 +2050,77 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Buttons2_0: 236103108868181852
+      Buttons2_1: -1154214333093496660
+      Buttons2_10: -3012864599669327140
+      Buttons2_11: 8850216769542707158
+      Buttons2_12: -6719486904230280131
+      Buttons2_13: 8042792591569714749
+      Buttons2_14: -3941666724169775036
+      Buttons2_15: 9136661827454672500
+      Buttons2_16: -7103612853400569303
+      Buttons2_17: -1498646676450052079
+      Buttons2_18: -482884513955644964
+      Buttons2_19: -8716575784705352919
+      Buttons2_2: -4907272853570934515
+      Buttons2_20: 4722818413881773145
+      Buttons2_21: -7992890858942047112
+      Buttons2_22: -7906720448534905332
+      Buttons2_23: 2746785303429825857
+      Buttons2_24: 4195137456735995284
+      Buttons2_25: 7708287904516879665
+      Buttons2_26: 6392765555992333698
+      Buttons2_27: -616549982541637327
+      Buttons2_28: 9166185819831247397
+      Buttons2_29: -7462694874396412721
+      Buttons2_3: 7520551082710846112
+      Buttons2_30: 6172659246237374150
+      Buttons2_31: 6410884337987027553
+      Buttons2_32: -2004320475786489421
+      Buttons2_33: 7650601320560784721
+      Buttons2_34: 2329338945703999316
+      Buttons2_35: 8529695871792016594
+      Buttons2_36: 277600790519612181
+      Buttons2_37: 7790971347427954805
+      Buttons2_38: 6469141027247793205
+      Buttons2_39: 6631533755681220187
+      Buttons2_4: 3929608215574648842
+      Buttons2_40: 8631017618907506799
+      Buttons2_41: 8613873909986343984
+      Buttons2_42: 7619953851529316142
+      Buttons2_43: 900024610832121
+      Buttons2_44: 5773660789730628978
+      Buttons2_45: 1228998011715672802
+      Buttons2_46: 2795502695949697429
+      Buttons2_47: -525079229882196634
+      Buttons2_48: 4315567846545332243
+      Buttons2_49: -7581585249702428673
+      Buttons2_5: 9081857935571746852
+      Buttons2_50: -9161606729517026526
+      Buttons2_51: -1298634175851613056
+      Buttons2_52: 2088110264326869516
+      Buttons2_53: -8899677308461250039
+      Buttons2_54: -3937760322834239863
+      Buttons2_55: -3493186385254548280
+      Buttons2_56: 9068896673284447885
+      Buttons2_57: 380895922945642078
+      Buttons2_58: 3468292563361346770
+      Buttons2_59: 6789133430482916809
+      Buttons2_6: 4943699232522283316
+      Buttons2_60: -5320603119055923445
+      Buttons2_61: 2181892041783000635
+      Buttons2_62: -8756753504317403104
+      Buttons2_63: -5053744758191248499
+      Buttons2_64: 3497918340072234773
+      Buttons2_65: -5583984503063700109
+      Buttons2_66: 4791300218724373890
+      Buttons2_67: 2539075527433357425
+      Buttons2_7: -7331472248702142959
+      Buttons2_8: 972482067272005926
+      Buttons2_9: 3335190747116688112
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

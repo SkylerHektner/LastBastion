@@ -363,7 +363,7 @@ TextureImporter:
       213: -1397637385899827224
     second: castle_interriors 3_16
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -380,10 +380,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -393,8 +395,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -415,11 +417,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -431,6 +437,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -443,6 +450,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -455,6 +463,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -467,6 +476,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1301,9 +1324,48 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      castle_interriors 1_32: 4136179600511026148
+      castle_interriors 1_33: 3141680328212363968
+      castle_interriors 1_35: 3181012480269149961
+      castle_interriors 1_36: 3992486632164696364
+      castle_interriors 1_37: -3853645858438786823
+      castle_interriors 2_13: -5901590689835455076
+      castle_interriors 2_14: 4772567497424637780
+      castle_interriors 2_32: -5010439793761622965
+      castle_interriors 2_33: -775429260755772280
+      castle_interriors 2_34: -8313126858836601798
+      castle_interriors 2_35: 2245227585597835505
+      castle_interriors 2_36: 1629470479716929041
+      castle_interriors 2_37: -2394849261004274886
+      castle_interriors 2_38: 5669324449472933499
+      castle_interriors 2_39: -6369317024693862632
+      castle_interriors 2_40: -8570836166666789749
+      castle_interriors 2_41: -4421143923493311834
+      castle_interriors 3_0: -6179559420812256154
+      castle_interriors 3_1: -1191794852916245499
+      castle_interriors 3_10: 7690236669467339482
+      castle_interriors 3_11: 8139998603683771123
+      castle_interriors 3_12: 964957887894849493
+      castle_interriors 3_13: -5071793187855923834
+      castle_interriors 3_14: -7423242080396495951
+      castle_interriors 3_15: 7758780095501258160
+      castle_interriors 3_16: -1397637385899827224
+      castle_interriors 3_2: 5043866837426980629
+      castle_interriors 3_3: 512825627330992446
+      castle_interriors 3_4: -8789989067470514713
+      castle_interriors 3_5: -6667402553687726295
+      castle_interriors 3_6: -9001778326339506403
+      castle_interriors 3_7: -6892003630868971491
+      castle_interriors 3_8: -4316337430786507145
+      castle_interriors 3_9: 7465640164140497187
+      castle_interriors_16: 9195377798736566298
+      castle_interriors_17: 336149516950890014
+      castle_interriors_18: -7496923546533041338
+      castle_interriors_19: -4880911850886093368
+      castle_interriors_20: -4625751590488045676
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

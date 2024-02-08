@@ -219,7 +219,7 @@ TextureImporter:
       213: 1007433538405104656
     second: Spawn_71
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -236,10 +236,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -249,8 +251,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -271,11 +273,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -287,6 +293,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -299,6 +306,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -311,6 +319,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -323,6 +332,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1850,9 +1873,81 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Spawn_0: 4298640735753312424
+      Spawn_1: -8900632797018122485
+      Spawn_10: 2306640521318491938
+      Spawn_11: -850006407425791748
+      Spawn_12: -9016392338132089643
+      Spawn_13: 7198869372241566501
+      Spawn_14: -5757741268540753290
+      Spawn_15: 8075206043565297698
+      Spawn_16: 8148667369318949769
+      Spawn_17: -1632019845231298606
+      Spawn_18: 8039073237928966058
+      Spawn_19: -8185566019582371866
+      Spawn_2: -178533689023744454
+      Spawn_20: -4286044851908850434
+      Spawn_21: -8602801353538975999
+      Spawn_22: -3535523229087693344
+      Spawn_23: 3301317010113059305
+      Spawn_24: 2186860371565655179
+      Spawn_25: 8615935566695619534
+      Spawn_26: -5766927382671396750
+      Spawn_27: -681292030657230306
+      Spawn_28: -4416510874647732405
+      Spawn_29: 3647716840297190299
+      Spawn_3: 6076168756079295722
+      Spawn_30: 3159836894057227386
+      Spawn_31: -6990328274456827055
+      Spawn_32: -8029014116352595101
+      Spawn_33: 1090568513779249255
+      Spawn_34: -3319651783274037826
+      Spawn_35: 8493308145196528747
+      Spawn_36: 5110237181789976023
+      Spawn_37: 3771427409424940764
+      Spawn_38: -1912312290440619431
+      Spawn_39: 23738713175105364
+      Spawn_4: -4509553527503662615
+      Spawn_40: -6507687957724617946
+      Spawn_41: 2712465861681106178
+      Spawn_42: -6669986431995187458
+      Spawn_43: 470438371076171918
+      Spawn_44: -874872746077685266
+      Spawn_45: 3837458393817617260
+      Spawn_46: -3027165980122554974
+      Spawn_47: 2964942811332403076
+      Spawn_48: 4387827814911453083
+      Spawn_49: -7594312882203342337
+      Spawn_5: 4429380745168012402
+      Spawn_50: 2694970476118403471
+      Spawn_51: 2429929912825799558
+      Spawn_52: -9129334464200854490
+      Spawn_53: -7030686583129302635
+      Spawn_54: -7087025842414016289
+      Spawn_55: -8268141439717171205
+      Spawn_56: 5434930876938343350
+      Spawn_57: 1252836559741791271
+      Spawn_58: -2072511314700637522
+      Spawn_59: -2473961331281713135
+      Spawn_6: 7778749598130395667
+      Spawn_60: -4394542802417449982
+      Spawn_61: 4824959960518451338
+      Spawn_62: 3995717372533659316
+      Spawn_63: 1962303900511472527
+      Spawn_64: -9211593014515860775
+      Spawn_65: 3827910352872887263
+      Spawn_66: 5187966572237041358
+      Spawn_67: 1021016799221212689
+      Spawn_68: 1933536519391602584
+      Spawn_69: -1807110169210118249
+      Spawn_7: 5757297203639459536
+      Spawn_70: 7620883909479949933
+      Spawn_71: 1007433538405104656
+      Spawn_8: 5346386580725365539
+      Spawn_9: 4808700441540097081
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

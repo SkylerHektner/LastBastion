@@ -186,7 +186,7 @@ TextureImporter:
       213: -5388409771315575166
     second: 16_sunburn_spritesheet_60
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -203,10 +203,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -216,8 +218,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -245,6 +247,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -256,6 +260,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -268,6 +273,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -280,6 +286,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -292,6 +299,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1588,9 +1609,70 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      16_sunburn_spritesheet_0: 3636900024169929489
+      16_sunburn_spritesheet_1: -7801025535723522783
+      16_sunburn_spritesheet_10: 5753855330253882085
+      16_sunburn_spritesheet_11: 1765943271687648794
+      16_sunburn_spritesheet_12: 4039554951370867815
+      16_sunburn_spritesheet_13: -5573781941526240469
+      16_sunburn_spritesheet_14: 3438489358563515437
+      16_sunburn_spritesheet_15: 983870750753396577
+      16_sunburn_spritesheet_16: 6265798283278840764
+      16_sunburn_spritesheet_17: 4764206203490849985
+      16_sunburn_spritesheet_18: 6750589935680655065
+      16_sunburn_spritesheet_19: 2819493221355987182
+      16_sunburn_spritesheet_2: 929992761325742028
+      16_sunburn_spritesheet_20: -1577169843732162904
+      16_sunburn_spritesheet_21: 559096768429298963
+      16_sunburn_spritesheet_22: 7423359587126464373
+      16_sunburn_spritesheet_23: -3869532909192072933
+      16_sunburn_spritesheet_24: -4792485684000035400
+      16_sunburn_spritesheet_25: -2391277357771098244
+      16_sunburn_spritesheet_26: 6723216669409562616
+      16_sunburn_spritesheet_27: -3408238494602770409
+      16_sunburn_spritesheet_28: -8270095943488192715
+      16_sunburn_spritesheet_29: 6218723282806394756
+      16_sunburn_spritesheet_3: -5407246234350717664
+      16_sunburn_spritesheet_30: -1391013807117551562
+      16_sunburn_spritesheet_31: -1313062158316945709
+      16_sunburn_spritesheet_32: -3370238458506574945
+      16_sunburn_spritesheet_33: -3405891168391227487
+      16_sunburn_spritesheet_34: 2874648784610909869
+      16_sunburn_spritesheet_35: 2766919344764068492
+      16_sunburn_spritesheet_36: -7604481204068681643
+      16_sunburn_spritesheet_37: 8126642164633690539
+      16_sunburn_spritesheet_38: 5052514067925562059
+      16_sunburn_spritesheet_39: 73900944802438821
+      16_sunburn_spritesheet_4: -2654148419914707379
+      16_sunburn_spritesheet_40: 1292860156061241575
+      16_sunburn_spritesheet_41: -1644502719512115600
+      16_sunburn_spritesheet_42: -7476304437819375453
+      16_sunburn_spritesheet_43: 9020376077729300850
+      16_sunburn_spritesheet_44: 2067425699724449576
+      16_sunburn_spritesheet_45: -7571716408800103154
+      16_sunburn_spritesheet_46: 2688385840614490287
+      16_sunburn_spritesheet_47: -5682584017595173380
+      16_sunburn_spritesheet_48: -3161001389483830168
+      16_sunburn_spritesheet_49: -2830149530689499704
+      16_sunburn_spritesheet_5: -2228744589622232453
+      16_sunburn_spritesheet_50: 1812935776265886121
+      16_sunburn_spritesheet_51: -2754520757361000975
+      16_sunburn_spritesheet_52: 4652196723891069569
+      16_sunburn_spritesheet_53: -9189960473933038795
+      16_sunburn_spritesheet_54: -2497154201582160551
+      16_sunburn_spritesheet_55: 7326562647693624400
+      16_sunburn_spritesheet_56: 2911505540911931282
+      16_sunburn_spritesheet_57: -690644721177463751
+      16_sunburn_spritesheet_58: 8838842382013582482
+      16_sunburn_spritesheet_59: 5307238274938574227
+      16_sunburn_spritesheet_6: 6263272190325439682
+      16_sunburn_spritesheet_60: -5388409771315575166
+      16_sunburn_spritesheet_7: 3735753296659679372
+      16_sunburn_spritesheet_8: -8310453132643485235
+      16_sunburn_spritesheet_9: 1407436812790957083
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

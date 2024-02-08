@@ -118,4 +118,9 @@ public class UnityIAPListener : IStoreListener
             Debug.LogError( $"BuyProductID {productId} FAILED. Not initialized." );
         }
     }
+
+    public void OnInitializeFailed(InitializationFailureReason error, string message)
+    {
+        throw new NotImplementedException();
+    }
 }

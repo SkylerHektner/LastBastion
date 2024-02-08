@@ -90,7 +90,7 @@ TextureImporter:
       213: -4405909350227907755
     second: Dungen Tiles_28
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -107,10 +107,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -120,8 +122,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -142,11 +144,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -158,6 +164,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -170,6 +177,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -182,6 +190,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -194,6 +203,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -818,9 +841,38 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Dungen Tiles_0: -1872680198206293188
+      Dungen Tiles_1: -674114268113696900
+      Dungen Tiles_10: -8352666920191278066
+      Dungen Tiles_11: -8769257251458764620
+      Dungen Tiles_12: 4870844494664256644
+      Dungen Tiles_13: 6134539885972339600
+      Dungen Tiles_14: -1786589921014572202
+      Dungen Tiles_15: -5222625998180050545
+      Dungen Tiles_16: -8043593002751413966
+      Dungen Tiles_17: -424263376981771120
+      Dungen Tiles_18: 4369669663733112554
+      Dungen Tiles_19: -3601375169688472557
+      Dungen Tiles_2: 8965150769603859601
+      Dungen Tiles_20: 6800373931831058289
+      Dungen Tiles_21: -7295185280773929414
+      Dungen Tiles_22: -2321978630680075674
+      Dungen Tiles_23: 4233375075422398592
+      Dungen Tiles_24: -4202343554514963557
+      Dungen Tiles_25: 5907077026385886172
+      Dungen Tiles_26: -7063918022159299669
+      Dungen Tiles_27: 5372789256130067040
+      Dungen Tiles_28: -4405909350227907755
+      Dungen Tiles_3: -5474389161635048995
+      Dungen Tiles_4: 4824766744139509598
+      Dungen Tiles_5: -8848809025634680224
+      Dungen Tiles_6: 6400276179421673783
+      Dungen Tiles_7: -720892460126034019
+      Dungen Tiles_8: -3236230005330070738
+      Dungen Tiles_9: -2667059251954668845
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

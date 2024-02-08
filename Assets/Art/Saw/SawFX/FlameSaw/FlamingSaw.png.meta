@@ -138,7 +138,7 @@ TextureImporter:
       213: 2799006238469458848
     second: FlamingSaw_44
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -155,10 +155,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -168,8 +170,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -190,11 +192,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -206,6 +212,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -218,6 +225,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -230,6 +238,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -242,6 +251,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1202,9 +1225,54 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      FlamingSaw_0: -2695556705683332444
+      FlamingSaw_1: -6247784479533890569
+      FlamingSaw_10: -6158343977434972868
+      FlamingSaw_11: -30606496418279309
+      FlamingSaw_12: -563607984693808979
+      FlamingSaw_13: -959580491238239851
+      FlamingSaw_14: -686315067986549369
+      FlamingSaw_15: 2534854644421706591
+      FlamingSaw_16: -3525277108996598459
+      FlamingSaw_17: -3666891595678707690
+      FlamingSaw_18: -687351498227424574
+      FlamingSaw_19: -5267928333730370183
+      FlamingSaw_2: 6860325373662764455
+      FlamingSaw_20: -4996165732810329759
+      FlamingSaw_21: -8689025326928085603
+      FlamingSaw_22: 6289514734031229574
+      FlamingSaw_23: -2419463480146781643
+      FlamingSaw_24: 6087176049761469289
+      FlamingSaw_25: 4262985551125993780
+      FlamingSaw_26: 3392067369827945805
+      FlamingSaw_27: -7378485947258905382
+      FlamingSaw_28: 1792043049302701684
+      FlamingSaw_29: 1298146888325515987
+      FlamingSaw_3: 6024594066398425437
+      FlamingSaw_30: -4821298065347106526
+      FlamingSaw_31: 8214833376476628320
+      FlamingSaw_32: -8218718760405423209
+      FlamingSaw_33: 3552239061181172674
+      FlamingSaw_34: 4371087496216340179
+      FlamingSaw_35: 2925776869942967141
+      FlamingSaw_36: 3756620352144215988
+      FlamingSaw_37: 9153793920516435928
+      FlamingSaw_38: 866024151581265225
+      FlamingSaw_39: 8534645242475872523
+      FlamingSaw_4: -3470264127547155460
+      FlamingSaw_40: -8862536749432689312
+      FlamingSaw_41: 3023758435946533134
+      FlamingSaw_42: 2777843697483620182
+      FlamingSaw_43: 1782847986259363880
+      FlamingSaw_44: 2799006238469458848
+      FlamingSaw_5: -1811113545047136738
+      FlamingSaw_6: -2657758931785907901
+      FlamingSaw_7: 3177849046283543547
+      FlamingSaw_8: 638747654845545007
+      FlamingSaw_9: -5743282022836458612
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
