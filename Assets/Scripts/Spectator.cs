@@ -24,11 +24,11 @@ public class Spectator : MonoBehaviour
 
     private float achievementCheckCooldown;
 
-    public UnityIAPListener UnityIAP;
+    //public UnityIAPListener UnityIAP;
 
     private void Start()
     {
-        UnityIAP = new UnityIAPListener();
+       // UnityIAP = new UnityIAPListener();
     }
 
     private void Awake()

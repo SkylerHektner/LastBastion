@@ -14,14 +14,14 @@ public class TradesCanvasManager : MonoBehaviour
 
     public void Start()
     {
-        Spectator.Instance.UnityIAP.PurchaseFailedEvent.AddListener( OnPurchaseFailed );
-        Spectator.Instance.UnityIAP.PurchaseCompletedEvent.AddListener( OnPurchaseCompleted );
+        // Spectator.Instance.UnityIAP.PurchaseFailedEvent.AddListener( OnPurchaseFailed );
+        // Spectator.Instance.UnityIAP.PurchaseCompletedEvent.AddListener( OnPurchaseCompleted );
     }
 
     public void OnDestroy()
     {
-        Spectator.Instance.UnityIAP.PurchaseFailedEvent.RemoveListener( OnPurchaseFailed );
-        Spectator.Instance.UnityIAP.PurchaseCompletedEvent.RemoveListener( OnPurchaseCompleted );
+        // Spectator.Instance.UnityIAP.PurchaseFailedEvent.RemoveListener( OnPurchaseFailed );
+        // Spectator.Instance.UnityIAP.PurchaseCompletedEvent.RemoveListener( OnPurchaseCompleted );
     }
 
     public void OnConfirmPurchase()
@@ -48,7 +48,7 @@ public class TradesCanvasManager : MonoBehaviour
     {
         if( trade_cosmetic.GetIsPremium() )
         {
-            Spectator.Instance.UnityIAP.BuyProductID( trade_cosmetic.GetProductID() );
+            //Spectator.Instance.UnityIAP.BuyProductID( trade_cosmetic.GetProductID() );
         }
         else
         {
