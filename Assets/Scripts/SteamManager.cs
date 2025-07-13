@@ -4,6 +4,9 @@ public class SteamManager
 {
     public uint appId = 3876840;
 
+    // TODO Assign once we have a DLC setup
+    public uint cosmeticsDLCAppId = 0;
+
     public SteamManager()
     {
         try
@@ -20,5 +23,10 @@ public class SteamManager
     public void Update()
     {
         Steamworks.SteamClient.RunCallbacks();
+    }
+
+    public bool HasCosmeticsDLC()
+    {
+        return Steamworks.SteamApps.IsDlcInstalled(cosmeticsDLCAppId);
     }
 }

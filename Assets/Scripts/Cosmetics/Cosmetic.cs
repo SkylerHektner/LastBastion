@@ -11,7 +11,6 @@ public class CosmeticDisplayInterface : ScriptableObject
     public virtual string GetDescription() { return null; }
     public virtual float GetPrice() { return 0.0f; }
     public virtual bool GetIsPremium() { return false; }
-    public virtual string GetProductID() { return null; }
     public virtual void ApplyUnlocks() { }
     public virtual bool IsUnlocked() { return false; }
 }
@@ -24,9 +23,7 @@ public class Cosmetic : CosmeticDisplayInterface
     public UnlockFlag unlock_flag;
     public CosmeticCategory category;
     public float Price;
-    public bool BelongsToBundle;
     public bool Premium;
-    public string ProductID;
 
     public AnimatorOverrideController override_controller;
     public Sprite sprite;
@@ -57,11 +54,6 @@ public class Cosmetic : CosmeticDisplayInterface
     public override bool GetIsPremium()
     {
         return Premium;
-    }
-
-    public override string GetProductID()
-    {
-        return ProductID;
     }
 
     public void Equip()
@@ -117,7 +109,7 @@ public class Cosmetic : CosmeticDisplayInterface
 
     public override bool IsUnlocked()
     {
-        return PD.Instance.UnlockMap.Get( unlock_flag, false );
+        return Spectator.Instance?.SteamManagerInstance.HasCosmeticsDLC() ?? false;
     }
 }
 
@@ -137,16 +129,9 @@ public class CosmeticEditor : ExtendedEditor<Cosmetic>
         StringField( ref target.Description, "Description" );
         EnumField( ref target.unlock_flag, "Unlock Flag" );
         EnumField( ref target.category, "Category" );
-        ToggleField( ref target.BelongsToBundle, "Belongs To Bundle" );
-        if( !target.BelongsToBundle )
-        {
+        ToggleField( ref target.Premium, "Premium" );
+        if ( !target.Premium )
             FloatField( ref target.Price, "Price" );
-            ToggleField( ref target.Premium, "Premium" );
-            if( target.Premium )
-            {
-                StringField( ref target.ProductID, "Product ID" );
-            }
-        }
 
         switch( target.category )
         {
