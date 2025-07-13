@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Steamworks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class Spectator : MonoBehaviour
     public static Spectator Instance;
 
     public GlobalData GD;
+
+    public SteamManager SteamManagerInstance;
 
     public static bool ReturningFromLevel;
     public static bool ReturningFromSurvival;
@@ -47,6 +50,8 @@ public class Spectator : MonoBehaviour
         Debug.Assert( GD != null, "ERROR: Global Data is null in Spectator. This will break a LOT of stuff" );
         GD?.Verify();
         LevelIndex = PD.Instance.CampaignLimboResumeInformation.LevelIndex;
+
+        SteamManagerInstance = new SteamManager();
     }
 
     private void Update()
@@ -54,8 +59,10 @@ public class Spectator : MonoBehaviour
         if( GameplayManager.Instance == null )
             PD.Instance.Tick();
 
+        SteamManagerInstance.Update();
+
         // makes the cursor a finger texture
-        if( Input.GetMouseButton( 0 ) )
+        if ( Input.GetMouseButton( 0 ) )
         {
             Cursor.SetCursor( CursorTexture2, Vector2.zero, CursorMode.ForceSoftware );
         }
@@ -101,7 +108,15 @@ public class Spectator : MonoBehaviour
                 AchievementPopup.SetText( achievement.Name );
                 PD.Instance.EarnedAchievementList.Add( achievement.UniqueID );
                 PD.Instance.AchievementPoints.Set( PD.Instance.AchievementPoints.Get() + achievement.Payout );
-                achievementCheckCooldown *= 3; // make sure the animation has enough time to finish before we check again incase we got two achievements at once
+                achievementCheckCooldown = AchievementCheckRate * 3; // make sure the animation has enough time to finish before we check again incase we got two achievements at once
+
+                // Record completion for Steam
+                Steamworks.Data.Achievement steam_achievement = new Steamworks.Data.Achievement(achievement.UniqueID);
+                if (!steam_achievement.State)
+                {
+                    steam_achievement.Trigger(true);
+                }
+
                 break;
             }
         }
