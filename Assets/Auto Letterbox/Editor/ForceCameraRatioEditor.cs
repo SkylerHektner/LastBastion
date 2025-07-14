@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections;
-using LetterboxCamera;
+using AutoLetterbox;
 
-namespace LetterboxCamera
+namespace AutoLetterbox
 {
 
     /* ForceCameraRatioEditor.cs

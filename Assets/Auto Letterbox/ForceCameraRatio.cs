@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using LetterboxCamera;
+using AutoLetterbox;
 
-namespace LetterboxCamera
+namespace AutoLetterbox
 {
     /* ForceCameraRatio.cs
      *
      * Forces the assigned Cameras to a given Aspect Ratio by Letterboxing them horizontally or vertically
      *
-     * Copyright Hexdragonal Games 2015
+     * 2015
      * Written by Tom Elliott */
 
     // A class for tracking individual Cameras and their Viewports
@@ -182,13 +182,11 @@ namespace LetterboxCamera
                 letterBoxCamera.clearFlags = CameraClearFlags.Color;
                 letterBoxCamera.name = "Letter Box Camera";
 
-#if UNITY_EDITOR
                 for (int i = 0; i < cameras.Count; i++) {
                     if (cameras[i].camera.depth == -100) {
                         Debug.LogError(cameras[i].camera.name + " has a depth of -100 and may conflict with the Letter Box Camera in Forced Camera Ratio!");
                     }
                 }
-#endif
             }
 
             if (forceRatioOnAwake) {
