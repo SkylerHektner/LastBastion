@@ -120,12 +120,20 @@ public class InfoViewer : MonoBehaviour
     public void ShiftConentRight()
     {
         Index += 1;
+        if (Index == LevelBar.childCount)
+        {
+            Index = 0;
+        }
         JumpToPosition( Index );
     }
 
     public void ShiftContentLeft()
     {
         Index -= 1;
+        if (Index == -1)
+        {
+            Index = LevelBar.childCount - 1;
+        }
         JumpToPosition( Index );
     }
 
@@ -192,11 +200,11 @@ public class InfoViewer : MonoBehaviour
         }
         if( index == 0 )
         {
-            ArrowL.GetComponent<Button>().interactable = false;
+            //ArrowL.GetComponent<Button>().interactable = false;
         }
         else if( index >= LevelBar.childCount - 1 )
         {
-            ArrowR.GetComponent<Button>().interactable = false;
+            //ArrowR.GetComponent<Button>().interactable = false;
         }
         else if( index > 0 && index < LevelBar.childCount - 1 )
         {

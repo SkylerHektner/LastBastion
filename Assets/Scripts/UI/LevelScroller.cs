@@ -113,16 +113,16 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         if (Index <= 1)
         {
-            ArrowL.SetActive(false);
+            ArrowL.GetComponent<Button>().enabled = false;
         }
         else if (Index >= LevelList.Count)
         {
-            ArrowR.SetActive(false);
+            ArrowR.GetComponent<Button>().enabled = false;
         }
         else if (Index >= 1 && Index < LevelList.Count)
         {
-            ArrowL.SetActive(true);
-            ArrowR.SetActive(true);
+            ArrowL.GetComponent<Button>().enabled = true;
+            ArrowR.GetComponent<Button>().enabled = true;
         }
         DisplayLevelImage(Index);
         UpdateAnimators(Index);
@@ -191,20 +191,23 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void ShiftNextLevel()
     {
-        if (LevelIndex < LevelList.Count)
+        LevelIndex = LevelIndex + 1;
+
+        if (LevelIndex == LevelList.Count + 1)
         {
-            LevelIndex = LevelIndex + 1;
-            JumpToDesiredLevel(LevelIndex);
+            LevelIndex = 1;
         }
+        JumpToDesiredLevel(LevelIndex);
+
         Debug.Log(LevelIndex);
 
     }
     public void ShiftPreviousLevel()
     {
         LevelIndex = LevelIndex - 1;
-        if (LevelIndex < 1)
+        if (LevelIndex == 0)
         {
-            LevelIndex = 1;
+            LevelIndex = LevelList.Count;
         }
         JumpToDesiredLevel(LevelIndex);
         Debug.Log(LevelIndex);

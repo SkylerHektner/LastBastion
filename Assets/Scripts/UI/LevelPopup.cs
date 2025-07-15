@@ -23,6 +23,7 @@ public class LevelPopup : MonoBehaviour
     public GameObject ArrowL;
     public Button HomeButton;
     public Button UpgradesButton;
+    public Button LastClickedWorld;
 
     private void Update()
     {
@@ -72,16 +73,17 @@ public class LevelPopup : MonoBehaviour
         ArrowR.GetComponent<Image>().enabled = true;
         ArrowL.GetComponent<Button>().enabled = true;
         ArrowL.GetComponent<Image>().enabled = true;
+        LastClickedWorld.Select();
     }
 
     public void DisableButtons()
     {
-        HomeButton.enabled = false;
-        UpgradesButton.enabled = false;
+        HomeButton.gameObject.SetActive(false);
+        UpgradesButton.gameObject.SetActive(false);
     }
     public void EnableButtons()
     {
-        HomeButton.enabled = true;
-        UpgradesButton.enabled = true;
+        HomeButton.gameObject.SetActive(true);
+        UpgradesButton.gameObject.SetActive(true);
     }
 }

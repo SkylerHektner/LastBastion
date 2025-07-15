@@ -79,6 +79,8 @@ public class LoadLevel : MonoBehaviour
         // load contract info
         UpdateContract();
         ContractPopup.DisableArrows();
+        ContractPopup.LastClickedWorld = GetComponent<Button>();
+        ContractPopup.DisableButtons();
     }
 
     public void UpdateContract()
