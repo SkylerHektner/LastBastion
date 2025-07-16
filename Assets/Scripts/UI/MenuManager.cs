@@ -39,6 +39,7 @@ public class MenuManager : MonoBehaviour
     public Image SkullMan;
     public Sprite SkullManAlt;
     public Sprite DefaulySkullSprite;
+    public Button CampaignButton;
 
     public string RateURL;
 
@@ -71,6 +72,7 @@ public class MenuManager : MonoBehaviour
             Debug.Log("Starting up menu");
             IntroWooshSFX.playOnAwake = true;
             IntroWooshSFX.Play();
+            Invoke("SelectCampaignButton", 3f);
         }
 
         if (PD.Instance.CampaignLimboResumeInformation != null && PD.Instance.SurvivalLimboResumeInformation != null)
@@ -99,6 +101,11 @@ public class MenuManager : MonoBehaviour
             SkullMan.sprite = DefaulySkullSprite;
         }
 
+    }
+
+    public void SelectCampaignButton()
+    {
+        CampaignButton.Select();
     }
 
     public void ShowLevels()

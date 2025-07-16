@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class ProgressCanvas : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class ProgressCanvas : MonoBehaviour
     public TextMeshProUGUI WaveText;
     string Scene2Load;
     public Boombox MenuTrack;
+    public Button ContinueButton;
+    public Button CampaignButton;
+
 
     private void Start()
     {
@@ -28,6 +32,14 @@ public class ProgressCanvas : MonoBehaviour
     public void ContinueSave()
     {
 
+    }
+    public void SelectStartingContinueButton()
+    {
+        ContinueButton.Select();
+    }
+    public void SelectCampaignButton()
+    {
+        CampaignButton.Select();
     }
 
     public void Awake()
@@ -85,5 +97,6 @@ public class ProgressCanvas : MonoBehaviour
         Spectator.ReturningFromLevel = true;
         MenuTrack.gameObject.SetActive(true); // toggle music soundtrack when transitioned
         //MenuTrack.SwapTrack(MenuTrack.MyClip);
+        SelectCampaignButton();
     }
 }
