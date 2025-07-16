@@ -42,6 +42,19 @@ public class UpgradeButton : MonoBehaviour
         ThePanel.UpgradeCost = UnlockFlagInformation.CampaignCost;
         ThePanel.DesiredUpgrade = this.gameObject.GetComponent<UpgradeButton>(); // for unlocking
         ThePanel.EnableButtons();
+        ThePanel.LastClickedUpgrade = GetComponent<Button>();
+        if (Purchased)
+        {
+            ThePanel.PurchaseButton.enabled = false;
+            ThePanel.PurchaseButton.image.color = new Color(0.3372549f, 0.5882353f, 0.3529412f, 0.6352941f);
+            ThePanel.UpgradeDenyButton.Select();
+        }
+        else
+        {
+            ThePanel.PurchaseButton.enabled = true;
+            ThePanel.PurchaseButton.image.color = new Color(0f, 1f, 0.04879761f, 1f);
+            ThePanel.PurchaseButton.Select();
+        }
     }
 
     private void Start()

@@ -16,6 +16,8 @@ public class InfoPanel : MonoBehaviour
 
     public UpgradeButton DesiredUpgrade;
     public int UpgradeCost;
+    public Button UpgradeDenyButton;
+    public Button LastClickedUpgrade;
 
     //public Animator PumpkinBucket;
     //public Animator Skull;
@@ -40,6 +42,7 @@ public class InfoPanel : MonoBehaviour
             //Skull.SetTrigger("Speak");
             PlayerWealthText.GetComponent<Animator>().SetTrigger("Buy");
             gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
+            ReturnHighlight();
         }
         else // player is too poor
         {
@@ -65,6 +68,11 @@ public class InfoPanel : MonoBehaviour
         gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
         //gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
 
+    }
+
+    public void ReturnHighlight()
+    {
+        LastClickedUpgrade.Select();
     }
 
     public void UpdatePlayerWealth()
