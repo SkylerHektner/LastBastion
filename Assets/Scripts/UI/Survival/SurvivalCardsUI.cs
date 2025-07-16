@@ -20,6 +20,7 @@ public class SurvivalCardsUI : MonoBehaviour
     private Dictionary<UnlockFlag, UnlockFlagUIInformation> ui_info_map = new Dictionary<UnlockFlag, UnlockFlagUIInformation>();
     private int num_curse_cards;
     private int num_boon_cards;
+    public Button StartingSelection;
 
     private void Start()
     {
@@ -75,6 +76,7 @@ public class SurvivalCardsUI : MonoBehaviour
         ResetCardGlowsAndBackground( true );
         ResetCardGlowsAndBackground( false );
         ContinueButton.gameObject.SetActive( false );
+        StartingSelection.Select();
         gameObject.SetActive( true );
         Anim.SetBool( "Empty", boon_unlock_flags.Count == 0 && curse_unlock_flags.Count == 0 );
         TryEnableContinueButton();

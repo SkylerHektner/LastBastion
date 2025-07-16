@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class VictoryScreen : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class VictoryScreen : MonoBehaviour
     public GameObject ChallengeDisplay;
     public TextMeshProUGUI ChallengeSuccessNotifierText;
     public TextMeshProUGUI ChallengeDescriptionText;
+    public Button ContinueButton;
 
     public void Start()
     {
@@ -29,9 +31,10 @@ public class VictoryScreen : MonoBehaviour
         PauseCanvas.SetActive( false );
         SawCanvas.SetActive( false );
         AbilityManager.SetActive( false );
+        Invoke("SelectContinueButton", 3f);
 
 #if UNITY_EDITOR
-        if( CandyGivenText == null )
+        if ( CandyGivenText == null )
             Debug.LogError( "CandyGivenText not assigned in victory screen", this );
 #endif
         if( CandyGivenText != null )
@@ -47,6 +50,11 @@ public class VictoryScreen : MonoBehaviour
                 ChallengeDisplay.GetComponent<Animator>().SetBool("Winner", true);
             }
         }
+    }
+
+    public void SelectContinueButton()
+    {
+        ContinueButton.Select();
     }
 
     public void LoadMenu()

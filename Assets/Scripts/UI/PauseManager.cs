@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PauseManager : MonoBehaviour
     public GameObject PauseButton;
     public TextMeshProUGUI CurrentWaveText;
     public Animator ConfirmationMenu;
+    public Button ResumeButton;
 
     public void ResumeGame()
     {
@@ -34,6 +36,7 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
+        ResumeButton.Select();
         PauseScreen.SetActive(true);
         Time.timeScale = 0;
         WaveCounter.SetTrigger("Hide");
