@@ -289,4 +289,11 @@ public class MenuManager : MonoBehaviour
         Application.OpenURL(RateURL);
     }
 
+    // rate game button in settings
+    public void OpenSteamURL()
+    {
+        string URL = "https://store.steampowered.com/app/3876840/Sawmania/";
+        Application.OpenURL(URL);
+    }
+
 }

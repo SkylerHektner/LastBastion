@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VolumeController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class VolumeController : MonoBehaviour
     public List<AudioClip> RandomlyPayedEffects;
     bool Toggled = false;
     float PitchWait;
+    public Button TradesButton;
 
     float last_frame_volume = -1.0f;
 
@@ -142,6 +144,13 @@ public class VolumeController : MonoBehaviour
         }
         Toggled = !Toggled;
 
+    }
+
+
+    // shhh don't ask (animator thing)
+    public void SelectTradesButton()
+    {
+        TradesButton.Select();
     }
 
 }

@@ -19,6 +19,7 @@ public class OffersCanvasManager : MonoBehaviour
     public Button HomeButton;
     public Animator WealthPlate;
     public GameObject NewPurchaseFX;
+    public Button ConfirmButton;
 
     private void Awake()
     {
@@ -75,6 +76,7 @@ public class OffersCanvasManager : MonoBehaviour
             LeftArrow.SetActive(false);
             HomeButton.interactable = false;
             //WealthPlate.SetTrigger("Success");
+            ConfirmButton.Select();
 
         }
         else if (PD.Instance.AchievementPoints.Get() < current_store_item.CosmeticInformation.GetPrice()) // player is too poor, sad
@@ -83,4 +85,5 @@ public class OffersCanvasManager : MonoBehaviour
             WealthPlate.GetComponent<VolumeController>().PlayMyAlternateSound();
         }
     }
+
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class TradesCanvasManager : MonoBehaviour
 {
@@ -11,11 +12,18 @@ public class TradesCanvasManager : MonoBehaviour
     public bool FailPurchase;
     public Animator DeniedAnimator;
     public VolumeController ConfirmationPopup;
+    public Button TradesBuyButton;
+    public Sprite TradesOwnedImage;
+    public bool DLC_Owned;
 
-    public void Start()
+    public void Awake()
     {
         // Spectator.Instance.UnityIAP.PurchaseFailedEvent.AddListener( OnPurchaseFailed );
         // Spectator.Instance.UnityIAP.PurchaseCompletedEvent.AddListener( OnPurchaseCompleted );
+        if (DLC_Owned)
+        {
+            DisableTradesPurchaseButton();
+        }
     }
 
     public void OnDestroy()
@@ -72,5 +80,13 @@ public class TradesCanvasManager : MonoBehaviour
         CandyBucketAnimator.SetTrigger("Thanks");
         DeniedAnimator.SetTrigger("Success");
         ConfirmationPopup.PlayMySound();
+    }
+    
+    [ContextMenu("DisableTradesPurchaseButton")]
+    public void DisableTradesPurchaseButton()
+    {
+        TradesBuyButton.enabled = false;
+        TradesBuyButton.image.sprite = TradesOwnedImage; // swap sprite!
+        CandyBucketAnimator.SetBool("DLC_Owned", true);
     }
 }

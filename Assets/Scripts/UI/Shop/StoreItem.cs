@@ -8,12 +8,14 @@ public class StoreItem : MonoBehaviour
     public CosmeticDisplayInterface CosmeticInformation;
     public bool PremiumItem;
     public bool ItemPurchased { get; private set; }
+    public string FallbackDescription;
 
     public string GetInfoPrice()
     {
         if (PremiumItem)
         {
-            return ("$" + CosmeticInformation.GetPrice().ToString());
+            return "Get\nDLC";
+            //return ("$" + CosmeticInformation.GetPrice().ToString());
         }
         else
         {
@@ -22,8 +24,19 @@ public class StoreItem : MonoBehaviour
     }
     public string GetInfoDescription()
     {
-        return CosmeticInformation.GetDescription();
+        if (CosmeticInformation == null)
+        {
+            return GetFallBackDescription();
+        }
+        else
+            return CosmeticInformation.GetDescription();
     }
+
+    public string GetFallBackDescription()
+    {
+        return FallbackDescription;
+    }
+
     public string GetInfoName()
     {
         return CosmeticInformation.GetName();
@@ -59,6 +72,12 @@ public class StoreItem : MonoBehaviour
 
     private void UpdatePurchased()
     {
+        if (CosmeticInformation == null)
+        {
+            return;
+        }
         ItemPurchased = CosmeticInformation.IsUnlocked();
     }
+
+
 }
