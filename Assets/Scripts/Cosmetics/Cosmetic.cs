@@ -109,7 +109,10 @@ public class Cosmetic : CosmeticDisplayInterface
 
     public override bool IsUnlocked()
     {
-        return Spectator.Instance?.SteamManagerInstance.HasCosmeticsDLC() ?? false;
+        if (Premium)
+            return Spectator.Instance?.SteamManagerInstance.HasCosmeticsDLC() ?? false;
+        else 
+            return PD.Instance.UnlockMap.Get(unlock_flag, false);
     }
 }
 
