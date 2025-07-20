@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Spectator : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Spectator : MonoBehaviour
     public GlobalData GD;
 
     public SteamManager SteamManagerInstance;
+
+    public bool InGamepadMode = false;
 
     public static bool ReturningFromLevel;
     public static bool ReturningFromSurvival;
@@ -93,6 +96,50 @@ public class Spectator : MonoBehaviour
         {
             PD.Instance.OneTimeCandyBonusClaimed.Set( true );
             PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + 5 );
+        }
+
+        Gamepad gp = Gamepad.current;
+        if (gp != null && !InGamepadMode)
+        {
+            // lord forgive my sins
+            if (gp.rightShoulder.wasPressedThisFrame ||
+                gp.rightStickButton.wasPressedThisFrame ||
+                gp.rightTrigger.wasPressedThisFrame ||
+                gp.leftShoulder.wasPressedThisFrame ||
+                gp.leftStickButton.wasPressedThisFrame ||
+                gp.leftTrigger.wasPressedThisFrame ||
+                gp.startButton.wasPressedThisFrame ||
+                gp.selectButton.wasPressedThisFrame ||
+                gp.aButton.wasPressedThisFrame ||
+                gp.bButton.wasPressedThisFrame ||
+                gp.xButton.wasPressedThisFrame ||
+                gp.yButton.wasPressedThisFrame ||
+                gp.dpad.left.wasPressedThisFrame ||
+                gp.dpad.right.wasPressedThisFrame ||
+                gp.dpad.up.wasPressedThisFrame ||
+                gp.dpad.down.wasPressedThisFrame ||
+                gp.leftStick.left.wasPressedThisFrame ||
+                gp.leftStick.right.wasPressedThisFrame ||
+                gp.leftStick.up.wasPressedThisFrame ||
+                gp.leftStick.down.wasPressedThisFrame ||
+                gp.rightStick.left.wasPressedThisFrame ||
+                gp.rightStick.right.wasPressedThisFrame ||
+                gp.rightStick.up.wasPressedThisFrame ||
+                gp.rightStick.down.wasPressedThisFrame)
+            {
+                Debug.Log("going to gamepad mode");
+                InGamepadMode = true;
+            }
+        }
+        else if (InGamepadMode)
+        {
+            if (gp == null ||
+                Input.GetMouseButtonDown(0) ||
+                Input.GetMouseButtonDown(1))
+            {
+                Debug.Log("going to non gamepad mode");
+                InGamepadMode = false;
+            }
         }
     }
 

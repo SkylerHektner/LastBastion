@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using NUnit.Framework;
+using Steamworks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 [RequireComponent( typeof( Projectile ) )]
 public class Saw : MonoBehaviour
@@ -117,7 +120,38 @@ public class Saw : MonoBehaviour
         AnomalyFX.SetFloat( "Duration", AnomalyAbility.AnimatorDuration );
         SawmageddonFX.SetFloat( "Duration", SawmageddonAbility.AnimatorDuration );
 
-        if( dragging )
+
+        if (Spectator.Instance.InGamepadMode)
+        {
+            Gamepad gp = Gamepad.current;
+            Debug.Assert(gp != null);
+
+            drag_start_position = gameObject.transform.position;
+            drag_last_position = drag_start_position;
+            drag_last_position.x += gp.leftStick.ReadValue().x * MaxDragDistance; // normalized along the max drag distance
+            drag_last_position.y += gp.leftStick.ReadValue().y * MaxDragDistance; // normalized along the max drag distance
+
+            if ((drag_start_position - drag_last_position).sqrMagnitude > MinDragDistance * MinDragDistance)
+            {
+                if (!DirectionArrow.gameObject.activeInHierarchy)
+                {
+                    ActivateDragArrow();
+                }
+
+                UpdateDragArrowGraphics();
+            }
+            else
+            {
+                DirectionArrow.gameObject.SetActive(false);
+            }
+
+            if (gp.aButton.wasPressedThisFrame ||
+                gp.xButton.wasPressedThisFrame)
+            {
+                DragEnded();
+            }
+        }
+        else if( !Spectator.Instance.InGamepadMode && dragging )
         {
             bool still_dragging;
 
@@ -291,6 +325,9 @@ public class Saw : MonoBehaviour
 
     public void DragStarted()
     {
+        if (Spectator.Instance.InGamepadMode)
+            return;
+
         if( dragging )
         {
 #if UNITY_EDITOR
@@ -309,11 +346,16 @@ public class Saw : MonoBehaviour
         drag_start_position = Camera.main.ScreenToWorldPoint( touch_postition );
         dragging = true;
 
-        DirectionArrow.gameObject.SetActive( true );
+        ActivateDragArrow();
+    }
+
+    private void ActivateDragArrow()
+    {
+        DirectionArrow.gameObject.SetActive(true);
         DirectionArrow.sprite = DirectionArrowSprite;
         DirectionArrow.material = Moving ? DisabledDirectionArrowMaterial : EnabledDirectionArrowMaterial;
         drag_arrow_color.a = 0.0f;
-        DirectionArrow.GetComponent<Renderer>().material.SetColor( "_Color", drag_arrow_color );
+        DirectionArrow.GetComponent<Renderer>().material.SetColor("_Color", drag_arrow_color);
     }
 
     public void TryCoverInMud( float duration, float move_speed_mult )
