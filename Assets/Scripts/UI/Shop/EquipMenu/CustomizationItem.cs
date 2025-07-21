@@ -17,6 +17,8 @@ public class CustomizationItem : MonoBehaviour
     float ChainsSFXCooldown;
     bool ChainsCanRattle;
     public GameObject ActivatedFX;
+    public Image MyIcon;
+    public Image ShowcaseImage;
 
     public void Start()
     {
@@ -70,6 +72,7 @@ public class CustomizationItem : MonoBehaviour
     public void UpdateDescriptorText()
     {
         DescriptorText.text = MyCosmetic.Name;
+        ShowcaseImage.sprite = MyIcon.sprite;
     }
 
     public void WipeDescriptorText()

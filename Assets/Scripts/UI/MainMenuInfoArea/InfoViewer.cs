@@ -226,4 +226,9 @@ public class InfoViewer : MonoBehaviour
             ShowItemDescription(Index);
         }
     }
+
+    public void NextCosmeticPage()
+    {
+
+    }
 }
