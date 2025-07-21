@@ -232,6 +232,7 @@ MonoBehaviour:
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
   RandomlyPayedEffects: []
+  TradesButton: {fileID: 0}
 --- !u!1 &1227442620669187729
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,6 +521,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1752228628971405335}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &7253847544459321317
 Animator:
   serializedVersion: 7
@@ -657,6 +670,7 @@ MonoBehaviour:
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
   RandomlyPayedEffects: []
+  TradesButton: {fileID: 1752228628971405335}
 --- !u!114 &1641999191740781304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1195,6 +1209,7 @@ MonoBehaviour:
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
   RandomlyPayedEffects: []
+  TradesButton: {fileID: 0}
 --- !u!1 &1752228629859829647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,6 +2616,7 @@ MonoBehaviour:
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
   RandomlyPayedEffects: []
+  TradesButton: {fileID: 0}
 --- !u!1 &3421951968414566440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,6 +2930,7 @@ MonoBehaviour:
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
   RandomlyPayedEffects: []
+  TradesButton: {fileID: 0}
 --- !u!1 &4609476151218345926
 GameObject:
   m_ObjectHideFlags: 0
@@ -3144,6 +3161,7 @@ MonoBehaviour:
   PitchIncreaseOnAwake: 0
   NeutralizePitchOnDestroy: 0
   RandomlyPayedEffects: []
+  TradesButton: {fileID: 0}
 --- !u!1 &7199238813833336996
 GameObject:
   m_ObjectHideFlags: 0
