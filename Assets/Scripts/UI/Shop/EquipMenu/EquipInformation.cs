@@ -9,9 +9,16 @@ public class EquipInformation : MonoBehaviour
     public GameObject ContentList;
     public TextMeshProUGUI ItemName;
     public Image ShowcaseImage;
+    public Button HomeButton;
+    public Button DefaultButton;
 
     void OnEnable()
     {
+        Navigation CosmeticsHomeNavigation = HomeButton.navigation; // have to explicitly tell home button where to go :(
+        CosmeticsHomeNavigation.selectOnRight = DefaultButton;
+        CosmeticsHomeNavigation.selectOnDown = DefaultButton;
+        HomeButton.navigation = CosmeticsHomeNavigation;
+
         MyCosmetics = ContentList.GetComponentsInChildren<CustomizationItem>();
         foreach (CustomizationItem Cosmetic in MyCosmetics)
         {
