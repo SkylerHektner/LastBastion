@@ -11,9 +11,13 @@ public class HelpManager : MonoBehaviour
     public GameObject HowToText;
     public GameObject PowerupText;
     public GameObject GameTypeText;
-
-
     public ScrollRect HelpInfoBar;
+
+    public GameObject[] Tips1;
+    public GameObject[] Tips2;
+    public GameObject[] Tips3;
+    int CurrentIndex;
+    public GameObject[] ActiveList;
 
     // Start is called before the first frame update
     void Awake()
@@ -30,8 +34,9 @@ public class HelpManager : MonoBehaviour
         HowToText.SetActive(false);
         PowerupText.SetActive(false);
         GameTypeText.SetActive(true);
-        ResetBarPos();
-
+        ResetList();
+        ActiveList = Tips3;
+        ActiveList[0].SetActive(true);
     }
 
     public void ToggleOnPowerupsInfo()
@@ -43,8 +48,9 @@ public class HelpManager : MonoBehaviour
         HowToText.SetActive(false);
         PowerupText.SetActive(true);
         GameTypeText.SetActive(false);
-        ResetBarPos();
-
+        ResetList();
+        ActiveList = Tips2;
+        ActiveList[0].SetActive(true);
     }
 
     public void ToggleOnHowToPlayInfo()
@@ -56,12 +62,49 @@ public class HelpManager : MonoBehaviour
         HowToText.SetActive(true);
         PowerupText.SetActive(false);
         GameTypeText.SetActive(false);
-        ResetBarPos();
-
+        ResetList();
+        ActiveList = Tips1;
+        ActiveList[0].SetActive(true);
     }
 
-    public void ResetBarPos()
+    public void NextTip()
     {
-        HelpInfoBar.content.localPosition = Vector3.zero;
+        ActiveList[CurrentIndex].SetActive(false); // turn existing tip OFF
+        CurrentIndex++;
+        if (CurrentIndex >= ActiveList.Length)
+        {
+            CurrentIndex = ActiveList.Length - 1;
+        }
+        ActiveList[CurrentIndex].SetActive(true); // turn new tip ON
+    }
+
+    public void PreviousTip()
+    {
+        ActiveList[CurrentIndex].SetActive(false); // turn existing tip OFF
+        CurrentIndex--;
+        if (CurrentIndex <= 0)
+        {
+            CurrentIndex = 0;
+        }
+        ActiveList[CurrentIndex].SetActive(true); // turn new tip ON
+    }
+
+    public void ResetList()
+    {
+        CurrentIndex = 0;
+
+        foreach (GameObject Tip in Tips1)
+        {
+            Tip.SetActive(false);
+        }
+        foreach (GameObject Tip in Tips2)
+        {
+            Tip.SetActive(false);
+        }
+        foreach (GameObject Tip in Tips3)
+        {
+            Tip.SetActive(false);
+        }
+
     }
 }
