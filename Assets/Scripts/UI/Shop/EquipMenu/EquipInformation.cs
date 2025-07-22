@@ -32,4 +32,10 @@ public class EquipInformation : MonoBehaviour
         }
     }
 
+    public void SetPreview(CustomizationItem Cosmetic)
+    {
+        ItemName.text = Cosmetic.MyCosmetic.Name;
+        ShowcaseImage.sprite = Cosmetic.MyIcon.sprite;
+    }
+
 }

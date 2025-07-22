@@ -16,7 +16,7 @@ public class TradesCanvasManager : MonoBehaviour
     public Sprite TradesOwnedImage;
     public bool DLC_Owned;
 
-    public void Awake()
+    public void OnEnable()
     {
         // Spectator.Instance.UnityIAP.PurchaseFailedEvent.AddListener( OnPurchaseFailed );
         // Spectator.Instance.UnityIAP.PurchaseCompletedEvent.AddListener( OnPurchaseCompleted );

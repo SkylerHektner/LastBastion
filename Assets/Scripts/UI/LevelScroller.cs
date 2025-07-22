@@ -53,6 +53,10 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //}
     }
 
+    public void SetButtonSelection()
+    {
+        LevelList[LevelIndex - 1].GetComponent<Button>().Select();
+    }
 
     // might have to remove this later on, as it may cause problems with returning from levels
     private void Awake()
@@ -80,6 +84,7 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             Portal.SetTrigger("Shrink");
             Spectator.ReturningFromLevel = false;
             UpdateAnimators(LevelIndex);
+            SetButtonSelection();
 
 #if UNITY_EDITOR
             Debug.Log("Returning from level" + Spectator.LevelIndex);

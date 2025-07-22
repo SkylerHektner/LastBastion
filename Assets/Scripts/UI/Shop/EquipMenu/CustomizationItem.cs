@@ -19,6 +19,7 @@ public class CustomizationItem : MonoBehaviour
     public GameObject ActivatedFX;
     public Image MyIcon;
     public Image ShowcaseImage;
+    public EquipInformation ParentPortal;
 
     public void Start()
     {
@@ -102,7 +103,7 @@ public class CustomizationItem : MonoBehaviour
             ColoredBG.color = Color.green;
             ActivatedFX.SetActive(true);
             gameObject.GetComponent<AudioSource>().Play();
-
+            ParentPortal.SetPreview(gameObject.GetComponent<CustomizationItem>());
         }
         else
         {

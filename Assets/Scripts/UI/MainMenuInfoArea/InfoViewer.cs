@@ -37,6 +37,9 @@ public class InfoViewer : MonoBehaviour
     public Animator SoldOutIcon;
     public Button ClaimButton;
     public GameObject PriceDisplay;
+    public Sprite SoldOutButtonSprite;
+    public Sprite NotSoldOutButtonSprite;
+    public bool PremiumInfoViewing;
 
     // Start is called before the first frame update
     void Awake()
@@ -157,13 +160,21 @@ public class InfoViewer : MonoBehaviour
                 {
                     SoldOutIcon.SetBool("Sold", true);
                     ClaimButton.interactable = false;
+                    ClaimButton.enabled = false;
+                    ClaimButton.image.sprite = SoldOutButtonSprite;
                     PriceDisplay.SetActive(false);
                 }
                 else// hide the universal purchased symbol
                 {
-                    SoldOutIcon.SetBool("Sold", false);
-                    ClaimButton.interactable = true;
-                    PriceDisplay.SetActive(true);
+                    if (PremiumInfoViewing == false)
+                    {
+                        SoldOutIcon.SetBool("Sold", false);
+                        ClaimButton.interactable = true;
+                        ClaimButton.enabled = true;
+                        ClaimButton.image.sprite = NotSoldOutButtonSprite;
+                        PriceDisplay.SetActive(true);
+                    }
+
                 }
             }
             else

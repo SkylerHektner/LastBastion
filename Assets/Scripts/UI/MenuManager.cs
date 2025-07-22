@@ -40,6 +40,7 @@ public class MenuManager : MonoBehaviour
     public Sprite SkullManAlt;
     public Sprite DefaulySkullSprite;
     public Button CampaignButton;
+    public Button SurvivalPlayButton;
 
     public string RateURL;
 
@@ -64,6 +65,7 @@ public class MenuManager : MonoBehaviour
             CameraMover.LoadSurvivalShortcut();
             MenuOptions.SetTrigger("Skip");
             SurvivalBoombox.SwapTrack(SurvivalBoombox.MyClip);
+            SurvivalPlayButton.Select();
             //IntroWooshSFX.playOnAwake = false;
         }
         else if ((!Spectator.ReturningFromLevel && !Spectator.ReturningFromSurvival) && (!PD.Instance.CampaignLimboResumeInformation.Active && !PD.Instance.SurvivalLimboResumeInformation.Active))
