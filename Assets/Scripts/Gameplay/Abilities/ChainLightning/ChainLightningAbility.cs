@@ -85,8 +85,6 @@ public class ChainLightningAbility : Ability
         {
             PD.Instance.HighestZappedEnemiesWithSingleChainLightning.Set( pending_zaps.Count );
         }
-
-        Spectator.Instance?.SteamManagerInstance.TrySetHighestZappedEnemiesWithSingleChainLightning(pending_zaps.Count);
     }
 
     public override void Update( float delta_time )

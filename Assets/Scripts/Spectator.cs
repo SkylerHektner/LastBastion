@@ -59,7 +59,7 @@ public class Spectator : MonoBehaviour
         if( GameplayManager.Instance == null )
             PD.Instance.Tick();
 
-        SteamManagerInstance.Update();
+        SteamManagerInstance.Update(Time.deltaTime);
 
         // makes the cursor a finger texture
         if ( Input.GetMouseButton( 0 ) )

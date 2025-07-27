@@ -20,7 +20,6 @@ public class Typhoon : MonoBehaviour
             if( died )
             {
                 PD.Instance.NumEnemiesKilledByTyphoon.Set( PD.Instance.NumEnemiesKilledByTyphoon.Get() + 1 );
-                Spectator.Instance?.SteamManagerInstance.IncrementNumEnemiesKilledByTyphoon();
             }
         }
     }

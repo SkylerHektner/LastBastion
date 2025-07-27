@@ -6,7 +6,12 @@ public class SteamManager
     public uint appId = 3876840;
 
     // TODO Assign once we have a DLC setup
-    public uint cosmeticsDLCAppId = 0;
+    public uint cosmeticsDLCAppId = 3892740;
+
+    private Steamworks.Data.Leaderboard highestSurivalWaveLeaderboard;
+
+    private const float statPersistenceCooldown = 30.0f;
+    private float currentStatPersistenceCooldown = statPersistenceCooldown;
 
     public SteamManager()
     {
@@ -21,9 +26,16 @@ public class SteamManager
         }
     }
 
-    public void Update()
+    public void Update(float deltaTime)
     {
         Steamworks.SteamClient.RunCallbacks();
+
+        currentStatPersistenceCooldown -= deltaTime;
+        if (currentStatPersistenceCooldown <= 0.0f)
+        {
+            currentStatPersistenceCooldown = statPersistenceCooldown;
+            UpdateAndStoreStats();
+        }
     }
 
     public bool HasCosmeticsDLC()
@@ -32,100 +44,31 @@ public class SteamManager
     }
 
     // STATS
-    public void IncrementNumKilledEnemies()
+    private void UpdateAndStoreStats()
     {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumKilledEnemies");
-        stat.Set(stat.GetInt() + 1);
-        Debug.Log(stat.GetInt());
-    }
+        Steamworks.SteamUserStats.SetStat("NumKilledEnemies", PD.Instance.NumKilledEnemies.Get());
+        Steamworks.SteamUserStats.SetStat("NumCrystalsUsed", PD.Instance.NumCrystalsUsed.Get());
+        Steamworks.SteamUserStats.SetStat("NumTurretKills", PD.Instance.NumTurretKills.Get());
+        Steamworks.SteamUserStats.SetStat("NumTimesSawOnFire", PD.Instance.NumTimesSawOnFire.Get());
+        Steamworks.SteamUserStats.SetStat("NumEnemiesKilledByTyphoon", PD.Instance.NumEnemiesKilledByTyphoon.Get());
+        Steamworks.SteamUserStats.SetStat("NumZappedEnemiesKilled", PD.Instance.NumZappedEnemiesKilled.Get());
+        Steamworks.SteamUserStats.SetStat("HighestZappedEnemiesWithSingleChainLightning", PD.Instance.HighestZappedEnemiesWithSingleChainLightning.Get());
+        Steamworks.SteamUserStats.SetStat("HighestAnomalySawUnleash", PD.Instance.HighestAnomalySawUnleash.Get());
+        Steamworks.SteamUserStats.SetStat("TotalNumberOfAnomalySawUnleash", PD.Instance.TotalNumberOfAnomalySawUnleash.Get());
+        Steamworks.SteamUserStats.SetStat("HighestEnemyDeathTollFromSawmageddonShot", PD.Instance.HighestEnemyDeathTollFromSawmageddonShot.Get());
+        Steamworks.SteamUserStats.SetStat("HighestSurvivalWave", PD.Instance.HighestSurvivalWave.Get());
+        Steamworks.SteamUserStats.SetStat("TotalWavesCompleted", PD.Instance.TotalWavesCompleted.Get());
+        Steamworks.SteamUserStats.SetStat("TotalWealthEarned", PD.Instance.TotalWealthEarned.Get());
+        Steamworks.SteamUserStats.SetStat("TotalFailures", PD.Instance.TotalFailures.Get());
 
-    public void IncrementNumCrystalsUsed()
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumCrystalsUsed");
-        stat.Set(stat.GetInt() + 1);
-    }
+        var steamworks_val = Steamworks.SteamUserStats.GetStatInt("NumKilledEnemies");
+        Debug.Log($"Steamworks Value {steamworks_val}");
+        var pd_val = PD.Instance.NumKilledEnemies.Get();
+        Debug.Log($"PD Value {pd_val}");
 
-    public void IncrementNumTurretKills()
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumTurretKills");
-        stat.Set(stat.GetInt() + 1);
-    }
-
-    public void IncrementNumTimesSawOnFire()
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumTimesSawOnFire");
-        stat.Set(stat.GetInt() + 1);
-    }
-
-    public void IncrementNumEnemiesKilledByTyphoon()
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumEnemiesKilledByTyphoon");
-        stat.Set(stat.GetInt() + 1);
-    }
-
-    public void IncrementNumZappedEnemiesKilled()
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumZappedEnemiesKilled");
-        stat.Set(stat.GetInt() + 1);
-    }
-
-    public void TrySetHighestZappedEnemiesWithSingleChainLightning(int candidateValue)
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("HighestZappedEnemiesWithSingleChainLightning");
-        if (candidateValue > stat.GetInt())
+        if (!Steamworks.SteamUserStats.StoreStats())
         {
-            stat.Set(candidateValue);
+            Debug.LogError("Unable to store stats to steam");
         }
-    }
-
-    public void TrySetHighestAnomalySawUnleash(int candidateValue)
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("HighestAnomalySawUnleash");
-        if (candidateValue > stat.GetInt())
-        {
-            stat.Set(candidateValue);
-        }
-    }
-
-    public void IncrementTotalNumberOfAnomalySawUnleash(int amount)
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("TotalNumberOfAnomalySawUnleash");
-        stat.Set(stat.GetInt() + amount);
-    }
-
-    public void TrySetHighestEnemyDeathTollFromSawmageddonShot(int candidateValue)
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("HighestEnemyDeathTollFromSawmageddonShot");
-        if (candidateValue > stat.GetInt())
-        {
-            stat.Set(candidateValue);
-        }
-    }
-
-    public void TrySetHighestSurvivalWave(int candidateValue)
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("HighestSurvivalWave");
-        if (candidateValue > stat.GetInt())
-        {
-            stat.Set(candidateValue);
-        }
-    }
-
-    public void IncrementTotalWavesCompleted()
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("TotalWavesCompleted");
-        stat.Set(stat.GetInt() + 1);
-    }
-
-    public void IncrementTotalWealthEarned(int amount)
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("TotalWealthEarned");
-        stat.Set(stat.GetInt() + amount);
-    }
-
-    public void IncrementTotalFailures()
-    {
-        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("TotalFailures");
-        stat.Set(stat.GetInt() + 1);
     }
 }
