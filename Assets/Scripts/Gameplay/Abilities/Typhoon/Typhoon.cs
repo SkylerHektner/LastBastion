@@ -18,7 +18,10 @@ public class Typhoon : MonoBehaviour
                 en.Hit( Vector3.up, false, DamageSource.Typhoon, out died, out dodged );
 
             if( died )
+            {
                 PD.Instance.NumEnemiesKilledByTyphoon.Set( PD.Instance.NumEnemiesKilledByTyphoon.Get() + 1 );
+                Spectator.Instance?.SteamManagerInstance.IncrementNumEnemiesKilledByTyphoon();
+            }
         }
     }
 }

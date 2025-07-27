@@ -144,6 +144,7 @@ public class BaseHP : MonoBehaviour
                     GameplayManager.State = GameplayManager.GameState.Lost;
                     GameplayManager.Instance.ResetLimbo();
                     PD.Instance.TotalFailures.Set(PD.Instance.TotalFailures.Get() + 1);
+                    Spectator.Instance?.SteamManagerInstance.IncrementTotalFailures();
                 }
                 UpdateHPBar();
             }
@@ -180,6 +181,7 @@ public class BaseHP : MonoBehaviour
                 GameplayManager.State = GameplayManager.GameState.Lost;
                 GameplayManager.Instance.ResetLimbo();
                 PD.Instance.TotalFailures.Set( PD.Instance.TotalFailures.Get() + 1 );
+                Spectator.Instance?.SteamManagerInstance.IncrementTotalFailures();
             }
         }
     }

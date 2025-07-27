@@ -277,10 +277,17 @@ public class Enemy : MonoBehaviour
     {
         // record some stuff for player stats
         PD.Instance.NumKilledEnemies.Set( PD.Instance.NumKilledEnemies.Get() + 1 );
+        Spectator.Instance?.SteamManagerInstance.IncrementNumKilledEnemies();
         if( Zapped )
+        {
             PD.Instance.NumZappedEnemiesKilled.Set( PD.Instance.NumZappedEnemiesKilled.Get() + 1 );
+            Spectator.Instance?.SteamManagerInstance.IncrementNumZappedEnemiesKilled();
+        }
         if( DeathSource == DamageSource.Turret )
+        {
             PD.Instance.NumTurretKills.Set( PD.Instance.NumTurretKills.Get() + 1 );
+            Spectator.Instance?.SteamManagerInstance.IncrementNumTurretKills();
+        }
         if( !PD.Instance.EncounteredEnemyList.Contains( EnemyType ) )
             PD.Instance.EncounteredEnemyList.Add( EnemyType );
 

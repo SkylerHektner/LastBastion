@@ -68,6 +68,7 @@ public class SawmageddonAbility : Ability
                 PD.Instance.HighestEnemyDeathTollFromSawmageddonShot.Get(),
                 num_kills_this_release
                 ) );
+        Spectator.Instance?.SteamManagerInstance.TrySetHighestEnemyDeathTollFromSawmageddonShot(num_kills_this_release);
 
         num_kills_this_release = 0;
     }

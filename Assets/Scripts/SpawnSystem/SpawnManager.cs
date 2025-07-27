@@ -246,6 +246,7 @@ public class SpawnManager : MonoBehaviour
                     PD.Instance.LevelCompletionMap.SetWaveCompletion( spawnCadenceProfile.GetLevelIdentifier(), CurrentWaveIndex, true );
                     PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + reward );
                     PD.Instance.TotalWealthEarned.Set( PD.Instance.TotalWealthEarned.Get() + reward );
+                    Spectator.Instance?.SteamManagerInstance.IncrementTotalWealthEarned(reward);
                     total_level_earnings += reward;
                     Spectator.WitnessedVictory = true; // enables a popup on the menu screen for "New level unlocked!" notification
                 }
@@ -260,10 +261,12 @@ public class SpawnManager : MonoBehaviour
         {
             // just record the highest wave we've reached in survival
             PD.Instance.HighestSurvivalWave.Set( Mathf.Max( PD.Instance.HighestSurvivalWave.Get(), CurrentWaveIndex + 1 ) );
+            Spectator.Instance?.SteamManagerInstance.TrySetHighestSurvivalWave(CurrentWaveIndex + 1);
         }
 
         // player stats
         PD.Instance.TotalWavesCompleted.Set( PD.Instance.TotalWavesCompleted.Get() + 1 );
+        Spectator.Instance?.SteamManagerInstance.IncrementTotalWavesCompleted();
 
         spawn_timer = -1.0f; // stop spawning
 
@@ -291,6 +294,7 @@ public class SpawnManager : MonoBehaviour
                         String.Format( "ERROR: Spawn Cadence {0} has succeeded but has not been assigned any reward", spawnCadenceProfile.GetChallenge().name ) );
                     PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + spawnCadenceProfile.GetChallenge().Reward );
                     PD.Instance.TotalWealthEarned.Set( PD.Instance.TotalWealthEarned.Get() + spawnCadenceProfile.GetChallenge().Reward );
+                    Spectator.Instance?.SteamManagerInstance.IncrementTotalWealthEarned(spawnCadenceProfile.GetChallenge().Reward);
                     PD.Instance.PlayerChallengeCompletionList.Add( spawnCadenceProfile.GetChallenge().UniqueChallengeID );
                     total_level_earnings += spawnCadenceProfile.GetChallenge().Reward;
                 }

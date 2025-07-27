@@ -22,6 +22,7 @@ public class AbilityDrop : MonoBehaviour
 
         // record player stats
         PD.Instance.NumCrystalsUsed.Set( PD.Instance.NumCrystalsUsed.Get() + 1 );
+        Spectator.Instance?.SteamManagerInstance.IncrementNumCrystalsUsed();
     }
 
     public void Disintegrate()

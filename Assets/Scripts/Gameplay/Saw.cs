@@ -407,6 +407,7 @@ public class Saw : MonoBehaviour
 
         // record player stats
         PD.Instance.NumTimesSawOnFire.Set( PD.Instance.NumTimesSawOnFire.Get() + 1 );
+        Spectator.Instance?.SteamManagerInstance.IncrementNumTimesSawOnFire();
     }
 
     private void EndOnFire()

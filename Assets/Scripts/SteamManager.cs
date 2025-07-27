@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Steamworks.InventoryItem;
 
 public class SteamManager
 {
@@ -28,5 +29,103 @@ public class SteamManager
     public bool HasCosmeticsDLC()
     {
         return Steamworks.SteamApps.IsDlcInstalled(cosmeticsDLCAppId);
+    }
+
+    // STATS
+    public void IncrementNumKilledEnemies()
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumKilledEnemies");
+        stat.Set(stat.GetInt() + 1);
+        Debug.Log(stat.GetInt());
+    }
+
+    public void IncrementNumCrystalsUsed()
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumCrystalsUsed");
+        stat.Set(stat.GetInt() + 1);
+    }
+
+    public void IncrementNumTurretKills()
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumTurretKills");
+        stat.Set(stat.GetInt() + 1);
+    }
+
+    public void IncrementNumTimesSawOnFire()
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumTimesSawOnFire");
+        stat.Set(stat.GetInt() + 1);
+    }
+
+    public void IncrementNumEnemiesKilledByTyphoon()
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumEnemiesKilledByTyphoon");
+        stat.Set(stat.GetInt() + 1);
+    }
+
+    public void IncrementNumZappedEnemiesKilled()
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("NumZappedEnemiesKilled");
+        stat.Set(stat.GetInt() + 1);
+    }
+
+    public void TrySetHighestZappedEnemiesWithSingleChainLightning(int candidateValue)
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("HighestZappedEnemiesWithSingleChainLightning");
+        if (candidateValue > stat.GetInt())
+        {
+            stat.Set(candidateValue);
+        }
+    }
+
+    public void TrySetHighestAnomalySawUnleash(int candidateValue)
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("HighestAnomalySawUnleash");
+        if (candidateValue > stat.GetInt())
+        {
+            stat.Set(candidateValue);
+        }
+    }
+
+    public void IncrementTotalNumberOfAnomalySawUnleash(int amount)
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("TotalNumberOfAnomalySawUnleash");
+        stat.Set(stat.GetInt() + amount);
+    }
+
+    public void TrySetHighestEnemyDeathTollFromSawmageddonShot(int candidateValue)
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("HighestEnemyDeathTollFromSawmageddonShot");
+        if (candidateValue > stat.GetInt())
+        {
+            stat.Set(candidateValue);
+        }
+    }
+
+    public void TrySetHighestSurvivalWave(int candidateValue)
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("HighestSurvivalWave");
+        if (candidateValue > stat.GetInt())
+        {
+            stat.Set(candidateValue);
+        }
+    }
+
+    public void IncrementTotalWavesCompleted()
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("TotalWavesCompleted");
+        stat.Set(stat.GetInt() + 1);
+    }
+
+    public void IncrementTotalWealthEarned(int amount)
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("TotalWealthEarned");
+        stat.Set(stat.GetInt() + amount);
+    }
+
+    public void IncrementTotalFailures()
+    {
+        Steamworks.Data.Stat stat = new Steamworks.Data.Stat("TotalFailures");
+        stat.Set(stat.GetInt() + 1);
     }
 }

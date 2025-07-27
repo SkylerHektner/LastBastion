@@ -366,6 +366,7 @@ public class PD
     {
         PD.Instance.PlayerWealth.Set( PD.Instance.PlayerWealth.Get() + 1000 );
         PD.Instance.TotalWealthEarned.Set( PD.Instance.TotalWealthEarned.Get() + 1000 );
+        Spectator.Instance?.SteamManagerInstance.IncrementTotalWealthEarned(1000);
     }
     [MenuItem( "Debug/UnlockEverything" )]
     public static void UnlockEverything()
