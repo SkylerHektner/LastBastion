@@ -37,7 +37,6 @@ public class SteamManager
             UpdateAndStoreStats();
         }
     }
-
     public bool HasCosmeticsDLC()
     {
         return Steamworks.SteamApps.IsDlcInstalled(cosmeticsDLCAppId);

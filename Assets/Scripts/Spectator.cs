@@ -132,7 +132,8 @@ public class Spectator : MonoBehaviour
         {
             if (gp == null ||
                 Input.GetMouseButtonDown(0) ||
-                Input.GetMouseButtonDown(1))
+                Input.GetMouseButtonDown(1) ||
+                Input.touchCount > 0)
             {
                 Debug.Log("going to non gamepad mode");
                 InGamepadMode = false;

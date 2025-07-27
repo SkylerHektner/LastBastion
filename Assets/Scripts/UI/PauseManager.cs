@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using System.Security.Cryptography;
 
 public class PauseManager : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class PauseManager : MonoBehaviour
     public Animator ConfirmationMenu;
     public Button ResumeButton;
 
+    private bool paused = false;
+
     public void ResumeGame()
     {
         //WaveCounter.SetBool("Visible", false);
@@ -25,6 +29,7 @@ public class PauseManager : MonoBehaviour
         //BonusScreen.SetActive(true);
         PauseButton.SetActive(true);
         WaveCounter.ResetTrigger("Hide");
+        paused = false;
     }
     public void DelayedResume()
     {
@@ -43,6 +48,7 @@ public class PauseManager : MonoBehaviour
         CurrentWaveText.text = ("Wave  " + WaveCounter.GetComponent<WaveCounter>().CurrentWave);
         //BonusScreen.SetActive(false);
         PauseButton.SetActive(false);
+        paused = true;
     }
 
     public void ExitGame()
@@ -60,11 +66,41 @@ public class PauseManager : MonoBehaviour
     private void Start()
     {
         PauseManager.Instance = this;
+        Steamworks.SteamFriends.OnGameOverlayActivated += SteamOverlayChangedStatus;
+    }
+
+    private void Update()
+    {
+        if (Spectator.Instance.InGamepadMode)
+        {
+            Gamepad gp = Gamepad.current;
+            if (gp.startButton.wasPressedThisFrame)
+            {
+                if (!paused)
+                    PauseGame();
+                else
+                    ResumeGame();
+            }
+        }
     }
 
     private void OnDestroy()
     {
         PauseManager.Instance = null;
+        Steamworks.SteamFriends.OnGameOverlayActivated -= SteamOverlayChangedStatus;
+    }
+
+    private void SteamOverlayChangedStatus(bool InOverlay)
+    {
+        if (!paused && InOverlay)
+        {
+            PauseGame();
+        }
+
+        if (paused && !InOverlay)
+        {
+            ResumeGame();
+        }
     }
 
     public void AskConfirmation()
