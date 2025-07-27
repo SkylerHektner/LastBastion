@@ -61,11 +61,6 @@ public class SteamManager
         Steamworks.SteamUserStats.SetStat("TotalWealthEarned", PD.Instance.TotalWealthEarned.Get());
         Steamworks.SteamUserStats.SetStat("TotalFailures", PD.Instance.TotalFailures.Get());
 
-        var steamworks_val = Steamworks.SteamUserStats.GetStatInt("NumKilledEnemies");
-        Debug.Log($"Steamworks Value {steamworks_val}");
-        var pd_val = PD.Instance.NumKilledEnemies.Get();
-        Debug.Log($"PD Value {pd_val}");
-
         if (!Steamworks.SteamUserStats.StoreStats())
         {
             Debug.LogError("Unable to store stats to steam");
