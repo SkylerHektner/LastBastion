@@ -298,4 +298,13 @@ public class MenuManager : MonoBehaviour
         Application.OpenURL(URL);
     }
 
+    public void ShowScoreboards()
+    {
+        CameraMover.LoadScoreboards();
+    }
+    public void ExitScoreboards()
+    {
+        CameraMover.ExitScoreBoards();
+    }
+
 }

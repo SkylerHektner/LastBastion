@@ -21,6 +21,7 @@ public class CameraUIMover : MonoBehaviour
     public Transform CustomizeZone;
     public Transform CreditsZone;
     public Transform CreditsZone2;
+    public Transform ScoresZone;
 
     public float CameraSpeed;   // default is .8f
 
@@ -75,6 +76,7 @@ public class CameraUIMover : MonoBehaviour
     {
         CurrentDestination = UpgradeLocation;
     }
+
 
     [ContextMenu("LoadMainMenu")]
     public void LoadMainMenu()
@@ -196,6 +198,18 @@ public class CameraUIMover : MonoBehaviour
         CurrentDestination = StoreZone;
         CameraSpeed = 1.5f;
     }
+
+    public void LoadScoreboards()
+    {
+        CurrentDestination = ScoresZone;
+        CameraSpeed = 1.5f;
+    }
+    public void ExitScoreBoards()
+    {
+        CurrentDestination = SurvivalZone;
+        CameraSpeed = 1.5f;
+    }
+
     [ContextMenu("ScrollCredits")]
     public void ScrollCredits()
     {
