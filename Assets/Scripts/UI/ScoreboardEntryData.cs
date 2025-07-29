@@ -8,7 +8,8 @@ public class ScoreboardEntryData : MonoBehaviour
     public TextMeshProUGUI PlayerWaveText;
     public Image PlayerProfilePicture;
     public int HighestWave;
-
+    public int CurrentRanking;
+    public Image RankingBubble;
 
     public void SetMyInfo(string MyName, int MyScore, Sprite MyPicture)
     {
