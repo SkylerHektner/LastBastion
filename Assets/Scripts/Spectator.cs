@@ -98,7 +98,8 @@ public class Spectator : MonoBehaviour
         Gamepad gp = Gamepad.current;
         if (gp != null && !InGamepadMode)
         {
-            // lord forgive my sins
+            Cursor.visible = true;
+            // lord forgive my sins (NO)
             if (gp.rightShoulder.wasPressedThisFrame ||
                 gp.rightStickButton.wasPressedThisFrame ||
                 gp.rightTrigger.wasPressedThisFrame ||
@@ -130,6 +131,7 @@ public class Spectator : MonoBehaviour
         }
         else if (InGamepadMode)
         {
+            Cursor.visible = false;
             if (gp == null ||
                 Input.GetMouseButtonDown(0) ||
                 Input.GetMouseButtonDown(1) ||
