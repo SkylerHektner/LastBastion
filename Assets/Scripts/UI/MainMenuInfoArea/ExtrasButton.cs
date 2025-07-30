@@ -9,9 +9,11 @@ public class ExtrasButton : MonoBehaviour
     float ChainsSFXCooldown;
     bool ChainsCanRattle;
     public CameraUIMover MenuManager;
-    bool ExtrasUnlocked = false;
+    public bool ExtrasUnlocked;
     public Boombox GameMusic;
     public Sprite ExtrasUnlockedImage;
+    public Button HomeButton;
+    public BonusTuneData ActiveTrack;
 
     public void RattleAllChains()
     {
@@ -29,9 +31,13 @@ public class ExtrasButton : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        ExtrasUnlocked = PD.Instance.LevelCompletionMap.GetLevelCompletion("Level 1"); // unlocks after beating level 1
+    }
+
     public void FixedUpdate()
     {
-        //ExtrasUnlocked = PD.Instance.LevelCompletionMap.GetLevelCompletion("Level 1");
         if (ExtrasUnlocked)
         {
             foreach (Animator Chain in ChainList)
@@ -63,6 +69,16 @@ public class ExtrasButton : MonoBehaviour
         if (ExtrasUnlocked)
         {
             MenuManager.LoadExtras();
+            HomeButton.Select();
+            if (ActiveTrack != null)
+            {
+                if (ActiveTrack.MainBoombox.GetCurrentTrack() != ActiveTrack.BonusTrack)
+                {
+                    ActiveTrack.ActiveFX.SetActive(false);
+                    ActiveTrack.TrackName.text = "Select a track";
+                }
+            }
+
         }
     }
 }
