@@ -19,6 +19,12 @@ public class HelpManager : MonoBehaviour
     int CurrentIndex;
     public GameObject[] ActiveList;
 
+    public GameObject TapDragText;
+    public GameObject GamepadAimText;
+    public GameObject ReleaseText;
+    public GameObject GamepadTapText;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -106,5 +112,23 @@ public class HelpManager : MonoBehaviour
             Tip.SetActive(false);
         }
 
+    }
+
+    private void Update()
+    {
+        if (Spectator.Instance.InGamepadMode)
+        {
+            GamepadAimText.SetActive(true);
+            TapDragText.SetActive(false);
+            GamepadTapText.SetActive(true);
+            ReleaseText.SetActive(false);
+        }
+        else
+        {
+            GamepadAimText.SetActive(false);
+            TapDragText.SetActive(true);
+            GamepadTapText.SetActive(false);
+            ReleaseText.SetActive(true);
+        }
     }
 }
