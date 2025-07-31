@@ -10,6 +10,8 @@ public class Boombox : MonoBehaviour
     public bool VictoryMusic;
     public bool SurvivalTrack;
     public AudioClip MyClip;
+    public bool DiscoverTrackOnStart;
+    public string TrackID;
 
     public AudioClip GetCurrentTrack()
     {
@@ -62,6 +64,10 @@ public class Boombox : MonoBehaviour
             }
             //AudioSource LevelMusicPlayer = gameObject.GetComponent<AudioSource>();
             SwapTrack(MyClip);
+        }
+        if (DiscoverTrackOnStart)
+        {
+            PD.Instance.LevelCompletionMap.SetLevelCompletion(TrackID, true);
         }
 
 

@@ -14,6 +14,8 @@ public class ExtrasButton : MonoBehaviour
     public Sprite ExtrasUnlockedImage;
     public Button HomeButton;
     public BonusTuneData ActiveTrack;
+    public Image BigCassette;
+    public Sprite DefaultCassetteColor;
 
     public void RattleAllChains()
     {
@@ -75,7 +77,8 @@ public class ExtrasButton : MonoBehaviour
                 if (ActiveTrack.MainBoombox.GetCurrentTrack() != ActiveTrack.BonusTrack)
                 {
                     ActiveTrack.ActiveFX.SetActive(false);
-                    ActiveTrack.TrackName.text = "Select a track";
+                    ActiveTrack.TrackName.text = "Main Menu";
+                    BigCassette.sprite = DefaultCassetteColor;
                 }
             }
 

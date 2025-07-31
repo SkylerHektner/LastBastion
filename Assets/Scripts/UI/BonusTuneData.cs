@@ -17,11 +17,18 @@ public class BonusTuneData : MonoBehaviour
     public TextMeshProUGUI TrackName;
     public GameObject ActiveFX;
     public ExtrasButton ExtrasButton;
+    public Sprite CassetteColor;
+    public bool SurvivalTrack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
         if (PD.Instance.LevelCompletionMap.GetLevelCompletion(Level_ID))
+        {
+            MyChains.SetActive(false);
+            Discovered = true;
+        }
+        else if (PD.Instance.SurvivalDiscoveryMap.GetLevelCompletion(Level_ID)) // survival
         {
             MyChains.SetActive(false);
             Discovered = true;
@@ -49,6 +56,7 @@ public class BonusTuneData : MonoBehaviour
             {
                 MainBoombox.SwapTrack(BonusTrack);
                 TrackName.text = Level_ID;
+                ExtrasButton.BigCassette.sprite = CassetteColor;
                 if (ExtrasButton.ActiveTrack != null)
                 {
                     ExtrasButton.ActiveTrack.ActiveFX.SetActive(false); // turn off previous one's FX
@@ -63,7 +71,7 @@ public class BonusTuneData : MonoBehaviour
                     Chain.SetTrigger("Rattle");
                     ChainsCanRattle = false;
                     ChainsSFXCooldown = 1f;
-                    TrackName.text = "Undiscovered";
+                    //TrackName.text = "Undiscovered";
                 }
             }
         }

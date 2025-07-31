@@ -128,6 +128,7 @@ public class PD
     public PlayerDataField<int> PlayerWealth = new PlayerDataField<int>( 0 );
     public PlayerUpgradeUnlockMap UnlockMap = new PlayerUpgradeUnlockMap();
     public PlayerLevelCompletionMap LevelCompletionMap = new PlayerLevelCompletionMap();
+    public PlayerLevelCompletionMap SurvivalDiscoveryMap = new PlayerLevelCompletionMap();
     public PDList<string> PlayerChallengeCompletionList = new PDList<string>();
     // limbo data
     public LimboResumeInformation CampaignLimboResumeInformation = new LimboResumeInformation();
