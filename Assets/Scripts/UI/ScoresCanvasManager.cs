@@ -38,6 +38,8 @@ public class ScoresCanvasManager : MonoBehaviour
 
     public void OnSteamLeaderboardDataRead(Steamworks.Data.LeaderboardEntry[] entries)
     {
+        if (entries == null)
+            return;
         // TODO: I highly recommend making a method to clear all existing entries and calling that here, first
         // That way we can call this all again to refresh entries with latest data
         foreach (Steamworks.Data.LeaderboardEntry entry in entries)

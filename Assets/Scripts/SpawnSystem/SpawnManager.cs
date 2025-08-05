@@ -260,7 +260,7 @@ public class SpawnManager : MonoBehaviour
         {
             // just record the highest wave we've reached in survival
             PD.Instance.HighestSurvivalWave.Set( Mathf.Max( PD.Instance.HighestSurvivalWave.Get(), CurrentWaveIndex + 1 ) );
-            Spectator.Instance.SteamManagerInstance.TryUploadSurvivalScoreToLeaderboard(PD.Instance.HighestSurvivalWave.Get());
+            Spectator.Instance.SteamManagerInstance.TryUploadSurvivalScoreToLeaderboard();
         }
 
         // player stats

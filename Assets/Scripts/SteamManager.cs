@@ -29,6 +29,7 @@ public class SteamManager
         {
             Steamworks.SteamClient.Init(appId, false);
             Debug.Log("Steamworks initialized succesfully");
+            leaderboardRequest = Steamworks.SteamUserStats.FindLeaderboardAsync("HighestSurvivalWaveLeaderboard");
         }
         catch (System.Exception e)
         {
@@ -56,7 +57,7 @@ public class SteamManager
                 leaderboardData = leaderboardRequest.Result;
                 leaderboardRequest = null;
             }
-            else
+            else if (leaderboardRequest.IsFaulted)
             {
                 Debug.LogError("Unable to fetch survival leaderboard");
             }
@@ -66,8 +67,12 @@ public class SteamManager
         if (leaderboardData.HasValue && currentLeaderboardRefreshCooldown <= 0.0f)
         {
             currentLeaderboardRefreshCooldown = leaderboardRefreshCooldown;
-
             leaderboardEntriesRequest = leaderboardData.Value.GetScoresAsync(20);
+            Debug.Log("Requesting leaderboard scores");
+        }
+        else
+        {
+            currentLeaderboardRefreshCooldown -= deltaTime;
         }
 
         // handle in progress leaderboard entries request
@@ -81,9 +86,9 @@ public class SteamManager
                 // fetch a new set of data
                 leaderboardEntriesRequest = null;
             }
-            else
+            else if (leaderboardEntriesRequest.IsFaulted)
             {
-                Debug.LogError("Unable to fetch survival leaderboard");
+                Debug.LogError("Unable to fetch survival leaderboard entries");
             }
         }
     }
@@ -94,10 +99,12 @@ public class SteamManager
         return Steamworks.SteamApps.IsDlcInstalled(cosmeticsDLCAppId);
     }
 
-    public void TryUploadSurvivalScoreToLeaderboard(int score)
+    public void TryUploadSurvivalScoreToLeaderboard()
     {
         if (leaderboardData.HasValue)
         {
+            int score = PD.Instance.HighestSurvivalWave.Get();
+            Debug.Log($"Submitting survival score {score} to leaderboard");
             leaderboardData.Value.SubmitScoreAsync(score);
         }    
     }
