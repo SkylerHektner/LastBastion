@@ -24,6 +24,8 @@ public class ScoresCanvasManager : MonoBehaviour
     GameObject ScoreEntryClone;
     public Sprite DefaultProfilePic;
     public Button HomeButton;
+    ScoreboardEntryData[] ChildrenEntries;
+    public ScoreboardEntryData[] ChildrenOrdered;
 
     private void Awake()
     {
@@ -42,10 +44,12 @@ public class ScoresCanvasManager : MonoBehaviour
             return;
         // TODO: I highly recommend making a method to clear all existing entries and calling that here, first
         // That way we can call this all again to refresh entries with latest data
+        ClearOutLeaderboardEntries();
         foreach (Steamworks.Data.LeaderboardEntry entry in entries)
         {
             CreateScoreEntries(entry.User.Name, entry.Score, DefaultProfilePic);
         }
+        NumberofElements = LevelBar.GetComponentsInChildren<ScoreboardEntryData>().Length;
     }
 
     public void ShiftNextLevel()
@@ -157,8 +161,8 @@ public class ScoresCanvasManager : MonoBehaviour
         ScoreEntryClone.GetComponent<ScoreboardEntryData>().SetMyInfo(PlayerNameString, PlayerBestWaveScore, PlayerPicture);
         ScoreEntryClone.transform.parent = LevelBar;
         ScoreEntryClone.transform.localScale = new Vector3(1, 1, 1);
-        ScoreboardEntryData[] ChildrenEntries = GetComponentsInChildren<ScoreboardEntryData>();
-        ScoreboardEntryData[] ChildrenOrdered = ChildrenEntries.OrderBy(go => go.HighestWave).ToArray();
+        ChildrenEntries = GetComponentsInChildren<ScoreboardEntryData>();
+        ChildrenOrdered = ChildrenEntries.OrderBy(go => go.HighestWave).ToArray();
         Array.Reverse(ChildrenOrdered);
         for (int i = 0; i < ChildrenOrdered.Length; i++)
         {
@@ -166,7 +170,21 @@ public class ScoresCanvasManager : MonoBehaviour
             ChildrenOrdered[i].CurrentRanking = i;
             ChildrenOrdered[i].RankingBubble.sprite = RankIcons[i];
         }
-        NumberofElements = ChildrenEntries.Length;
+        NumberofElements = ChildrenOrdered.Length;
+        ShowArrows();
+    }
+
+    [ContextMenu("ClearOutLeaderboardEntries")]
+    public void ClearOutLeaderboardEntries()
+    {
+        foreach (ScoreboardEntryData item in LevelBar.GetComponentsInChildren<ScoreboardEntryData>())
+        {
+            item.transform.parent = null;
+            Destroy(item.gameObject);
+        }
+        ChildrenEntries = new ScoreboardEntryData[0];
+        ChildrenOrdered = new ScoreboardEntryData[0];
+        NumberofElements = 0;
         ShowArrows();
     }
 
@@ -175,6 +193,5 @@ public class ScoresCanvasManager : MonoBehaviour
     {
         CreateScoreEntries("pussySlayerxx420", UnityEngine.Random.Range(1, 200), DefaultProfilePic);
     }
-   
 
 }
