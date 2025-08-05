@@ -6,9 +6,11 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 
 public class ScoresCanvasManager : MonoBehaviour
 {
+    public int numScoresToFetch;
 
     public float DistanceBetweenElements;
     public GameObject ArrowL;
@@ -23,10 +25,28 @@ public class ScoresCanvasManager : MonoBehaviour
     public Sprite DefaultProfilePic;
     public Button HomeButton;
 
+    
+
 
     private void Awake()
     {
         ShowArrows();
+        Spectator.Instance.SteamManagerInstance.RefreshedLeaderboardEntriesEvent.AddListener(OnSteamLeaderboardDataRead);
+    }
+
+    private void OnDestroy()
+    {
+        Spectator.Instance.SteamManagerInstance.RefreshedLeaderboardEntriesEvent.RemoveListener(OnSteamLeaderboardDataRead);
+    }
+
+    public void OnSteamLeaderboardDataRead(Steamworks.Data.LeaderboardEntry[] entries)
+    {
+        // TODO: I highly recommend making a method to clear all existing entries and calling that here, first
+        // That way we can call this all again to refresh entries with latest data
+        foreach (Steamworks.Data.LeaderboardEntry entry in entries)
+        {
+            CreateScoreEntries(entry.User.Name, entry.Score, DefaultProfilePic);
+        }
     }
 
     public void ShiftNextLevel()

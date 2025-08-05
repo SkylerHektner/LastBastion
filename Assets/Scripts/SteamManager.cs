@@ -1,9 +1,13 @@
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using static Steamworks.InventoryItem;
 
 public class SteamManager
 {
     public uint appId = 3876840;
+
+    public UnityEvent<Steamworks.Data.LeaderboardEntry[]> RefreshedLeaderboardEntriesEvent = new UnityEvent<Steamworks.Data.LeaderboardEntry[]>();
 
     // TODO Assign once we have a DLC setup
     public uint cosmeticsDLCAppId = 3892740;
@@ -12,6 +16,12 @@ public class SteamManager
 
     private const float statPersistenceCooldown = 30.0f;
     private float currentStatPersistenceCooldown = statPersistenceCooldown;
+
+    private const float leaderboardRefreshCooldown = 30.0f;
+    private float currentLeaderboardRefreshCooldown = 0.0f;
+    private Task<Steamworks.Data.Leaderboard?> leaderboardRequest = null;
+    private Steamworks.Data.Leaderboard? leaderboardData;
+    private Task<Steamworks.Data.LeaderboardEntry[]> leaderboardEntriesRequest = null;
 
     public SteamManager()
     {
@@ -36,10 +46,60 @@ public class SteamManager
             currentStatPersistenceCooldown = statPersistenceCooldown;
             UpdateAndStoreStats();
         }
+
+        // handle the initial request of the leaderboard
+        if (leaderboardRequest != null)
+        {
+            if (leaderboardRequest.IsCompletedSuccessfully && leaderboardRequest.Result.HasValue)
+            {
+                Debug.Log("Succesfully fetched leaderboard for survival. Now fetching entries");
+                leaderboardData = leaderboardRequest.Result;
+                leaderboardRequest = null;
+            }
+            else
+            {
+                Debug.LogError("Unable to fetch survival leaderboard");
+            }
+        }
+
+        // if we have a leaderboard and it's time to refresh its data, begin that process
+        if (leaderboardData.HasValue && currentLeaderboardRefreshCooldown <= 0.0f)
+        {
+            currentLeaderboardRefreshCooldown = leaderboardRefreshCooldown;
+
+            leaderboardEntriesRequest = leaderboardData.Value.GetScoresAsync(20);
+        }
+
+        // handle in progress leaderboard entries request
+        if (leaderboardEntriesRequest != null)
+        {
+            if (leaderboardEntriesRequest.IsCompletedSuccessfully)
+            {
+                Debug.Log("Succesfully fetched entries for survival leaderboard.");
+                RefreshedLeaderboardEntriesEvent.Invoke(leaderboardEntriesRequest.Result);
+
+                // fetch a new set of data
+                leaderboardEntriesRequest = null;
+            }
+            else
+            {
+                Debug.LogError("Unable to fetch survival leaderboard");
+            }
+        }
     }
     public bool HasCosmeticsDLC()
     {
         return Steamworks.SteamApps.IsDlcInstalled(cosmeticsDLCAppId);
+    }
+
+    public Task<Steamworks.Data.Leaderboard?> FetchSurvivalLeaderboard()
+    {
+        return Steamworks.SteamUserStats.FindLeaderboardAsync("HighestSurvivalWaveLeaderboard");
+    }
+
+    public void UploadSurvivalScoreToLeaderboard()
+    {
+        
     }
 
     // STATS
