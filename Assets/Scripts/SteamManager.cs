@@ -87,19 +87,19 @@ public class SteamManager
             }
         }
     }
+
+
     public bool HasCosmeticsDLC()
     {
         return Steamworks.SteamApps.IsDlcInstalled(cosmeticsDLCAppId);
     }
 
-    public Task<Steamworks.Data.Leaderboard?> FetchSurvivalLeaderboard()
+    public void TryUploadSurvivalScoreToLeaderboard(int score)
     {
-        return Steamworks.SteamUserStats.FindLeaderboardAsync("HighestSurvivalWaveLeaderboard");
-    }
-
-    public void UploadSurvivalScoreToLeaderboard()
-    {
-        
+        if (leaderboardData.HasValue)
+        {
+            leaderboardData.Value.SubmitScoreAsync(score);
+        }    
     }
 
     // STATS

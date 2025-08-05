@@ -25,9 +25,6 @@ public class ScoresCanvasManager : MonoBehaviour
     public Sprite DefaultProfilePic;
     public Button HomeButton;
 
-    
-
-
     private void Awake()
     {
         ShowArrows();
