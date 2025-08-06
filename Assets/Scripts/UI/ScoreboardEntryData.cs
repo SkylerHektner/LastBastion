@@ -11,11 +11,10 @@ public class ScoreboardEntryData : MonoBehaviour
     public int CurrentRanking;
     public Image RankingBubble;
 
-    public void SetMyInfo(string MyName, int MyScore, Sprite MyPicture)
+    public void SetMyInfo(string MyName, int MyScore)
     {
         PlayerNameText.text = MyName;
         PlayerWaveText.text = "Wave " + MyScore.ToString();
-        PlayerProfilePicture.sprite = MyPicture;
         HighestWave = MyScore;
     }
 }

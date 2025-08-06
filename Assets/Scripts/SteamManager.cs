@@ -18,7 +18,7 @@ public class SteamManager
     private float currentStatPersistenceCooldown = statPersistenceCooldown;
 
     private const float leaderboardRefreshCooldown = 30.0f;
-    private float currentLeaderboardRefreshCooldown = 0.0f;
+    public float currentLeaderboardRefreshCooldown = 0.0f;
     private Task<Steamworks.Data.Leaderboard?> leaderboardRequest = null;
     private Steamworks.Data.Leaderboard? leaderboardData;
     private Task<Steamworks.Data.LeaderboardEntry[]> leaderboardEntriesRequest = null;

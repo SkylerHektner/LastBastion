@@ -26,10 +26,10 @@ public class ScoresCanvasManager : MonoBehaviour
     public Button HomeButton;
     ScoreboardEntryData[] ChildrenEntries;
     public ScoreboardEntryData[] ChildrenOrdered;
+    public bool BrowsingScoreboard;
 
     private void Awake()
     {
-        ShowArrows();
         Spectator.Instance.SteamManagerInstance.RefreshedLeaderboardEntriesEvent.AddListener(OnSteamLeaderboardDataRead);
     }
 
@@ -47,7 +47,7 @@ public class ScoresCanvasManager : MonoBehaviour
         ClearOutLeaderboardEntries();
         foreach (Steamworks.Data.LeaderboardEntry entry in entries)
         {
-            CreateScoreEntries(entry.User.Name, entry.Score, DefaultProfilePic);
+            CreateScoreEntries(entry.User.Name, entry.Score);
         }
         NumberofElements = LevelBar.GetComponentsInChildren<ScoreboardEntryData>().Length;
     }
@@ -155,10 +155,10 @@ public class ScoresCanvasManager : MonoBehaviour
 
 
     // used to populate scoreboard prefab entries
-    public void CreateScoreEntries(string PlayerNameString, int PlayerBestWaveScore, Sprite PlayerPicture)
+    public void CreateScoreEntries(string PlayerNameString, int PlayerBestWaveScore)
     {
         ScoreEntryClone = Instantiate(ScoreEntryPrefab, transform.position, Quaternion.identity);
-        ScoreEntryClone.GetComponent<ScoreboardEntryData>().SetMyInfo(PlayerNameString, PlayerBestWaveScore, PlayerPicture);
+        ScoreEntryClone.GetComponent<ScoreboardEntryData>().SetMyInfo(PlayerNameString, PlayerBestWaveScore);
         ScoreEntryClone.transform.parent = LevelBar;
         ScoreEntryClone.transform.localScale = new Vector3(1, 1, 1);
         ChildrenEntries = GetComponentsInChildren<ScoreboardEntryData>();
@@ -171,7 +171,10 @@ public class ScoresCanvasManager : MonoBehaviour
             ChildrenOrdered[i].RankingBubble.sprite = RankIcons[i];
         }
         NumberofElements = ChildrenOrdered.Length;
-        ShowArrows();
+        if (BrowsingScoreboard) // or else controller focus is grabbed accidentally
+        {
+            ShowArrows();
+        }
     }
 
     [ContextMenu("ClearOutLeaderboardEntries")]
@@ -185,13 +188,29 @@ public class ScoresCanvasManager : MonoBehaviour
         ChildrenEntries = new ScoreboardEntryData[0];
         ChildrenOrdered = new ScoreboardEntryData[0];
         NumberofElements = 0;
-        ShowArrows();
+        if (BrowsingScoreboard)
+        {
+            ShowArrows();
+        }
     }
 
     [ContextMenu("TestEntries")]
     public void TestEntries()
     {
-        CreateScoreEntries("pussySlayerxx420", UnityEngine.Random.Range(1, 200), DefaultProfilePic);
+        CreateScoreEntries("pussySlayerxx420", UnityEngine.Random.Range(1, 200));
     }
 
+    public void GetScoresImmediately()
+    {
+        Spectator.Instance.SteamManagerInstance.currentLeaderboardRefreshCooldown = 0f;
+    }
+
+    public void OpenScoreboard()
+    {
+        BrowsingScoreboard = true;
+    }
+    public void CloseScoreboard()
+    {
+        BrowsingScoreboard = false;
+    }
 }
