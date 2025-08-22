@@ -298,6 +298,13 @@ public class MenuManager : MonoBehaviour
         Application.OpenURL(URL);
     }
 
+    // rate game button in settings
+    public void OpenDLCSteamURL()
+    {
+        string URL = "https://store.steampowered.com/app/3892740/Sawmania__Bonus_Cosmetics_Bundle/";
+        Application.OpenURL(URL);
+    }
+
     public void ShowScoreboards()
     {
         CameraMover.LoadScoreboards();
