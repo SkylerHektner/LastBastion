@@ -201,6 +201,10 @@ public class Spectator : MonoBehaviour
 
                 // get rid of campaign stats for limbo purposes
                 PD.Instance.CampaignLimboResumeInformation.Clear();
+                
+                // Tick the PD so it saves immediately
+                PD.Instance.Tick();
+                PD.Instance.LazyTick();
             }
             else
             {
@@ -214,6 +218,10 @@ public class Spectator : MonoBehaviour
 
                 //get rid of survival stats for limbo purposes
                 PD.Instance.SurvivalLimboResumeInformation.Clear();
+
+                // Tick the PD so it saves immediately
+                PD.Instance.Tick();
+                PD.Instance.LazyTick();
             }
         }
     }
