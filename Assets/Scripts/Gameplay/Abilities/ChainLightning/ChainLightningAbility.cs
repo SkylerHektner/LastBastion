@@ -140,6 +140,7 @@ public class ChainLightningAbility : Ability
             if( PD.Instance.UnlockMap.Get( UnlockFlag.ChainLightningStaticOverload ) )
             {
                 en.DeathEvent.AddListener( OnEnemyDeath );
+                listening_enemies.Add(en.EnemyID);
             }
         }
     }

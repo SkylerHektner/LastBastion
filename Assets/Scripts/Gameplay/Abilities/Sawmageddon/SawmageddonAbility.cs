@@ -108,7 +108,8 @@ public class SawmageddonAbility : Ability
 
     public override bool OnAbilityUsedWhileAlreadyActive()
     {
-        time_left += AbilityData.Duration;
+        time_left += AbilityData.Duration * GetAbilityDurationMultiplier();
+        time_left = Mathf.Clamp(time_left, 0.0f, 10.0f);
         // return true to cancel new ability construction
         return true;
     }

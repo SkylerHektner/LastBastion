@@ -199,6 +199,7 @@ public class Enemy : MonoBehaviour
     public void StopMoving()
     {
         Moving = false;
+
         if( attacks )
             anim.SetBool( "Attacking", Moving );
     }
@@ -213,7 +214,7 @@ public class Enemy : MonoBehaviour
     public virtual void Hit( Vector3 hit_direction, bool can_dodge, DamageSource source, out bool died, out bool dodged, int damage = 1 )
     {
         dodged = false;
-        if( Spawning || Dying )
+        if( Spawning || Dying || !didStart || !didAwake )
         {
             dodged = true; // if they're spawning or dying did they dodge it? Hmmm. Sure, I guess so
             died = false;

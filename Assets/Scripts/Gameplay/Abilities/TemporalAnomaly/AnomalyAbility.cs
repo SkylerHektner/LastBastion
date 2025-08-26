@@ -115,6 +115,7 @@ public class AnomalyAbility : Ability
     public override bool OnAbilityUsedWhileAlreadyActive()
     {
         time_remaining += AbilityData.Duration * GetAbilityDurationMultiplier();
+        time_remaining = Mathf.Clamp(time_remaining, 0.0f, 10.0f);
         // return true to cancel new ability construction
         return true;
     }

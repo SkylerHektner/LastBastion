@@ -87,6 +87,7 @@ public class TyphoonAbility : Ability
     private void SetDuration( float duration )
     {
         time_remaining = duration;
+        time_remaining = Mathf.Clamp(time_remaining, 0.0f, 10.0f);
     }
 
     private void OnSawKilledEnemy( Vector3 enemy_position )
