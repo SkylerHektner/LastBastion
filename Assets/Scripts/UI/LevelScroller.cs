@@ -109,6 +109,13 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 #endif
     }
 
+    public void Wipe()
+    {
+        LevelIndex = 1;
+        JumpToDesiredLevel(LevelIndex);
+        UpdateAnimators(LevelIndex);
+    }
+
     //[ContextMenu("JumpToDesiredLevel")]
     public void JumpToDesiredLevel(int Index)
     {
