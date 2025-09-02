@@ -9,9 +9,17 @@ public class WaveCounter : MonoBehaviour
     [SerializeField] Animator Anim;
     public string CurrentWave;
 
-    public void ShowNextWave(int wave)
+    public void ShowNextWave(int wave, string totalWaves)
     {
-        WaveNumberText.SetText( wave.ToString() );
+        if (!GameplayManager.Instance.Survival)
+        {
+            WaveNumberText.SetText(wave.ToString() + "/" + totalWaves);
+        }
+        else
+        {
+            WaveNumberText.SetText(wave.ToString());
+
+        }
         Anim.SetTrigger( "Appear" );
         CurrentWave = wave.ToString();
     }

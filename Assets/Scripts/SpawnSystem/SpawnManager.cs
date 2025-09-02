@@ -111,7 +111,7 @@ public class SpawnManager : MonoBehaviour
 
         spawn_timer = 0.0f;
         CurrentWave = spawnCadenceProfile.GetWave( CurrentWaveIndex );
-        WaveCounterUI?.ShowNextWave( CurrentWaveIndex + 1 );
+        WaveCounterUI?.ShowNextWave(CurrentWaveIndex + 1, spawnCadenceProfile.GetWaveCount().ToString());
         cur_spawn_group_index = 0;
         passive_spawn_trackers.Clear();
         if( !string.IsNullOrEmpty( CurrentWave.AnimationTrigger ) )
