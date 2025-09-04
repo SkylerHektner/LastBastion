@@ -47,6 +47,9 @@ public class MenuManager : MonoBehaviour
     public List<string> UpgradeNames;
     public List<string> UpgradeColors;
     public TextMeshProUGUI UpgradeNameText;
+    public GameObject ExitMenuCanvas;
+    public Button DenyExitButton;
+    public GameObject ExitGameButton;
 
 
     private void Awake()
@@ -325,6 +328,51 @@ public class MenuManager : MonoBehaviour
     public void ExitScoreboards()
     {
         CameraMover.ExitScoreBoards();
+    }
+
+    public void AskExitConfirmation()
+    {
+        ExitMenuCanvas.SetActive(true);
+        ExitMenuCanvas.GetComponent<Animator>().Play("AskToExitGame");
+        DenyExitButton.Select();
+        ExitGameButton.SetActive(false);
+    }
+
+    public void ExitGame()
+    {
+        Invoke("DelayedGameExit", 2f);
+        Invoke("DelayedHideSkull", 1.05f);
+        ExitMenuCanvas.GetComponent<Animator>().SetTrigger("Confirm");
+        // play goodby animation on skull too (3 seconds long?)
+    }
+
+    public void DelayedGameExit()
+    {
+        Application.Quit();
+        Debug.Log("Game has been exited");
+    }
+
+    public void DontExitGame()
+    {
+        ExitMenuCanvas.GetComponent<Animator>().SetTrigger("Decline");
+        // play animation to go back to main menu
+    }
+
+    public void DelayedShowExitButton()
+    {
+        // spam protection stuff
+        Invoke("ShowExitButton", 1f);
+    }
+
+    public void ShowExitButton()
+    {
+        ExitGameButton.SetActive(true);
+    }
+
+    public void DelayedHideSkull()
+    {
+        SkullMan.GetComponent<Image>().enabled = false;
+        BonusBandaid.SetActive(false);
     }
 
 }
