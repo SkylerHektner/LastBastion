@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
@@ -43,6 +44,9 @@ public class MenuManager : MonoBehaviour
     public Button SurvivalPlayButton;
 
     public string RateURL;
+    public List<string> UpgradeNames;
+    public List<string> UpgradeColors;
+    public TextMeshProUGUI UpgradeNameText;
 
 
     private void Awake()
@@ -247,6 +251,15 @@ public class MenuManager : MonoBehaviour
 
 
         }
+    }
+
+    public void UpdateUpgradeName()
+    {
+        UpgradeNameText.text = UpgradeNames[UpgradeIndex];
+        ColorUtility.TryParseHtmlString(UpgradeColors[UpgradeIndex], out var colorFromHex);
+        UpgradeNameText.color = colorFromHex;
+        UpgradeNameText.fontSharedMaterial.SetColor(ShaderUtilities.ID_GlowColor, colorFromHex);
+        UpgradeNameText.UpdateMeshPadding();
     }
 
     public void LoadStore()
