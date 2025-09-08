@@ -21,4 +21,6 @@ public class SurvivalCardsUIDescriptionBox : MonoBehaviour
         DescriptionText.text = Information.Description;
         DescriptionText.SetAllDirty();
     }
+
+
 }

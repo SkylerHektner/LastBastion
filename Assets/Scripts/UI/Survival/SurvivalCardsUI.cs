@@ -77,9 +77,19 @@ public class SurvivalCardsUI : MonoBehaviour
         ResetCardGlowsAndBackground( false );
         ContinueButton.gameObject.SetActive( false );
         StartingSelection.Select();
+
+        if (boon_unlock_flags.Count != 0 && curse_unlock_flags.Count != 0)
+        {
+            OnSurvivalCardHighlighted(Cards[0]);
+        }
         gameObject.SetActive( true );
         Anim.SetBool( "Empty", boon_unlock_flags.Count == 0 && curse_unlock_flags.Count == 0 );
         TryEnableContinueButton();
+    }
+
+    public void ShowInfoBox()
+    {
+        DescriptionBox.GetComponent<Animator>().SetTrigger("Show");
     }
 
     public void OnSurvivalCardClicked( SurvivalCardsUICard card )
@@ -94,6 +104,23 @@ public class SurvivalCardsUI : MonoBehaviour
         card.SetGlowColor( card.Information.GlowColor );
         ( card.CurseCard ? NegativeBackgroundEffects : PositiveBackgroundEffects ).SetActive( true );
         TryEnableContinueButton();
+    }
+
+    // just show me the item description when highlighted, but don't select it for me until I click it later
+    public void OnSurvivalCardHighlighted(SurvivalCardsUICard card)
+    {
+        DescriptionBox.SetTextFromUIInfo(card.Information);
+        if (card.CurseCard)
+        {
+            PositiveBackgroundEffects.SetActive(false);
+            NegativeBackgroundEffects.SetActive(true);
+        }
+        else
+        {
+            PositiveBackgroundEffects.SetActive(true);
+            NegativeBackgroundEffects.SetActive(false);
+        }
+
     }
 
     private void TryEnableContinueButton()
