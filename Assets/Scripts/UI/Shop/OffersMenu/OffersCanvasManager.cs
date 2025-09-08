@@ -74,7 +74,8 @@ public class OffersCanvasManager : MonoBehaviour
             ClaimButton.SetActive(false);
             RightArrow.SetActive(false);
             LeftArrow.SetActive(false);
-            HomeButton.interactable = false;
+            //HomeButton.interactable = false;
+            HomeButton.gameObject.SetActive(false);
             //WealthPlate.SetTrigger("Success");
             ConfirmButton.Select();
 

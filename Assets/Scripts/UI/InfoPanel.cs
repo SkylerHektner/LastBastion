@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class InfoPanel : MonoBehaviour
 {
@@ -18,6 +19,14 @@ public class InfoPanel : MonoBehaviour
     public int UpgradeCost;
     public Button UpgradeDenyButton;
     public Button LastClickedUpgrade;
+
+    // things specific to offers store
+    public bool ImTheOffersStore;
+    public GameObject ClaimButton;
+    public GameObject RightButton;
+    public GameObject LeftButton;
+    public Button OffersHomeButton;
+
 
     //public Animator PumpkinBucket;
     //public Animator Skull;
@@ -58,7 +67,52 @@ public class InfoPanel : MonoBehaviour
         //EnableButtons();
     }
 
+    private void Update()
+    {
+        if (Spectator.Instance.InGamepadMode)
+        {
+            Gamepad gp = Gamepad.current;
+            if (gp.buttonEast.wasPressedThisFrame)
+            {
+                if (ImTheOffersStore)
+                {
+                    DenyPurchaseOffersMenu();
+                }
+                else
+                {
+                    DenyPurchase();
+                    ReturnHighlight();
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (ImTheOffersStore)
+                {
+                    DenyPurchaseOffersMenu();
+                }
+                else
+                {
+                    DenyPurchase();
+                    ReturnHighlight();
+                }
+            }
+        }
 
+    }
+
+    public void DenyPurchaseOffersMenu()
+    {
+        gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
+        ClaimButton.SetActive(true);
+        RightButton.SetActive(true);
+        LeftButton.SetActive(true);
+        OffersHomeButton.interactable = true;
+        RightButton.GetComponent<Button>().Select();
+        OffersHomeButton.gameObject.SetActive(true);
+    }
 
     public void DenyPurchase()
     {
@@ -72,7 +126,10 @@ public class InfoPanel : MonoBehaviour
 
     public void ReturnHighlight()
     {
-        LastClickedUpgrade.Select();
+        if (LastClickedUpgrade)
+        {
+            LastClickedUpgrade.Select();
+        }
     }
 
     public void UpdatePlayerWealth()

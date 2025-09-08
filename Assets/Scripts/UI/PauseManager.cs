@@ -82,6 +82,16 @@ public class PauseManager : MonoBehaviour
                     ResumeGame();
             }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (!paused)
+                    PauseGame();
+                else
+                    ResumeGame();
+            }
+        }
     }
 
     private void OnDestroy()
