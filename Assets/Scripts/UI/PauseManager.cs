@@ -18,6 +18,7 @@ public class PauseManager : MonoBehaviour
     public TextMeshProUGUI CurrentWaveText;
     public Animator ConfirmationMenu;
     public Button ResumeButton;
+    public static bool PreventPause;
 
     private bool paused = false;
 
@@ -41,14 +42,18 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        ResumeButton.Select();
-        PauseScreen.SetActive(true);
-        Time.timeScale = 0;
-        WaveCounter.SetTrigger("Hide");
-        CurrentWaveText.text = ("Wave  " + WaveCounter.GetComponent<WaveCounter>().CurrentWave);
-        //BonusScreen.SetActive(false);
-        PauseButton.SetActive(false);
-        paused = true;
+        if (PreventPause == false)
+        {
+            ResumeButton.Select();
+            PauseScreen.SetActive(true);
+            Time.timeScale = 0;
+            WaveCounter.SetTrigger("Hide");
+            CurrentWaveText.text = ("Wave  " + WaveCounter.GetComponent<WaveCounter>().CurrentWave);
+            //BonusScreen.SetActive(false);
+            PauseButton.SetActive(false);
+            paused = true;
+        }
+
     }
 
     public void ExitGame()

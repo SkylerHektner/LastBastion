@@ -45,8 +45,9 @@ public class SurvivalCardsUI : MonoBehaviour
     [ContextMenu( "ShowUpgrades" )]
     public void ShowUpgrades()
     {
+        PauseManager.PreventPause = true;
         // my shame
-        if( ui_info_map.Count == 0 )
+        if ( ui_info_map.Count == 0 )
         {
             PopulateUIMap();
         }
@@ -145,7 +146,7 @@ public class SurvivalCardsUI : MonoBehaviour
 
     public void ConfirmOptions()
     {
-        if( selected_boon_card != null )
+        if ( selected_boon_card != null )
             PD.Instance.UnlockMap.Set( selected_boon_card.Information.UnlockFlag, true, true );
         if( selected_curse_card != null )
             PD.Instance.UnlockMap.Set( selected_curse_card.Information.UnlockFlag, true, true );
