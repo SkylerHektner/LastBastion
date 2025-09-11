@@ -51,6 +51,9 @@ public class MenuManager : MonoBehaviour
     public Button DenyExitButton;
     public GameObject ExitGameButton;
 
+    public Button CampaignHomeButton;
+    public Button SurvivalHomeButton;
+    public Button LimboDeclineButton;
 
     private void Awake()
     {
@@ -65,6 +68,7 @@ public class MenuManager : MonoBehaviour
             MenuOptions.SetTrigger("Skip");
             MenuUIBoombox.SwapTrack(MenuUIBoombox.MyClip);
             //IntroWooshSFX.playOnAwake = false;
+            Spectator.Instance.ActiveExitButton = CampaignHomeButton;
         }
         else if (Spectator.ReturningFromSurvival)
         {
@@ -74,6 +78,7 @@ public class MenuManager : MonoBehaviour
             SurvivalBoombox.SwapTrack(SurvivalBoombox.MyClip);
             SurvivalPlayButton.Select();
             //IntroWooshSFX.playOnAwake = false;
+            Spectator.Instance.ActiveExitButton = SurvivalHomeButton;
         }
         else if ((!Spectator.ReturningFromLevel && !Spectator.ReturningFromSurvival) && (!PD.Instance.CampaignLimboResumeInformation.Active && !PD.Instance.SurvivalLimboResumeInformation.Active))
         {
@@ -82,6 +87,7 @@ public class MenuManager : MonoBehaviour
             IntroWooshSFX.playOnAwake = true;
             IntroWooshSFX.Play();
             Invoke("SelectCampaignButton", 3f);
+            Spectator.Instance.ActiveExitButton = ExitGameButton.GetComponent<Button>();
         }
 
         if (PD.Instance.CampaignLimboResumeInformation != null && PD.Instance.SurvivalLimboResumeInformation != null)
@@ -299,6 +305,7 @@ public class MenuManager : MonoBehaviour
     {
         ProgressContent.SetActive( true );
         LimboTrack.SwapTrack(LimboTrack.MyClip); // play limbo track
+
     }
 
     // rate game button in settings
@@ -373,6 +380,11 @@ public class MenuManager : MonoBehaviour
     {
         SkullMan.GetComponent<Image>().enabled = false;
         BonusBandaid.SetActive(false);
+    }
+
+    public void SetActiveExitButton(Button ActiveExitButton)
+    {
+        Spectator.Instance.ActiveExitButton = ActiveExitButton;
     }
 
 }

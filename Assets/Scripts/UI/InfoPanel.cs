@@ -22,10 +22,12 @@ public class InfoPanel : MonoBehaviour
 
     // things specific to offers store
     public bool ImTheOffersStore;
+    public bool ImUpgradesScreen;
     public GameObject ClaimButton;
     public GameObject RightButton;
     public GameObject LeftButton;
     public Button OffersHomeButton;
+    public Button UpgradeNavHomeButton;
 
 
     //public Animator PumpkinBucket;
@@ -78,7 +80,7 @@ public class InfoPanel : MonoBehaviour
                 {
                     DenyPurchaseOffersMenu();
                 }
-                else
+                else if (ImUpgradesScreen)
                 {
                     DenyPurchase();
                     ReturnHighlight();
@@ -93,7 +95,7 @@ public class InfoPanel : MonoBehaviour
                 {
                     DenyPurchaseOffersMenu();
                 }
-                else
+                else if (ImUpgradesScreen)
                 {
                     DenyPurchase();
                     ReturnHighlight();
@@ -112,6 +114,7 @@ public class InfoPanel : MonoBehaviour
         OffersHomeButton.interactable = true;
         RightButton.GetComponent<Button>().Select();
         OffersHomeButton.gameObject.SetActive(true);
+        Spectator.Instance.ActiveExitButton = OffersHomeButton;
     }
 
     public void DenyPurchase()
@@ -121,6 +124,7 @@ public class InfoPanel : MonoBehaviour
         PurchaseButton.enabled = false;
         gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
         //gameObject.GetComponentInParent<Animator>().SetTrigger("Hide");
+        Spectator.Instance.ActiveExitButton = UpgradeNavHomeButton;
 
     }
 

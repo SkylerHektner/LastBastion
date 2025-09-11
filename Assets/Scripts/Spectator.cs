@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Spectator : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class Spectator : MonoBehaviour
     public Texture2D CursorTexture2;
     public RewardCanvas AchievementPopup;
     public float AchievementCheckRate = 1.0f;
+
+    public Button ActiveExitButton; // used for pressing the B button on a controller
+
 
     private float achievementCheckCooldown;
 
@@ -139,6 +143,29 @@ public class Spectator : MonoBehaviour
             {
                 Debug.Log("going to non gamepad mode");
                 InGamepadMode = false;
+            }
+        }
+
+        // used for exiting a menu with the B button on a controller
+        if (Instance.InGamepadMode)
+        {
+            gp = Gamepad.current;
+            if (gp.buttonEast.wasPressedThisFrame)
+            {
+                if (ActiveExitButton != null)
+                {
+                    ActiveExitButton.Select();
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (ActiveExitButton != null)
+                {
+                    ActiveExitButton.Select();
+                }
             }
         }
     }

@@ -19,6 +19,7 @@ public class PauseManager : MonoBehaviour
     public Animator ConfirmationMenu;
     public Button ResumeButton;
     public static bool PreventPause;
+    public Button DeclineButton;
 
     private bool paused = false;
 
@@ -52,6 +53,7 @@ public class PauseManager : MonoBehaviour
             //BonusScreen.SetActive(false);
             PauseButton.SetActive(false);
             paused = true;
+            Spectator.Instance.ActiveExitButton = ResumeButton;
         }
 
     }
@@ -121,10 +123,13 @@ public class PauseManager : MonoBehaviour
     public void AskConfirmation()
     {
         ConfirmationMenu.SetBool("Confirming", true);
+        Spectator.Instance.ActiveExitButton = DeclineButton;
 
     }
     public void DenyConfirmation()
     {
         ConfirmationMenu.SetBool("Confirming", false);
+        Spectator.Instance.ActiveExitButton = ResumeButton;
     }
+
 }

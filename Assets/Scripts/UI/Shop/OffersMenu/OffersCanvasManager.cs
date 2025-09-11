@@ -78,6 +78,7 @@ public class OffersCanvasManager : MonoBehaviour
             HomeButton.gameObject.SetActive(false);
             //WealthPlate.SetTrigger("Success");
             ConfirmButton.Select();
+            Spectator.Instance.ActiveExitButton = HomeButton;
 
         }
         else if (PD.Instance.AchievementPoints.Get() < current_store_item.CosmeticInformation.GetPrice()) // player is too poor, sad

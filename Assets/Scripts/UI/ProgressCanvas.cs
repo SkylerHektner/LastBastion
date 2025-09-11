@@ -19,6 +19,7 @@ public class ProgressCanvas : MonoBehaviour
     public Boombox MenuTrack;
     public Button ContinueButton;
     public Button CampaignButton;
+    public Button DeclineButton;
 
 
     private void Start()
@@ -27,6 +28,7 @@ public class ProgressCanvas : MonoBehaviour
         {
             Skull.SetBool("Speaking", true);
         }
+        Spectator.Instance.ActiveExitButton = DeclineButton;
     }
 
     public void ContinueSave()

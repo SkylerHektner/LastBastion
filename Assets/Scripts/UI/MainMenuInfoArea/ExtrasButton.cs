@@ -72,6 +72,7 @@ public class ExtrasButton : MonoBehaviour
         {
             MenuManager.LoadExtras();
             HomeButton.Select();
+            Spectator.Instance.ActiveExitButton = HomeButton;
             if (ActiveTrack != null)
             {
                 if (ActiveTrack.MainBoombox.GetCurrentTrack() != ActiveTrack.BonusTrack)
