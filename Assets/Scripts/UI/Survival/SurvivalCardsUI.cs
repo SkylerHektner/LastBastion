@@ -78,6 +78,7 @@ public class SurvivalCardsUI : MonoBehaviour
         ResetCardGlowsAndBackground( false );
         ContinueButton.gameObject.SetActive( false );
         StartingSelection.Select();
+        Spectator.Instance.ActiveExitButton = StartingSelection;
 
         if (boon_unlock_flags.Count != 0 && curse_unlock_flags.Count != 0)
         {
@@ -127,8 +128,13 @@ public class SurvivalCardsUI : MonoBehaviour
     private void TryEnableContinueButton()
     {
         if( ( selected_boon_card != null || !Cards.Where( c => !c.CurseCard ).Any( c => c.gameObject.activeInHierarchy ) )
-            && ( selected_curse_card != null || !Cards.Where( c => c.CurseCard ).Any( c => c.gameObject.activeInHierarchy ) ) )
-            ContinueButton.gameObject.SetActive( true );
+            && ( selected_curse_card != null || !Cards.Where( c => c.CurseCard ).Any( c => c.gameObject.activeInHierarchy ) ))
+        {
+            ContinueButton.gameObject.SetActive(true);
+            Spectator.Instance.ActiveExitButton = ContinueButton;
+            ContinueButton.interactable = true;
+            ContinueButton.enabled = true;
+        }
     }
 
     private void ResetCardGlowsAndBackground( bool curse_cards )
@@ -156,6 +162,7 @@ public class SurvivalCardsUI : MonoBehaviour
 
         selected_boon_card = null;
         selected_curse_card = null;
+        ContinueButton.gameObject.SetActive(false);
 
         // call here to hide the transition while the screen is blacked out
         InfiniteSpawnCadenceManager.Instance.PickNewSpawnCadenceProfile();

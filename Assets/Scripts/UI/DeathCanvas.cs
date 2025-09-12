@@ -13,6 +13,7 @@ public class DeathCanvas : MonoBehaviour
     //public GameObject RewardScreen;
     public GameObject SendSawCanvas;
     public TextMeshProUGUI WaveText;
+    public Button ContinueButton;
 
 
     public void DisplayDeathScreen()
@@ -22,6 +23,7 @@ public class DeathCanvas : MonoBehaviour
         //WaveCounter.SetBool("Visible", true);
         //RewardScreen.SetActive(false);
         SendSawCanvas.SetActive(false);
+        Spectator.Instance.ActiveExitButton = ContinueButton;
     }
 
     public void ExitGame()

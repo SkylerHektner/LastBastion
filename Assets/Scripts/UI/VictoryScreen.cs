@@ -32,6 +32,7 @@ public class VictoryScreen : MonoBehaviour
         SawCanvas.SetActive( false );
         AbilityManager.SetActive( false );
         Invoke("SelectContinueButton", 3f);
+        Spectator.Instance.ActiveExitButton = ContinueButton;
 
 #if UNITY_EDITOR
         if ( CandyGivenText == null )
@@ -56,6 +57,7 @@ public class VictoryScreen : MonoBehaviour
     {
         ContinueButton.Select();
     }
+
 
     public void LoadMenu()
     {

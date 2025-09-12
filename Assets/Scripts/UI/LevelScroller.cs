@@ -55,7 +55,14 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void SetButtonSelection()
     {
-        LevelList[LevelIndex - 1].GetComponent<Button>().Select();
+        if (LevelList[LevelIndex - 1].GetComponent<LoadLevel>().Locked == true)
+        {
+            ArrowL.GetComponent<Button>().Select();
+        }
+        else
+        {
+            LevelList[LevelIndex - 1].GetComponent<Button>().Select();
+        }
     }
 
     // might have to remove this later on, as it may cause problems with returning from levels
@@ -138,6 +145,22 @@ public class LevelScroller : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         DisplayLevelImage(Index);
         UpdateAnimators(Index);
+
+        Navigation LeftArrowNav = ArrowL.GetComponent<Button>().navigation;
+        Navigation RightArrowNav = ArrowR.GetComponent<Button>().navigation;
+
+        if (LevelList[LevelIndex - 1].GetComponent<LoadLevel>().Locked == false) // level can be played, so let it be selected by cursor
+        {
+            LeftArrowNav.selectOnRight = LevelList[LevelIndex - 1].GetComponent<Button>();
+            RightArrowNav.selectOnLeft = LevelList[LevelIndex - 1].GetComponent<Button>();
+        }
+        else // level is locked so ignore it in navigation
+        {
+            LeftArrowNav.selectOnRight = ArrowR.GetComponent<Button>();
+            RightArrowNav.selectOnLeft = ArrowL.GetComponent<Button>();
+        }
+        ArrowL.GetComponent<Button>().navigation = LeftArrowNav;
+        ArrowR.GetComponent<Button>().navigation = RightArrowNav;
     }
 
     public void UpdateAnimators(int Index)
